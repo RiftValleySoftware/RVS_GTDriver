@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D40D8E71232A88FA00697259 /* RVS_GTDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */; };
+		D41494BF232A92B200E1475D /* Warnings.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D41494BD232A92B200E1475D /* Warnings.xcconfig */; };
+		D41494C0232A92B200E1475D /* Warnings.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D41494BD232A92B200E1475D /* Warnings.xcconfig */; };
 		D4749B70232A842A0073F7BC /* RVS_GTDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4749B66232A842A0073F7BC /* RVS_GTDriver.framework */; };
 		D4749B75232A842A0073F7BC /* RVS_GTDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4749B74232A842A0073F7BC /* RVS_GTDriverTests.swift */; };
-		D4749B77232A842A0073F7BC /* RVS_GTDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = D4749B69232A842A0073F7BC /* RVS_GTDriver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D4DDD0EB232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DDD0EA232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_AppDelegate.swift */; };
+		D4DDD0ED232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DDD0EC232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_ViewController.swift */; };
+		D4DDD0EF232A8CAA006836D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4DDD0EE232A8CAA006836D0 /* Assets.xcassets */; };
+		D4DDD0F2232A8CAA006836D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4DDD0F0232A8CAA006836D0 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,25 +26,35 @@
 			remoteGlobalIDString = D4749B65232A842A0073F7BC;
 			remoteInfo = RVS_GTDriver;
 		};
+		D4823C47232A940000A16CE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4749B5D232A842A0073F7BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4749B65232A842A0073F7BC;
+			remoteInfo = RVS_GTDriver;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver.swift; sourceTree = "<group>"; };
+		D41494BD232A92B200E1475D /* Warnings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Warnings.xcconfig; path = ../../Meta/Warnings.xcconfig; sourceTree = "<group>"; };
 		D4749B66232A842A0073F7BC /* RVS_GTDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RVS_GTDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4749B69232A842A0073F7BC /* RVS_GTDriver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RVS_GTDriver.h; sourceTree = "<group>"; };
 		D4749B6A232A842A0073F7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4749B6F232A842A0073F7BC /* RVS_GTDriverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RVS_GTDriverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4749B74232A842A0073F7BC /* RVS_GTDriverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriverTests.swift; sourceTree = "<group>"; };
 		D4749B76232A842A0073F7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4823C4A232A947300A16CE9 /* Meta */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Meta; sourceTree = "<group>"; };
+		D4DDD0E8232A8CA9006836D0 /* RVS_GTDriver_MacOS_Test_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVS_GTDriver_MacOS_Test_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4DDD0EA232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_MacOS_Test_Harness_AppDelegate.swift; sourceTree = "<group>"; };
+		D4DDD0EC232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_MacOS_Test_Harness_ViewController.swift; sourceTree = "<group>"; };
+		D4DDD0EE232A8CAA006836D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D4DDD0F1232A8CAA006836D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D4DDD0F3232A8CAB006836D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4DDD0F4232A8CAB006836D0 /* RVS_GTDriver_MacOS_Test_Harness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RVS_GTDriver_MacOS_Test_Harness.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D4749B63232A842A0073F7BC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D4749B6C232A842A0073F7BC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -55,7 +71,9 @@
 			children = (
 				D4749B68232A842A0073F7BC /* RVS_GTDriver */,
 				D4749B73232A842A0073F7BC /* RVS_GTDriverTests */,
+				D4DDD0E9232A8CA9006836D0 /* RVS_GTDriver_MacOS_Test_Harness */,
 				D4749B67232A842A0073F7BC /* Products */,
+				D4823C4A232A947300A16CE9 /* Meta */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +82,7 @@
 			children = (
 				D4749B66232A842A0073F7BC /* RVS_GTDriver.framework */,
 				D4749B6F232A842A0073F7BC /* RVS_GTDriverTests.xctest */,
+				D4DDD0E8232A8CA9006836D0 /* RVS_GTDriver_MacOS_Test_Harness.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,6 +92,7 @@
 			children = (
 				D4749B69232A842A0073F7BC /* RVS_GTDriver.h */,
 				D4749B6A232A842A0073F7BC /* Info.plist */,
+				D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */,
 			);
 			path = RVS_GTDriver;
 			sourceTree = "<group>";
@@ -86,28 +106,45 @@
 			path = RVS_GTDriverTests;
 			sourceTree = "<group>";
 		};
-/* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		D4749B61232A842A0073F7BC /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D4749B77232A842A0073F7BC /* RVS_GTDriver.h in Headers */,
+		D4DDD0E9232A8CA9006836D0 /* RVS_GTDriver_MacOS_Test_Harness */ = {
+			isa = PBXGroup;
+			children = (
+				D4DDD0EA232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_AppDelegate.swift */,
+				D4DDD0EC232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_ViewController.swift */,
+				D4DDD0F8232A8D32006836D0 /* Resources */,
+				D4DDD0F9232A8D62006836D0 /* Meta */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			path = RVS_GTDriver_MacOS_Test_Harness;
+			sourceTree = "<group>";
 		};
-/* End PBXHeadersBuildPhase section */
+		D4DDD0F8232A8D32006836D0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4DDD0EE232A8CAA006836D0 /* Assets.xcassets */,
+				D4DDD0F0232A8CAA006836D0 /* Main.storyboard */,
+				D4DDD0F4232A8CAB006836D0 /* RVS_GTDriver_MacOS_Test_Harness.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D4DDD0F9232A8D62006836D0 /* Meta */ = {
+			isa = PBXGroup;
+			children = (
+				D41494BD232A92B200E1475D /* Warnings.xcconfig */,
+				D4DDD0F3232A8CAB006836D0 /* Info.plist */,
+			);
+			path = Meta;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
 		D4749B65232A842A0073F7BC /* RVS_GTDriver */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4749B7A232A842A0073F7BC /* Build configuration list for PBXNativeTarget "RVS_GTDriver" */;
 			buildPhases = (
-				D4749B61232A842A0073F7BC /* Headers */,
+				D4823C46232A93C600A16CE9 /* SwiftLint */,
 				D4749B62232A842A0073F7BC /* Sources */,
-				D4749B63232A842A0073F7BC /* Frameworks */,
-				D4749B64232A842A0073F7BC /* Resources */,
 			);
 			buildRules = (
 			);
@@ -136,6 +173,24 @@
 			productReference = D4749B6F232A842A0073F7BC /* RVS_GTDriverTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D4DDD0E7232A8CA9006836D0 /* RVS_GTDriver_MacOS_Test_Harness */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4DDD0F7232A8CAB006836D0 /* Build configuration list for PBXNativeTarget "RVS_GTDriver_MacOS_Test_Harness" */;
+			buildPhases = (
+				D4823C49232A940600A16CE9 /* SwiftLint */,
+				D4DDD0E4232A8CA9006836D0 /* Sources */,
+				D4DDD0E6232A8CA9006836D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4823C48232A940000A16CE9 /* PBXTargetDependency */,
+			);
+			name = RVS_GTDriver_MacOS_Test_Harness;
+			productName = RVS_GTDriver_MacOS_Test_Harness;
+			productReference = D4DDD0E8232A8CA9006836D0 /* RVS_GTDriver_MacOS_Test_Harness.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -148,8 +203,12 @@
 				TargetAttributes = {
 					D4749B65232A842A0073F7BC = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 					D4749B6E232A842A0073F7BC = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					D4DDD0E7232A8CA9006836D0 = {
 						CreatedOnToolsVersion = 11.0;
 					};
 				};
@@ -169,32 +228,77 @@
 			targets = (
 				D4749B65232A842A0073F7BC /* RVS_GTDriver */,
 				D4749B6E232A842A0073F7BC /* RVS_GTDriverTests */,
+				D4DDD0E7232A8CA9006836D0 /* RVS_GTDriver_MacOS_Test_Harness */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D4749B64232A842A0073F7BC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D4749B6D232A842A0073F7BC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D41494BF232A92B200E1475D /* Warnings.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4DDD0E6232A8CA9006836D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D41494C0232A92B200E1475D /* Warnings.xcconfig in Resources */,
+				D4DDD0EF232A8CAA006836D0 /* Assets.xcassets in Resources */,
+				D4DDD0F2232A8CAA006836D0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D4823C46232A93C600A16CE9 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/Pods/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/Pods/SwiftLint/swiftlint\"\nfi\n";
+		};
+		D4823C49232A940600A16CE9 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/Pods/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/Pods/SwiftLint/swiftlint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D4749B62232A842A0073F7BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D40D8E71232A88FA00697259 /* RVS_GTDriver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +310,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4DDD0E4232A8CA9006836D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4DDD0ED232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_ViewController.swift in Sources */,
+				D4DDD0EB232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -214,11 +327,28 @@
 			target = D4749B65232A842A0073F7BC /* RVS_GTDriver */;
 			targetProxy = D4749B71232A842A0073F7BC /* PBXContainerItemProxy */;
 		};
+		D4823C48232A940000A16CE9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4749B65232A842A0073F7BC /* RVS_GTDriver */;
+			targetProxy = D4823C47232A940000A16CE9 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D4DDD0F0232A8CAA006836D0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4DDD0F1232A8CAA006836D0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D4749B78232A842A0073F7BC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D41494BD232A92B200E1475D /* Warnings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -282,6 +412,7 @@
 		};
 		D4749B79232A842A0073F7BC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D41494BD232A92B200E1475D /* Warnings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -339,6 +470,7 @@
 		D4749B7B232A842A0073F7BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -346,7 +478,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = RVS_GTDriver/Info.plist;
+				INFOPLIST_FILE = "${PROJECT_DIR}/Meta/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -356,6 +488,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-GTDriver";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -363,6 +496,7 @@
 		D4749B7C232A842A0073F7BC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -370,7 +504,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = RVS_GTDriver/Info.plist;
+				INFOPLIST_FILE = "${PROJECT_DIR}/Meta/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -387,6 +521,7 @@
 		D4749B7E232A842A0073F7BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -405,6 +540,7 @@
 		D4749B7F232A842A0073F7BC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -415,6 +551,46 @@
 					"@loader_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-GTDriverTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D4DDD0F5232A8CAB006836D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RVS_GTDriver_MacOS_Test_Harness/Resources/RVS_GTDriver_MacOS_Test_Harness.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = KSAUGZFWP2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "${PROJECT_DIR}/RVS_GTDriver_MacOS_Test_Harness/Meta/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-GTDriver-MacOS-Test-Harness";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D4DDD0F6232A8CAB006836D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RVS_GTDriver_MacOS_Test_Harness/Resources/RVS_GTDriver_MacOS_Test_Harness.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = KSAUGZFWP2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "${PROJECT_DIR}/RVS_GTDriver_MacOS_Test_Harness/Meta/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-GTDriver-MacOS-Test-Harness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -446,6 +622,15 @@
 			buildConfigurations = (
 				D4749B7E232A842A0073F7BC /* Debug */,
 				D4749B7F232A842A0073F7BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4DDD0F7232A8CAB006836D0 /* Build configuration list for PBXNativeTarget "RVS_GTDriver_MacOS_Test_Harness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4DDD0F5232A8CAB006836D0 /* Debug */,
+				D4DDD0F6232A8CAB006836D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

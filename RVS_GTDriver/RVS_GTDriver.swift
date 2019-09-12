@@ -20,14 +20,4 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-#import <Foundation/Foundation.h>
-
-//! Project version number for RVS_GTDriver.
-FOUNDATION_EXPORT double RVS_GTDriverVersionNumber;
-
-//! Project version string for RVS_GTDriver.
-FOUNDATION_EXPORT const unsigned char RVS_GTDriverVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <RVS_GTDriver/PublicHeader.h>
-
-
+import Foundation

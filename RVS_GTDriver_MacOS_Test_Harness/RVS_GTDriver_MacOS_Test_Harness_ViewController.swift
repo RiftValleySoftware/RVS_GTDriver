@@ -20,14 +20,29 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-#import <Foundation/Foundation.h>
+import Cocoa
 
-//! Project version number for RVS_GTDriver.
-FOUNDATION_EXPORT double RVS_GTDriverVersionNumber;
+/* ###################################################################################################################################### */
+// MARK: - Main View Controller Class -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_GTDriver_MacOS_Test_Harness_ViewController: NSViewController {
+    /* ################################################################## */
+    /**
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-//! Project version string for RVS_GTDriver.
-FOUNDATION_EXPORT const unsigned char RVS_GTDriverVersionString[];
+        // Do any additional setup after loading the view.
+    }
 
-// In this header, you should import all the public headers of your framework using statements like #import <RVS_GTDriver/PublicHeader.h>
-
-
+    /* ################################################################## */
+    /**
+     */
+    override var representedObject: Any? {
+        didSet {
+        // Update the view, if already loaded.
+        }
+    }
+}
