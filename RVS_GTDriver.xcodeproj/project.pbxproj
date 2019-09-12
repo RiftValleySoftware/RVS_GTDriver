@@ -10,6 +10,7 @@
 		D40D8E71232A88FA00697259 /* RVS_GTDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */; };
 		D41494BF232A92B200E1475D /* Warnings.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D41494BD232A92B200E1475D /* Warnings.xcconfig */; };
 		D41494C0232A92B200E1475D /* Warnings.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D41494BD232A92B200E1475D /* Warnings.xcconfig */; };
+		D43A7E07232AEADF00A9C55A /* RVS_GTDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */; };
 		D4749B70232A842A0073F7BC /* RVS_GTDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4749B66232A842A0073F7BC /* RVS_GTDriver.framework */; };
 		D4749B75232A842A0073F7BC /* RVS_GTDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4749B74232A842A0073F7BC /* RVS_GTDriverTests.swift */; };
 		D4DDD0EB232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DDD0EA232A8CAA006836D0 /* RVS_GTDriver_MacOS_Test_Harness_AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver.swift; sourceTree = "<group>"; };
 		D41494BD232A92B200E1475D /* Warnings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Warnings.xcconfig; path = ../../Meta/Warnings.xcconfig; sourceTree = "<group>"; };
+		D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDevice.swift; sourceTree = "<group>"; };
 		D4749B66232A842A0073F7BC /* RVS_GTDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RVS_GTDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4749B69232A842A0073F7BC /* RVS_GTDriver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RVS_GTDriver.h; sourceTree = "<group>"; };
 		D4749B6A232A842A0073F7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				D4749B69232A842A0073F7BC /* RVS_GTDriver.h */,
 				D4749B6A232A842A0073F7BC /* Info.plist */,
 				D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */,
+				D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */,
 			);
 			path = RVS_GTDriver;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D43A7E07232AEADF00A9C55A /* RVS_GTDevice.swift in Sources */,
 				D40D8E71232A88FA00697259 /* RVS_GTDriver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,6 +477,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -499,6 +504,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				DYLIB_COMPATIBILITY_VERSION = 1;

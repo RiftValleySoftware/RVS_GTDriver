@@ -24,23 +24,12 @@ import Foundation
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
-// MARK: - Main Driver Class -
+// MARK: - Individual Device Instance Class -
 /* ###################################################################################################################################### */
 /**
- This class implements the main "skeleton" of the driver API.
- 
- The driver will always be a BT Central. It will scan for goTenna devices as peripherals, and instantiate internal instances of RVS_GTDevice
- for each discovered device (in BT Peripheral mode).
+ This class implements a single discovered goTenna device (in peripheral mode).
  */
-open class RVS_GTDriver: NSObject {
-    /* ################################################################################################################################## */
-    // MARK: - Private Instance Properties
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    private var _devices: [RVS_GTDevice] = []
-    
+open class RVS_GTDevice: NSObject {
     /* ################################################################################################################################## */
     // MARK: - Initializers
     /* ################################################################################################################################## */
@@ -50,7 +39,7 @@ open class RVS_GTDriver: NSObject {
     override init() {
         
     }
-    
+
     /* ################################################################################################################################## */
     // MARK: - Public Enums
     /* ################################################################################################################################## */
@@ -60,25 +49,10 @@ open class RVS_GTDriver: NSObject {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Calculated Instance Properties
+// MARK: - Peripheral Delegate Handler
 /* ###################################################################################################################################### */
-extension RVS_GTDriver {
-    /* ################################################################## */
-    /**
-     This returns our discovered and initialized devices.
-     */
-    private var devices: [RVS_GTDevice] {
-        return _devices
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Central Manager Delegate Handler
-/* ###################################################################################################################################### */
-extension RVS_GTDriver: CBCentralManagerDelegate {
+extension RVS_GTDevice: CBPeripheralDelegate {
     /* ################################################################## */
     /**
     */
-    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
-    }
 }
