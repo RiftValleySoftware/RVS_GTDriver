@@ -8,6 +8,6 @@ jazzy   --github_url https://github.com/RiftValleySoftware/RVS_GTDriver\
         --author The\ Great\ Rift\ Valley\ Software\ Company\
         --author_url https://riftvalleysoftware.com\
         --module RVS_GTDriver\
-        --min-acl private
+        --min-acl public
 cp icon.png docs/icon.png
 cd "${CWD}"
