@@ -140,7 +140,12 @@ extension RVS_GTDriver_iOS_Test_Harness_AppDelegate: RVS_GTDriverDelegate {
     func gtDriver(_ inDriver: RVS_GTDriver, errorEncountered inError: Error) {
         
     }
+}
 
+/* ###################################################################################################################################### */
+// MARK: - RVS_GTDeviceDelegate Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver_iOS_Test_Harness_AppDelegate: RVS_GTDeviceDelegate {
     /* ################################################################## */
     /**
      Called when an error is encountered by a single device.

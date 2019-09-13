@@ -24,6 +24,30 @@ import Foundation
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_GTDeviceDelegate Protocol -
+/* ###################################################################################################################################### */
+/**
+ A delegate object is required to instantiate an instance of the driver class.
+ 
+ This is the delegate protocol.
+ */
+public protocol RVS_GTDeviceDelegate: class {
+    /* ###################################################################################################################################### */
+    // MARK: - Required Methods
+    /* ###################################################################################################################################### */
+    /* ################################################################## */
+    /**
+     Called when an error is encountered by a single device.
+     
+     This is required, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device instance calling this.
+     - parameter errorEncountered: The error encountered.
+     */
+    func gtDevice(_ device: RVS_GTDevice, errorEncountered: Error)
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Individual Device Instance Class -
 /* ###################################################################################################################################### */
 /**
@@ -37,46 +61,45 @@ public class RVS_GTDevice: NSObject {
     /**
      This is the Core Bluetooth peripheral instance that is associated with this object.
      */
-    private var _peripheral: PeripheralType!
+    private var _peripheral: CBPeripheral!
     
     /* ################################################################## */
     /**
      This is the driver instance that "owns" this device instance.
      */
     private weak var _owner: RVS_GTDriver!
+    
+    /* ################################################################## */
+    /**
+     This is our delegate instance. It is a weak reference.
+     */
+    private var _delegate: RVS_GTDeviceDelegate!
 
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     We decalre this private, so we force the driver to instantiate with a peripheral and an owner.
+     We declare this private, so we force the driver to instantiate with a peripheral and an owner.
      */
     private override init() { }
     
     /* ################################################################################################################################## */
-    // MARK: - Public Typealiases
+    // MARK: - Internal Initializers
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     We alias the peripheral type for mocking.
-     */
-    public typealias PeripheralType = CBPeripheral
-    
-    /* ################################################################################################################################## */
-    // MARK: - Public Initializers
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     Initializer with a peripheral instance.
+     Initializer with a peripheral instance and an owner.
      
-     - parameter inPeripheral: The peripheral to associate with this instance.
-     - parameter owner: The driver that "owns" this peripheral. It is a weak reference.
+     - parameter inPeripheral: The peripheral to associate with this instance. This is a strong reference. It cannot be nil or omitted.
+     - parameter owner: The driver that "owns" this device. It is a weak reference. It cannot be nil or omitted.
+     - parameter delegate: The RVS_GTDeviceDelegate instance. This is a weak reference, but is optional, and can be omitted
      */
-    public init(_ inPeripheral: PeripheralType?, owner inOwner: RVS_GTDriver) {
+    internal init(_ inPeripheral: CBPeripheral, owner inOwner: RVS_GTDriver, delegate inDelegate: RVS_GTDeviceDelegate! = nil) {
         super.init()
         _peripheral = inPeripheral
         _owner = inOwner
+        _delegate = inDelegate
     }
 }
 
@@ -88,7 +111,7 @@ extension RVS_GTDevice {
     /**
      This returns our peripheral instance.
      */
-    public var peripheral: PeripheralType! {
+    public var peripheral: CBPeripheral! {
         return _peripheral
     }
     
@@ -98,6 +121,14 @@ extension RVS_GTDevice {
      */
     public var owner: RVS_GTDriver {
         return _owner
+    }
+    
+    /* ################################################################## */
+    /**
+     This is our delegate instance. It can be nil.
+     */
+    public var delegate: RVS_GTDeviceDelegate! {
+        return _delegate
     }
 }
 

@@ -45,17 +45,6 @@ public protocol RVS_GTDriverDelegate: class {
      - parameter errorEncountered: The error encountered.
      */
     func gtDriver(_ driver: RVS_GTDriver, errorEncountered: Error)
-    
-    /* ################################################################## */
-    /**
-     Called when an error is encountered by a single device.
-     
-     This is required, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter device: The device instance calling this.
-     - parameter errorEncountered: The error encountered.
-     */
-    func gtDevice(_ device: RVS_GTDevice, errorEncountered: Error)
 
     /* ###################################################################################################################################### */
     // MARK: - Optional Methods
@@ -70,7 +59,7 @@ public protocol RVS_GTDriverDelegate: class {
      - parameter peripheralDiscovered: The peripheral object.
      - returns: True, if the peripheral is to be instantiated.
      */
-    func gtDriver(_ driver: RVS_GTDriver, peripheralDiscovered: RVS_GTDevice.PeripheralType) -> Bool
+    func gtDriver(_ driver: RVS_GTDriver, peripheralDiscovered: CBPeripheral) -> Bool
     
     /* ################################################################## */
     /**
@@ -99,7 +88,7 @@ extension RVS_GTDriverDelegate {
      - parameter peripheralDiscovered: The peripheral object.
      - returns: True.
      */
-    public func gtDriver(_ driver: RVS_GTDriver, peripheralDiscovered: RVS_GTDevice.PeripheralType) -> Bool {
+    public func gtDriver(_ driver: RVS_GTDriver, peripheralDiscovered: CBPeripheral) -> Bool {
         return true
     }
     
@@ -151,6 +140,12 @@ public class RVS_GTDriver: NSObject {
     
     /* ################################################################## */
     /**
+     This is our delegate instance. It is a weak reference.
+     */
+    private var _delegate: RVS_GTDriverDelegate!
+    
+    /* ################################################################## */
+    /**
      Our CB Central manager instance.
      */
     private var _centralManager: CBCentralManager!
@@ -160,19 +155,10 @@ public class RVS_GTDriver: NSObject {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     We decalre this private, so we force the user to instantiate with a delegate.
+     We declare this private, so we force the user to instantiate with a delegate.
      */
     private override init() { }
     
-    /* ################################################################################################################################## */
-    // MARK: - Public Instance Properties
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This is our delegate instance. It is a weak reference.
-     */
-    public weak var delegate: RVS_GTDriverDelegate!
-
     /* ################################################################################################################################## */
     // MARK: - Public Initializers
     /* ################################################################################################################################## */
@@ -180,11 +166,11 @@ public class RVS_GTDriver: NSObject {
     /**
      The main initializer.
      
-     - parameter delegate: The delegate to be used with this instance. It cannot be nil.
+     - parameter delegate: The delegate to be used with this instance. It cannot be nil, and is a weak reference.
      */
     public init(delegate inDelegate: RVS_GTDriverDelegate) {
         super.init()
-        delegate = inDelegate
+        _delegate = inDelegate
         _centralManager = CBCentralManager(delegate: self, queue: nil)
     }
 }
@@ -203,6 +189,22 @@ extension RVS_GTDriver {
 }
 
 /* ###################################################################################################################################### */
+// MARK: - Internal Class Calculated Properties -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver {
+    /* ################################################################## */
+    /**
+     This is used to see whether or not we are running under unit tests.
+     
+     - returns: True, if we are currently in a unit test.
+     */
+    internal class var _runningUnitTests: Bool {
+        // Searches for an environment setting that describes the XCTest path (only present under unit test, and always present when under unit test).
+        return nil != ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"]
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Public Calculated Instance Properties -
 /* ###################################################################################################################################### */
 extension RVS_GTDriver {
@@ -213,6 +215,14 @@ extension RVS_GTDriver {
     public var devices: [RVS_GTDevice] {
         return _devices
     }
+    
+    /* ################################################################## */
+    /**
+     This is our delegate instance.
+     */
+    public var delegate: RVS_GTDriverDelegate {
+        return _delegate
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -221,60 +231,12 @@ extension RVS_GTDriver {
 extension RVS_GTDriver {
     /* ################################################################## */
     /**
-     Use this to see if we have already allocated and cached a device instance for the given peripheral.
-     
-     - parameter inPeripheral: The peripheral we are looking for.
-     - returns: True, if the driver currently has an instance of the peripheral cached.
-     */
-    public func containsThisPeripheral(_ inPeripheral: CBPeripheral) -> Bool {
-        return devices.reduce(false) { (inCurrent, inElement) -> Bool in
-            guard !inCurrent, let peripheral = inElement.peripheral else { return inCurrent }
-            return inPeripheral == peripheral
-        }
-    }
-
-    /* ################################################################## */
-    /**
-     If we have a device that is associated with the given peripheral, then return that device.
-     
-     - parameter inPeripheral: The peripheral we are looking for.
-     - returns a device for the given peripheral. Nil, if the device is not available.
-     */
-    public func deviceForThisPeripheral(_ inPeripheral: CBPeripheral) -> RVS_GTDevice! {
-        let result = devices.compactMap { (inCurrentDevice) -> RVS_GTDevice? in
-            return inCurrentDevice.peripheral == inPeripheral ? inCurrentDevice : nil
-        }
-        
-        // There can only be one...
-        guard 1 == result.count else {
-            return nil
-        }
-        
-        return result[0]
-    }
-    
-    /* ################################################################## */
-    /**
      This simply returns the 0-based index of the given device in our Array of devices.
      
      - returns the 0-based index of the device. Nil, if not available.
      */
     public func indexOfThisDevice(_ inDevice: RVS_GTDevice) -> Int! {
         return devices.firstIndex(of: inDevice)
-    }
-    
-    /* ################################################################## */
-    /**
-     This simply returns the 0-based index of the device instance for the given peripheral in our Array of devices.
-     
-     - returns the 0-based index of the peripheral. Nil, if not available.
-     */
-    public func indexOfThisPeripheral(_ inPeripheral: CBPeripheral) -> Int! {
-        for i in devices.enumerated() where i.element.peripheral == inPeripheral {
-            return i.offset
-        }
-        
-        return nil
     }
 }
 
@@ -355,17 +317,31 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - parameter rssi: The signal strength (in DB).
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didDiscover inPeripheral: CBPeripheral, advertisementData inAdvertisementData: [String: Any], rssi inRSSI: NSNumber) {
+        /* ############################################################## */
+        /**
+         Use this to see if we have already allocated and cached a device instance for the given peripheral.
+         
+         - parameter inPeripheral: The peripheral we are looking for.
+         - returns: True, if the driver currently has an instance of the peripheral cached.
+         */
+        func containsThisPeripheral(_ inPeripheral: CBPeripheral) -> Bool {
+            return devices.reduce(false) { (inCurrent, inElement) -> Bool in
+                guard !inCurrent, let peripheral = inElement.peripheral else { return inCurrent }
+                return inPeripheral == peripheral
+            }
+        }
+        
         // Check to make sure the signal is strong enough.
         guard _RSSI_range.contains(inRSSI.intValue) else { return }
         // Make sure we don't already have this one.
         guard !containsThisPeripheral(inPeripheral) else { return }
         // Make sure that we are supposed to add this.
-        if delegate?.gtDriver(self, peripheralDiscovered: inPeripheral) ?? false {
+        if delegate.gtDriver(self, peripheralDiscovered: inPeripheral) {
             // If so, we simply create the new device and add it to our list.
             let newDevice = RVS_GTDevice(inPeripheral, owner: self)
             _devices.append(newDevice)
             // Call our delegate to tell it about the new device.
-            delegate?.gtDriver(self, newDeviceAdded: newDevice)
+            delegate.gtDriver(self, newDeviceAdded: newDevice)
         }
     }
 }

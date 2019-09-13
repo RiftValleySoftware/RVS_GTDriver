@@ -20,12 +20,30 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import UIKit
-import RVS_GTDriver_iOS
+import XCTest
+import CoreBluetooth
 
-class RVS_GTDriver_iOS_Test_Harness_ViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+/* ###################################################################################################################################### */
+// MARK: - Tests -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_GTDriver_iOS_Tests: XCTestCase {
+    /* ################################################################## */
+    /**
+     */
+    override func setUp() {
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    override func tearDown() {
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    func testExample() {
     }
 }

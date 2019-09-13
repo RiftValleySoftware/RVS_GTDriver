@@ -20,44 +20,13 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import XCTest
-@testable import RVS_GTDriver
+import UIKit
 
 /* ###################################################################################################################################### */
-// MARK: - Tests -
+// MARK: - Main Navigation Controller Class -
 /* ###################################################################################################################################### */
 /**
+ The main navigation controller class.
  */
-class RVS_GTDriverTests: XCTestCase {
-    /* ################################################################## */
-    /**
-     */
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    /* ################################################################## */
-    /**
-     */
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    /* ################################################################## */
-    /**
-     */
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    /* ################################################################## */
-    /**
-     */
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+class RVS_GTDriver_iOS_Test_Harness_NavigationController: UINavigationController {
 }

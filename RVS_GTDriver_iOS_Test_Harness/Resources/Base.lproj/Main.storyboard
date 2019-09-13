@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dY6-oJ-arW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -8,20 +8,100 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Driver iOS Test Harness View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Driver iOS Test Harness Main View Controller-->
+        <scene sceneID="wAe-xo-wRc">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="RVS_GTDriver_iOS_Test_Harness_ViewController" customModule="RVS_GTDriver_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="Mz5-c2-Hvb" customClass="RVS_GTDriver_iOS_Test_Harness_MainViewController" customModule="RVS_GTDriver_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1qZ-r7-4aA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-gradient" translatesAutoresizingMaskIntoConstraints="NO" id="4Dm-Ed-oCq">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Br9-Xa-IRh">
+                                <rect key="frame" x="20" y="44" width="374" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DeviceRow" id="ALD-5M-LH5" customClass="RVS_GTDriver_iOS_Test_Harness_MainViewController_TableViewCell" customModule="RVS_GTDriver_iOS_Test_Harness" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="374" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ALD-5M-LH5" id="Iia-DB-ro7">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Mz5-c2-Hvb" id="mq8-3m-kDX"/>
+                                    <outlet property="delegate" destination="Mz5-c2-Hvb" id="c18-ex-dqv"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <constraints>
+                            <constraint firstItem="V8R-ju-ISl" firstAttribute="trailing" secondItem="Br9-Xa-IRh" secondAttribute="trailing" constant="20" id="2X3-1W-YNV"/>
+                            <constraint firstItem="4Dm-Ed-oCq" firstAttribute="trailing" secondItem="V8R-ju-ISl" secondAttribute="trailing" id="Arx-Sn-zWZ"/>
+                            <constraint firstItem="Br9-Xa-IRh" firstAttribute="leading" secondItem="V8R-ju-ISl" secondAttribute="leading" constant="20" id="QTr-N9-wje"/>
+                            <constraint firstAttribute="bottom" secondItem="4Dm-Ed-oCq" secondAttribute="bottom" id="dxP-mc-KkB"/>
+                            <constraint firstItem="Br9-Xa-IRh" firstAttribute="top" secondItem="V8R-ju-ISl" secondAttribute="top" id="irz-Ll-4K1"/>
+                            <constraint firstItem="4Dm-Ed-oCq" firstAttribute="top" secondItem="1qZ-r7-4aA" secondAttribute="top" id="niS-Ib-2TH"/>
+                            <constraint firstItem="Br9-Xa-IRh" firstAttribute="bottom" secondItem="V8R-ju-ISl" secondAttribute="bottom" id="rYY-8k-tSE"/>
+                            <constraint firstItem="4Dm-Ed-oCq" firstAttribute="leading" secondItem="V8R-ju-ISl" secondAttribute="leading" id="uE1-Kj-fBe"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="V8R-ju-ISl"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qBr-on-pgc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="emq-ga-77Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1604.3478260869567" y="-753.34821428571422"/>
+        </scene>
+        <!--Driver iOS Test Harness Device View Controller-->
+        <scene sceneID="7rp-G0-6US">
+            <objects>
+                <viewController storyboardIdentifier="RVS_GTDriver_iOS_Test_Harness_Device_ViewController" modalTransitionStyle="crossDissolve" id="BkO-wb-7ZO" customClass="RVS_GTDriver_iOS_Test_Harness_Device_ViewController" customModule="RVS_GTDriver_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nts-IW-hvl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-gradient" translatesAutoresizingMaskIntoConstraints="NO" id="88B-lg-HiP">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="88B-lg-HiP" firstAttribute="leading" secondItem="2cs-kV-lVN" secondAttribute="leading" id="5HI-mM-wh0"/>
+                            <constraint firstItem="88B-lg-HiP" firstAttribute="trailing" secondItem="2cs-kV-lVN" secondAttribute="trailing" id="HCE-ut-2hf"/>
+                            <constraint firstAttribute="bottom" secondItem="88B-lg-HiP" secondAttribute="bottom" id="iti-Ll-JRy"/>
+                            <constraint firstItem="88B-lg-HiP" firstAttribute="top" secondItem="Nts-IW-hvl" secondAttribute="top" id="z0r-mV-ajT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2cs-kV-lVN"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TY5-oF-Fbv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="139"/>
+            <point key="canvasLocation" x="-620.28985507246387" y="-753.34821428571422"/>
+        </scene>
+        <!--Driver iOS Test Harness Navigation Controller-->
+        <scene sceneID="olW-Ru-WIZ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mqi-H9-GJU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController navigationBarHidden="YES" id="dY6-oJ-arW" customClass="RVS_GTDriver_iOS_Test_Harness_NavigationController" customModule="RVS_GTDriver_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mtM-5d-AyM">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Mz5-c2-Hvb" kind="relationship" relationship="rootViewController" id="gxc-LP-BpC"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-2474" y="-753"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="background-gradient" width="1" height="1000"/>
+    </resources>
 </document>
