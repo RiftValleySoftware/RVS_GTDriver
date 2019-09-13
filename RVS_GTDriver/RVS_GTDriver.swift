@@ -23,8 +23,96 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 import CoreBluetooth
 
+/* ###################################################################################################################################### */
+// MARK: - Main Driver RVS_GTDriverDelegate Protocol -
+/* ###################################################################################################################################### */
+/**
+ A delegate object is required to instantiate an instance of the driver class.
+ 
+ This is the delegate protocol.
+ */
 public protocol RVS_GTDriverDelegate: class {
+    /* ###################################################################################################################################### */
+    // MARK: - Required Methods
+    /* ###################################################################################################################################### */
+    /* ################################################################## */
+    /**
+     Called when an error is encountered by the main driver.
+     
+     This is required, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter errorEncountered: The error encountered.
+     */
+    func gtDriver(_ driver: RVS_GTDriver, errorEncountered: Error)
     
+    /* ################################################################## */
+    /**
+     Called when an error is encountered by a single device.
+     
+     This is required, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device instance calling this.
+     - parameter errorEncountered: The error encountered.
+     */
+    func gtDevice(_ device: RVS_GTDevice, errorEncountered: Error)
+
+    /* ###################################################################################################################################### */
+    // MARK: - Optional Methods
+    /* ###################################################################################################################################### */
+    /* ################################################################## */
+    /**
+     Called when a peripheral is discovered, and before a device instance is instantiated.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread. If not specified, the device will always be added.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter peripheralDiscovered: The peripheral object.
+     - returns: True, if the peripheral is to be instantiated.
+     */
+    func gtDriver(_ driver: RVS_GTDriver, peripheralDiscovered: RVS_GTDevice.PeripheralType) -> Bool
+    
+    /* ################################################################## */
+    /**
+     Called when a device has been added and instantiated.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter newDeviceAdded: The device object.
+     */
+    func gtDriver(_ driver: RVS_GTDriver, newDeviceAdded: RVS_GTDevice)
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Main Driver RVS_GTDriverDelegate Protocol Extension -
+/* ###################################################################################################################################### */
+/**
+ These defaults allow a number of methods to be optional.
+ */
+extension RVS_GTDriverDelegate {
+    /* ################################################################## */
+    /**
+     Called when a peripheral is discovered, and before a device instance is instantiated.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter peripheralDiscovered: The peripheral object.
+     - returns: True.
+     */
+    public func gtDriver(_ driver: RVS_GTDriver, peripheralDiscovered: RVS_GTDevice.PeripheralType) -> Bool {
+        return true
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device has been added and instantiated.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread. If not specified, the device will always be added.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter newDeviceAdded: The device object.
+     */
+    public func gtDriver(_ driver: RVS_GTDriver, newDeviceAdded: RVS_GTDevice) { }
 }
 
 /* ###################################################################################################################################### */
@@ -164,6 +252,30 @@ extension RVS_GTDriver {
         
         return result[0]
     }
+    
+    /* ################################################################## */
+    /**
+     This simply returns the 0-based index of the given device in our Array of devices.
+     
+     - returns the 0-based index of the device. Nil, if not available.
+     */
+    public func indexOfThisDevice(_ inDevice: RVS_GTDevice) -> Int! {
+        return devices.firstIndex(of: inDevice)
+    }
+    
+    /* ################################################################## */
+    /**
+     This simply returns the 0-based index of the device instance for the given peripheral in our Array of devices.
+     
+     - returns the 0-based index of the peripheral. Nil, if not available.
+     */
+    public func indexOfThisPeripheral(_ inPeripheral: CBPeripheral) -> Int! {
+        for i in devices.enumerated() where i.element.peripheral == inPeripheral {
+            return i.offset
+        }
+        
+        return nil
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -210,7 +322,7 @@ extension RVS_GTDriver: Sequence {
      - parameter inIndex: The 0-based integer index. Must be less than the total count of devices.
      */
     public subscript(_ inIndex: Int) -> RVS_GTDevice {
-        precondition(inIndex < count)   // Ah. Ah. Aaah! You didn't say the magic word!
+        precondition((0..<count).contains(inIndex))   // Standard precondition. Index needs to be 0 or greater, and less than the count.
         
         return devices[inIndex]
     }
@@ -247,7 +359,13 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
         guard _RSSI_range.contains(inRSSI.intValue) else { return }
         // Make sure we don't already have this one.
         guard !containsThisPeripheral(inPeripheral) else { return }
-        let device = RVS_GTDevice(inPeripheral)
-        _devices.append(device)
+        // Make sure that we are supposed to add this.
+        if delegate?.gtDriver(self, peripheralDiscovered: inPeripheral) ?? false {
+            // If so, we simply create the new device and add it to our list.
+            let newDevice = RVS_GTDevice(inPeripheral, owner: self)
+            _devices.append(newDevice)
+            // Call our delegate to tell it about the new device.
+            delegate?.gtDriver(self, newDeviceAdded: newDevice)
+        }
     }
 }

@@ -20,92 +20,87 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation
-import CoreBluetooth
+import UIKit
+import RVS_GTDriver_iOS
 
+@UIApplicationMain
 /* ###################################################################################################################################### */
-// MARK: - Individual Device Instance Class -
+// MARK: - Main App Delegate Class -
 /* ###################################################################################################################################### */
 /**
- This class implements a single discovered goTenna device (in peripheral mode).
  */
-public class RVS_GTDevice: NSObject {
-    /* ################################################################################################################################## */
-    // MARK: - Private Instance Properties
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This is the Core Bluetooth peripheral instance that is associated with this object.
-     */
-    private var _peripheral: PeripheralType!
-    
-    /* ################################################################## */
-    /**
-     This is the driver instance that "owns" this device instance.
-     */
-    private weak var _owner: RVS_GTDriver!
-
-    /* ################################################################################################################################## */
-    // MARK: - Private Initializer
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     We decalre this private, so we force the driver to instantiate with a peripheral and an owner.
-     */
-    private override init() { }
+class RVS_GTDriver_iOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDelegate {
     
     /* ################################################################################################################################## */
-    // MARK: - Public Typealiases
+    // MARK: - Internal Class Functions
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     We alias the peripheral type for mocking.
-     */
-    public typealias PeripheralType = CBPeripheral
-    
-    /* ################################################################################################################################## */
-    // MARK: - Public Initializers
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     Initializer with a peripheral instance.
+     This displays a simple alert, with an OK button.
      
-     - parameter inPeripheral: The peripheral to associate with this instance.
-     - parameter owner: The driver that "owns" this peripheral. It is a weak reference.
+     - parameter header: The header to display at the top.
+     - parameter message: A String, containing whatever messge is to be displayed below the header.
      */
-    public init(_ inPeripheral: PeripheralType?, owner inOwner: RVS_GTDriver) {
-        super.init()
-        _peripheral = inPeripheral
-        _owner = inOwner
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Public Calculated Instance Properties -
-/* ###################################################################################################################################### */
-extension RVS_GTDevice {
-    /* ################################################################## */
-    /**
-     This returns our peripheral instance.
-     */
-    public var peripheral: PeripheralType! {
-        return _peripheral
+    class func displayAlert(header inHeader: String, message inMessage: String = "") {
     }
     
+    /* ############################################################################################################################## */
+    // MARK: - Internal Class Calculated Properties
+    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
-     this is the driver instance that "owns" this device instance.
+     This is a quick way to get this object instance (it's a SINGLETON), cast as the correct class.
+     
+     - returns: the app delegate object, in its natural environment.
      */
-    public var owner: RVS_GTDriver {
-        return _owner
+    class var appDelegateObject: RVS_GTDriver_iOS_Test_Harness_AppDelegate {
+        return (UIApplication.shared.delegate as? RVS_GTDriver_iOS_Test_Harness_AppDelegate)!
+    }
+
+    /* ################################################################################################################################## */
+    // MARK: - Internal Instance Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     The driver object that is the basis for this whole circus.
+     */
+    var gtDriver: RVS_GTDriver!
+    
+    var window: UIWindow?
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        gtDriver = RVS_GTDriver(delegate: self)
+        return true
     }
 }
 
 /* ###################################################################################################################################### */
-// MARK: - CBPeripheralDelegate Methods -
+// MARK: - RVS_GTDriverDelegate Methods -
 /* ###################################################################################################################################### */
-extension RVS_GTDevice: CBPeripheralDelegate {
+extension RVS_GTDriver_iOS_Test_Harness_AppDelegate: RVS_GTDriverDelegate {
     /* ################################################################## */
     /**
-    */
+     Called when an error is encountered by the main driver.
+     
+     This is required, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDriver: The driver instance calling this.
+     - parameter errorEncountered: The error encountered.
+     */
+    func gtDriver(_ inDriver: RVS_GTDriver, errorEncountered inError: Error) {
+        
+    }
+
+    /* ################################################################## */
+    /**
+     Called when an error is encountered by a single device.
+     
+     This is required, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device instance that experienced the error.
+     - parameter errorEncountered: The error encountered.
+     */
+    func gtDevice(_ inDevice: RVS_GTDevice, errorEncountered inError: Error) {
+        
+    }
 }
