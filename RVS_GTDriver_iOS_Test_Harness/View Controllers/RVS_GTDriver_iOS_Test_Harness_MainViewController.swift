@@ -30,7 +30,17 @@ import RVS_GTDriver_iOS
  Each row of the table is composed of an instance of this class.
  */
 class RVS_GTDriver_iOS_Test_Harness_MainViewController_TableViewCell: UITableViewCell {
+    /* ################################################################## */
+    /**
+     The device associated with this cell.
+     */
     var gtDevice: RVS_GTDevice!
+    
+    /* ################################################################## */
+    /**
+     The label, displaying the device info.
+     */
+    @IBOutlet weak var displayLabel: UILabel!
 }
 
 /* ###################################################################################################################################### */
