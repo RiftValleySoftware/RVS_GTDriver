@@ -21,6 +21,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import Cocoa
+import RVS_GTDriver
 
 @NSApplicationMain
 /* ###################################################################################################################################### */
@@ -28,18 +29,45 @@ import Cocoa
 /* ###################################################################################################################################### */
 /**
  */
-class RVS_GTDriver_MacOS_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate {
+class RVS_GTDriver_MacOS_Test_Harness_AppDelegate: NSObject {
+    /* ################################################################################################################################## */
+    // MARK: - Internal Class Functions
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     This displays a simple alert, with an OK button.
+     
+     - parameter header: The header to display at the top.
+     - parameter message: A String, containing whatever messge is to be displayed below the header.
      */
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+    class func displayAlert(header inHeader: String, message inMessage: String = "") {
+        let alert = NSAlert()
+        alert.messageText = inHeader
+        alert.informativeText = inMessage
+        alert.addButton(withTitle: "SLUG-OK-BUTTON-TEXT".localizedVariant)
+        alert.runModal()
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - NSApplicationDelegate Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver_MacOS_Test_Harness_AppDelegate: NSApplicationDelegate {
+    /* ################################################################## */
+    /**
+     Called when the application has completed launching.
+     
+     - parameter inNotification: The notification object that accompanied the launch.
+     */
+    func applicationDidFinishLaunching(_ inNotification: Notification) {
     }
 
     /* ################################################################## */
     /**
+     Called when the application is about to terminate.
+     
+     - parameter inNotification: The notification object that accompanied the call.
      */
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+    func applicationWillTerminate(_ inNotification: Notification) {
     }
 }

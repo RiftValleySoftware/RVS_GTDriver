@@ -20,18 +20,5 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Cocoa
-
-/* ###################################################################################################################################### */
-// MARK: - Main View Controller Class -
-/* ###################################################################################################################################### */
-/**
- */
-class RVS_GTDriver_MacOS_Test_Harness_ViewController: NSViewController {
-}
-
-/* ###################################################################################################################################### */
-// MARK: - NSViewController Override Methods -
-/* ###################################################################################################################################### */
-extension RVS_GTDriver_MacOS_Test_Harness_ViewController {
-}
+/// The OK button in alerts.
+"SLUG-OK-BUTTON-TEXT"                       =       "OK";
