@@ -53,15 +53,49 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController {
      */
     static let reuseID = "DeviceRow"
     
+    /* ################################################################## */
+    /**
+     This is the segue ID for showing device detail.
+     */
+    static let displaySegueID = "SelectDevice"
+    
     /* ################################################################################################################################## */
-    // MARK: - Internal Calculated Methods
+    // MARK: - Internal IB Properties
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This returns the driver instance, from the app delegate
+     This is the table that displays our available devices.
      */
-    var gtDriver: RVS_GTDriver! {
-        return RVS_GTDriver_iOS_Test_Harness_AppDelegate.appDelegateObject.gtDriver
+    @IBOutlet weak var tableView: UITableView!
+    
+    /* ################################################################## */
+    /**
+     The segmented control that selects scanning or not scanning.
+     */
+    @IBOutlet weak var scanningSegmentedControl: UISegmentedControl!
+    
+    /* ################################################################################################################################## */
+    // MARK: - Internal Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     The driver object that is the basis for this whole circus.
+     */
+    var gtDriver: RVS_GTDriver!
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Instance IBAction Handlers -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
+    /* ################################################################## */
+    /**
+     Called when the user changes the value of the segmented switch.
+     
+     - parameter: ignored.
+     */
+    @IBAction func scanningStateChanged(_: UISegmentedControl) {
+        gtDriver.isScanning = 1 == scanningSegmentedControl.selectedSegmentIndex
     }
 }
 
@@ -71,6 +105,9 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController {
 extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDataSource {
     /* ################################################################## */
     /**
+     - parameter inTableView: The table view that called this.
+     - parameter numberOfRowsInSection: An integer, with the 0-based section (always 0).
+     - returns: The number of rows (number of devices).
      */
     func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
         return gtDriver?.count ?? 0
@@ -78,6 +115,11 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDataSourc
     
     /* ################################################################## */
     /**
+     Called to create a cell instance to populate a table cell.
+     
+     - parameter inTableView: The table view that called this.
+     - parameter cellForRowAt: An IndexPath to the selected cell that needs populating.
+     - returns: A newly-created cell instance.
      */
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let cell = inTableView.dequeueReusableCell(withIdentifier: type(of: self).reuseID) as? RVS_GTDriver_iOS_Test_Harness_MainViewController_TableViewCell else { return UITableViewCell() }
@@ -87,15 +129,123 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDataSourc
 }
 
 /* ###################################################################################################################################### */
+// MARK: - UITableViewDelegate Support -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDelegate {
+    /* ################################################################## */
+    /**
+     This is called when someone taps on a row.
+     
+     We bring in the inspector for that device, and deselect the row.
+     
+     - parameter inTableView: The table view that called this.
+     - parameter willSelectRowAt: An IndexPath to the selected row.
+     - returns: An IndexPath, if the row is to remain selected and highlighted. It is always false, and we immediately deselect the row, anyway.
+     */
+    func tableView(_ inTableView: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
+        inTableView.deselectRow(at: inIndexPath, animated: false)    // Make sure to deselect the row, right away.
+        let device = gtDriver[inIndexPath.row]
+        performSegue(withIdentifier: type(of: self).displaySegueID, sender: device)
+        return nil
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Overridden Base Class Methods -
 /* ###################################################################################################################################### */
 extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
+    override func viewDidLoad() {
+        gtDriver = RVS_GTDriver(delegate: self)
+        // We set up the localized strings for the segmented control.
+        for i in 0..<scanningSegmentedControl.numberOfSegments {
+            scanningSegmentedControl.setTitle(scanningSegmentedControl.titleForSegment(at: i)?.localizedVariant, forSegmentAt: i)
+        }
+    }
+    
     /* ################################################################## */
     /**
      Make sure that the navbar is hidden for the main view.
+     
+     - parameter inAnimated: Ignored, but sent to the superclass.
      */
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewWillAppear(_ inAnimated: Bool) {
+        super.viewWillAppear(inAnimated)
         navigationController?.isNavigationBarHidden = true
+    }
+    
+    /* ################################################################## */
+    /**
+     This is called as we prepare to open the device inspector screen. We use it to associate the device instance with the screen.
+     
+     - parameter for: The sgue object.
+     - parameter sender: The context we attached to the segue (the device object).
+     */
+    override func prepare(for inSegue: UIStoryboardSegue, sender inSender: Any?) {
+        guard   let destination = inSegue.destination as? RVS_GTDriver_iOS_Test_Harness_Device_ViewController,
+                let device = inSender as? RVS_GTDevice else { return }
+        destination.gtDevice = device
+        device.delegate = destination
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_GTDriverDelegate Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver_iOS_Test_Harness_MainViewController: RVS_GTDriverDelegate {
+    /* ################################################################## */
+    /**
+     Called when an error is encountered by the main driver.
+     
+     This is required, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDriver: The driver instance calling this.
+     - parameter errorEncountered: The error encountered.
+     */
+    func gtDriver(_ inDriver: RVS_GTDriver, errorEncountered inError: Error) {
+        
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device has been added and instantiated.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDriver: The driver instance calling this.
+     - parameter newDeviceAdded: The device object.
+     */
+    func gtDriver(_ inDriver: RVS_GTDriver, newDeviceAdded inDevice: RVS_GTDevice) {
+        // All we need to do, is tell the table to reload itself.
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device is about to be removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDriver: The driver instance calling this.
+     - parameter deviceWillBeRemoved: The device object.
+     */
+    func gtDriver(_ inDriver: RVS_GTDriver, deviceWillBeRemoved inDevice: RVS_GTDevice) {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device was removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDriver: The driver instance calling this.
+     - parameter deviceWillBeRemoved: The device object. It will not be viable after this call.
+     */
+    func gtDriver(_ inDriver: RVS_GTDriver, deviceWasRemoved inDevice: RVS_GTDevice) {
+        // All we need to do, is tell the table to reload itself.
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }

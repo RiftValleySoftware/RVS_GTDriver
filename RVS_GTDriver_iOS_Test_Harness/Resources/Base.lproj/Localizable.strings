@@ -22,3 +22,5 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 
 /// The OK button in alerts.
 "SLUG-OK-BUTTON-TEXT"                       =       "OK";
+"SLUG-IS-NOT-SCANNING"                      =       "NOT SCANNING";
+"SLUG-IS-SCANNING"                          =       "SCANNING";

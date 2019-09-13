@@ -55,9 +55,50 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController {
     /* ################################################################## */
     /**
      Make sure that we display the navbar.
+     
+     - parameter inAnimated: Ignored, but sent to the superclass.
      */
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewWillAppear(_ inAnimated: Bool) {
+        super.viewWillAppear(inAnimated)
         navigationController?.isNavigationBarHidden = false
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_GTDeviceDelegate Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTDeviceDelegate {
+    /* ################################################################## */
+    /**
+     Called when an error is encountered by a single device.
+     
+     This is required, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device instance that experienced the error.
+     - parameter errorEncountered: The error encountered.
+     */
+    func gtDevice(_ inDevice: RVS_GTDevice, errorEncountered inError: Error) {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device is about to be removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device instance calling this.
+     */
+    func gtDeviceWillBeRemoved(_ inDevice: RVS_GTDevice) {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device was removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device object. It will not be viable after this call.
+     */
+    func gtDeviceWasBeRemoved(_ inDevice: RVS_GTDevice) {
     }
 }

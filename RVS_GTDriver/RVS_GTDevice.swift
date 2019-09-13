@@ -45,6 +45,54 @@ public protocol RVS_GTDeviceDelegate: class {
      - parameter errorEncountered: The error encountered.
      */
     func gtDevice(_ device: RVS_GTDevice, errorEncountered: Error)
+    
+    /* ###################################################################################################################################### */
+    // MARK: - Optional Methods
+    /* ###################################################################################################################################### */
+    /* ################################################################## */
+    /**
+     Called when a device is about to be removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device instance calling this.
+     */
+    func gtDeviceWillBeRemoved(_ device: RVS_GTDevice)
+    
+    /* ################################################################## */
+    /**
+     Called when a device was removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device object. It will not be viable after this call.
+     */
+    func gtDeviceWasBeRemoved(_ device: RVS_GTDevice)
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_GTDeviceDelegate Protocol Extension (Optional Methods) -
+/* ###################################################################################################################################### */
+extension RVS_GTDeviceDelegate {
+    /* ################################################################## */
+    /**
+     Called when a device is about to be removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device instance calling this.
+     */
+    public func gtDeviceWillBeRemoved(_ device: RVS_GTDevice) { }
+    
+    /* ################################################################## */
+    /**
+     Called when a device was removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device object. It will not be viable after this call.
+     */
+    public func gtDeviceWasBeRemoved(_ device: RVS_GTDevice) { }
 }
 
 /* ###################################################################################################################################### */
@@ -128,7 +176,13 @@ extension RVS_GTDevice {
      This is our delegate instance. It can be nil.
      */
     public var delegate: RVS_GTDeviceDelegate! {
-        return _delegate
+        get {
+            return _delegate
+        }
+        
+        set {
+            _delegate = newValue
+        }
     }
 }
 

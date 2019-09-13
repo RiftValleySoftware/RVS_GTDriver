@@ -71,6 +71,28 @@ public protocol RVS_GTDriverDelegate: class {
      - parameter newDeviceAdded: The device object.
      */
     func gtDriver(_ driver: RVS_GTDriver, newDeviceAdded: RVS_GTDevice)
+    
+    /* ################################################################## */
+    /**
+     Called when a device is about to be removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter deviceWillBeRemoved: The device object.
+     */
+    func gtDriver(_ driver: RVS_GTDriver, deviceWillBeRemoved: RVS_GTDevice)
+    
+    /* ################################################################## */
+    /**
+     Called when a device was removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter deviceWillBeRemoved: The device object. It will not be viable after this call.
+     */
+    func gtDriver(_ driver: RVS_GTDriver, deviceWasRemoved: RVS_GTDevice)
 }
 
 /* ###################################################################################################################################### */
@@ -96,12 +118,34 @@ extension RVS_GTDriverDelegate {
     /**
      Called when a device has been added and instantiated.
      
-     This is optional, and is NOT guaranteed to be called in the main thread. If not specified, the device will always be added.
-     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+
      - parameter driver: The driver instance calling this.
      - parameter newDeviceAdded: The device object.
      */
     public func gtDriver(_ driver: RVS_GTDriver, newDeviceAdded: RVS_GTDevice) { }
+    
+    /* ################################################################## */
+    /**
+     Called when a device is about to be removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter deviceWillBeRemoved: The device object.
+     */
+    public func gtDriver(_ driver: RVS_GTDriver, deviceWillBeRemoved: RVS_GTDevice) { }
+    
+    /* ################################################################## */
+    /**
+     Called when a device was removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter deviceWillBeRemoved: The device object. It will not be viable after this call.
+     */
+    public func gtDriver(_ driver: RVS_GTDriver, deviceWasRemoved: RVS_GTDevice) { }
 }
 
 /* ###################################################################################################################################### */
@@ -176,19 +220,6 @@ public class RVS_GTDriver: NSObject {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Private Instance Methods -
-/* ###################################################################################################################################### */
-extension RVS_GTDriver {
-    /* ################################################################## */
-    /**
-     Tells the Central Manager to start looking for our devices.
-     */
-    private func _scanForDevices() {
-      _centralManager.scanForPeripherals(withServices: [], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Internal Class Calculated Properties -
 /* ###################################################################################################################################### */
 extension RVS_GTDriver {
@@ -222,6 +253,24 @@ extension RVS_GTDriver {
      */
     public var delegate: RVS_GTDriverDelegate {
         return _delegate
+    }
+    
+    /* ################################################################## */
+    /**
+     This is true, if we are currently scanning for new CB peripherals.
+     */
+    public var isScanning: Bool {
+        get {
+            return _centralManager.isScanning
+        }
+        
+        set {
+            if !newValue {
+                _centralManager.stopScan()
+            } else {
+                _centralManager.scanForPeripherals(withServices: [], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
+            }
+        }
     }
 }
 

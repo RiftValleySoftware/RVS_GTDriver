@@ -21,7 +21,6 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import UIKit
-import RVS_GTDriver_iOS
 
 @UIApplicationMain
 /* ###################################################################################################################################### */
@@ -89,15 +88,6 @@ class RVS_GTDriver_iOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDeleg
     }
 
     /* ################################################################################################################################## */
-    // MARK: - Internal Instance Properties
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     The driver object that is the basis for this whole circus.
-     */
-    var gtDriver: RVS_GTDriver!
-    
-    /* ################################################################################################################################## */
     // MARK: - UIApplicationDelegate Properties
     /* ################################################################################################################################## */
     /* ################################################################## */
@@ -119,43 +109,6 @@ class RVS_GTDriver_iOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDeleg
      - returns: True, if the app is OK to launch.
      */
     func application(_ inApplication: UIApplication, didFinishLaunchingWithOptions inLaunchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        gtDriver = RVS_GTDriver(delegate: self)
         return true
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - RVS_GTDriverDelegate Methods -
-/* ###################################################################################################################################### */
-extension RVS_GTDriver_iOS_Test_Harness_AppDelegate: RVS_GTDriverDelegate {
-    /* ################################################################## */
-    /**
-     Called when an error is encountered by the main driver.
-     
-     This is required, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter inDriver: The driver instance calling this.
-     - parameter errorEncountered: The error encountered.
-     */
-    func gtDriver(_ inDriver: RVS_GTDriver, errorEncountered inError: Error) {
-        
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - RVS_GTDeviceDelegate Methods -
-/* ###################################################################################################################################### */
-extension RVS_GTDriver_iOS_Test_Harness_AppDelegate: RVS_GTDeviceDelegate {
-    /* ################################################################## */
-    /**
-     Called when an error is encountered by a single device.
-     
-     This is required, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter inDevice: The device instance that experienced the error.
-     - parameter errorEncountered: The error encountered.
-     */
-    func gtDevice(_ inDevice: RVS_GTDevice, errorEncountered inError: Error) {
-        
     }
 }
