@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D403D355232BCA970040EBA3 /* Warnings.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D403D354232BCA970040EBA3 /* Warnings.xcconfig */; };
+		D403D356232BCA970040EBA3 /* Warnings.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D403D354232BCA970040EBA3 /* Warnings.xcconfig */; };
+		D403D357232BCA970040EBA3 /* Warnings.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D403D354232BCA970040EBA3 /* Warnings.xcconfig */; };
 		D43058A6232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43058A5232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift */; };
 		D43058AA232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43058A9232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_ViewController.swift */; };
 		D43058AD232BBCE700B64056 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43058AB232BBCE700B64056 /* Main.storyboard */; };
@@ -46,6 +49,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D403D354232BCA970040EBA3 /* Warnings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Warnings.xcconfig; path = Meta/Warnings.xcconfig; sourceTree = "<group>"; };
 		D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver.swift; sourceTree = "<group>"; };
 		D43058A3232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVS_GTDriver_iOS_Test_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43058A5232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +66,6 @@
 		D4749B6F232A842A0073F7BC /* RVS_GTDriverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RVS_GTDriverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4749B74232A842A0073F7BC /* RVS_GTDriverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriverTests.swift; sourceTree = "<group>"; };
 		D4749B76232A842A0073F7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4823C4A232A947300A16CE9 /* Meta */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Meta; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,25 +94,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D43058A4232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness */ = {
+		D403D353232BCA830040EBA3 /* Meta */ = {
 			isa = PBXGroup;
 			children = (
-				D43058A5232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift */,
-				D43058A9232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_ViewController.swift */,
+				D403D354232BCA970040EBA3 /* Warnings.xcconfig */,
+			);
+			name = Meta;
+			sourceTree = "<group>";
+		};
+		D403D35A232BCB1D0040EBA3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				D43058AB232BBCE700B64056 /* Main.storyboard */,
 				D43058D2232BBFE100B64056 /* Localizable.strings */,
 				D43058AE232BBCE800B64056 /* Assets.xcassets */,
 				D43058B0232BBCE800B64056 /* LaunchScreen.storyboard */,
-				D43058B3232BBCE800B64056 /* Info.plist */,
 			);
-			path = RVS_GTDriver_iOS_Test_Harness;
+			path = Resources;
 			sourceTree = "<group>";
 		};
-		D43058B7232BBDBB00B64056 /* Frameworks */ = {
+		D403D35B232BCB2F0040EBA3 /* Meta */ = {
 			isa = PBXGroup;
 			children = (
+				D43058B3232BBCE800B64056 /* Info.plist */,
 			);
-			name = Frameworks;
+			path = Meta;
+			sourceTree = "<group>";
+		};
+		D403D35C232BCB570040EBA3 /* Main App */ = {
+			isa = PBXGroup;
+			children = (
+				D43058A5232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift */,
+			);
+			path = "Main App";
+			sourceTree = "<group>";
+		};
+		D403D35D232BCB6A0040EBA3 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D43058A9232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D43058A4232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness */ = {
+			isa = PBXGroup;
+			children = (
+				D403D35C232BCB570040EBA3 /* Main App */,
+				D403D35D232BCB6A0040EBA3 /* View Controllers */,
+				D403D35A232BCB1D0040EBA3 /* Resources */,
+				D403D35B232BCB2F0040EBA3 /* Meta */,
+			);
+			path = RVS_GTDriver_iOS_Test_Harness;
 			sourceTree = "<group>";
 		};
 		D43058D5232BC59700B64056 /* iOS Variant */ = {
@@ -134,9 +170,8 @@
 				D4749B68232A842A0073F7BC /* RVS_GTDriver */,
 				D43058A4232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness */,
 				D4749B73232A842A0073F7BC /* RVS_GTDriverTests */,
+				D403D353232BCA830040EBA3 /* Meta */,
 				D4749B67232A842A0073F7BC /* Products */,
-				D4823C4A232A947300A16CE9 /* Meta */,
-				D43058B7232BBDBB00B64056 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -172,16 +207,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		D43058BE232BBECB00B64056 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		D43058A2232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness */ = {
 			isa = PBXNativeTarget;
@@ -207,7 +232,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D43058CC232BBECB00B64056 /* Build configuration list for PBXNativeTarget "RVS_GTDriver_iOS" */;
 			buildPhases = (
-				D43058BE232BBECB00B64056 /* Headers */,
+				D403D358232BCAE20040EBA3 /* SwiftLint */,
 				D43058BF232BBECB00B64056 /* Sources */,
 				D43058C0232BBECB00B64056 /* Frameworks */,
 				D43058C1232BBECB00B64056 /* Resources */,
@@ -285,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D43058B2232BBCE800B64056 /* LaunchScreen.storyboard in Resources */,
+				D403D357232BCA970040EBA3 /* Warnings.xcconfig in Resources */,
 				D43058D4232BBFE200B64056 /* Localizable.strings in Resources */,
 				D43058AF232BBCE800B64056 /* Assets.xcassets in Resources */,
 				D43058AD232BBCE700B64056 /* Main.storyboard in Resources */,
@@ -295,6 +321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D403D355232BCA970040EBA3 /* Warnings.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,12 +329,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D403D356232BCA970040EBA3 /* Warnings.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D403D358232BCAE20040EBA3 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/Pods/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/Pods/SwiftLint/swiftlint\"\nfi\n";
+		};
 		D43058BD232BBE2200B64056 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -402,7 +448,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
-				INFOPLIST_FILE = RVS_GTDriver_iOS_Test_Harness/Info.plist;
+				INFOPLIST_FILE = RVS_GTDriver_iOS_Test_Harness/Meta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -425,7 +471,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
-				INFOPLIST_FILE = RVS_GTDriver_iOS_Test_Harness/Info.plist;
+				INFOPLIST_FILE = RVS_GTDriver_iOS_Test_Harness/Meta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -496,6 +542,7 @@
 		};
 		D4749B78232A842A0073F7BC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D403D354232BCA970040EBA3 /* Warnings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -560,6 +607,7 @@
 		};
 		D4749B79232A842A0073F7BC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D403D354232BCA970040EBA3 /* Warnings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

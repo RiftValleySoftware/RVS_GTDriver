@@ -28,22 +28,53 @@ import RVS_GTDriver_iOS
 // MARK: - Main App Delegate Class -
 /* ###################################################################################################################################### */
 /**
+ The main application delegate class for the app.
  */
 class RVS_GTDriver_iOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDelegate {
-    
     /* ################################################################################################################################## */
     // MARK: - Internal Class Functions
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This displays a simple alert, with an OK button.
+     Displays the given error in an alert with an "OK" button.
      
-     - parameter header: The header to display at the top.
-     - parameter message: A String, containing whatever messge is to be displayed below the header.
+     - parameter inTitle: a string to be displayed as the title of the alert. It is localized by this method.
+     - parameter inMessage: a string to be displayed as the message of the alert. It is localized by this method.
+     - parameter presentedBy: An optional UIViewController object that is acting as the presenter context for the alert. If nil, we use the top controller of the Navigation stack.
      */
-    class func displayAlert(header inHeader: String, message inMessage: String = "") {
+    class func displayAlert(_ inTitle: String, inMessage: String, presentedBy inPresentingViewController: UIViewController! = nil ) {
+        #if DEBUG
+            print("*** \(inTitle)\n\t\(inMessage)")
+        #endif
+        DispatchQueue.main.async {
+            var presentedBy = inPresentingViewController
+            
+            if nil == presentedBy {
+                if let navController = self.appDelegateObject.window?.rootViewController as? UINavigationController {
+                    presentedBy = navController.topViewController
+                } else {
+                    if let tabController = self.appDelegateObject.window?.rootViewController as? UITabBarController {
+                        if let navController = tabController.selectedViewController as? UINavigationController {
+                            presentedBy = navController.topViewController
+                        } else {
+                            presentedBy = tabController.selectedViewController
+                        }
+                    }
+                }
+            }
+            
+            if nil != presentedBy {
+                let alertController = UIAlertController(title: inTitle, message: inMessage, preferredStyle: .actionSheet)
+                
+                let okAction = UIAlertAction(title: "SLUG-OK-BUTTON-TEXT".localizedVariant, style: UIAlertAction.Style.cancel, handler: nil)
+                
+                alertController.addAction(okAction)
+                
+                presentedBy?.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
-    
+
     /* ############################################################################################################################## */
     // MARK: - Internal Class Calculated Properties
     /* ############################################################################################################################## */
@@ -66,9 +97,28 @@ class RVS_GTDriver_iOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDeleg
      */
     var gtDriver: RVS_GTDriver!
     
+    /* ################################################################################################################################## */
+    // MARK: - UIApplicationDelegate Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     The window instance for this app.
+     */
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    /* ################################################################################################################################## */
+    // MARK: - UIApplicationDelegate Methods
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     Called after the application has launched, but before it runs in the device UI.
+     
+     - parameter inApplication: The application instance for this app.
+     - parameter didFinishLaunchingWithOptions: The launch options Array.
+     
+     - returns: True, if the app is OK to launch.
+     */
+    func application(_ inApplication: UIApplication, didFinishLaunchingWithOptions inLaunchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         gtDriver = RVS_GTDriver(delegate: self)
         return true
     }
