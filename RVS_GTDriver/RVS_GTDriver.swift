@@ -36,7 +36,7 @@ public protocol RVS_GTDriverDelegate: class {
  The driver will always be a BT Central. It will scan for goTenna devices as peripherals, and instantiate internal instances of RVS_GTDevice
  for each discovered device (in BT Peripheral mode).
  */
-open class RVS_GTDriver: NSObject {
+public class RVS_GTDriver: NSObject {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Constants
     /* ################################################################################################################################## */

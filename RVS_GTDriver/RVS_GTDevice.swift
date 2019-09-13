@@ -29,7 +29,7 @@ import CoreBluetooth
 /**
  This class implements a single discovered goTenna device (in peripheral mode).
  */
-open class RVS_GTDevice: NSObject {
+public class RVS_GTDevice: NSObject {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -37,10 +37,19 @@ open class RVS_GTDevice: NSObject {
     /**
      This is the Core Bluetooth peripheral instance that is associated with this object.
      */
-    private var _peripheral: CBPeripheral!
+    private var _peripheral: PeripheralType!
     
     /* ################################################################################################################################## */
-    // MARK: - Initializers
+    // MARK: - Public Typealiases
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     We alias the peripheral type for mocking.
+     */
+    public typealias PeripheralType = CBPeripheral
+
+    /* ################################################################################################################################## */
+    // MARK: - Public Initializers
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
@@ -48,7 +57,7 @@ open class RVS_GTDevice: NSObject {
      
      - parameter inPeripheral: The peripheral to associate with this instance.
      */
-    init(_ inPeripheral: CBPeripheral?) {
+    public init(_ inPeripheral: PeripheralType?) {
         _peripheral = inPeripheral
     }
 }
@@ -61,7 +70,7 @@ extension RVS_GTDevice {
     /**
      This returns our peripheral instance.
      */
-    public var peripheral: CBPeripheral! {
+    public var peripheral: PeripheralType! {
         return _peripheral
     }
 }
