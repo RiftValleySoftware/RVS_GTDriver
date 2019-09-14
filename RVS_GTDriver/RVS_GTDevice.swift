@@ -27,8 +27,6 @@ import CoreBluetooth
 // MARK: - RVS_GTDeviceDelegate Protocol -
 /* ###################################################################################################################################### */
 /**
- A delegate object is required to instantiate an instance of the driver class.
- 
  This is the delegate protocol.
  */
 public protocol RVS_GTDeviceDelegate: class {
@@ -164,6 +162,8 @@ extension RVS_GTDeviceDelegate {
 /* ###################################################################################################################################### */
 /**
  This class implements a single discovered goTenna device (in peripheral mode).
+ 
+ Since this receives delegate callbacks from CB, it must derive from NSObject.
  */
 public class RVS_GTDevice: NSObject {
     /* ################################################################################################################################## */
@@ -186,6 +186,12 @@ public class RVS_GTDevice: NSObject {
      This is our delegate instance. It is a weak reference.
      */
     private var _delegate: RVS_GTDeviceDelegate!
+    
+    /* ################################################################## */
+    /**
+     This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
+     */
+    private var _contents: [RVS_GTService] = []
 
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
@@ -275,6 +281,14 @@ extension RVS_GTDevice {
     
     /* ################################################################## */
     /**
+     This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
+     */
+    private var services: [RVS_GTService] {
+        return _contents
+    }
+
+    /* ################################################################## */
+    /**
      This manages and reports our connection. Changing this value will connect or disconnect this device.
      */
     public var isConnected: Bool {
@@ -301,17 +315,66 @@ extension RVS_GTDevice {
      Asks the device to discover all of its services.
      */
     public func discoverServices() {
+        _contents = [] // Start clean
         peripheral.discoverServices(nil)
     }
     
     /* ################################################################## */
     /**
-     Asks the device to discover all of its characteristics for a given service.
-     
-     - parameter inService: The service to query.
+     Asks the device to discover all of the characteristics for a given service.
      */
-    public func discoverCharacteristicsForService(_ inService: CBService) {
-        peripheral.discoverCharacteristics(nil, for: inService)
+    public func discoverAllCharacteristicsForService(_ inService: RVS_GTService) {
+        peripheral.discoverCharacteristics(nil, for: inService.service)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Sequence Support -
+/* ###################################################################################################################################### */
+/**
+ We do this, so we can iterate through our services, and treat the driver like an Array of services.
+ */
+extension RVS_GTDevice: Sequence {
+    /* ################################################################## */
+    /**
+     The element type is our service.
+     */
+    public typealias Element = RVS_GTService
+
+    /* ################################################################## */
+    /**
+     The iterator is simple, since it is already an Array.
+     */
+    public typealias Iterator = Array<Element>.Iterator
+    
+    /* ################################################################## */
+    /**
+     We just pass the iterator through to the Array.
+     
+     - returns: The Array iterator for our characateristics.
+     */
+    public func makeIterator() -> Iterator {
+        return _contents.makeIterator()
+    }
+    
+    /* ################################################################## */
+    /**
+     The number of characteristics we have. 1-based. 0 is no characteristics.
+     */
+    public var count: Int {
+        return _contents.count
+    }
+    
+    /* ################################################################## */
+    /**
+     Returns an indexed characteristic.
+     
+     - parameter inIndex: The 0-based integer index. Must be less than the total count of characteristics.
+     */
+    public subscript(_ inIndex: Int) -> Element {
+        precondition((0..<count).contains(inIndex))   // Standard precondition. Index needs to be 0 or greater, and less than the count.
+        
+        return _contents[inIndex]
     }
 }
 
@@ -321,18 +384,49 @@ extension RVS_GTDevice {
 extension RVS_GTDevice: CBPeripheralDelegate {
     /* ################################################################## */
     /**
+     Use this to see if we have already allocated and cached a service instance for the given service.
+     This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
+     
+     - parameter inService: The peripheral we are looking for.
+     - returns: True, if the driver currently has an instance of the peripheral cached.
+     */
+    internal func containsThisService(_ inService: CBService) -> Bool {
+        return services.reduce(false) { (inCurrent, inElement) -> Bool in
+            guard !inCurrent, let service = inElement.service else { return inCurrent }
+            return inService == service
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Return the service from our cached Array that corresponds to the given service.
+     This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
+     
+     - parameter inService: The service we are looking for.
+     - returns: The service. Nil, if not found.
+     */
+    internal func serviceForThisService(_ inService: CBService) -> Element? {
+        for service in services where inService == service.service {
+            return service
+        }
+        
+        return nil
+    }
+
+    /* ################################################################## */
+    /**
     */
     public func peripheral(_ inPeripheral: CBPeripheral, didDiscoverServices inError: Error?) {
         #if DEBUG
             print("\n***> Services Discovered:")
             print("\terror: \(String(describing: inError))\n")
             if let services = inPeripheral.services {
-                for service in services {
+                for service in services where !containsThisService(service) {
                     #if DEBUG
                         print("\t***\n")
                         print("\tservice: \(String(describing: service))\n")
                     #endif
-                    discoverCharacteristicsForService(service)
+                    _contents.append(RVS_GTService(service, owner: self))
                 }
             }
         #endif
@@ -348,12 +442,14 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\t***\n")
             print("\terror: \(String(describing: inError))\n")
         #endif
+        guard let service = serviceForThisService(inService) else { return }
         guard let characteristics = inService.characteristics else { return }
         for characteristic in characteristics {
             #if DEBUG
                 print("\t***\n")
                 print("\tcharacteristic: \(String(describing: characteristic))\n")
             #endif
+            service.addCharacteristic(characteristic)
         }
         #if DEBUG
             print("<***\n")

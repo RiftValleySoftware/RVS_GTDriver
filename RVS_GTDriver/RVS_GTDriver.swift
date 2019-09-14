@@ -155,7 +155,9 @@ extension RVS_GTDriverDelegate {
  This class implements the main "skeleton" of the driver API.
  
  The driver will always be a BT Central. It will scan for goTenna devices as peripherals, and instantiate internal instances of RVS_GTDevice
- for each discovered device (in BT Peripheral mode).
+ for each discovered peripheral device.
+ 
+ Since this receives delegate callbacks from CB, it must derive from NSObject.
  */
 public class RVS_GTDriver: NSObject {
     /* ################################################################################################################################## */
@@ -186,7 +188,7 @@ public class RVS_GTDriver: NSObject {
     /**
      This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_GTDevice.
      */
-    private var _devices: [RVS_GTDevice] = []
+    private var _contents: [RVS_GTDevice] = []
     
     /* ################################################################## */
     /**
@@ -242,6 +244,36 @@ extension RVS_GTDriver {
 }
 
 /* ###################################################################################################################################### */
+// MARK: - Internal Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver {
+    
+    /* ################################################################## */
+    /**
+     Connect the given device.
+     
+     - parameter inDevice: The deivice we want connected.
+     */
+    internal func connectDevice(_ inDevice: RVS_GTDevice) {
+        if .disconnected == inDevice.peripheral.state { // Must be completely disconnected
+            _centralManager.connect(inDevice.peripheral, options: nil)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Disconnect the given device.
+     
+     - parameter inDevice: The deivice we want disconnected.
+     */
+    internal func disconnectDevice(_ inDevice: RVS_GTDevice) {
+        if .disconnected != inDevice.peripheral.state { // We can disconnect at any stage.
+            _centralManager.cancelPeripheralConnection(inDevice.peripheral)
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Public Calculated Instance Properties -
 /* ###################################################################################################################################### */
 extension RVS_GTDriver {
@@ -250,7 +282,7 @@ extension RVS_GTDriver {
      This returns our discovered and initialized devices.
      */
     public var devices: [RVS_GTDevice] {
-        return _devices
+        return _contents
     }
     
     /* ################################################################## */
@@ -293,24 +325,6 @@ extension RVS_GTDriver {
     public func indexOfThisDevice(_ inDevice: RVS_GTDevice) -> Int! {
         return devices.firstIndex(of: inDevice)
     }
-    
-    /* ################################################################## */
-    /**
-     */
-    public func connectDevice(_ inDevice: RVS_GTDevice) {
-        if .disconnected == inDevice.peripheral.state { // Must be completely disconnected
-            _centralManager.connect(inDevice.peripheral, options: nil)
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    public func disconnectDevice(_ inDevice: RVS_GTDevice) {
-        if .disconnected != inDevice.peripheral.state { // We can disconnect at any stage.
-            _centralManager.cancelPeripheralConnection(inDevice.peripheral)
-        }
-    }
 }
 
 /* ###################################################################################################################################### */
@@ -325,7 +339,7 @@ extension RVS_GTDriver: Sequence {
      The element type is our device.
      */
     public typealias Element = RVS_GTDevice
-
+    
     /* ################################################################## */
     /**
      The iterator is simple, since it is already an Array.
@@ -336,30 +350,30 @@ extension RVS_GTDriver: Sequence {
     /**
      We just pass the iterator through to the Array.
      
-     - returns: The Array iterator for our devices.
+     - returns: The Array iterator for our characateristics.
      */
     public func makeIterator() -> Iterator {
-        return devices.makeIterator()
+        return _contents.makeIterator()
     }
     
     /* ################################################################## */
     /**
-     The number of devices we have. 1-based. 0 is no devices.
+     The number of characteristics we have. 1-based. 0 is no characteristics.
      */
     public var count: Int {
-        return devices.count
+        return _contents.count
     }
     
     /* ################################################################## */
     /**
-     Returns an indexed device.
+     Returns an indexed characteristic.
      
-     - parameter inIndex: The 0-based integer index. Must be less than the total count of devices.
+     - parameter inIndex: The 0-based integer index. Must be less than the total count of characteristics.
      */
-    public subscript(_ inIndex: Int) -> RVS_GTDevice {
+    public subscript(_ inIndex: Int) -> Element {
         precondition((0..<count).contains(inIndex))   // Standard precondition. Index needs to be 0 or greater, and less than the count.
         
-        return devices[inIndex]
+        return _contents[inIndex]
     }
 }
 
@@ -375,7 +389,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - parameter inPeripheral: The peripheral we are looking for.
      - returns: True, if the driver currently has an instance of the peripheral cached.
      */
-    func containsThisPeripheral(_ inPeripheral: CBPeripheral) -> Bool {
+    internal func containsThisPeripheral(_ inPeripheral: CBPeripheral) -> Bool {
         return devices.reduce(false) { (inCurrent, inElement) -> Bool in
             guard !inCurrent, let peripheral = inElement.peripheral else { return inCurrent }
             return inPeripheral == peripheral
@@ -390,7 +404,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - parameter inPeripheral: The peripheral we are looking for.
      - returns: The device. Nil, if not found.
      */
-    func deviceForThisPeripheral(_ inPeripheral: CBPeripheral) -> RVS_GTDevice? {
+    internal func deviceForThisPeripheral(_ inPeripheral: CBPeripheral) -> RVS_GTDevice? {
         for device in devices where inPeripheral == device.peripheral {
             return device
         }
@@ -466,7 +480,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
             #endif
             // If so, we simply create the new device and add it to our list.
             let newDevice = RVS_GTDevice(inPeripheral, owner: self)
-            _devices.append(newDevice)
+            _contents.append(newDevice)
             // Call our delegate to tell it about the new device.
             delegate.gtDriver(self, newDeviceAdded: newDevice)
         }

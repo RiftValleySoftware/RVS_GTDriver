@@ -26,6 +26,8 @@
 		D43058D0232BBEE300B64056 /* RVS_GTDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */; };
 		D43058D1232BBEE300B64056 /* RVS_GTDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */; };
 		D43058D4232BBFE200B64056 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D43058D2232BBFE100B64056 /* Localizable.strings */; };
+		D4FC1ED8232D78B40014FECF /* RVS_GTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */; };
+		D4FC1EDA232D7F780014FECF /* RVS_GTCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,8 @@
 		D43058D6232BC5A700B64056 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = RVS_GTDriver_iOS/Info.plist; sourceTree = SOURCE_ROOT; };
 		D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_String_Extensions.swift; sourceTree = "<group>"; };
 		D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDevice.swift; sourceTree = "<group>"; };
+		D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTService.swift; sourceTree = "<group>"; };
+		D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTCharacteristic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +221,8 @@
 				D43540E0232B143800C92A19 /* Extensions */,
 				D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */,
 				D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */,
+				D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */,
+				D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */,
 			);
 			path = RVS_GTDriver;
 			sourceTree = "<group>";
@@ -416,8 +422,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4FC1ED8232D78B40014FECF /* RVS_GTService.swift in Sources */,
 				D43058D1232BBEE300B64056 /* RVS_GTDevice.swift in Sources */,
 				D43058D0232BBEE300B64056 /* RVS_GTDriver.swift in Sources */,
+				D4FC1EDA232D7F780014FECF /* RVS_GTCharacteristic.swift in Sources */,
 				D43058CF232BBEE300B64056 /* RVS_String_Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
