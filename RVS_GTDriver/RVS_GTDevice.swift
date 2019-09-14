@@ -68,6 +68,38 @@ public protocol RVS_GTDeviceDelegate: class {
      - parameter device: The device object. It will not be viable after this call.
      */
     func gtDeviceWasBeRemoved(_ device: RVS_GTDevice)
+    
+    /* ################################################################## */
+    /**
+     Called when a device was connected.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device object.
+     */
+    func gtDeviceWasConnected(_ device: RVS_GTDevice)
+    
+    /* ################################################################## */
+    /**
+     Called when a device was disconnected for any reason.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device object.
+     - parameter wasDisconnected: Any error that may have occurred. May be nil.
+     */
+    func gtDevice(_ device: RVS_GTDevice, wasDisconnected: Error?)
+
+    /* ################################################################## */
+    /**
+     Called when a device discovers a new service
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device instance calling this.
+     - parameter discoveredService: The CBUUID of the discovered service.
+     */
+    func gtDevice(_ device: RVS_GTDevice, discoveredService: CBUUID)
 }
 
 /* ###################################################################################################################################### */
@@ -93,6 +125,38 @@ extension RVS_GTDeviceDelegate {
      - parameter device: The device object. It will not be viable after this call.
      */
     public func gtDeviceWasBeRemoved(_ device: RVS_GTDevice) { }
+    
+    /* ################################################################## */
+    /**
+     Called when a device was connected.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device object.
+     */
+    public func gtDeviceWasConnected(_ device: RVS_GTDevice) { }
+    
+    /* ################################################################## */
+    /**
+     Called when a device was disconnected for any reason.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device object.
+     - parameter wasDisconnected: Any error that may have occurred. May be nil.
+     */
+    func gtDevice(_ device: RVS_GTDevice, wasDisconnected: Error?) { }
+
+    /* ################################################################## */
+    /**
+     Called when a device discovers a new service
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The device instance calling this.
+     - parameter discoveredService: The CBUUID of the discovered service.
+     */
+    public func gtDevice(_ device: RVS_GTDevice, discoveredService: CBUUID) { }
 }
 
 /* ###################################################################################################################################### */
@@ -146,8 +210,32 @@ public class RVS_GTDevice: NSObject {
     internal init(_ inPeripheral: CBPeripheral, owner inOwner: RVS_GTDriver, delegate inDelegate: RVS_GTDeviceDelegate! = nil) {
         super.init()
         _peripheral = inPeripheral
+        _peripheral.delegate = self
         _owner = inOwner
         _delegate = inDelegate
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDevice {
+    /* ################################################################## */
+    /**
+     Called to send a connection message to the delegate for this device.
+     */
+    internal func reportSuccessfulConnection() {
+        delegate?.gtDeviceWasConnected(self)
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to send a disconnection event to the device's delegate.
+     
+     - parameter inError: Any error that may have occurred. It is passed directly to the delegate.
+     */
+    internal func reportDisconnection(_ inError: Error?) {
+        delegate?.gtDevice(self, wasDisconnected: inError)
     }
 }
 
@@ -184,6 +272,47 @@ extension RVS_GTDevice {
             _delegate = newValue
         }
     }
+    
+    /* ################################################################## */
+    /**
+     This manages and reports our connection. Changing this value will connect or disconnect this device.
+     */
+    public var isConnected: Bool {
+        get {
+            return .connected == peripheral.state
+        }
+        
+        set {
+            if newValue && .disconnected == peripheral.state {
+                _owner.connectDevice(self)
+            } else {
+                _owner.disconnectDevice(self)
+            }
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Public Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDevice {
+    /* ################################################################## */
+    /**
+     Asks the device to discover all of its services.
+     */
+    public func discoverServices() {
+        peripheral.discoverServices(nil)
+    }
+    
+    /* ################################################################## */
+    /**
+     Asks the device to discover all of its characteristics for a given service.
+     
+     - parameter inService: The service to query.
+     */
+    public func discoverCharacteristicsForService(_ inService: CBService) {
+        peripheral.discoverCharacteristics(nil, for: inService)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -193,4 +322,41 @@ extension RVS_GTDevice: CBPeripheralDelegate {
     /* ################################################################## */
     /**
     */
+    public func peripheral(_ inPeripheral: CBPeripheral, didDiscoverServices inError: Error?) {
+        #if DEBUG
+            print("\n***> Services Discovered:")
+            print("\terror: \(String(describing: inError))\n")
+            if let services = inPeripheral.services {
+                for service in services {
+                    #if DEBUG
+                        print("\t***\n")
+                        print("\tservice: \(String(describing: service))\n")
+                    #endif
+                    discoverCharacteristicsForService(service)
+                }
+            }
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+    */
+    public func peripheral(_ inPeripheral: CBPeripheral, didDiscoverCharacteristicsFor inService: CBService, error inError: Error?) {
+        #if DEBUG
+            print("\n***> Characteristics Detected:")
+            print("\tdidDiscoverCharacteristicsFor: \(String(describing: inService))\n")
+            print("\t***\n")
+            print("\terror: \(String(describing: inError))\n")
+        #endif
+        guard let characteristics = inService.characteristics else { return }
+        for characteristic in characteristics {
+            #if DEBUG
+                print("\t***\n")
+                print("\tcharacteristic: \(String(describing: characteristic))\n")
+            #endif
+        }
+        #if DEBUG
+            print("<***\n")
+        #endif
+    }
 }

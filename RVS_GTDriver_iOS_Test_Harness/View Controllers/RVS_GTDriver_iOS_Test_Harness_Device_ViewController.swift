@@ -21,6 +21,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import UIKit
+import CoreBluetooth
 import RVS_GTDriver_iOS
 
 /* ###################################################################################################################################### */
@@ -62,6 +63,12 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController {
         super.viewWillAppear(inAnimated)
         navigationController?.isNavigationBarHidden = false
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        gtDevice.delegate = self
+        gtDevice.isConnected = true
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -77,7 +84,7 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTDeviceDeleg
      - parameter inDevice: The device instance that experienced the error.
      - parameter errorEncountered: The error encountered.
      */
-    func gtDevice(_ inDevice: RVS_GTDevice, errorEncountered inError: Error) {
+    public func gtDevice(_ inDevice: RVS_GTDevice, errorEncountered inError: Error) {
     }
     
     /* ################################################################## */
@@ -88,7 +95,7 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTDeviceDeleg
      
      - parameter inDevice: The device instance calling this.
      */
-    func gtDeviceWillBeRemoved(_ inDevice: RVS_GTDevice) {
+    public func gtDeviceWillBeRemoved(_ inDevice: RVS_GTDevice) {
     }
     
     /* ################################################################## */
@@ -99,6 +106,43 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTDeviceDeleg
      
      - parameter inDevice: The device object. It will not be viable after this call.
      */
-    func gtDeviceWasBeRemoved(_ inDevice: RVS_GTDevice) {
+    public func gtDeviceWasBeRemoved(_ inDevice: RVS_GTDevice) {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device was connected.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device object.
+     */
+    public func gtDeviceWasConnected(_ inDevice: RVS_GTDevice) {
+        inDevice.discoverServices()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device was disconnected for any reason.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device object.
+     - parameter wasDisconnected: Any error that may have occurred. May be nil.
+     */
+    public func gtDevice(_ inDevice: RVS_GTDevice, wasDisconnected inError: Error?) {
+    }
+
+    /* ################################################################## */
+    /**
+     Called when a device discovers a new service
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device instance calling this.
+     - parameter discoveredService: The CBUUID of the discovered service.
+     */
+    public func gtDevice(_ inDevice: RVS_GTDevice, discoveredService inService: CBUUID) {
+        print("Discovered Service: \(inService)")
     }
 }

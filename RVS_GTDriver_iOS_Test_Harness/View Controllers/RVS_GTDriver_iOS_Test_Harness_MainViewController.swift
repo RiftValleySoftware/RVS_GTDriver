@@ -244,7 +244,8 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
         guard   let destination = inSegue.destination as? RVS_GTDriver_iOS_Test_Harness_Device_ViewController,
                 let device = inSender as? RVS_GTDevice else { return }
         destination.gtDevice = device
-        device.delegate = destination
+        gtDriver.isScanning = false
+        setUpUI()
     }
 }
 

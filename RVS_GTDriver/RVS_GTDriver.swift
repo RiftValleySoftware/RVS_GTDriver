@@ -163,9 +163,9 @@ public class RVS_GTDriver: NSObject {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is the signal strength range. Optimal is -22.
+     This is the signal strength range. Optimal is -50.
      */
-    private let _RSSI_range = -40..<(-15)
+    private let _RSSI_range = -80..<(-40)
     
     /* ################################################################## */
     /**
@@ -175,9 +175,9 @@ public class RVS_GTDriver: NSObject {
     
     /* ################################################################## */
     /**
-     This is the GATT UUID that goTenna uses to advertise. We look for this in our scan.
+     This is the service UUID that goTenna uses to advertise. We look for this in our scan.
      */
-    private let gtGATTUUID = CBUUID(string: "1276AAEE-DF5E-11E6-BF01-FE55135034F3")
+    private let gtServiceUUID = CBUUID(string: "1276AAEE-DF5E-11E6-BF01-FE55135034F3")
 
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
@@ -274,7 +274,7 @@ extension RVS_GTDriver {
             if !newValue {
                 _centralManager.stopScan()
             } else {
-                _centralManager.scanForPeripherals(withServices: [gtGATTUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
+                _centralManager.scanForPeripherals(withServices: [gtServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
             }
         }
     }
@@ -292,6 +292,24 @@ extension RVS_GTDriver {
      */
     public func indexOfThisDevice(_ inDevice: RVS_GTDevice) -> Int! {
         return devices.firstIndex(of: inDevice)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    public func connectDevice(_ inDevice: RVS_GTDevice) {
+        if .disconnected == inDevice.peripheral.state { // Must be completely disconnected
+            _centralManager.connect(inDevice.peripheral, options: nil)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    public func disconnectDevice(_ inDevice: RVS_GTDevice) {
+        if .disconnected != inDevice.peripheral.state { // We can disconnect at any stage.
+            _centralManager.cancelPeripheralConnection(inDevice.peripheral)
+        }
     }
 }
 
@@ -351,6 +369,37 @@ extension RVS_GTDriver: Sequence {
 extension RVS_GTDriver: CBCentralManagerDelegate {
     /* ################################################################## */
     /**
+     Use this to see if we have already allocated and cached a device instance for the given peripheral.
+     This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
+     
+     - parameter inPeripheral: The peripheral we are looking for.
+     - returns: True, if the driver currently has an instance of the peripheral cached.
+     */
+    func containsThisPeripheral(_ inPeripheral: CBPeripheral) -> Bool {
+        return devices.reduce(false) { (inCurrent, inElement) -> Bool in
+            guard !inCurrent, let peripheral = inElement.peripheral else { return inCurrent }
+            return inPeripheral == peripheral
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     Return the device from our cached Array that corresponds to the given peripheral.
+     This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
+     
+     - parameter inPeripheral: The peripheral we are looking for.
+     - returns: The device. Nil, if not found.
+     */
+    func deviceForThisPeripheral(_ inPeripheral: CBPeripheral) -> RVS_GTDevice? {
+        for device in devices where inPeripheral == device.peripheral {
+            return device
+        }
+        
+        return nil
+    }
+
+    /* ################################################################## */
+    /**
      Called when the manager state changes.
      
      - parameter inCentralManager: The manager instance.
@@ -359,6 +408,33 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
         switch inCentralManager.state {
         default:
             ()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a peripheral connects.
+     
+     - parameter inCentralManager: The manager instance.
+     - parameter didConnect: The peripheral that was successfully connected.
+    */
+    public func centralManager(_ inCentralManager: CBCentralManager, didConnect inPeripheral: CBPeripheral) {
+        if let device = deviceForThisPeripheral(inPeripheral) {
+            device.reportSuccessfulConnection()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a peripheral disconnects.
+     
+     - parameter inCentralManager: The manager instance.
+     - parameter didDisconnectPeripheral: The peripheral that was successfully disconnected.
+     - parameter error: Any error that may have occurred. May be nil (no error).
+    */
+    public func centralManager(_ inCentralManager: CBCentralManager, didDisconnectPeripheral inPeripheral: CBPeripheral, error inError: Error?) {
+        if let device = deviceForThisPeripheral(inPeripheral) {
+            device.reportDisconnection(inError)
         }
     }
 
@@ -372,26 +448,22 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - parameter rssi: The signal strength (in DB).
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didDiscover inPeripheral: CBPeripheral, advertisementData inAdvertisementData: [String: Any], rssi inRSSI: NSNumber) {
-        /* ############################################################## */
-        /**
-         Use this to see if we have already allocated and cached a device instance for the given peripheral.
-         
-         - parameter inPeripheral: The peripheral we are looking for.
-         - returns: True, if the driver currently has an instance of the peripheral cached.
-         */
-        func containsThisPeripheral(_ inPeripheral: CBPeripheral) -> Bool {
-            return devices.reduce(false) { (inCurrent, inElement) -> Bool in
-                guard !inCurrent, let peripheral = inElement.peripheral else { return inCurrent }
-                return inPeripheral == peripheral
-            }
-        }
         
         // Check to make sure the signal is strong enough.
-//        guard _RSSI_range.contains(inRSSI.intValue) else { return }
+        guard _RSSI_range.contains(inRSSI.intValue) else { return }
         // Make sure we don't already have this one.
         guard !containsThisPeripheral(inPeripheral) else { return }
         // Make sure that we are supposed to add this.
         if delegate.gtDriver(self, peripheralDiscovered: inPeripheral) {
+            #if DEBUG
+                print("\n***> New Peripheral To Be Installed:")
+                print("\tdidDiscover: \(String(describing: inPeripheral))\n")
+                print("\t***\n")
+                print("\tadvertisementData: \(String(describing: inAdvertisementData))\n")
+                print("\t***\n")
+                print("\trssi: \(String(describing: inRSSI))")
+                print("<***\n")
+            #endif
             // If so, we simply create the new device and add it to our list.
             let newDevice = RVS_GTDevice(inPeripheral, owner: self)
             _devices.append(newDevice)
