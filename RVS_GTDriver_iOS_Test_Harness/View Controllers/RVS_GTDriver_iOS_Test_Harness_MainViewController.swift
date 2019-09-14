@@ -80,6 +80,18 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController {
      This is the index that indicates the segmented Switch is in "scanning" mode.
      */
     static let segmentedSwitchIsOnIndex = 1
+    
+    /* ################################################################## */
+    /**
+     The color to use for the segmented switch when not scanning.
+     */
+    static let redSelectedColor = UIColor(red: 0.5, green: 0, blue: 0, alpha: 1)
+    
+    /* ################################################################## */
+    /**
+     The color to use for the segmented switch when scanning.
+     */
+    static let greenSelectedColor = UIColor(red: 0, green: 1.0, blue: 0, alpha: 1)
 
     /* ################################################################################################################################## */
     // MARK: - Internal IB Properties
@@ -132,7 +144,16 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
      */
     func setUpUI() {
         scanningSegmentedControl.selectedSegmentIndex = gtDriver.isScanning ? type(of: self).segmentedSwitchIsOnIndex : type(of: self).segmentedSwitchIsOffIndex
-        scanningSegmentedControl.tintColor = gtDriver.isScanning ? UIColor.green : UIColor(red: 0.5, green: 0, blue: 0, alpha: 1)
+        // iOS 13 uses a different property to affect the tint color.
+        if #available(iOS 13.0, *) {
+            scanningSegmentedControl.selectedSegmentTintColor = gtDriver.isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+            // White text.
+            scanningSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        } else {
+            let textColor = gtDriver.isScanning ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor
+            scanningSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
+            scanningSegmentedControl.tintColor = gtDriver.isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+        }
         tableView?.reloadData()
     }
 }
