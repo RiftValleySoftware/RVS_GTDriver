@@ -65,6 +65,7 @@
                                     <segment title="SLUG-IS-NOT-SCANNING"/>
                                     <segment title="SLUG-IS-SCANNING"/>
                                 </segments>
+                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="scanningStateChanged:" destination="Mz5-c2-Hvb" eventType="valueChanged" id="21m-kA-vSA"/>
                                 </connections>

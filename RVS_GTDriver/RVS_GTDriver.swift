@@ -387,7 +387,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
         }
         
         // Check to make sure the signal is strong enough.
-        guard _RSSI_range.contains(inRSSI.intValue) else { return }
+//        guard _RSSI_range.contains(inRSSI.intValue) else { return }
         // Make sure we don't already have this one.
         guard !containsThisPeripheral(inPeripheral) else { return }
         // Make sure that we are supposed to add this.

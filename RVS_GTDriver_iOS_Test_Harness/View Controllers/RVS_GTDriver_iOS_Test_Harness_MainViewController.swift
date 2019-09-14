@@ -69,6 +69,18 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController {
      */
     static let displaySegueID = "SelectDevice"
     
+    /* ################################################################## */
+    /**
+     This is the index that indicates the segmented Switch is in "not scanning" mode.
+     */
+    static let segmentedSwitchIsOffIndex = 0
+    
+    /* ################################################################## */
+    /**
+     This is the index that indicates the segmented Switch is in "scanning" mode.
+     */
+    static let segmentedSwitchIsOnIndex = 1
+
     /* ################################################################################################################################## */
     // MARK: - Internal IB Properties
     /* ################################################################################################################################## */
@@ -105,7 +117,23 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
      - parameter: ignored.
      */
     @IBAction func scanningStateChanged(_: UISegmentedControl) {
-        gtDriver.isScanning = 1 == scanningSegmentedControl.selectedSegmentIndex
+        gtDriver.isScanning = type(of: self).segmentedSwitchIsOnIndex == scanningSegmentedControl.selectedSegmentIndex
+        setUpUI()
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
+    /* ################################################################## */
+    /**
+     Sets up the UI to match the state.
+     */
+    func setUpUI() {
+        scanningSegmentedControl.selectedSegmentIndex = gtDriver.isScanning ? type(of: self).segmentedSwitchIsOnIndex : type(of: self).segmentedSwitchIsOffIndex
+        scanningSegmentedControl.tintColor = gtDriver.isScanning ? UIColor.green : UIColor(red: 0.5, green: 0, blue: 0, alpha: 1)
+        tableView?.reloadData()
     }
 }
 
@@ -170,6 +198,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
         for i in 0..<scanningSegmentedControl.numberOfSegments {
             scanningSegmentedControl.setTitle(scanningSegmentedControl.titleForSegment(at: i)?.localizedVariant, forSegmentAt: i)
         }
+        setUpUI()
     }
     
     /* ################################################################## */
