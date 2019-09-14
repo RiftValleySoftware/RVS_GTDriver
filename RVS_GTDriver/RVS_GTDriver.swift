@@ -172,6 +172,12 @@ public class RVS_GTDriver: NSObject {
      This is the Maximum Transmission Unit size.
      */
     private let _notifyMTU = 244
+    
+    /* ################################################################## */
+    /**
+     This is the GATT UUID that goTenna uses to advertise. We look for this in our scan.
+     */
+    private let gtGATTUUID = CBUUID(string: "1276AAEE-DF5E-11E6-BF01-FE55135034F3")
 
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
@@ -229,7 +235,7 @@ extension RVS_GTDriver {
      
      - returns: True, if we are currently in a unit test.
      */
-    internal class var _runningUnitTests: Bool {
+    internal class var isRunningUnitTests: Bool {
         // Searches for an environment setting that describes the XCTest path (only present under unit test, and always present when under unit test).
         return nil != ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"]
     }
@@ -268,7 +274,7 @@ extension RVS_GTDriver {
             if !newValue {
                 _centralManager.stopScan()
             } else {
-                _centralManager.scanForPeripherals(withServices: [], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
+                _centralManager.scanForPeripherals(withServices: [gtGATTUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
             }
         }
     }
