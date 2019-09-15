@@ -236,8 +236,12 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDelegate 
 // MARK: - Overridden Base Class Methods -
 /* ###################################################################################################################################### */
 extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
+    /* ################################################################## */
+    /**
+     Called when the view is first loaded.
+     */
     override func viewDidLoad() {
-        gtDriver = RVS_GTDriver(delegate: self)
+        gtDriver = RVS_GTDriver(delegate: self) // Create our driver instance.
         // We set up the localized strings for the segmented control.
         for i in 0..<scanningSegmentedControl.numberOfSegments {
             scanningSegmentedControl.setTitle(scanningSegmentedControl.titleForSegment(at: i)?.localizedVariant, forSegmentAt: i)
@@ -331,11 +335,13 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: RVS_GTDriverDelegate
     /**
      Called to indicate that the driver's status should be checked.
      
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+
      This is optional, and is NOT guaranteed to be called in the main thread.
      
      - parameter driver: The driver instance calling this.
      */
-    func gtDriverStateusUpdate(_ driver: RVS_GTDriver) {
+    func gtDriverStatusUpdate(_ driver: RVS_GTDriver) {
         DispatchQueue.main.async {
             self.setUpUI()
         }

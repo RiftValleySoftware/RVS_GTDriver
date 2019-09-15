@@ -98,11 +98,13 @@ public protocol RVS_GTDriverDelegate: class {
     /**
      Called to indicate that the driver's status should be checked.
      
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
      This is optional, and is NOT guaranteed to be called in the main thread.
      
      - parameter driver: The driver instance calling this.
      */
-    func gtDriverStateusUpdate(_ driver: RVS_GTDriver)
+    func gtDriverStatusUpdate(_ driver: RVS_GTDriver)
 }
 
 /* ###################################################################################################################################### */
@@ -161,11 +163,13 @@ extension RVS_GTDriverDelegate {
     /**
      Called to indicate that the driver's status should be checked.
      
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+
      This is optional, and is NOT guaranteed to be called in the main thread.
      
      - parameter driver: The driver instance calling this.
      */
-    func gtDriverStateusUpdate(_ driver: RVS_GTDriver) { }
+    func gtDriverStatusUpdate(_ driver: RVS_GTDriver) { }
 }
 
 /* ###################################################################################################################################### */
@@ -460,7 +464,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - parameter inCentralManager: The manager instance.
     */
     public func centralManagerDidUpdateState(_ inCentralManager: CBCentralManager) {
-        delegate.gtDriverStateusUpdate(self)
+        delegate.gtDriverStatusUpdate(self)
     }
     
     /* ################################################################## */
@@ -476,6 +480,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
         } else {
             delegate.gtDriver(self, errorEncountered: .unknownError(error: nil))
         }
+        delegate.gtDriverStatusUpdate(self)
     }
     
     /* ################################################################## */
@@ -488,6 +493,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didFailToConnect inPeripheral: CBPeripheral, error inError: Error?) {
         delegate.gtDriver(self, errorEncountered: .connectionAttemptFailed(error: inError))
+        delegate.gtDriverStatusUpdate(self)
     }
 
     /* ################################################################## */
@@ -503,6 +509,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
             delegate.gtDriver(self, errorEncountered: .disconnectionAttemptFailed(error: error))
         } else if let device = deviceForThisPeripheral(inPeripheral) {
             device.reportDisconnection(inError)
+            delegate.gtDriverStatusUpdate(self)
         } else {
             delegate.gtDriver(self, errorEncountered: .unknownError(error: nil))
         }
@@ -538,6 +545,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
             sequence_contents.append(newDevice)
             // Call our delegate to tell it about the new device.
             delegate.gtDriver(self, newDeviceAdded: newDevice)
+            delegate.gtDriverStatusUpdate(self)
         }
     }
 }
