@@ -148,7 +148,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
      Sets up the UI to match the state.
      */
     func setUpUI() {
-        noBTImageView.isHidden = gtDriver?.isBluetoothAvailable ?? true
+        noBTImageView.isHidden = gtDriver?.isBluetoothAvailable ?? false
         tableView.isHidden = !(gtDriver?.isBluetoothAvailable ?? false)
         scanningSegmentedControl.isHidden = !(gtDriver?.isBluetoothAvailable ?? false)
         if gtDriver?.isBluetoothAvailable ?? false {
@@ -299,18 +299,6 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: RVS_GTDriverDelegate
     
     /* ################################################################## */
     /**
-     Called when a device is about to be removed.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter inDriver: The driver instance calling this.
-     - parameter deviceWillBeRemoved: The device object.
-     */
-    func gtDriver(_ inDriver: RVS_GTDriver, deviceWillBeRemoved inDevice: RVS_GTDevice) {
-    }
-    
-    /* ################################################################## */
-    /**
      Called when a device was removed.
      
      This is optional, and is NOT guaranteed to be called in the main thread.
@@ -322,6 +310,20 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: RVS_GTDriverDelegate
         // All we need to do, is tell the table to reload itself.
         DispatchQueue.main.async {
             self.tableView.reloadData()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver's status should be checked.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     */
+    func gtDriverStateusUpdate(_ driver: RVS_GTDriver) {
+        DispatchQueue.main.async {
+            self.setUpUI()
         }
     }
 }

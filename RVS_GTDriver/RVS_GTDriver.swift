@@ -93,6 +93,16 @@ public protocol RVS_GTDriverDelegate: class {
      - parameter deviceWillBeRemoved: The device object. It will not be viable after this call.
      */
     func gtDriver(_ driver: RVS_GTDriver, deviceWasRemoved: RVS_GTDevice)
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver's status should be checked.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     */
+    func gtDriverStateusUpdate(_ driver: RVS_GTDriver)
 }
 
 /* ###################################################################################################################################### */
@@ -146,6 +156,16 @@ extension RVS_GTDriverDelegate {
      - parameter deviceWillBeRemoved: The device object. It will not be viable after this call.
      */
     public func gtDriver(_ driver: RVS_GTDriver, deviceWasRemoved: RVS_GTDevice) { }
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver's status should be checked.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     */
+    func gtDriverStateusUpdate(_ driver: RVS_GTDriver) { }
 }
 
 /* ###################################################################################################################################### */
@@ -219,10 +239,6 @@ public class RVS_GTDriver: NSObject {
         super.init()
         _delegate = inDelegate
         _centralManager = CBCentralManager(delegate: self, queue: inQueue)
-        // Check to make sure that we actually have BLE available.
-        if .poweredOn != _centralManager.state {
-            delegate.gtDriver(self, errorEncountered: .bluetoothNotAvailable)
-        }
     }
     
     /* ################################################################################################################################## */
@@ -315,15 +331,6 @@ extension RVS_GTDriver {
     /* ################################################################## */
     /**
      This is KVO-observable.
-     Returns true, if the BLE subsystem is available.
-     */
-    @objc dynamic public var isBluetoothAvailable: Bool {
-        return .poweredOn == _centralManager.state
-    }
-    
-    /* ################################################################## */
-    /**
-     This is KVO-observable.
      Returns true, if we are currently scanning for new CB peripherals.
      */
     @objc dynamic public var isScanning: Bool {
@@ -338,6 +345,15 @@ extension RVS_GTDriver {
                 _centralManager.scanForPeripherals(withServices: [_gtGoTennaServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
             }
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     This is KVO-observable. READ-ONLY.
+     Returns true, if the bluetooth system is valid.
+     */
+    @objc dynamic public var isBluetoothAvailable: Bool {
+        return .poweredOn == _centralManager.state
     }
 }
 
@@ -407,15 +423,12 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
 
     /* ################################################################## */
     /**
-     Called when the manager state changes.
+     Called when the manager state changes. We simply use this to call the delegate to check the state.
      
      - parameter inCentralManager: The manager instance.
     */
     public func centralManagerDidUpdateState(_ inCentralManager: CBCentralManager) {
-        switch inCentralManager.state {
-        default:
-            ()
-        }
+        delegate.gtDriverStateusUpdate(self)
     }
     
     /* ################################################################## */
@@ -431,6 +444,18 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
         }
     }
     
+    /* ################################################################## */
+    /**
+     Called when the manager changes state.
+     
+     - parameter inCentralManager: The manager instance.
+     - parameter didFailToConnect: The peripheral that was not successfully connected.
+     - parameter error: Any error that may have occurred. May be nil (no error).
+    */
+    public func centralManager(_ inCentralManager: CBCentralManager, didFailToConnect inPeripheral: CBPeripheral, error inError: Error?) {
+        print("ERROR! \(String(describing: inError))")
+    }
+
     /* ################################################################## */
     /**
      Called when a peripheral disconnects.
