@@ -264,22 +264,6 @@ extension RVS_GTDriver {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Internal Class Calculated Properties -
-/* ###################################################################################################################################### */
-extension RVS_GTDriver {
-    /* ################################################################## */
-    /**
-     This is used to see whether or not we are running under unit tests.
-     
-     - returns: True, if we are currently in a unit test.
-     */
-    internal class var isRunningUnitTests: Bool {
-        // Searches for an environment setting that describes the XCTest path (only present under unit test, and always present when under unit test).
-        return nil != ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"]
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Internal Instance Methods -
 /* ###################################################################################################################################### */
 extension RVS_GTDriver {

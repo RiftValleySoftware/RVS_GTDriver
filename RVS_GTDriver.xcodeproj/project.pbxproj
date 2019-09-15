@@ -29,6 +29,7 @@
 		D4FC1ED8232D78B40014FECF /* RVS_GTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */; };
 		D4FC1EDA232D7F780014FECF /* RVS_GTCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */; };
 		D4FC1EDC232D9FA80014FECF /* RVS_SequenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */; };
+		D4FC1EDE232DD3810014FECF /* RVS_DebugTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1EDD232DD3810014FECF /* RVS_DebugTools.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTService.swift; sourceTree = "<group>"; };
 		D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTCharacteristic.swift; sourceTree = "<group>"; };
 		D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_SequenceProtocol.swift; sourceTree = "<group>"; };
+		D4FC1EDD232DD3810014FECF /* RVS_DebugTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_DebugTools.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			children = (
 				D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */,
 				D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */,
+				D4FC1EDD232DD3810014FECF /* RVS_DebugTools.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				D43058D0232BBEE300B64056 /* RVS_GTDriver.swift in Sources */,
 				D4FC1EDA232D7F780014FECF /* RVS_GTCharacteristic.swift in Sources */,
 				D43058CF232BBEE300B64056 /* RVS_String_Extensions.swift in Sources */,
+				D4FC1EDE232DD3810014FECF /* RVS_DebugTools.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
