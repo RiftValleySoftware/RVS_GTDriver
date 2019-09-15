@@ -24,3 +24,6 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-OK-BUTTON-TEXT"                       =       "OK";
 "SLUG-IS-NOT-SCANNING"                      =       "NOT SCANNING";
 "SLUG-IS-SCANNING"                          =       "SCANNING";
+"SLUG-PLACEHOLDER-TEXT"                     =       "goTenna Device";
+"SLUG-ERROR-HEADER"                         =       "ERROR!";
+"RVS_GTDriver.Error.bluetoothNotAvailable"  =       "Bluetooth Not Available";

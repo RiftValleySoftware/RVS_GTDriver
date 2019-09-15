@@ -42,17 +42,37 @@ public protocol RVS_GTServiceDelegate: class {
      - parameter service: The service instance calling this.
      - parameter errorEncountered: The error encountered.
      */
-    func gtService(_ service: RVS_GTService, errorEncountered: Error)
+    func gtService(_ service: RVS_GTService, errorEncountered: RVS_GTDriver.Errors)
     
     /* ###################################################################################################################################### */
     // MARK: - Optional Methods
     /* ###################################################################################################################################### */
+    /* ################################################################## */
+    /**
+     Called when a new characteristic has been added to the service.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter service: The service instance calling this.
+     - parameter dicoveredCharacteristic: The new characteristic instance.
+     */
+    func gtService(_ service: RVS_GTService, dicoveredCharacteristic: RVS_GTCharacteristic)
 }
 
 /* ###################################################################################################################################### */
 // MARK: - RVS_GTServiceDelegate Protocol Extension (Optional Methods) -
 /* ###################################################################################################################################### */
 extension RVS_GTServiceDelegate {
+    /* ################################################################## */
+    /**
+     Called when a new characteristic has been added to the service.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter service: The service instance calling this.
+     - parameter dicoveredCharacteristic: The new characteristic instance.
+     */
+    func gtService(_ service: RVS_GTService, dicoveredCharacteristic: RVS_GTCharacteristic) { }
 }
 
 /* ###################################################################################################################################### */
@@ -60,6 +80,8 @@ extension RVS_GTServiceDelegate {
 /* ###################################################################################################################################### */
 /**
  This class implements a single discovered goTenna device (in peripheral mode).
+ 
+ It needs to be a class, as opposed to a struct, so that it can have its delegate set and passed around.
  */
 public class RVS_GTService {
     /* ################################################################################################################################## */
@@ -82,12 +104,6 @@ public class RVS_GTService {
      This is our delegate instance. It is a weak reference.
      */
     private var _delegate: RVS_GTServiceDelegate!
-
-    /* ################################################################## */
-    /**
-     This is an Array of our discovered characteristics, as represented by instances of RVS_GTCharacteristic.
-     */
-    private var _contents: [RVS_GTCharacteristic] = []
 
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
@@ -114,6 +130,15 @@ public class RVS_GTService {
         _owner = inOwner
         _delegate = inDelegate
     }
+    
+    /* ################################################################################################################################## */
+    // MARK: - Public Sequence Support Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is an Array of our discovered characteristics, as represented by instances of RVS_GTCharacteristic.
+     */
+    public var sequence_contents: [RVS_GTCharacteristic] = []
 }
 
 /* ###################################################################################################################################### */
@@ -159,7 +184,9 @@ extension RVS_GTService {
      */
     internal func addCharacteristic(_ inCharacteristic: CBCharacteristic) {
         if !containsThisCharacteristic(inCharacteristic) {
-            _contents.append(RVS_GTCharacteristic(inCharacteristic, owner: self))
+            let chrInstance = RVS_GTCharacteristic(inCharacteristic, owner: self)
+            sequence_contents.append(chrInstance)
+            delegate?.gtService(self, dicoveredCharacteristic: chrInstance)
         }
     }
 }
@@ -170,48 +197,12 @@ extension RVS_GTService {
 /**
  We do this, so we can iterate through our characteristics, and treat the service like an Array of characteristics.
  */
-extension RVS_GTService: Sequence {
+extension RVS_GTService: RVS_SequenceProtocol {
     /* ################################################################## */
     /**
      The element type is our characteristic class.
      */
     public typealias Element = RVS_GTCharacteristic
-
-    /* ################################################################## */
-    /**
-     The iterator is simple, since it is already an Array.
-     */
-    public typealias Iterator = Array<Element>.Iterator
-    
-    /* ################################################################## */
-    /**
-     We just pass the iterator through to the Array.
-     
-     - returns: The Array iterator for our characateristics.
-     */
-    public func makeIterator() -> Iterator {
-        return _contents.makeIterator()
-    }
-    
-    /* ################################################################## */
-    /**
-     The number of characteristics we have. 1-based. 0 is no characteristics.
-     */
-    public var count: Int {
-        return _contents.count
-    }
-    
-    /* ################################################################## */
-    /**
-     Returns an indexed characteristic.
-     
-     - parameter inIndex: The 0-based integer index. Must be less than the total count of characteristics.
-     */
-    public subscript(_ inIndex: Int) -> Element {
-        precondition((0..<count).contains(inIndex))   // Standard precondition. Index needs to be 0 or greater, and less than the count.
-        
-        return _contents[inIndex]
-    }
 }
 
 /* ###################################################################################################################################### */
@@ -239,7 +230,7 @@ extension RVS_GTService {
      This returns our characteristics Array.
      */
     public var characteristics: [RVS_GTCharacteristic]! {
-        return _contents
+        return sequence_contents
     }
     
     /* ################################################################## */
@@ -266,7 +257,7 @@ extension RVS_GTService {
      Asks the device to discover all of its characteristics for our service.
      */
     public func discoverCharacteristics() {
-        _contents = []   // Start clean.
+        sequence_contents = []   // Start clean.
         _owner.discoverAllCharacteristicsForService(self)
     }
 }

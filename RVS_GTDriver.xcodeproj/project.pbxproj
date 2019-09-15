@@ -28,6 +28,7 @@
 		D43058D4232BBFE200B64056 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D43058D2232BBFE100B64056 /* Localizable.strings */; };
 		D4FC1ED8232D78B40014FECF /* RVS_GTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */; };
 		D4FC1EDA232D7F780014FECF /* RVS_GTCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */; };
+		D4FC1EDC232D9FA80014FECF /* RVS_SequenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDevice.swift; sourceTree = "<group>"; };
 		D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTService.swift; sourceTree = "<group>"; };
 		D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTCharacteristic.swift; sourceTree = "<group>"; };
+		D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_SequenceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 		D43540E0232B143800C92A19 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */,
 				D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */,
 			);
 			path = Extensions;
@@ -424,6 +427,7 @@
 			files = (
 				D4FC1ED8232D78B40014FECF /* RVS_GTService.swift in Sources */,
 				D43058D1232BBEE300B64056 /* RVS_GTDevice.swift in Sources */,
+				D4FC1EDC232D9FA80014FECF /* RVS_SequenceProtocol.swift in Sources */,
 				D43058D0232BBEE300B64056 /* RVS_GTDriver.swift in Sources */,
 				D4FC1EDA232D7F780014FECF /* RVS_GTCharacteristic.swift in Sources */,
 				D43058CF232BBEE300B64056 /* RVS_String_Extensions.swift in Sources */,

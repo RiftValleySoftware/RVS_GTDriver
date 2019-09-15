@@ -53,7 +53,7 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController_TableViewCell: UITableVie
  
  Selecting a row will open a view for that device (pushed onto the nav stack).
  */
-class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController {
+class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController, RVS_GTDriver_iOS_Test_Harness_AppDelegateAccess {
     /* ################################################################################################################################## */
     // MARK: - Internal Static Properties
     /* ################################################################################################################################## */
@@ -183,6 +183,8 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDataSourc
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let cell = inTableView.dequeueReusableCell(withIdentifier: type(of: self).reuseID) as? RVS_GTDriver_iOS_Test_Harness_MainViewController_TableViewCell else { return UITableViewCell() }
         cell.gtDevice = gtDriver[inIndexPath.row]
+        cell.displayLabel.text = "SLUG-PLACEHOLDER-TEXT".localizedVariant
+        cell.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.clear : UIColor.white.withAlphaComponent(0.25)
         return cell
     }
 }
@@ -262,8 +264,11 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: RVS_GTDriverDelegate
      - parameter inDriver: The driver instance calling this.
      - parameter errorEncountered: The error encountered.
      */
-    func gtDriver(_ inDriver: RVS_GTDriver, errorEncountered inError: Error) {
-        
+    func gtDriver(_ inDriver: RVS_GTDriver, errorEncountered inError: RVS_GTDriver.Errors) {
+        #if DEBUG
+            print("ERROR: \(String(describing: inError))")
+        #endif
+        displayError(inError.localizedDescription.localizedVariant)
     }
     
     /* ################################################################## */

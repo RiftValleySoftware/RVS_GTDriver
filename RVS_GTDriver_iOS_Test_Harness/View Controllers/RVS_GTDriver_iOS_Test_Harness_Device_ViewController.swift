@@ -30,7 +30,7 @@ import RVS_GTDriver_iOS
 /**
  One of these is instantiated for each device managed by the app.
  */
-class RVS_GTDriver_iOS_Test_Harness_Device_ViewController: UIViewController {
+class RVS_GTDriver_iOS_Test_Harness_Device_ViewController: UIViewController, RVS_GTDriver_iOS_Test_Harness_AppDelegateAccess {
     /* ################################################################################################################################## */
     // MARK: - Internal Static Properties
     /* ################################################################################################################################## */
@@ -84,7 +84,7 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTDeviceDeleg
      - parameter inDevice: The device instance that experienced the error.
      - parameter errorEncountered: The error encountered.
      */
-    public func gtDevice(_ inDevice: RVS_GTDevice, errorEncountered inError: Error) {
+    public func gtDevice(_ inDevice: RVS_GTDevice, errorEncountered inError: RVS_GTDriver.Errors) {
     }
     
     /* ################################################################## */
@@ -140,9 +140,41 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTDeviceDeleg
      This is optional, and is NOT guaranteed to be called in the main thread.
      
      - parameter inDevice: The device instance calling this.
-     - parameter discoveredService: The CBUUID of the discovered service.
+     - parameter discoveredService: The discovered service.
      */
-    public func gtDevice(_ inDevice: RVS_GTDevice, discoveredService inService: CBUUID) {
+    public func gtDevice(_ inDevice: RVS_GTDevice, discoveredService inService: RVS_GTService) {
+        inService.delegate = self
         print("Discovered Service: \(inService)")
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_GTServiceDelegate Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTServiceDelegate {
+    /* ################################################################## */
+    /**
+     Called when an error is encountered by a single device.
+     
+     This is required, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inService: The device instance that experienced the error.
+     - parameter errorEncountered: The error encountered.
+     */
+    public func gtService(_ inService: RVS_GTService, errorEncountered inError: RVS_GTDriver.Errors) {
+        displayError(inError.localizedDescription.localizedVariant)
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a new characteristic has been added to the service.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inService: The service instance calling this.
+     - parameter dicoveredCharacteristic: The new characteristic instance.
+     */
+    func gtService(_ inService: RVS_GTService, dicoveredCharacteristic inCharacteristic: RVS_GTCharacteristic) {
+        print("Discovered Characteristic: \(inCharacteristic)")
     }
 }

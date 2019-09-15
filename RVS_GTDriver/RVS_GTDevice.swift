@@ -42,7 +42,7 @@ public protocol RVS_GTDeviceDelegate: class {
      - parameter device: The device instance calling this.
      - parameter errorEncountered: The error encountered.
      */
-    func gtDevice(_ device: RVS_GTDevice, errorEncountered: Error)
+    func gtDevice(_ device: RVS_GTDevice, errorEncountered: RVS_GTDriver.Errors)
     
     /* ###################################################################################################################################### */
     // MARK: - Optional Methods
@@ -87,7 +87,7 @@ public protocol RVS_GTDeviceDelegate: class {
      - parameter wasDisconnected: Any error that may have occurred. May be nil.
      */
     func gtDevice(_ device: RVS_GTDevice, wasDisconnected: Error?)
-
+    
     /* ################################################################## */
     /**
      Called when a device discovers a new service
@@ -95,9 +95,9 @@ public protocol RVS_GTDeviceDelegate: class {
      This is optional, and is NOT guaranteed to be called in the main thread.
      
      - parameter device: The device instance calling this.
-     - parameter discoveredService: The CBUUID of the discovered service.
+     - parameter discoveredService: The discovered service.
      */
-    func gtDevice(_ device: RVS_GTDevice, discoveredService: CBUUID)
+    func gtDevice(_ device: RVS_GTDevice, discoveredService: RVS_GTService)
 }
 
 /* ###################################################################################################################################### */
@@ -152,9 +152,9 @@ extension RVS_GTDeviceDelegate {
      This is optional, and is NOT guaranteed to be called in the main thread.
      
      - parameter device: The device instance calling this.
-     - parameter discoveredService: The CBUUID of the discovered service.
+     - parameter discoveredService: The discovered service.
      */
-    public func gtDevice(_ device: RVS_GTDevice, discoveredService: CBUUID) { }
+    public func gtDevice(_ device: RVS_GTDevice, discoveredService: RVS_GTService) { }
 }
 
 /* ###################################################################################################################################### */
@@ -187,12 +187,6 @@ public class RVS_GTDevice: NSObject {
      */
     private var _delegate: RVS_GTDeviceDelegate!
     
-    /* ################################################################## */
-    /**
-     This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
-     */
-    private var _contents: [RVS_GTService] = []
-
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -220,6 +214,15 @@ public class RVS_GTDevice: NSObject {
         _owner = inOwner
         _delegate = inDelegate
     }
+    
+    /* ################################################################################################################################## */
+    // MARK: - Public Sequence Support Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
+     */
+    public var sequence_contents: [RVS_GTService] = []
 }
 
 /* ###################################################################################################################################### */
@@ -284,7 +287,7 @@ extension RVS_GTDevice {
      This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
      */
     private var services: [RVS_GTService] {
-        return _contents
+        return sequence_contents
     }
 
     /* ################################################################## */
@@ -315,7 +318,7 @@ extension RVS_GTDevice {
      Asks the device to discover all of its services.
      */
     public func discoverServices() {
-        _contents = [] // Start clean
+        sequence_contents = [] // Start clean
         peripheral.discoverServices(nil)
     }
     
@@ -334,48 +337,12 @@ extension RVS_GTDevice {
 /**
  We do this, so we can iterate through our services, and treat the driver like an Array of services.
  */
-extension RVS_GTDevice: Sequence {
+extension RVS_GTDevice: RVS_SequenceProtocol {
     /* ################################################################## */
     /**
      The element type is our service.
      */
     public typealias Element = RVS_GTService
-
-    /* ################################################################## */
-    /**
-     The iterator is simple, since it is already an Array.
-     */
-    public typealias Iterator = Array<Element>.Iterator
-    
-    /* ################################################################## */
-    /**
-     We just pass the iterator through to the Array.
-     
-     - returns: The Array iterator for our characateristics.
-     */
-    public func makeIterator() -> Iterator {
-        return _contents.makeIterator()
-    }
-    
-    /* ################################################################## */
-    /**
-     The number of characteristics we have. 1-based. 0 is no characteristics.
-     */
-    public var count: Int {
-        return _contents.count
-    }
-    
-    /* ################################################################## */
-    /**
-     Returns an indexed characteristic.
-     
-     - parameter inIndex: The 0-based integer index. Must be less than the total count of characteristics.
-     */
-    public subscript(_ inIndex: Int) -> Element {
-        precondition((0..<count).contains(inIndex))   // Standard precondition. Index needs to be 0 or greater, and less than the count.
-        
-        return _contents[inIndex]
-    }
 }
 
 /* ###################################################################################################################################### */
@@ -426,7 +393,10 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                         print("\t***\n")
                         print("\tservice: \(String(describing: service))\n")
                     #endif
-                    _contents.append(RVS_GTService(service, owner: self))
+                    let sInstance = RVS_GTService(service, owner: self)
+                    sequence_contents.append(sInstance)
+                    delegate?.gtDevice(self, discoveredService: sInstance)
+                    sInstance.discoverCharacteristics()
                 }
             }
         #endif

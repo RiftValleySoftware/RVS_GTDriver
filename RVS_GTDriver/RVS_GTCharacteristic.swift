@@ -29,7 +29,7 @@ import CoreBluetooth
 /**
  This class implements a single discovered goTenna device (in peripheral mode).
  */
-public class RVS_GTCharacteristic {
+public struct RVS_GTCharacteristic {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -41,7 +41,7 @@ public class RVS_GTCharacteristic {
     
     /* ################################################################## */
     /**
-     This is the service instance that "owns" this device instance.
+     This is the service instance that "owns" this device instance. It is a weak reference.
      */
     private weak var _owner: RVS_GTService!
     

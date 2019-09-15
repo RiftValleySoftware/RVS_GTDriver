@@ -44,7 +44,7 @@ public protocol RVS_GTDriverDelegate: class {
      - parameter driver: The driver instance calling this.
      - parameter errorEncountered: The error encountered.
      */
-    func gtDriver(_ driver: RVS_GTDriver, errorEncountered: Error)
+    func gtDriver(_ driver: RVS_GTDriver, errorEncountered: RVS_GTDriver.Errors)
 
     /* ###################################################################################################################################### */
     // MARK: - Optional Methods
@@ -186,12 +186,6 @@ public class RVS_GTDriver: NSObject {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_GTDevice.
-     */
-    private var _contents: [RVS_GTDevice] = []
-    
-    /* ################################################################## */
-    /**
      This is our delegate instance. It is a weak reference.
      */
     private var _delegate: RVS_GTDriverDelegate!
@@ -219,11 +213,53 @@ public class RVS_GTDriver: NSObject {
      The main initializer.
      
      - parameter delegate: The delegate to be used with this instance. It cannot be nil, and is a weak reference.
+     - parameter queue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
      */
-    public init(delegate inDelegate: RVS_GTDriverDelegate) {
+    public init(delegate inDelegate: RVS_GTDriverDelegate, queue inQueue: DispatchQueue? = nil) {
         super.init()
         _delegate = inDelegate
-        _centralManager = CBCentralManager(delegate: self, queue: nil)
+        _centralManager = CBCentralManager(delegate: self, queue: inQueue)
+        // Check to make sure that we actually have BLE available.
+        if .poweredOn != _centralManager.state {
+            delegate.gtDriver(self, errorEncountered: .bluetoothNotAvailable)
+        }
+    }
+    
+    /* ################################################################################################################################## */
+    // MARK: - Public Sequence Support Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_GTDevice.
+     */
+    public var sequence_contents: [RVS_GTDevice] = []
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Public Enums -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver {
+    /* ################################################################################################################################## */
+    // MARK: - Error Enums -
+    /* ################################################################################################################################## */
+    /**
+     These are the various errors that can be returned by this class.
+     */
+    public enum Errors: Error {
+        /* ################################################################## */
+        /**
+         This is returned if the manager can't power on.
+         */
+        case bluetoothNotAvailable
+        
+        /* ################################################################## */
+        /**
+         The localized description is a simple slug that can be used to key a client-supplied message.
+         It is a very simple class.enum.case String.
+         */
+        public var localizedDescription: String {
+            return "RVS_GTDriver.Error.\(String(describing: self))"
+        }
     }
 }
 
@@ -247,7 +283,6 @@ extension RVS_GTDriver {
 // MARK: - Internal Instance Methods -
 /* ###################################################################################################################################### */
 extension RVS_GTDriver {
-    
     /* ################################################################## */
     /**
      Connect the given device.
@@ -282,7 +317,7 @@ extension RVS_GTDriver {
      This returns our discovered and initialized devices.
      */
     public var devices: [RVS_GTDevice] {
-        return _contents
+        return sequence_contents
     }
     
     /* ################################################################## */
@@ -333,48 +368,12 @@ extension RVS_GTDriver {
 /**
  We do this, so we can iterate through our devices, and treat the driver like an Array of devices.
  */
-extension RVS_GTDriver: Sequence {
+extension RVS_GTDriver: RVS_SequenceProtocol {
     /* ################################################################## */
     /**
      The element type is our device.
      */
     public typealias Element = RVS_GTDevice
-    
-    /* ################################################################## */
-    /**
-     The iterator is simple, since it is already an Array.
-     */
-    public typealias Iterator = Array<Element>.Iterator
-    
-    /* ################################################################## */
-    /**
-     We just pass the iterator through to the Array.
-     
-     - returns: The Array iterator for our characateristics.
-     */
-    public func makeIterator() -> Iterator {
-        return _contents.makeIterator()
-    }
-    
-    /* ################################################################## */
-    /**
-     The number of characteristics we have. 1-based. 0 is no characteristics.
-     */
-    public var count: Int {
-        return _contents.count
-    }
-    
-    /* ################################################################## */
-    /**
-     Returns an indexed characteristic.
-     
-     - parameter inIndex: The 0-based integer index. Must be less than the total count of characteristics.
-     */
-    public subscript(_ inIndex: Int) -> Element {
-        precondition((0..<count).contains(inIndex))   // Standard precondition. Index needs to be 0 or greater, and less than the count.
-        
-        return _contents[inIndex]
-    }
 }
 
 /* ###################################################################################################################################### */
@@ -462,7 +461,6 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - parameter rssi: The signal strength (in DB).
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didDiscover inPeripheral: CBPeripheral, advertisementData inAdvertisementData: [String: Any], rssi inRSSI: NSNumber) {
-        
         // Check to make sure the signal is strong enough.
         guard _RSSI_range.contains(inRSSI.intValue) else { return }
         // Make sure we don't already have this one.
@@ -480,7 +478,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
             #endif
             // If so, we simply create the new device and add it to our list.
             let newDevice = RVS_GTDevice(inPeripheral, owner: self)
-            _contents.append(newDevice)
+            sequence_contents.append(newDevice)
             // Call our delegate to tell it about the new device.
             delegate.gtDriver(self, newDeviceAdded: newDevice)
         }

@@ -22,6 +22,27 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 
 import UIKit
 
+/* ###################################################################################################################################### */
+// MARK: - Special App Delegate Access Protocol -
+/* ###################################################################################################################################### */
+/**
+ If an entity conforms to this protocol, they will get access to a couple of App delegate functions.
+ */
+protocol RVS_GTDriver_iOS_Test_Harness_AppDelegateAccess {
+    var appDelegateObject: RVS_GTDriver_iOS_Test_Harness_AppDelegate { get }
+    func displayError(_ message: String)
+}
+
+extension RVS_GTDriver_iOS_Test_Harness_AppDelegateAccess {
+    var appDelegateObject: RVS_GTDriver_iOS_Test_Harness_AppDelegate {
+        return RVS_GTDriver_iOS_Test_Harness_AppDelegate.appDelegateObject
+    }
+    
+    func displayError(_ inMessage: String) {
+        RVS_GTDriver_iOS_Test_Harness_AppDelegate.displayAlert("SLUG-ERROR-HEADER".localizedVariant, message: inMessage)
+    }
+}
+
 @UIApplicationMain
 /* ###################################################################################################################################### */
 // MARK: - Main App Delegate Class -
@@ -38,10 +59,10 @@ class RVS_GTDriver_iOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDeleg
      Displays the given error in an alert with an "OK" button.
      
      - parameter inTitle: a string to be displayed as the title of the alert. It is localized by this method.
-     - parameter inMessage: a string to be displayed as the message of the alert. It is localized by this method.
+     - parameter message: a string to be displayed as the message of the alert. It is localized by this method.
      - parameter presentedBy: An optional UIViewController object that is acting as the presenter context for the alert. If nil, we use the top controller of the Navigation stack.
      */
-    class func displayAlert(_ inTitle: String, inMessage: String, presentedBy inPresentingViewController: UIViewController! = nil ) {
+    class func displayAlert(_ inTitle: String, message inMessage: String, presentedBy inPresentingViewController: UIViewController! = nil ) {
         #if DEBUG
             print("*** \(inTitle)\n\t\(inMessage)")
         #endif

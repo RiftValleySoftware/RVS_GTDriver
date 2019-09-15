@@ -15,7 +15,7 @@
  The Great Rift Valley Software Company: https://riftvalleysoftware.com
  */
 
-import Foundation
+import Foundation   // Required for the NS stuff.
 
 /* ###################################################################################################################################### */
 /**
