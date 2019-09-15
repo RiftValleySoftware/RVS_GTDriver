@@ -179,7 +179,7 @@ public class RVS_GTDriver: NSObject {
     /**
      This is the service UUID that goTenna uses to advertise. We look for this in our scan.
      */
-    private let gtServiceUUID = CBUUID(string: "1276AAEE-DF5E-11E6-BF01-FE55135034F3")
+    private let _gtGoTennaServiceUUID = CBUUID(string: "1276AAEE-DF5E-11E6-BF01-FE55135034F3")
 
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
@@ -314,9 +314,19 @@ extension RVS_GTDriver {
     
     /* ################################################################## */
     /**
-     This is true, if we are currently scanning for new CB peripherals.
+     This is KVO-observable.
+     Returns true, if the BLE subsystem is available.
      */
-    public var isScanning: Bool {
+    @objc dynamic public var isBluetoothAvailable: Bool {
+        return .poweredOn == _centralManager.state
+    }
+    
+    /* ################################################################## */
+    /**
+     This is KVO-observable.
+     Returns true, if we are currently scanning for new CB peripherals.
+     */
+    @objc dynamic public var isScanning: Bool {
         get {
             return _centralManager.isScanning
         }
@@ -325,7 +335,7 @@ extension RVS_GTDriver {
             if !newValue {
                 _centralManager.stopScan()
             } else {
-                _centralManager.scanForPeripherals(withServices: [gtServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
+                _centralManager.scanForPeripherals(withServices: [_gtGoTennaServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
             }
         }
     }

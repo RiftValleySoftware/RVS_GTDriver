@@ -108,6 +108,11 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController, RVS_GT
      */
     @IBOutlet weak var scanningSegmentedControl: UISegmentedControl!
     
+    /* ################################################################## */
+    /**
+     The image that is displayed if there is no bluetooth available.
+     */
+    @IBOutlet weak var noBTImageView: UIImageView!
     /* ################################################################################################################################## */
     // MARK: - Internal Properties
     /* ################################################################################################################################## */
@@ -129,7 +134,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
      - parameter: ignored.
      */
     @IBAction func scanningStateChanged(_: UISegmentedControl) {
-        gtDriver.isScanning = type(of: self).segmentedSwitchIsOnIndex == scanningSegmentedControl.selectedSegmentIndex
+        gtDriver?.isScanning = type(of: self).segmentedSwitchIsOnIndex == scanningSegmentedControl.selectedSegmentIndex
         setUpUI()
     }
 }
@@ -143,18 +148,23 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
      Sets up the UI to match the state.
      */
     func setUpUI() {
-        scanningSegmentedControl.selectedSegmentIndex = gtDriver.isScanning ? type(of: self).segmentedSwitchIsOnIndex : type(of: self).segmentedSwitchIsOffIndex
-        // iOS 13 uses a different property to affect the tint color.
-        if #available(iOS 13.0, *) {
-            scanningSegmentedControl.selectedSegmentTintColor = gtDriver.isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
-            // White text.
-            scanningSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
-        } else {
-            let textColor = gtDriver.isScanning ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor
-            scanningSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
-            scanningSegmentedControl.tintColor = gtDriver.isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+        noBTImageView.isHidden = gtDriver?.isBluetoothAvailable ?? true
+        tableView.isHidden = !(gtDriver?.isBluetoothAvailable ?? false)
+        scanningSegmentedControl.isHidden = !(gtDriver?.isBluetoothAvailable ?? false)
+        if gtDriver?.isBluetoothAvailable ?? false {
+            scanningSegmentedControl.selectedSegmentIndex = gtDriver?.isScanning ?? false ? type(of: self).segmentedSwitchIsOnIndex : type(of: self).segmentedSwitchIsOffIndex
+            // iOS 13 uses a different property to affect the tint color.
+            if #available(iOS 13.0, *) {
+                scanningSegmentedControl.selectedSegmentTintColor = gtDriver?.isScanning ?? false ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+                // White text.
+                scanningSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+            } else {
+                let textColor = gtDriver?.isScanning ?? false ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor
+                scanningSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
+                scanningSegmentedControl.tintColor = gtDriver?.isScanning ?? false ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+            }
+            tableView?.reloadData()
         }
-        tableView?.reloadData()
     }
 }
 
@@ -182,7 +192,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDataSourc
      */
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let cell = inTableView.dequeueReusableCell(withIdentifier: type(of: self).reuseID) as? RVS_GTDriver_iOS_Test_Harness_MainViewController_TableViewCell else { return UITableViewCell() }
-        cell.gtDevice = gtDriver[inIndexPath.row]
+        cell.gtDevice = gtDriver?[inIndexPath.row]
         cell.displayLabel.text = "SLUG-PLACEHOLDER-TEXT".localizedVariant
         cell.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.clear : UIColor.white.withAlphaComponent(0.25)
         return cell
@@ -205,7 +215,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDelegate 
      */
     func tableView(_ inTableView: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
         inTableView.deselectRow(at: inIndexPath, animated: false)    // Make sure to deselect the row, right away.
-        let device = gtDriver[inIndexPath.row]
+        let device = gtDriver?[inIndexPath.row]
         performSegue(withIdentifier: type(of: self).displaySegueID, sender: device)
         return nil
     }
@@ -246,7 +256,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
         guard   let destination = inSegue.destination as? RVS_GTDriver_iOS_Test_Harness_Device_ViewController,
                 let device = inSender as? RVS_GTDevice else { return }
         destination.gtDevice = device
-        gtDriver.isScanning = false
+        gtDriver?.isScanning = false
         setUpUI()
     }
 }

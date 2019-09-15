@@ -19,7 +19,14 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-gradient" translatesAutoresizingMaskIntoConstraints="NO" id="4Dm-Ed-oCq">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Br9-Xa-IRh">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoBT" translatesAutoresizingMaskIntoConstraints="NO" id="4r3-gj-4LV">
+                                <rect key="frame" x="87" y="333" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="4r3-gj-4LV" secondAttribute="height" multiplier="1:1" id="5WG-Yc-n0z"/>
+                                    <constraint firstAttribute="width" constant="240" id="ejH-JA-0fq"/>
+                                </constraints>
+                            </imageView>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Br9-Xa-IRh">
                                 <rect key="frame" x="20" y="44" width="374" height="774"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -56,7 +63,7 @@
                                     <outlet property="delegate" destination="Mz5-c2-Hvb" id="c18-ex-dqv"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Tyj-km-SRD">
+                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Tyj-km-SRD">
                                 <rect key="frame" x="20" y="822" width="374" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="dvq-GU-cTN"/>
@@ -80,14 +87,17 @@
                             <constraint firstItem="Br9-Xa-IRh" firstAttribute="leading" secondItem="V8R-ju-ISl" secondAttribute="leading" constant="20" id="QTr-N9-wje"/>
                             <constraint firstAttribute="bottom" secondItem="4Dm-Ed-oCq" secondAttribute="bottom" id="dxP-mc-KkB"/>
                             <constraint firstItem="Br9-Xa-IRh" firstAttribute="top" secondItem="V8R-ju-ISl" secondAttribute="top" id="irz-Ll-4K1"/>
+                            <constraint firstItem="4r3-gj-4LV" firstAttribute="centerX" secondItem="V8R-ju-ISl" secondAttribute="centerX" id="kgs-aW-iW5"/>
                             <constraint firstItem="4Dm-Ed-oCq" firstAttribute="top" secondItem="1qZ-r7-4aA" secondAttribute="top" id="niS-Ib-2TH"/>
                             <constraint firstItem="V8R-ju-ISl" firstAttribute="bottom" secondItem="Tyj-km-SRD" secondAttribute="bottom" id="pyt-NT-kOv"/>
+                            <constraint firstItem="4r3-gj-4LV" firstAttribute="centerY" secondItem="V8R-ju-ISl" secondAttribute="centerY" id="scE-b4-IYg"/>
                             <constraint firstItem="4Dm-Ed-oCq" firstAttribute="leading" secondItem="V8R-ju-ISl" secondAttribute="leading" id="uE1-Kj-fBe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="V8R-ju-ISl"/>
                     </view>
                     <navigationItem key="navigationItem" id="qBr-on-pgc"/>
                     <connections>
+                        <outlet property="noBTImageView" destination="4r3-gj-4LV" id="SqJ-0z-3Az"/>
                         <outlet property="scanningSegmentedControl" destination="Tyj-km-SRD" id="4x8-di-AVt"/>
                         <outlet property="tableView" destination="Br9-Xa-IRh" id="fny-Z0-7x0"/>
                         <segue destination="BkO-wb-7ZO" kind="show" identifier="SelectDevice" id="dLo-d9-l7p"/>
@@ -141,6 +151,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="NoBT" width="341.5" height="341.5"/>
         <image name="background-gradient" width="1" height="1000"/>
     </resources>
 </document>
