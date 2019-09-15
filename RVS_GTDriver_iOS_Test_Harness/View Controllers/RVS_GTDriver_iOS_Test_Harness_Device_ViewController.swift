@@ -175,6 +175,14 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTServiceDele
      - parameter dicoveredCharacteristic: The new characteristic instance.
      */
     func gtService(_ inService: RVS_GTService, dicoveredCharacteristic inCharacteristic: RVS_GTCharacteristic) {
-        print("Discovered Characteristic: \(inCharacteristic)")
+        #if DEBUG
+            print("Adding Characteristic: \(inCharacteristic)")
+        print("\tValue: \(String(describing: inCharacteristic.value))")
+        #endif
+        for descriptor in inCharacteristic {
+            #if DEBUG
+                print("\tDescriptor: \(descriptor)")
+            #endif
+        }
     }
 }

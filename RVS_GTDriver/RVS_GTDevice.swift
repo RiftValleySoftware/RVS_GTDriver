@@ -382,28 +382,37 @@ extension RVS_GTDevice: CBPeripheralDelegate {
 
     /* ################################################################## */
     /**
+     Called when we have discovered services for the peripheral.
+     
+     - parameter inPeripheral: The peripheral we have received notification on.
+     - parameter didDiscoverServices: Any errors that ocurred.
     */
     public func peripheral(_ inPeripheral: CBPeripheral, didDiscoverServices inError: Error?) {
         #if DEBUG
             print("\n***> Services Discovered:")
             print("\terror: \(String(describing: inError))\n")
-            if let services = inPeripheral.services {
-                for service in services where !containsThisService(service) {
-                    #if DEBUG
-                        print("\t***\n")
-                        print("\tservice: \(String(describing: service))\n")
-                    #endif
-                    let sInstance = RVS_GTService(service, owner: self)
-                    sequence_contents.append(sInstance)
-                    delegate?.gtDevice(self, discoveredService: sInstance)
-                    sInstance.discoverCharacteristics()
-                }
-            }
         #endif
+        if let services = inPeripheral.services {
+            for service in services where !containsThisService(service) {
+                #if DEBUG
+                    print("\t***\n")
+                    print("\tservice: \(String(describing: service))\n")
+                #endif
+                let sInstance = RVS_GTService(service, owner: self)
+                sequence_contents.append(sInstance)
+                delegate?.gtDevice(self, discoveredService: sInstance)
+                sInstance.discoverCharacteristics()
+            }
+        }
     }
     
     /* ################################################################## */
     /**
+     Called when we have discovered characteristics for a service.
+     
+     - parameter inPeripheral: The peripheral we have received notification on.
+     - parameter didDiscoverCharacteristicsFor: The service object.
+     - parameter error: Any errors that occurred.
     */
     public func peripheral(_ inPeripheral: CBPeripheral, didDiscoverCharacteristicsFor inService: CBService, error inError: Error?) {
         #if DEBUG
@@ -423,6 +432,23 @@ extension RVS_GTDevice: CBPeripheralDelegate {
         }
         #if DEBUG
             print("<***\n")
+        #endif
+    }
+
+    /* ################################################################## */
+    /**
+    Called when a characteristic state has changed.
+    
+    - parameter inPeripheral: The peripheral we have received notification on.
+    - parameter didUpdateNotificationStateFor: The characteristic object.
+    - parameter error: Any errors that occurred.
+    */
+    public func peripheral(_ inPeripheral: CBPeripheral, didUpdateNotificationStateFor inCharacteristic: CBCharacteristic, error inError: Error?) {
+        #if DEBUG
+            print("\n***> Characteristic State Change Detected:")
+            print("\tdidUpdateNotificationStateFor: \(String(describing: inCharacteristic))\n")
+            print("\t***\n")
+            print("\terror: \(String(describing: inError))\n")
         #endif
     }
 }

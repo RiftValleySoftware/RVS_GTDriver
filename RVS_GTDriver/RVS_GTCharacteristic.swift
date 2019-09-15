@@ -29,7 +29,7 @@ import CoreBluetooth
 /**
  This class implements a single discovered goTenna device (in peripheral mode).
  */
-public struct RVS_GTCharacteristic {
+public class RVS_GTCharacteristic: RVS_SequenceProtocol {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -81,10 +81,43 @@ extension RVS_GTCharacteristic {
     
     /* ################################################################## */
     /**
-     this is the service instance that "owns" this characteristic instance.
+     This is the service instance that "owns" this characteristic instance.
      */
     public var owner: RVS_GTService {
         return _owner
+    }
+    
+    /* ################################################################## */
+    /**
+     Returns the value data for this characteristic.
+     */
+    public var value: Data? {
+        return _characteristic.value
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Sequence Support
+/* ###################################################################################################################################### */
+extension RVS_GTCharacteristic {
+    /* ################################################################## */
+    /**
+     We sequence CBDescriptors.
+     */
+    public typealias Element = CBDescriptor
+    
+    /* ################################################################## */
+    /**
+     This is a simple direct access to the characteristic descriptors.
+     */
+    public var sequence_contents: [CBDescriptor] {
+        get {
+            return _characteristic.descriptors ?? []
+        }
+        
+        set {
+            _ = newValue    // NOP
+        }
     }
 }
 

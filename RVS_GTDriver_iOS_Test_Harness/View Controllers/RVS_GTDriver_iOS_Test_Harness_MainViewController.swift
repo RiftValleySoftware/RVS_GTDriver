@@ -159,6 +159,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
      Sets up the UI to match the state.
      */
     func setUpUI() {
+        // In case there is no bluetooth service available, we can hide most of the stuff, and display a "S.O.L." image.
         noBTImageView.isHidden = gtDriver?.isBluetoothAvailable ?? false
         tableView.isHidden = !(gtDriver?.isBluetoothAvailable ?? false)
         scanningSegmentedControl.isHidden = !(gtDriver?.isBluetoothAvailable ?? false)
