@@ -270,6 +270,27 @@ extension RVS_GTDriver {
         
         /* ################################################################## */
         /**
+         This is returned if we cannot connect to the device.
+         The associated value is any error that occurred.
+         */
+        case connectionAttemptFailed(error: Error?)
+        
+        /* ################################################################## */
+        /**
+         This is returned if we cannot disconnect from the device.
+         The associated value is any error that occurred.
+         */
+        case disconnectionAttemptFailed(error: Error?)
+        
+        /* ################################################################## */
+        /**
+         This is a "catchall" error.
+         The associated value is any error that occurred.
+         */
+        case unknownError(error: Error?)
+
+        /* ################################################################## */
+        /**
          The localized description is a simple slug that can be used to key a client-supplied message.
          It is a very simple class.enum.case String.
          */
@@ -452,6 +473,8 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
     public func centralManager(_ inCentralManager: CBCentralManager, didConnect inPeripheral: CBPeripheral) {
         if let device = deviceForThisPeripheral(inPeripheral) {
             device.reportSuccessfulConnection()
+        } else {
+            delegate.gtDriver(self, errorEncountered: .unknownError(error: nil))
         }
     }
     
@@ -464,7 +487,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - parameter error: Any error that may have occurred. May be nil (no error).
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didFailToConnect inPeripheral: CBPeripheral, error inError: Error?) {
-        print("ERROR! \(String(describing: inError))")
+        delegate.gtDriver(self, errorEncountered: .connectionAttemptFailed(error: inError))
     }
 
     /* ################################################################## */
@@ -476,8 +499,12 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - parameter error: Any error that may have occurred. May be nil (no error).
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didDisconnectPeripheral inPeripheral: CBPeripheral, error inError: Error?) {
-        if let device = deviceForThisPeripheral(inPeripheral) {
+        if let error = inError {
+            delegate.gtDriver(self, errorEncountered: .disconnectionAttemptFailed(error: error))
+        } else if let device = deviceForThisPeripheral(inPeripheral) {
             device.reportDisconnection(inError)
+        } else {
+            delegate.gtDriver(self, errorEncountered: .unknownError(error: nil))
         }
     }
 

@@ -82,7 +82,7 @@
                             <constraint firstItem="Tyj-km-SRD" firstAttribute="leading" secondItem="V8R-ju-ISl" secondAttribute="leading" constant="20" id="0S0-ki-zIs"/>
                             <constraint firstItem="V8R-ju-ISl" firstAttribute="trailing" secondItem="Br9-Xa-IRh" secondAttribute="trailing" constant="20" id="2X3-1W-YNV"/>
                             <constraint firstItem="Tyj-km-SRD" firstAttribute="top" secondItem="Br9-Xa-IRh" secondAttribute="bottom" constant="4" id="77x-YY-88Y"/>
-                            <constraint firstItem="4Dm-Ed-oCq" firstAttribute="trailing" secondItem="V8R-ju-ISl" secondAttribute="trailing" id="Arx-Sn-zWZ"/>
+                            <constraint firstItem="4Dm-Ed-oCq" firstAttribute="trailing" secondItem="1qZ-r7-4aA" secondAttribute="trailing" id="Arx-Sn-zWZ"/>
                             <constraint firstItem="V8R-ju-ISl" firstAttribute="trailing" secondItem="Tyj-km-SRD" secondAttribute="trailing" constant="20" id="NyW-Zp-hLn"/>
                             <constraint firstItem="Br9-Xa-IRh" firstAttribute="leading" secondItem="V8R-ju-ISl" secondAttribute="leading" constant="20" id="QTr-N9-wje"/>
                             <constraint firstAttribute="bottom" secondItem="4Dm-Ed-oCq" secondAttribute="bottom" id="dxP-mc-KkB"/>
@@ -91,7 +91,7 @@
                             <constraint firstItem="4Dm-Ed-oCq" firstAttribute="top" secondItem="1qZ-r7-4aA" secondAttribute="top" id="niS-Ib-2TH"/>
                             <constraint firstItem="V8R-ju-ISl" firstAttribute="bottom" secondItem="Tyj-km-SRD" secondAttribute="bottom" id="pyt-NT-kOv"/>
                             <constraint firstItem="4r3-gj-4LV" firstAttribute="centerY" secondItem="V8R-ju-ISl" secondAttribute="centerY" id="scE-b4-IYg"/>
-                            <constraint firstItem="4Dm-Ed-oCq" firstAttribute="leading" secondItem="V8R-ju-ISl" secondAttribute="leading" id="uE1-Kj-fBe"/>
+                            <constraint firstItem="4Dm-Ed-oCq" firstAttribute="leading" secondItem="1qZ-r7-4aA" secondAttribute="leading" id="uE1-Kj-fBe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="V8R-ju-ISl"/>
                     </view>
@@ -121,14 +121,15 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="88B-lg-HiP" firstAttribute="leading" secondItem="2cs-kV-lVN" secondAttribute="leading" id="5HI-mM-wh0"/>
-                            <constraint firstItem="88B-lg-HiP" firstAttribute="trailing" secondItem="2cs-kV-lVN" secondAttribute="trailing" id="HCE-ut-2hf"/>
+                            <constraint firstItem="88B-lg-HiP" firstAttribute="leading" secondItem="Nts-IW-hvl" secondAttribute="leading" id="5HI-mM-wh0"/>
+                            <constraint firstItem="88B-lg-HiP" firstAttribute="trailing" secondItem="Nts-IW-hvl" secondAttribute="trailing" id="HCE-ut-2hf"/>
                             <constraint firstAttribute="bottom" secondItem="88B-lg-HiP" secondAttribute="bottom" id="iti-Ll-JRy"/>
                             <constraint firstItem="88B-lg-HiP" firstAttribute="top" secondItem="Nts-IW-hvl" secondAttribute="top" id="z0r-mV-ajT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2cs-kV-lVN"/>
                     </view>
                     <navigationItem key="navigationItem" id="wV9-Rw-RPy"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TY5-oF-Fbv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -138,8 +139,9 @@
         <scene sceneID="olW-Ru-WIZ">
             <objects>
                 <navigationController navigationBarHidden="YES" id="dY6-oJ-arW" customClass="RVS_GTDriver_iOS_Test_Harness_NavigationController" customModule="RVS_GTDriver_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mtM-5d-AyM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="mtM-5d-AyM">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="Mz5-c2-Hvb" kind="relationship" relationship="rootViewController" id="gxc-LP-BpC"/>

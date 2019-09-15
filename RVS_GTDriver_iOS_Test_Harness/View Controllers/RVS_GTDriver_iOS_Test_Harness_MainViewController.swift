@@ -54,6 +54,16 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController_TableViewCell: UITableVie
  Selecting a row will open a view for that device (pushed onto the nav stack).
  */
 class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController, RVS_GTDriver_iOS_Test_Harness_AppDelegateAccess {
+    
+    /* ################################################################################################################################## */
+    // MARK: - Private Internal Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is a semaphore that we use to remember whether or not we were in scanning mode when the view was last exited.
+     */
+    private var _wasScanning = false
+    
     /* ################################################################################################################################## */
     // MARK: - Internal Static Properties
     /* ################################################################################################################################## */
@@ -113,6 +123,7 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController, RVS_GT
      The image that is displayed if there is no bluetooth available.
      */
     @IBOutlet weak var noBTImageView: UIImageView!
+    
     /* ################################################################################################################################## */
     // MARK: - Internal Properties
     /* ################################################################################################################################## */
@@ -231,7 +242,6 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
         for i in 0..<scanningSegmentedControl.numberOfSegments {
             scanningSegmentedControl.setTitle(scanningSegmentedControl.titleForSegment(at: i)?.localizedVariant, forSegmentAt: i)
         }
-        setUpUI()
     }
     
     /* ################################################################## */
@@ -243,6 +253,9 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
     override func viewWillAppear(_ inAnimated: Bool) {
         super.viewWillAppear(inAnimated)
         navigationController?.isNavigationBarHidden = true
+        gtDriver?.isScanning = _wasScanning
+        _wasScanning = false
+        setUpUI()
     }
     
     /* ################################################################## */
@@ -256,6 +269,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
         guard   let destination = inSegue.destination as? RVS_GTDriver_iOS_Test_Harness_Device_ViewController,
                 let device = inSender as? RVS_GTDevice else { return }
         destination.gtDevice = device
+        _wasScanning = gtDriver?.isScanning ?? false
         gtDriver?.isScanning = false
         setUpUI()
     }
