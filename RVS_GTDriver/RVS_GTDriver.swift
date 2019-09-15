@@ -290,6 +290,12 @@ extension RVS_GTDriver {
      - parameter inDevice: The deivice we want connected.
      */
     internal func connectDevice(_ inDevice: RVS_GTDevice) {
+        // If we are not powered on, then we report an error, and stop.
+        guard CBManagerState.poweredOn == _centralManager.state else {
+            delegate.gtDriver(self, errorEncountered: .bluetoothNotAvailable)
+            return
+        }
+
         if .disconnected == inDevice.peripheral.state { // Must be completely disconnected
             _centralManager.connect(inDevice.peripheral, options: nil)
         }
@@ -342,6 +348,11 @@ extension RVS_GTDriver {
             if !newValue {
                 _centralManager.stopScan()
             } else {
+                // If we are not powered on, then we report an error, and stop.
+                guard CBManagerState.poweredOn == _centralManager.state else {
+                    delegate.gtDriver(self, errorEncountered: .bluetoothNotAvailable)
+                    return
+                }
                 _centralManager.scanForPeripherals(withServices: [_gtGoTennaServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
             }
         }
