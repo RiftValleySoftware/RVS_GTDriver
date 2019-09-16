@@ -75,12 +75,10 @@ extension RVS_GTServiceDelegate {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Individual Device Instance Class -
+// MARK: - Individual Service Instance Class -
 /* ###################################################################################################################################### */
 /**
- This class implements a single discovered goTenna device (in peripheral mode).
- 
- It needs to be a class, as opposed to a struct, so that it can have its delegate set and passed around.
+ This class implements a BLE service wrapper, specialized for the goTenna driver.
  */
 public class RVS_GTService: NSObject {
     /* ################################################################################################################################## */
@@ -164,8 +162,57 @@ public class RVS_GTService: NSObject {
     /* ################################################################## */
     /**
      This is an Array of our discovered characteristics, as represented by instances of RVS_GTCharacteristic.
+     
+     THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
      */
     public var sequence_contents: [RVS_GTCharacteristic] = []
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Instance Calculated Properties -
+/* ###################################################################################################################################### */
+extension RVS_GTService {
+    /* ################################################################## */
+    /**
+     This returns our characteristics Array as well as our "holding" characteristics
+     */
+    internal var characteristicUUIDs: [CBUUID] {
+        var ret: [CBUUID] = []
+        
+        self.forEach {
+            ret.append($0.characteristic.uuid)
+        }
+        
+        _holdingPen.forEach {
+            ret.append($0.characteristic.uuid)
+        }
+        
+        return ret
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns our characteristics Array.
+     */
+    internal var characteristics: [RVS_GTCharacteristic]! {
+        return sequence_contents
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns our service instance.
+     */
+    internal var service: CBService! {
+        return _service
+    }
+    
+    /* ################################################################## */
+    /**
+     this is the device instance that "owns" this service instance.
+     */
+    internal var owner: RVS_GTDevice {
+        return _owner
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -376,51 +423,18 @@ extension RVS_GTService: RVS_SequenceProtocol {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Public Calculated Instance Properties -
+// MARK: - This is What We Tell the Kids -
 /* ###################################################################################################################################### */
+/**
+ This is the "Public Face" of the device. This is what we want our consumers to see and use. Some of the other stuff is public, but isn't
+ meant for consumer use. It needs to be public in order to conform to delegate protocols.
+ 
+ One other thing about this class, is that it conforms to Sequence, so you can iterate through it for services, or access services as subscripts.
+ */
 extension RVS_GTService {
-    /* ################################################################## */
-    /**
-     This returns our service instance.
-     */
-    public var service: CBService! {
-        return _service
-    }
-    
-    /* ################################################################## */
-    /**
-     this is the device instance that "owns" this service instance.
-     */
-    public var owner: RVS_GTDevice {
-        return _owner
-    }
-    
-    /* ################################################################## */
-    /**
-     This returns our characteristics Array.
-     */
-    public var characteristics: [RVS_GTCharacteristic]! {
-        return sequence_contents
-    }
-    
-    /* ################################################################## */
-    /**
-     This returns our characteristics Array as well as our "holding" characteristics
-     */
-    public var characteristicUUIDs: [CBUUID] {
-        var ret: [CBUUID] = []
-        
-        self.forEach {
-            ret.append($0.characteristic.uuid)
-        }
-        
-        _holdingPen.forEach {
-            ret.append($0.characteristic.uuid)
-        }
-        
-        return ret
-    }
-
+    /* ################################################################################################################################## */
+    // MARK: - Public Calculated Instance Properties -
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This is our delegate instance. It can be nil.
@@ -441,19 +455,5 @@ extension RVS_GTService {
      */
     override public var description: String {
         return String(describing: service.uuid)
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Public Instance Methods -
-/* ###################################################################################################################################### */
-extension RVS_GTService {
-    /* ################################################################## */
-    /**
-     Asks the device to discover all of its characteristics for our service.
-     */
-    public func discoverCharacteristics() {
-        sequence_contents = []   // Start clean.
-        _owner.discoverAllCharacteristicsForService(self)
     }
 }

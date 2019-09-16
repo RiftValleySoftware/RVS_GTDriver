@@ -256,6 +256,8 @@ public class RVS_GTDevice: NSObject {
     /* ################################################################## */
     /**
      This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
+     
+     THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
      */
     public var sequence_contents: [RVS_GTService] = []
 }
@@ -283,6 +285,14 @@ extension RVS_GTDevice {
      */
     internal var peripheral: CBPeripheral! {
         return _peripheral
+    }
+    
+    /* ################################################################## */
+    /**
+     this is the driver instance that "owns" this device instance.
+     */
+    internal var owner: RVS_GTDriver {
+        return _owner
     }
 }
 
@@ -491,102 +501,6 @@ extension RVS_GTDevice {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Public Calculated Instance Properties -
-/* ###################################################################################################################################### */
-extension RVS_GTDevice {
-    /* ################################################################## */
-    /**
-     this is the driver instance that "owns" this device instance.
-     */
-    public var owner: RVS_GTDriver {
-        return _owner
-    }
-    
-    /* ################################################################## */
-    /**
-     This is our delegate instance. It can be nil.
-     */
-    public var delegate: RVS_GTDeviceDelegate! {
-        get {
-            return _delegate
-        }
-        
-        set {
-            _delegate = newValue
-        }
-    }
-
-    /* ################################################################## */
-    /**
-     This manages and reports our connection. Changing this value will connect or disconnect this device.
-     It is KVO-observable.
-     */
-    @objc dynamic public var isConnected: Bool {
-        get {
-            return .connected == peripheral.state
-        }
-        
-        set {
-            if newValue && .disconnected == peripheral.state {
-                _owner.connectDevice(self)
-            } else {
-                _owner.disconnectDevice(self)
-            }
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     This is the manufacturer name. It will be filled at initialization time.
-     It is KVO-observable.
-     */
-    @objc dynamic public var manufacturerName: String {
-        return _manufacturerName
-    }
-    
-    /* ################################################################## */
-    /**
-     This is the "model number." It will be filled at initialization time.
-     It is KVO-observable.
-     */
-    @objc dynamic public var modelNumber: String {
-        return _modelNumber
-    }
-    
-    /* ################################################################## */
-    /**
-     This is the hardware revision. It will be filled at initialization time.
-     It is KVO-observable.
-     */
-    @objc dynamic public var hardwareRevision: String {
-        return _hardwareRevision
-    }
-    
-    /* ################################################################## */
-    /**
-     This is the firmware revision. It will be filled at initialization time.
-     It is KVO-observable.
-     */
-    @objc dynamic public var firmwareRevision: String {
-        return _firmwareRevision
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Sequence Support -
-/* ###################################################################################################################################### */
-/**
- We do this, so we can iterate through our services, and treat the driver like an Array of _services.
- */
-extension RVS_GTDevice: RVS_SequenceProtocol {
-    /* ################################################################## */
-    /**
-     The element type is our service.
-     */
-    public typealias Element = RVS_GTService
-}
-
-/* ###################################################################################################################################### */
 // MARK: - CBPeripheralDelegate Methods -
 /* ###################################################################################################################################### */
 extension RVS_GTDevice: CBPeripheralDelegate {
@@ -707,6 +621,8 @@ extension RVS_GTDevice: CBPeripheralDelegate {
     /**
      Called when we have discovered services for the peripheral.
      
+     THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
+
      - parameter inPeripheral: The peripheral we have received notification on.
      - parameter didDiscoverServices: Any errors that ocurred.
     */
@@ -727,14 +643,13 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                 let testUUID = CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue)
                 let serviceUUID = service.uuid
                 if testUUID == serviceUUID {   // If device info, we ask for the following four characteristics
-                    initialCharacteristics = [CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue), // Manufacturer name
+                    initialCharacteristics = [CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue), // Manufacturer name
                                               CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoModelName.rawValue), // Model name
                                               CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue), // Hardware Revision
                                               CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)  // Firmware Revision
                     ]
                 }
                 let sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
-                sInstance.discoverCharacteristics()
                 #if DEBUG
                     print("Adding Service: \(String(describing: sInstance)) To Holding Pen at index \(_holdingPen.count).")
                 #endif
@@ -747,6 +662,8 @@ extension RVS_GTDevice: CBPeripheralDelegate {
     /**
      Called when we have discovered characteristics for a service.
      
+     THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
+
      - parameter inPeripheral: The peripheral we have received notification on.
      - parameter didDiscoverCharacteristicsFor: The service object.
      - parameter error: Any errors that occurred.
@@ -777,6 +694,8 @@ extension RVS_GTDevice: CBPeripheralDelegate {
     /**
     Called when a characteristic state has changed.
     
+    THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
+
     - parameter inPeripheral: The peripheral we have received notification on.
     - parameter didUpdateNotificationStateFor: The characteristic object.
     - parameter error: Any errors that occurred.
@@ -799,6 +718,8 @@ extension RVS_GTDevice: CBPeripheralDelegate {
     /**
     Called when a characteristic state has changed.
     
+    THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
+
     - parameter inPeripheral: The peripheral we have received notification on.
     - parameter didUpdateNotificationStateFor: The characteristic object.
     - parameter error: Any errors that occurred.
@@ -824,4 +745,109 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("<***\n")
         #endif
     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - This is What We Tell the Kids -
+/* ###################################################################################################################################### */
+/**
+ This is the "Public Face" of the device. This is what we want our consumers to see and use. Some of the other stuff is public, but isn't
+ meant for consumer use. It needs to be public in order to conform to delegate protocols.
+ 
+ One other thing about this class, is that it conforms to Sequence, so you can iterate through it for services, or access services as subscripts.
+ */
+extension RVS_GTDevice {
+    /* ################################################################################################################################## */
+    // MARK: - Public Calculated Instance Properties -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is our delegate instance. It can be nil.
+     */
+    public var delegate: RVS_GTDeviceDelegate! {
+        get {
+            return _delegate
+        }
+        
+        set {
+            _delegate = newValue
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Return the simple description UUID.
+     */
+    override public var description: String {
+        return String(describing: _manufacturerName + " " + _modelNumber)
+    }
+
+    /* ################################################################## */
+    /**
+     This manages and reports our connection. Changing this value will connect or disconnect this device.
+     It is KVO-observable.
+     */
+    @objc dynamic public var isConnected: Bool {
+        get {
+            return .connected == peripheral.state
+        }
+        
+        set {
+            if newValue && .disconnected == peripheral.state {
+                _owner.connectDevice(self)
+            } else {
+                _owner.disconnectDevice(self)
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the manufacturer name. It will be filled at initialization time.
+     It is KVO-observable.
+     */
+    @objc dynamic public var manufacturerName: String {
+        return _manufacturerName
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the "model number." It will be filled at initialization time.
+     It is KVO-observable.
+     */
+    @objc dynamic public var modelNumber: String {
+        return _modelNumber
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the hardware revision. It will be filled at initialization time.
+     It is KVO-observable.
+     */
+    @objc dynamic public var hardwareRevision: String {
+        return _hardwareRevision
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the firmware revision. It will be filled at initialization time.
+     It is KVO-observable.
+     */
+    @objc dynamic public var firmwareRevision: String {
+        return _firmwareRevision
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Sequence Support -
+/* ###################################################################################################################################### */
+/**
+ We do this, so we can iterate through our services, and treat the driver like an Array of _services.
+ */
+extension RVS_GTDevice: RVS_SequenceProtocol {
+    /* ################################################################## */
+    /**
+     The element type is our service.
+     */
+    public typealias Element = RVS_GTService
 }

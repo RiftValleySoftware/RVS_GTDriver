@@ -26,7 +26,7 @@ import CoreBluetooth
 // MARK: - Individual Characteristic Instance Class -
 /* ###################################################################################################################################### */
 /**
- This class implements a single discovered goTenna device (in peripheral mode).
+ This class wraps a CB characteristic, on behalf of the goTenna driver.
  */
 public class RVS_GTCharacteristic: NSObject, RVS_SequenceProtocol {
     /* ################################################################################################################################## */
@@ -59,12 +59,6 @@ public class RVS_GTCharacteristic: NSObject, RVS_SequenceProtocol {
         _characteristic = inCharacteristic
         _owner = inOwner
     }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Internal Instance Methods -
-/* ###################################################################################################################################### */
-extension RVS_GTCharacteristic {
 }
 
 /* ###################################################################################################################################### */
@@ -127,10 +121,4 @@ extension RVS_GTCharacteristic {
             _ = newValue    // NOP
         }
     }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Public Instance Methods -
-/* ###################################################################################################################################### */
-extension RVS_GTCharacteristic {
 }

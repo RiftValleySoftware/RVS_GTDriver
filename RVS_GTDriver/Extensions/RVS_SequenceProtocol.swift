@@ -24,6 +24,11 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 // MARK: - Standardized Sequence Protocol to Let Collectors be Sequences -
 /* ###################################################################################################################################### */
 /**
+ If you conform to this protocol, you get a few basic Sequence attributes for free.
+ 
+ You'll need to set up a sequence_contents Array (read/write), and set the Element type, and that's about all.
+ 
+ This also gives you a read-only subscript.
  */
 public protocol RVS_SequenceProtocol: Sequence {
     /* ################################################################## */
