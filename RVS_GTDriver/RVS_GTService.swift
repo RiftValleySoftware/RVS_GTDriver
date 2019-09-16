@@ -218,7 +218,7 @@ extension RVS_GTService {
             }
             
             _holdingPen.append(chrInstance)
-            _owner.startNotifyForCharacteristic(chrInstance)
+            _owner.readValueForCharacteristic(chrInstance)
         }
     }
     

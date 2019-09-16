@@ -356,6 +356,16 @@ extension RVS_GTDevice {
     internal func stopNotifyForCharacteristic(_ inCharacteristic: RVS_GTCharacteristic) {
         _peripheral.setNotifyValue(false, for: inCharacteristic.characteristic)
     }
+    
+    /* ################################################################## */
+    /**
+     This tells the driver to read the value for the given characteristic.
+     
+     - parameter inCharacteristic: The characteristic object.
+     */
+    internal func readValueForCharacteristic(_ inCharacteristic: RVS_GTCharacteristic) {
+        _peripheral.readValue(for: inCharacteristic.characteristic)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -566,7 +576,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("<***\n")
         #endif
     }
-
+    
     /* ################################################################## */
     /**
     Called when a characteristic state has changed.
@@ -579,6 +589,27 @@ extension RVS_GTDevice: CBPeripheralDelegate {
         #if DEBUG
             print("\n***> Characteristic State Change Detected:")
             print("\tdidUpdateNotificationStateFor: \(String(describing: inCharacteristic))\n")
+            print("\t***\n")
+            print("\terror: \(String(describing: inError))\n")
+        #endif
+        
+        if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
+            characteristic.owner.addCharacteristic(characteristic)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+    Called when a characteristic state has changed.
+    
+    - parameter inPeripheral: The peripheral we have received notification on.
+    - parameter didUpdateNotificationStateFor: The characteristic object.
+    - parameter error: Any errors that occurred.
+    */
+    public func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
+        #if DEBUG
+            print("\n***> Characteristic Value Changed:")
+            print("\tdidUpdateValueFor: \(String(describing: inCharacteristic))\n")
             print("\t***\n")
             print("\terror: \(String(describing: inError))\n")
         #endif
