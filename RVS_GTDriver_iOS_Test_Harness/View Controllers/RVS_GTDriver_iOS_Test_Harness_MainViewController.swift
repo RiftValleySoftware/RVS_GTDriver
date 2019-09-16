@@ -255,8 +255,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDelegate 
      */
     func tableView(_ inTableView: UITableView, commit inEditingStyle: UITableViewCell.EditingStyle, forRowAt inIndexPath: IndexPath) {
         if inEditingStyle == UITableViewCell.EditingStyle.delete {
-            let device = gtDriver[inIndexPath.row]
-            device.goodbyeCruelWorld()
+            gtDriver[inIndexPath.row].goodbyeCruelWorld()   // We'll delete it when we get the callback.
         }
     }
 }

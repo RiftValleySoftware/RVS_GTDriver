@@ -506,7 +506,11 @@ extension RVS_GTDevice {
      - parameter inError: The error to be sent to the delegate.
      */
     internal func reportThisError(_ inError: RVS_GTDriver.Errors) {
-        owner.reportThisError(inError)
+        if let delegate = delegate {    // If we have a delegate, they get first dibs.
+            delegate.gtDevice(self, errorEncountered: inError)
+        } else {
+            owner.reportThisError(inError)
+        }
     }
 }
 
