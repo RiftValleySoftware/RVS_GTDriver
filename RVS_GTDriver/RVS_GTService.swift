@@ -153,6 +153,8 @@ public class RVS_GTService {
         // If we aren't looking up any initial characteristics, then we're done.
         if _initialCharacteristics.isEmpty {
             addOurselvesToDevice()
+        } else {
+            discoverCharacteristics(characteristicCBUUIDs: _initialCharacteristics)
         }
     }
     
@@ -188,16 +190,40 @@ extension RVS_GTService {
     /* ################################################################## */
     /**
      Return the service from our cached Array that corresponds to the given service.
+     This also checks our "holding pen."
      This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
      
      - parameter inCharacteristic: The characteristic we are looking for.
      - returns: The service. Nil, if not found.
      */
     internal func characteristicForThisCharacteristic(_ inCharacteristic: CBCharacteristic) -> Element? {
+        #if DEBUG
+            print("Searching for Characteristic.")
+        #endif
+        
+        #if DEBUG
+            print("Searching Main Array for Characteristic.")
+        #endif
         for characteristic in characteristics where inCharacteristic == characteristic.characteristic {
+            #if DEBUG
+                print("Characteristic Found In Main Array.")
+            #endif
             return characteristic
         }
         
+        #if DEBUG
+            print("Searching Holding Pen for Characteristic.")
+        #endif
+        for characteristic in _holdingPen where inCharacteristic == characteristic.characteristic {
+            #if DEBUG
+                print("Characteristic Found In Holding Pen.")
+            #endif
+            return characteristic
+        }
+
+        #if DEBUG
+            print("Characteristic Was Not Found.")
+        #endif
         return nil
     }
 
@@ -214,9 +240,15 @@ extension RVS_GTService {
             chrInstance = RVS_GTCharacteristic(inCharacteristic, owner: self)
             
             if let index = _initialCharacteristics.firstIndex(of: inCharacteristic.uuid) {
+                #if DEBUG
+                    print("Removing Characteristic: \(String(describing: inCharacteristic)) From Our Initial List at index \(index).")
+                #endif
                 _initialCharacteristics.remove(at: index)
             }
             
+            #if DEBUG
+                print("Adding Characteristic: \(String(describing: chrInstance)) To Our Holding Pen at index \(_holdingPen.count).")
+            #endif
             _holdingPen.append(chrInstance)
             _owner.readValueForCharacteristic(chrInstance)
         }
@@ -229,15 +261,27 @@ extension RVS_GTService {
      - parameter inCharacteristic: The CB characteristic we are adding.
      */
     internal func addCharacteristic(_ inCharacteristic: RVS_GTCharacteristic) {
+        #if DEBUG
+            print("Adding Characteristic: \(String(describing: inCharacteristic)) To Our List at index \(count).")
+        #endif
         if let index = _holdingPen.firstIndex(where: { return $0.characteristic == inCharacteristic.characteristic }) {
+            #if DEBUG
+                print("Removing Characteristic: \(String(describing: inCharacteristic)) From Our Holding Pen at index \(index).")
+            #endif
             _holdingPen.remove(at: index)
             sequence_contents.append(inCharacteristic)
         }
         
         // If we are already initialized, then we simply call the delegate to let it know we have a characteristic ready.
         if _initialized {
+            #if DEBUG
+                print("Sending Characteristic: \(String(describing: inCharacteristic)) To the Delegate.")
+            #endif
             delegate?.gtService(self, dicoveredCharacteristic: inCharacteristic)
         } else if _holdingPen.isEmpty { // Otherwise, we see if we are done. If so, we add ourselves to the device.
+            #if DEBUG
+                print("We Are Done With Initialization. Time to Add Ourselves to the Device.")
+            #endif
             addOurselvesToDevice()
         }
     }
@@ -247,6 +291,9 @@ extension RVS_GTService {
      Adds this instance to our device.
      */
     internal func addOurselvesToDevice() {
+        #if DEBUG
+            print("Adding Ourselves to the Device.")
+        #endif
         _initialized = true
         owner.addServiceToList(self)
     }
@@ -264,6 +311,9 @@ extension RVS_GTService {
         }
         
         if !inUUIDs.isEmpty {
+            #if DEBUG
+                print("Service: \(String(describing: self)) is Discovering Characteristics for UUIDs: \(String(describing: inUUIDs))")
+            #endif
             _owner.discoverCharacteristicsForService(self, characteristicCBUUIDs: inUUIDs)
         }
     }
@@ -279,6 +329,10 @@ extension RVS_GTService {
             sequence_contents = [] // Start clean
         }
         
+        #if DEBUG
+            print("Service: \(String(describing: self)) is Discovering All Characteristics")
+        #endif
+
         _owner.discoverAllCharacteristicsForService(self)
     }
 }
@@ -325,6 +379,24 @@ extension RVS_GTService {
         return sequence_contents
     }
     
+    /* ################################################################## */
+    /**
+     This returns our characteristics Array as well as our "holding" characteristics
+     */
+    public var characteristicUUIDs: [CBUUID] {
+        var ret: [CBUUID] = []
+        
+        self.forEach {
+            ret.append($0.characteristic.uuid)
+        }
+        
+        _holdingPen.forEach {
+            ret.append($0.characteristic.uuid)
+        }
+        
+        return ret
+    }
+
     /* ################################################################## */
     /**
      This is our delegate instance. It can be nil.

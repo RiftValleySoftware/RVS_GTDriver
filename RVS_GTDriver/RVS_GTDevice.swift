@@ -329,8 +329,14 @@ extension RVS_GTDevice {
      - parameter inService: The service object.
      */
     internal func addServiceToList(_ inService: RVS_GTService) {
+        #if DEBUG
+            print("Adding Service: \(String(describing: inService)) To Our List at index \(count).")
+        #endif
         // Remove from the "holding pen."
         if let index = _holdingPen.firstIndex(where: { return $0.service == inService.service }) {
+            #if DEBUG
+                print("Removing Service: \(String(describing: inService)) From Holding Pen at index \(index).")
+            #endif
             _holdingPen.remove(at: index)
         }
         sequence_contents.append(inService)
@@ -455,12 +461,33 @@ extension RVS_GTDevice: CBPeripheralDelegate {
      - returns: The instance associated with the CBCharacteristic. Nil, if none.
      */
     internal func getCharacteristicInstanceForCharacteristic(_ inCharacteristic: CBCharacteristic) -> RVS_GTCharacteristic! {
+        #if DEBUG
+            print("Searching Services for Characteristic.")
+        #endif
         for service in self {
-            for characteristic in service where characteristic.characteristic == inCharacteristic {
+            if let characteristic = service.characteristicForThisCharacteristic(inCharacteristic) {
+                #if DEBUG
+                    print("Characteristic Found.")
+                #endif
                 return characteristic
             }
         }
         
+        #if DEBUG
+            print("Searching Service Holding Pen for Characteristic.")
+        #endif
+        for service in _holdingPen {
+            if let characteristic = service.characteristicForThisCharacteristic(inCharacteristic) {
+                #if DEBUG
+                    print("Characteristic Found.")
+                #endif
+                return characteristic
+            }
+        }
+
+        #if DEBUG
+            print("Characteristic Not Found.")
+        #endif
         return nil
     }
     
@@ -497,6 +524,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
     /* ################################################################## */
     /**
      Return the service from our cached Array that corresponds to the given service.
+     This checks our "holding pen," as well as our main array.
      This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
      
      - parameter inService: The service we are looking for.
@@ -507,6 +535,10 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             return service
         }
         
+        for service in _holdingPen where inService == service.service {
+            return service
+        }
+
         return nil
     }
 
@@ -529,7 +561,9 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                     print("\tservice: \(String(describing: service))\n")
                 #endif
                 var initialCharacteristics: [CBUUID] = []
-                if CBUUID(string: "0x181A") == service.uuid {   // If device info, we ask for the following four characteristics
+                let testUUID = CBUUID(string: "0x180A")
+                let serviceUUID = service.uuid
+                if testUUID == serviceUUID {   // If device info, we ask for the following four characteristics
                     initialCharacteristics = [CBUUID(string: "0x2A29"), // Manufacturer name
                                               CBUUID(string: "0x2A24"), // Model name
                                               CBUUID(string: "0x2A27"), // Hardware Revision
@@ -538,6 +572,9 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                 }
                 let sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
                 sInstance.discoverCharacteristics()
+                #if DEBUG
+                    print("Adding Service: \(String(describing: sInstance)) To Holding Pen at index \(_holdingPen.count).")
+                #endif
                 _holdingPen.append(sInstance)   // In the holding pen, until we officially add it.
             }
         }
@@ -564,13 +601,10 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\terror: \(String(describing: inError))\n")
         #endif
         guard let service = serviceForThisService(inService) else { return }
-        guard let characteristics = inService.characteristics else { return }
-        for characteristic in characteristics {
-            #if DEBUG
-                print("\t***\n")
-                print("\tcharacteristic: \(String(describing: characteristic))\n")
-            #endif
-            service.interimCharacteristic(characteristic)
+        if let characteristics = inService.characteristics {
+            for characteristic in characteristics where nil == service.characteristicForThisCharacteristic(characteristic) {
+                service.interimCharacteristic(characteristic)
+            }
         }
         #if DEBUG
             print("<***\n")
@@ -608,14 +642,21 @@ extension RVS_GTDevice: CBPeripheralDelegate {
     */
     public func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
         #if DEBUG
-            print("\n***> Characteristic Value Changed:")
+            print("\n***> Characteristic Value Updated:")
             print("\tdidUpdateValueFor: \(String(describing: inCharacteristic))\n")
             print("\t***\n")
             print("\terror: \(String(describing: inError))\n")
         #endif
         
         if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
+            #if DEBUG
+                print("Adding Characteristic: \(String(describing: characteristic)) to its service.\n")
+            #endif
             characteristic.owner.addCharacteristic(characteristic)
         }
+        
+        #if DEBUG
+            print("<***\n")
+        #endif
     }
 }
