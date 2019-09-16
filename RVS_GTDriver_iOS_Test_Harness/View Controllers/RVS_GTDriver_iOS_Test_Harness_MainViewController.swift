@@ -205,7 +205,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDataSourc
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let cell = inTableView.dequeueReusableCell(withIdentifier: type(of: self).reuseID) as? RVS_GTDriver_iOS_Test_Harness_MainViewController_TableViewCell else { return UITableViewCell() }
         cell.gtDevice = gtDriver?[inIndexPath.row]
-        cell.displayLabel.text = "SLUG-PLACEHOLDER-TEXT".localizedVariant
+        cell.displayLabel.text = cell.gtDevice.modelNumber.localizedVariant
         cell.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.clear : UIColor.white.withAlphaComponent(0.25)
         return cell
     }

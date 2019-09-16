@@ -20,7 +20,6 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
@@ -199,6 +198,30 @@ public class RVS_GTDevice: NSObject {
      */
     private var _holdingPen: [RVS_GTService] = []
     
+    /* ################################################################## */
+    /**
+     This is the manufacturer name. It will be filled at initialization time.
+     */
+    private var _manufacturerName: String = ""
+    
+    /* ################################################################## */
+    /**
+     This is the "model number." It will be filled at initialization time.
+     */
+    private var _modelNumber: String = ""
+    
+    /* ################################################################## */
+    /**
+     This is the hardware revision. It will be filled at initialization time.
+     */
+    private var _hardwareRevision: String = ""
+    
+    /* ################################################################## */
+    /**
+     This is the firmware revision. It will be filled at initialization time.
+     */
+    private var _firmwareRevision: String = ""
+
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -225,7 +248,6 @@ public class RVS_GTDevice: NSObject {
         _peripheral.delegate = self
         _owner = inOwner
         _delegate = inDelegate
-        isConnected = true  // We start by connecting, so we can get information.
     }
     
     /* ################################################################################################################################## */
@@ -236,6 +258,32 @@ public class RVS_GTDevice: NSObject {
      This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
      */
     public var sequence_contents: [RVS_GTService] = []
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Private Instance Calculated Properties -
+/* ###################################################################################################################################### */
+extension RVS_GTDevice {
+    /* ################################################################## */
+    /**
+     This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
+     */
+    private var _services: [RVS_GTService] {
+        return sequence_contents
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Calculated Instance Properties -
+/* ###################################################################################################################################### */
+extension RVS_GTDevice {
+    /* ################################################################## */
+    /**
+     This returns our peripheral instance.
+     */
+    internal var peripheral: CBPeripheral! {
+        return _peripheral
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -266,7 +314,7 @@ extension RVS_GTDevice {
     
     /* ################################################################## */
     /**
-     Asks the device to discover specific services.
+     Asks the device to discover specific _services.
      
      - parameter inServiceCBUUIDs: These are the specific UUIDs we are searching for.
      - parameter startClean: Optional (default is false). If true, then all cached services are cleared before discovery.
@@ -280,7 +328,7 @@ extension RVS_GTDevice {
     
     /* ################################################################## */
     /**
-     Asks the device to discover all of its services.
+     Asks the device to discover all of its _services.
      
      - parameter startClean: Optional (default is false). If true, then all cached services are cleared before discovery.
      */
@@ -339,8 +387,15 @@ extension RVS_GTDevice {
             #endif
             _holdingPen.remove(at: index)
         }
+        
         sequence_contents.append(inService)
         delegate?.gtDevice(self, discoveredService: inService)
+        
+        if !_initialized, _holdingPen.isEmpty {
+            _initialized = true
+            setUpDeviceInfo()
+            owner.addDeviceToList(self)
+        }
     }
     
     /* ################################################################## */
@@ -372,20 +427,73 @@ extension RVS_GTDevice {
     internal func readValueForCharacteristic(_ inCharacteristic: RVS_GTCharacteristic) {
         _peripheral.readValue(for: inCharacteristic.characteristic)
     }
+    
+    /* ################################################################## */
+    /**
+     This goes through the device info service, and extracts the four basic device info fields.
+     */
+    internal func setUpDeviceInfo() {
+        // Start by getting the device info object.
+        if let deviceInfoService = serviceForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue)) {
+            guard   let manufacturerNameCh = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue)),
+                    let manufacturerNameData = manufacturerNameCh.value,
+                    let manufacturerName = String(data: manufacturerNameData, encoding: .utf8)
+            else {
+                owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: nil))
+                return
+            }
+            
+            #if DEBUG
+                print("Read the Manufacturer Name: \(manufacturerName).")
+            #endif
+            _manufacturerName = manufacturerName
+            
+            guard   let modelNumberCh = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoModelName.rawValue)),
+                    let modelNumberData = modelNumberCh.value,
+                    let modelNumber = String(data: modelNumberData, encoding: .utf8)
+            else {
+                owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: nil))
+                return
+            }
+            
+            #if DEBUG
+                print("Read the Model Number: \(modelNumber).")
+            #endif
+            _modelNumber = modelNumber
+            
+            guard   let hardwareRevisionCh = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue)),
+                    let hardwareRevisionData = hardwareRevisionCh.value,
+                    let hardwareRevision = String(data: hardwareRevisionData, encoding: .utf8)
+            else {
+                owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: nil))
+                return
+            }
+            
+            #if DEBUG
+                print("Read the Hardware Revision: \(hardwareRevision).")
+            #endif
+            _hardwareRevision = hardwareRevision
+            
+            guard   let firmwareRevisionCh = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)),
+                    let firmwareRevisionData = firmwareRevisionCh.value,
+                    let firmwareRevision = String(data: firmwareRevisionData, encoding: .utf8)
+            else {
+                owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: nil))
+                return
+            }
+            
+            #if DEBUG
+                print("Read the Firmaware Revision: \(firmwareRevision).")
+            #endif
+            _firmwareRevision = hardwareRevision
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
 // MARK: - Public Calculated Instance Properties -
 /* ###################################################################################################################################### */
 extension RVS_GTDevice {
-    /* ################################################################## */
-    /**
-     This returns our peripheral instance.
-     */
-    public var peripheral: CBPeripheral! {
-        return _peripheral
-    }
-    
     /* ################################################################## */
     /**
      this is the driver instance that "owns" this device instance.
@@ -407,20 +515,13 @@ extension RVS_GTDevice {
             _delegate = newValue
         }
     }
-    
-    /* ################################################################## */
-    /**
-     This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
-     */
-    private var services: [RVS_GTService] {
-        return sequence_contents
-    }
 
     /* ################################################################## */
     /**
      This manages and reports our connection. Changing this value will connect or disconnect this device.
+     It is KVO-observable.
      */
-    public var isConnected: Bool {
+    @objc dynamic public var isConnected: Bool {
         get {
             return .connected == peripheral.state
         }
@@ -433,13 +534,49 @@ extension RVS_GTDevice {
             }
         }
     }
+    
+    /* ################################################################## */
+    /**
+     This is the manufacturer name. It will be filled at initialization time.
+     It is KVO-observable.
+     */
+    @objc dynamic public var manufacturerName: String {
+        return _manufacturerName
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the "model number." It will be filled at initialization time.
+     It is KVO-observable.
+     */
+    @objc dynamic public var modelNumber: String {
+        return _modelNumber
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the hardware revision. It will be filled at initialization time.
+     It is KVO-observable.
+     */
+    @objc dynamic public var hardwareRevision: String {
+        return _hardwareRevision
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the firmware revision. It will be filled at initialization time.
+     It is KVO-observable.
+     */
+    @objc dynamic public var firmwareRevision: String {
+        return _firmwareRevision
+    }
 }
 
 /* ###################################################################################################################################### */
 // MARK: - Sequence Support -
 /* ###################################################################################################################################### */
 /**
- We do this, so we can iterate through our services, and treat the driver like an Array of services.
+ We do this, so we can iterate through our services, and treat the driver like an Array of _services.
  */
 extension RVS_GTDevice: RVS_SequenceProtocol {
     /* ################################################################## */
@@ -515,7 +652,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
      - returns: True, if the driver currently has an instance of the peripheral cached.
      */
     internal func containsThisService(_ inService: CBService) -> Bool {
-        return services.reduce(false) { (inCurrent, inElement) -> Bool in
+        return _services.reduce(false) { (inCurrent, inElement) -> Bool in
             guard !inCurrent, let service = inElement.service else { return inCurrent }
             return inService == service
         }
@@ -531,7 +668,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
      - returns: The service. Nil, if not found.
      */
     internal func serviceForThisService(_ inService: CBService) -> Element? {
-        for service in services where inService == service.service {
+        for service in self where inService == service.service {
             return service
         }
         
@@ -539,6 +676,30 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             return service
         }
 
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     Return the service from our cached Array that corresponds to the given service.
+     This DOES NOT check the "holding pen."
+     This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
+     
+     - parameter inUUID: The UUID of the service we are looking for.
+     - returns: The service. Nil, if not found.
+     */
+    internal func serviceForThisUUID(_ inUUID: CBUUID) -> Element? {
+        #if DEBUG
+            print("Searching for Service for \(String(describing: inUUID)).")
+        #endif
+        
+        for service in self where inUUID == service.service.uuid {
+            #if DEBUG
+                print("Service Found.")
+            #endif
+            return service
+        }
+        
         return nil
     }
 
@@ -554,20 +715,22 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\n***> Services Discovered:")
             print("\terror: \(String(describing: inError))\n")
         #endif
-        if let services = inPeripheral.services {
+        if let error = inError {
+            owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: error))
+        } else if let services = inPeripheral.services {
             for service in services where !containsThisService(service) && !holdingThisService(service) {
                 #if DEBUG
                     print("\t***\n")
                     print("\tservice: \(String(describing: service))\n")
                 #endif
                 var initialCharacteristics: [CBUUID] = []
-                let testUUID = CBUUID(string: "0x180A")
+                let testUUID = CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue)
                 let serviceUUID = service.uuid
                 if testUUID == serviceUUID {   // If device info, we ask for the following four characteristics
-                    initialCharacteristics = [CBUUID(string: "0x2A29"), // Manufacturer name
-                                              CBUUID(string: "0x2A24"), // Model name
-                                              CBUUID(string: "0x2A27"), // Hardware Revision
-                                              CBUUID(string: "0x2A26")  // Firmware Revision
+                    initialCharacteristics = [CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue), // Manufacturer name
+                                              CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoModelName.rawValue), // Model name
+                                              CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue), // Hardware Revision
+                                              CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)  // Firmware Revision
                     ]
                 }
                 let sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
@@ -577,11 +740,6 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                 #endif
                 _holdingPen.append(sInstance)   // In the holding pen, until we officially add it.
             }
-        }
-        
-        if !_initialized {
-            _initialized = true
-            reportSuccessfulConnection()
         }
     }
     
@@ -600,11 +758,15 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\t***\n")
             print("\terror: \(String(describing: inError))\n")
         #endif
-        guard let service = serviceForThisService(inService) else { return }
-        if let characteristics = inService.characteristics {
-            for characteristic in characteristics where nil == service.characteristicForThisCharacteristic(characteristic) {
-                service.interimCharacteristic(characteristic)
-            }
+        if let error = inError {
+            owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: error))
+        } else {
+            guard let service = serviceForThisService(inService) else { return }
+           if let characteristics = inService.characteristics {
+               for characteristic in characteristics where nil == service.characteristicForThisCharacteristic(characteristic) {
+                   service.interimCharacteristic(characteristic)
+               }
+           }
         }
         #if DEBUG
             print("<***\n")
@@ -626,8 +788,9 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\t***\n")
             print("\terror: \(String(describing: inError))\n")
         #endif
-        
-        if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
+        if let error = inError {
+            owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: error))
+        } else if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
             characteristic.owner.addCharacteristic(characteristic)
         }
     }
@@ -648,7 +811,9 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\terror: \(String(describing: inError))\n")
         #endif
         
-        if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
+        if let error = inError {
+            owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: error))
+        } else if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
             #if DEBUG
                 print("Adding Characteristic: \(String(describing: characteristic)) to its service.\n")
             #endif

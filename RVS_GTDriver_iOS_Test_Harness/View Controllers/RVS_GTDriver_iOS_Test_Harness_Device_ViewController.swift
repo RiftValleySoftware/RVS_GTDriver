@@ -47,6 +47,30 @@ class RVS_GTDriver_iOS_Test_Harness_Device_ViewController: UIViewController, RVS
      This is the device that is associated with this view.
      */
     var gtDevice: RVS_GTDevice!
+    
+    /* ################################################################## */
+    /**
+     The label for our manufacturer name
+     */
+    @IBOutlet weak var manufacturerNameLabel: UILabel!
+    
+    /* ################################################################## */
+    /**
+     The label for our model name
+     */
+    @IBOutlet weak var modelNameLabel: UILabel!
+    
+    /* ################################################################## */
+    /**
+     The label for our hardware revision
+     */
+    @IBOutlet weak var hardwareRevisionLabel: UILabel!
+    
+    /* ################################################################## */
+    /**
+     The label for our firmware revision
+     */
+    @IBOutlet weak var firmwareRevisionLabel: UILabel!
 }
 
 /* ###################################################################################################################################### */
@@ -64,10 +88,17 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
+    /* ################################################################## */
+    /**
+     Load up on our fixed data header.
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         gtDevice.delegate = self
-        gtDevice.isConnected = true
+        manufacturerNameLabel.text = "SLUG-MANUFACTURERNAME-LABEL-PREFIX".localizedVariant + " " + gtDevice.manufacturerName
+        modelNameLabel.text = "SLUG-MODELNAME-LABEL-PREFIX".localizedVariant + " " + gtDevice.modelNumber
+        hardwareRevisionLabel.text = "SLUG-HARDWAREREVISION-LABEL-PREFIX".localizedVariant + " " + gtDevice.hardwareRevision
+        firmwareRevisionLabel.text = "SLUG-FIRMWAREREVISION-LABEL-PREFIX".localizedVariant + " " + gtDevice.firmwareRevision
     }
 }
 

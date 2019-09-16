@@ -29,3 +29,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "RVS_GTDriver.Error.bluetoothNotAvailable"      =       "Bluetooth Not Available";
 "RVS_GTDriver.Error.connectionAttemptFailed"    =       "Device connection failed";
 "RVS_GTDriver.Error.unknownError"               =       "Unknown Driver Error";
+"SLUG-MANUFACTURERNAME-LABEL-PREFIX"            =       "Manufacturer Name:";
+"SLUG-MODELNAME-LABEL-PREFIX"                   =       "Model Name:";
+"SLUG-HARDWAREREVISION-LABEL-PREFIX"            =       "Hardware Revision:";
+"SLUG-FIRMWAREREVISION-LABEL-PREFIX"            =       "Firmware Revision:";

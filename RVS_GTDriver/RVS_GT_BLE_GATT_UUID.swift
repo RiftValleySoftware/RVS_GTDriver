@@ -20,36 +20,30 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation   // Required for the ProcessInfo stuff.
+import CoreBluetooth
 
 /* ###################################################################################################################################### */
-// MARK: - Debug Tools Protocol -
+// MARK: - Enums for Standard (and Proprietary) BLE Service and Characteristic UUIDs -
 /* ###################################################################################################################################### */
 /**
- This protocol is a "junk drawer" of vrious debug/testing tools.
+ These are String-based enums that we use to reference various services and characteristics in our driver.
  */
-public protocol RVS_DebugTools {
-    /* ################################################################## */
-    /**
-     This is used to see whether or not we are running under unit tests. It is optional, and isn't really supposed to be replaced.
-     
-     - returns: True, if we are currently in a unit test.
-     */
-    var isRunningUnitTests: Bool { get }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Make Things Optional -
-/* ###################################################################################################################################### */
-extension RVS_DebugTools {
-    /* ################################################################## */
-    /**
-     This is used to see whether or not we are running under unit tests.
-     
-     - returns: True, if we are currently in a unit test.
-     */
-    public var isRunningUnitTests: Bool {
-        // Searches for an environment setting that describes the XCTest path (only present under unit test, and always present when under unit test).
-        return nil != ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"]
-    }
+internal enum RVS_GT_BLE_GATT_UUID: String {
+    // MARK: - Service IDs
+    /// This is the basic goTenna proprietary service.
+    case goTennaProprietary     =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
+    /// The standard GATT Device Info service.
+    case deviceInfoService      =   "0x180A"
+    
+    // MARK: - Device Info Characteristic IDs
+    /// Manufacturer Name
+    case deviceInfoManufacturerName     =   "0x2A29"
+    /// Model Name
+    case deviceInfoModelName            =   "0x2A24"
+    /// Hardware Revision
+    case deviceInfoHardwareRevision     =   "0x2A27"
+    /// Firmware Revision
+    case deviceInfoFirmwareRevision     =   "0x2A26"
+    
+    // MARK: - goTenna Proprietary Characteristic IDs
 }

@@ -118,18 +118,72 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-gradient" translatesAutoresizingMaskIntoConstraints="NO" id="88B-lg-HiP">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVB-in-BLM">
+                                <rect key="frame" x="20" y="92" width="374" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="ehi-bo-yOE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIZ-ba-eUo">
+                                <rect key="frame" x="20" y="116" width="374" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="acV-gV-mAK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQU-43-v5x">
+                                <rect key="frame" x="20" y="140" width="374" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="QDd-kW-rxh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOc-bP-N9K">
+                                <rect key="frame" x="20" y="164" width="374" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Aya-kU-DAE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="NQU-43-v5x" firstAttribute="leading" secondItem="2cs-kV-lVN" secondAttribute="leading" constant="20" id="48l-Wm-2QJ"/>
                             <constraint firstItem="88B-lg-HiP" firstAttribute="leading" secondItem="Nts-IW-hvl" secondAttribute="leading" id="5HI-mM-wh0"/>
+                            <constraint firstItem="GVB-in-BLM" firstAttribute="top" secondItem="2cs-kV-lVN" secondAttribute="top" constant="4" id="6PO-yZ-CTZ"/>
+                            <constraint firstItem="2cs-kV-lVN" firstAttribute="trailing" secondItem="GVB-in-BLM" secondAttribute="trailing" constant="20" id="7EM-dx-FzG"/>
                             <constraint firstItem="88B-lg-HiP" firstAttribute="trailing" secondItem="Nts-IW-hvl" secondAttribute="trailing" id="HCE-ut-2hf"/>
+                            <constraint firstItem="2cs-kV-lVN" firstAttribute="trailing" secondItem="BOc-bP-N9K" secondAttribute="trailing" constant="20" id="HYU-uu-xHr"/>
+                            <constraint firstItem="2cs-kV-lVN" firstAttribute="trailing" secondItem="rIZ-ba-eUo" secondAttribute="trailing" constant="20" id="Ki2-zt-CLu"/>
+                            <constraint firstItem="BOc-bP-N9K" firstAttribute="leading" secondItem="2cs-kV-lVN" secondAttribute="leading" constant="20" id="M8I-rj-VtX"/>
+                            <constraint firstItem="BOc-bP-N9K" firstAttribute="top" secondItem="NQU-43-v5x" secondAttribute="bottom" constant="4" id="NBB-Oo-qAp"/>
+                            <constraint firstItem="rIZ-ba-eUo" firstAttribute="top" secondItem="GVB-in-BLM" secondAttribute="bottom" constant="4" id="STX-hi-LgG"/>
+                            <constraint firstItem="GVB-in-BLM" firstAttribute="leading" secondItem="2cs-kV-lVN" secondAttribute="leading" constant="20" id="U7l-pJ-roh"/>
+                            <constraint firstItem="2cs-kV-lVN" firstAttribute="trailing" secondItem="NQU-43-v5x" secondAttribute="trailing" constant="20" id="VAt-z2-xNd"/>
                             <constraint firstAttribute="bottom" secondItem="88B-lg-HiP" secondAttribute="bottom" id="iti-Ll-JRy"/>
+                            <constraint firstItem="NQU-43-v5x" firstAttribute="top" secondItem="rIZ-ba-eUo" secondAttribute="bottom" constant="4" id="xW7-u2-GMC"/>
+                            <constraint firstItem="rIZ-ba-eUo" firstAttribute="leading" secondItem="2cs-kV-lVN" secondAttribute="leading" constant="20" id="xoK-Xq-dcU"/>
                             <constraint firstItem="88B-lg-HiP" firstAttribute="top" secondItem="Nts-IW-hvl" secondAttribute="top" id="z0r-mV-ajT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2cs-kV-lVN"/>
                     </view>
                     <navigationItem key="navigationItem" id="wV9-Rw-RPy"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="firmwareRevisionLabel" destination="BOc-bP-N9K" id="04I-DW-TiZ"/>
+                        <outlet property="hardwareRevisionLabel" destination="NQU-43-v5x" id="zcS-K8-lDU"/>
+                        <outlet property="manufacturerNameLabel" destination="GVB-in-BLM" id="fgT-H1-7vO"/>
+                        <outlet property="modelNameLabel" destination="rIZ-ba-eUo" id="NU4-P0-LUy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TY5-oF-Fbv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -139,9 +193,9 @@
         <scene sceneID="olW-Ru-WIZ">
             <objects>
                 <navigationController navigationBarHidden="YES" id="dY6-oJ-arW" customClass="RVS_GTDriver_iOS_Test_Harness_NavigationController" customModule="RVS_GTDriver_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="mtM-5d-AyM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mtM-5d-AyM">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.0" green="1" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="Mz5-c2-Hvb" kind="relationship" relationship="rootViewController" id="gxc-LP-BpC"/>

@@ -20,7 +20,6 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
@@ -182,6 +181,17 @@ extension RVS_GTDriverDelegate {
  for each discovered peripheral device.
  
  Since this receives delegate callbacks from CB, it must derive from NSObject.
+ 
+ This driver has two modes: Not scanning, in which case it does not discover new devices, but the devices it does have may still be active and updating, and
+ Scanning, in which case, it looks for goTenna devices.
+ 
+ If it finds a device, it adds it to a "Holding Pen," where it lives until some basic information has been read; namely, the Device Info service.
+ 
+ After all that has been gathered, the device is considered "shiny," and gets added to our main Array, and then it will ignore the same device, if that device shows up again in discovery.
+ 
+ The idea is to build up an object model of the goTenna devices, and represent them to the API consumer as simply as possible.
+ 
+ It is important that the consumer provide delegates to the driver, device and service instances. Most of the action happens in delegate callbacks.
  */
 public class RVS_GTDriver: NSObject {
     /* ################################################################################################################################## */
@@ -199,12 +209,6 @@ public class RVS_GTDriver: NSObject {
      */
     private let _notifyMTU = 244
     
-    /* ################################################################## */
-    /**
-     This is the service UUID that goTenna uses to advertise. We look for this in our scan.
-     */
-    private let _gtGoTennaServiceUUID = CBUUID(string: "1276AAEE-DF5E-11E6-BF01-FE55135034F3")
-
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -220,6 +224,12 @@ public class RVS_GTDriver: NSObject {
      */
     private var _centralManager: CBCentralManager!
     
+    /* ################################################################## */
+    /**
+     This is "temporary storage" for devices that are still undergoing validation before being added.
+     */
+    private var _holdingPen: [RVS_GTDevice] = []
+    
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -230,7 +240,7 @@ public class RVS_GTDriver: NSObject {
     private override init() { }
     
     /* ################################################################################################################################## */
-    // MARK: - Public Initializers
+    // MARK: - Public Initializer
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
@@ -253,6 +263,19 @@ public class RVS_GTDriver: NSObject {
      This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_GTDevice.
      */
     public var sequence_contents: [RVS_GTDevice] = []
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Private Instance Calculated Properties -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver {
+    /* ################################################################## */
+    /**
+     This returns our discovered and initialized _devices.
+     */
+    private var _devices: [RVS_GTDevice] {
+        return sequence_contents
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -337,20 +360,58 @@ extension RVS_GTDriver {
             _centralManager.cancelPeripheralConnection(inDevice.peripheral)
         }
     }
+    
+    /* ################################################################## */
+    /**
+     Add the device to our main list.
+     
+     - parameter inDevice: The deivice we want disconnected.
+     */
+    internal func addDeviceToList(_ inDevice: RVS_GTDevice) {
+        #if DEBUG
+            print("Adding Device: \(String(describing: inDevice)) To Our List at index \(count).")
+        #endif
+        // Remove from the "holding pen."
+        if let index = _holdingPen.firstIndex(where: { return $0.peripheral == inDevice.peripheral }) {
+            #if DEBUG
+                print("Removing Device: \(String(describing: inDevice)) From Holding Pen at index \(index).")
+            #endif
+            _holdingPen.remove(at: index)
+        }
+        // We no longer need the device to be connected.
+        inDevice.isConnected = false
+        sequence_contents.append(inDevice)
+        // Let the delegate know that it now has a new device.
+        delegate.gtDriver(self, newDeviceAdded: inDevice)
+        // Tell the device to report that it was successfully connected.
+        inDevice.reportSuccessfulConnection()
+        // And this rates a status update.
+        delegate.gtDriverStatusUpdate(self)
+    }
+    
+    /* ################################################################## */
+    /**
+     This simply returns the 0-based index of the given device in our Array of _devices.
+     
+     - returns the 0-based index of the device. Nil, if not available.
+     */
+    internal func indexOfThisDevice(_ inDevice: RVS_GTDevice) -> Int! {
+        return _devices.firstIndex(of: inDevice)
+    }
+    
+    /* ################################################################## */
+    /**
+     Deletes all cached peripherals.
+     */
+    internal func clearCachedDevices() {
+        sequence_contents = []
+    }
 }
 
 /* ###################################################################################################################################### */
 // MARK: - Public Calculated Instance Properties -
 /* ###################################################################################################################################### */
 extension RVS_GTDriver {
-    /* ################################################################## */
-    /**
-     This returns our discovered and initialized devices.
-     */
-    public var devices: [RVS_GTDevice] {
-        return sequence_contents
-    }
-    
     /* ################################################################## */
     /**
      This is our delegate instance.
@@ -378,7 +439,8 @@ extension RVS_GTDriver {
                     delegate.gtDriver(self, errorEncountered: .bluetoothNotAvailable)
                     return
                 }
-                _centralManager.scanForPeripherals(withServices: [_gtGoTennaServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
+                // We search for any devices that advertise the goTenna proprietary service.
+                _centralManager.scanForPeripherals(withServices: [CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue)], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
             }
         }
     }
@@ -394,33 +456,10 @@ extension RVS_GTDriver {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Public Instance Methods -
-/* ###################################################################################################################################### */
-extension RVS_GTDriver {
-    /* ################################################################## */
-    /**
-     This simply returns the 0-based index of the given device in our Array of devices.
-     
-     - returns the 0-based index of the device. Nil, if not available.
-     */
-    public func indexOfThisDevice(_ inDevice: RVS_GTDevice) -> Int! {
-        return devices.firstIndex(of: inDevice)
-    }
-    
-    /* ################################################################## */
-    /**
-     Deletes all cached peripherals.
-     */
-    public func clearCachedDevices() {
-        sequence_contents = []
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Sequence Support -
 /* ###################################################################################################################################### */
 /**
- We do this, so we can iterate through our devices, and treat the driver like an Array of devices.
+ We do this, so we can iterate through our devices, and treat the driver like an Array of _devices.
  */
 extension RVS_GTDriver: RVS_SequenceProtocol {
     /* ################################################################## */
@@ -437,31 +476,46 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
     /* ################################################################## */
     /**
      Use this to see if we have already allocated and cached a device instance for the given peripheral.
+     This also checks our "holding pen."
      This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
      
      - parameter inPeripheral: The peripheral we are looking for.
      - returns: True, if the driver currently has an instance of the peripheral cached.
      */
     internal func containsThisPeripheral(_ inPeripheral: CBPeripheral) -> Bool {
-        return devices.reduce(false) { (inCurrent, inElement) -> Bool in
+        var ret: Bool = _devices.reduce(false) { (inCurrent, inElement) -> Bool in
             guard !inCurrent, let peripheral = inElement.peripheral else { return inCurrent }
             return inPeripheral == peripheral
         }
+        
+        if !ret {
+            ret = _holdingPen.reduce(false) { (inCurrent, inElement) -> Bool in
+                guard !inCurrent, let peripheral = inElement.peripheral else { return inCurrent }
+                return inPeripheral == peripheral
+            }
+        }
+        
+        return ret
     }
 
     /* ################################################################## */
     /**
      Return the device from our cached Array that corresponds to the given peripheral.
+     This also checks our "holding pen."
      This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
      
      - parameter inPeripheral: The peripheral we are looking for.
      - returns: The device. Nil, if not found.
      */
     internal func deviceForThisPeripheral(_ inPeripheral: CBPeripheral) -> RVS_GTDevice? {
-        for device in devices where inPeripheral == device.peripheral {
+        for device in self where inPeripheral == device.peripheral {
             return device
         }
         
+        for device in _holdingPen where inPeripheral == device.peripheral {
+            return device
+        }
+
         return nil
     }
 
@@ -548,12 +602,11 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
                 print("\trssi: \(String(describing: inRSSI))")
                 print("<***\n")
             #endif
-            // If so, we simply create the new device and add it to our list.
+            // If so, we simply create the new device and add it to our holding pen.
             let newDevice = RVS_GTDevice(inPeripheral, owner: self)
-            sequence_contents.append(newDevice)
-            // Call our delegate to tell it about the new device.
-            delegate.gtDriver(self, newDeviceAdded: newDevice)
-            delegate.gtDriverStatusUpdate(self)
+            _holdingPen.append(newDevice)
+            // We then initate a connection. This will verify the basics, and get back to us when it's all sorted.
+            newDevice.isConnected = true
         }
     }
 }

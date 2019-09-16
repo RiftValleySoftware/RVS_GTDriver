@@ -20,7 +20,6 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
@@ -83,7 +82,7 @@ extension RVS_GTServiceDelegate {
  
  It needs to be a class, as opposed to a struct, so that it can have its delegate set and passed around.
  */
-public class RVS_GTService {
+public class RVS_GTService: NSObject {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -130,7 +129,7 @@ public class RVS_GTService {
     /**
      We declare this private, so we force the driver to instantiate with a peripheral and an owner.
      */
-    private init() { }
+    private override init() { }
     
     /* ################################################################################################################################## */
     // MARK: - Internal Initializers
@@ -145,6 +144,7 @@ public class RVS_GTService {
      - parameter initialCharacteristics: This is a list of UUIDs that must be all read before the service is considered initialized. This is optional, and default is an empty Array.
      */
     internal init(_ inService: CBService, owner inOwner: RVS_GTDevice, delegate inDelegate: RVS_GTServiceDelegate? = nil, initialCharacteristics inInitialCharacteristics: [CBUUID] = []) {
+        super.init()
         _service = inService
         _owner = inOwner
         _delegate = inDelegate
@@ -189,12 +189,12 @@ extension RVS_GTService {
     
     /* ################################################################## */
     /**
-     Return the service from our cached Array that corresponds to the given service.
+     Return the characteristic from our cached Array that corresponds to the given CB Characteristic.
      This also checks our "holding pen."
      This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
      
      - parameter inCharacteristic: The characteristic we are looking for.
-     - returns: The service. Nil, if not found.
+     - returns: The characteristic. Nil, if not found.
      */
     internal func characteristicForThisCharacteristic(_ inCharacteristic: CBCharacteristic) -> Element? {
         #if DEBUG
@@ -226,7 +226,31 @@ extension RVS_GTService {
         #endif
         return nil
     }
+    
+    /* ################################################################## */
+    /**
+     Return the characteristic from our cached Array that corresponds to the given characteristic UUID.
+     This DOES NOT check the "holding pen."
+     This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
+     
+     - parameter inUUID: The UUID of the characteristic we are looking for.
+     - returns: The characteristic. Nil, if not found.
+     */
+    internal func characteristicForThisUUID(_ inUUID: CBUUID) -> Element? {
+        #if DEBUG
+            print("Searching for Characteristic for \(String(describing: inUUID)).")
+        #endif
+        
+        for characteristic in self where inUUID == characteristic.characteristic.uuid {
+            #if DEBUG
+                print("Characteristic Found.")
+            #endif
+            return characteristic
+        }
 
+        return nil
+    }
+    
     /* ################################################################## */
     /**
      We add and instantiate a new RVS_GTCharacteristic for the given CBCharacteristic, but we don't add it quite yet, if we are initializing.
@@ -409,6 +433,14 @@ extension RVS_GTService {
         set {
             _delegate = newValue
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     Return the simple description UUID.
+     */
+    override public var description: String {
+        return String(describing: service.uuid)
     }
 }
 

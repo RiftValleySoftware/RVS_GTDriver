@@ -20,7 +20,6 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
@@ -29,7 +28,7 @@ import CoreBluetooth
 /**
  This class implements a single discovered goTenna device (in peripheral mode).
  */
-public class RVS_GTCharacteristic: RVS_SequenceProtocol {
+public class RVS_GTCharacteristic: NSObject, RVS_SequenceProtocol {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -56,6 +55,7 @@ public class RVS_GTCharacteristic: RVS_SequenceProtocol {
      - parameter owner: The service that "owns" this characteristic. It is a weak reference. It cannot be nil or omitted.
      */
     internal init(_ inCharacteristic: CBCharacteristic, owner inOwner: RVS_GTService) {
+        super.init()
         _characteristic = inCharacteristic
         _owner = inOwner
     }
@@ -93,6 +93,14 @@ extension RVS_GTCharacteristic {
      */
     public var value: Data? {
         return _characteristic.value
+    }
+    
+    /* ################################################################## */
+    /**
+     Return the simple description UUID.
+     */
+    override public var description: String {
+        return String(describing: characteristic.uuid)
     }
 }
 
