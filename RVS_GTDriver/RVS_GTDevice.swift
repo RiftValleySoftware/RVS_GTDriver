@@ -836,6 +836,14 @@ extension RVS_GTDevice {
     @objc dynamic public var firmwareRevision: String {
         return _firmwareRevision
     }
+    
+    /* ################################################################## */
+    /**
+     If you call this, the driver will delete the device, and it will be eligible for rediscovery.
+     */
+    public func goodbyeCruelWorld() {
+        owner.removeDeviceFromDriver(self)
+    }
 }
 
 /* ###################################################################################################################################### */

@@ -335,6 +335,33 @@ extension RVS_GTDriver {
     
     /* ################################################################## */
     /**
+     This will remove the given device from either the main list, or the holding pen; depending on where it is.
+     
+     - parameter inDevice: The deivice we want disconnected.
+     */
+    internal func removeDeviceFromDriver(_ inDevice: RVS_GTDevice) {
+        #if DEBUG
+            print("Removing Device: \(String(describing: inDevice)).")
+        #endif
+        if let index = _holdingPen.firstIndex(where: { return $0.peripheral == inDevice.peripheral }) {
+            #if DEBUG
+                print("Removing Device: \(String(describing: inDevice)) From Holding Pen at index \(index).")
+            #endif
+            _holdingPen.remove(at: index)
+        }
+        
+        if let index = sequence_contents.firstIndex(where: { return $0.peripheral == inDevice.peripheral }) {
+            #if DEBUG
+                print("Removing Device: \(String(describing: inDevice)) From Main Cache at index \(index).")
+            #endif
+            sequence_contents.remove(at: index)
+        }
+        // And this rates a status update.
+        delegate.gtDriverStatusUpdate(self)
+    }
+    
+    /* ################################################################## */
+    /**
      This simply returns the 0-based index of the given device in our Array of devices.
      
      - returns the 0-based index of the device. Nil, if not available.

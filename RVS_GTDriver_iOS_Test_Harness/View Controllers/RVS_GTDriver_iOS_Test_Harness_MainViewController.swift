@@ -54,7 +54,6 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController_TableViewCell: UITableVie
  Selecting a row will open a view for that device (pushed onto the nav stack).
  */
 class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController, RVS_GTDriver_iOS_Test_Harness_AppDelegateAccess {
-    
     /* ################################################################################################################################## */
     // MARK: - Private Internal Properties
     /* ################################################################################################################################## */
@@ -206,6 +205,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDataSourc
         guard let cell = inTableView.dequeueReusableCell(withIdentifier: type(of: self).reuseID) as? RVS_GTDriver_iOS_Test_Harness_MainViewController_TableViewCell else { return UITableViewCell() }
         cell.gtDevice = gtDriver?[inIndexPath.row]
         cell.displayLabel.text = cell.gtDevice.modelNumber.localizedVariant
+        // This just gives us some stripes, so we can see the different rows.
         cell.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.clear : UIColor.white.withAlphaComponent(0.25)
         return cell
     }
@@ -230,6 +230,34 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDelegate 
         let device = gtDriver?[inIndexPath.row]
         performSegue(withIdentifier: type(of: self).displaySegueID, sender: device)
         return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     Indicate that a row can be edited (for left-swipe delete).
+     
+     - parameter inTableView: The table view being checked
+     - parameter canEditRowAt: The indexpath of the row to be checked.
+     
+     - returns: true, always.
+     */
+    func tableView(_ inTableView: UITableView, canEditRowAt inIndexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to do a delete action.
+     
+     - parameter inTableView: The table view being checked
+     - parameter commit: The action to perform.
+     - parameter forRowAt: The indexpath of the row to be deleted.
+     */
+    func tableView(_ inTableView: UITableView, commit inEditingStyle: UITableViewCell.EditingStyle, forRowAt inIndexPath: IndexPath) {
+        if inEditingStyle == UITableViewCell.EditingStyle.delete {
+            let device = gtDriver[inIndexPath.row]
+            device.goodbyeCruelWorld()
+        }
     }
 }
 
