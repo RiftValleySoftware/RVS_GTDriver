@@ -164,7 +164,7 @@ extension RVS_GTDeviceDelegate {
  
  Since this receives delegate callbacks from CB, it must derive from NSObject.
  */
-public class RVS_GTDevice: NSObject {
+public class RVS_GTDevice: NSObject, RVS_GTDriverErrorReporter {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -449,7 +449,7 @@ extension RVS_GTDevice {
                     let manufacturerNameData = manufacturerNameCh.value,
                     let manufacturerName = String(data: manufacturerNameData, encoding: .utf8)
             else {
-                owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: nil))
+                reportThisError(.unknownError(error: nil))
                 return
             }
             
@@ -462,7 +462,7 @@ extension RVS_GTDevice {
                     let modelNumberData = modelNumberCh.value,
                     let modelNumber = String(data: modelNumberData, encoding: .utf8)
             else {
-                owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: nil))
+                reportThisError(.unknownError(error: nil))
                 return
             }
             
@@ -475,7 +475,7 @@ extension RVS_GTDevice {
                     let hardwareRevisionData = hardwareRevisionCh.value,
                     let hardwareRevision = String(data: hardwareRevisionData, encoding: .utf8)
             else {
-                owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: nil))
+                reportThisError(.unknownError(error: nil))
                 return
             }
             
@@ -488,7 +488,7 @@ extension RVS_GTDevice {
                     let firmwareRevisionData = firmwareRevisionCh.value,
                     let firmwareRevision = String(data: firmwareRevisionData, encoding: .utf8)
             else {
-                owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: nil))
+                reportThisError(.unknownError(error: nil))
                 return
             }
             
@@ -497,6 +497,16 @@ extension RVS_GTDevice {
             #endif
             _firmwareRevision = hardwareRevision
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
+     
+     - parameter inError: The error to be sent to the delegate.
+     */
+    internal func reportThisError(_ inError: RVS_GTDriver.Errors) {
+        owner.reportThisError(inError)
     }
 }
 
@@ -632,7 +642,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\terror: \(String(describing: inError))\n")
         #endif
         if let error = inError {
-            owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: error))
+            reportThisError(.unknownError(error: error))
         } else if let services = inPeripheral.services {
             for service in services where !containsThisService(service) && !holdingThisService(service) {
                 #if DEBUG
@@ -676,7 +686,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\terror: \(String(describing: inError))\n")
         #endif
         if let error = inError {
-            owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: error))
+            reportThisError(.unknownError(error: error))
         } else {
             guard let service = serviceForThisService(inService) else { return }
            if let characteristics = inService.characteristics {
@@ -708,7 +718,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\terror: \(String(describing: inError))\n")
         #endif
         if let error = inError {
-            owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: error))
+            reportThisError(.unknownError(error: error))
         } else if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
             characteristic.owner.addCharacteristic(characteristic)
         }
@@ -733,7 +743,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
         #endif
         
         if let error = inError {
-            owner.delegate.gtDriver(owner, errorEncountered: .unknownError(error: error))
+            reportThisError(.unknownError(error: error))
         } else if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
             #if DEBUG
                 print("Adding Characteristic: \(String(describing: characteristic)) to its service.\n")

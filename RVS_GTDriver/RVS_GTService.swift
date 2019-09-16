@@ -80,7 +80,7 @@ extension RVS_GTServiceDelegate {
 /**
  This class implements a BLE service wrapper, specialized for the goTenna driver.
  */
-public class RVS_GTService: NSObject {
+public class RVS_GTService: NSObject, RVS_GTDriverErrorReporter {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -405,6 +405,16 @@ extension RVS_GTService {
         #endif
 
         _owner.discoverAllCharacteristicsForService(self)
+    }
+    
+    /* ################################################################## */
+    /**
+     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
+     
+     - parameter inError: The error to be sent to the delegate.
+     */
+    internal func reportThisError(_ inError: RVS_GTDriver.Errors) {
+        owner.reportThisError(inError)
     }
 }
 

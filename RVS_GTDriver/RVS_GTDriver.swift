@@ -23,6 +23,22 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_GTDriverErrorReporter Protocol -
+/* ###################################################################################################################################### */
+/**
+ This protocol allows aggregated instances to report errors through the main driver, without breaking the fourth wall.
+ */
+internal protocol RVS_GTDriverErrorReporter {
+    /* ################################################################## */
+    /**
+     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
+     
+     - parameter error: The error to be sent to the delegate.
+     */
+    func reportThisError(_ error: RVS_GTDriver.Errors)
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Main Driver RVS_GTDriverDelegate Protocol -
 /* ###################################################################################################################################### */
 /**
@@ -197,7 +213,7 @@ extension RVS_GTDriverDelegate {
  
  You will see that internal methods and properties are explicitly marked as "internal." This is to help clarify their scope.
  */
-public class RVS_GTDriver: NSObject {
+public class RVS_GTDriver: NSObject, RVS_GTDriverErrorReporter {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Constants
     /* ################################################################################################################################## */
@@ -284,7 +300,7 @@ extension RVS_GTDriver {
     internal func connectDevice(_ inDevice: RVS_GTDevice) {
         // If we are not powered on, then we report an error, and stop.
         guard CBManagerState.poweredOn == _centralManager.state else {
-            delegate.gtDriver(self, errorEncountered: .bluetoothNotAvailable)
+            reportThisError(.bluetoothNotAvailable)
             return
         }
 
@@ -377,6 +393,16 @@ extension RVS_GTDriver {
     internal func clearCachedDevices() {
         sequence_contents = []
     }
+    
+    /* ################################################################## */
+    /**
+     The buck stops here.
+     
+     - parameter inError: The error to be sent to the delegate.
+     */
+    internal func reportThisError(_ inError: RVS_GTDriver.Errors) {
+        delegate.gtDriver(self, errorEncountered: inError)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -454,7 +480,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
         if let device = deviceForThisPeripheral(inPeripheral) {
             device.reportSuccessfulConnection()
         } else {
-            delegate.gtDriver(self, errorEncountered: .unknownError(error: nil))
+            reportThisError(.unknownError(error: nil))
         }
         delegate.gtDriverStatusUpdate(self)
     }
@@ -468,7 +494,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - parameter error: Any error that may have occurred. May be nil (no error).
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didFailToConnect inPeripheral: CBPeripheral, error inError: Error?) {
-        delegate.gtDriver(self, errorEncountered: .connectionAttemptFailed(error: inError))
+        reportThisError(.connectionAttemptFailed(error: inError))
         delegate.gtDriverStatusUpdate(self)
     }
 
@@ -484,12 +510,12 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didDisconnectPeripheral inPeripheral: CBPeripheral, error inError: Error?) {
         if let error = inError {
-            delegate.gtDriver(self, errorEncountered: .disconnectionAttemptFailed(error: error))
+            reportThisError(.disconnectionAttemptFailed(error: error))
         } else if let device = deviceForThisPeripheral(inPeripheral) {
             device.reportDisconnection(inError)
             delegate.gtDriverStatusUpdate(self)
         } else {
-            delegate.gtDriver(self, errorEncountered: .unknownError(error: nil))
+            reportThisError(.unknownError(error: nil))
         }
     }
 
@@ -610,7 +636,7 @@ extension RVS_GTDriver {
             } else {
                 // If we are not powered on, then we report an error, and stop.
                 guard CBManagerState.poweredOn == _centralManager.state else {
-                    delegate.gtDriver(self, errorEncountered: .bluetoothNotAvailable)
+                    reportThisError(.bluetoothNotAvailable)
                     return
                 }
                 // We search for any devices that advertise the goTenna proprietary service.

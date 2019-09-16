@@ -28,7 +28,7 @@ import CoreBluetooth
 /**
  This class wraps a CB characteristic, on behalf of the goTenna driver.
  */
-public class RVS_GTCharacteristic: NSObject, RVS_SequenceProtocol {
+public class RVS_GTCharacteristic: NSObject, RVS_SequenceProtocol, RVS_GTDriverErrorReporter {    
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -59,6 +59,24 @@ public class RVS_GTCharacteristic: NSObject, RVS_SequenceProtocol {
         _characteristic = inCharacteristic
         _owner = inOwner
     }
+    
+    /* ################################################################## */
+    /**
+     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
+     
+     - parameter inError: The error to be sent to the delegate.
+     */
+    internal func reportThisError(_ inError: RVS_GTDriver.Errors) {
+        owner.reportThisError(inError)
+    }
+
+    /* ################################################################## */
+    /**
+     This is the service instance that "owns" this characteristic instance.
+     */
+    internal var owner: RVS_GTService {
+        return _owner
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -71,14 +89,6 @@ extension RVS_GTCharacteristic {
      */
     public var characteristic: CBCharacteristic! {
         return _characteristic
-    }
-    
-    /* ################################################################## */
-    /**
-     This is the service instance that "owns" this characteristic instance.
-     */
-    public var owner: RVS_GTService {
-        return _owner
     }
     
     /* ################################################################## */
