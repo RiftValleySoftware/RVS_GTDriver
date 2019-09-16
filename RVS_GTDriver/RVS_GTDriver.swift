@@ -406,6 +406,14 @@ extension RVS_GTDriver {
     public func indexOfThisDevice(_ inDevice: RVS_GTDevice) -> Int! {
         return devices.firstIndex(of: inDevice)
     }
+    
+    /* ################################################################## */
+    /**
+     Deletes all cached peripherals.
+     */
+    public func clearCachedDevices() {
+        sequence_contents = []
+    }
 }
 
 /* ###################################################################################################################################### */

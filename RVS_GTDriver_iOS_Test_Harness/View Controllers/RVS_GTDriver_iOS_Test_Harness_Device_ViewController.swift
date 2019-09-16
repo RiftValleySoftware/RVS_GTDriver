@@ -118,7 +118,6 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTDeviceDeleg
      - parameter inDevice: The device object.
      */
     public func gtDeviceWasConnected(_ inDevice: RVS_GTDevice) {
-        inDevice.discoverServices()
     }
     
     /* ################################################################## */

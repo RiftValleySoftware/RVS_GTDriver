@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RVS_GTDriverDelegate Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Protocol/RVS_GTDriverDelegate" class="dashAnchor"></a>
+
+    <a title="RVS_GTDriverDelegate Protocol Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          RVS_GTDriver_iOS Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/RiftValleySoftware/RVS_GTDriver">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">RVS_GTDriver_iOS Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      RVS_GTDriverDelegate Protocol Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_GTCharacteristic.html">RVS_GTCharacteristic</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_GTDriver.html">RVS_GTDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_GTDriver/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_GTService.html">RVS_GTService</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/StringProtocol.html">StringProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_DebugTools.html">RVS_DebugTools</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_GTDeviceDelegate.html">RVS_GTDeviceDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_GTDriverDelegate.html">RVS_GTDriverDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_GTServiceDelegate.html">RVS_GTServiceDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>RVS_GTDriverDelegate</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_GTDriverDelegate</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>A delegate object is required to instantiate an instance of the driver class.</p>
+
+<p>This is the delegate protocol.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Required%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Required Methods" class="dashAnchor"></a>
+                <a href="#/Required%20Methods">
+                  <h3 class="section-name">Required Methods</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_16errorEncounteredyAA0a1_B0C_AG6ErrorsOtF"></a>
+                    <a name="//apple_ref/swift/Method/gtDriver(_:errorEncountered:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_16errorEncounteredyAA0a1_B0C_AG6ErrorsOtF">gtDriver(_:errorEncountered:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when an error is encountered by the main driver.</p>
+
+<p>This is required, and is NOT guaranteed to be called in the main thread.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gtDriver</span><span class="p">(</span><span class="n">_</span> <span class="nv">driver</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDriver.html">RVS_GTDriver</a></span><span class="p">,</span> <span class="nv">errorEncountered</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDriver.html">RVS_GTDriver</a></span><span class="o">.</span><span class="kt">Errors</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>driver</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The driver instance calling this.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>errorEncountered</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The error encountered.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Optional%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Optional Methods" class="dashAnchor"></a>
+                <a href="#/Optional%20Methods">
+                  <h3 class="section-name">Optional Methods</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_20peripheralDiscoveredSbAA0a1_B0C_So12CBPeripheralCtF"></a>
+                    <a name="//apple_ref/swift/Method/gtDriver(_:peripheralDiscovered:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_20peripheralDiscoveredSbAA0a1_B0C_So12CBPeripheralCtF">gtDriver(_:peripheralDiscovered:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a peripheral is discovered, and before a device instance is instantiated.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread. If not specified, the device will always be added.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Called when a peripheral is discovered, and before a device instance is instantiated.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gtDriver</span><span class="p">(</span><span class="n">_</span> <span class="nv">driver</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDriver.html">RVS_GTDriver</a></span><span class="p">,</span> <span class="nv">peripheralDiscovered</span><span class="p">:</span> <span class="kt">CBPeripheral</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>driver</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The driver instance calling this.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>peripheralDiscovered</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The peripheral object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>True, if the peripheral is to be instantiated.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_14newDeviceAddedyAA0a1_B0C_AA0A9_GTDeviceCtF"></a>
+                    <a name="//apple_ref/swift/Method/gtDriver(_:newDeviceAdded:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_14newDeviceAddedyAA0a1_B0C_AA0A9_GTDeviceCtF">gtDriver(_:newDeviceAdded:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a device has been added and instantiated.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Called when a device has been added and instantiated.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gtDriver</span><span class="p">(</span><span class="n">_</span> <span class="nv">driver</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDriver.html">RVS_GTDriver</a></span><span class="p">,</span> <span class="nv">newDeviceAdded</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>driver</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The driver instance calling this.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newDeviceAdded</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The device object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_19deviceWillBeRemovedyAA0a1_B0C_AA0A9_GTDeviceCtF"></a>
+                    <a name="//apple_ref/swift/Method/gtDriver(_:deviceWillBeRemoved:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_19deviceWillBeRemovedyAA0a1_B0C_AA0A9_GTDeviceCtF">gtDriver(_:deviceWillBeRemoved:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a device is about to be removed.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Called when a device is about to be removed.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gtDriver</span><span class="p">(</span><span class="n">_</span> <span class="nv">driver</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDriver.html">RVS_GTDriver</a></span><span class="p">,</span> <span class="nv">deviceWillBeRemoved</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>driver</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The driver instance calling this.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>deviceWillBeRemoved</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The device object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_16deviceWasRemovedyAA0a1_B0C_AA0A9_GTDeviceCtF"></a>
+                    <a name="//apple_ref/swift/Method/gtDriver(_:deviceWasRemoved:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_16deviceWasRemovedyAA0a1_B0C_AA0A9_GTDeviceCtF">gtDriver(_:deviceWasRemoved:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a device was removed.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Called when a device was removed.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gtDriver</span><span class="p">(</span><span class="n">_</span> <span class="nv">driver</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDriver.html">RVS_GTDriver</a></span><span class="p">,</span> <span class="nv">deviceWasRemoved</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>driver</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The driver instance calling this.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>deviceWillBeRemoved</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The device object. It will not be viable after this call.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B8DelegateP20gtDriverStatusUpdateyyAA0a1_B0CF"></a>
+                    <a name="//apple_ref/swift/Method/gtDriverStatusUpdate(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B8DelegateP20gtDriverStatusUpdateyyAA0a1_B0CF">gtDriverStatusUpdate(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called to indicate that the driver&rsquo;s status should be checked.</p>
+
+<p>It may be called frequently, and there may not be any changes. This is mereley a <q>make you aware of the POSSIBILITY of a change</q> call.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gtDriverStatusUpdate</span><span class="p">(</span><span class="n">_</span> <span class="nv">driver</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDriver.html">RVS_GTDriver</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>driver</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The driver instance calling this.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-09-16)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

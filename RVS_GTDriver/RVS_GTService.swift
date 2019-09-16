@@ -104,7 +104,25 @@ public class RVS_GTService {
      This is our delegate instance. It is a weak reference.
      */
     private var _delegate: RVS_GTServiceDelegate!
+    
+    /* ################################################################## */
+    /**
+     This is a list of initial characteristics that must be read before we consider the initialization complete.
+     */
+    private var _initialCharacteristics: [CBUUID] = []
+    
+    /* ################################################################## */
+    /**
+     This is a (yuck) semaphore, indicating that the initial service info was read.
+     */
+    private var _initialized = false
 
+    /* ################################################################## */
+    /**
+     This is a "holding pen" for characteristics that have been discovered, but not yet initialized. They need to be kept around, in order to remain viable.
+     */
+    private var _holdingPen: [RVS_GTCharacteristic] = []
+    
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -123,12 +141,19 @@ public class RVS_GTService {
      
      - parameter inService: The service to associate with this instance. This is a strong reference. It cannot be nil or omitted.
      - parameter owner: The device that "owns" this service. It is a weak reference. It cannot be nil or omitted.
-     - parameter delegate: The RVS_GTServiceDelegate instance. This is a weak reference, but is optional, and can be omitted
+     - parameter delegate: The RVS_GTServiceDelegate instance. This is a weak reference. It is optional. Default is nil (no delegate).
+     - parameter initialCharacteristics: This is a list of UUIDs that must be all read before the service is considered initialized. This is optional, and default is an empty Array.
      */
-    internal init(_ inService: CBService, owner inOwner: RVS_GTDevice, delegate inDelegate: RVS_GTServiceDelegate! = nil) {
+    internal init(_ inService: CBService, owner inOwner: RVS_GTDevice, delegate inDelegate: RVS_GTServiceDelegate? = nil, initialCharacteristics inInitialCharacteristics: [CBUUID] = []) {
         _service = inService
         _owner = inOwner
         _delegate = inDelegate
+        _initialCharacteristics = inInitialCharacteristics
+        
+        // If we aren't looking up any initial characteristics, then we're done.
+        if _initialCharacteristics.isEmpty {
+            addOurselvesToDevice()
+        }
     }
     
     /* ################################################################################################################################## */
@@ -178,16 +203,83 @@ extension RVS_GTService {
 
     /* ################################################################## */
     /**
+     We add and instantiate a new RVS_GTCharacteristic for the given CBCharacteristic, but we don't add it quite yet, if we are initializing.
+     
+     - parameter inCharacteristic: The CB characteristic we are adding.
+     */
+    internal func interimCharacteristic(_ inCharacteristic: CBCharacteristic) {
+        var chrInstance: RVS_GTCharacteristic!
+        
+        if !containsThisCharacteristic(inCharacteristic) {
+            chrInstance = RVS_GTCharacteristic(inCharacteristic, owner: self)
+            
+            if let index = _initialCharacteristics.firstIndex(of: inCharacteristic.uuid) {
+                _initialCharacteristics.remove(at: index)
+            }
+            
+            _holdingPen.append(chrInstance)
+            _owner.startNotifyForCharacteristic(chrInstance)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
      We add and instantiate a new RVS_GTCharacteristic for the given CBCharacteristic.
      
      - parameter inCharacteristic: The CB characteristic we are adding.
      */
-    internal func addCharacteristic(_ inCharacteristic: CBCharacteristic) {
-        if !containsThisCharacteristic(inCharacteristic) {
-            let chrInstance = RVS_GTCharacteristic(inCharacteristic, owner: self)
-            sequence_contents.append(chrInstance)
-            delegate?.gtService(self, dicoveredCharacteristic: chrInstance)
+    internal func addCharacteristic(_ inCharacteristic: RVS_GTCharacteristic) {
+        if let index = _holdingPen.firstIndex(where: { return $0.characteristic == inCharacteristic.characteristic }) {
+            _holdingPen.remove(at: index)
+            sequence_contents.append(inCharacteristic)
         }
+        
+        // If we are already initialized, then we simply call the delegate to let it know we have a characteristic ready.
+        if _initialized {
+            delegate?.gtService(self, dicoveredCharacteristic: inCharacteristic)
+        } else if _holdingPen.isEmpty { // Otherwise, we see if we are done. If so, we add ourselves to the device.
+            addOurselvesToDevice()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Adds this instance to our device.
+     */
+    internal func addOurselvesToDevice() {
+        _initialized = true
+        owner.addServiceToList(self)
+    }
+
+    /* ################################################################## */
+    /**
+     Asks the device to discover specific characteristics for this service.
+     
+     - parameter characteristicCBUUIDs: An Array of CBUUIDs, with the specific characteristics we're looking for.
+     - parameter startClean: Optional (default is false). If true, then all cached characteristics are cleared before discovery.
+     */
+    internal func discoverCharacteristics(characteristicCBUUIDs inUUIDs: [CBUUID], startClean inStartClean: Bool = false) {
+        if inStartClean {
+            sequence_contents = [] // Start clean
+        }
+        
+        if !inUUIDs.isEmpty {
+            _owner.discoverCharacteristicsForService(self, characteristicCBUUIDs: inUUIDs)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Asks the device to discover all of the characteristics for this service.
+     
+     - parameter startClean: Optional (default is false). If true, then all cached characteristics are cleared before discovery.
+     */
+    internal func discoverAllCharacteristics(startClean inStartClean: Bool = false) {
+        if inStartClean {
+            sequence_contents = [] // Start clean
+        }
+        
+        _owner.discoverAllCharacteristicsForService(self)
     }
 }
 

@@ -187,6 +187,18 @@ public class RVS_GTDevice: NSObject {
      */
     private var _delegate: RVS_GTDeviceDelegate!
     
+    /* ################################################################## */
+    /**
+     This is a (yuck) semaphore, indicating that the initial device info connection was made.
+     */
+    private var _initialized = false
+    
+    /* ################################################################## */
+    /**
+     This is a "holding pen" for services that have been discovered, but not yet initialized. They need to be kept around, in order to remain viable.
+     */
+    private var _holdingPen: [RVS_GTService] = []
+    
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -213,6 +225,7 @@ public class RVS_GTDevice: NSObject {
         _peripheral.delegate = self
         _owner = inOwner
         _delegate = inDelegate
+        isConnected = true  // We start by connecting, so we can get information.
     }
     
     /* ################################################################################################################################## */
@@ -234,7 +247,11 @@ extension RVS_GTDevice {
      Called to send a connection message to the delegate for this device.
      */
     internal func reportSuccessfulConnection() {
-        delegate?.gtDeviceWasConnected(self)
+        if !_initialized {  // If we have not yet been initialized, then we straightaway start looking for our device information, which is now available.
+            discoverServices([CBUUID(string: "180A")])
+        } else {
+            delegate?.gtDeviceWasConnected(self)
+        }
     }
     
     /* ################################################################## */
@@ -245,6 +262,99 @@ extension RVS_GTDevice {
      */
     internal func reportDisconnection(_ inError: Error?) {
         delegate?.gtDevice(self, wasDisconnected: inError)
+    }
+    
+    /* ################################################################## */
+    /**
+     Asks the device to discover specific services.
+     
+     - parameter inServiceCBUUIDs: These are the specific UUIDs we are searching for.
+     - parameter startClean: Optional (default is false). If true, then all cached services are cleared before discovery.
+     */
+    internal func discoverServices(_ inServiceCBUUIDs: [CBUUID], startClean inStartClean: Bool = false) {
+        if inStartClean {
+            sequence_contents = [] // Start clean
+        }
+        peripheral.discoverServices(inServiceCBUUIDs)
+    }
+    
+    /* ################################################################## */
+    /**
+     Asks the device to discover all of its services.
+     
+     - parameter startClean: Optional (default is false). If true, then all cached services are cleared before discovery.
+     */
+    internal func discoverAllServices(startClean inStartClean: Bool = false) {
+        if inStartClean {
+            sequence_contents = [] // Start clean
+        }
+        peripheral.discoverServices(nil)
+    }
+
+    /* ################################################################## */
+    /**
+     Asks the device to discover all of the characteristics for a given service.
+     
+     - parameter inService: The service object.
+     */
+    internal func discoverCharacteristicsForService(_ inService: RVS_GTService) {
+        peripheral.discoverCharacteristics(nil, for: inService.service)
+    }
+    
+    /* ################################################################## */
+    /**
+     Asks the device to discover all of the characteristics for a given service.
+     
+     - parameter inService: The service object.
+     */
+    internal func discoverAllCharacteristicsForService(_ inService: RVS_GTService) {
+        peripheral.discoverCharacteristics(nil, for: inService.service)
+    }
+    
+    /* ################################################################## */
+    /**
+     Asks the device to discover specific characteristics for a given service.
+     
+     - parameter inService: The service object.
+     - parameter characteristicCBUUIDs: An Array of CBUUIDs, with the specific characteristics we're looking for.
+     */
+    internal func discoverCharacteristicsForService(_ inService: RVS_GTService, characteristicCBUUIDs inUUIDs: [CBUUID]) {
+        peripheral.discoverCharacteristics(inUUIDs, for: inService.service)
+    }
+    
+    /* ################################################################## */
+    /**
+     This is called when a service is done initializing.
+     
+     - parameter inService: The service object.
+     */
+    internal func addServiceToList(_ inService: RVS_GTService) {
+        // Remove from the "holding pen."
+        if let index = _holdingPen.firstIndex(where: { return $0.service == inService.service }) {
+            _holdingPen.remove(at: index)
+        }
+        sequence_contents.append(inService)
+        delegate?.gtDevice(self, discoveredService: inService)
+    }
+    
+    /* ################################################################## */
+    /**
+     This tells the driver to start updating for the value for the given characteristic.
+     
+     - parameter inCharacteristic: The characteristic object.
+     */
+    internal func startNotifyForCharacteristic(_ inCharacteristic: RVS_GTCharacteristic) {
+        _peripheral.setNotifyValue(true, for: inCharacteristic.characteristic)
+    }
+    
+    /* ################################################################## */
+    /**
+     This tells the driver to stop updating for the value for the given characteristic.
+     
+     - parameter inCharacteristic: The characteristic object.
+     */
+    internal func stopNotifyForCharacteristic(_ inCharacteristic: RVS_GTCharacteristic) {
+        _peripheral.setNotifyValue(false, for: inCharacteristic.characteristic)
     }
 }
 
@@ -310,28 +420,6 @@ extension RVS_GTDevice {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Public Instance Methods -
-/* ###################################################################################################################################### */
-extension RVS_GTDevice {
-    /* ################################################################## */
-    /**
-     Asks the device to discover all of its services.
-     */
-    public func discoverServices() {
-        sequence_contents = [] // Start clean
-        peripheral.discoverServices(nil)
-    }
-    
-    /* ################################################################## */
-    /**
-     Asks the device to discover all of the characteristics for a given service.
-     */
-    public func discoverAllCharacteristicsForService(_ inService: RVS_GTService) {
-        peripheral.discoverCharacteristics(nil, for: inService.service)
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Sequence Support -
 /* ###################################################################################################################################### */
 /**
@@ -351,10 +439,42 @@ extension RVS_GTDevice: RVS_SequenceProtocol {
 extension RVS_GTDevice: CBPeripheralDelegate {
     /* ################################################################## */
     /**
+     This searches through our services for the chacarteristic instance that corresponds to the supplied characteristic.
+     
+     - parameter inCharacteristic: The CBCharacteristic that we want to match to its RVS_GTCharacteristic instance.
+     - returns: The instance associated with the CBCharacteristic. Nil, if none.
+     */
+    internal func getCharacteristicInstanceForCharacteristic(_ inCharacteristic: CBCharacteristic) -> RVS_GTCharacteristic! {
+        for service in self {
+            for characteristic in service where characteristic.characteristic == inCharacteristic {
+                return characteristic
+            }
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     Use this to see if we have already allocated and cached a service instance for the given service, but it has not yet been added to our main cache.
+     This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
+     
+     - parameter inService: The service we are looking for.
+     - returns: True, if the "holding pen" currently has an instance of the peripheral cached.
+     */
+    internal func holdingThisService(_ inService: CBService) -> Bool {
+        return _holdingPen.reduce(false) { (inCurrent, inElement) -> Bool in
+            guard !inCurrent, let service = inElement.service else { return inCurrent }
+            return inService == service
+        }
+    }
+    
+    /* ################################################################## */
+    /**
      Use this to see if we have already allocated and cached a service instance for the given service.
      This is contained here, because we are trying to encapsulate the "pure" CoreBluetooth stuff as much as possible.
      
-     - parameter inService: The peripheral we are looking for.
+     - parameter inService: The service we are looking for.
      - returns: True, if the driver currently has an instance of the peripheral cached.
      */
     internal func containsThisService(_ inService: CBService) -> Bool {
@@ -393,16 +513,28 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\terror: \(String(describing: inError))\n")
         #endif
         if let services = inPeripheral.services {
-            for service in services where !containsThisService(service) {
+            for service in services where !containsThisService(service) && !holdingThisService(service) {
                 #if DEBUG
                     print("\t***\n")
                     print("\tservice: \(String(describing: service))\n")
                 #endif
-                let sInstance = RVS_GTService(service, owner: self)
-                sequence_contents.append(sInstance)
-                delegate?.gtDevice(self, discoveredService: sInstance)
+                var initialCharacteristics: [CBUUID] = []
+                if CBUUID(string: "0x181A") == service.uuid {   // If device info, we ask for the following four characteristics
+                    initialCharacteristics = [CBUUID(string: "0x2A29"), // Manufacturer name
+                                              CBUUID(string: "0x2A24"), // Model name
+                                              CBUUID(string: "0x2A27"), // Hardware Revision
+                                              CBUUID(string: "0x2A26")  // Firmware Revision
+                    ]
+                }
+                let sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
                 sInstance.discoverCharacteristics()
+                _holdingPen.append(sInstance)   // In the holding pen, until we officially add it.
             }
+        }
+        
+        if !_initialized {
+            _initialized = true
+            reportSuccessfulConnection()
         }
     }
     
@@ -428,7 +560,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                 print("\t***\n")
                 print("\tcharacteristic: \(String(describing: characteristic))\n")
             #endif
-            service.addCharacteristic(characteristic)
+            service.interimCharacteristic(characteristic)
         }
         #if DEBUG
             print("<***\n")
@@ -450,5 +582,9 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\t***\n")
             print("\terror: \(String(describing: inError))\n")
         #endif
+        
+        if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
+            characteristic.owner.addCharacteristic(characteristic)
+        }
     }
 }
