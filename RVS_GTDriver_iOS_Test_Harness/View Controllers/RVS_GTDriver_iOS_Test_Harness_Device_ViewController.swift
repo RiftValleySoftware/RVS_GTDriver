@@ -137,7 +137,7 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTDeviceDeleg
      
      - parameter inDevice: The device object. It will not be viable after this call.
      */
-    public func gtDeviceWasBeRemoved(_ inDevice: RVS_GTDevice) {
+    public func gtDeviceWasRemoved(_ inDevice: RVS_GTDevice) {
     }
     
     /* ################################################################## */

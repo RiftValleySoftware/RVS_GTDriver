@@ -64,7 +64,7 @@ public protocol RVS_GTDeviceDelegate: class {
      
      - parameter device: The device object. It will not be viable after this call.
      */
-    func gtDeviceWasBeRemoved(_ device: RVS_GTDevice)
+    func gtDeviceWasRemoved(_ device: RVS_GTDevice)
     
     /* ################################################################## */
     /**
@@ -121,7 +121,7 @@ extension RVS_GTDeviceDelegate {
      
      - parameter device: The device object. It will not be viable after this call.
      */
-    public func gtDeviceWasBeRemoved(_ device: RVS_GTDevice) { }
+    public func gtDeviceWasRemoved(_ device: RVS_GTDevice) { }
     
     /* ################################################################## */
     /**
@@ -854,9 +854,13 @@ extension RVS_GTDevice {
     /* ################################################################## */
     /**
      If you call this, the driver will delete the device, and it will be eligible for rediscovery.
+     
+     We also call the delegate with the "before and after" calls.
      */
     public func goodbyeCruelWorld() {
+        delegate?.gtDeviceWillBeRemoved(self)
         owner.removeDeviceFromDriver(self)
+        delegate?.gtDeviceWasRemoved(self)
     }
 }
 
