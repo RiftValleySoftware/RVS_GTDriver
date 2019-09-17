@@ -21,15 +21,22 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 /// The OK button in alerts.
-"SLUG-OK-BUTTON-TEXT"                           =       "OK";
-"SLUG-IS-NOT-SCANNING"                          =       "NOT SCANNING";
-"SLUG-IS-SCANNING"                              =       "SCANNING";
-"SLUG-PLACEHOLDER-TEXT"                         =       "goTenna Device";
-"SLUG-ERROR-HEADER"                             =       "ERROR!";
-"RVS_GTDriver.Error.bluetoothNotAvailable"      =       "Bluetooth Not Available";
-"RVS_GTDriver.Error.connectionAttemptFailed"    =       "Device connection failed";
-"RVS_GTDriver.Error.unknownError"               =       "Unknown Driver Error";
-"SLUG-MANUFACTURERNAME-LABEL-PREFIX"            =       "Manufacturer Name:";
-"SLUG-MODELNAME-LABEL-PREFIX"                   =       "Model Name:";
-"SLUG-HARDWAREREVISION-LABEL-PREFIX"            =       "Hardware Revision:";
-"SLUG-FIRMWAREREVISION-LABEL-PREFIX"            =       "Firmware Revision:";
+"SLUG-OK-BUTTON-TEXT"                                       =       "OK";
+"SLUG-IS-NOT-SCANNING"                                      =       "NOT SCANNING";
+"SLUG-IS-SCANNING"                                          =       "SCANNING";
+"SLUG-PLACEHOLDER-TEXT"                                     =       "goTenna Device";
+"SLUG-ERROR-HEADER"                                         =       "ERROR!";
+"RVS_GTDriver.Error.bluetoothNotAvailable"                  =       "Bluetooth Not Available";
+"RVS_GTDriver.Error.connectionAttemptFailed"                =       "Device connection failed";
+"RVS_GTDriver.Error.connectionAttemptFailedNoDevice"        =       "Device connection failed";
+"RVS_GTDriver.Error.disconnectionAttemptFailed"             =       "Unknown Driver Error";
+"RVS_GTDriver.Error.unknownDisconnectionError"              =       "Unknown Driver Error";
+"RVS_GTDriver.Error.unknownPeripheralDiscoveryError"        =       "Unknown Driver Error";
+"RVS_GTDriver.Error.characteristicValueMissing"             =       "Unknown Driver Error";
+"RVS_GTDriver.Error.unknownCharacteristicsDiscoveryError"   =       "Unknown Driver Error";
+"RVS_GTDriver.Error.unknownCharacteristicsReadValueError"   =       "Unknown Driver Error";
+"RVS_GTDriver.Error.unknownError"                           =       "Unknown Driver Error";
+"SLUG-MANUFACTURERNAME-LABEL-PREFIX"                        =       "Manufacturer Name:";
+"SLUG-MODELNAME-LABEL-PREFIX"                               =       "Model Name:";
+"SLUG-HARDWAREREVISION-LABEL-PREFIX"                        =       "Hardware Revision:";
+"SLUG-FIRMWAREREVISION-LABEL-PREFIX"                        =       "Firmware Revision:";

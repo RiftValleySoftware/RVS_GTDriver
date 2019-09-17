@@ -196,12 +196,12 @@
 		D4749B68232A842A0073F7BC /* RVS_GTDriver */ = {
 			isa = PBXGroup;
 			children = (
-				D43058D5232BC59700B64056 /* iOS Variant */,
-				D43540E0232B143800C92A19 /* Extensions and Protocols */,
 				D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */,
 				D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */,
 				D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */,
 				D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */,
+				D43540E0232B143800C92A19 /* Extensions and Protocols */,
+				D43058D5232BC59700B64056 /* iOS Variant */,
 			);
 			path = RVS_GTDriver;
 			sourceTree = "<group>";

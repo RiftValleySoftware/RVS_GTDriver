@@ -447,7 +447,7 @@ extension RVS_GTDevice {
         if let deviceInfoService = serviceForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue)) {
             guard   let manufacturerName = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue))?.stringValue
             else {
-                reportThisError(.unknownError(error: nil))
+                reportThisError(.characteristicValueMissing)
                 return
             }
             
@@ -458,7 +458,7 @@ extension RVS_GTDevice {
             
             guard   let modelNumber = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoModelName.rawValue))?.stringValue
             else {
-                reportThisError(.unknownError(error: nil))
+                reportThisError(.characteristicValueMissing)
                 return
             }
             
@@ -469,7 +469,7 @@ extension RVS_GTDevice {
             
             guard   let hardwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue))?.stringValue
             else {
-                reportThisError(.unknownError(error: nil))
+                reportThisError(.characteristicValueMissing)
                 return
             }
             
@@ -480,7 +480,7 @@ extension RVS_GTDevice {
             
             guard   let firmwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue))?.stringValue
             else {
-                reportThisError(.unknownError(error: nil))
+                reportThisError(.characteristicValueMissing)
                 return
             }
             
@@ -643,8 +643,11 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\terror: \(String(describing: inError))\n")
         #endif
         if let error = inError {
-            reportThisError(.unknownError(error: error))
+            reportThisError(.unknownPeripheralDiscoveryError(error: error))
         } else if let services = inPeripheral.services {
+            if 0 == services.count {    // We can't have no services.
+                reportThisError(.unknownPeripheralDiscoveryError(error: nil))
+            }
             for service in services where !containsThisService(service) && !holdingThisService(service) {
                 #if DEBUG
                     print("\t***\n")
@@ -687,10 +690,15 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\terror: \(String(describing: inError))\n")
         #endif
         if let error = inError {
-            reportThisError(.unknownError(error: error))
+            reportThisError(.unknownCharacteristicsDiscoveryError(error: error))
         } else {
-            guard let service = serviceForThisService(inService) else { return }
-           if let characteristics = inService.characteristics {
+            // Make sure that we have at least one characteristic, and we can find our service.
+            guard   let service = serviceForThisService(inService),
+                    0 < (inService.characteristics?.count ?? 0) else {
+                reportThisError(.unknownCharacteristicsDiscoveryError(error: nil))
+                return
+            }
+            if let characteristics = inService.characteristics {
                for characteristic in characteristics where nil == service.characteristicForThisCharacteristic(characteristic) {
                    service.interimCharacteristic(characteristic)
                }
@@ -719,9 +727,11 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\terror: \(String(describing: inError))\n")
         #endif
         if let error = inError {
-            reportThisError(.unknownError(error: error))
+            reportThisError(.unknownCharacteristicsReadValueError(error: error))
         } else if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
             characteristic.owner.addCharacteristic(characteristic)
+        } else {
+            reportThisError(.unknownCharacteristicsReadValueError(error: nil))
         }
     }
     
@@ -744,12 +754,14 @@ extension RVS_GTDevice: CBPeripheralDelegate {
         #endif
         
         if let error = inError {
-            reportThisError(.unknownError(error: error))
+            reportThisError(.unknownCharacteristicsReadValueError(error: error))
         } else if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
             #if DEBUG
                 print("Adding Characteristic: \(String(describing: characteristic)) to its service.\n")
             #endif
             characteristic.owner.addCharacteristic(characteristic)
+        } else {
+            reportThisError(.unknownCharacteristicsReadValueError(error: nil))
         }
         
         #if DEBUG

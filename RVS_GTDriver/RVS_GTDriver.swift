@@ -29,6 +29,10 @@ import CoreBluetooth
  A delegate object is required to instantiate an instance of the driver class.
  
  This is the delegate protocol.
+ 
+ Protocols are an important part of this driver. The driver protocol is required. Protocols for devices and services are optional.
+ 
+ Each protocol has only one required method: an error receiver. We use an enum that wraps errors, and is returned in the handler.
  */
 public protocol RVS_GTDriverDelegate: class {
     /* ###################################################################################################################################### */
@@ -469,7 +473,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
         if let device = deviceForThisPeripheral(inPeripheral) {
             device.reportSuccessfulConnection()
         } else {
-            reportThisError(.unknownError(error: nil))
+            reportThisError(.connectionAttemptFailedNoDevice)
         }
         delegate.gtDriverStatusUpdate(self)
     }
@@ -504,7 +508,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
             device.reportDisconnection(inError)
             delegate.gtDriverStatusUpdate(self)
         } else {
-            reportThisError(.unknownError(error: nil))
+            reportThisError(.unknownDisconnectionError)
         }
     }
 
@@ -559,6 +563,7 @@ extension RVS_GTDriver {
     /* ################################################################################################################################## */
     /**
      These are the various errors that can be returned by this class.
+     The enum is designed to provide keys for use by localization. If you access the "localizedDescription" calculated property, you will get a consistent string.
      */
     public enum Errors: Error {
         /* ################################################################## */
@@ -576,11 +581,50 @@ extension RVS_GTDriver {
         
         /* ################################################################## */
         /**
+         This is returned if we connected, but no device was available. This should never happen.
+         */
+        case connectionAttemptFailedNoDevice
+
+        /* ################################################################## */
+        /**
          This is returned if we cannot disconnect from the device.
          The associated value is any error that occurred.
          */
         case disconnectionAttemptFailed(error: Error?)
         
+        /* ################################################################## */
+        /**
+         This is a "catchall" error for a disconnection issue
+         */
+        case unknownDisconnectionError
+
+        /* ################################################################## */
+        /**
+         This is a "catchall" error for peripheral discovery
+         The associated value is any error that occurred.
+         */
+        case unknownPeripheralDiscoveryError(error: Error?)
+        
+        /* ################################################################## */
+        /**
+         This means that we did not get a characteristic value
+         */
+        case characteristicValueMissing
+        
+        /* ################################################################## */
+        /**
+         This is a "catchall" error for characteristics discovery
+         The associated value is any error that occurred.
+         */
+        case unknownCharacteristicsDiscoveryError(error: Error?)
+        
+        /* ################################################################## */
+        /**
+         This is a "catchall" error for characteristics value read
+         The associated value is any error that occurred.
+         */
+        case unknownCharacteristicsReadValueError(error: Error?)
+
         /* ################################################################## */
         /**
          This is a "catchall" error.
