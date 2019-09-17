@@ -77,28 +77,6 @@ public protocol RVS_GTDriverDelegate: class {
     
     /* ################################################################## */
     /**
-     Called when a device is about to be removed.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter driver: The driver instance calling this.
-     - parameter deviceWillBeRemoved: The device object.
-     */
-    func gtDriver(_ driver: RVS_GTDriver, deviceWillBeRemoved: RVS_GTDevice)
-    
-    /* ################################################################## */
-    /**
-     Called when a device was removed.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter driver: The driver instance calling this.
-     - parameter deviceWillBeRemoved: The device object. It will not be viable after this call.
-     */
-    func gtDriver(_ driver: RVS_GTDriver, deviceWasRemoved: RVS_GTDevice)
-    
-    /* ################################################################## */
-    /**
      Called to indicate that the driver's status should be checked.
      
      It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
@@ -139,28 +117,6 @@ extension RVS_GTDriverDelegate {
      - parameter newDeviceAdded: The device object.
      */
     public func gtDriver(_ driver: RVS_GTDriver, newDeviceAdded: RVS_GTDevice) { }
-    
-    /* ################################################################## */
-    /**
-     Called when a device is about to be removed.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter driver: The driver instance calling this.
-     - parameter deviceWillBeRemoved: The device object.
-     */
-    public func gtDriver(_ driver: RVS_GTDriver, deviceWillBeRemoved: RVS_GTDevice) { }
-    
-    /* ################################################################## */
-    /**
-     Called when a device was removed.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter driver: The driver instance calling this.
-     - parameter deviceWillBeRemoved: The device object. It will not be viable after this call.
-     */
-    public func gtDriver(_ driver: RVS_GTDriver, deviceWasRemoved: RVS_GTDevice) { }
     
     /* ################################################################## */
     /**
