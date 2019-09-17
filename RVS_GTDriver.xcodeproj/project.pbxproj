@@ -167,9 +167,9 @@
 		D43540E0232B143800C92A19 /* Extensions and Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				D4FC1EDD232DD3810014FECF /* RVS_DebugTools.swift */,
 				D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */,
 				D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */,
-				D4FC1EDD232DD3810014FECF /* RVS_DebugTools.swift */,
 				D45962342330E577001A7EDE /* RVS_GTDriverTools.swift */,
 				D45F0D692330021200E1AADF /* RVS_GT_BLE_GATT_UUID.swift */,
 			);

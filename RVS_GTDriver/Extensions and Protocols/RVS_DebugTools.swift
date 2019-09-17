@@ -28,7 +28,7 @@ import Foundation   // Required for the ProcessInfo stuff.
 /**
  This protocol is a "junk drawer" of vrious debug/testing tools.
  */
-public protocol RVS_DebugTools {
+internal protocol RVS_DebugTools {
     /* ################################################################## */
     /**
      This is used to see whether or not we are running under unit tests. It is optional, and isn't really supposed to be replaced.
@@ -48,7 +48,7 @@ extension RVS_DebugTools {
      
      - returns: True, if we are currently in a unit test.
      */
-    public var isRunningUnitTests: Bool {
+    internal var isRunningUnitTests: Bool {
         // Searches for an environment setting that describes the XCTest path (only present under unit test, and always present when under unit test).
         return nil != ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"]
     }
