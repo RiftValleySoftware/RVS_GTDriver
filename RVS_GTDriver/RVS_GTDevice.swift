@@ -299,6 +299,7 @@ public class RVS_GTDevice: NSObject {
     
     /* ################################################################## */
     /**
+     Deinitializer. We simply make sure that we are disconnected.
      */
     deinit {
         isConnected = false
