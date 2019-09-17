@@ -130,7 +130,7 @@ extension RVS_GTDriverDelegate {
      
      - parameter driver: The driver instance calling this.
      */
-    func gtDriverStatusUpdate(_ driver: RVS_GTDriver) { }
+    public func gtDriverStatusUpdate(_ driver: RVS_GTDriver) { }
 }
 
 /* ###################################################################################################################################### */

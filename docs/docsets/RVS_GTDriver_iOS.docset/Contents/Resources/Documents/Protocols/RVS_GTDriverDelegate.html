@@ -355,12 +355,24 @@
                     <a name="//apple_ref/swift/Method/gtDriverStatusUpdate(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B8DelegateP20gtDriverStatusUpdateyyAA0a1_B0CF">gtDriverStatusUpdate(_:)</a>
                     </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
+                        <p>Called to indicate that the driver&rsquo;s status should be checked.</p>
+
+<p>It may be called frequently, and there may not be any changes. This is mereley a <q>make you aware of the POSSIBILITY of a change</q> call.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
                         <p>Called to indicate that the driver&rsquo;s status should be checked.</p>
 
 <p>It may be called frequently, and there may not be any changes. This is mereley a <q>make you aware of the POSSIBILITY of a change</q> call.</p>
