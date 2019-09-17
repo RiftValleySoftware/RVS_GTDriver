@@ -40,3 +40,4 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-MODELNAME-LABEL-PREFIX"                               =       "Model Name:";
 "SLUG-HARDWAREREVISION-LABEL-PREFIX"                        =       "Hardware Revision:";
 "SLUG-FIRMWAREREVISION-LABEL-PREFIX"                        =       "Firmware Revision:";
+"SLUG-ID-LABEL-PREFIX"                                      =       "ID:";

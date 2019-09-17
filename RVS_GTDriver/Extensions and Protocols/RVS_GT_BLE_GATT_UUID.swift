@@ -46,4 +46,7 @@ internal enum RVS_GT_BLE_GATT_UUID: String {
     case deviceInfoFirmwareRevision     =   "0x2A26"
     
     // MARK: - goTenna Proprietary Characteristic IDs
+    case goTennaProprietary001          =   "12762B18-DF5E-11E6-BF01-FE55135034F3"
+    case goTennaProprietary002          =   "1276B20A-DF5E-11E6-BF01-FE55135034F3"
+    case goTennaProprietary003          =   "1276B20B-DF5E-11E6-BF01-FE55135034F3"
 }

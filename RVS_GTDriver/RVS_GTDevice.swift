@@ -248,6 +248,7 @@ public class RVS_GTDevice: NSObject {
         _peripheral.delegate = self
         _owner = inOwner
         _delegate = inDelegate
+        isConnected = true  // Start our first connection.
     }
     
     /* ################################################################################################################################## */
@@ -260,6 +261,13 @@ public class RVS_GTDevice: NSObject {
      THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
      */
     public var sequence_contents: [RVS_GTService] = []
+    
+    /* ################################################################## */
+    /**
+     */
+    deinit {
+        isConnected = false
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -289,10 +297,26 @@ extension RVS_GTDevice {
     
     /* ################################################################## */
     /**
-     this is the driver instance that "owns" this device instance.
+     This is the driver instance that "owns" this device instance.
      */
     internal var owner: RVS_GTDriver {
         return _owner
+    }
+    
+    /* ################################################################## */
+    /**
+     Returns the device info service (if installed).
+     */
+    internal var deviceInfoService: RVS_GTService! {
+        return serviceForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue))
+    }
+    
+    /* ################################################################## */
+    /**
+     Returns the goTenna proprietary service (if installed).
+     */
+    internal var goTennaService: RVS_GTService! {
+        return serviceForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue))
     }
 }
 
@@ -305,10 +329,14 @@ extension RVS_GTDevice {
      Called to send a connection message to the delegate for this device.
      */
     internal func reportSuccessfulConnection() {
-        if !_initialized {  // If we have not yet been initialized, then we straightaway start looking for our device information, which is now available.
+        if !_initialized, nil == deviceInfoService {  // If we have not yet been initialized, then we straightaway start looking for our device information, which is now available.
             discoverDeviceInfoService()
-        } else {
+        } else if !_initialized, nil == goTennaService {
+            discoverGoTennaService()
+        } else if _initialized {
             delegate?.gtDeviceWasConnected(self)
+        } else {
+            reportThisError(.connectionAttemptFailed(error: nil))
         }
     }
     
@@ -319,7 +347,11 @@ extension RVS_GTDevice {
      - parameter inError: Any error that may have occurred. It is passed directly to the delegate.
      */
     internal func reportDisconnection(_ inError: Error?) {
-        delegate?.gtDevice(self, wasDisconnected: inError)
+        if nil == goTennaService {  // If we haven't loaded the goTenna service yet, we grab that before reporting a disconnection.
+            isConnected = true
+        } else {
+            delegate?.gtDevice(self, wasDisconnected: inError)
+        }
     }
     
     /* ################################################################## */
@@ -419,6 +451,8 @@ extension RVS_GTDevice {
         
         if !_initialized, _holdingPen.isEmpty {
             _initialized = true
+            // We no longer need the device to be connected.
+            isConnected = false
             setUpDeviceInfo()
             owner.addDeviceToList(self)
         }
@@ -675,17 +709,20 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                 let serviceUUID = service.uuid
                 switch serviceUUID {
                 case deviceInfoUUID:
-                    let initialCharacteristics = [CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue), // Manufacturer name
-                                              CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoModelName.rawValue), // Model name
-                                              CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue), // Hardware Revision
-                                              CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)  // Firmware Revision
+                    let initialCharacteristics = [  CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue),   // Manufacturer name
+                                                    CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoModelName.rawValue),          // Model name
+                                                    CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue),   // Hardware Revision
+                                                    CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)    // Firmware Revision
                     ]
                     sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
 
                 case goTennaProprietaryServiceUUID:
-                    sInstance = RVS_GTService(service, owner: self)
-                    sInstance.discoverAllCharacteristics()
-                    
+                    let initialCharacteristics = [  CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary001.rawValue),
+                                                    CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary002.rawValue),
+                                                    CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary003.rawValue)
+                    ]
+                    sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
+
                 default:
                     break
                 }
@@ -892,11 +929,23 @@ extension RVS_GTDevice {
     
     /* ################################################################## */
     /**
+     It is KVO-observable.
+     */
+    @objc dynamic public var id: String {
+        if let device = _peripheral {
+            return device.identifier.uuidString
+        }
+        return ""
+    }
+
+    /* ################################################################## */
+    /**
      If you call this, the driver will delete the device, and it will be eligible for rediscovery.
      
      We also call the delegate with the "before and after" calls.
      */
     public func goodbyeCruelWorld() {
+        isConnected = false // Make sure that we're not connected anymore.
         delegate?.gtDeviceWillBeRemoved(self)
         owner.removeDeviceFromDriver(self)
         delegate?.gtDeviceWasRemoved(self)

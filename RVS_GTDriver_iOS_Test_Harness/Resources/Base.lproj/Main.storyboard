@@ -154,6 +154,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzD-Ln-qJj">
+                                <rect key="frame" x="20" y="188" width="374" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="m5N-FT-6E6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -166,10 +175,13 @@
                             <constraint firstItem="2cs-kV-lVN" firstAttribute="trailing" secondItem="rIZ-ba-eUo" secondAttribute="trailing" constant="20" id="Ki2-zt-CLu"/>
                             <constraint firstItem="BOc-bP-N9K" firstAttribute="leading" secondItem="2cs-kV-lVN" secondAttribute="leading" constant="20" id="M8I-rj-VtX"/>
                             <constraint firstItem="BOc-bP-N9K" firstAttribute="top" secondItem="NQU-43-v5x" secondAttribute="bottom" constant="4" id="NBB-Oo-qAp"/>
+                            <constraint firstItem="GzD-Ln-qJj" firstAttribute="top" secondItem="BOc-bP-N9K" secondAttribute="bottom" constant="4" id="QUl-tC-jan"/>
                             <constraint firstItem="rIZ-ba-eUo" firstAttribute="top" secondItem="GVB-in-BLM" secondAttribute="bottom" constant="4" id="STX-hi-LgG"/>
                             <constraint firstItem="GVB-in-BLM" firstAttribute="leading" secondItem="2cs-kV-lVN" secondAttribute="leading" constant="20" id="U7l-pJ-roh"/>
                             <constraint firstItem="2cs-kV-lVN" firstAttribute="trailing" secondItem="NQU-43-v5x" secondAttribute="trailing" constant="20" id="VAt-z2-xNd"/>
+                            <constraint firstItem="2cs-kV-lVN" firstAttribute="trailing" secondItem="GzD-Ln-qJj" secondAttribute="trailing" constant="20" id="WLG-xI-2Xe"/>
                             <constraint firstAttribute="bottom" secondItem="88B-lg-HiP" secondAttribute="bottom" id="iti-Ll-JRy"/>
+                            <constraint firstItem="GzD-Ln-qJj" firstAttribute="leading" secondItem="2cs-kV-lVN" secondAttribute="leading" constant="20" id="umJ-TW-Eh9"/>
                             <constraint firstItem="NQU-43-v5x" firstAttribute="top" secondItem="rIZ-ba-eUo" secondAttribute="bottom" constant="4" id="xW7-u2-GMC"/>
                             <constraint firstItem="rIZ-ba-eUo" firstAttribute="leading" secondItem="2cs-kV-lVN" secondAttribute="leading" constant="20" id="xoK-Xq-dcU"/>
                             <constraint firstItem="88B-lg-HiP" firstAttribute="top" secondItem="Nts-IW-hvl" secondAttribute="top" id="z0r-mV-ajT"/>
@@ -181,6 +193,7 @@
                     <connections>
                         <outlet property="firmwareRevisionLabel" destination="BOc-bP-N9K" id="04I-DW-TiZ"/>
                         <outlet property="hardwareRevisionLabel" destination="NQU-43-v5x" id="zcS-K8-lDU"/>
+                        <outlet property="idLabel" destination="GzD-Ln-qJj" id="nur-H3-yYL"/>
                         <outlet property="manufacturerNameLabel" destination="GVB-in-BLM" id="fgT-H1-7vO"/>
                         <outlet property="modelNameLabel" destination="rIZ-ba-eUo" id="NU4-P0-LUy"/>
                     </connections>

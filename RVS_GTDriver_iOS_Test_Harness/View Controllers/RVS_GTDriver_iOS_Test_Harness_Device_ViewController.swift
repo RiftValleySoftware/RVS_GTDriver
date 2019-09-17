@@ -71,6 +71,12 @@ class RVS_GTDriver_iOS_Test_Harness_Device_ViewController: UIViewController, RVS
      The label for our firmware revision
      */
     @IBOutlet weak var firmwareRevisionLabel: UILabel!
+    
+    /* ################################################################## */
+    /**
+     The label for our ID String
+     */
+    @IBOutlet weak var idLabel: UILabel!
 }
 
 /* ###################################################################################################################################### */
@@ -99,6 +105,7 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController {
         modelNameLabel.text = "SLUG-MODELNAME-LABEL-PREFIX".localizedVariant + " " + gtDevice.modelNumber
         hardwareRevisionLabel.text = "SLUG-HARDWAREREVISION-LABEL-PREFIX".localizedVariant + " " + gtDevice.hardwareRevision
         firmwareRevisionLabel.text = "SLUG-FIRMWAREREVISION-LABEL-PREFIX".localizedVariant + " " + gtDevice.firmwareRevision
+        idLabel.text = "SLUG-ID-LABEL-PREFIX".localizedVariant + " " + gtDevice.id
     }
 }
 

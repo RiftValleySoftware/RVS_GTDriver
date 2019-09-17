@@ -284,8 +284,6 @@ extension RVS_GTDriver {
             #endif
             _holdingPen.remove(at: index)
         }
-        // We no longer need the device to be connected.
-        inDevice.isConnected = false
         sequence_contents.append(inDevice)
         // Let the delegate know that it now has a new device.
         delegate.gtDriver(self, newDeviceAdded: inDevice)
@@ -465,8 +463,6 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
         } else if let device = deviceForThisPeripheral(inPeripheral) {
             device.reportDisconnection(inError)
             delegate.gtDriverStatusUpdate(self)
-        } else {
-            reportThisError(.unknownDisconnectionError)
         }
     }
 
@@ -504,10 +500,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
                 print("<***\n")
             #endif
             // If so, we simply create the new device and add it to our holding pen.
-            let newDevice = RVS_GTDevice(inPeripheral, owner: self)
-            _holdingPen.append(newDevice)
-            // We then initate a connection. This will verify the basics, and get back to us when it's all sorted.
-            newDevice.isConnected = true
+            _holdingPen.append(RVS_GTDevice(inPeripheral, owner: self))
         }
         #if DEBUG
             if !shouldInstall {
