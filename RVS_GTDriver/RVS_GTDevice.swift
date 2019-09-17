@@ -306,7 +306,7 @@ extension RVS_GTDevice {
      */
     internal func reportSuccessfulConnection() {
         if !_initialized {  // If we have not yet been initialized, then we straightaway start looking for our device information, which is now available.
-            discoverServices([CBUUID(string: "180A")])
+            discoverDeviceInfoService()
         } else {
             delegate?.gtDeviceWasConnected(self)
         }
@@ -322,6 +322,22 @@ extension RVS_GTDevice {
         delegate?.gtDevice(self, wasDisconnected: inError)
     }
     
+    /* ################################################################## */
+    /**
+     This discovers just the device info service.
+     */
+    internal func discoverDeviceInfoService() {
+        discoverServices([CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue)])
+    }
+    
+    /* ################################################################## */
+    /**
+     This discovers just the goTenna service.
+     */
+    internal func discoverGoTennaService() {
+        discoverServices([CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue)])
+    }
+
     /* ################################################################## */
     /**
      Asks the device to discover specific _services.
@@ -639,7 +655,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
     */
     public func peripheral(_ inPeripheral: CBPeripheral, didDiscoverServices inError: Error?) {
         #if DEBUG
-            print("\n***> Services Discovered:")
+            print("\n***> Services Discovered:\n\t\(String(describing: inPeripheral.services))")
             print("\terror: \(String(describing: inError))\n")
         #endif
         if let error = inError {
@@ -653,23 +669,37 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                     print("\t***\n")
                     print("\tservice: \(String(describing: service))\n")
                 #endif
-                var initialCharacteristics: [CBUUID] = []
-                let testUUID = CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue)
+                var sInstance: RVS_GTService!
+                let deviceInfoUUID = CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue)
+                let goTennaProprietaryServiceUUID = CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue)
                 let serviceUUID = service.uuid
-                if testUUID == serviceUUID {   // If device info, we ask for the following four characteristics
-                    initialCharacteristics = [CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue), // Manufacturer name
+                switch serviceUUID {
+                case deviceInfoUUID:
+                    let initialCharacteristics = [CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue), // Manufacturer name
                                               CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoModelName.rawValue), // Model name
                                               CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue), // Hardware Revision
                                               CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)  // Firmware Revision
                     ]
+                    sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
+
+                case goTennaProprietaryServiceUUID:
+                    sInstance = RVS_GTService(service, owner: self)
+                    sInstance.discoverAllCharacteristics()
+                    
+                default:
+                    break
                 }
-                let sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
-                #if DEBUG
-                    print("Adding Service: \(String(describing: sInstance)) To Holding Pen at index \(_holdingPen.count).")
-                #endif
-                _holdingPen.append(sInstance)   // In the holding pen, until we officially add it.
+                if let sInstance = sInstance {
+                    #if DEBUG
+                        print("Adding Service: \(String(describing: sInstance)) To Holding Pen at index \(_holdingPen.count).")
+                    #endif
+                    _holdingPen.append(sInstance)   // In the holding pen, until we officially add it.
+                }
             }
         }
+        #if DEBUG
+            print("<***\n")
+        #endif
     }
     
     /* ################################################################## */

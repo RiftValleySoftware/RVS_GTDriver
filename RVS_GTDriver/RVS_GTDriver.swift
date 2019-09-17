@@ -490,12 +490,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
             return
         }
         // Make sure we don't already have this one.
-        guard !containsThisPeripheral(inPeripheral) else {
-            #if DEBUG
-                print("Peripheral: \(inPeripheral) already handled.")
-            #endif
-            return
-        }
+        guard !containsThisPeripheral(inPeripheral) else { return }
         // Make sure that we are supposed to add this.
         let shouldInstall = delegate.gtDriver(self, peripheralDiscovered: inPeripheral)
         if shouldInstall {
