@@ -230,7 +230,7 @@ public class RVS_GTDriver: NSObject {
      
      THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
      */
-    public var sequence_contents: [RVS_GTDevice] = []
+    private var _sequence_contents: [RVS_GTDevice] = []
 }
 
 /* ###################################################################################################################################### */
@@ -292,7 +292,8 @@ extension RVS_GTDriver {
             #endif
             _holdingPen.remove(at: index)
         }
-        sequence_contents.append(inDevice)
+        
+        _sequence_contents.append(inDevice)
         // Let the delegate know that it now has a new device.
         delegate.gtDriver(self, newDeviceAdded: inDevice)
         // Tell the device to report that it was successfully connected.
@@ -325,7 +326,7 @@ extension RVS_GTDriver {
             #if DEBUG
                 print("Removing Device: \(String(describing: inDevice)) From Main Cache at index \(index).")
             #endif
-            sequence_contents.remove(at: index)
+            _sequence_contents.remove(at: index)
         }
         // And this rates a status update.
         sendDeviceUpdateToDelegegate()
@@ -346,7 +347,7 @@ extension RVS_GTDriver {
      Deletes all cached peripherals.
      */
     internal func clearCachedDevices() {
-        sequence_contents = []
+        _sequence_contents = []
     }
 }
 
@@ -677,4 +678,19 @@ extension RVS_GTDriver: RVS_SequenceProtocol {
      The element type is our device.
      */
     public typealias Element = RVS_GTDevice
+    
+    /* ################################################################## */
+    /**
+     This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_GTDevice.
+     READ-ONLY
+     */
+    public var sequence_contents: [RVS_GTDevice] {
+        get {
+            return _sequence_contents
+        }
+        
+        set {
+            _ = newValue    // NOP
+        }
+    }
 }
