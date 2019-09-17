@@ -154,7 +154,7 @@ extension RVS_GTDeviceDelegate {
      - parameter device: The device object.
      - parameter wasDisconnected: Any error that may have occurred. May be nil.
      */
-    func gtDevice(_ device: RVS_GTDevice, wasDisconnected: Error?) { }
+    public func gtDevice(_ device: RVS_GTDevice, wasDisconnected: Error?) { }
 
     /* ################################################################## */
     /**

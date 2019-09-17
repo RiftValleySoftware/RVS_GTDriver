@@ -24,6 +24,7 @@
 		D43058D4232BBFE200B64056 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D43058D2232BBFE100B64056 /* Localizable.strings */; };
 		D45962352330E577001A7EDE /* RVS_GTDriverTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45962342330E577001A7EDE /* RVS_GTDriverTools.swift */; };
 		D45F0D6A2330021200E1AADF /* RVS_GT_BLE_GATT_UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45F0D692330021200E1AADF /* RVS_GT_BLE_GATT_UUID.swift */; };
+		D46F1546233189FE00E6282A /* RVS_GTDriver_Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46F1545233189FE00E6282A /* RVS_GTDriver_Public.swift */; };
 		D4FC1ED8232D78B40014FECF /* RVS_GTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */; };
 		D4FC1EDA232D7F780014FECF /* RVS_GTCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */; };
 		D4FC1EDC232D9FA80014FECF /* RVS_SequenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */; };
@@ -73,6 +74,7 @@
 		D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDevice.swift; sourceTree = "<group>"; };
 		D45962342330E577001A7EDE /* RVS_GTDriverTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriverTools.swift; sourceTree = "<group>"; };
 		D45F0D692330021200E1AADF /* RVS_GT_BLE_GATT_UUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GT_BLE_GATT_UUID.swift; sourceTree = "<group>"; };
+		D46F1545233189FE00E6282A /* RVS_GTDriver_Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_Public.swift; sourceTree = "<group>"; };
 		D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTService.swift; sourceTree = "<group>"; };
 		D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTCharacteristic.swift; sourceTree = "<group>"; };
 		D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_SequenceProtocol.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 		D4749B68232A842A0073F7BC /* RVS_GTDriver */ = {
 			isa = PBXGroup;
 			children = (
+				D46F1545233189FE00E6282A /* RVS_GTDriver_Public.swift */,
 				D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */,
 				D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */,
 				D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */,
@@ -367,6 +370,7 @@
 				D45962352330E577001A7EDE /* RVS_GTDriverTools.swift in Sources */,
 				D43058D1232BBEE300B64056 /* RVS_GTDevice.swift in Sources */,
 				D4FC1EDC232D9FA80014FECF /* RVS_SequenceProtocol.swift in Sources */,
+				D46F1546233189FE00E6282A /* RVS_GTDriver_Public.swift in Sources */,
 				D43058D0232BBEE300B64056 /* RVS_GTDriver.swift in Sources */,
 				D4FC1EDA232D7F780014FECF /* RVS_GTCharacteristic.swift in Sources */,
 				D43058CF232BBEE300B64056 /* RVS_String_Extensions.swift in Sources */,
