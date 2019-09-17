@@ -162,6 +162,10 @@ extension RVS_GTDeviceDelegate {
 /**
  This class implements a single discovered goTenna device (in peripheral mode).
  
+ This class deliberately doesn't implement a sequence protocol, because we want to keep the details opaque.
+ 
+ The class will offer a complete object model to the API user. We need to abstract all CB stuff.
+ 
  Since this receives delegate callbacks from CB, it must derive from NSObject.
  */
 public class RVS_GTDevice: NSObject {
@@ -200,6 +204,12 @@ public class RVS_GTDevice: NSObject {
     
     /* ################################################################## */
     /**
+     This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
+     */
+    private var _services: [RVS_GTService] = []
+
+    /* ################################################################## */
+    /**
      This is the manufacturer name. It will be filled at initialization time.
      */
     private var _manufacturerName: String = ""
@@ -221,7 +231,19 @@ public class RVS_GTDevice: NSObject {
      This is the firmware revision. It will be filled at initialization time.
      */
     private var _firmwareRevision: String = ""
+    
+    /* ################################################################## */
+    /**
+     This is a reference to our internal device info service.
+     */
+    private var _deviceInfoService: RVS_GTService!
 
+    /* ################################################################## */
+    /**
+     This is a reference to our internal proprietary goTenna service.
+     */
+    private var _goTennaService: RVS_GTService!
+    
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -256,30 +278,9 @@ public class RVS_GTDevice: NSObject {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
-     
-     THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
-     */
-    public var sequence_contents: [RVS_GTService] = []
-    
-    /* ################################################################## */
-    /**
      */
     deinit {
         isConnected = false
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Private Instance Calculated Properties -
-/* ###################################################################################################################################### */
-extension RVS_GTDevice {
-    /* ################################################################## */
-    /**
-     This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
-     */
-    private var _services: [RVS_GTService] {
-        return sequence_contents
     }
 }
 
@@ -302,22 +303,6 @@ extension RVS_GTDevice {
     internal var owner: RVS_GTDriver {
         return _owner
     }
-    
-    /* ################################################################## */
-    /**
-     Returns the device info service (if installed).
-     */
-    internal var deviceInfoService: RVS_GTService! {
-        return serviceForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue))
-    }
-    
-    /* ################################################################## */
-    /**
-     Returns the goTenna proprietary service (if installed).
-     */
-    internal var goTennaService: RVS_GTService! {
-        return serviceForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue))
-    }
 }
 
 /* ###################################################################################################################################### */
@@ -329,10 +314,8 @@ extension RVS_GTDevice {
      Called to send a connection message to the delegate for this device.
      */
     internal func reportSuccessfulConnection() {
-        if !_initialized, nil == deviceInfoService {  // If we have not yet been initialized, then we straightaway start looking for our device information, which is now available.
+        if !_initialized, nil == _deviceInfoService {  // If we have not yet been initialized, then we straightaway start looking for our device information, which is now available.
             discoverDeviceInfoService()
-        } else if !_initialized, nil == goTennaService {
-            discoverGoTennaService()
         } else if _initialized {
             delegate?.gtDeviceWasConnected(self)
         } else {
@@ -347,7 +330,7 @@ extension RVS_GTDevice {
      - parameter inError: Any error that may have occurred. It is passed directly to the delegate.
      */
     internal func reportDisconnection(_ inError: Error?) {
-        if nil == goTennaService {  // If we haven't loaded the goTenna service yet, we grab that before reporting a disconnection.
+        if nil == _goTennaService {  // If we haven't loaded the goTenna service yet, we grab that before reporting a disconnection.
             isConnected = true
         } else {
             delegate?.gtDevice(self, wasDisconnected: inError)
@@ -379,7 +362,7 @@ extension RVS_GTDevice {
      */
     internal func discoverServices(_ inServiceCBUUIDs: [CBUUID], startClean inStartClean: Bool = false) {
         if inStartClean {
-            sequence_contents = [] // Start clean
+            _services = [] // Start clean
         }
         peripheral.discoverServices(inServiceCBUUIDs)
     }
@@ -392,7 +375,7 @@ extension RVS_GTDevice {
      */
     internal func discoverAllServices(startClean inStartClean: Bool = false) {
         if inStartClean {
-            sequence_contents = [] // Start clean
+            _services = [] // Start clean
         }
         peripheral.discoverServices(nil)
     }
@@ -436,7 +419,7 @@ extension RVS_GTDevice {
      */
     internal func addServiceToList(_ inService: RVS_GTService) {
         #if DEBUG
-            print("Adding Service: \(String(describing: inService)) To Our List at index \(count).")
+            print("Adding Service: \(String(describing: inService)) To Our List at index \(_services.count).")
         #endif
         // Remove from the "holding pen."
         if let index = _holdingPen.firstIndex(where: { return $0.service == inService.service }) {
@@ -446,10 +429,19 @@ extension RVS_GTDevice {
             _holdingPen.remove(at: index)
         }
         
-        sequence_contents.append(inService)
-        delegate?.gtDevice(self, discoveredService: inService)
+        _services.append(inService)
+
+        // See if we will load one of our references with this service.
+        if inService.service.uuid == CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue) {
+            _deviceInfoService = inService
+            delegate?.gtDevice(self, discoveredService: inService)
+            discoverGoTennaService()
+        } else if inService.service.uuid == CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue) {
+            _goTennaService = inService
+            delegate?.gtDevice(self, discoveredService: inService)
+        }
         
-        if !_initialized, _holdingPen.isEmpty {
+        if !_initialized, _holdingPen.isEmpty, nil != _goTennaService, nil != _deviceInfoService {
             _initialized = true
             // We no longer need the device to be connected.
             isConnected = false
@@ -576,7 +568,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
         #if DEBUG
             print("Searching Services for Characteristic.")
         #endif
-        for service in self {
+        for service in _services {
             if let characteristic = service.characteristicForThisCharacteristic(inCharacteristic) {
                 #if DEBUG
                     print("Characteristic Found.")
@@ -642,8 +634,8 @@ extension RVS_GTDevice: CBPeripheralDelegate {
      - parameter inService: The service we are looking for.
      - returns: The service. Nil, if not found.
      */
-    internal func serviceForThisService(_ inService: CBService) -> Element? {
-        for service in self where inService == service.service {
+    internal func serviceForThisService(_ inService: CBService) -> RVS_GTService? {
+        for service in _services where inService == service.service {
             return service
         }
         
@@ -663,12 +655,12 @@ extension RVS_GTDevice: CBPeripheralDelegate {
      - parameter inUUID: The UUID of the service we are looking for.
      - returns: The service. Nil, if not found.
      */
-    internal func serviceForThisUUID(_ inUUID: CBUUID) -> Element? {
+    internal func serviceForThisUUID(_ inUUID: CBUUID) -> RVS_GTService? {
         #if DEBUG
             print("Searching for Service for \(String(describing: inUUID)).")
         #endif
         
-        for service in self where inUUID == service.service.uuid {
+        for service in _services where inUUID == service.service.uuid {
             #if DEBUG
                 print("Service Found.")
             #endif
@@ -950,18 +942,4 @@ extension RVS_GTDevice {
         owner.removeDeviceFromDriver(self)
         delegate?.gtDeviceWasRemoved(self)
     }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Sequence Support -
-/* ###################################################################################################################################### */
-/**
- We do this, so we can iterate through our services, and treat the driver like an Array of _services.
- */
-extension RVS_GTDevice: RVS_SequenceProtocol {
-    /* ################################################################## */
-    /**
-     The element type is our service.
-     */
-    public typealias Element = RVS_GTService
 }
