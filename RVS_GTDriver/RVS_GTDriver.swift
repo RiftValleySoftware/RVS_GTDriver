@@ -56,6 +56,8 @@ public protocol RVS_GTDriverDelegate: class {
     /**
      Called when a peripheral is discovered, and before a device instance is instantiated.
      
+     You may return false, if you want to prevent the peripheral from being loaded. This will not remove the peripheral from discovery; it only prevents it from being loaded.
+     
      This is optional, and is NOT guaranteed to be called in the main thread. If not specified, the device will always be added.
      
      - parameter driver: The driver instance calling this.
@@ -481,11 +483,22 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didDiscover inPeripheral: CBPeripheral, advertisementData inAdvertisementData: [String: Any], rssi inRSSI: NSNumber) {
         // Check to make sure the signal is strong enough.
-        guard _RSSI_range.contains(inRSSI.intValue) else { return }
+        guard _RSSI_range.contains(inRSSI.intValue) else {
+            #if DEBUG
+                print("Signal out of range (\(inRSSI.intValue)) for peripheral: \(inPeripheral).")
+            #endif
+            return
+        }
         // Make sure we don't already have this one.
-        guard !containsThisPeripheral(inPeripheral) else { return }
+        guard !containsThisPeripheral(inPeripheral) else {
+            #if DEBUG
+                print("Peripheral: \(inPeripheral) already handled.")
+            #endif
+            return
+        }
         // Make sure that we are supposed to add this.
-        if delegate.gtDriver(self, peripheralDiscovered: inPeripheral) {
+        let shouldInstall = delegate.gtDriver(self, peripheralDiscovered: inPeripheral)
+        if shouldInstall {
             #if DEBUG
                 print("\n***> New Peripheral To Be Installed:")
                 print("\tdidDiscover: \(String(describing: inPeripheral))\n")
@@ -501,6 +514,11 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
             // We then initate a connection. This will verify the basics, and get back to us when it's all sorted.
             newDevice.isConnected = true
         }
+        #if DEBUG
+            if !shouldInstall {
+                print("Install of discovered peripheral canceled by API user.")
+            }
+        #endif
     }
 }
 
