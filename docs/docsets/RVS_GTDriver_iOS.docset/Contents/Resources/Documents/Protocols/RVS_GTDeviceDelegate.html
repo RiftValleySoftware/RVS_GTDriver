@@ -259,9 +259,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:16RVS_GTDriver_iOS0A17_GTDeviceDelegateP20gtDeviceWasBeRemovedyyAA0a1_D0CF"></a>
-                    <a name="//apple_ref/swift/Method/gtDeviceWasBeRemoved(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_GTDriver_iOS0A17_GTDeviceDelegateP20gtDeviceWasBeRemovedyyAA0a1_D0CF">gtDeviceWasBeRemoved(_:)</a>
+                    <a name="/s:16RVS_GTDriver_iOS0A17_GTDeviceDelegateP18gtDeviceWasRemovedyyAA0a1_D0CF"></a>
+                    <a name="//apple_ref/swift/Method/gtDeviceWasRemoved(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0A17_GTDeviceDelegateP18gtDeviceWasRemovedyyAA0a1_D0CF">gtDeviceWasRemoved(_:)</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -288,7 +288,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gtDeviceWasBeRemoved</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gtDeviceWasRemoved</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -502,6 +502,68 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0A17_GTDeviceDelegateP20gtDeviceStatusUpdateyyAA0a1_D0CF"></a>
+                    <a name="//apple_ref/swift/Method/gtDeviceStatusUpdate(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0A17_GTDeviceDelegateP20gtDeviceStatusUpdateyyAA0a1_D0CF">gtDeviceStatusUpdate(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called to indicate that the device&rsquo;s status should be checked.</p>
+
+<p>It may be called frequently, and there may not be any changes. This is mereley a <q>make you aware of the POSSIBILITY of a change</q> call.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Called to indicate that the device&rsquo;s status should be checked.</p>
+
+<p>It may be called frequently, and there may not be any changes. This is mereley a <q>make you aware of the POSSIBILITY of a change</q> call.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gtDeviceStatusUpdate</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>driver</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The driver instance calling this.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
@@ -510,7 +572,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-09-16)</p>
+      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-09-17)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

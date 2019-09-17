@@ -118,6 +118,21 @@ for each discovered peripheral device.</p>
 
 <p>Since this receives delegate callbacks from CB, it must derive from NSObject.</p>
 
+<p>This driver has two modes: Not scanning, in which case it does not discover new devices, but the devices it does have may still be active and updating, and
+Scanning, in which case, it looks for goTenna devices.</p>
+
+<p>If it finds a device, it adds it to a <q>Holding Pen,</q> where it lives until some basic information has been read; namely, the Device Info service, and the proprietary goTenna service.</p>
+
+<p>After all that has been gathered, the device is considered <q>shiny,</q> and gets added to our main Array, and then it will ignore the same device, if that device shows up again in discovery.</p>
+
+<p>The idea is to build up an object model of the goTenna devices, and represent them to the API consumer as simply as possible.</p>
+
+<p>It is important that the consumer provide delegates to the driver, device and service instances. Most of the action happens in delegate callbacks.</p>
+
+<p>Only the entities in the last extension (and the initializer) should be considered useful for API consumers.</p>
+
+<p>You will see that internal methods and properties are explicitly marked as <q>internal.</q> This is to help clarify their scope.</p>
+
           </div>
         </section>
 
@@ -125,10 +140,10 @@ for each discovered peripheral device.</p>
           <div class="section-content">
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Public%20Initializers"></a>
-                <a name="//apple_ref/swift/Section/Public Initializers" class="dashAnchor"></a>
-                <a href="#/Public%20Initializers">
-                  <h3 class="section-name">Public Initializers</h3>
+                <a name="/Public%20Initializer"></a>
+                <a name="//apple_ref/swift/Section/Public Initializer" class="dashAnchor"></a>
+                <a href="#/Public%20Initializer">
+                  <h3 class="section-name">Public Initializer</h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -194,282 +209,6 @@ for each discovered peripheral device.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Public%20Sequence%20Support%20Properties"></a>
-                <a name="//apple_ref/swift/Section/Public Sequence Support Properties" class="dashAnchor"></a>
-                <a href="#/Public%20Sequence%20Support%20Properties">
-                  <h3 class="section-name">Public Sequence Support Properties</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C17sequence_contentsSayAA0A9_GTDeviceCGvp"></a>
-                    <a name="//apple_ref/swift/Property/sequence_contents" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C17sequence_contentsSayAA0A9_GTDeviceCGvp">sequence_contents</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_GTDevice.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sequence_contents</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Error%20Enums"></a>
-                <a name="//apple_ref/swift/Section/Error Enums" class="dashAnchor"></a>
-                <a href="#/Error%20Enums">
-                  <h3 class="section-name">Error Enums</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO"></a>
-                    <a name="//apple_ref/swift/Enum/Errors" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO">Errors</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>These are the various errors that can be returned by this class.</p>
-
-                        <a href="../Classes/RVS_GTDriver/Errors.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Errors</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Public%20Calculated%20Instance%20Properties"></a>
-                <a name="//apple_ref/swift/Section/Public Calculated Instance Properties" class="dashAnchor"></a>
-                <a href="#/Public%20Calculated%20Instance%20Properties">
-                  <h3 class="section-name">Public Calculated Instance Properties</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C7devicesSayAA0A9_GTDeviceCGvp"></a>
-                    <a name="//apple_ref/swift/Property/devices" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C7devicesSayAA0A9_GTDeviceCGvp">devices</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This returns our discovered and initialized devices.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">devices</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C8delegateAA0a1_B8Delegate_pvp"></a>
-                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C8delegateAA0a1_B8Delegate_pvp">delegate</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This is our delegate instance.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_GTDriverDelegate.html">RVS_GTDriverDelegate</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@CM@RVS_GTDriver_iOS@objc(cs)RVS_GTDriver(py)isScanning"></a>
-                    <a name="//apple_ref/swift/Property/isScanning" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@RVS_GTDriver_iOS@objc(cs)RVS_GTDriver(py)isScanning">isScanning</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This is KVO-observable.
-Returns true, if we are currently scanning for new CB peripherals.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">dynamic</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">isScanning</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@CM@RVS_GTDriver_iOS@objc(cs)RVS_GTDriver(py)isBluetoothAvailable"></a>
-                    <a name="//apple_ref/swift/Property/isBluetoothAvailable" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@RVS_GTDriver_iOS@objc(cs)RVS_GTDriver(py)isBluetoothAvailable">isBluetoothAvailable</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This is KVO-observable. READ-ONLY.
-Returns true, if the bluetooth system is valid.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">dynamic</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">isBluetoothAvailable</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Public%20Instance%20Methods"></a>
-                <a name="//apple_ref/swift/Section/Public Instance Methods" class="dashAnchor"></a>
-                <a href="#/Public%20Instance%20Methods">
-                  <h3 class="section-name">Public Instance Methods</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C17indexOfThisDeviceySiSgAA0A9_GTDeviceCF"></a>
-                    <a name="//apple_ref/swift/Method/indexOfThisDevice(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C17indexOfThisDeviceySiSgAA0A9_GTDeviceCF">indexOfThisDevice(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This simply returns the 0-based index of the given device in our Array of devices.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">indexOfThisDevice</span><span class="p">(</span><span class="n">_</span> <span class="nv">inDevice</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span><span class="o">!</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Sequence%20Support"></a>
-                <a name="//apple_ref/swift/Section/Sequence Support" class="dashAnchor"></a>
-                <a href="#/Sequence%20Support">
-                  <h3 class="section-name">Sequence Support</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C7Elementa"></a>
-                    <a name="//apple_ref/swift/Alias/Element" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C7Elementa">Element</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The element type is our device.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Element</span> <span class="o">=</span> <span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
                 <a name="/CBCentralManagerDelegate%20Methods"></a>
                 <a name="//apple_ref/swift/Section/CBCentralManagerDelegate Methods" class="dashAnchor"></a>
                 <a href="#/CBCentralManagerDelegate%20Methods">
@@ -491,6 +230,8 @@ Returns true, if the bluetooth system is valid.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Called when the manager state changes. We simply use this to call the delegate to check the state.</p>
+
+<p>THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.</p>
 
                       </div>
                       <div class="declaration">
@@ -537,6 +278,8 @@ Returns true, if the bluetooth system is valid.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Called when a peripheral connects.</p>
+
+<p>THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.</p>
 
                       </div>
                       <div class="declaration">
@@ -666,6 +409,8 @@ Returns true, if the bluetooth system is valid.</p>
                       <div class="abstract">
                         <p>Called when a peripheral disconnects.</p>
 
+<p>THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -736,6 +481,8 @@ Returns true, if the bluetooth system is valid.</p>
                       <div class="abstract">
                         <p>Called when a peripheral is discovered.</p>
 
+<p>THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -805,13 +552,215 @@ Returns true, if the bluetooth system is valid.</p>
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Error%20Enums"></a>
+                <a name="//apple_ref/swift/Section/Error Enums" class="dashAnchor"></a>
+                <a href="#/Error%20Enums">
+                  <h3 class="section-name">Error Enums</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO"></a>
+                    <a name="//apple_ref/swift/Enum/Errors" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO">Errors</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>These are the various errors that can be returned by this class.
+The enum is designed to provide keys for use by localization. If you access the <q>localizedDescription</q> calculated property, you will get a consistent string.</p>
+
+                        <a href="../Classes/RVS_GTDriver/Errors.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Errors</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Public%20Calculated%20Instance%20Properties"></a>
+                <a name="//apple_ref/swift/Section/Public Calculated Instance Properties" class="dashAnchor"></a>
+                <a href="#/Public%20Calculated%20Instance%20Properties">
+                  <h3 class="section-name">Public Calculated Instance Properties</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C8delegateAA0a1_B8Delegate_pvp"></a>
+                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C8delegateAA0a1_B8Delegate_pvp">delegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is our delegate instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_GTDriverDelegate.html">RVS_GTDriverDelegate</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_GTDriver_iOS@objc(cs)RVS_GTDriver(py)isScanning"></a>
+                    <a name="//apple_ref/swift/Property/isScanning" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_GTDriver_iOS@objc(cs)RVS_GTDriver(py)isScanning">isScanning</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is KVO-observable.
+Returns true, if we are currently scanning for new CB peripherals.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">dynamic</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">isScanning</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_GTDriver_iOS@objc(cs)RVS_GTDriver(py)isBluetoothAvailable"></a>
+                    <a name="//apple_ref/swift/Property/isBluetoothAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_GTDriver_iOS@objc(cs)RVS_GTDriver(py)isBluetoothAvailable">isBluetoothAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is KVO-observable. READ-ONLY.
+Returns true, if the bluetooth system is valid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">dynamic</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">isBluetoothAvailable</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Sequence%20Support"></a>
+                <a name="//apple_ref/swift/Section/Sequence Support" class="dashAnchor"></a>
+                <a href="#/Sequence%20Support">
+                  <h3 class="section-name">Sequence Support</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C7Elementa"></a>
+                    <a name="//apple_ref/swift/Alias/Element" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C7Elementa">Element</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The element type is our device.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Element</span> <span class="o">=</span> <span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C17sequence_contentsSayAA0A9_GTDeviceCGvp"></a>
+                    <a name="//apple_ref/swift/Property/sequence_contents" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C17sequence_contentsSayAA0A9_GTDeviceCGvp">sequence_contents</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_GTDevice.
+READ-ONLY</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sequence_contents</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
 
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-09-16)</p>
+      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-09-17)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

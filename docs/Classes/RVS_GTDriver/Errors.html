@@ -111,7 +111,8 @@
 
                 </div>
               </div>
-            <p>These are the various errors that can be returned by this class.</p>
+            <p>These are the various errors that can be returned by this class.
+The enum is designed to provide keys for use by localization. If you access the <q>localizedDescription</q> calculated property, you will get a consistent string.</p>
 
           </div>
         </section>
@@ -178,6 +179,33 @@ The associated value is any error that occurred.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO31connectionAttemptFailedNoDeviceyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/connectionAttemptFailedNoDevice" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO31connectionAttemptFailedNoDeviceyA2EmF">connectionAttemptFailedNoDevice</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is returned if we connected, but no device was available. This should never happen.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">connectionAttemptFailedNoDevice</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO26disconnectionAttemptFailedyAEs5Error_pSg_tcAEmF"></a>
                     <a name="//apple_ref/swift/Element/disconnectionAttemptFailed(error:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO26disconnectionAttemptFailedyAEs5Error_pSg_tcAEmF">disconnectionAttemptFailed(error:)</a>
@@ -197,6 +225,144 @@ The associated value is any error that occurred.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">disconnectionAttemptFailed</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO25unknownDisconnectionErroryA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/unknownDisconnectionError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO25unknownDisconnectionErroryA2EmF">unknownDisconnectionError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a <q>catchall</q> error for a disconnection issue</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unknownDisconnectionError</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO31unknownPeripheralDiscoveryErroryAEs0H0_pSg_tcAEmF"></a>
+                    <a name="//apple_ref/swift/Element/unknownPeripheralDiscoveryError(error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO31unknownPeripheralDiscoveryErroryAEs0H0_pSg_tcAEmF">unknownPeripheralDiscoveryError(error:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a <q>catchall</q> error for peripheral discovery
+The associated value is any error that occurred.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">unknownPeripheralDiscoveryError</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO26characteristicValueMissingyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/characteristicValueMissing" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO26characteristicValueMissingyA2EmF">characteristicValueMissing</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This means that we did not get a characteristic value</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">characteristicValueMissing</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO36unknownCharacteristicsDiscoveryErroryAEs0H0_pSg_tcAEmF"></a>
+                    <a name="//apple_ref/swift/Element/unknownCharacteristicsDiscoveryError(error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO36unknownCharacteristicsDiscoveryErroryAEs0H0_pSg_tcAEmF">unknownCharacteristicsDiscoveryError(error:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a <q>catchall</q> error for characteristics discovery
+The associated value is any error that occurred.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">unknownCharacteristicsDiscoveryError</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO36unknownCharacteristicsReadValueErroryAEs0I0_pSg_tcAEmF"></a>
+                    <a name="//apple_ref/swift/Element/unknownCharacteristicsReadValueError(error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B0C6ErrorsO36unknownCharacteristicsReadValueErroryAEs0I0_pSg_tcAEmF">unknownCharacteristicsReadValueError(error:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a <q>catchall</q> error for characteristics value read
+The associated value is any error that occurred.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">unknownCharacteristicsReadValueError</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -267,7 +433,7 @@ It is a very simple class.enum.case String.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-09-16)</p>
+      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-09-17)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
