@@ -927,10 +927,10 @@ extension RVS_GTDevice {
     
     /* ################################################################## */
     /**
-     Return the simple description UUID.
+     Return the simple description (Manufacturer name, model and ID).
      */
     override public var description: String {
-        return String(describing: _manufacturerName + " " + _modelNumber)
+        return String(describing: _manufacturerName + " " + _modelNumber + " " + id)
     }
 
     /* ################################################################## */
