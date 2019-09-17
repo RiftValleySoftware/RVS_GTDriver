@@ -164,7 +164,7 @@ extension RVS_GTDeviceDelegate {
  
  Since this receives delegate callbacks from CB, it must derive from NSObject.
  */
-public class RVS_GTDevice: NSObject, RVS_GTDriverErrorReporter {
+public class RVS_GTDevice: NSObject {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -445,9 +445,7 @@ extension RVS_GTDevice {
     internal func setUpDeviceInfo() {
         // Start by getting the device info object.
         if let deviceInfoService = serviceForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue)) {
-            guard   let manufacturerNameCh = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue)),
-                    let manufacturerNameData = manufacturerNameCh.value,
-                    let manufacturerName = String(data: manufacturerNameData, encoding: .utf8)
+            guard   let manufacturerName = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue))?.stringValue
             else {
                 reportThisError(.unknownError(error: nil))
                 return
@@ -458,9 +456,7 @@ extension RVS_GTDevice {
             #endif
             _manufacturerName = manufacturerName
             
-            guard   let modelNumberCh = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoModelName.rawValue)),
-                    let modelNumberData = modelNumberCh.value,
-                    let modelNumber = String(data: modelNumberData, encoding: .utf8)
+            guard   let modelNumber = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoModelName.rawValue))?.stringValue
             else {
                 reportThisError(.unknownError(error: nil))
                 return
@@ -471,9 +467,7 @@ extension RVS_GTDevice {
             #endif
             _modelNumber = modelNumber
             
-            guard   let hardwareRevisionCh = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue)),
-                    let hardwareRevisionData = hardwareRevisionCh.value,
-                    let hardwareRevision = String(data: hardwareRevisionData, encoding: .utf8)
+            guard   let hardwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue))?.stringValue
             else {
                 reportThisError(.unknownError(error: nil))
                 return
@@ -484,9 +478,7 @@ extension RVS_GTDevice {
             #endif
             _hardwareRevision = hardwareRevision
             
-            guard   let firmwareRevisionCh = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)),
-                    let firmwareRevisionData = firmwareRevisionCh.value,
-                    let firmwareRevision = String(data: firmwareRevisionData, encoding: .utf8)
+            guard   let firmwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue))?.stringValue
             else {
                 reportThisError(.unknownError(error: nil))
                 return
@@ -498,7 +490,12 @@ extension RVS_GTDevice {
             _firmwareRevision = hardwareRevision
         }
     }
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_GTDriverTools Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDevice: RVS_GTDriverTools {
     /* ################################################################## */
     /**
      This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.

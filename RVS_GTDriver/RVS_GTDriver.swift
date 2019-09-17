@@ -23,22 +23,6 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_GTDriverErrorReporter Protocol -
-/* ###################################################################################################################################### */
-/**
- This protocol allows aggregated instances to report errors through the main driver, without breaking the fourth wall.
- */
-internal protocol RVS_GTDriverErrorReporter {
-    /* ################################################################## */
-    /**
-     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
-     
-     - parameter error: The error to be sent to the delegate.
-     */
-    func reportThisError(_ error: RVS_GTDriver.Errors)
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Main Driver RVS_GTDriverDelegate Protocol -
 /* ###################################################################################################################################### */
 /**
@@ -213,7 +197,7 @@ extension RVS_GTDriverDelegate {
  
  You will see that internal methods and properties are explicitly marked as "internal." This is to help clarify their scope.
  */
-public class RVS_GTDriver: NSObject, RVS_GTDriverErrorReporter {
+public class RVS_GTDriver: NSObject {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Constants
     /* ################################################################################################################################## */
@@ -308,7 +292,7 @@ extension RVS_GTDriver {
             _centralManager.connect(inDevice.peripheral, options: nil)
         }
     }
-    
+
     /* ################################################################## */
     /**
      Disconnect the given device.
@@ -393,7 +377,12 @@ extension RVS_GTDriver {
     internal func clearCachedDevices() {
         sequence_contents = []
     }
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_GTDriverTools Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver: RVS_GTDriverTools {
     /* ################################################################## */
     /**
      The buck stops here.

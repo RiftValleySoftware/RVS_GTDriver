@@ -80,7 +80,7 @@ extension RVS_GTServiceDelegate {
 /**
  This class implements a BLE service wrapper, specialized for the goTenna driver.
  */
-public class RVS_GTService: NSObject, RVS_GTDriverErrorReporter {
+public class RVS_GTService: NSObject {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -406,7 +406,12 @@ extension RVS_GTService {
 
         _owner.discoverAllCharacteristicsForService(self)
     }
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_GTDriverTools Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTService: RVS_GTDriverTools {
     /* ################################################################## */
     /**
      This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
@@ -440,10 +445,10 @@ extension RVS_GTService: RVS_SequenceProtocol {
 // MARK: - This is What We Tell the Kids -
 /* ###################################################################################################################################### */
 /**
- This is the "Public Face" of the device. This is what we want our consumers to see and use. Some of the other stuff is public, but isn't
+ This is the "Public Face" of the service. This is what we want our consumers to see and use. Some of the other stuff is public, but isn't
  meant for consumer use. It needs to be public in order to conform to delegate protocols.
  
- One other thing about this class, is that it conforms to Sequence, so you can iterate through it for services, or access services as subscripts.
+ One other thing about this class, is that it conforms to Sequence, so you can iterate through it for characteristics, or access characteristics as subscripts.
  */
 extension RVS_GTService {
     /* ################################################################################################################################## */

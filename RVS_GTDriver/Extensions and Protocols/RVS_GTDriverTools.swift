@@ -20,30 +20,18 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import XCTest
-import CoreBluetooth
-
 /* ###################################################################################################################################### */
-// MARK: - Tests -
+// MARK: - RVS_GTDriverTools Protocol -
 /* ###################################################################################################################################### */
 /**
+ This protocol allows aggregated instances to report errors through the main driver, without breaking the fourth wall.
  */
-class RVS_GTDriver_iOS_Tests: XCTestCase {
+internal protocol RVS_GTDriverTools {
     /* ################################################################## */
     /**
+     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
+     
+     - parameter error: The error to be sent to the delegate.
      */
-    override func setUp() {
-    }
-
-    /* ################################################################## */
-    /**
-     */
-    override func tearDown() {
-    }
-
-    /* ################################################################## */
-    /**
-     */
-    func testExample() {
-    }
+    func reportThisError(_ error: RVS_GTDriver.Errors)
 }
