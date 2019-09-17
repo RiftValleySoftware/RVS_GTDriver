@@ -147,7 +147,7 @@ extension RVS_GTDriverDelegate {
  This driver has two modes: Not scanning, in which case it does not discover new devices, but the devices it does have may still be active and updating, and
  Scanning, in which case, it looks for goTenna devices.
  
- If it finds a device, it adds it to a "Holding Pen," where it lives until some basic information has been read; namely, the Device Info service.
+ If it finds a device, it adds it to a "Holding Pen," where it lives until some basic information has been read; namely, the Device Info service, and the proprietary goTenna service.
  
  After all that has been gathered, the device is considered "shiny," and gets added to our main Array, and then it will ignore the same device, if that device shows up again in discovery.
  
@@ -239,6 +239,14 @@ public class RVS_GTDriver: NSObject {
 extension RVS_GTDriver {
     /* ################################################################## */
     /**
+     This forces a device update callback to be sent to the delegate.
+     */
+    internal func sendDeviceUpdateToDelegegate() {
+        delegate.gtDriverStatusUpdate(self)
+    }
+    
+    /* ################################################################## */
+    /**
      Connect the given device.
      
      - parameter inDevice: The deivice we want connected.
@@ -290,7 +298,7 @@ extension RVS_GTDriver {
         // Tell the device to report that it was successfully connected.
         inDevice.reportSuccessfulConnection()
         // And this rates a status update.
-        delegate.gtDriverStatusUpdate(self)
+        sendDeviceUpdateToDelegegate()
     }
     
     /* ################################################################## */
@@ -303,6 +311,9 @@ extension RVS_GTDriver {
         #if DEBUG
             print("Removing Device: \(String(describing: inDevice)).")
         #endif
+        // Make sure that we are not connected.
+        _centralManager.cancelPeripheralConnection(inDevice.peripheral)
+
         if let index = _holdingPen.firstIndex(where: { return $0.peripheral == inDevice.peripheral }) {
             #if DEBUG
                 print("Removing Device: \(String(describing: inDevice)) From Holding Pen at index \(index).")
@@ -317,7 +328,7 @@ extension RVS_GTDriver {
             sequence_contents.remove(at: index)
         }
         // And this rates a status update.
-        delegate.gtDriverStatusUpdate(self)
+        sendDeviceUpdateToDelegegate()
     }
     
     /* ################################################################## */
@@ -413,7 +424,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - parameter inCentralManager: The manager instance.
     */
     public func centralManagerDidUpdateState(_ inCentralManager: CBCentralManager) {
-        delegate.gtDriverStatusUpdate(self)
+        sendDeviceUpdateToDelegegate()
     }
     
     /* ################################################################## */
@@ -431,7 +442,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
         } else {
             reportThisError(.connectionAttemptFailedNoDevice)
         }
-        delegate.gtDriverStatusUpdate(self)
+        sendDeviceUpdateToDelegegate()
     }
     
     /* ################################################################## */
@@ -444,7 +455,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didFailToConnect inPeripheral: CBPeripheral, error inError: Error?) {
         reportThisError(.connectionAttemptFailed(error: inError))
-        delegate.gtDriverStatusUpdate(self)
+        sendDeviceUpdateToDelegegate()
     }
 
     /* ################################################################## */
@@ -462,7 +473,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
             reportThisError(.disconnectionAttemptFailed(error: error))
         } else if let device = deviceForThisPeripheral(inPeripheral) {
             device.reportDisconnection(inError)
-            delegate.gtDriverStatusUpdate(self)
+            sendDeviceUpdateToDelegegate()
         }
     }
 
@@ -483,6 +494,10 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
             #if DEBUG
                 print("Signal out of range (\(inRSSI.intValue)) for peripheral: \(inPeripheral).")
             #endif
+            // Make sure that we remove the device, if we have it.
+            if let device = deviceForThisPeripheral(inPeripheral) {
+                device.goodbyeCruelWorld()
+            }
             return
         }
         // Make sure we don't already have this one.

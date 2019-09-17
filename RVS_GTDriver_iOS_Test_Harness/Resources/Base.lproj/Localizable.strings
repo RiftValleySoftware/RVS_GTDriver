@@ -36,6 +36,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "RVS_GTDriver.Error.unknownCharacteristicsDiscoveryError"   =       "Unknown Driver Error";
 "RVS_GTDriver.Error.unknownCharacteristicsReadValueError"   =       "Unknown Driver Error";
 "RVS_GTDriver.Error.unknownError"                           =       "Unknown Driver Error";
+"SLUG-EMPTY-DEVICE-NAME"                                    =       "No Device Name";
 "SLUG-MANUFACTURERNAME-LABEL-PREFIX"                        =       "Manufacturer Name:";
 "SLUG-MODELNAME-LABEL-PREFIX"                               =       "Model Name:";
 "SLUG-HARDWAREREVISION-LABEL-PREFIX"                        =       "Hardware Revision:";

@@ -50,6 +50,12 @@ class RVS_GTDriver_iOS_Test_Harness_Device_ViewController: UIViewController, RVS
     
     /* ################################################################## */
     /**
+     The label at the top, for any device name.
+     */
+    @IBOutlet weak var peripheralNameLabel: UILabel!
+    
+    /* ################################################################## */
+    /**
      The label for our manufacturer name
      */
     @IBOutlet weak var manufacturerNameLabel: UILabel!
@@ -101,6 +107,11 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         gtDevice.delegate = self
+        if !gtDevice.name.isEmpty {
+            peripheralNameLabel.text = gtDevice.name
+        } else {
+            peripheralNameLabel.text = "SLUG-EMPTY-DEVICE-NAME".localizedVariant
+        }
         manufacturerNameLabel.text = "SLUG-MANUFACTURERNAME-LABEL-PREFIX".localizedVariant + " " + gtDevice.manufacturerName
         modelNameLabel.text = "SLUG-MODELNAME-LABEL-PREFIX".localizedVariant + " " + gtDevice.modelNumber
         hardwareRevisionLabel.text = "SLUG-HARDWAREREVISION-LABEL-PREFIX".localizedVariant + " " + gtDevice.hardwareRevision

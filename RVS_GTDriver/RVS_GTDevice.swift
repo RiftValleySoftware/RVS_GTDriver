@@ -97,6 +97,18 @@ public protocol RVS_GTDeviceDelegate: class {
      - parameter discoveredService: The discovered service.
      */
     func gtDevice(_ device: RVS_GTDevice, discoveredService: RVS_GTService)
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the device's status should be checked.
+     
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     */
+    func gtDeviceStatusUpdate(_ device: RVS_GTDevice)
 }
 
 /* ###################################################################################################################################### */
@@ -154,6 +166,18 @@ extension RVS_GTDeviceDelegate {
      - parameter discoveredService: The discovered service.
      */
     public func gtDevice(_ device: RVS_GTDevice, discoveredService: RVS_GTService) { }
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the device's status should be checked.
+     
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     */
+    public func gtDeviceStatusUpdate(_ device: RVS_GTDevice) { }
 }
 
 /* ###################################################################################################################################### */
@@ -434,18 +458,20 @@ extension RVS_GTDevice {
         // See if we will load one of our references with this service.
         if inService.service.uuid == CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue) {
             _deviceInfoService = inService
+            setUpDeviceInfo()
             delegate?.gtDevice(self, discoveredService: inService)
             discoverGoTennaService()
         } else if inService.service.uuid == CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue) {
             _goTennaService = inService
+            setUpGoTennaInfo()
             delegate?.gtDevice(self, discoveredService: inService)
         }
         
+        // If we are all done with both services, we wrap up the connection, and add ourselves to the driver in an "official" capacity.
         if !_initialized, _holdingPen.isEmpty, nil != _goTennaService, nil != _deviceInfoService {
             _initialized = true
             // We no longer need the device to be connected.
             isConnected = false
-            setUpDeviceInfo()
             owner.addDeviceToList(self)
         }
     }
@@ -529,8 +555,16 @@ extension RVS_GTDevice {
             #if DEBUG
                 print("Read the Firmaware Revision: \(firmwareRevision).")
             #endif
-            _firmwareRevision = hardwareRevision
+            _firmwareRevision = firmwareRevision
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     This goes through the goTenna service and exctracts the information from it.
+     */
+    internal func setUpGoTennaInfo() {
+        
     }
 }
 
@@ -566,24 +600,24 @@ extension RVS_GTDevice: CBPeripheralDelegate {
      */
     internal func getCharacteristicInstanceForCharacteristic(_ inCharacteristic: CBCharacteristic) -> RVS_GTCharacteristic! {
         #if DEBUG
-            print("Searching Services for Characteristic.")
+            print("Searching Main List for Characteristic: \(inCharacteristic)")
         #endif
         for service in _services {
             if let characteristic = service.characteristicForThisCharacteristic(inCharacteristic) {
                 #if DEBUG
-                    print("Characteristic Found.")
+                    print("Characteristic: \(inCharacteristic) Found in Main List.")
                 #endif
                 return characteristic
             }
         }
         
         #if DEBUG
-            print("Searching Service Holding Pen for Characteristic.")
+            print("Searching Holding Pen for Characteristic: \(inCharacteristic)")
         #endif
         for service in _holdingPen {
             if let characteristic = service.characteristicForThisCharacteristic(inCharacteristic) {
                 #if DEBUG
-                    print("Characteristic Found.")
+                    print("Characteristic: \(inCharacteristic) Found in Holding Pen.")
                 #endif
                 return characteristic
             }
@@ -669,7 +703,30 @@ extension RVS_GTDevice: CBPeripheralDelegate {
         
         return nil
     }
+    
+    /* ################################################################## */
+    /**
+     Called when the device changed its service listing.
+     
+     THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
 
+     - parameter inPeripheral: The peripheral we have received notification on.
+     - parameter didModifyServices: Invalidated services (we need to nuke these).
+    */
+    public func peripheral(_ inPeripheral: CBPeripheral, didModifyServices inInvalidatedServices: [CBService]) {
+        for cbService in inInvalidatedServices {
+            if  let service = serviceForThisService(cbService),
+                let index = _services.firstIndex(of: service) {
+                _services.remove(at: index)
+            }
+            
+            // Make sure that our delegates are updated.
+            delegate?.gtDeviceStatusUpdate(self)
+            owner.sendDeviceUpdateToDelegegate()
+            discoverAllServices()   // We discover all services.
+        }
+    }
+    
     /* ################################################################## */
     /**
      Called when we have discovered services for the peripheral.
@@ -827,6 +884,18 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("<***\n")
         #endif
     }
+    
+    /* ################################################################## */
+    /**
+    Called when a peripheral's name has changed.
+    
+    THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
+
+    - parameter inPeripheral: The peripheral we have received notification on.
+    */
+    public func peripheralDidUpdateName(_ inPeripheral: CBPeripheral) {
+        delegate?.gtDeviceStatusUpdate(self)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -921,11 +990,24 @@ extension RVS_GTDevice {
     
     /* ################################################################## */
     /**
+     This is the unique ID for the peripheral.
      It is KVO-observable.
      */
     @objc dynamic public var id: String {
         if let device = _peripheral {
             return device.identifier.uuidString
+        }
+        return ""
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the peripheral's name.
+     It is KVO-observable.
+     */
+    @objc dynamic public var name: String {
+        if let device = _peripheral {
+            return device.name ?? ""
         }
         return ""
     }
