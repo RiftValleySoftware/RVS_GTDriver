@@ -164,8 +164,6 @@ extension RVS_GTDeviceDelegate {
 /**
  This is the "Public Face" of the device. This is what we want our consumers to see and use. Some of the other stuff is public, but isn't
  meant for consumer use. It needs to be public in order to conform to delegate protocols.
- 
- One other thing about this class, is that it conforms to Sequence, so you can iterate through it for services, or access services as subscripts.
  */
 extension RVS_GTDevice {
     /* ################################################################################################################################## */
