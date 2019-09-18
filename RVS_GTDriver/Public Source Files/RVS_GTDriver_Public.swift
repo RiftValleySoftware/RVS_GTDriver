@@ -148,9 +148,12 @@ extension RVS_GTDriver {
      
      - parameter delegate: The delegate to be used with this instance. It cannot be nil, and is a weak reference.
      - parameter queue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
+     - parameter allowDuplicatesInBLEScan:  This is a flag that specifies that the scanner can be continuously running, and "re-finding" duplicate devices.
+                                            If true, it could adversely affect battery life. Default is false.
      */
-    public convenience init(delegate inDelegate: RVS_GTDriverDelegate, queue inQueue: DispatchQueue? = nil) {
-        self.init(delegate: inDelegate, dispatchQueue: inQueue)
+    public convenience init(delegate inDelegate: RVS_GTDriverDelegate, queue inQueue: DispatchQueue? = nil, allowDuplicatesInBLEScan inAllowDuplicatesInBLEScan: Bool = false) {
+        self.init(delegate: inDelegate, queue: inQueue)
+        internal_AllowDuplicatesInBLEScan = inAllowDuplicatesInBLEScan
     }
 
     /* ################################################################################################################################## */
@@ -233,7 +236,39 @@ extension RVS_GTDriver {
          It is a very simple class.enum.case String.
          */
         public var localizedDescription: String {
-            return "RVS_GTDriver.Error.\(String(describing: self))"
+            var caseString = ""
+            switch self {
+            case .bluetoothNotAvailable:
+                caseString = "bluetoothNotAvailable"
+
+            case .connectionAttemptFailed:
+                caseString = "connectionAttemptFailed"
+
+            case .connectionAttemptFailedNoDevice:
+                caseString = "connectionAttemptFailedNoDevice"
+
+            case .disconnectionAttemptFailed:
+                caseString = "disconnectionAttemptFailed"
+
+            case .unknownDisconnectionError:
+                caseString = "unknownDisconnectionError"
+
+            case .unknownPeripheralDiscoveryError:
+                caseString = "unknownPeripheralDiscoveryError"
+
+            case .characteristicValueMissing:
+                caseString = "characteristicValueMissing"
+
+            case .unknownCharacteristicsDiscoveryError:
+                caseString = "unknownCharacteristicsDiscoveryError"
+
+            case .unknownCharacteristicsReadValueError:
+                caseString = "unknownCharacteristicsReadValueError"
+
+            default:
+                 caseString = "unknownError"
+            }
+            return "RVS_GTDriver.Error.\(caseString)"
         }
     }
 
@@ -245,7 +280,7 @@ extension RVS_GTDriver {
      This is our delegate instance. READ-ONLY
      */
     public var delegate: RVS_GTDriverDelegate {
-        return _delegate
+        return internal_delegate
     }
     
     /* ################################################################## */
@@ -255,20 +290,24 @@ extension RVS_GTDriver {
      */
     @objc dynamic public var isScanning: Bool {
         get {
-            return _centralManager.isScanning
+            return internal_centralManager.isScanning
         }
         
         set {
             if !newValue {
-                _centralManager.stopScan()
+                internal_centralManager.stopScan()
             } else {
                 // If we are not powered on, then we report an error, and stop.
-                guard CBManagerState.poweredOn == _centralManager.state else {
+                guard CBManagerState.poweredOn == internal_centralManager.state else {
                     reportThisError(.bluetoothNotAvailable)
                     return
                 }
+                // See if we want to be continuously scanning.
+                let options = [
+                    CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: internal_AllowDuplicatesInBLEScan)
+                ]
                 // We search for any devices that advertise the goTenna proprietary service.
-                _centralManager.scanForPeripherals(withServices: [CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue)], options: [CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true as Bool)])
+                internal_centralManager.scanForPeripherals(withServices: [CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue)], options: options)
             }
         }
     }
@@ -279,7 +318,7 @@ extension RVS_GTDriver {
      Returns true, if the bluetooth system is valid.
      */
     @objc dynamic public var isBluetoothAvailable: Bool {
-        return .poweredOn == _centralManager.state
+        return .poweredOn == internal_centralManager.state
     }
     
     /* ################################################################## */

@@ -56,47 +56,20 @@ import CoreBluetooth
 */
 public class RVS_GTDriver: NSObject {
     /* ################################################################################################################################## */
-    // MARK: - Internal Instance Constants
+    // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This is the signal strength range. Optimal is -50.
-     */
-    internal let _RSSI_range = -80..<(-40)
-    
-    /* ################################################################## */
-    /**
-     This is the Maximum Transmission Unit size.
-     */
-    internal let _notifyMTU = 244
-    
-    /* ################################################################################################################################## */
-    // MARK: - Internal Instance Properties
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This is our delegate instance. It is a weak reference.
-     */
-    internal var _delegate: RVS_GTDriverDelegate!
-    
-    /* ################################################################## */
-    /**
-     Our CB Central manager instance.
-     */
-    internal var _centralManager: CBCentralManager!
-    
     /* ################################################################## */
     /**
      This is "temporary storage" for devices that are still undergoing validation before being added.
      */
-    internal var _holdingPen: [RVS_GTDevice] = []
+    private var _holdingPen: [RVS_GTDevice] = []
     
     /* ################################################################## */
     /**
      This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_GTDevice.
      */
-    internal var _sequence_contents: [RVS_GTDevice] = []
-
+    private var _sequence_contents: [RVS_GTDevice] = []
+    
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -107,6 +80,43 @@ public class RVS_GTDriver: NSObject {
     private override init() { }
     
     /* ################################################################################################################################## */
+    // MARK: - Internal Instance Constants
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is the signal strength range. Optimal is -50.
+     */
+    internal let RSSI_range = -80..<(-40)
+    
+    /* ################################################################## */
+    /**
+     This is the Maximum Transmission Unit size.
+     */
+    internal let notifyMTU = 244
+    
+    /* ################################################################################################################################## */
+    // MARK: - Internal Instance Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is our delegate instance. It is a weak reference.
+     */
+    internal var internal_delegate: RVS_GTDriverDelegate!
+    
+    /* ################################################################## */
+    /**
+     Our CB Central manager instance.
+     */
+    internal var internal_centralManager: CBCentralManager!
+    
+    /* ################################################################## */
+    /**
+     This is a flag that specifies that the scanner can be continuously running, and "re-finding" duplicate devices.
+     If true, it could adversely affect battery life. Default is false.
+     */
+    internal var internal_AllowDuplicatesInBLEScan: Bool = false
+
+    /* ################################################################################################################################## */
     // MARK: - Internal Main Initializer
     /* ################################################################################################################################## */
     /* ################################################################## */
@@ -114,12 +124,12 @@ public class RVS_GTDriver: NSObject {
      The main initializer.
      
      - parameter delegate: The delegate to be used with this instance. It cannot be nil, and is a weak reference.
-     - parameter dispatchQueue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
+     - parameter queue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
      */
-    internal init(delegate inDelegate: RVS_GTDriverDelegate, dispatchQueue inQueue: DispatchQueue? = nil) {
+    internal init(delegate inDelegate: RVS_GTDriverDelegate, queue inQueue: DispatchQueue? = nil) {
         super.init()
-        _delegate = inDelegate
-        _centralManager = CBCentralManager(delegate: self, queue: inQueue)
+        internal_delegate = inDelegate
+        internal_centralManager = CBCentralManager(delegate: self, queue: inQueue)
     }
 }
 
@@ -143,13 +153,13 @@ extension RVS_GTDriver {
      */
     internal func connectDevice(_ inDevice: RVS_GTDevice) {
         // If we are not powered on, then we report an error, and stop.
-        guard CBManagerState.poweredOn == _centralManager.state else {
+        guard CBManagerState.poweredOn == internal_centralManager.state else {
             reportThisError(.bluetoothNotAvailable)
             return
         }
 
         if .disconnected == inDevice.internal_peripheral.state { // Must be completely disconnected
-            _centralManager.connect(inDevice.internal_peripheral, options: nil)
+            internal_centralManager.connect(inDevice.internal_peripheral, options: nil)
         }
     }
 
@@ -161,7 +171,7 @@ extension RVS_GTDriver {
      */
     internal func disconnectDevice(_ inDevice: RVS_GTDevice) {
         if .disconnected != inDevice.internal_peripheral.state { // We can disconnect at any stage.
-            _centralManager.cancelPeripheralConnection(inDevice.internal_peripheral)
+            internal_centralManager.cancelPeripheralConnection(inDevice.internal_peripheral)
         }
     }
     
@@ -203,7 +213,7 @@ extension RVS_GTDriver {
             print("Removing Device: \(String(describing: inDevice)).")
         #endif
         // Make sure that we are not connected.
-        _centralManager.cancelPeripheralConnection(inDevice.internal_peripheral)
+        internal_centralManager.cancelPeripheralConnection(inDevice.internal_peripheral)
 
         if let index = _holdingPen.firstIndex(where: { return $0.internal_peripheral == inDevice.internal_peripheral }) {
             #if DEBUG
@@ -416,7 +426,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didDiscover inPeripheral: CBPeripheral, advertisementData inAdvertisementData: [String: Any], rssi inRSSI: NSNumber) {
         // Check to make sure the signal is strong enough.
-        guard _RSSI_range.contains(inRSSI.intValue) else {
+        guard RSSI_range.contains(inRSSI.intValue) else {
             #if DEBUG
                 print("Signal out of range (\(inRSSI.intValue)) for peripheral: \(inPeripheral).")
             #endif
