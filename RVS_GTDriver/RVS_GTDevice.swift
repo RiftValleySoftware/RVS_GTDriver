@@ -40,75 +40,78 @@ public class RVS_GTDevice: NSObject {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is the Core Bluetooth peripheral instance that is associated with this object.
-     */
-    internal var _peripheral: CBPeripheral!
-    
-    /* ################################################################## */
-    /**
-     This is the driver instance that "owns" this device instance.
-     */
-    internal weak var _owner: RVS_GTDriver!
-    
-    /* ################################################################## */
-    /**
-     This is our delegate instance. It is a weak reference.
-     */
-    internal var _delegate: RVS_GTDeviceDelegate!
-    
-    /* ################################################################## */
-    /**
      This is a (yuck) semaphore, indicating that the initial device info connection was made.
      */
-    internal var _initialized = false
+    private var _initialized = false
     
     /* ################################################################## */
     /**
      This is a "holding pen" for services that have been discovered, but not yet initialized. They need to be kept around, in order to remain viable.
      */
-    internal var _holdingPen: [RVS_GTService] = []
+    private var _holdingPen: [RVS_GTService] = []
     
     /* ################################################################## */
     /**
      This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_GTService.
      */
-    internal var _services: [RVS_GTService] = []
-
-    /* ################################################################## */
-    /**
-     This is the manufacturer name. It will be filled at initialization time.
-     */
-    internal var _manufacturerName: String = ""
-    
-    /* ################################################################## */
-    /**
-     This is the "model number." It will be filled at initialization time.
-     */
-    internal var _modelNumber: String = ""
-    
-    /* ################################################################## */
-    /**
-     This is the hardware revision. It will be filled at initialization time.
-     */
-    internal var _hardwareRevision: String = ""
-    
-    /* ################################################################## */
-    /**
-     This is the firmware revision. It will be filled at initialization time.
-     */
-    internal var _firmwareRevision: String = ""
+    private var _services: [RVS_GTService] = []
     
     /* ################################################################## */
     /**
      This is a reference to our internal device info service.
      */
-    internal var _deviceInfoService: RVS_GTService!
+    private var _deviceInfoService: RVS_GTService!
 
     /* ################################################################## */
     /**
      This is a reference to our internal proprietary goTenna service.
      */
-    internal var _goTennaService: RVS_GTService!
+    private var _goTennaService: RVS_GTService!
+
+    /* ################################################################################################################################## */
+    // MARK: - Internal Instance Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is the Core Bluetooth peripheral instance that is associated with this object.
+     */
+    internal var internal_peripheral: CBPeripheral!
+    
+    /* ################################################################## */
+    /**
+     This is the driver instance that "owns" this device instance.
+     */
+    internal weak var internal_owner: RVS_GTDriver!
+    
+    /* ################################################################## */
+    /**
+     This is our delegate instance. It is a weak reference.
+     */
+    internal var internal_delegate: RVS_GTDeviceDelegate!
+    
+    /* ################################################################## */
+    /**
+     This is the manufacturer name. It will be filled at initialization time.
+     */
+    internal var internal_manufacturerName: String = ""
+    
+    /* ################################################################## */
+    /**
+     This is the "model number." It will be filled at initialization time.
+     */
+    internal var internal_modelNumber: String = ""
+    
+    /* ################################################################## */
+    /**
+     This is the hardware revision. It will be filled at initialization time.
+     */
+    internal var internal_hardwareRevision: String = ""
+    
+    /* ################################################################## */
+    /**
+     This is the firmware revision. It will be filled at initialization time.
+     */
+    internal var internal_firmwareRevision: String = ""
     
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
@@ -132,10 +135,10 @@ public class RVS_GTDevice: NSObject {
      */
     internal init(_ inPeripheral: CBPeripheral, owner inOwner: RVS_GTDriver, delegate inDelegate: RVS_GTDeviceDelegate! = nil) {
         super.init()
-        _peripheral = inPeripheral
-        _peripheral.delegate = self
-        _owner = inOwner
-        _delegate = inDelegate
+        internal_peripheral = inPeripheral
+        internal_peripheral.delegate = self
+        internal_owner = inOwner
+        internal_delegate = inDelegate
         isConnected = true  // Start our first connection.
     }
     
@@ -145,27 +148,6 @@ public class RVS_GTDevice: NSObject {
      */
     deinit {
         isConnected = false
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Internal Calculated Instance Properties -
-/* ###################################################################################################################################### */
-extension RVS_GTDevice {
-    /* ################################################################## */
-    /**
-     This returns our peripheral instance.
-     */
-    internal var peripheral: CBPeripheral! {
-        return _peripheral
-    }
-    
-    /* ################################################################## */
-    /**
-     This is the driver instance that "owns" this device instance.
-     */
-    internal var owner: RVS_GTDriver {
-        return _owner
     }
 }
 
@@ -228,7 +210,7 @@ extension RVS_GTDevice {
         if inStartClean {
             _services = [] // Start clean
         }
-        peripheral.discoverServices(inServiceCBUUIDs)
+        internal_peripheral.discoverServices(inServiceCBUUIDs)
     }
     
     /* ################################################################## */
@@ -241,7 +223,7 @@ extension RVS_GTDevice {
         if inStartClean {
             _services = [] // Start clean
         }
-        peripheral.discoverServices(nil)
+        internal_peripheral.discoverServices(nil)
     }
 
     /* ################################################################## */
@@ -251,7 +233,7 @@ extension RVS_GTDevice {
      - parameter inService: The service object.
      */
     internal func discoverCharacteristicsForService(_ inService: RVS_GTService) {
-        peripheral.discoverCharacteristics(nil, for: inService.service)
+        internal_peripheral.discoverCharacteristics(nil, for: inService.service)
     }
     
     /* ################################################################## */
@@ -261,7 +243,7 @@ extension RVS_GTDevice {
      - parameter inService: The service object.
      */
     internal func discoverAllCharacteristicsForService(_ inService: RVS_GTService) {
-        peripheral.discoverCharacteristics(nil, for: inService.service)
+        internal_peripheral.discoverCharacteristics(nil, for: inService.service)
     }
     
     /* ################################################################## */
@@ -272,7 +254,7 @@ extension RVS_GTDevice {
      - parameter characteristicCBUUIDs: An Array of CBUUIDs, with the specific characteristics we're looking for.
      */
     internal func discoverCharacteristicsForService(_ inService: RVS_GTService, characteristicCBUUIDs inUUIDs: [CBUUID]) {
-        peripheral.discoverCharacteristics(inUUIDs, for: inService.service)
+        internal_peripheral.discoverCharacteristics(inUUIDs, for: inService.service)
     }
     
     /* ################################################################## */
@@ -310,7 +292,7 @@ extension RVS_GTDevice {
             _initialized = true
             // We no longer need the device to be connected.
             isConnected = false
-            owner.addDeviceToList(self)
+            internal_owner.addDeviceToList(self)
         }
     }
     
@@ -321,7 +303,7 @@ extension RVS_GTDevice {
      - parameter inCharacteristic: The characteristic object.
      */
     internal func startNotifyForCharacteristic(_ inCharacteristic: RVS_GTCharacteristic) {
-        _peripheral.setNotifyValue(true, for: inCharacteristic.characteristic)
+        internal_peripheral.setNotifyValue(true, for: inCharacteristic.characteristic)
     }
     
     /* ################################################################## */
@@ -331,7 +313,7 @@ extension RVS_GTDevice {
      - parameter inCharacteristic: The characteristic object.
      */
     internal func stopNotifyForCharacteristic(_ inCharacteristic: RVS_GTCharacteristic) {
-        _peripheral.setNotifyValue(false, for: inCharacteristic.characteristic)
+        internal_peripheral.setNotifyValue(false, for: inCharacteristic.characteristic)
     }
     
     /* ################################################################## */
@@ -341,7 +323,7 @@ extension RVS_GTDevice {
      - parameter inCharacteristic: The characteristic object.
      */
     internal func readValueForCharacteristic(_ inCharacteristic: RVS_GTCharacteristic) {
-        _peripheral.readValue(for: inCharacteristic.characteristic)
+        internal_peripheral.readValue(for: inCharacteristic.characteristic)
     }
     
     /* ################################################################## */
@@ -360,7 +342,7 @@ extension RVS_GTDevice {
             #if DEBUG
                 print("Read the Manufacturer Name: \(manufacturerName).")
             #endif
-            _manufacturerName = manufacturerName
+            internal_manufacturerName = manufacturerName
             
             guard   let modelNumber = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoModelName.rawValue))?.stringValue
             else {
@@ -371,7 +353,7 @@ extension RVS_GTDevice {
             #if DEBUG
                 print("Read the Model Number: \(modelNumber).")
             #endif
-            _modelNumber = modelNumber
+            internal_modelNumber = modelNumber
             
             guard   let hardwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue))?.stringValue
             else {
@@ -382,7 +364,7 @@ extension RVS_GTDevice {
             #if DEBUG
                 print("Read the Hardware Revision: \(hardwareRevision).")
             #endif
-            _hardwareRevision = hardwareRevision
+            internal_hardwareRevision = hardwareRevision
             
             guard   let firmwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue))?.stringValue
             else {
@@ -393,7 +375,7 @@ extension RVS_GTDevice {
             #if DEBUG
                 print("Read the Firmaware Revision: \(firmwareRevision).")
             #endif
-            _firmwareRevision = firmwareRevision
+            internal_firmwareRevision = firmwareRevision
         }
     }
     
@@ -420,7 +402,7 @@ extension RVS_GTDevice: RVS_GTDriverTools {
         if let delegate = delegate {    // If we have a delegate, they get first dibs.
             delegate.gtDevice(self, errorEncountered: inError)
         } else {
-            owner.reportThisError(inError)
+            internal_owner.reportThisError(inError)
         }
     }
 }
@@ -560,7 +542,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             
             // Make sure that our delegates are updated.
             delegate?.gtDeviceStatusUpdate(self)
-            owner.sendDeviceUpdateToDelegegate()
+            internal_owner.sendDeviceUpdateToDelegegate()
             discoverAllServices()   // We discover all services.
         }
     }
@@ -740,6 +722,6 @@ extension RVS_GTDevice: CBPeripheralDelegate {
      :nodoc: Return the simple description (Manufacturer name, model and ID).
      */
     override public var description: String {
-        return String(describing: _manufacturerName + " " + _modelNumber + " " + id)
+        return String(describing: internal_manufacturerName + " " + internal_modelNumber + " " + id)
     }
 }

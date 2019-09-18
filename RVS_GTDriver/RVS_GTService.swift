@@ -62,6 +62,12 @@ public class RVS_GTService: NSObject {
      */
     private var _holdingPen: [RVS_GTCharacteristic] = []
     
+    /* ################################################################## */
+    /**
+     This is where we keep our discovered and cached characteristics.
+     */
+    private var _sequence_contents: [RVS_GTCharacteristic] = []
+
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -95,17 +101,6 @@ public class RVS_GTService: NSObject {
             discoverCharacteristics(characteristicCBUUIDs: _initialCharacteristics)
         }
     }
-    
-    /* ################################################################################################################################## */
-    // MARK: - Public Sequence Support Properties
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     :nodoc: This is an Array of our discovered characteristics, as represented by instances of RVS_GTCharacteristic.
-     
-     THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
-     */
-    public var sequence_contents: [RVS_GTCharacteristic] = []
 }
 
 /* ###################################################################################################################################### */
@@ -280,7 +275,7 @@ extension RVS_GTService {
                 print("Removing Characteristic: \(String(describing: inCharacteristic)) From Our Holding Pen at index \(index).")
             #endif
             _holdingPen.remove(at: index)
-            sequence_contents.append(inCharacteristic)
+            _sequence_contents.append(inCharacteristic)
         }
         
         if  !_initialized,
@@ -313,7 +308,7 @@ extension RVS_GTService {
      */
     internal func discoverCharacteristics(characteristicCBUUIDs inUUIDs: [CBUUID], startClean inStartClean: Bool = false) {
         if inStartClean {
-            sequence_contents = [] // Start clean
+            _sequence_contents = [] // Start clean
         }
         
         if !inUUIDs.isEmpty {
@@ -332,7 +327,7 @@ extension RVS_GTService {
      */
     internal func discoverAllCharacteristics(startClean inStartClean: Bool = false) {
         if inStartClean {
-            sequence_contents = [] // Start clean
+            _sequence_contents = [] // Start clean
         }
         
         #if DEBUG
@@ -370,21 +365,26 @@ extension RVS_GTService: RVS_SequenceProtocol {
      :nodoc: The element type is our characteristic class.
      */
     public typealias Element = RVS_GTCharacteristic
+    
+    /* ################################################################## */
+    /**
+     :nodoc: This is an Array of our discovered characteristics, as represented by instances of RVS_GTCharacteristic.
+     */
+    public var sequence_contents: [RVS_GTCharacteristic] {
+        get {
+            return _sequence_contents
+        }
+        
+        set {
+            _ = newValue    // NOP
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
-// MARK: - This is What We Tell the Kids -
+// MARK: - Public Calculated Instance Properties -
 /* ###################################################################################################################################### */
-/**
- This is the "Public Face" of the service. This is what we want our consumers to see and use. Some of the other stuff is public, but isn't
- meant for consumer use. It needs to be public in order to conform to delegate protocols.
- 
- One other thing about this class, is that it conforms to Sequence, so you can iterate through it for characteristics, or access characteristics as subscripts.
- */
 extension RVS_GTService {
-    /* ################################################################################################################################## */
-    // MARK: - Public Calculated Instance Properties -
-    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      :nodoc: Return the simple description UUID.

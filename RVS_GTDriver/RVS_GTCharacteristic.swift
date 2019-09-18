@@ -101,32 +101,7 @@ extension RVS_GTCharacteristic: RVS_GTDriverTools {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Sequence Support
-/* ###################################################################################################################################### */
-extension RVS_GTCharacteristic: RVS_SequenceProtocol {
-    /* ################################################################## */
-    /**
-     :nodoc: We sequence CBDescriptors.
-     */
-    public typealias Element = CBDescriptor
-    
-    /* ################################################################## */
-    /**
-     :nodoc: This is a simple direct access to the characteristic descriptors.
-     */
-    public var sequence_contents: [CBDescriptor] {
-        get {
-            return _characteristic.descriptors ?? []
-        }
-        
-        set {
-            _ = newValue    // NOP
-        }
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Exposed Internally -
+// MARK: - Internal Calculated Properties -
 /* ###################################################################################################################################### */
 extension RVS_GTCharacteristic {
     /* ################################################################## */
@@ -153,7 +128,37 @@ extension RVS_GTCharacteristic {
         
         return nil
     }
+}
 
+/* ###################################################################################################################################### */
+// MARK: - Sequence Support
+/* ###################################################################################################################################### */
+extension RVS_GTCharacteristic: RVS_SequenceProtocol {
+    /* ################################################################## */
+    /**
+     :nodoc: We sequence CBDescriptors.
+     */
+    public typealias Element = CBDescriptor
+    
+    /* ################################################################## */
+    /**
+     :nodoc: This is a simple direct access to the characteristic descriptors.
+     */
+    public var sequence_contents: [CBDescriptor] {
+        get {
+            return _characteristic.descriptors ?? []
+        }
+        
+        set {
+            _ = newValue    // NOP
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Public Description -
+/* ###################################################################################################################################### */
+extension RVS_GTCharacteristic {
     /* ################################################################## */
     /**
      :nodoc: Return the simple description UUID.

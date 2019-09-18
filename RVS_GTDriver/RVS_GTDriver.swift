@@ -144,8 +144,8 @@ extension RVS_GTDriver {
             return
         }
 
-        if .disconnected == inDevice.peripheral.state { // Must be completely disconnected
-            _centralManager.connect(inDevice.peripheral, options: nil)
+        if .disconnected == inDevice.internal_peripheral.state { // Must be completely disconnected
+            _centralManager.connect(inDevice.internal_peripheral, options: nil)
         }
     }
 
@@ -156,8 +156,8 @@ extension RVS_GTDriver {
      - parameter inDevice: The deivice we want disconnected.
      */
     internal func disconnectDevice(_ inDevice: RVS_GTDevice) {
-        if .disconnected != inDevice.peripheral.state { // We can disconnect at any stage.
-            _centralManager.cancelPeripheralConnection(inDevice.peripheral)
+        if .disconnected != inDevice.internal_peripheral.state { // We can disconnect at any stage.
+            _centralManager.cancelPeripheralConnection(inDevice.internal_peripheral)
         }
     }
     
@@ -172,7 +172,7 @@ extension RVS_GTDriver {
             print("Adding Device: \(String(describing: inDevice)) To Our List at index \(count).")
         #endif
         // Remove from the "holding pen."
-        if let index = _holdingPen.firstIndex(where: { return $0.peripheral == inDevice.peripheral }) {
+        if let index = _holdingPen.firstIndex(where: { return $0.internal_peripheral == inDevice.internal_peripheral }) {
             #if DEBUG
                 print("Removing Device: \(String(describing: inDevice)) From Holding Pen at index \(index).")
             #endif
@@ -199,16 +199,16 @@ extension RVS_GTDriver {
             print("Removing Device: \(String(describing: inDevice)).")
         #endif
         // Make sure that we are not connected.
-        _centralManager.cancelPeripheralConnection(inDevice.peripheral)
+        _centralManager.cancelPeripheralConnection(inDevice.internal_peripheral)
 
-        if let index = _holdingPen.firstIndex(where: { return $0.peripheral == inDevice.peripheral }) {
+        if let index = _holdingPen.firstIndex(where: { return $0.internal_peripheral == inDevice.internal_peripheral }) {
             #if DEBUG
                 print("Removing Device: \(String(describing: inDevice)) From Holding Pen at index \(index).")
             #endif
             _holdingPen.remove(at: index)
         }
         
-        if let index = sequence_contents.firstIndex(where: { return $0.peripheral == inDevice.peripheral }) {
+        if let index = sequence_contents.firstIndex(where: { return $0.internal_peripheral == inDevice.internal_peripheral }) {
             #if DEBUG
                 print("Removing Device: \(String(describing: inDevice)) From Main Cache at index \(index).")
             #endif
@@ -296,13 +296,13 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      */
     internal func containsThisPeripheral(_ inPeripheral: CBPeripheral) -> Bool {
         var ret: Bool = sequence_contents.reduce(false) { (inCurrent, inElement) -> Bool in
-            guard !inCurrent, let peripheral = inElement.peripheral else { return inCurrent }
+            guard !inCurrent, let peripheral = inElement.internal_peripheral else { return inCurrent }
             return inPeripheral == peripheral
         }
         
         if !ret {
             ret = _holdingPen.reduce(false) { (inCurrent, inElement) -> Bool in
-                guard !inCurrent, let peripheral = inElement.peripheral else { return inCurrent }
+                guard !inCurrent, let peripheral = inElement.internal_peripheral else { return inCurrent }
                 return inPeripheral == peripheral
             }
         }
@@ -320,11 +320,11 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - returns: The device. Nil, if not found.
      */
     internal func deviceForThisPeripheral(_ inPeripheral: CBPeripheral) -> RVS_GTDevice? {
-        for device in self where inPeripheral == device.peripheral {
+        for device in self where inPeripheral == device.internal_peripheral {
             return device
         }
         
-        for device in _holdingPen where inPeripheral == device.peripheral {
+        for device in _holdingPen where inPeripheral == device.internal_peripheral {
             return device
         }
 

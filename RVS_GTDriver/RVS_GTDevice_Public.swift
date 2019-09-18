@@ -178,11 +178,11 @@ extension RVS_GTDevice {
      */
     public var delegate: RVS_GTDeviceDelegate! {
         get {
-            return _delegate
+            return internal_delegate
         }
         
         set {
-            _delegate = newValue
+            internal_delegate = newValue
         }
     }
 
@@ -193,14 +193,14 @@ extension RVS_GTDevice {
      */
     @objc dynamic public var isConnected: Bool {
         get {
-            return .connected == peripheral.state
+            return .connected == internal_peripheral.state
         }
         
         set {
-            if newValue && .disconnected == peripheral.state {
-                _owner.connectDevice(self)
+            if newValue && .disconnected == internal_peripheral.state {
+                internal_owner.connectDevice(self)
             } else {
-                _owner.disconnectDevice(self)
+                internal_owner.disconnectDevice(self)
             }
         }
     }
@@ -211,7 +211,7 @@ extension RVS_GTDevice {
      It is KVO-observable.
      */
     @objc dynamic public var manufacturerName: String {
-        return _manufacturerName
+        return internal_manufacturerName
     }
     
     /* ################################################################## */
@@ -220,7 +220,7 @@ extension RVS_GTDevice {
      It is KVO-observable.
      */
     @objc dynamic public var modelNumber: String {
-        return _modelNumber
+        return internal_modelNumber
     }
     
     /* ################################################################## */
@@ -229,7 +229,7 @@ extension RVS_GTDevice {
      It is KVO-observable.
      */
     @objc dynamic public var hardwareRevision: String {
-        return _hardwareRevision
+        return internal_hardwareRevision
     }
     
     /* ################################################################## */
@@ -238,7 +238,7 @@ extension RVS_GTDevice {
      It is KVO-observable.
      */
     @objc dynamic public var firmwareRevision: String {
-        return _firmwareRevision
+        return internal_firmwareRevision
     }
     
     /* ################################################################## */
@@ -247,7 +247,7 @@ extension RVS_GTDevice {
      It is KVO-observable.
      */
     @objc dynamic public var id: String {
-        if let device = _peripheral {
+        if let device = internal_peripheral {
             return device.identifier.uuidString
         }
         return ""
@@ -259,7 +259,7 @@ extension RVS_GTDevice {
      It is KVO-observable.
      */
     @objc dynamic public var name: String {
-        if let device = _peripheral {
+        if let device = internal_peripheral {
             return device.name ?? ""
         }
         return ""
@@ -274,7 +274,7 @@ extension RVS_GTDevice {
     public func goodbyeCruelWorld() {
         isConnected = false // Make sure that we're not connected anymore.
         delegate?.gtDeviceWillBeRemoved(self)
-        owner.removeDeviceFromDriver(self)
+        internal_owner.removeDeviceFromDriver(self)
         delegate?.gtDeviceWasRemoved(self)
     }
 }
