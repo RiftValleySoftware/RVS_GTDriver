@@ -282,4 +282,13 @@ extension RVS_GTDriver {
     @objc dynamic public var isBluetoothAvailable: Bool {
         return .poweredOn == _centralManager.state
     }
+    
+    /* ################################################################## */
+    /**
+     This accesses the devices as a simple Array.
+     This is KVO-observable. READ-ONLY.
+     */
+    @objc dynamic public var devices: [RVS_GTDevice] {
+        return sequence_contents
+    }
 }

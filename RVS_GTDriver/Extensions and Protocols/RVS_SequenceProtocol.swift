@@ -39,7 +39,7 @@ public protocol RVS_SequenceProtocol: Sequence {
     
     /* ################################################################## */
     /**
-     :nodoc: Subscript access is get-only (for safety).
+     Subscript access is get-only (for safety).
      
      - parameter index: The 0-based index to subscript. Must be less than count.
      */
@@ -54,7 +54,7 @@ extension RVS_SequenceProtocol {
     /**
      :nodoc: We just pass the iterator through to the Array.
      
-     - returns: The Array iterator for our characateristics.
+     - returns: The Array iterator for our elements.
      */
     public func makeIterator() -> Array<Element>.Iterator {
         return sequence_contents.makeIterator()
@@ -62,17 +62,25 @@ extension RVS_SequenceProtocol {
     
     /* ################################################################## */
     /**
-     :nodoc: The number of characteristics we have. 1-based. 0 is no characteristics.
+     Returns true, if yes, we have no bananas.
      */
-    public var count: Int {
-        return sequence_contents.count
+    public var isEmpty: Bool {
+        return sequence_contents.isEmpty
     }
     
     /* ################################################################## */
     /**
-     :nodoc: Returns an indexed characteristic.
+     The number of elements we have. 1-based. 0 is no elements (isEmpty is true).
+     */
+    public var count: Int {
+        return sequence_contents.count
+    }
+
+    /* ################################################################## */
+    /**
+     Returns an indexed element.
      
-     - parameter inIndex: The 0-based integer index. Must be less than the total count of characteristics.
+     - parameter inIndex: The 0-based integer index. Must be less than the total count of elements.
      */
     public subscript(_ inIndex: Int) -> Element {
         precondition((0..<count).contains(inIndex))   // Standard precondition. Index needs to be 0 or greater, and less than the count.

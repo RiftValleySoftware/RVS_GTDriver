@@ -101,16 +101,19 @@ Scanning, in which case, it looks for goTenna devices.</p>
 
 <p>It is important that the consumer provide delegates to the driver, device and service instances. Most of the action happens in delegate callbacks.</p>
 
-<p>Only the entities in the last extension (and the initializer) should be considered useful for API consumers.</p>
+<p>Only the entities in the <a href="https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/RVS_GTDriver/RVS_GTDriver_Public.swift">RVS_GTDriver_Public.swift</a> extension should be considered useful for API consumers.</p>
+
+<p>You may also treat the instance as <a href="https://developer.apple.com/documentation/swift/sequence">a Sequence</a>, with Element being instances of RVS_GTDevice (goTenna devices).
+You can access them directly with subscripts (count returns the number of devices).</p>
 
 <p>You will see that internal methods and properties are explicitly marked as <q>internal.</q> This is to help clarify their scope.</p>
 
-<p>One of the goals of this driver is to abstract the Core Bluetooth stuff from the consumer, so it can be swapped out with things like USB or WiFi.</p>
+<p>One of the goals of this driver is to abstract the <a href="https://developer.apple.com/documentation/corebluetooth">Core Bluetooth</a> stuff from the consumer, so it can be swapped out with things like USB or WiFi.</p>
 
-<p>Internally, the driver will always be a BT Central. It will scan for goTenna devices as peripherals, and instantiate internal instances of RVS_GTDevice
+<p>Internally, the driver will always run a <a href="https://developer.apple.com/documentation/corebluetooth/cbcentralmanager">CBCentralManager</a> instance. It will scan for goTenna devices as <a href="https://developer.apple.com/documentation/corebluetooth/cbperipheral">peripherals</a>, and instantiate internal instances of <a href="https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/RVS_GTDriver/RVS_GTDevice.swift">RVS_GTDevice</a>
 for each discovered peripheral device.</p>
 
-<p>Since this receives delegate callbacks from CB, it must derive from NSObject.</p>
+<p>Since this receives delegate callbacks from <a href="https://developer.apple.com/documentation/corebluetooth">Core Bluetooth</a>, it must derive from <a href="https://developer.apple.com/documentation/objectivec/1418956-nsobject?language=occ">NSObject</a>.</p>
 
           </div>
         </section>
@@ -314,6 +317,35 @@ Returns true, if the bluetooth system is valid.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objc</span>
 <span class="kd">dynamic</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">isBluetoothAvailable</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_GTDriver_iOS@objc(cs)RVS_GTDriver(py)devices"></a>
+                    <a name="//apple_ref/swift/Property/devices" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_GTDriver_iOS@objc(cs)RVS_GTDriver(py)devices">devices</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This accesses the devices as a simple Array.
+This is KVO-observable. READ-ONLY.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">dynamic</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">devices</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/RVS_GTDevice.html">RVS_GTDevice</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>

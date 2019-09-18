@@ -39,16 +39,19 @@ import CoreBluetooth
  
  It is important that the consumer provide delegates to the driver, device and service instances. Most of the action happens in delegate callbacks.
  
- Only the entities in the last extension (and the initializer) should be considered useful for API consumers.
+ Only the entities in the [RVS_GTDriver_Public.swift](https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/RVS_GTDriver/RVS_GTDriver_Public.swift) extension should be considered useful for API consumers.
+ 
+ You may also treat the instance as [a Sequence](https://developer.apple.com/documentation/swift/sequence), with Element being instances of RVS_GTDevice (goTenna devices).
+ You can access them directly with subscripts (count returns the number of devices).
  
  You will see that internal methods and properties are explicitly marked as "internal." This is to help clarify their scope.
  
- One of the goals of this driver is to abstract the Core Bluetooth stuff from the consumer, so it can be swapped out with things like USB or WiFi.
+ One of the goals of this driver is to abstract the [Core Bluetooth](https://developer.apple.com/documentation/corebluetooth) stuff from the consumer, so it can be swapped out with things like USB or WiFi.
  
- Internally, the driver will always be a BT Central. It will scan for goTenna devices as peripherals, and instantiate internal instances of RVS_GTDevice
+ Internally, the driver will always run a [CBCentralManager](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) instance. It will scan for goTenna devices as [peripherals](https://developer.apple.com/documentation/corebluetooth/cbperipheral), and instantiate internal instances of [RVS_GTDevice](https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/RVS_GTDriver/RVS_GTDevice.swift)
  for each discovered peripheral device.
  
- Since this receives delegate callbacks from CB, it must derive from NSObject.
+ Since this receives delegate callbacks from [Core Bluetooth](https://developer.apple.com/documentation/corebluetooth), it must derive from [NSObject](https://developer.apple.com/documentation/objectivec/1418956-nsobject?language=occ).
 */
 public class RVS_GTDriver: NSObject {
     /* ################################################################################################################################## */
