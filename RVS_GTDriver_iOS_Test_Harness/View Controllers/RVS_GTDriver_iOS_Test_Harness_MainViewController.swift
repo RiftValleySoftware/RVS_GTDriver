@@ -190,6 +190,10 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDataSourc
      - returns: The number of rows (number of devices).
      */
     func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
+        // Make sure that we are the delegate for all devices.
+        for device in gtDriver {
+            device.delegate = self
+        }
         return gtDriver?.count ?? 0
     }
     
@@ -286,10 +290,6 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
     override func viewWillAppear(_ inAnimated: Bool) {
         super.viewWillAppear(inAnimated)
         navigationController?.isNavigationBarHidden = true
-        // Make sure that we are the delegate for all devices.
-        for device in gtDriver {
-            device.delegate = self
-        }
         gtDriver?.isScanning = _wasScanning
         _wasScanning = false
         setUpUI()
@@ -303,11 +303,11 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
      - parameter sender: The context we attached to the segue (the device object).
      */
     override func prepare(for inSegue: UIStoryboardSegue, sender inSender: Any?) {
+        _wasScanning = gtDriver?.isScanning ?? false
+        gtDriver?.isScanning = false
         guard   let destination = inSegue.destination as? RVS_GTDriver_iOS_Test_Harness_Device_ViewController,
                 let device = inSender as? RVS_GTDevice else { return }
         destination.gtDevice = device
-        _wasScanning = gtDriver?.isScanning ?? false
-        gtDriver?.isScanning = false
         setUpUI()
     }
 }
@@ -395,50 +395,9 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: RVS_GTDeviceDelegate
      - parameter errorEncountered: The error encountered.
      */
     public func gtDevice(_ inDevice: RVS_GTDevice, errorEncountered inError: RVS_GTDriver.Errors) {
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when a device is about to be removed.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter inDevice: The device instance calling this.
-     */
-    public func gtDeviceWillBeRemoved(_ inDevice: RVS_GTDevice) {
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when a device was removed.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter inDevice: The device object. It will not be viable after this call.
-     */
-    public func gtDeviceWasRemoved(_ inDevice: RVS_GTDevice) {
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when a device was connected.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter inDevice: The device object.
-     */
-    public func gtDeviceWasConnected(_ inDevice: RVS_GTDevice) {
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when a device was disconnected for any reason.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter inDevice: The device object.
-     - parameter wasDisconnected: Any error that may have occurred. May be nil.
-     */
-    public func gtDevice(_ inDevice: RVS_GTDevice, wasDisconnected inError: Error?) {
+        #if DEBUG
+            print("ERROR: \(String(describing: inError))")
+        #endif
+        displayError(inError.localizedDescription.localizedVariant)
     }
 }
