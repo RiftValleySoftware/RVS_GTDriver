@@ -24,7 +24,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 // MARK: - Standardized Sequence Protocol to Let Collectors be Sequences -
 /* ###################################################################################################################################### */
 /**
- If you conform to this protocol, you get a few basic Sequence attributes for free.
+ :nodoc: If you conform to this protocol, you get a few basic Sequence attributes for free.
  
  You'll need to set up a sequence_contents Array (read/write), and set the Element type, and that's about all.
  
@@ -33,13 +33,13 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 public protocol RVS_SequenceProtocol: Sequence {
     /* ################################################################## */
     /**
-     The implementor is required to have an Array of Element (required by Sequence).
+     :nodoc: The implementor is required to have an Array of Element (required by Sequence).
      */
     var sequence_contents: [Element] { get set }
     
     /* ################################################################## */
     /**
-     Subscript access is get-only (for safety).
+     :nodoc: Subscript access is get-only (for safety).
      
      - parameter index: The 0-based index to subscript. Must be less than count.
      */
@@ -49,12 +49,10 @@ public protocol RVS_SequenceProtocol: Sequence {
 /* ###################################################################################################################################### */
 // MARK: - Makes Things Optional -
 /* ###################################################################################################################################### */
-/**
- */
 extension RVS_SequenceProtocol {
     /* ################################################################## */
     /**
-     We just pass the iterator through to the Array.
+     :nodoc: We just pass the iterator through to the Array.
      
      - returns: The Array iterator for our characateristics.
      */
@@ -64,7 +62,7 @@ extension RVS_SequenceProtocol {
     
     /* ################################################################## */
     /**
-     The number of characteristics we have. 1-based. 0 is no characteristics.
+     :nodoc: The number of characteristics we have. 1-based. 0 is no characteristics.
      */
     public var count: Int {
         return sequence_contents.count
@@ -72,7 +70,7 @@ extension RVS_SequenceProtocol {
     
     /* ################################################################## */
     /**
-     Returns an indexed characteristic.
+     :nodoc: Returns an indexed characteristic.
      
      - parameter inIndex: The 0-based integer index. Must be less than the total count of characteristics.
      */

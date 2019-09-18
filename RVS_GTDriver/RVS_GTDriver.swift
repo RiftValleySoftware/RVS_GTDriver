@@ -108,9 +108,9 @@ public class RVS_GTDriver: NSObject {
      The main initializer.
      
      - parameter delegate: The delegate to be used with this instance. It cannot be nil, and is a weak reference.
-     - parameter queue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
+     - parameter dispatchQueue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
      */
-    internal init(delegate inDelegate: RVS_GTDriverDelegate, queue inQueue: DispatchQueue? = nil, ignoreMeImJustHereToBorkTheSignature: Bool = false) {
+    internal init(delegate inDelegate: RVS_GTDriverDelegate, dispatchQueue inQueue: DispatchQueue? = nil) {
         super.init()
         _delegate = inDelegate
         _centralManager = CBCentralManager(delegate: self, queue: inQueue)

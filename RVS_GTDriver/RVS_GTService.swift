@@ -23,62 +23,10 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_GTServiceDelegate Protocol -
-/* ###################################################################################################################################### */
-/**
- This is the delegate protocol.
- */
-public protocol RVS_GTServiceDelegate: class {
-    /* ###################################################################################################################################### */
-    // MARK: - Required Methods
-    /* ###################################################################################################################################### */
-    /* ################################################################## */
-    /**
-     Called when an error is encountered by a single service.
-     
-     This is required, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter service: The service instance calling this.
-     - parameter errorEncountered: The error encountered.
-     */
-    func gtService(_ service: RVS_GTService, errorEncountered: RVS_GTDriver.Errors)
-    
-    /* ###################################################################################################################################### */
-    // MARK: - Optional Methods
-    /* ###################################################################################################################################### */
-    /* ################################################################## */
-    /**
-     Called when a new characteristic has been added to the service.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter service: The service instance calling this.
-     - parameter dicoveredCharacteristic: The new characteristic instance.
-     */
-    func gtService(_ service: RVS_GTService, dicoveredCharacteristic: RVS_GTCharacteristic)
-}
-
-/* ###################################################################################################################################### */
-// MARK: - RVS_GTServiceDelegate Protocol Extension (Optional Methods) -
-/* ###################################################################################################################################### */
-extension RVS_GTServiceDelegate {
-    /* ################################################################## */
-    /**
-     Called when a new characteristic has been added to the service.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter service: The service instance calling this.
-     - parameter dicoveredCharacteristic: The new characteristic instance.
-     */
-    func gtService(_ service: RVS_GTService, dicoveredCharacteristic: RVS_GTCharacteristic) { }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Individual Service Instance Class -
 /* ###################################################################################################################################### */
 /**
- This class implements a BLE service wrapper, specialized for the goTenna driver.
+ :nodoc: This class implements a BLE service wrapper, specialized for the goTenna driver.
  */
 public class RVS_GTService: NSObject {
     /* ################################################################################################################################## */
@@ -95,12 +43,6 @@ public class RVS_GTService: NSObject {
      This is the device instance that "owns" this service instance.
      */
     private weak var _owner: RVS_GTDevice!
-    
-    /* ################################################################## */
-    /**
-     This is our delegate instance. It is a weak reference.
-     */
-    private var _delegate: RVS_GTServiceDelegate!
     
     /* ################################################################## */
     /**
@@ -138,14 +80,12 @@ public class RVS_GTService: NSObject {
      
      - parameter inService: The service to associate with this instance. This is a strong reference. It cannot be nil or omitted.
      - parameter owner: The device that "owns" this service. It is a weak reference. It cannot be nil or omitted.
-     - parameter delegate: The RVS_GTServiceDelegate instance. This is a weak reference. It is optional. Default is nil (no delegate).
      - parameter initialCharacteristics: This is a list of UUIDs that must be all read before the service is considered initialized. This is optional, and default is an empty Array.
      */
-    internal init(_ inService: CBService, owner inOwner: RVS_GTDevice, delegate inDelegate: RVS_GTServiceDelegate? = nil, initialCharacteristics inInitialCharacteristics: [CBUUID] = []) {
+    internal init(_ inService: CBService, owner inOwner: RVS_GTDevice, initialCharacteristics inInitialCharacteristics: [CBUUID] = []) {
         super.init()
         _service = inService
         _owner = inOwner
-        _delegate = inDelegate
         _initialCharacteristics = inInitialCharacteristics
         
         // If we aren't looking up any initial characteristics, then we're done.
@@ -161,7 +101,7 @@ public class RVS_GTService: NSObject {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is an Array of our discovered characteristics, as represented by instances of RVS_GTCharacteristic.
+     :nodoc: This is an Array of our discovered characteristics, as represented by instances of RVS_GTCharacteristic.
      
      THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
      */
@@ -343,13 +283,8 @@ extension RVS_GTService {
             sequence_contents.append(inCharacteristic)
         }
         
-        // If we are already initialized, then we simply call the delegate to let it know we have a characteristic ready.
-        if _initialized {
-            #if DEBUG
-                print("Sending Characteristic: \(String(describing: inCharacteristic)) To the Delegate.")
-            #endif
-            delegate?.gtService(self, dicoveredCharacteristic: inCharacteristic)
-        } else if _holdingPen.isEmpty { // Otherwise, we see if we are done. If so, we add ourselves to the device.
+        if  !_initialized,
+            _holdingPen.isEmpty { // We see if we are done. If so, we add ourselves to the device.
             #if DEBUG
                 print("We Are Done With Initialization. Time to Add Ourselves to the Device.")
             #endif
@@ -419,11 +354,7 @@ extension RVS_GTService: RVS_GTDriverTools {
      - parameter inError: The error to be sent to the delegate.
      */
     internal func reportThisError(_ inError: RVS_GTDriver.Errors) {
-        if let delegate = delegate {    // If we have a delegate, they get first dibs.
-            delegate.gtService(self, errorEncountered: inError)
-        } else {
-            owner.reportThisError(inError)
-        }
+        owner.reportThisError(inError)
     }
 }
 
@@ -436,7 +367,7 @@ extension RVS_GTService: RVS_GTDriverTools {
 extension RVS_GTService: RVS_SequenceProtocol {
     /* ################################################################## */
     /**
-     The element type is our characteristic class.
+     :nodoc: The element type is our characteristic class.
      */
     public typealias Element = RVS_GTCharacteristic
 }
@@ -456,21 +387,7 @@ extension RVS_GTService {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is our delegate instance. It can be nil.
-     */
-    public var delegate: RVS_GTServiceDelegate! {
-        get {
-            return _delegate
-        }
-        
-        set {
-            _delegate = newValue
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     Return the simple description UUID.
+     :nodoc: Return the simple description UUID.
      */
     override public var description: String {
         return String(describing: service.uuid)

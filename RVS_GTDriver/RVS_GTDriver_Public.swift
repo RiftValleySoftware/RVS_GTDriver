@@ -151,7 +151,7 @@ extension RVS_GTDriver {
      - parameter queue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
      */
     public convenience init(delegate inDelegate: RVS_GTDriverDelegate, queue inQueue: DispatchQueue? = nil) {
-        self.init(delegate: inDelegate, queue: inQueue, ignoreMeImJustHereToBorkTheSignature: false)
+        self.init(delegate: inDelegate, dispatchQueue: inQueue)
     }
 
     /* ################################################################################################################################## */

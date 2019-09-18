@@ -180,26 +180,12 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTDeviceDeleg
      */
     public func gtDevice(_ inDevice: RVS_GTDevice, wasDisconnected inError: Error?) {
     }
-
-    /* ################################################################## */
-    /**
-     Called when a device discovers a new service
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter inDevice: The device instance calling this.
-     - parameter discoveredService: The discovered service.
-     */
-    public func gtDevice(_ inDevice: RVS_GTDevice, discoveredService inService: RVS_GTService) {
-        inService.delegate = self
-        print("Discovered Service: \(inService)")
-    }
 }
 
 /* ###################################################################################################################################### */
 // MARK: - RVS_GTServiceDelegate Methods -
 /* ###################################################################################################################################### */
-extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTServiceDelegate {
+extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController {
     /* ################################################################## */
     /**
      Called when an error is encountered by a single device.
@@ -225,7 +211,7 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTServiceDele
     func gtService(_ inService: RVS_GTService, dicoveredCharacteristic inCharacteristic: RVS_GTCharacteristic) {
         #if DEBUG
             print("Adding Characteristic: \(inCharacteristic)")
-        print("\tValue: \(String(describing: inCharacteristic.value))")
+            print("\tValue: \(String(describing: inCharacteristic.value))")
         #endif
         for descriptor in inCharacteristic {
             #if DEBUG

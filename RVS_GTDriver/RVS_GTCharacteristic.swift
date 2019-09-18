@@ -26,7 +26,7 @@ import CoreBluetooth
 // MARK: - Individual Characteristic Instance Class -
 /* ###################################################################################################################################### */
 /**
- This class wraps a CB characteristic, on behalf of the goTenna driver.
+ :nodoc: This class wraps a CB characteristic, on behalf of the goTenna driver.
  */
 public class RVS_GTCharacteristic: NSObject {
     /* ################################################################################################################################## */
@@ -104,13 +104,13 @@ extension RVS_GTCharacteristic: RVS_GTDriverTools {
 extension RVS_GTCharacteristic: RVS_SequenceProtocol {
     /* ################################################################## */
     /**
-     We sequence CBDescriptors.
+     :nodoc: We sequence CBDescriptors.
      */
     public typealias Element = CBDescriptor
     
     /* ################################################################## */
     /**
-     This is a simple direct access to the characteristic descriptors.
+     :nodoc: This is a simple direct access to the characteristic descriptors.
      */
     public var sequence_contents: [CBDescriptor] {
         get {
@@ -124,22 +124,14 @@ extension RVS_GTCharacteristic: RVS_SequenceProtocol {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - This is What We Tell the Kids -
+// MARK: - Exposed Internally -
 /* ###################################################################################################################################### */
-/**
- This is the "Public Face" of the characteristic. This is what we want our consumers to see and use. Some of the other stuff is public, but isn't
- meant for consumer use. It needs to be public in order to conform to delegate protocols.
- 
- One other thing about this class, is that it conforms to Sequence, so you can iterate through it for descriptors, or access descriptors as subscripts.
- */
 extension RVS_GTCharacteristic {
     /* ################################################################## */
     /**
-     Returns the value data for this characteristic.
-     
-     It is KVO Observable
+     :nodoc: Returns the value data for this characteristic.
      */
-    @objc dynamic public var value: Data? {
+    public var value: Data? {
         // If the characteristic object has data, we always use that.
         if let cachedData = _characteristic.value {
             _cachedData = cachedData
@@ -151,10 +143,8 @@ extension RVS_GTCharacteristic {
     /* ################################################################## */
     /**
      Returns the value of the characteristic, cast to a string. It may well be nil.
-     
-     It is KVO Observable
      */
-    @objc dynamic public var stringValue: String? {
+    internal var stringValue: String? {
         if let value = value {
             return String(data: value, encoding: .utf8)
         }
@@ -164,7 +154,7 @@ extension RVS_GTCharacteristic {
 
     /* ################################################################## */
     /**
-     Return the simple description UUID.
+     :nodoc: Return the simple description UUID.
      */
     override public var description: String {
         return String(describing: characteristic.uuid)

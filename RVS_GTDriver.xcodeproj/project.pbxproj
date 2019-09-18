@@ -11,6 +11,7 @@
 		D403D357232BCA970040EBA3 /* Warnings.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D403D354232BCA970040EBA3 /* Warnings.xcconfig */; };
 		D403D373232BFCA00040EBA3 /* RVS_GTDriver_iOS_Test_Harness_Device_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D403D372232BFCA00040EBA3 /* RVS_GTDriver_iOS_Test_Harness_Device_ViewController.swift */; };
 		D403D375232C03850040EBA3 /* RVS_GTDriver_iOS_Test_Harness_NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D403D374232C03850040EBA3 /* RVS_GTDriver_iOS_Test_Harness_NavigationController.swift */; };
+		D4040D2C2331ABAA007D9B15 /* RVS_GTDevice_Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4040D2B2331ABAA007D9B15 /* RVS_GTDevice_Public.swift */; };
 		D43058A6232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43058A5232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift */; };
 		D43058AA232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43058A9232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_MainViewController.swift */; };
 		D43058AD232BBCE700B64056 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43058AB232BBCE700B64056 /* Main.storyboard */; };
@@ -18,13 +19,13 @@
 		D43058B2232BBCE800B64056 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43058B0232BBCE800B64056 /* LaunchScreen.storyboard */; };
 		D43058CA232BBECB00B64056 /* RVS_GTDriver_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43058C3232BBECB00B64056 /* RVS_GTDriver_iOS.framework */; };
 		D43058CB232BBECB00B64056 /* RVS_GTDriver_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D43058C3232BBECB00B64056 /* RVS_GTDriver_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D43058CF232BBEE300B64056 /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */; };
 		D43058D0232BBEE300B64056 /* RVS_GTDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */; };
 		D43058D1232BBEE300B64056 /* RVS_GTDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */; };
 		D43058D4232BBFE200B64056 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D43058D2232BBFE100B64056 /* Localizable.strings */; };
 		D45962352330E577001A7EDE /* RVS_GTDriverTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45962342330E577001A7EDE /* RVS_GTDriverTools.swift */; };
 		D45F0D6A2330021200E1AADF /* RVS_GT_BLE_GATT_UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45F0D692330021200E1AADF /* RVS_GT_BLE_GATT_UUID.swift */; };
 		D46F1546233189FE00E6282A /* RVS_GTDriver_Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46F1545233189FE00E6282A /* RVS_GTDriver_Public.swift */; };
+		D4D3CBF22331B1770053D57F /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */; };
 		D4FC1ED8232D78B40014FECF /* RVS_GTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */; };
 		D4FC1EDA232D7F780014FECF /* RVS_GTCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */; };
 		D4FC1EDC232D9FA80014FECF /* RVS_SequenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */; };
@@ -59,6 +60,7 @@
 		D403D354232BCA970040EBA3 /* Warnings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Warnings.xcconfig; path = Meta/Warnings.xcconfig; sourceTree = "<group>"; };
 		D403D372232BFCA00040EBA3 /* RVS_GTDriver_iOS_Test_Harness_Device_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_iOS_Test_Harness_Device_ViewController.swift; sourceTree = "<group>"; };
 		D403D374232C03850040EBA3 /* RVS_GTDriver_iOS_Test_Harness_NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_iOS_Test_Harness_NavigationController.swift; sourceTree = "<group>"; };
+		D4040D2B2331ABAA007D9B15 /* RVS_GTDevice_Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDevice_Public.swift; sourceTree = "<group>"; };
 		D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver.swift; sourceTree = "<group>"; };
 		D43058A3232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVS_GTDriver_iOS_Test_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43058A5232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		D403D35C232BCB570040EBA3 /* Main App */ = {
 			isa = PBXGroup;
 			children = (
+				D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */,
 				D43058A5232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift */,
 			);
 			path = "Main App";
@@ -169,7 +172,6 @@
 			children = (
 				D4FC1EDD232DD3810014FECF /* RVS_DebugTools.swift */,
 				D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */,
-				D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */,
 				D45962342330E577001A7EDE /* RVS_GTDriverTools.swift */,
 				D45F0D692330021200E1AADF /* RVS_GT_BLE_GATT_UUID.swift */,
 			);
@@ -200,6 +202,7 @@
 			children = (
 				D46F1545233189FE00E6282A /* RVS_GTDriver_Public.swift */,
 				D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */,
+				D4040D2B2331ABAA007D9B15 /* RVS_GTDevice_Public.swift */,
 				D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */,
 				D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */,
 				D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */,
@@ -357,6 +360,7 @@
 				D43058AA232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_MainViewController.swift in Sources */,
 				D403D373232BFCA00040EBA3 /* RVS_GTDriver_iOS_Test_Harness_Device_ViewController.swift in Sources */,
 				D43058A6232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift in Sources */,
+				D4D3CBF22331B1770053D57F /* RVS_String_Extensions.swift in Sources */,
 				D403D375232C03850040EBA3 /* RVS_GTDriver_iOS_Test_Harness_NavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,12 +372,12 @@
 				D45F0D6A2330021200E1AADF /* RVS_GT_BLE_GATT_UUID.swift in Sources */,
 				D4FC1ED8232D78B40014FECF /* RVS_GTService.swift in Sources */,
 				D45962352330E577001A7EDE /* RVS_GTDriverTools.swift in Sources */,
+				D4040D2C2331ABAA007D9B15 /* RVS_GTDevice_Public.swift in Sources */,
 				D43058D1232BBEE300B64056 /* RVS_GTDevice.swift in Sources */,
 				D4FC1EDC232D9FA80014FECF /* RVS_SequenceProtocol.swift in Sources */,
 				D46F1546233189FE00E6282A /* RVS_GTDriver_Public.swift in Sources */,
 				D43058D0232BBEE300B64056 /* RVS_GTDriver.swift in Sources */,
 				D4FC1EDA232D7F780014FECF /* RVS_GTCharacteristic.swift in Sources */,
-				D43058CF232BBEE300B64056 /* RVS_String_Extensions.swift in Sources */,
 				D4FC1EDE232DD3810014FECF /* RVS_DebugTools.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
