@@ -243,7 +243,7 @@ extension RVS_GTDriver {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is our delegate instance.
+     This is our delegate instance. READ-ONLY
      */
     public var delegate: RVS_GTDriverDelegate {
         return _delegate

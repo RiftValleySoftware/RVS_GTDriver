@@ -73,6 +73,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_GTDriverDelegate.html">RVS_GTDriverDelegate</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -110,7 +113,8 @@ You can access them directly with subscripts (count returns the number of device
 
 <p>One of the goals of this driver is to abstract the <a href="https://developer.apple.com/documentation/corebluetooth">Core Bluetooth</a> stuff from the consumer, so it can be swapped out with things like USB or WiFi.</p>
 
-<p>Internally, the driver will always run a <a href="https://developer.apple.com/documentation/corebluetooth/cbcentralmanager">CBCentralManager</a> instance. It will scan for goTenna devices as <a href="https://developer.apple.com/documentation/corebluetooth/cbperipheral">peripherals</a>, and instantiate internal instances of <a href="https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/RVS_GTDriver/RVS_GTDevice.swift">RVS_GTDevice</a>
+<p>Internally, the driver will always run a <a href="https://developer.apple.com/documentation/corebluetooth/cbcentralmanager">CBCentralManager</a> instance.
+It will scan for goTenna devices as <a href="https://developer.apple.com/documentation/corebluetooth/cbperipheral">peripherals</a>, and instantiate internal instances of <a href="https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/RVS_GTDriver/RVS_GTDevice.swift">RVS_GTDevice</a>
 for each discovered peripheral device.</p>
 
 <p>Since this receives delegate callbacks from <a href="https://developer.apple.com/documentation/corebluetooth">Core Bluetooth</a>, it must derive from <a href="https://developer.apple.com/documentation/objectivec/1418956-nsobject?language=occ">NSObject</a>.</p>
@@ -251,7 +255,7 @@ The enum is designed to provide keys for use by localization. If you access the 
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This is our delegate instance.</p>
+                        <p>This is our delegate instance. READ-ONLY</p>
 
                       </div>
                       <div class="declaration">

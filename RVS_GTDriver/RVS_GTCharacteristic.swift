@@ -28,6 +28,8 @@ import CoreBluetooth
 /**
  :nodoc: This class wraps a CB characteristic, on behalf of the goTenna driver.
  
+ This class conforms to our sequence protocol, so you can iterate and subscript descriptors.
+ 
  We derive from NSObject, mainly for the description calculated property.
  */
 public class RVS_GTCharacteristic: NSObject {

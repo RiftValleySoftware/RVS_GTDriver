@@ -27,6 +27,8 @@ import CoreBluetooth
 /* ###################################################################################################################################### */
 /**
  :nodoc: This class implements a BLE service wrapper, specialized for the goTenna driver.
+ 
+ This class also conforms to a Sequence protocol, so you can iterate and subscript characteristics.
  */
 public class RVS_GTService: NSObject {
     /* ################################################################################################################################## */
@@ -78,7 +80,7 @@ public class RVS_GTService: NSObject {
     private override init() { }
     
     /* ################################################################################################################################## */
-    // MARK: - Internal Initializers
+    // MARK: - Internal Initializer
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**

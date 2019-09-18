@@ -26,11 +26,11 @@ import CoreBluetooth
 // MARK: - Individual Device Instance Class -
 /* ###################################################################################################################################### */
 /**
- This class implements a single discovered goTenna device (in [peripheral](https://developer.apple.com/documentation/corebluetooth/cbperipheral) mode).
+ This class models a single discovered goTenna device (in [peripheral](https://developer.apple.com/documentation/corebluetooth/cbperipheral) mode).
  
- This class deliberately doesn't implement a sequence protocol, because we want to keep the details opaque.
- 
- The class will offer a complete object model to the API user. We need to abstract all [Core Bluetooth](https://developer.apple.com/documentation/corebluetooth) stuff.
+ The class will offer a complete object model of the device to the API user. We need to abstract all [Core Bluetooth](https://developer.apple.com/documentation/corebluetooth) stuff.
+
+ This class deliberately doesn't conform to a sequence protocol, because we want to keep the details opaque.
  
  Since this receives delegate callbacks from [Core Bluetooth](https://developer.apple.com/documentation/corebluetooth), it must derive from [NSObject](https://developer.apple.com/documentation/objectivec/1418956-nsobject?language=occ).
  */
