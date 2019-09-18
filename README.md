@@ -4,6 +4,8 @@ RVS_GTDriver
 =
 This project is an open-source, low-level native Cocoa ([iOS](https://apple.com/ios), [macOS](https://apple.com/macos), [watchOS](https:apple.com/watchos) and [tvOS](https://apple.com/tvos)) [BLE (**B**luetooth **L**ow **E**nergy)](https://www.bluetooth.com) driver for [goTenna](https://gotenna.com) mesh network devices.
 
+[This is the documentation site for this project.](https://riftvalleysoftware.github.io/RVS_GTDriver/)
+
 REQUIREMENTS
 -
 The Driver is provided as a [Swift](https://developer.apple.com/swift/)-only shared dynamic [framework](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Frameworks.html).
