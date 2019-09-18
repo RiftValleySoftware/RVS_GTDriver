@@ -106,9 +106,7 @@ public protocol RVS_GTDeviceDelegate: class {
 extension RVS_GTDeviceDelegate {
     /* ################################################################## */
     /**
-     Called when a device is about to be removed.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
+     default implementation does nothing.
      
      - parameter device: The device instance calling this.
      */
@@ -116,9 +114,7 @@ extension RVS_GTDeviceDelegate {
     
     /* ################################################################## */
     /**
-     Called when a device was removed.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
+     default implementation does nothing.
      
      - parameter device: The device object. It will not be viable after this call.
      */
@@ -126,9 +122,7 @@ extension RVS_GTDeviceDelegate {
     
     /* ################################################################## */
     /**
-     Called when a device was connected.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
+     default implementation does nothing.
      
      - parameter device: The device object.
      */
@@ -136,9 +130,7 @@ extension RVS_GTDeviceDelegate {
     
     /* ################################################################## */
     /**
-     Called when a device was disconnected for any reason.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
+     default implementation does nothing.
      
      - parameter device: The device object.
      - parameter wasDisconnected: Any error that may have occurred. May be nil.
@@ -147,11 +139,7 @@ extension RVS_GTDeviceDelegate {
     
     /* ################################################################## */
     /**
-     Called to indicate that the device's status should be checked.
-     
-     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
+     default implementation does nothing.
      
      - parameter device: The driver instance calling this.
      */
@@ -183,6 +171,7 @@ extension RVS_GTDevice {
         
         set {
             internal_delegate = newValue
+            internal_delegate?.gtDeviceStatusUpdate(self)   // Even though they already know, we may send a status update.
         }
     }
 
@@ -247,22 +236,16 @@ extension RVS_GTDevice {
      It is KVO-observable. READ-ONLY
      */
     @objc dynamic public var id: String {
-        if let device = internal_peripheral {
-            return device.identifier.uuidString
-        }
-        return ""
+        return internal_peripheral?.identifier.uuidString ?? ""
     }
     
     /* ################################################################## */
     /**
      This is the peripheral's name.
-     It is KVO-observable.
+     It is KVO-observable. READ-ONLY
      */
     @objc dynamic public var name: String {
-        if let device = internal_peripheral {
-            return device.name ?? ""
-        }
-        return ""
+        return internal_peripheral?.name ?? ""
     }
 
     /* ################################################################################################################################## */

@@ -54,20 +54,6 @@ public protocol RVS_GTDriverDelegate: class {
     /* ###################################################################################################################################### */
     /* ################################################################## */
     /**
-     Called when a peripheral is discovered, and before a device instance is instantiated.
-     
-     You may return false, if you want to prevent the peripheral from being loaded. This will not remove the peripheral from discovery; it only prevents it from being loaded.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread. If not specified, the device will always be added.
-     
-     - parameter driver: The driver instance calling this.
-     - parameter peripheralDiscovered: The peripheral object.
-     - returns: True, if the peripheral is to be instantiated.
-     */
-    func gtDriver(_ driver: RVS_GTDriver, peripheralDiscovered: CBPeripheral) -> Bool
-    
-    /* ################################################################## */
-    /**
      Called when a device has been added and instantiated.
      
      This is optional, and is NOT guaranteed to be called in the main thread.
@@ -88,6 +74,25 @@ public protocol RVS_GTDriverDelegate: class {
      - parameter driver: The driver instance calling this.
      */
     func gtDriverStatusUpdate(_ driver: RVS_GTDriver)
+
+    /* ###################################################################################################################################### */
+    // MARK: - Optional Advanced Methods
+    /* ###################################################################################################################################### */
+    /* ################################################################## */
+    /**
+     This is the only place that Core Bluetooth is exposed!
+     
+     Called when a peripheral is discovered, and before a device instance is instantiated. This gives your implementation the chance to "vet" a device before adding it to our list.
+     
+     You may return false, if you want to prevent the peripheral from being loaded. This will not remove the peripheral from discovery; it only prevents it from being loaded.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread. If not specified, the device will always be added.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter peripheralDiscovered: The peripheral object (CoreBluetooth CBPeripheral).
+     - returns: True, if the peripheral is to be instantiated.
+     */
+    func gtDriver(_ driver: RVS_GTDriver, peripheralDiscovered: CBPeripheral) -> Bool
 }
 
 /* ###################################################################################################################################### */
@@ -99,7 +104,24 @@ public protocol RVS_GTDriverDelegate: class {
 extension RVS_GTDriverDelegate {
     /* ################################################################## */
     /**
-     Called when a peripheral is discovered, and before a device instance is instantiated.
+     default implementation does nothing.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter newDeviceAdded: The device object.
+     */
+    public func gtDriver(_ driver: RVS_GTDriver, newDeviceAdded: RVS_GTDevice) { }
+    
+    /* ################################################################## */
+    /**
+     default implementation does nothing.
+     
+     - parameter driver: The driver instance calling this.
+     */
+    public func gtDriverStatusUpdate(_ driver: RVS_GTDriver) { }
+
+    /* ################################################################## */
+    /**
+     The default implementation always returns true.
      
      - parameter driver: The driver instance calling this.
      - parameter peripheralDiscovered: The peripheral object.
@@ -108,29 +130,6 @@ extension RVS_GTDriverDelegate {
     public func gtDriver(_ driver: RVS_GTDriver, peripheralDiscovered: CBPeripheral) -> Bool {
         return true
     }
-    
-    /* ################################################################## */
-    /**
-     Called when a device has been added and instantiated.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-
-     - parameter driver: The driver instance calling this.
-     - parameter newDeviceAdded: The device object.
-     */
-    public func gtDriver(_ driver: RVS_GTDriver, newDeviceAdded: RVS_GTDevice) { }
-    
-    /* ################################################################## */
-    /**
-     Called to indicate that the driver's status should be checked.
-     
-     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
-
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter driver: The driver instance calling this.
-     */
-    public func gtDriverStatusUpdate(_ driver: RVS_GTDriver) { }
 }
 
 /* ###################################################################################################################################### */

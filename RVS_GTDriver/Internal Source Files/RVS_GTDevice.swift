@@ -56,21 +56,21 @@ public class RVS_GTDevice: NSObject {
      */
     private var _services: [RVS_GTService] = []
     
+    /* ################################################################################################################################## */
+    // MARK: - Internal Instance Properties
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This is a reference to our internal device info service.
      */
-    private var _deviceInfoService: RVS_GTService!
+    internal var deviceInfoService: RVS_GTService!
 
     /* ################################################################## */
     /**
      This is a reference to our internal proprietary goTenna service.
      */
-    private var _goTennaService: RVS_GTService!
+    internal var goTennaService: RVS_GTService!
 
-    /* ################################################################################################################################## */
-    // MARK: - Internal Instance Properties
-    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This is the Core Bluetooth peripheral instance that is associated with this object.
@@ -182,7 +182,7 @@ extension RVS_GTDevice {
      Called to send a connection message to the delegate for this device.
      */
     internal func reportSuccessfulConnection() {
-        if !_initialized, nil == _deviceInfoService {  // If we have not yet been initialized, then we straightaway start looking for our device information, which is now available.
+        if !_initialized, nil == deviceInfoService {  // If we have not yet been initialized, then we straightaway start looking for our device information, which is now available.
             discoverDeviceInfoService()
         } else if _initialized {
             delegate?.gtDeviceWasConnected(self)
@@ -198,7 +198,7 @@ extension RVS_GTDevice {
      - parameter inError: Any error that may have occurred. It is passed directly to the delegate.
      */
     internal func reportDisconnection(_ inError: Error?) {
-        if nil == _goTennaService {  // If we haven't loaded the goTenna service yet, we grab that before reporting a disconnection.
+        if nil == goTennaService {  // If we haven't loaded the goTenna service yet, we grab that before reporting a disconnection.
             isConnected = true
         } else {
             delegate?.gtDevice(self, wasDisconnected: inError)
@@ -227,16 +227,16 @@ extension RVS_GTDevice {
 
         // See if we will load one of our references with this service.
         if inService.service.uuid == CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue) {
-            _deviceInfoService = inService
+            deviceInfoService = inService
             setUpDeviceInfo()
             discoverGoTennaService()
         } else if inService.service.uuid == CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue) {
-            _goTennaService = inService
+            goTennaService = inService
             setUpGoTennaInfo()
         }
         
         // If we are all done with both services, we wrap up the connection, and add ourselves to the driver in an "official" capacity.
-        if !_initialized, _holdingPen.isEmpty, nil != _goTennaService, nil != _deviceInfoService {
+        if !_initialized, _holdingPen.isEmpty, nil != goTennaService, nil != deviceInfoService {
             _initialized = true
             // We no longer need the device to be connected.
             isConnected = false

@@ -187,80 +187,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_20peripheralDiscoveredSbAA0a1_B0C_So12CBPeripheralCtF"></a>
-                    <a name="//apple_ref/swift/Method/gtDriver(_:peripheralDiscovered:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_20peripheralDiscoveredSbAA0a1_B0C_So12CBPeripheralCtF">gtDriver(_:peripheralDiscovered:)</a>
-                    </code>
-                      <span class="declaration-note">
-                        Default implementation
-                      </span>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Called when a peripheral is discovered, and before a device instance is instantiated.</p>
-
-<p>You may return false, if you want to prevent the peripheral from being loaded. This will not remove the peripheral from discovery; it only prevents it from being loaded.</p>
-
-<p>This is optional, and is NOT guaranteed to be called in the main thread. If not specified, the device will always be added.</p>
-
-                      </div>
-                      <h4>Default Implementation</h4>
-                      <div class="default_impl abstract">
-                        <p>Called when a peripheral is discovered, and before a device instance is instantiated.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gtDriver</span><span class="p">(</span><span class="n">_</span> <span class="nv">driver</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDriver.html">RVS_GTDriver</a></span><span class="p">,</span> <span class="nv">peripheralDiscovered</span><span class="p">:</span> <span class="kt">CBPeripheral</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>driver</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The driver instance calling this.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>peripheralDiscovered</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The peripheral object.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>True, if the peripheral is to be instantiated.</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_14newDeviceAddedyAA0a1_B0C_AA0A9_GTDeviceCtF"></a>
                     <a name="//apple_ref/swift/Method/gtDriver(_:newDeviceAdded:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_14newDeviceAddedyAA0a1_B0C_AA0A9_GTDeviceCtF">gtDriver(_:newDeviceAdded:)</a>
@@ -281,9 +207,7 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Called when a device has been added and instantiated.</p>
-
-<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+                        <p>default implementation does nothing.</p>
 
                       </div>
                       <div class="declaration">
@@ -353,11 +277,7 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Called to indicate that the driver&rsquo;s status should be checked.</p>
-
-<p>It may be called frequently, and there may not be any changes. This is mereley a <q>make you aware of the POSSIBILITY of a change</q> call.</p>
-
-<p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
+                        <p>default implementation does nothing.</p>
 
                       </div>
                       <div class="declaration">
@@ -386,6 +306,93 @@
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Optional%20Advanced%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Optional Advanced Methods" class="dashAnchor"></a>
+                <a href="#/Optional%20Advanced%20Methods">
+                  <h3 class="section-name">Optional Advanced Methods</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_20peripheralDiscoveredSbAA0a1_B0C_So12CBPeripheralCtF"></a>
+                    <a name="//apple_ref/swift/Method/gtDriver(_:peripheralDiscovered:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_GTDriver_iOS0a1_B8DelegateP8gtDriver_20peripheralDiscoveredSbAA0a1_B0C_So12CBPeripheralCtF">gtDriver(_:peripheralDiscovered:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the only place that Core Bluetooth is exposed!</p>
+
+<p>Called when a peripheral is discovered, and before a device instance is instantiated. This gives your implementation the chance to <q>vet</q> a device before adding it to our list.</p>
+
+<p>You may return false, if you want to prevent the peripheral from being loaded. This will not remove the peripheral from discovery; it only prevents it from being loaded.</p>
+
+<p>This is optional, and is NOT guaranteed to be called in the main thread. If not specified, the device will always be added.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>The default implementation always returns true.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gtDriver</span><span class="p">(</span><span class="n">_</span> <span class="nv">driver</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_GTDriver.html">RVS_GTDriver</a></span><span class="p">,</span> <span class="nv">peripheralDiscovered</span><span class="p">:</span> <span class="kt">CBPeripheral</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>driver</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The driver instance calling this.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>peripheralDiscovered</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The peripheral object (CoreBluetooth CBPeripheral).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>True, if the peripheral is to be instantiated.</p>
                       </div>
                     </section>
                   </div>
