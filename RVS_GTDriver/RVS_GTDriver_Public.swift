@@ -139,6 +139,8 @@ extension RVS_GTDriverDelegate {
 /**
  This is the "Public Face" of the driver. This is what we want our consumers to see and use. Some of the other stuff is public, but isn't
  meant for consumer use. It needs to be public in order to conform to delegate protocols.
+ 
+ One other thing about this class, is that it conforms to Sequence, so you can iterate through it for devices, or access devices as subscripts.
  */
 extension RVS_GTDriver {
     /* ################################################################## */
