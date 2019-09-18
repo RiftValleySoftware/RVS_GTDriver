@@ -286,6 +286,10 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
     override func viewWillAppear(_ inAnimated: Bool) {
         super.viewWillAppear(inAnimated)
         navigationController?.isNavigationBarHidden = true
+        // Make sure that we are the delegate for all devices.
+        for device in gtDriver {
+            device.delegate = self
+        }
         gtDriver?.isScanning = _wasScanning
         _wasScanning = false
         setUpUI()
@@ -374,5 +378,67 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: RVS_GTDriverDelegate
         DispatchQueue.main.async {
             self.setUpUI()
         }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_GTDeviceDelegate Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDriver_iOS_Test_Harness_MainViewController: RVS_GTDeviceDelegate {
+    /* ################################################################## */
+    /**
+     Called when an error is encountered by a single device.
+     
+     This is required, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device instance that experienced the error.
+     - parameter errorEncountered: The error encountered.
+     */
+    public func gtDevice(_ inDevice: RVS_GTDevice, errorEncountered inError: RVS_GTDriver.Errors) {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device is about to be removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device instance calling this.
+     */
+    public func gtDeviceWillBeRemoved(_ inDevice: RVS_GTDevice) {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device was removed.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device object. It will not be viable after this call.
+     */
+    public func gtDeviceWasRemoved(_ inDevice: RVS_GTDevice) {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device was connected.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device object.
+     */
+    public func gtDeviceWasConnected(_ inDevice: RVS_GTDevice) {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a device was disconnected for any reason.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDevice: The device object.
+     - parameter wasDisconnected: Any error that may have occurred. May be nil.
+     */
+    public func gtDevice(_ inDevice: RVS_GTDevice, wasDisconnected inError: Error?) {
     }
 }

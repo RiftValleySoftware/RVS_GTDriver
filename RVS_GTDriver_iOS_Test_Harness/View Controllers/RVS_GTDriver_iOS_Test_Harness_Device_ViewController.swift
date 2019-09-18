@@ -25,10 +25,10 @@ import CoreBluetooth
 import RVS_GTDriver_iOS
 
 /* ###################################################################################################################################### */
-// MARK: - View Controller Class for Device Tabs -
+// MARK: - View Controller Class for The Device Inspector Screen -
 /* ###################################################################################################################################### */
 /**
- One of these is instantiated for each device managed by the app.
+ This screen is pushed in when you select a device in the main table.
  */
 class RVS_GTDriver_iOS_Test_Harness_Device_ViewController: UIViewController, RVS_GTDriver_iOS_Test_Harness_AppDelegateAccess {
     /* ################################################################################################################################## */
@@ -100,6 +100,7 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        // We'll be the delegate for this device while we're looking at it.
         gtDevice.delegate = self
         if !gtDevice.name.isEmpty {
             navigationItem.title = gtDevice.name
