@@ -95,7 +95,7 @@ public protocol RVS_GTDeviceDelegate: class {
      
      This is optional, and is NOT guaranteed to be called in the main thread.
      
-     - parameter driver: The driver instance calling this.
+     - parameter device: The driver instance calling this.
      */
     func gtDeviceStatusUpdate(_ device: RVS_GTDevice)
 }
@@ -153,7 +153,7 @@ extension RVS_GTDeviceDelegate {
      
      This is optional, and is NOT guaranteed to be called in the main thread.
      
-     - parameter driver: The driver instance calling this.
+     - parameter device: The driver instance calling this.
      */
     public func gtDeviceStatusUpdate(_ device: RVS_GTDevice) { }
 }
@@ -164,6 +164,9 @@ extension RVS_GTDeviceDelegate {
 /**
  This is the "Public Face" of the device. This is what we want our consumers to see and use. Some of the other stuff is public, but isn't
  meant for consumer use. It needs to be public in order to conform to delegate protocols.
+ 
+ The device interface is likely to be the one that your implementation uses the most. The driver acts as an "aggregator," but devices are
+ where the action is at.
  */
 extension RVS_GTDevice {
     /* ################################################################################################################################## */

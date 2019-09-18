@@ -27,6 +27,8 @@ import CoreBluetooth
 /* ###################################################################################################################################### */
 /**
  :nodoc: This class wraps a CB characteristic, on behalf of the goTenna driver.
+ 
+ We derive from NSObject, mainly for the description calculated property.
  */
 public class RVS_GTCharacteristic: NSObject {
     /* ################################################################################################################################## */
@@ -34,7 +36,7 @@ public class RVS_GTCharacteristic: NSObject {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is the Core Bluetooth service instance that is associated with this object.
+     This is the Core Bluetooth characteristic instance that is associated with this object.
      */
     private var _characteristic: CBCharacteristic!
     
@@ -55,7 +57,7 @@ public class RVS_GTCharacteristic: NSObject {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     Initializer with a peripheral instance and an owner.
+     Initializer with a CBCharacteristic instance and a service owner.
      
      - parameter inCharacteristic: The characteristic to associate with this instance. This is a strong reference. It cannot be nil or omitted.
      - parameter owner: The service that "owns" this characteristic. It is a weak reference. It cannot be nil or omitted.
@@ -131,7 +133,7 @@ extension RVS_GTCharacteristic {
     /**
      :nodoc: Returns the value data for this characteristic.
      */
-    public var value: Data? {
+    internal var characteristicValue: Data? {
         // If the characteristic object has data, we always use that.
         if let cachedData = _characteristic.value {
             _cachedData = cachedData
@@ -145,7 +147,7 @@ extension RVS_GTCharacteristic {
      Returns the value of the characteristic, cast to a string. It may well be nil.
      */
     internal var stringValue: String? {
-        if let value = value {
+        if let value = characteristicValue {
             return String(data: value, encoding: .utf8)
         }
         

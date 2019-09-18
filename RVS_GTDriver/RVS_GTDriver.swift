@@ -28,11 +28,6 @@ import CoreBluetooth
 /**
  This class implements the main "skeleton" of the driver API.
  
- The driver will always be a BT Central. It will scan for goTenna devices as peripherals, and instantiate internal instances of RVS_GTDevice
- for each discovered peripheral device.
- 
- Since this receives delegate callbacks from CB, it must derive from NSObject.
- 
  This driver has two modes: Not scanning, in which case it does not discover new devices, but the devices it does have may still be active and updating, and
  Scanning, in which case, it looks for goTenna devices.
  
@@ -47,7 +42,14 @@ import CoreBluetooth
  Only the entities in the last extension (and the initializer) should be considered useful for API consumers.
  
  You will see that internal methods and properties are explicitly marked as "internal." This is to help clarify their scope.
- */
+ 
+ One of the goals of this driver is to abstract the Core Bluetooth stuff from the consumer, so it can be swapped out with things like USB or WiFi.
+ 
+ Internally, the driver will always be a BT Central. It will scan for goTenna devices as peripherals, and instantiate internal instances of RVS_GTDevice
+ for each discovered peripheral device.
+ 
+ Since this receives delegate callbacks from CB, it must derive from NSObject.
+*/
 public class RVS_GTDriver: NSObject {
     /* ################################################################################################################################## */
     // MARK: - Internal Instance Constants
@@ -251,7 +253,36 @@ extension RVS_GTDriver: RVS_GTDriverTools {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - CBCentralManagerDelegate Methods -
+// MARK: - Public Sequence Support -
+/* ###################################################################################################################################### */
+/**
+ We do this, so we can iterate through our devices, and treat the driver like an Array of devices.
+ */
+extension RVS_GTDriver: RVS_SequenceProtocol {
+    /* ################################################################## */
+    /**
+     :nodoc: The element type is our device.
+     */
+    public typealias Element = RVS_GTDevice
+    
+    /* ################################################################## */
+    /**
+     :nodoc: This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_GTDevice.
+     READ-ONLY
+     */
+    public var sequence_contents: [RVS_GTDevice] {
+        get {
+            return _sequence_contents
+        }
+        
+        set {
+            _ = newValue    // NOP
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - CBCentralManagerDelegate Methods (NOT FOR EXTERNAL USE) -
 /* ###################################################################################################################################### */
 extension RVS_GTDriver: CBCentralManagerDelegate {
     /* ################################################################## */
@@ -407,34 +438,5 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
                 print("Install of discovered peripheral canceled by API user.")
             }
         #endif
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Sequence Support -
-/* ###################################################################################################################################### */
-/**
- We do this, so we can iterate through our devices, and treat the driver like an Array of devices.
- */
-extension RVS_GTDriver: RVS_SequenceProtocol {
-    /* ################################################################## */
-    /**
-     :nodoc: The element type is our device.
-     */
-    public typealias Element = RVS_GTDevice
-    
-    /* ################################################################## */
-    /**
-     :nodoc: This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_GTDevice.
-     READ-ONLY
-     */
-    public var sequence_contents: [RVS_GTDevice] {
-        get {
-            return _sequence_contents
-        }
-        
-        set {
-            _ = newValue    // NOP
-        }
     }
 }
