@@ -69,7 +69,7 @@ public class RVS_GTDriver: NSObject {
      This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_GTDevice.
      */
     private var _sequence_contents: [RVS_GTDevice] = []
-    
+
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -437,26 +437,27 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
             return
         }
         // Make sure we don't already have this one.
-        guard !containsThisPeripheral(inPeripheral) else { return }
-        // Make sure that we are supposed to add this.
-        let shouldInstall = delegate.gtDriver(self, peripheralDiscovered: inPeripheral)
-        if shouldInstall {
-            #if DEBUG
-                print("\n***> New Peripheral To Be Installed:")
-                print("\tdidDiscover: \(String(describing: inPeripheral))\n")
-                print("\t***\n")
-                print("\tadvertisementData: \(String(describing: inAdvertisementData))\n")
-                print("\t***\n")
-                print("\trssi: \(String(describing: inRSSI))")
-                print("<***\n")
-            #endif
-            // If so, we simply create the new device and add it to our holding pen.
-            _holdingPen.append(RVS_GTDevice(inPeripheral, owner: self))
-        }
-        #if DEBUG
-            if !shouldInstall {
-                print("Install of discovered peripheral canceled by API user.")
+        if !containsThisPeripheral(inPeripheral) {
+            // Make sure that we are supposed to add this.
+            let shouldInstall = delegate.gtDriver(self, peripheralDiscovered: inPeripheral)
+            if shouldInstall {
+                #if DEBUG
+                    print("\n***> New Peripheral To Be Installed:")
+                    print("\tdidDiscover: \(String(describing: inPeripheral))\n")
+                    print("\t***\n")
+                    print("\tadvertisementData: \(String(describing: inAdvertisementData))\n")
+                    print("\t***\n")
+                    print("\trssi: \(String(describing: inRSSI))")
+                    print("<***\n")
+                #endif
+                // If so, we simply create the new device and add it to our holding pen.
+                _holdingPen.append(RVS_GTDevice(inPeripheral, owner: self))
             }
-        #endif
+            #if DEBUG
+                if !shouldInstall {
+                    print("Install of discovered peripheral canceled by API user.")
+                }
+            #endif
+        }
     }
 }

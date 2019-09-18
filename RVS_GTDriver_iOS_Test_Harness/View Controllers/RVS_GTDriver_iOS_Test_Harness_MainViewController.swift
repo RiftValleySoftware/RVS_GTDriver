@@ -100,7 +100,7 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController, RVS_GT
     /**
      The color to use for the segmented switch when scanning.
      */
-    static let greenSelectedColor = UIColor(red: 0, green: 1.0, blue: 0, alpha: 1)
+    static let greenSelectedColor = UIColor(red: 0, green: 0.5, blue: 0, alpha: 1)
 
     /* ################################################################################################################################## */
     // MARK: - Internal IB Properties
@@ -270,6 +270,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
      */
     override func viewDidLoad() {
         gtDriver = RVS_GTDriver(delegate: self) // Create our driver instance.
+        navigationItem.backBarButtonItem?.title = navigationItem.backBarButtonItem?.title?.localizedVariant ?? "ERROR"
         // We set up the localized strings for the segmented control.
         for i in 0..<scanningSegmentedControl.numberOfSegments {
             scanningSegmentedControl.setTitle(scanningSegmentedControl.titleForSegment(at: i)?.localizedVariant, forSegmentAt: i)
