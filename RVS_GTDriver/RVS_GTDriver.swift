@@ -289,6 +289,9 @@ extension RVS_GTDriver: RVS_SequenceProtocol {
 // MARK: - CBCentralManagerDelegate Methods (NOT FOR EXTERNAL USE) -
 /* ###################################################################################################################################### */
 extension RVS_GTDriver: CBCentralManagerDelegate {
+    /* ################################################################################################################################## */
+    // MARK: - Internal Utility Methods
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      Use this to see if we have already allocated and cached a device instance for the given peripheral.
@@ -335,6 +338,9 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
         return nil
     }
 
+    /* ################################################################################################################################## */
+    // MARK: - Public CBManager Callbacks
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      :nodoc: Called when the manager state changes. We simply use this to call the delegate to check the state.
@@ -416,7 +422,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
             #endif
             // Make sure that we remove the device, if we have it.
             if let device = deviceForThisPeripheral(inPeripheral) {
-                device.goodbyeCruelWorld()
+                device.deleteThisDevice()
             }
             return
         }

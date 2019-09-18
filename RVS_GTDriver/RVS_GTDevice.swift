@@ -129,7 +129,7 @@ public class RVS_GTDevice: NSObject {
     /**
      Initializer with a peripheral instance and an owner.
      
-     - parameter inPeripheral: The peripheral to associate with this instance. This is a strong reference. It cannot be nil or omitted.
+     - parameter inPeripheral: The Core Bluetooth peripheral to associate with this instance. This is a strong reference. It cannot be nil or omitted.
      - parameter owner: The driver that "owns" this device. It is a weak reference. It cannot be nil or omitted.
      - parameter delegate: The RVS_GTDeviceDelegate instance. This is a weak reference, but is optional, and can be omitted
      */
@@ -152,9 +152,31 @@ public class RVS_GTDevice: NSObject {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Internal Instance Methods -
+// MARK: - RVS_GTDriverTools Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_GTDevice: RVS_GTDriverTools {
+    /* ################################################################## */
+    /**
+     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
+     
+     - parameter inError: The error to be sent to the delegate.
+     */
+    internal func reportThisError(_ inError: RVS_GTDriver.Errors) {
+        if let delegate = delegate {    // If we have a delegate, they get first dibs.
+            delegate.gtDevice(self, errorEncountered: inError)
+        } else {
+            internal_owner.reportThisError(inError)
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Core Bluetooth Methods -
 /* ###################################################################################################################################### */
 extension RVS_GTDevice {
+    /* ################################################################################################################################## */
+    // MARK: - Internal Methods
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      Called to send a connection message to the delegate for this device.
@@ -181,80 +203,6 @@ extension RVS_GTDevice {
         } else {
             delegate?.gtDevice(self, wasDisconnected: inError)
         }
-    }
-    
-    /* ################################################################## */
-    /**
-     This discovers just the device info service.
-     */
-    internal func discoverDeviceInfoService() {
-        discoverServices([CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue)])
-    }
-    
-    /* ################################################################## */
-    /**
-     This discovers just the goTenna service.
-     */
-    internal func discoverGoTennaService() {
-        discoverServices([CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue)])
-    }
-
-    /* ################################################################## */
-    /**
-     Asks the device to discover specific _services.
-     
-     - parameter inServiceCBUUIDs: These are the specific UUIDs we are searching for.
-     - parameter startClean: Optional (default is false). If true, then all cached services are cleared before discovery.
-     */
-    internal func discoverServices(_ inServiceCBUUIDs: [CBUUID], startClean inStartClean: Bool = false) {
-        if inStartClean {
-            _services = [] // Start clean
-        }
-        internal_peripheral.discoverServices(inServiceCBUUIDs)
-    }
-    
-    /* ################################################################## */
-    /**
-     Asks the device to discover all of its _services.
-     
-     - parameter startClean: Optional (default is false). If true, then all cached services are cleared before discovery.
-     */
-    internal func discoverAllServices(startClean inStartClean: Bool = false) {
-        if inStartClean {
-            _services = [] // Start clean
-        }
-        internal_peripheral.discoverServices(nil)
-    }
-
-    /* ################################################################## */
-    /**
-     Asks the device to discover all of the characteristics for a given service.
-     
-     - parameter inService: The service object.
-     */
-    internal func discoverCharacteristicsForService(_ inService: RVS_GTService) {
-        internal_peripheral.discoverCharacteristics(nil, for: inService.service)
-    }
-    
-    /* ################################################################## */
-    /**
-     Asks the device to discover all of the characteristics for a given service.
-     
-     - parameter inService: The service object.
-     */
-    internal func discoverAllCharacteristicsForService(_ inService: RVS_GTService) {
-        internal_peripheral.discoverCharacteristics(nil, for: inService.service)
-    }
-    
-    /* ################################################################## */
-    /**
-     Asks the device to discover specific characteristics for a given service.
-     
-     - parameter inService: The service object.
-     - parameter characteristicCBUUIDs: An Array of CBUUIDs, with the specific characteristics we're looking for.
-     */
-    internal func discoverCharacteristicsForService(_ inService: RVS_GTService, characteristicCBUUIDs inUUIDs: [CBUUID]) {
-        internal_peripheral.discoverCharacteristics(inUUIDs, for: inService.service)
     }
     
     /* ################################################################## */
@@ -325,7 +273,87 @@ extension RVS_GTDevice {
     internal func readValueForCharacteristic(_ inCharacteristic: RVS_GTCharacteristic) {
         internal_peripheral.readValue(for: inCharacteristic.characteristic)
     }
+
+    /* ################################################################################################################################## */
+    // MARK: - Internal Discovery Methods
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This discovers just the device info service.
+     */
+    internal func discoverDeviceInfoService() {
+        discoverServices([CBUUID(string: RVS_GT_BLE_GATT_UUID.deviceInfoService.rawValue)])
+    }
     
+    /* ################################################################## */
+    /**
+     This discovers just the goTenna service.
+     */
+    internal func discoverGoTennaService() {
+        discoverServices([CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue)])
+    }
+
+    /* ################################################################## */
+    /**
+     Asks the device to discover specific _services.
+     
+     - parameter inServiceCBUUIDs: These are the specific UUIDs we are searching for.
+     - parameter startClean: Optional (default is false). If true, then all cached services are cleared before discovery.
+     */
+    internal func discoverServices(_ inServiceCBUUIDs: [CBUUID], startClean inStartClean: Bool = false) {
+        if inStartClean {
+            _services = [] // Start clean
+        }
+        internal_peripheral.discoverServices(inServiceCBUUIDs)
+    }
+    
+    /* ################################################################## */
+    /**
+     Asks the device to discover specific characteristics for a given service.
+     
+     - parameter inService: The service object.
+     - parameter characteristicCBUUIDs: An Array of CBUUIDs, with the specific characteristics we're looking for.
+     */
+    internal func discoverCharacteristicsForService(_ inService: RVS_GTService, characteristicCBUUIDs inUUIDs: [CBUUID]) {
+        internal_peripheral.discoverCharacteristics(inUUIDs, for: inService.service)
+    }
+    
+    /* ################################################################## */
+    /**
+     Asks the device to discover all of its _services.
+     
+     - parameter startClean: Optional (default is false). If true, then all cached services are cleared before discovery.
+     */
+    internal func discoverAllServices(startClean inStartClean: Bool = false) {
+        if inStartClean {
+            _services = [] // Start clean
+        }
+        internal_peripheral.discoverServices(nil)
+    }
+
+    /* ################################################################## */
+    /**
+     Asks the device to discover all of the characteristics for a given service.
+     
+     - parameter inService: The service object.
+     */
+    internal func discoverCharacteristicsForService(_ inService: RVS_GTService) {
+        internal_peripheral.discoverCharacteristics(nil, for: inService.service)
+    }
+    
+    /* ################################################################## */
+    /**
+     Asks the device to discover all of the characteristics for a given service.
+     
+     - parameter inService: The service object.
+     */
+    internal func discoverAllCharacteristicsForService(_ inService: RVS_GTService) {
+        internal_peripheral.discoverCharacteristics(nil, for: inService.service)
+    }
+
+    /* ################################################################################################################################## */
+    // MARK: - Internal Service Setup Methods
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This goes through the device info service, and extracts the four basic device info fields.
@@ -389,28 +417,12 @@ extension RVS_GTDevice {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_GTDriverTools Instance Methods -
-/* ###################################################################################################################################### */
-extension RVS_GTDevice: RVS_GTDriverTools {
-    /* ################################################################## */
-    /**
-     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
-     
-     - parameter inError: The error to be sent to the delegate.
-     */
-    internal func reportThisError(_ inError: RVS_GTDriver.Errors) {
-        if let delegate = delegate {    // If we have a delegate, they get first dibs.
-            delegate.gtDevice(self, errorEncountered: inError)
-        } else {
-            internal_owner.reportThisError(inError)
-        }
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - CBPeripheralDelegate Methods -
 /* ###################################################################################################################################### */
 extension RVS_GTDevice: CBPeripheralDelegate {
+    /* ################################################################################################################################## */
+    // MARK: - Internal Utility Methods for Callbacks
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This searches through our services for the chacarteristic instance that corresponds to the supplied characteristic.
@@ -523,7 +535,10 @@ extension RVS_GTDevice: CBPeripheralDelegate {
         
         return nil
     }
-    
+
+    /* ################################################################################################################################## */
+    // MARK: - Public CBPeripheral Callbacks
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      :nodoc: Called when the device changed its service listing.
