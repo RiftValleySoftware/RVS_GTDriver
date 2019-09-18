@@ -134,7 +134,7 @@ extension RVS_GTDriverDelegate {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - This is What We Tell the Kids -
+// MARK: - Public Declaractions -
 /* ###################################################################################################################################### */
 /**
  This is the "Public Face" of the driver. This is what we want our consumers to see and use. Some of the other stuff is public, but isn't

@@ -159,7 +159,7 @@ extension RVS_GTDeviceDelegate {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - This is What We Tell the Kids -
+// MARK: - Public Declaractions -
 /* ###################################################################################################################################### */
 /**
  This is the "Public Face" of the device. This is what we want our consumers to see and use. Some of the other stuff is public, but isn't

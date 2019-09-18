@@ -30,10 +30,10 @@ import CoreBluetooth
  */
 internal enum RVS_GT_BLE_GATT_UUID: String {
     // MARK: - Service IDs
-    /// This is the basic goTenna proprietary service.
-    case goTennaProprietary     =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
     /// The standard GATT Device Info service.
-    case deviceInfoService      =   "0x180A"
+    case deviceInfoService              =   "0x180A"
+    /// This is the basic goTenna proprietary service.
+    case goTennaProprietary             =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
     
     // MARK: - Device Info Characteristic IDs
     /// Manufacturer Name
