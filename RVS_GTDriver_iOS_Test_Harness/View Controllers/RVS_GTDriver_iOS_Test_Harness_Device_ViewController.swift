@@ -129,17 +129,10 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTDeviceDeleg
      - parameter errorEncountered: The error encountered.
      */
     public func gtDevice(_ inDevice: RVS_GTDevice, errorEncountered inError: RVS_GTDriver.Errors) {
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when a device is about to be removed.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter inDevice: The device instance calling this.
-     */
-    public func gtDeviceWillBeRemoved(_ inDevice: RVS_GTDevice) {
+        #if DEBUG
+            print("ERROR: \(String(describing: inError))")
+        #endif
+        displayError(inError.localizedDescription.localizedVariant)
     }
     
     /* ################################################################## */
@@ -151,28 +144,10 @@ extension RVS_GTDriver_iOS_Test_Harness_Device_ViewController: RVS_GTDeviceDeleg
      - parameter inDevice: The device object. It will not be viable after this call.
      */
     public func gtDeviceWasRemoved(_ inDevice: RVS_GTDevice) {
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when a device was connected.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter inDevice: The device object.
-     */
-    public func gtDeviceWasConnected(_ inDevice: RVS_GTDevice) {
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when a device was disconnected for any reason.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread.
-     
-     - parameter inDevice: The device object.
-     - parameter wasDisconnected: Any error that may have occurred. May be nil.
-     */
-    public func gtDevice(_ inDevice: RVS_GTDevice, wasDisconnected inError: Error?) {
+        if inDevice == gtDevice {   // Oh dear. Gotta go...
+            DispatchQueue.main.async {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
     }
 }
