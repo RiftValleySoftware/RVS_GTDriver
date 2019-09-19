@@ -141,14 +141,6 @@ public class RVS_GTDevice: NSObject {
         internal_delegate = inDelegate
         isConnected = true  // Start our first connection.
     }
-    
-    /* ################################################################## */
-    /**
-     Deinitializer. We simply make sure that we are disconnected.
-     */
-    deinit {
-        isConnected = false
-    }
 }
 
 /* ###################################################################################################################################### */

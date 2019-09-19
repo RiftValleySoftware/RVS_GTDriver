@@ -163,6 +163,7 @@ extension RVS_GTDevice {
     /* ################################################################## */
     /**
      This is our delegate instance. It can be nil.
+     NOTE: This May not be in the main thread!
      */
     public var delegate: RVS_GTDeviceDelegate! {
         get {
@@ -179,6 +180,7 @@ extension RVS_GTDevice {
     /**
      This manages and reports our connection. Changing this value will connect or disconnect this device.
      It is KVO-observable, but can only be changed inside the driver.
+     NOTE: This May not be in the main thread!
      */
     @objc dynamic public internal(set) var isConnected: Bool {
         get {
@@ -198,6 +200,7 @@ extension RVS_GTDevice {
     /**
      This is the manufacturer name. It will be filled at initialization time.
      It is KVO-observable. READ-ONLY
+     NOTE: This May not be in the main thread!
      */
     @objc dynamic public var manufacturerName: String {
         return internal_manufacturerName
@@ -207,6 +210,7 @@ extension RVS_GTDevice {
     /**
      This is the "model number." It will be filled at initialization time.
      It is KVO-observable. READ-ONLY
+     NOTE: This May not be in the main thread!
      */
     @objc dynamic public var modelNumber: String {
         return internal_modelNumber
@@ -216,6 +220,7 @@ extension RVS_GTDevice {
     /**
      This is the hardware revision. It will be filled at initialization time.
      It is KVO-observable. READ-ONLY
+     NOTE: This May not be in the main thread!
      */
     @objc dynamic public var hardwareRevision: String {
         return internal_hardwareRevision
@@ -225,6 +230,7 @@ extension RVS_GTDevice {
     /**
      This is the firmware revision. It will be filled at initialization time.
      It is KVO-observable. READ-ONLY
+     NOTE: This May not be in the main thread!
      */
     @objc dynamic public var firmwareRevision: String {
         return internal_firmwareRevision
@@ -234,6 +240,7 @@ extension RVS_GTDevice {
     /**
      This is the unique ID for the peripheral.
      It is KVO-observable. READ-ONLY
+     NOTE: This May not be in the main thread!
      */
     @objc dynamic public var id: String {
         return internal_peripheral?.identifier.uuidString ?? ""
@@ -243,6 +250,7 @@ extension RVS_GTDevice {
     /**
      This is the peripheral's name.
      It is KVO-observable. READ-ONLY
+     NOTE: This May not be in the main thread!
      */
     @objc dynamic public var name: String {
         return internal_peripheral?.name ?? ""

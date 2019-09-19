@@ -63,6 +63,18 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController, RVS_GT
      */
     private var _wasScanning = false
     
+    /* ################################################################## */
+    /**
+     Used to remember our old value of the use different thread pref.
+     */
+    private var _oldQueueVal: Bool = false
+    
+    /* ################################################################## */
+    /**
+     Used to remember our old value of the include duplicates.
+     */
+    private var _oldContinuousScan: Bool = false
+    
     /* ################################################################################################################################## */
     // MARK: - Internal Static Properties
     /* ################################################################################################################################## */
@@ -128,6 +140,12 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController, RVS_GT
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     These represent the persistent state.
+     */
+    let prefs = RVS_GTDriver_iOS_Test_Harness_Prefs()
+    
+    /* ################################################################## */
+    /**
      The driver object that is the basis for this whole circus.
      */
     var gtDriver: RVS_GTDriver!
@@ -177,6 +195,22 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
             tableView?.reloadData()
         }
     }
+    
+    /* ################################################################## */
+    /**
+     Sets up our driver.
+     */
+    func setUpDriver() {
+        #if DEBUG
+            print("Setting Up Driver:")
+            print("\tDifferent Thread is \(prefs.useDifferentThread ? "" : "not ")on.")
+            print("\tContinuous Scan is \(prefs.continuousScan ? "" : "not ")on.\n")
+        #endif
+        _oldQueueVal = prefs.useDifferentThread
+        _oldContinuousScan = prefs.continuousScan
+        gtDriver = RVS_GTDriver(delegate: self, queue: prefs.useDifferentThread ? DispatchQueue.global() : nil, allowDuplicatesInBLEScan: prefs.continuousScan) // Create our driver instance.
+    }
+    
 }
 
 /* ###################################################################################################################################### */
@@ -207,10 +241,15 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController: UITableViewDataSourc
      */
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let cell = inTableView.dequeueReusableCell(withIdentifier: type(of: self).reuseID) as? RVS_GTDriver_iOS_Test_Harness_MainViewController_TableViewCell else { return UITableViewCell() }
-        cell.gtDevice = gtDriver?[inIndexPath.row]
-        cell.displayLabel.text = cell.gtDevice.modelNumber.localizedVariant
-        // This just gives us some stripes, so we can see the different rows.
-        cell.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.clear : UIColor.white.withAlphaComponent(0.25)
+        if let device = self.gtDriver?[inIndexPath.row] {
+            let model = device.modelNumber.localizedVariant
+            DispatchQueue.main.async {
+                cell.gtDevice = device
+                cell.displayLabel.text = model
+                // This just gives us some stripes, so we can see the different rows.
+                cell.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.clear : UIColor.white.withAlphaComponent(0.25)
+            }
+        }
         return cell
     }
 }
@@ -273,7 +312,9 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
      Called when the view is first loaded.
      */
     override func viewDidLoad() {
-        gtDriver = RVS_GTDriver(delegate: self) // Create our driver instance.
+        // We deliberately set these different, to force a new driver instance.
+        _oldQueueVal = !prefs.useDifferentThread
+        _oldContinuousScan = !prefs.continuousScan
         navigationItem.backBarButtonItem?.title = navigationItem.backBarButtonItem?.title?.localizedVariant ?? "ERROR"
         // We set up the localized strings for the segmented control.
         for i in 0..<scanningSegmentedControl.numberOfSegments {
@@ -292,6 +333,9 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
         navigationController?.isNavigationBarHidden = true
         gtDriver?.isScanning = _wasScanning
         _wasScanning = false
+        if _oldQueueVal != prefs.useDifferentThread || _oldContinuousScan != prefs.continuousScan {
+            setUpDriver()
+        }
         setUpUI()
     }
     

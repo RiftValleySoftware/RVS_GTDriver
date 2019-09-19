@@ -234,6 +234,7 @@ extension RVS_GTDriver {
         /**
          The localized description is a simple slug that can be used to key a client-supplied message.
          It is a very simple class.enum.case String.
+         NOTE: This May not be in the main thread!
          */
         public var localizedDescription: String {
             var caseString = ""
@@ -278,6 +279,7 @@ extension RVS_GTDriver {
     /* ################################################################## */
     /**
      This is our delegate instance. READ-ONLY
+     NOTE: This May not be in the main thread!
      */
     public var delegate: RVS_GTDriverDelegate {
         return internal_delegate
@@ -287,6 +289,7 @@ extension RVS_GTDriver {
     /**
      This is KVO-observable.
      Returns true, if we are currently scanning for new CB peripherals.
+     NOTE: This May not be in the main thread!
      */
     @objc dynamic public var isScanning: Bool {
         get {
@@ -316,6 +319,7 @@ extension RVS_GTDriver {
     /**
      This is KVO-observable. READ-ONLY.
      Returns true, if the bluetooth system is valid.
+     NOTE: This May not be in the main thread!
      */
     @objc dynamic public var isBluetoothAvailable: Bool {
         return .poweredOn == internal_centralManager.state
@@ -325,6 +329,7 @@ extension RVS_GTDriver {
     /**
      This accesses the devices as a simple Array.
      This is KVO-observable. READ-ONLY.
+     NOTE: This May not be in the main thread!
      */
     @objc dynamic public var devices: [RVS_GTDevice] {
         return sequence_contents

@@ -28,6 +28,45 @@ import UIKit
 /**
  */
 class RVS_GTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
+    /* ################################################################## */
+    /**
+     These represent the persistent state.
+     */
+    let prefs = RVS_GTDriver_iOS_Test_Harness_Prefs()
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var threadSwitch: UISwitch!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var scanSwitch: UISwitch!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var threadLabel: UILabel!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var scanLabel: UILabel!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBAction func threadSwitchChanged(_ inSwitch: UISwitch) {
+        prefs.useDifferentThread = inSwitch.isOn
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBAction func scanSwitchChanged(_ inSwitch: UISwitch) {
+        prefs.continuousScan = inSwitch.isOn
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -44,5 +83,9 @@ extension RVS_GTDriver_iOS_Test_Harness_SettingsViewController {
         super.viewWillAppear(inAnimated)
         navigationController?.isNavigationBarHidden = false
         navigationItem.title = navigationItem.title?.localizedVariant
+        threadLabel.text = threadLabel.text?.localizedVariant
+        scanLabel.text = scanLabel.text?.localizedVariant
+        threadSwitch.isOn = prefs.useDifferentThread
+        scanSwitch.isOn = prefs.continuousScan
     }
 }
