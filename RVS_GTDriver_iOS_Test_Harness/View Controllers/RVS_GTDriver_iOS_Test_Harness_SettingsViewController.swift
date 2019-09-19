@@ -36,26 +36,31 @@ class RVS_GTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
     
     /* ################################################################## */
     /**
+     This is the switch that controls the "Use A Different Thread" pref.
      */
     @IBOutlet weak var threadSwitch: UISwitch!
     
     /* ################################################################## */
     /**
+     This is a button that acts like a label, but allows the switch to toggle like a Web control.
+     */
+    @IBOutlet weak var threadToggleButton: UIButton!
+    
+    /* ################################################################## */
+    /**
+     This is the switch that controls the "Show Duplicates In Scans" pref.
      */
     @IBOutlet weak var scanSwitch: UISwitch!
     
     /* ################################################################## */
     /**
+     This is a button that acts like a label, but allows the switch to toggle like a Web control.
      */
-    @IBOutlet weak var threadLabel: UILabel!
+    @IBOutlet weak var scanToggleButton: UIButton!
     
     /* ################################################################## */
     /**
-     */
-    @IBOutlet weak var scanLabel: UILabel!
-    
-    /* ################################################################## */
-    /**
+     Called when the thread switch changes state.
      */
     @IBAction func threadSwitchChanged(_ inSwitch: UISwitch) {
         prefs.useDifferentThread = inSwitch.isOn
@@ -63,9 +68,28 @@ class RVS_GTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
     
     /* ################################################################## */
     /**
+     Called when the scan switch changes state.
      */
     @IBAction func scanSwitchChanged(_ inSwitch: UISwitch) {
         prefs.continuousScan = inSwitch.isOn
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the label/button is tapped. It toggles the state of the pref (and the switch).
+     */
+    @IBAction func threadSwitchToggle(_ inButton: UIButton) {
+        prefs.useDifferentThread = !prefs.useDifferentThread
+        threadSwitch.setOn(prefs.useDifferentThread, animated: true)
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the label/button is tapped. It toggles the state of the pref (and the switch).
+     */
+    @IBAction func scanSwitchToggle(_ inButton: UIButton) {
+        prefs.continuousScan = !prefs.continuousScan
+        scanSwitch.setOn(prefs.continuousScan, animated: true)
     }
 }
 
@@ -83,8 +107,8 @@ extension RVS_GTDriver_iOS_Test_Harness_SettingsViewController {
         super.viewWillAppear(inAnimated)
         navigationController?.isNavigationBarHidden = false
         navigationItem.title = navigationItem.title?.localizedVariant
-        threadLabel.text = threadLabel.text?.localizedVariant
-        scanLabel.text = scanLabel.text?.localizedVariant
+        threadToggleButton.setTitle(threadToggleButton.title(for: .normal)?.localizedVariant, for: .normal)
+        scanToggleButton.setTitle(scanToggleButton.title(for: .normal)?.localizedVariant, for: .normal)
         threadSwitch.isOn = prefs.useDifferentThread
         scanSwitch.isOn = prefs.continuousScan
     }
