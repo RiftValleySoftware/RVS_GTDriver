@@ -69,22 +69,6 @@ public class RVS_GTCharacteristic: NSObject {
         _characteristic = inCharacteristic
         _owner = inOwner
     }
-    
-    /* ################################################################## */
-    /**
-     This is the service instance that "owns" this characteristic instance.
-     */
-    internal var owner: RVS_GTService {
-        return _owner
-    }
-    
-    /* ################################################################## */
-    /**
-     This returns our characteristic instance.
-     */
-    internal var characteristic: CBCharacteristic! {
-        return _characteristic
-    }
 }
 
 /* ###################################################################################################################################### */
@@ -108,7 +92,7 @@ extension RVS_GTCharacteristic: RVS_GTDriverTools {
 extension RVS_GTCharacteristic {
     /* ################################################################## */
     /**
-     :nodoc: Returns the value data for this characteristic.
+     Returns the value data for this characteristic.
      */
     internal var characteristicValue: Data? {
         // If the characteristic object has data, we always use that.
@@ -129,6 +113,102 @@ extension RVS_GTCharacteristic {
         }
         
         return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the service instance that "owns" this characteristic instance.
+     */
+    internal var owner: RVS_GTService {
+        return _owner
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns our characteristic instance.
+     */
+    internal var characteristic: CBCharacteristic! {
+        return _characteristic
+    }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can broadcast its value.
+     */
+    internal var canBroadcast: Bool {
+        return _characteristic.properties.contains(.broadcast)
+    }
+
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be read.
+     */
+    internal var canRead: Bool {
+        return _characteristic.properties.contains(.read)
+    }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be written, with or without a response.
+     */
+    internal var canWrite: Bool {
+        return canWriteWithResponse || canWriteWithoutResponse
+    }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be written, with a response.
+     */
+    internal var canWriteWithResponse: Bool {
+        return _characteristic.properties.contains(.write)
+    }
+
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be written, without a response.
+     */
+    internal var canWriteWithoutResponse: Bool {
+        return _characteristic.properties.contains(.writeWithoutResponse)
+    }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can notify.
+     */
+    internal var canNotify: Bool {
+        return _characteristic.properties.contains(.notify)
+    }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can indicate. The driver need sto respond to indications.
+     */
+    internal var canIndicate: Bool {
+        return _characteristic.properties.contains(.indicate)
+    }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can have authenticated signed writes, without a response.
+     */
+    internal var canHaveAuthenticatedSignedWrites: Bool {
+        return _characteristic.properties.contains(.indicate)
+    }
+    
+    /* ################################################################## */
+    /**
+     Only trusted devices can subscribe to notifications of this property.
+     */
+    internal var isEncryptionRequiredForNotify: Bool {
+        return _characteristic.properties.contains(.notifyEncryptionRequired)
+    }
+    
+    /* ################################################################## */
+    /**
+     Only trusted devices can see indications of this property.
+     */
+    internal var isEncryptionRequiredForIndication: Bool {
+        return _characteristic.properties.contains(.indicateEncryptionRequired)
     }
 }
 

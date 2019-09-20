@@ -254,11 +254,18 @@ extension RVS_GTService {
                 _initialCharacteristics.remove(at: index)
             }
             
-            #if DEBUG
-                print("Adding Characteristic: \(String(describing: chrInstance)) To Our Holding Pen at index \(_holdingPen.count).")
-            #endif
-            _holdingPen.append(chrInstance)
-            _owner.readValueForCharacteristic(chrInstance)
+            if chrInstance.canRead {    // If we are allowed to read, we do so.
+                #if DEBUG
+                    print("Adding Characteristic: \(String(describing: chrInstance)) To Our Holding Pen at index \(_holdingPen.count).")
+                #endif
+                _holdingPen.append(chrInstance)
+                _owner.readValueForCharacteristic(chrInstance)
+            } else {    // If we can't read, we immediately add it.
+                #if DEBUG
+                    print("Immediately Adding Characteristic: \(String(describing: chrInstance)).")
+                #endif
+                addCharacteristic(chrInstance)
+            }
         }
     }
     

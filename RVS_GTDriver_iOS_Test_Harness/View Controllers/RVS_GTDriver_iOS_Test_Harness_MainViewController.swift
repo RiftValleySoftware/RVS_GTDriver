@@ -186,7 +186,8 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
             if #available(iOS 13.0, *) {
                 scanningSegmentedControl.selectedSegmentTintColor = gtDriver?.isScanning ?? false ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
                 // White text.
-                scanningSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+                scanningSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: gtDriver?.isScanning ?? false ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor], for: .normal)
+                scanningSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
             } else {
                 let textColor = gtDriver?.isScanning ?? false ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor
                 scanningSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)

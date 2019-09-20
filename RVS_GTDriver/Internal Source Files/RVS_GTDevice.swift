@@ -598,7 +598,8 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                                                     CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary003.rawValue)
                     ]
                     sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
-
+                    
+                    internal_peripheral.discoverIncludedServices(nil, for: service)
                 default:
                     break
                 }
@@ -612,6 +613,22 @@ extension RVS_GTDevice: CBPeripheralDelegate {
         }
         #if DEBUG
             print("<***\n")
+        #endif
+    }
+    /* ################################################################## */
+    /**
+     :nodoc: Called when we have discovered services for the peripheral.
+     
+     THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
+
+     - parameter inPeripheral: The peripheral we have received notification on.
+     - parameter didDiscoverIncludedServicesFor: The service that includes the services.
+    - parameter error: Any error that ocurred.
+    */
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor inService: CBService, error inError: Error?) {
+        #if DEBUG
+            print("\n***> Included Services Discovered:\n\t\(String(describing: inService.includedServices))")
+            print("\terror: \(String(describing: inError))\n")
         #endif
     }
     
@@ -696,8 +713,8 @@ extension RVS_GTDevice: CBPeripheralDelegate {
             print("\terror: \(String(describing: inError))\n")
         #endif
         
-        if let error = inError {
-            reportThisError(.unknownCharacteristicsReadValueError(error: error))
+        if  let nserror = inError as NSError? {
+            reportThisError(.unknownCharacteristicsReadValueError(error: nserror))
         } else if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
             #if DEBUG
                 print("Adding Characteristic: \(String(describing: characteristic)) to its service.\n")
