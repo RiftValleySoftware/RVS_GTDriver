@@ -310,9 +310,13 @@ extension RVS_GTDriver {
                     CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: internal_AllowDuplicatesInBLEScan)
                 ]
                 // We search for any devices that advertise the goTenna proprietary service.
-                let scanForTheseServices: [CBUUID] = [
-                    CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue)
-                ]
+                var scanForTheseServices: [CBUUID] = []
+                
+                // Go through our handlers, and fetch the advertised servce UUIDs.
+                for handler in type(of: self).handlers {
+                    scanForTheseServices += handler.advertisedServiceUUIDs
+                }
+                
                 internal_centralManager.scanForPeripherals(withServices: scanForTheseServices, options: options)
             }
         }

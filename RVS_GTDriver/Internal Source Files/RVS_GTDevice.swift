@@ -222,7 +222,7 @@ extension RVS_GTDevice {
             deviceInfoService = inService
             setUpDeviceInfo()
             discoverGoTennaService()
-        } else if inService.service.uuid == CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue) {
+        } else if inService.service.uuid == CBUUID(string: RVS_GTDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue) {
             goTennaService = inService
             setUpGoTennaInfo()
         }
@@ -282,7 +282,7 @@ extension RVS_GTDevice {
      This discovers just the goTenna service.
      */
     internal func discoverGoTennaService() {
-        discoverServices([CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue)])
+        discoverServices([CBUUID(string: RVS_GTDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue)])
     }
 
     /* ################################################################## */
@@ -565,7 +565,7 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                 #endif
                 var sInstance: RVS_GTService!
                 let deviceInfoUUID = CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoService.rawValue)
-                let goTennaProprietaryServiceUUID = CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary.rawValue)
+                let goTennaProprietaryServiceUUID = CBUUID(string: RVS_GTDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue)
                 let serviceUUID = service.uuid
                 switch serviceUUID {
                 case deviceInfoUUID:
@@ -577,9 +577,9 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                     sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
 
                 case goTennaProprietaryServiceUUID:
-                    let initialCharacteristics = [  CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary001.rawValue),
-                                                    CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary002.rawValue),
-                                                    CBUUID(string: RVS_GT_BLE_GATT_UUID.goTennaProprietary003.rawValue)
+                    let initialCharacteristics = [  CBUUID(string: RVS_GTDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary001.rawValue),
+                                                    CBUUID(string: RVS_GTDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary002.rawValue),
+                                                    CBUUID(string: RVS_GTDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary003.rawValue)
                     ]
                     sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
                     

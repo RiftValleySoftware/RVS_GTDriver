@@ -23,18 +23,30 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
-// MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
+// MARK: - Protocol for Device- or Manufacturer-Specific Handlers -
 /* ###################################################################################################################################### */
 /**
- These are String-based enums that we use to reference various services and characteristics in our driver.
  */
-internal enum RVS_GT_BLE_GATT_UUID: String {
-    // MARK: - Service IDs
-    /// This is the basic goTenna proprietary service.
-    case goTennaProprietary             =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
+internal protocol RVS_GTDevice_DeviceSpec {
+    /* ################################################################## */
+    /**
+     - returns: An Array, with the UUIDs of all the services this handler will take.
+     */
+    var serviceUUIDs: [CBUUID] { get }
     
-    // MARK: - goTenna Proprietary Characteristic IDs
-    case goTennaProprietary001          =   "12762B18-DF5E-11E6-BF01-FE55135034F3"
-    case goTennaProprietary002          =   "1276B20A-DF5E-11E6-BF01-FE55135034F3"
-    case goTennaProprietary003          =   "1276B20B-DF5E-11E6-BF01-FE55135034F3"
+    /* ################################################################## */
+    /**
+     - returns: An Array, with the UUIDs of the service[s] that the handler advertises (for a search).
+     */
+    var advertisedServiceUUIDs: [CBUUID] { get }
+    
+    /* ################################################################## */
+    /**
+     This allows the handler to "adopt" a service.
+     
+     - parameter inService: The discovered Core Bluetooth service.
+     - parameter forPeripheral: The Core Bluetooth peripheral that "owns" the discovered service.
+     - returns: An instance of a subclass of RVS_GTService, if it is handled by this instance, or nil, if not.
+     */
+    func handleDiscoveredService(_ inService: CBService, forPeripheral inPeripheral: CBPeripheral) -> RVS_GTService!
 }
