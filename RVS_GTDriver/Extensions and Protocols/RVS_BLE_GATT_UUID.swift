@@ -23,18 +23,23 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
-// MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
+// MARK: - Enums for Standard BLE Service and Characteristic UUIDs -
 /* ###################################################################################################################################### */
 /**
  These are String-based enums that we use to reference various services and characteristics in our driver.
  */
-internal enum RVS_GT_BLE_GATT_UUID: String {
+internal enum RVS_BLE_GATT_UUID: String {
     // MARK: - Service IDs
-    /// This is the basic goTenna proprietary service.
-    case goTennaProprietary             =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
+    /// The standard GATT Device Info service.
+    case deviceInfoService              =   "0x180A"
     
-    // MARK: - goTenna Proprietary Characteristic IDs
-    case goTennaProprietary001          =   "12762B18-DF5E-11E6-BF01-FE55135034F3"
-    case goTennaProprietary002          =   "1276B20A-DF5E-11E6-BF01-FE55135034F3"
-    case goTennaProprietary003          =   "1276B20B-DF5E-11E6-BF01-FE55135034F3"
+    // MARK: - Device Info Characteristic IDs
+    /// Manufacturer Name
+    case deviceInfoManufacturerName     =   "0x2A29"
+    /// Model Name
+    case deviceInfoModelName            =   "0x2A24"
+    /// Hardware Revision
+    case deviceInfoHardwareRevision     =   "0x2A27"
+    /// Firmware Revision
+    case deviceInfoFirmwareRevision     =   "0x2A26"
 }
