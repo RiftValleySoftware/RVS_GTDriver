@@ -46,7 +46,8 @@ internal protocol RVS_GTDevice_DeviceSpec {
      
      - parameter inService: The discovered Core Bluetooth service.
      - parameter forPeripheral: The Core Bluetooth peripheral that "owns" the discovered service.
+     - parameter andDevice: The Instance of the device that "owns" this service.
      - returns: An instance of a subclass of RVS_GTService, if it is handled by this instance, or nil, if not.
      */
-    func handleDiscoveredService(_ inService: CBService, forPeripheral inPeripheral: CBPeripheral) -> RVS_GTService!
+    func handleDiscoveredService(_ inService: CBService, forPeripheral inPeripheral: CBPeripheral, andDevice: RVS_GTDevice) -> RVS_GTService!
 }

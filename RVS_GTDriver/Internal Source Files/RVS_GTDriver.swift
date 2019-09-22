@@ -63,6 +63,8 @@ public class RVS_GTDriver: NSObject {
      This contains our device handlers.
      */
     static internal let handlers: [RVS_GTDevice_DeviceSpec] = [
+        /// These are global services.
+        RVS_GTDevice_DeviceSpec_GeneralPurpose(),
         /// Handle goTenna devices.
         RVS_GTDevice_DeviceSpec_goTenna()
     ]

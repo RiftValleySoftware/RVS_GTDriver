@@ -218,7 +218,7 @@ extension RVS_GTDevice {
         _services.append(inService)
 
         // See if we will load one of our references with this service.
-        if inService.service.uuid == CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoService.rawValue) {
+        if inService.service.uuid == CBUUID(string: RVS_BLE_GATT_UUID_GLOBAL.deviceInfoService.rawValue) {
             deviceInfoService = inService
             setUpDeviceInfo()
             discoverGoTennaService()
@@ -274,7 +274,7 @@ extension RVS_GTDevice {
      This discovers just the device info service.
      */
     internal func discoverDeviceInfoService() {
-        discoverServices([CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoService.rawValue)])
+        discoverServices([CBUUID(string: RVS_BLE_GATT_UUID_GLOBAL.deviceInfoService.rawValue)])
     }
     
     /* ################################################################## */
@@ -352,29 +352,29 @@ extension RVS_GTDevice {
      */
     internal func setUpDeviceInfo() {
         // Start by getting the device info object.
-        if let deviceInfoService = serviceForThisUUID(CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoService.rawValue)) {
-            if let manufacturerName = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue))?.stringValue {
+        if let deviceInfoService = serviceForThisUUID(CBUUID(string: RVS_BLE_GATT_UUID_GLOBAL.deviceInfoService.rawValue)) {
+            if let manufacturerName = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_GATT_UUID_GLOBAL.deviceInfoManufacturerName.rawValue))?.stringValue {
                 #if DEBUG
                     print("Read the Manufacturer Name: \(manufacturerName).")
                 #endif
                 internal_manufacturerName = manufacturerName
             }
             
-            if let modelNumber = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue))?.stringValue {
+            if let modelNumber = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_GATT_UUID_GLOBAL.deviceInfoModelName.rawValue))?.stringValue {
                 #if DEBUG
                     print("Read the Model Number: \(modelNumber).")
                 #endif
                 internal_modelNumber = modelNumber
             }
             
-            if let hardwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue))?.stringValue {
+            if let hardwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_GATT_UUID_GLOBAL.deviceInfoHardwareRevision.rawValue))?.stringValue {
                 #if DEBUG
                     print("Read the Hardware Revision: \(hardwareRevision).")
                 #endif
                 internal_hardwareRevision = hardwareRevision
             }
             
-            if let firmwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue))?.stringValue {
+            if let firmwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_GATT_UUID_GLOBAL.deviceInfoFirmwareRevision.rawValue))?.stringValue {
                 #if DEBUG
                     print("Read the Firmaware Revision: \(firmwareRevision).")
                 #endif
@@ -564,29 +564,13 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                     print("\tservice: \(String(describing: service))\n")
                 #endif
                 var sInstance: RVS_GTService!
-                let deviceInfoUUID = CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoService.rawValue)
-                let goTennaProprietaryServiceUUID = CBUUID(string: RVS_GTDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue)
-                let serviceUUID = service.uuid
-                switch serviceUUID {
-                case deviceInfoUUID:
-                    let initialCharacteristics = [  CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue),   // Manufacturer name
-                                                    CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue),          // Model name
-                                                    CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue),   // Hardware Revision
-                                                    CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)    // Firmware Revision
-                    ]
-                    sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
-
-                case goTennaProprietaryServiceUUID:
-                    let initialCharacteristics = [  CBUUID(string: RVS_GTDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary001.rawValue),
-                                                    CBUUID(string: RVS_GTDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary002.rawValue),
-                                                    CBUUID(string: RVS_GTDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary003.rawValue)
-                    ]
-                    sInstance = RVS_GTService(service, owner: self, initialCharacteristics: initialCharacteristics)
-                    
-                    internal_peripheral.discoverIncludedServices(nil, for: service)
-                default:
-                    break
+                
+                for handler in RVS_GTDriver.handlers {
+                    if let service = handler.handleDiscoveredService(service, forPeripheral: inPeripheral, andDevice: self) {
+                        sInstance = service
+                    }
                 }
+
                 if let sInstance = sInstance {
                     #if DEBUG
                         print("Adding Service: \(String(describing: sInstance)) To Holding Pen at index \(_holdingPen.count).")

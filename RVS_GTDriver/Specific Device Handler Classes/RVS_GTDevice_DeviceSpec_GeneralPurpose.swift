@@ -23,35 +23,39 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import CoreBluetooth
 
 /* ########################################################################################################################################## */
-// MARK: - Adapter Class for goTenna Devices -
+// MARK: - Adapter Class for Any Device -
 /* ########################################################################################################################################## */
 /**
- This class provides a set of constants and factories for handling goTenna devices.
  */
-class RVS_GTDevice_DeviceSpec_goTenna: RVS_GTDevice_DeviceSpec {
+class RVS_GTDevice_DeviceSpec_GeneralPurpose: RVS_GTDevice_DeviceSpec {
     /* ###################################################################################################################################### */
-    // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
+    // MARK: - Enums for Standard BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
     /**
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
         // MARK: - Service IDs
-        /// This is the basic goTenna proprietary service.
-        case goTennaProprietary             =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
+        /// The standard GATT Device Info service.
+        case deviceInfoService              =   "0x180A"
         
-        // MARK: - goTenna Proprietary Characteristic IDs
-        case goTennaProprietary001          =   "12762B18-DF5E-11E6-BF01-FE55135034F3"
-        case goTennaProprietary002          =   "1276B20A-DF5E-11E6-BF01-FE55135034F3"
-        case goTennaProprietary003          =   "1276B20B-DF5E-11E6-BF01-FE55135034F3"
+        // MARK: - Device Info Characteristic IDs
+        /// Manufacturer Name
+        case deviceInfoManufacturerName     =   "0x2A29"
+        /// Model Name
+        case deviceInfoModelName            =   "0x2A24"
+        /// Hardware Revision
+        case deviceInfoHardwareRevision     =   "0x2A27"
+        /// Firmware Revision
+        case deviceInfoFirmwareRevision     =   "0x2A26"
     }
-    
+
     /* ################################################################## */
     /**
      - returns: An Array, with the UUIDs of all the services this handler will take.
      */
     private var _serviceUUIDs: [CBUUID] = [
-        CBUUID(string: RVS_BLE_GATT_UUID.goTennaProprietary.rawValue)           // We handle proprietary services, too.
+        CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoService.rawValue)           // We handle proprietary services, too.
     ]
     
     /* ################################################################## */
@@ -64,10 +68,10 @@ class RVS_GTDevice_DeviceSpec_goTenna: RVS_GTDevice_DeviceSpec {
 
     /* ################################################################## */
     /**
-     - returns: An Array, with the UUIDs of the service[s] that the handler advertises (for a search).
+     - returns: An empty Array. We don't advertise.
      */
     var advertisedServiceUUIDs: [CBUUID] {
-        return serviceUUIDs
+        return []
     }
     
     /* ################################################################## */
@@ -82,23 +86,14 @@ class RVS_GTDevice_DeviceSpec_goTenna: RVS_GTDevice_DeviceSpec {
      */
     func handleDiscoveredService(_ inService: CBService, forPeripheral inPeripheral: CBPeripheral, andDevice inDevice: RVS_GTDevice) -> RVS_GTService! {
         if serviceUUIDs.contains(inService.uuid) {
-            let initialCharacteristics = [  CBUUID(string: RVS_BLE_GATT_UUID.goTennaProprietary001.rawValue),
-                                            CBUUID(string: RVS_BLE_GATT_UUID.goTennaProprietary002.rawValue),
-                                            CBUUID(string: RVS_BLE_GATT_UUID.goTennaProprietary003.rawValue)
+            let initialCharacteristics = [  CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue),
+                                            CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue),
+                                            CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue),
+                                            CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)
             ]
-            return RVS_GTService_goTenna(inService, owner: inDevice, initialCharacteristics: initialCharacteristics)
+            return RVS_GTService(inService, owner: inDevice, initialCharacteristics: initialCharacteristics)
         }
 
         return nil
     }
-}
-
-/* ########################################################################################################################################## */
-// MARK: - General-Purpose Service Class for goTenna Devices -
-/* ########################################################################################################################################## */
-/**
- This is a general-purpose goTenna service class. It will probably be superceded by more specialized ones.
- */
-internal class RVS_GTService_goTenna: RVS_GTService {
-    
 }
