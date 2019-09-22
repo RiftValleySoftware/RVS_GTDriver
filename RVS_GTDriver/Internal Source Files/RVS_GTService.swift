@@ -103,6 +103,18 @@ public class RVS_GTService: NSObject {
             discoverCharacteristics(characteristicCBUUIDs: _initialCharacteristics)
         }
     }
+    
+    /* ################################################################## */
+    /**
+     This is a factory function, for creating characteristic instances.
+     
+     This is declared here, so we can override it in our factory-produced subclasses.
+     
+     - parameter inCharacteristic: The CB characteristic we are adding.
+     */
+    internal func makeCharacteristicForThisCharacteristic(_ inCharacteristic: CBCharacteristic) -> RVS_GTCharacteristic? {
+        return RVS_GTCharacteristic(inCharacteristic, owner: self)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -242,11 +254,8 @@ extension RVS_GTService {
      - parameter inCharacteristic: The CB characteristic we are adding.
      */
     internal func interimCharacteristic(_ inCharacteristic: CBCharacteristic) {
-        var chrInstance: RVS_GTCharacteristic!
-        
-        if !containsThisCharacteristic(inCharacteristic) {
-            chrInstance = RVS_GTCharacteristic(inCharacteristic, owner: self)
-            
+        if  !containsThisCharacteristic(inCharacteristic),
+            let chrInstance = makeCharacteristicForThisCharacteristic(inCharacteristic) {
             if let index = _initialCharacteristics.firstIndex(of: inCharacteristic.uuid) {
                 #if DEBUG
                     print("Removing Characteristic: \(String(describing: inCharacteristic)) From Our Initial List at index \(index).")

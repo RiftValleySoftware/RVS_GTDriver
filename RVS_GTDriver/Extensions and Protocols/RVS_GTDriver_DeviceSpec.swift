@@ -26,6 +26,8 @@ import CoreBluetooth
 // MARK: - Protocol for Device- or Manufacturer-Specific Handlers -
 /* ###################################################################################################################################### */
 /**
+ This protocol describes a "factory" implementation, allowing the development of special classes that can generate specialized instances of
+ classes that handle services and characteristics that may be specific to ceertain manufacturers.
  */
 internal protocol RVS_GTDevice_DeviceSpec {
     /* ################################################################## */

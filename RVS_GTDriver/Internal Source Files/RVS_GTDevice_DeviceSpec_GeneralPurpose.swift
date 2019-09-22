@@ -49,7 +49,7 @@ class RVS_GTDevice_DeviceSpec_GeneralPurpose: RVS_GTDevice_DeviceSpec {
         /// Firmware Revision
         case deviceInfoFirmwareRevision     =   "0x2A26"
     }
-
+    
     /* ################################################################## */
     /**
      - returns: An Array, with the UUIDs of all the services this handler will take.

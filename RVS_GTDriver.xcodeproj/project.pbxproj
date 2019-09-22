@@ -12,7 +12,6 @@
 		D403D373232BFCA00040EBA3 /* RVS_GTDriver_iOS_Test_Harness_Device_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D403D372232BFCA00040EBA3 /* RVS_GTDriver_iOS_Test_Harness_Device_ViewController.swift */; };
 		D403D375232C03850040EBA3 /* RVS_GTDriver_iOS_Test_Harness_NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D403D374232C03850040EBA3 /* RVS_GTDriver_iOS_Test_Harness_NavigationController.swift */; };
 		D4040D2C2331ABAA007D9B15 /* RVS_GTDevice_Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4040D2B2331ABAA007D9B15 /* RVS_GTDevice_Public.swift */; };
-		D41896982336397E009C56BB /* RVS_BLE_GATT_UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41896972336397D009C56BB /* RVS_BLE_GATT_UUID.swift */; };
 		D43058A6232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43058A5232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift */; };
 		D43058AA232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43058A9232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_MainViewController.swift */; };
 		D43058AD232BBCE700B64056 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43058AB232BBCE700B64056 /* Main.storyboard */; };
@@ -68,7 +67,6 @@
 		D403D374232C03850040EBA3 /* RVS_GTDriver_iOS_Test_Harness_NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_iOS_Test_Harness_NavigationController.swift; sourceTree = "<group>"; };
 		D4040D2B2331ABAA007D9B15 /* RVS_GTDevice_Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDevice_Public.swift; sourceTree = "<group>"; };
 		D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver.swift; sourceTree = "<group>"; };
-		D41896972336397D009C56BB /* RVS_BLE_GATT_UUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLE_GATT_UUID.swift; sourceTree = "<group>"; };
 		D43058A3232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVS_GTDriver_iOS_Test_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43058A5232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift; sourceTree = "<group>"; };
 		D43058A9232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_iOS_Test_Harness_MainViewController.swift; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 				D4FC1EDD232DD3810014FECF /* RVS_DebugTools.swift */,
 				D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */,
 				D45962342330E577001A7EDE /* RVS_GTDriverTools.swift */,
-				D41896972336397D009C56BB /* RVS_BLE_GATT_UUID.swift */,
 			);
 			path = "Extensions and Protocols";
 			sourceTree = "<group>";
@@ -196,7 +193,6 @@
 		D4580A6C2336AD99006C67A5 /* Specific Device Handler Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D4E918802337D78200ABF286 /* RVS_GTDevice_DeviceSpec_GeneralPurpose.swift */,
 				D4580A6D2336ADD1006C67A5 /* RVS_GTDevice_DeviceSpec_goTenna.swift */,
 			);
 			path = "Specific Device Handler Classes";
@@ -250,6 +246,7 @@
 				D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */,
 				D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */,
 				D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */,
+				D4E918802337D78200ABF286 /* RVS_GTDevice_DeviceSpec_GeneralPurpose.swift */,
 			);
 			path = "Internal Source Files";
 			sourceTree = "<group>";
@@ -422,7 +419,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D41896982336397E009C56BB /* RVS_BLE_GATT_UUID.swift in Sources */,
 				D4FC1ED8232D78B40014FECF /* RVS_GTService.swift in Sources */,
 				D45962352330E577001A7EDE /* RVS_GTDriverTools.swift in Sources */,
 				D4040D2C2331ABAA007D9B15 /* RVS_GTDevice_Public.swift in Sources */,

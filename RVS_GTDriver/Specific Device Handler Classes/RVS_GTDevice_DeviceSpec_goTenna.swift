@@ -100,5 +100,24 @@ class RVS_GTDevice_DeviceSpec_goTenna: RVS_GTDevice_DeviceSpec {
  This is a general-purpose goTenna service class. It will probably be superceded by more specialized ones.
  */
 internal class RVS_GTService_goTenna: RVS_GTService {
-    
+    /* ################################################################## */
+    /**
+     This is a factory function, for creating characteristic instances.
+     
+     This is declared @objc, so we can override it in our factory-produced subclasses.
+     
+     - parameter inCharacteristic: The CB characteristic we are adding.
+     */
+    @objc internal override func makeCharacteristicForThisCharacteristic(_ inCharacteristic: CBCharacteristic) -> RVS_GTCharacteristic? {
+        return RVS_GTCharacteristic_goTenna(inCharacteristic, owner: self)
+    }
+}
+
+/* ########################################################################################################################################## */
+// MARK: - General-Purpose Characteristic Class for goTenna Devices -
+/* ########################################################################################################################################## */
+/**
+ This is a general-purpose goTenna Characteristic class. It will probably be superceded by more specialized ones.
+ */
+internal class RVS_GTCharacteristic_goTenna: RVS_GTCharacteristic {
 }
