@@ -104,11 +104,9 @@ internal class RVS_GTService_goTenna: RVS_GTService {
     /**
      This is a factory function, for creating characteristic instances.
      
-     This is declared @objc, so we can override it in our factory-produced subclasses.
-     
      - parameter inCharacteristic: The CB characteristic we are adding.
      */
-    @objc internal override func makeCharacteristicForThisCharacteristic(_ inCharacteristic: CBCharacteristic) -> RVS_GTCharacteristic? {
+    internal override func makeCharacteristicForThisCharacteristic(_ inCharacteristic: CBCharacteristic) -> RVS_GTCharacteristic? {
         return RVS_GTCharacteristic_goTenna(inCharacteristic, owner: self)
     }
 }
