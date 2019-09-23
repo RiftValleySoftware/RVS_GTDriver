@@ -162,7 +162,7 @@ extension RVS_GTDevice {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is our delegate instance. It can be nil.
+     This is our delegate instance. It can be nil. READ/WRITE
      NOTE: This May not be in the main thread!
      */
     public var delegate: RVS_GTDeviceDelegate! {
@@ -179,7 +179,7 @@ extension RVS_GTDevice {
     /* ################################################################## */
     /**
      This manages and reports our connection. Changing this value will connect or disconnect this device.
-     It is KVO-observable, but can only be changed inside the driver.
+     It is KVO-observable, but can only be changed inside the driver. READ-ONLY (PUBLIC)
      NOTE: This May not be in the main thread!
      */
     @objc dynamic public internal(set) var isConnected: Bool {
@@ -190,12 +190,28 @@ extension RVS_GTDevice {
         set {
             if newValue && .disconnected == internal_peripheral.state {
                 internal_owner.connectDevice(self)
-            } else {
+            } else if !newValue {
                 internal_owner.disconnectDevice(self)
             }
         }
     }
     
+    /* ################################################################## */
+    /**
+     This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is true.
+     It is KVO-observable. READ/WRITE
+     NOTE: This May not be in the main thread!
+     */
+    @objc dynamic public var shouldStayConnected: Bool {
+        get {
+            return internal_stayConnected
+        }
+        
+        set {
+            internal_stayConnected = newValue
+        }
+    }
+
     /* ################################################################## */
     /**
      This is the manufacturer name. It will be filled at initialization time.

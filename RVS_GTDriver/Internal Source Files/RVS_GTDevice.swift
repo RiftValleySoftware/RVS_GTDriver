@@ -113,6 +113,12 @@ public class RVS_GTDevice: NSObject {
      */
     internal var internal_firmwareRevision: String = ""
     
+    /* ################################################################## */
+    /**
+     This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is true.
+     */
+    internal var internal_stayConnected: Bool = true
+
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -230,8 +236,8 @@ extension RVS_GTDevice {
         // If we are all done with both services, we wrap up the connection, and add ourselves to the driver in an "official" capacity.
         if !_initialized, _holdingPen.isEmpty, nil != goTennaService, nil != deviceInfoService {
             _initialized = true
-            // We no longer need the device to be connected.
-            isConnected = false
+            // We no longer need the device to be connected, but won't disconnect, if we are to stay connected.
+            isConnected = shouldStayConnected
             internal_owner.addDeviceToList(self)
         }
     }
