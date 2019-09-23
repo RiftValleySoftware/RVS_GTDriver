@@ -6,6 +6,10 @@ This project is an open-source, low-level native Cocoa ([iOS](https://apple.com/
 
 [This is the documentation site for this project.](https://riftvalleysoftware.github.io/RVS_GTDriver/)
 
+NOTE:
+=
+The docs won't be available until I upgrade to Catalina. Jazzy doesn't like Xcode 11, running on Mojave.
+
 REQUIREMENTS
 -
 The Driver is provided as a [Swift](https://developer.apple.com/swift/)-only shared dynamic [framework](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Frameworks.html).
