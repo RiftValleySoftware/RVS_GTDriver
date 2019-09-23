@@ -40,6 +40,8 @@ class RVS_GTDriver_iOS_Test_Harness_Prefs: RVS_PersistentPrefs {
         case useDifferentThread
         /// This is the key for the "Keep Scanning and Include Duplicates" pref.
         case continuousScan
+        /// This is the key for "persistent connections." The device remains connected, once discovered.
+        case persistentConnections
     }
     
     /* ############################################################################################################################## */
@@ -72,6 +74,20 @@ class RVS_GTDriver_iOS_Test_Harness_Prefs: RVS_PersistentPrefs {
             values[Keys.continuousScan.rawValue] = newValue
         }
     }
+    
+    /* ################################################################## */
+    /**
+     - returns: True, if we are supposed to maintain persistent connections.
+     */
+    @objc dynamic var persistentConnections: Bool {
+        get {
+            return values[Keys.persistentConnections.rawValue] as? Bool ?? false
+        }
+        
+        set {
+            values[Keys.persistentConnections.rawValue] = newValue
+        }
+    }
         
     /* ############################################################################################################################## */
     // MARK: - Public Calculated Properties
@@ -81,6 +97,6 @@ class RVS_GTDriver_iOS_Test_Harness_Prefs: RVS_PersistentPrefs {
      An Array of String, containing the keys used to store and retrieve the values from persistent storage.
      */
     override public var keys: [String] {
-        return [Keys.useDifferentThread.rawValue, Keys.continuousScan.rawValue]
+        return [Keys.useDifferentThread.rawValue, Keys.continuousScan.rawValue, Keys.persistentConnections.rawValue]
     }
 }

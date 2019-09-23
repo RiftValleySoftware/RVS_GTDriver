@@ -46,3 +46,4 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-MAIN"                                                 =       "Main Screen";
 "SLUG-DIFFERENT-QUEUE"                                      =       "Use Different Thread";
 "SLUG-FULL-SCAN"                                            =       "Rescan After Delete";
+"SLUG-PERSISTENT-CONNECTIONS"                               =       "Stay Connected to Devices";

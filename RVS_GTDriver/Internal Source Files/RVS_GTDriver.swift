@@ -129,6 +129,12 @@ public class RVS_GTDriver: NSObject {
      If true, it could adversely affect battery life. Default is false.
      */
     internal var internal_AllowDuplicatesInBLEScan: Bool = false
+    
+    /* ################################################################## */
+    /**
+     This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is false.
+     */
+    internal var internal_stayConnected: Bool = false
 
     /* ################################################################################################################################## */
     // MARK: - Internal Main Initializer
@@ -465,7 +471,7 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
                     print("<***\n")
                 #endif
                 // If so, we simply create the new device and add it to our holding pen.
-                _holdingPen.append(RVS_GTDevice(inPeripheral, owner: self))
+                _holdingPen.append(RVS_GTDevice(inPeripheral, owner: self, remainConnected: stayConnected))
             }
             #if DEBUG
                 if !shouldInstall {

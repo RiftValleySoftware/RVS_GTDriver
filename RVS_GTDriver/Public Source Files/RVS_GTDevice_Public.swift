@@ -198,7 +198,7 @@ extension RVS_GTDevice {
     
     /* ################################################################## */
     /**
-     This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is true.
+     This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is false.
      It is KVO-observable. READ/WRITE
      NOTE: This May not be in the main thread!
      */

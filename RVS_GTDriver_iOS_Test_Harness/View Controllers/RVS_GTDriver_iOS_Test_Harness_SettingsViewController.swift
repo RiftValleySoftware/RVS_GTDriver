@@ -60,6 +60,18 @@ class RVS_GTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
     
     /* ################################################################## */
     /**
+     This is the persistent connections prefs switch.
+     */
+    @IBOutlet weak var persistentConnectionsSwitch: UISwitch!
+
+    /* ################################################################## */
+    /**
+     This is the toggle value button for the persistent connections switch.
+     */
+    @IBOutlet weak var persistentConnectionsToggleButton: UIButton!
+    
+    /* ################################################################## */
+    /**
      Called when the thread switch changes state.
      */
     @IBAction func threadSwitchChanged(_ inSwitch: UISwitch) {
@@ -76,6 +88,13 @@ class RVS_GTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
     
     /* ################################################################## */
     /**
+     */
+    @IBAction func persistentConnectionsSwitchChanged(_ inSwitch: UISwitch) {
+        prefs.persistentConnections = inSwitch.isOn
+    }
+
+    /* ################################################################## */
+    /**
      Called when the label/button is tapped. It toggles the state of the pref (and the switch).
      */
     @IBAction func threadSwitchToggle(_ inButton: UIButton) {
@@ -90,6 +109,14 @@ class RVS_GTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
     @IBAction func scanSwitchToggle(_ inButton: UIButton) {
         prefs.continuousScan = !prefs.continuousScan
         scanSwitch.setOn(prefs.continuousScan, animated: true)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBAction func peristentConnectionsToggleButtonHit(_ sender: Any) {
+        prefs.persistentConnections = !prefs.persistentConnections
+        persistentConnectionsSwitch.setOn(prefs.persistentConnections, animated: true)
     }
 }
 
@@ -109,7 +136,9 @@ extension RVS_GTDriver_iOS_Test_Harness_SettingsViewController {
         navigationItem.title = navigationItem.title?.localizedVariant
         threadToggleButton.setTitle(threadToggleButton.title(for: .normal)?.localizedVariant, for: .normal)
         scanToggleButton.setTitle(scanToggleButton.title(for: .normal)?.localizedVariant, for: .normal)
+        persistentConnectionsToggleButton.setTitle(persistentConnectionsToggleButton.title(for: .normal)?.localizedVariant, for: .normal)
         threadSwitch.isOn = prefs.useDifferentThread
         scanSwitch.isOn = prefs.continuousScan
+        persistentConnectionsSwitch.isOn = prefs.persistentConnections
     }
 }

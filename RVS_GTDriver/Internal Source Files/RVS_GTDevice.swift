@@ -115,9 +115,9 @@ public class RVS_GTDevice: NSObject {
     
     /* ################################################################## */
     /**
-     This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is true.
+     This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is false.
      */
-    internal var internal_stayConnected: Bool = true
+    internal var internal_stayConnected: Bool = false
 
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
@@ -138,14 +138,16 @@ public class RVS_GTDevice: NSObject {
      - parameter inPeripheral: The Core Bluetooth peripheral to associate with this instance. This is a strong reference. It cannot be nil or omitted.
      - parameter owner: The driver that "owns" this device. It is a weak reference. It cannot be nil or omitted.
      - parameter delegate: The RVS_GTDeviceDelegate instance. This is a weak reference, but is optional, and can be omitted
+     - parameter remainConnected: If true, then connections will persist until explicitly closed by the user. This is optional. Default is false.
      */
-    internal init(_ inPeripheral: CBPeripheral, owner inOwner: RVS_GTDriver, delegate inDelegate: RVS_GTDeviceDelegate! = nil) {
+    internal init(_ inPeripheral: CBPeripheral, owner inOwner: RVS_GTDriver, delegate inDelegate: RVS_GTDeviceDelegate! = nil, remainConnected inRemainConnected: Bool = false) {
         super.init()
         internal_peripheral = inPeripheral
         internal_peripheral.delegate = self
         internal_owner = inOwner
         internal_delegate = inDelegate
-        isConnected = true  // Start our first connection.
+        internal_stayConnected = inRemainConnected
+        isConnected = true
     }
 }
 

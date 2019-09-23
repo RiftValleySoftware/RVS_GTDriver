@@ -150,10 +150,14 @@ extension RVS_GTDriver {
      - parameter queue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
      - parameter allowDuplicatesInBLEScan:  This is a flag that specifies that the scanner can be continuously running, and "re-finding" duplicate devices.
                                             If true, it could adversely affect battery life. Default is false.
+     - parameter stayConnected: This is set to true, if you want all your device connections to be persistent. That is, once connected, they must be explicitly disconencted by the user.
+                                Otherwise, each device will be connected only while interacting.
+                                This is optional. Default is false.
      */
-    public convenience init(delegate inDelegate: RVS_GTDriverDelegate, queue inQueue: DispatchQueue? = nil, allowDuplicatesInBLEScan inAllowDuplicatesInBLEScan: Bool = false) {
+    public convenience init(delegate inDelegate: RVS_GTDriverDelegate, queue inQueue: DispatchQueue? = nil, allowDuplicatesInBLEScan inAllowDuplicatesInBLEScan: Bool = false, stayConnected inStayConnected: Bool = false) {
         self.init(delegate: inDelegate, queue: inQueue)
         internal_AllowDuplicatesInBLEScan = inAllowDuplicatesInBLEScan
+        internal_stayConnected = inStayConnected
     }
 
     /* ################################################################################################################################## */
@@ -340,5 +344,21 @@ extension RVS_GTDriver {
      */
     @objc dynamic public var devices: [RVS_GTDevice] {
         return sequence_contents
+    }
+    
+    /* ################################################################## */
+    /**
+     This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is false.
+     This is KVO-observable. READ/WRITE.
+     NOTE: This May not be in the main thread!
+     */
+    @objc dynamic public var stayConnected: Bool {
+        get {
+            return internal_stayConnected
+        }
+        
+        set {
+            internal_stayConnected = newValue
+        }
     }
 }

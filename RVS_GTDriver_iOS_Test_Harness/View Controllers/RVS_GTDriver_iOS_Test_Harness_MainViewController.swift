@@ -75,6 +75,12 @@ class RVS_GTDriver_iOS_Test_Harness_MainViewController: UIViewController, RVS_GT
      */
     private var _oldContinuousScan: Bool = false
     
+    /* ################################################################## */
+    /**
+     Used to remember our old value of the persistent connection pref.
+     */
+    private var _oldPersistentConnections: Bool = false
+
     /* ################################################################################################################################## */
     // MARK: - Internal Static Properties
     /* ################################################################################################################################## */
@@ -206,10 +212,13 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
             print("Setting Up Driver:")
             print("\tDifferent Thread is \(prefs.useDifferentThread ? "" : "not ")on.")
             print("\tContinuous Scan is \(prefs.continuousScan ? "" : "not ")on.\n")
+            print("\tPersistent Connections is \(prefs.persistentConnections ? "" : "not ")on.\n")
         #endif
         _oldQueueVal = prefs.useDifferentThread
         _oldContinuousScan = prefs.continuousScan
-        gtDriver = RVS_GTDriver(delegate: self, queue: prefs.useDifferentThread ? DispatchQueue.global() : nil, allowDuplicatesInBLEScan: prefs.continuousScan) // Create our driver instance.
+        _oldPersistentConnections = prefs.persistentConnections
+        // Create our driver instance.
+        gtDriver = RVS_GTDriver(delegate: self, queue: prefs.useDifferentThread ? DispatchQueue.global() : nil, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
     }
     
 }
@@ -316,6 +325,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
         // We deliberately set these different, to force a new driver instance.
         _oldQueueVal = !prefs.useDifferentThread
         _oldContinuousScan = !prefs.continuousScan
+        _oldPersistentConnections = !prefs.persistentConnections
         navigationItem.backBarButtonItem?.title = navigationItem.backBarButtonItem?.title?.localizedVariant ?? "ERROR"
         // We set up the localized strings for the segmented control.
         for i in 0..<scanningSegmentedControl.numberOfSegments {
@@ -334,7 +344,7 @@ extension RVS_GTDriver_iOS_Test_Harness_MainViewController {
         navigationController?.isNavigationBarHidden = true
         gtDriver?.isScanning = _wasScanning
         _wasScanning = false
-        if _oldQueueVal != prefs.useDifferentThread || _oldContinuousScan != prefs.continuousScan {
+        if _oldQueueVal != prefs.useDifferentThread || _oldContinuousScan != prefs.continuousScan || _oldPersistentConnections != prefs.persistentConnections {
             setUpDriver()
         }
         setUpUI()
