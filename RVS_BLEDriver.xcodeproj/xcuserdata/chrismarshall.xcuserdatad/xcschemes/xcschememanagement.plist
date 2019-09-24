@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>RVS_GTDriver_iOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>RVS_GTDriver_iOS_Test_Harness (Direct).xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>RVS_GTDriver_iOS_Test_Harness (Framework).xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>D403D362232BDC980040EBA3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D43058A2232BBCE700B64056</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D43058C2232BBECB00B64056</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D4749B6E232A842A0073F7BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
