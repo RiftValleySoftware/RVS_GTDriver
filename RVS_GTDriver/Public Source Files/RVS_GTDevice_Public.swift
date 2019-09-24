@@ -277,6 +277,25 @@ extension RVS_GTDevice {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     Causes the device to connect.
+     
+     - parameter remainConnected: If true (this is optional, and default is false), then the device will retain its connection until explicitly disconnected by the user.
+     */
+    public func connect(remainConnected inRemainConnected: Bool = false) {
+        shouldStayConnected = inRemainConnected
+        isConnected = true
+    }
+    
+    /* ################################################################## */
+    /**
+     Causes the device to disconnect.
+     */
+    public func disconnect() {
+        isConnected = false
+    }
+
+    /* ################################################################## */
+    /**
      If you call this, the driver will delete the device, and it will be eligible for rediscovery.
      
      We also call the delegate with the "before and after" calls.
