@@ -100,7 +100,7 @@ public class RVS_GTDriver: NSObject {
     /**
      This is the signal strength range. Optimal is -50.
      */
-    internal let RSSI_range = -80..<(-40)
+    internal let RSSI_range = -80..<(-30)
     
     /* ################################################################## */
     /**
@@ -425,8 +425,16 @@ extension RVS_GTDriver: CBCentralManagerDelegate {
      - parameter error: Any error that may have occurred. May be nil (no error).
     */
     public func centralManager(_ inCentralManager: CBCentralManager, didDisconnectPeripheral inPeripheral: CBPeripheral, error inError: Error?) {
-        if let error = inError {
-            reportThisError(.disconnectionAttemptFailed(error: error))
+        if  let error = inError {
+            let nsError = error as NSError
+            if nsError.domain == "CBErrorDomain", 7 == nsError.code {   // This is a special case, where we sometimes get a standard "they disconnected" error.
+                if let device = deviceForThisPeripheral(inPeripheral) {
+                    device.reportDisconnection(inError)
+                    sendDeviceUpdateToDelegegate()
+                }
+            } else {
+                reportThisError(.disconnectionAttemptFailed(error: error))
+            }
         } else if let device = deviceForThisPeripheral(inPeripheral) {
             device.reportDisconnection(inError)
             sendDeviceUpdateToDelegegate()

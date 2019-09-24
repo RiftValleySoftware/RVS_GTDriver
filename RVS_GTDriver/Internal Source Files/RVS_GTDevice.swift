@@ -67,12 +67,6 @@ public class RVS_GTDevice: NSObject {
 
     /* ################################################################## */
     /**
-     This is a reference to our internal proprietary goTenna service.
-     */
-    internal var goTennaService: RVS_GTService!
-
-    /* ################################################################## */
-    /**
      This is the Core Bluetooth peripheral instance that is associated with this object.
      */
     internal var internal_peripheral: CBPeripheral!
@@ -186,8 +180,6 @@ extension RVS_GTDevice {
             discoverDeviceInfoService()
         } else if _initialized {
             delegate?.gtDeviceWasConnected(self)
-        } else {
-            reportThisError(.connectionAttemptFailed(error: nil))
         }
     }
     
@@ -198,11 +190,7 @@ extension RVS_GTDevice {
      - parameter inError: Any error that may have occurred. It is passed directly to the delegate.
      */
     internal func reportDisconnection(_ inError: Error?) {
-        if nil == goTennaService {  // If we haven't loaded the goTenna service yet, we grab that before reporting a disconnection.
-            isConnected = true
-        } else {
-            delegate?.gtDevice(self, wasDisconnected: inError)
-        }
+        delegate?.gtDevice(self, wasDisconnected: inError)
     }
     
     /* ################################################################## */
@@ -229,14 +217,10 @@ extension RVS_GTDevice {
         if inService.service.uuid == CBUUID(string: RVS_GTDevice_DeviceSpec_GeneralPurpose.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) {
             deviceInfoService = inService
             setUpDeviceInfo()
-            discoverGoTennaService()
-        } else if inService.service.uuid == CBUUID(string: RVS_GTDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue) {
-            goTennaService = inService
-            setUpGoTennaInfo()
         }
         
         // If we are all done with both services, we wrap up the connection, and add ourselves to the driver in an "official" capacity.
-        if !_initialized, _holdingPen.isEmpty, nil != goTennaService, nil != deviceInfoService {
+        if !_initialized, _holdingPen.isEmpty, nil != deviceInfoService {
             _initialized = true
             // We no longer need the device to be connected, but won't disconnect, if we are to stay connected.
             isConnected = shouldStayConnected
@@ -563,9 +547,6 @@ extension RVS_GTDevice: CBPeripheralDelegate {
         if let error = inError {
             reportThisError(.unknownPeripheralDiscoveryError(error: error))
         } else if let services = inPeripheral.services {
-            if 0 == services.count {    // We can't have no services.
-                reportThisError(.unknownPeripheralDiscoveryError(error: nil))
-            }
             for service in services where !containsThisService(service) && !holdingThisService(service) {
                 #if DEBUG
                     print("\t***\n")
@@ -586,7 +567,13 @@ extension RVS_GTDevice: CBPeripheralDelegate {
                     _holdingPen.append(sInstance)   // In the holding pen, until we officially add it.
                 }
             }
+        } else {
+            #if DEBUG
+                print("\tNo services. Just disconnecting.\n")
+            #endif
+            disconnect()
         }
+        
         #if DEBUG
             print("<***\n")
         #endif

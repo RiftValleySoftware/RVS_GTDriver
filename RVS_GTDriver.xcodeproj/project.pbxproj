@@ -22,6 +22,31 @@
 		D43058D0232BBEE300B64056 /* RVS_GTDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */; };
 		D43058D1232BBEE300B64056 /* RVS_GTDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */; };
 		D43058D4232BBFE200B64056 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D43058D2232BBFE100B64056 /* Localizable.strings */; };
+		D44270A3233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4D6FD2333D1B500F19883 /* RVS_GTDriver_iOS_Test_Harness_Prefs.swift */; };
+		D44270A4233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43058A9232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_MainViewController.swift */; };
+		D44270A5233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1FECE2332A676000B8736 /* RVS_GTDriver_iOS_Test_Harness_SettingsViewController.swift */; };
+		D44270A6233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_Device_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D403D372232BFCA00040EBA3 /* RVS_GTDriver_iOS_Test_Harness_Device_ViewController.swift */; };
+		D44270A7233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43058A5232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift */; };
+		D44270A8233A9A0A007EDA59 /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */; };
+		D44270A9233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D403D374232C03850040EBA3 /* RVS_GTDriver_iOS_Test_Harness_NavigationController.swift */; };
+		D44270AA233A9A0A007EDA59 /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1FED12332A6F6000B8736 /* RVS_PersistentPrefs.swift */; };
+		D44270AE233A9A0A007EDA59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43058B0232BBCE800B64056 /* LaunchScreen.storyboard */; };
+		D44270AF233A9A0A007EDA59 /* Warnings.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D403D354232BCA970040EBA3 /* Warnings.xcconfig */; };
+		D44270B0233A9A0A007EDA59 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D43058D2232BBFE100B64056 /* Localizable.strings */; };
+		D44270B1233A9A0A007EDA59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D43058AE232BBCE800B64056 /* Assets.xcassets */; };
+		D44270B2233A9A0A007EDA59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43058AB232BBCE700B64056 /* Main.storyboard */; };
+		D44270BA233A9A46007EDA59 /* RVS_GTDevice_DeviceSpec_goTenna.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4580A6D2336ADD1006C67A5 /* RVS_GTDevice_DeviceSpec_goTenna.swift */; };
+		D44270BB233A9A46007EDA59 /* RVS_GTDriver_Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46F1545233189FE00E6282A /* RVS_GTDriver_Public.swift */; };
+		D44270BC233A9A46007EDA59 /* RVS_GTDevice_Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4040D2B2331ABAA007D9B15 /* RVS_GTDevice_Public.swift */; };
+		D44270BD233A9A46007EDA59 /* RVS_GTDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */; };
+		D44270BE233A9A46007EDA59 /* RVS_GTDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */; };
+		D44270BF233A9A46007EDA59 /* RVS_GTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED7232D78B40014FECF /* RVS_GTService.swift */; };
+		D44270C0233A9A46007EDA59 /* RVS_GTCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED9232D7F780014FECF /* RVS_GTCharacteristic.swift */; };
+		D44270C1233A9A46007EDA59 /* RVS_GTDevice_DeviceSpec_GeneralPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E918802337D78200ABF286 /* RVS_GTDevice_DeviceSpec_GeneralPurpose.swift */; };
+		D44270C2233A9A46007EDA59 /* RVS_GTDriver_DeviceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4580A6A2336AB11006C67A5 /* RVS_GTDriver_DeviceSpec.swift */; };
+		D44270C3233A9A46007EDA59 /* RVS_DebugTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1EDD232DD3810014FECF /* RVS_DebugTools.swift */; };
+		D44270C4233A9A46007EDA59 /* RVS_SequenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */; };
+		D44270C5233A9A46007EDA59 /* RVS_GTDriverTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45962342330E577001A7EDE /* RVS_GTDriverTools.swift */; };
 		D4580A6B2336AB11006C67A5 /* RVS_GTDriver_DeviceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4580A6A2336AB11006C67A5 /* RVS_GTDriver_DeviceSpec.swift */; };
 		D4580A6E2336ADD1006C67A5 /* RVS_GTDevice_DeviceSpec_goTenna.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4580A6D2336ADD1006C67A5 /* RVS_GTDevice_DeviceSpec_goTenna.swift */; };
 		D45962352330E577001A7EDE /* RVS_GTDriverTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45962342330E577001A7EDE /* RVS_GTDriverTools.swift */; };
@@ -67,7 +92,7 @@
 		D403D374232C03850040EBA3 /* RVS_GTDriver_iOS_Test_Harness_NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_iOS_Test_Harness_NavigationController.swift; sourceTree = "<group>"; };
 		D4040D2B2331ABAA007D9B15 /* RVS_GTDevice_Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDevice_Public.swift; sourceTree = "<group>"; };
 		D40D8E70232A88FA00697259 /* RVS_GTDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver.swift; sourceTree = "<group>"; };
-		D43058A3232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVS_GTDriver_iOS_Test_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D43058A3232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness (Framework).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_GTDriver_iOS_Test_Harness (Framework).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43058A5232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift; sourceTree = "<group>"; };
 		D43058A9232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness_MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_iOS_Test_Harness_MainViewController.swift; sourceTree = "<group>"; };
 		D43058AC232BBCE700B64056 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +104,8 @@
 		D43058D6232BC5A700B64056 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = RVS_GTDriver_iOS/Info.plist; sourceTree = SOURCE_ROOT; };
 		D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_String_Extensions.swift; sourceTree = "<group>"; };
 		D43A7E06232AEADF00A9C55A /* RVS_GTDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDevice.swift; sourceTree = "<group>"; };
+		D44270B8233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness (Direct).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_GTDriver_iOS_Test_Harness (Direct).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D44270B9233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "RVS_GTDriver_iOS_Test_Harness copy-Info.plist"; path = "/Volumes/Development/RiftValley/RVS_GTDriver/RVS_GTDriver_iOS_Test_Harness copy-Info.plist"; sourceTree = "<absolute>"; };
 		D4580A6A2336AB11006C67A5 /* RVS_GTDriver_DeviceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_GTDriver_DeviceSpec.swift; sourceTree = "<group>"; };
 		D4580A6D2336ADD1006C67A5 /* RVS_GTDevice_DeviceSpec_goTenna.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDevice_DeviceSpec_goTenna.swift; sourceTree = "<group>"; };
 		D45962342330E577001A7EDE /* RVS_GTDriverTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_GTDriverTools.swift; sourceTree = "<group>"; };
@@ -206,14 +233,16 @@
 				D43058A4232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness */,
 				D403D353232BCA830040EBA3 /* Meta */,
 				D4749B67232A842A0073F7BC /* Products */,
+				D44270B9233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
 		D4749B67232A842A0073F7BC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D43058A3232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness.app */,
+				D43058A3232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness (Framework).app */,
 				D43058C3232BBECB00B64056 /* RVS_GTDriver_iOS.framework */,
+				D44270B8233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness (Direct).app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,9 +291,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D43058A2232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness */ = {
+		D43058A2232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness (Framework) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D43058B6232BBCE800B64056 /* Build configuration list for PBXNativeTarget "RVS_GTDriver_iOS_Test_Harness" */;
+			buildConfigurationList = D43058B6232BBCE800B64056 /* Build configuration list for PBXNativeTarget "RVS_GTDriver_iOS_Test_Harness (Framework)" */;
 			buildPhases = (
 				D43058BD232BBE2200B64056 /* SwiftLint */,
 				D430589F232BBCE700B64056 /* Sources */,
@@ -277,9 +306,9 @@
 			dependencies = (
 				D43058C9232BBECB00B64056 /* PBXTargetDependency */,
 			);
-			name = RVS_GTDriver_iOS_Test_Harness;
+			name = "RVS_GTDriver_iOS_Test_Harness (Framework)";
 			productName = RVS_GTDriver_iOS_Test_Harness;
-			productReference = D43058A3232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness.app */;
+			productReference = D43058A3232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness (Framework).app */;
 			productType = "com.apple.product-type.application";
 		};
 		D43058C2232BBECB00B64056 /* RVS_GTDriver_iOS */ = {
@@ -299,6 +328,23 @@
 			productName = RVS_GTDriver_iOS;
 			productReference = D43058C3232BBECB00B64056 /* RVS_GTDriver_iOS.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		D442709E233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness (Direct) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D44270B5233A9A0A007EDA59 /* Build configuration list for PBXNativeTarget "RVS_GTDriver_iOS_Test_Harness (Direct)" */;
+			buildPhases = (
+				D44270A1233A9A0A007EDA59 /* SwiftLint */,
+				D44270A2233A9A0A007EDA59 /* Sources */,
+				D44270AD233A9A0A007EDA59 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RVS_GTDriver_iOS_Test_Harness (Direct)";
+			productName = RVS_GTDriver_iOS_Test_Harness;
+			productReference = D44270B8233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness (Direct).app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -332,7 +378,8 @@
 			projectRoot = "";
 			targets = (
 				D43058C2232BBECB00B64056 /* RVS_GTDriver_iOS */,
-				D43058A2232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness */,
+				D43058A2232BBCE700B64056 /* RVS_GTDriver_iOS_Test_Harness (Framework) */,
+				D442709E233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness (Direct) */,
 			);
 		};
 /* End PBXProject section */
@@ -358,6 +405,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D44270AD233A9A0A007EDA59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D44270AE233A9A0A007EDA59 /* LaunchScreen.storyboard in Resources */,
+				D44270AF233A9A0A007EDA59 /* Warnings.xcconfig in Resources */,
+				D44270B0233A9A0A007EDA59 /* Localizable.strings in Resources */,
+				D44270B1233A9A0A007EDA59 /* Assets.xcassets in Resources */,
+				D44270B2233A9A0A007EDA59 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -380,6 +439,24 @@
 			shellScript = "if test -f \"${PROJECT_DIR}/Pods/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/Pods/SwiftLint/swiftlint\"\nfi\n";
 		};
 		D43058BD232BBE2200B64056 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/Pods/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/Pods/SwiftLint/swiftlint\"\nfi\n";
+		};
+		D44270A1233A9A0A007EDA59 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -431,6 +508,33 @@
 				D4FC1EDA232D7F780014FECF /* RVS_GTCharacteristic.swift in Sources */,
 				D4FC1EDE232DD3810014FECF /* RVS_DebugTools.swift in Sources */,
 				D4580A6B2336AB11006C67A5 /* RVS_GTDriver_DeviceSpec.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D44270A2233A9A0A007EDA59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D44270C5233A9A46007EDA59 /* RVS_GTDriverTools.swift in Sources */,
+				D44270BF233A9A46007EDA59 /* RVS_GTService.swift in Sources */,
+				D44270C1233A9A46007EDA59 /* RVS_GTDevice_DeviceSpec_GeneralPurpose.swift in Sources */,
+				D44270C2233A9A46007EDA59 /* RVS_GTDriver_DeviceSpec.swift in Sources */,
+				D44270A3233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_Prefs.swift in Sources */,
+				D44270A4233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_MainViewController.swift in Sources */,
+				D44270C4233A9A46007EDA59 /* RVS_SequenceProtocol.swift in Sources */,
+				D44270C3233A9A46007EDA59 /* RVS_DebugTools.swift in Sources */,
+				D44270A5233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_SettingsViewController.swift in Sources */,
+				D44270BC233A9A46007EDA59 /* RVS_GTDevice_Public.swift in Sources */,
+				D44270A6233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_Device_ViewController.swift in Sources */,
+				D44270BA233A9A46007EDA59 /* RVS_GTDevice_DeviceSpec_goTenna.swift in Sources */,
+				D44270BB233A9A46007EDA59 /* RVS_GTDriver_Public.swift in Sources */,
+				D44270C0233A9A46007EDA59 /* RVS_GTCharacteristic.swift in Sources */,
+				D44270A7233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_AppDelegate.swift in Sources */,
+				D44270BE233A9A46007EDA59 /* RVS_GTDevice.swift in Sources */,
+				D44270A8233A9A0A007EDA59 /* RVS_String_Extensions.swift in Sources */,
+				D44270A9233A9A0A007EDA59 /* RVS_GTDriver_iOS_Test_Harness_NavigationController.swift in Sources */,
+				D44270BD233A9A46007EDA59 /* RVS_GTDriver.swift in Sources */,
+				D44270AA233A9A0A007EDA59 /* RVS_PersistentPrefs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +682,59 @@
 			};
 			name = Release;
 		};
+		D44270B6233A9A0A007EDA59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0000;
+				DEVELOPMENT_TEAM = KSAUGZFWP2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"DIRECT=1",
+				);
+				INFOPLIST_FILE = "RVS_GTDriver_iOS_Test_Harness copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-GTDriver-iOS-Test-Harness";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DIRECT";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D44270B7233A9A0A007EDA59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0000;
+				DEVELOPMENT_TEAM = KSAUGZFWP2;
+				GCC_PREPROCESSOR_DEFINITIONS = "DIRECT=1";
+				INFOPLIST_FILE = "RVS_GTDriver_iOS_Test_Harness copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-GTDriver-iOS-Test-Harness";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DIRECT;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		D4749B78232A842A0073F7BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D403D354232BCA970040EBA3 /* Warnings.xcconfig */;
@@ -704,7 +861,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D43058B6232BBCE800B64056 /* Build configuration list for PBXNativeTarget "RVS_GTDriver_iOS_Test_Harness" */ = {
+		D43058B6232BBCE800B64056 /* Build configuration list for PBXNativeTarget "RVS_GTDriver_iOS_Test_Harness (Framework)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D43058B4232BBCE800B64056 /* Debug */,
@@ -718,6 +875,15 @@
 			buildConfigurations = (
 				D43058CD232BBECB00B64056 /* Debug */,
 				D43058CE232BBECB00B64056 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D44270B5233A9A0A007EDA59 /* Build configuration list for PBXNativeTarget "RVS_GTDriver_iOS_Test_Harness (Direct)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D44270B6233A9A0A007EDA59 /* Debug */,
+				D44270B7233A9A0A007EDA59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

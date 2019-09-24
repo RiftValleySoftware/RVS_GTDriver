@@ -21,7 +21,9 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import UIKit
-import RVS_GTDriver_iOS
+#if !DIRECT
+    import RVS_GTDriver_iOS
+#endif
 
 /* ###################################################################################################################################### */
 // MARK: - Single Table View Cell Class -

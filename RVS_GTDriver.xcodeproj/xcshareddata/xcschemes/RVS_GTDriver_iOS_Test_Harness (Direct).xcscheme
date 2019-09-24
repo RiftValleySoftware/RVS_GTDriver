@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D43058A2232BBCE700B64056"
-               BuildableName = "RVS_GTDriver_iOS_Test_Harness.app"
-               BlueprintName = "RVS_GTDriver_iOS_Test_Harness"
+               BlueprintIdentifier = "D442709E233A9A0A007EDA59"
+               BuildableName = "RVS_GTDriver_iOS_Test_Harness (Direct).app"
+               BlueprintName = "RVS_GTDriver_iOS_Test_Harness (Direct)"
                ReferencedContainer = "container:RVS_GTDriver.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D403D362232BDC980040EBA3"
-               BuildableName = "RVS_GTDriver_iOS_Tests.xctest"
-               BlueprintName = "RVS_GTDriver_iOS_Tests"
-               ReferencedContainer = "container:RVS_GTDriver.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -54,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D43058A2232BBCE700B64056"
-            BuildableName = "RVS_GTDriver_iOS_Test_Harness.app"
-            BlueprintName = "RVS_GTDriver_iOS_Test_Harness"
+            BlueprintIdentifier = "D442709E233A9A0A007EDA59"
+            BuildableName = "RVS_GTDriver_iOS_Test_Harness (Direct).app"
+            BlueprintName = "RVS_GTDriver_iOS_Test_Harness (Direct)"
             ReferencedContainer = "container:RVS_GTDriver.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -71,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D43058A2232BBCE700B64056"
-            BuildableName = "RVS_GTDriver_iOS_Test_Harness.app"
-            BlueprintName = "RVS_GTDriver_iOS_Test_Harness"
+            BlueprintIdentifier = "D442709E233A9A0A007EDA59"
+            BuildableName = "RVS_GTDriver_iOS_Test_Harness (Direct).app"
+            BlueprintName = "RVS_GTDriver_iOS_Test_Harness (Direct)"
             ReferencedContainer = "container:RVS_GTDriver.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -301,7 +301,7 @@ extension RVS_GTDevice {
      We also call the delegate with the "before and after" calls.
      */
     public func deleteThisDevice() {
-        isConnected = false // Make sure that we're not connected anymore.
+        disconnect() // Make sure that we're not connected anymore.
         delegate?.gtDeviceWillBeRemoved(self)
         internal_owner.removeDeviceFromDriver(self)
         delegate?.gtDeviceWasRemoved(self)

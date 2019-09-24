@@ -22,7 +22,9 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 
 import UIKit
 import CoreBluetooth
-import RVS_GTDriver_iOS
+#if !DIRECT
+    import RVS_GTDriver_iOS
+#endif
 
 /* ###################################################################################################################################### */
 // MARK: - View Controller Class for The Device Inspector Screen -
