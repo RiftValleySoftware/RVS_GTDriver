@@ -54,6 +54,7 @@
 		D4B1FECF2332A676000B8736 /* RVS_BLEDriver_iOS_Test_Harness_SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1FECE2332A676000B8736 /* RVS_BLEDriver_iOS_Test_Harness_SettingsViewController.swift */; };
 		D4B1FED22332A6F6000B8736 /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1FED12332A6F6000B8736 /* RVS_PersistentPrefs.swift */; };
 		D4D3CBF22331B1770053D57F /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */; };
+		D4DAE24B233B9496000B8FB0 /* RVS_BLEDriver_ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DAE24A233B9496000B8FB0 /* RVS_BLEDriver_ServiceProtocol.swift */; };
 		D4E918812337D78200ABF286 /* RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E918802337D78200ABF286 /* RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift */; };
 		D4F4D6FE2333D1B500F19883 /* RVS_BLEDriver_iOS_Test_Harness_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4D6FD2333D1B500F19883 /* RVS_BLEDriver_iOS_Test_Harness_Prefs.swift */; };
 		D4FC1ED8232D78B40014FECF /* RVS_BLEService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED7232D78B40014FECF /* RVS_BLEService.swift */; };
@@ -111,6 +112,7 @@
 		D46F1545233189FE00E6282A /* RVS_BLEDriver_Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_Public.swift; sourceTree = "<group>"; };
 		D4B1FECE2332A676000B8736 /* RVS_BLEDriver_iOS_Test_Harness_SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_iOS_Test_Harness_SettingsViewController.swift; sourceTree = "<group>"; };
 		D4B1FED12332A6F6000B8736 /* RVS_PersistentPrefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_PersistentPrefs.swift; path = ExtensionsAndExtras/RVS_PersistentPrefs.swift; sourceTree = "<group>"; };
+		D4DAE24A233B9496000B8FB0 /* RVS_BLEDriver_ServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_ServiceProtocol.swift; sourceTree = "<group>"; };
 		D4E918802337D78200ABF286 /* RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift; sourceTree = "<group>"; };
 		D4F26050233ABE7D00A4710F /* RVS_BLEDriver_iOS_Test_Harness_Direct_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RVS_BLEDriver_iOS_Test_Harness_Direct_Info.plist; sourceTree = "<group>"; };
 		D4F4D6FD2333D1B500F19883 /* RVS_BLEDriver_iOS_Test_Harness_Prefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_iOS_Test_Harness_Prefs.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 			children = (
 				D46F1545233189FE00E6282A /* RVS_BLEDriver_Public.swift */,
 				D4040D2B2331ABAA007D9B15 /* RVS_BLEDevice_Public.swift */,
+				D4DAE24A233B9496000B8FB0 /* RVS_BLEDriver_ServiceProtocol.swift */,
 			);
 			path = "Public Source Files";
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				D4040D2C2331ABAA007D9B15 /* RVS_BLEDevice_Public.swift in Sources */,
 				D43058D1232BBEE300B64056 /* RVS_BLEDevice.swift in Sources */,
 				D4FC1EDC232D9FA80014FECF /* RVS_SequenceProtocol.swift in Sources */,
+				D4DAE24B233B9496000B8FB0 /* RVS_BLEDriver_ServiceProtocol.swift in Sources */,
 				D4E918812337D78200ABF286 /* RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift in Sources */,
 				D4580A6E2336ADD1006C67A5 /* RVS_BLEDevice_DeviceSpec_goTenna.swift in Sources */,
 				D46F1546233189FE00E6282A /* RVS_BLEDriver_Public.swift in Sources */,
