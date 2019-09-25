@@ -10,6 +10,10 @@ NOTE:
 =
 The docs won't be available until I upgrade to Catalina. Jazzy doesn't like Xcode 11, running on Mojave.
 
+NOT A DEVICE DRIVER 
+-
+RVS_BLEDriver is a low-level native Swift (Apple) driver. It is not a "device driver," which usually sit at an operating system level (kernel or user space). It is designed to translate between a **B**luetooth **L**ow-**E**nergy (BLE) connection to a device, and a user application; presenting an object model of the device.
+
 REQUIREMENTS
 -
 The Driver is provided as a [Swift](https://developer.apple.com/swift/)-only shared dynamic [framework](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Frameworks.html).
@@ -19,8 +23,6 @@ This is meant for [iOS](https://www.apple.com/ios/), [macOS](https://www.apple.c
 LICENSE
 -
 © Copyright 2019, [The Great Rift Valley Software Company](https://riftvalleysoftware.com)
-
-LICENSE:
 
 [MIT License](https://opensource.org/licenses/MIT)
 
