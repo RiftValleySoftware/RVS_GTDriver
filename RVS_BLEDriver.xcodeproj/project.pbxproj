@@ -172,7 +172,6 @@
 		D403D35C232BCB570040EBA3 /* Main App */ = {
 			isa = PBXGroup;
 			children = (
-				D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */,
 				D4F4D6FD2333D1B500F19883 /* RVS_BLEDriver_iOS_Test_Harness_Prefs.swift */,
 				D43058A5232BBCE700B64056 /* RVS_BLEDriver_iOS_Test_Harness_AppDelegate.swift */,
 			);
@@ -286,6 +285,7 @@
 		D4B1FED02332A6E1000B8736 /* ExtensionsAndExtras */ = {
 			isa = PBXGroup;
 			children = (
+				D43540E3232B146800C92A19 /* RVS_String_Extensions.swift */,
 				D4B1FED12332A6F6000B8736 /* RVS_PersistentPrefs.swift */,
 			);
 			name = ExtensionsAndExtras;
