@@ -21,12 +21,23 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 /* ###################################################################################################################################### */
+// MARK: - Main Driver RVS_BLEDriver_DeviceProtocol Protocol -
+/* ###################################################################################################################################### */
+/**
+ This protocol describes a service, or collection of "values," expressed as a sequence.
+ */
+public protocol RVS_BLEDriver_DeviceProtocol {
+    var services: [RVS_BLEDriver_ServiceProtocol] { get }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Main Driver RVS_BLEDriver_ServiceProtocol Protocol -
 /* ###################################################################################################################################### */
 /**
  This protocol describes a service, or collection of "values," expressed as a sequence.
  */
-public protocol RVS_BLEDriver_ServiceProtocol: RVS_SequenceProtocol where Element == RVS_BLEDriver_ValueProtocol {
+public protocol RVS_BLEDriver_ServiceProtocol {
+    var values: [RVS_BLEDriver_ValueProtocol] { get }
 }
 
 /* ###################################################################################################################################### */

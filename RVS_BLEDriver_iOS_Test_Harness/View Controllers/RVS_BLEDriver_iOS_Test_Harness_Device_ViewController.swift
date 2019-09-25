@@ -22,7 +22,8 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 
 import UIKit
 import CoreBluetooth
-#if !DIRECT
+
+#if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
     import RVS_BLEDriver_iOS
 #endif
 

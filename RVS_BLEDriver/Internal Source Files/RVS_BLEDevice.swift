@@ -50,15 +50,15 @@ public class RVS_BLEDevice: NSObject {
      */
     private var _holdingPen: [RVS_BLEService] = []
     
+    /* ################################################################################################################################## */
+    // MARK: - Internal Instance Properties
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This is an Array of our discovered and initialized goTenna services, as represented by instances of RVS_BLEService.
      */
-    private var _services: [RVS_BLEService] = []
-    
-    /* ################################################################################################################################## */
-    // MARK: - Internal Instance Properties
-    /* ################################################################################################################################## */
+    internal var internal_services: [RVS_BLEService] = []
+
     /* ################################################################## */
     /**
      This is a reference to our internal device info service.
@@ -112,7 +112,7 @@ public class RVS_BLEDevice: NSObject {
      This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is false.
      */
     internal var internal_stayConnected: Bool = false
-
+    
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -201,7 +201,7 @@ extension RVS_BLEDevice {
      */
     internal func addServiceToList(_ inService: RVS_BLEService) {
         #if DEBUG
-            print("Adding Service: \(String(describing: inService)) To Our List at index \(_services.count).")
+            print("Adding Service: \(String(describing: inService)) To Our List at index \(internal_services.count).")
         #endif
         // Remove from the "holding pen."
         if let index = _holdingPen.firstIndex(where: { return $0.service == inService.service }) {
@@ -211,7 +211,7 @@ extension RVS_BLEDevice {
             _holdingPen.remove(at: index)
         }
         
-        _services.append(inService)
+        internal_services.append(inService)
 
         // See if we will load one of our references with this service.
         if inService.service.uuid == CBUUID(string: RVS_BLEDevice_DeviceSpec_GeneralPurpose.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) {
@@ -279,14 +279,14 @@ extension RVS_BLEDevice {
 
     /* ################################################################## */
     /**
-     Asks the device to discover specific _services.
+     Asks the device to discover specific internal_services.
      
      - parameter inServiceCBUUIDs: These are the specific UUIDs we are searching for.
      - parameter startClean: Optional (default is false). If true, then all cached services are cleared before discovery.
      */
     internal func discoverServices(_ inServiceCBUUIDs: [CBUUID], startClean inStartClean: Bool = false) {
         if inStartClean {
-            _services = [] // Start clean
+            internal_services = [] // Start clean
         }
         internal_peripheral.discoverServices(inServiceCBUUIDs)
     }
@@ -304,13 +304,13 @@ extension RVS_BLEDevice {
     
     /* ################################################################## */
     /**
-     Asks the device to discover all of its _services.
+     Asks the device to discover all of its internal_services.
      
      - parameter startClean: Optional (default is false). If true, then all cached services are cleared before discovery.
      */
     internal func discoverAllServices(startClean inStartClean: Bool = false) {
         if inStartClean {
-            _services = [] // Start clean
+            internal_services = [] // Start clean
         }
         internal_peripheral.discoverServices(nil)
     }
@@ -402,7 +402,7 @@ extension RVS_BLEDevice: CBPeripheralDelegate {
         #if DEBUG
             print("Searching Main List for Characteristic: \(inCharacteristic)")
         #endif
-        for service in _services {
+        for service in internal_services {
             if let characteristic = service.characteristicForThisCharacteristic(inCharacteristic) {
                 #if DEBUG
                     print("Characteristic: \(inCharacteristic) Found in Main List.")
@@ -453,7 +453,7 @@ extension RVS_BLEDevice: CBPeripheralDelegate {
      - returns: True, if the driver currently has an instance of the peripheral cached.
      */
     internal func containsThisService(_ inService: CBService) -> Bool {
-        return _services.reduce(false) { (inCurrent, inElement) -> Bool in
+        return internal_services.reduce(false) { (inCurrent, inElement) -> Bool in
             guard !inCurrent, let service = inElement.service else { return inCurrent }
             return inService == service
         }
@@ -469,7 +469,7 @@ extension RVS_BLEDevice: CBPeripheralDelegate {
      - returns: The service. Nil, if not found.
      */
     internal func serviceForThisService(_ inService: CBService) -> RVS_BLEService? {
-        for service in _services where inService == service.service {
+        for service in internal_services where inService == service.service {
             return service
         }
         
@@ -494,7 +494,7 @@ extension RVS_BLEDevice: CBPeripheralDelegate {
             print("Searching for Service for \(String(describing: inUUID)).")
         #endif
         
-        for service in _services where inUUID == service.service.uuid {
+        for service in internal_services where inUUID == service.service.uuid {
             #if DEBUG
                 print("Service Found.")
             #endif
@@ -519,8 +519,8 @@ extension RVS_BLEDevice: CBPeripheralDelegate {
     public func peripheral(_ inPeripheral: CBPeripheral, didModifyServices inInvalidatedServices: [CBService]) {
         for cbService in inInvalidatedServices {
             if  let service = serviceForThisService(cbService),
-                let index = _services.firstIndex(of: service) {
-                _services.remove(at: index)
+                let index = internal_services.firstIndex(of: service) {
+                internal_services.remove(at: index)
             }
             
             // Make sure that our delegates are updated.

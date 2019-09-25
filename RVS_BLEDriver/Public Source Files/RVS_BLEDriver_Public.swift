@@ -20,7 +20,7 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import CoreBluetooth
+import CoreBluetooth    // We need to import this for the one advanced method that looks at CB.
 
 /* ###################################################################################################################################### */
 // MARK: - Main Driver RVS_BLEDriverDelegate Protocol -

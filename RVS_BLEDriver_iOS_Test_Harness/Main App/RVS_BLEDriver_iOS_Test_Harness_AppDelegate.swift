@@ -26,18 +26,45 @@ import UIKit
 // MARK: - Special App Delegate Access Protocol -
 /* ###################################################################################################################################### */
 /**
- If an entity conforms to this protocol, they will get access to a couple of App delegate functions.
+ If an entity conforms to this protocol, they will get access to a couple of App delegate functions. This is designed to use the default implementation.
  */
 protocol RVS_BLEDriver_iOS_Test_Harness_AppDelegateAccess {
+    /* ################################################################## */
+    /**
+     - returns: The App Delegate instance, cast to our class.
+     */
     var appDelegateObject: RVS_BLEDriver_iOS_Test_Harness_AppDelegate { get }
+
+    /* ################################################################## */
+    /**
+     Displays a string as an error alert.
+     
+     - parameter message: The string we want displayed. It should have localization already applied.
+     */
     func displayError(_ message: String)
 }
 
+/* ###################################################################################################################################### */
+// MARK: - Default Implementations of the Protocol -
+/* ###################################################################################################################################### */
+/**
+ If an entity conforms to this protocol, they will get access to a couple of App delegate functions.
+ */
 extension RVS_BLEDriver_iOS_Test_Harness_AppDelegateAccess {
+    /* ################################################################## */
+    /**
+     - returns: The App Delegate instance, cast to our class.
+     */
     var appDelegateObject: RVS_BLEDriver_iOS_Test_Harness_AppDelegate {
         return RVS_BLEDriver_iOS_Test_Harness_AppDelegate.appDelegateObject
     }
     
+    /* ################################################################## */
+    /**
+     Displays a string as an error alert.
+     
+     - parameter message: The string we want displayed. It should have localization already applied.
+     */
     func displayError(_ inMessage: String) {
         RVS_BLEDriver_iOS_Test_Harness_AppDelegate.displayAlert("SLUG-ERROR-HEADER".localizedVariant, message: inMessage)
     }

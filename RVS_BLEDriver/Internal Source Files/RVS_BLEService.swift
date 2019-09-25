@@ -30,7 +30,7 @@ import CoreBluetooth
  
  This class also conforms to a Sequence protocol, so you can iterate and subscript characteristics.
  */
-public class RVS_BLEService: NSObject {
+public class RVS_BLEService: NSObject, RVS_BLEDriver_ServiceProtocol {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */

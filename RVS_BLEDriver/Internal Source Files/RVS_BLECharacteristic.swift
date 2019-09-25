@@ -32,7 +32,7 @@ import CoreBluetooth
  
  We derive from NSObject, mainly for the description calculated property.
  */
-public class RVS_BLECharacteristic: NSObject {
+public class RVS_BLECharacteristic: NSObject, RVS_BLEDriver_ValueProtocol {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */

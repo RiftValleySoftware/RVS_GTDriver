@@ -20,7 +20,7 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import CoreBluetooth
+import Foundation
 
 /* ###################################################################################################################################### */
 // MARK: - RVS_BLEDeviceDelegate Protocol -
@@ -305,5 +305,21 @@ extension RVS_BLEDevice {
         delegate?.gtDeviceWillBeRemoved(self)
         internal_owner.removeDeviceFromDriver(self)
         delegate?.gtDeviceWasRemoved(self)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Public Access to the Services -
+/* ###################################################################################################################################### */
+/**
+ This is how we allow public access to the services. They are returned as protocol instances.
+ */
+extension RVS_BLEDevice: RVS_BLEDriver_DeviceProtocol {
+    /* ################################################################## */
+    /**
+     The services are returned in semi-opaque fashion, so they can be used via the protocol mask.
+     */
+    public var services: [RVS_BLEDriver_ServiceProtocol] {
+        return internal_services
     }
 }

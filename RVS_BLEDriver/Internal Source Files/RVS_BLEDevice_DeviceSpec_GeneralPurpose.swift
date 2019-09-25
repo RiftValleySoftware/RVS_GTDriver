@@ -26,6 +26,7 @@ import CoreBluetooth
 // MARK: - Adapter Class for Any Device -
 /* ########################################################################################################################################## */
 /**
+ This is a "general-purpose" adapter. It provides some of the standard BLE services and characteristics.
  */
 class RVS_BLEDevice_DeviceSpec_GeneralPurpose: RVS_BLEDevice_DeviceSpec {
     /* ###################################################################################################################################### */
