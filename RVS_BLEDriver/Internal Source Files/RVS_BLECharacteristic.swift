@@ -32,7 +32,7 @@ import CoreBluetooth
  
  We derive from NSObject, mainly for the description calculated property.
  */
-public class RVS_BLECharacteristic: NSObject, RVS_BLEDriver_ValueProtocol {
+public class RVS_BLECharacteristic: NSObject {
     /* ################################################################################################################################## */
     // MARK: - Private Instance Properties
     /* ################################################################################################################################## */
@@ -48,12 +48,15 @@ public class RVS_BLECharacteristic: NSObject, RVS_BLEDriver_ValueProtocol {
      */
     private weak var _owner: RVS_BLEService!
     
+    /* ################################################################################################################################## */
+    // MARK: - Internal Instance Properties
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This is a "cache" of the data.
      */
-    private var _cachedData: Data!
-    
+    internal var internal_cachedData: Data!
+
     /* ################################################################################################################################## */
     // MARK: - Internal Initializers
     /* ################################################################################################################################## */
@@ -97,10 +100,10 @@ extension RVS_BLECharacteristic {
     internal var characteristicValue: Data? {
         // If the characteristic object has data, we always use that.
         if let cachedData = _characteristic.value {
-            _cachedData = cachedData
+            internal_cachedData = cachedData
         }
         
-        return _cachedData
+        return internal_cachedData
     }
 
     /* ################################################################## */
@@ -247,5 +250,18 @@ extension RVS_BLECharacteristic {
      */
     override public var description: String {
         return String(describing: characteristic.uuid)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Public RVS_BLEDriver_ValueProtocol Support -
+/* ###################################################################################################################################### */
+extension RVS_BLECharacteristic: RVS_BLEDriver_ValueProtocol {
+    /* ################################################################## */
+    /**
+     - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
+     */
+    public var rawValue: Data? {
+        return internal_cachedData
     }
 }
