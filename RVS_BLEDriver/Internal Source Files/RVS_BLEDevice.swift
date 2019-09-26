@@ -680,7 +680,8 @@ extension RVS_BLEDevice: CBPeripheralDelegate {
             reportThisError(.unknownCharacteristicsReadValueError(error: nserror))
         } else if let characteristic = getCharacteristicInstanceForCharacteristic(inCharacteristic) {
             #if DEBUG
-                print("Adding Characteristic: \(String(describing: characteristic)) to its service.\n")
+                let chrDescription = characteristic.description
+                print("Adding Characteristic: \(chrDescription) to its service.\n")
             #endif
             characteristic.owner.addCharacteristic(characteristic)
         } else {

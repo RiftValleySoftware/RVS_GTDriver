@@ -35,7 +35,7 @@ class RVS_BLEDevice_DeviceSpec_GeneralPurpose: RVS_BLEDevice_DeviceSpec {
     /**
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
-    internal enum RVS_BLE_GATT_UUID: String {
+    internal enum RVS_BLE_GATT_UUID: String, RawRepresentable {
         // MARK: - Service IDs
         /// The standard GATT Device Info service.
         case deviceInfoService              =   "0x180A"

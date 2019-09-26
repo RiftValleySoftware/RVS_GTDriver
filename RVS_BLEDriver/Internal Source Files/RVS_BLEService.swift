@@ -99,8 +99,9 @@ public class RVS_BLEService: NSObject, RVS_BLEDriver_ServiceProtocol {
         // If we aren't looking up any initial characteristics, then we're done.
         if _initialCharacteristics.isEmpty {
             addOurselvesToDevice()
+            discoverAllCharacteristics()    // Also, tell the device to discover all of our characteristics. We won't wait for them.
         } else {
-            discoverCharacteristics(characteristicCBUUIDs: _initialCharacteristics)
+            discoverCharacteristics(characteristicCBUUIDs: _initialCharacteristics) // If we have been given a list of initial characteristics, then we do wait for those.
         }
     }
     
@@ -286,11 +287,17 @@ extension RVS_BLEService {
      */
     internal func addCharacteristic(_ inCharacteristic: RVS_BLECharacteristic) {
         #if DEBUG
-            print("Adding Characteristic: \(String(describing: inCharacteristic)) To Our List at index \(count).")
+            let chrDescription = inCharacteristic.description
+            print("Adding Characteristic: \(chrDescription) To Our List at index \(count).")
+            print("\tThe Characteristic value is \(inCharacteristic.value)")
+            print("\tThe Characteristic has \(inCharacteristic.count) descriptors.")
+            for descriptor in inCharacteristic {
+                print("\tDescriptor: \(String(describing: descriptor))")
+            }
         #endif
         if let index = _holdingPen.firstIndex(where: { return $0.characteristic == inCharacteristic.characteristic }) {
             #if DEBUG
-                print("Removing Characteristic: \(String(describing: inCharacteristic)) From Our Holding Pen at index \(index).")
+                print("Removing Characteristic: \(chrDescription) From Our Holding Pen at index \(index).")
             #endif
             _holdingPen.remove(at: index)
             _sequence_contents.append(inCharacteristic)

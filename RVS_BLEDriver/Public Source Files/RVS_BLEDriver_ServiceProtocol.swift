@@ -71,19 +71,25 @@ public enum RVS_BLEDriver_ValueProtocol_Type_Enum {
  */
 public protocol RVS_BLEDriver_ValueProtocol {
     /* ################################################################################################################################## */
-    // MARK: - Required Methods -
+    // MARK: - Optional Calculated Properties -
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
      */
     var rawValue: Data? { get }
-
+    
     /* ################################################################## */
     /**
      - returns: The Value, but cast into a specific data type (selected by the enum).
      */
     var value: RVS_BLEDriver_ValueProtocol_Type_Enum { get }
+    
+    /* ################################################################## */
+    /**
+     - returns: The user description of the value (if any). If none, the String will be empty.
+     */
+    var description: String { get }
 }
 
 /* ###################################################################################################################################### */
@@ -111,5 +117,15 @@ extension RVS_BLEDriver_ValueProtocol {
      */
     public var value: RVS_BLEDriver_ValueProtocol_Type_Enum {
         return .undefinedValue
+    }
+    
+    /* ################################################################## */
+    /**
+     The default description is an empty string.
+     
+     - returns: An empty String.
+     */
+    public var description: String {
+        return ""
     }
 }

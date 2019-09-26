@@ -213,6 +213,30 @@ extension RVS_BLECharacteristic {
     internal var isEncryptionRequiredForIndication: Bool {
         return _characteristic.properties.contains(.indicateEncryptionRequired)
     }
+    
+    /* ################################################################## */
+    /**
+     - returns: The User description (if any) as a String. Nil, if none.
+     */
+    internal var descriptorString: String! {
+        for descriptor in self where CBUUIDCharacteristicUserDescriptionString == descriptor.uuid.uuidString {
+            return descriptor.value as? String
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     - returns: The type of data. Nil, if none.
+     */
+    internal var typeString: String! {
+        for descriptor in self where CBUUIDCharacteristicFormatString == descriptor.uuid.uuidString {
+            return descriptor.value as? String
+        }
+        
+        return nil
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -241,28 +265,15 @@ extension RVS_BLECharacteristic: RVS_SequenceProtocol {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Public Description -
-/* ###################################################################################################################################### */
-extension RVS_BLECharacteristic {
-    /* ################################################################## */
-    /**
-     :nodoc: Return the simple description UUID.
-     */
-    override public var description: String {
-        return String(describing: characteristic.uuid)
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Public RVS_BLEDriver_ValueProtocol Support -
 /* ###################################################################################################################################### */
 extension RVS_BLECharacteristic: RVS_BLEDriver_ValueProtocol {
     /* ################################################################## */
     /**
-     :nodoc: Returns the value, expressed as raw Data. Nil, if no value available (or not available as Data).
+     Returns the value, expressed as raw Data. Nil, if no value available (or not available as Data).
      */
     public var rawValue: Data? {
-        return internal_cachedData
+        return characteristicValue
     }
     
     /* ################################################################## */
@@ -272,6 +283,35 @@ extension RVS_BLECharacteristic: RVS_BLEDriver_ValueProtocol {
      - returns: An enum, wrapping the data in a parsed form.
      */
     public var value: RVS_BLEDriver_ValueProtocol_Type_Enum {
+        if let type = typeString {  // If we have a type descriptor...
+            print("The characteristic type is \(String(describing: type))")
+        } else if   let rawValue = rawValue,
+                    let stringVal = String(data: rawValue, encoding: .utf8) {
+            return .stringValue(stringVal)
+        }
         return .undefinedValue
+    }
+    
+    /* ################################################################## */
+    /**
+     - returns: either the user description (if given), or the UUID.
+     */
+    override public var description: String {
+        var ret: String! = descriptorString
+        
+        if nil == ret || ret.isEmpty,
+            let gattInst = RVS_BLEDevice_DeviceSpec_GeneralPurpose.RVS_BLE_GATT_UUID(rawValue: "0x" + characteristic.uuid.uuidString) { // Need to add the hex indicator.
+            ret = String(describing: gattInst)
+        }
+        
+        if nil == ret || ret.isEmpty {
+            ret = "0x" + characteristic.uuid.uuidString
+        }
+        
+        if nil == ret || ret.isEmpty {
+            ret = "ERROR"
+        }
+
+        return ret
     }
 }
