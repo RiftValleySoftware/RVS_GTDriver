@@ -31,9 +31,9 @@ import Foundation
 extension RVS_BLEService {
     /* ################################################################## */
     /**
-     - returns: An Array of values, exposed as a protocol.
+     - returns: An Array of characteristics, exposed as a value protocol.
      */
     public var values: [RVS_BLEDriver_ValueProtocol] {
-        return []
+        return characteristics
     }
 }

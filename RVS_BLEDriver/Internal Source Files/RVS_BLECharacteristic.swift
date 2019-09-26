@@ -26,7 +26,7 @@ import CoreBluetooth
 // MARK: - Individual Characteristic Instance Class -
 /* ###################################################################################################################################### */
 /**
- :nodoc: This class wraps a CB characteristic, on behalf of the goTenna driver.
+ :nodoc: This class wraps a CB characteristic, on behalf of the BLE driver.
  
  This class conforms to our sequence protocol, so you can iterate and subscript descriptors.
  
@@ -259,9 +259,19 @@ extension RVS_BLECharacteristic {
 extension RVS_BLECharacteristic: RVS_BLEDriver_ValueProtocol {
     /* ################################################################## */
     /**
-     - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
+     :nodoc: Returns the value, expressed as raw Data. Nil, if no value available (or not available as Data).
      */
     public var rawValue: Data? {
         return internal_cachedData
+    }
+    
+    /* ################################################################## */
+    /**
+     Return a value, dependent upon our type.
+     
+     - returns: An enum, wrapping the data in a parsed form.
+     */
+    public var value: RVS_BLEDriver_ValueProtocol_Type_Enum {
+        return .undefinedValue
     }
 }

@@ -26,7 +26,7 @@ import CoreBluetooth
 // MARK: - Individual Device Instance Class -
 /* ###################################################################################################################################### */
 /**
- This class models a single discovered goTenna device (in [peripheral](https://developer.apple.com/documentation/corebluetooth/cbperipheral) mode).
+ This class models a single discovered BLE device (in [peripheral](https://developer.apple.com/documentation/corebluetooth/cbperipheral) mode).
  
  The class will offer a complete object model of the device to the API user. We need to abstract all [Core Bluetooth](https://developer.apple.com/documentation/corebluetooth) stuff.
 

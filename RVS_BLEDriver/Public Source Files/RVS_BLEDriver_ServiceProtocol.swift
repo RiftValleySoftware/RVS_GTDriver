@@ -70,12 +70,15 @@ public enum RVS_BLEDriver_ValueProtocol_Type_Enum {
  This protocol is used to describe one value in a service.
  */
 public protocol RVS_BLEDriver_ValueProtocol {
+    /* ################################################################################################################################## */
+    // MARK: - Required Methods -
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
      */
     var rawValue: Data? { get }
-    
+
     /* ################################################################## */
     /**
      - returns: The Value, but cast into a specific data type (selected by the enum).
