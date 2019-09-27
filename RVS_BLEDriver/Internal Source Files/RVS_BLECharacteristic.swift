@@ -44,7 +44,7 @@ public class RVS_BLECharacteristic: NSObject {
     
     /* ################################################################## */
     /**
-     This is the service instance that "owns" this device instance. It is a weak reference.
+     This is the service instance that "owns" this characteristic instance. It is a weak reference.
      */
     private weak var _owner: RVS_BLEService!
     
