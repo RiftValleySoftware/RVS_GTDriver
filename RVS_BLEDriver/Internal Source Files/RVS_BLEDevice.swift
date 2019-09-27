@@ -61,12 +61,6 @@ public class RVS_BLEDevice: NSObject {
 
     /* ################################################################## */
     /**
-     This is a reference to our internal device info service.
-     */
-    internal var deviceInfoService: RVS_BLEService!
-
-    /* ################################################################## */
-    /**
      This is the Core Bluetooth peripheral instance that is associated with this object.
      */
     internal var internal_peripheral: CBPeripheral!
@@ -85,34 +79,10 @@ public class RVS_BLEDevice: NSObject {
     
     /* ################################################################## */
     /**
-     This is the manufacturer name. It will be filled at initialization time.
-     */
-    internal var internal_manufacturerName: String = ""
-    
-    /* ################################################################## */
-    /**
-     This is the "model number." It will be filled at initialization time.
-     */
-    internal var internal_modelNumber: String = ""
-    
-    /* ################################################################## */
-    /**
-     This is the hardware revision. It will be filled at initialization time.
-     */
-    internal var internal_hardwareRevision: String = ""
-    
-    /* ################################################################## */
-    /**
-     This is the firmware revision. It will be filled at initialization time.
-     */
-    internal var internal_firmwareRevision: String = ""
-    
-    /* ################################################################## */
-    /**
      This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is false.
      */
     internal var internal_stayConnected: Bool = false
-    
+
     /* ################################################################################################################################## */
     // MARK: - Private Initializer
     /* ################################################################################################################################## */
@@ -142,6 +112,21 @@ public class RVS_BLEDevice: NSObject {
         internal_delegate = inDelegate
         internal_stayConnected = inRemainConnected
         isConnected = true
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Calculated Properties
+/* ###################################################################################################################################### */
+extension RVS_BLEDevice {
+    /* ################################################################## */
+    /**
+     Sorts through our services, and finds the Device Info service (if available).
+     
+     - returns: The Device Info service. Nil, if not available.
+     */
+    internal var deviceInfoService: RVS_BLE_DeviceInfo_Service! {
+        return serviceForThisUUID(CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoService.rawValue)) as? RVS_BLE_DeviceInfo_Service
     }
 }
 
@@ -212,15 +197,10 @@ extension RVS_BLEDevice {
         }
         
         internal_services.append(inService)
-
-        // See if we will load one of our references with this service.
-        if inService.service.uuid == CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) {
-            deviceInfoService = inService
-            setUpDeviceInfo()
-        }
         
-        // If we are all done with both services, we wrap up the connection, and add ourselves to the driver in an "official" capacity.
-        if !_initialized, _holdingPen.isEmpty, nil != deviceInfoService {
+        // If we are all done with all services, we wrap up the connection, and add ourselves to the driver in an "official" capacity.
+        if !_initialized, _holdingPen.isEmpty,
+            nil != deviceInfoService {
             _initialized = true
             // We no longer need the device to be connected, but won't disconnect, if we are to stay connected.
             isConnected = shouldStayConnected
@@ -333,54 +313,6 @@ extension RVS_BLEDevice {
      */
     internal func discoverAllCharacteristicsForService(_ inService: RVS_BLEService) {
         internal_peripheral.discoverCharacteristics(nil, for: inService.service)
-    }
-
-    /* ################################################################################################################################## */
-    // MARK: - Internal Service Setup Methods
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This goes through the device info service, and extracts the four basic device info fields.
-     */
-    internal func setUpDeviceInfo() {
-        // Start by getting the device info object.
-        if let deviceInfoService = serviceForThisUUID(CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoService.rawValue)) {
-            if let manufacturerName = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue))?.stringValue {
-                #if DEBUG
-                    print("Read the Manufacturer Name: \(manufacturerName).")
-                #endif
-                internal_manufacturerName = manufacturerName
-            }
-            
-            if let modelNumber = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue))?.stringValue {
-                #if DEBUG
-                    print("Read the Model Number: \(modelNumber).")
-                #endif
-                internal_modelNumber = modelNumber
-            }
-            
-            if let hardwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue))?.stringValue {
-                #if DEBUG
-                    print("Read the Hardware Revision: \(hardwareRevision).")
-                #endif
-                internal_hardwareRevision = hardwareRevision
-            }
-            
-            if let firmwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue))?.stringValue {
-                #if DEBUG
-                    print("Read the Firmaware Revision: \(firmwareRevision).")
-                #endif
-                internal_firmwareRevision = firmwareRevision
-            }
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     This goes through the goTenna service and exctracts the information from it.
-     */
-    internal func setUpGoTennaInfo() {
-        
     }
 }
 
@@ -710,6 +642,6 @@ extension RVS_BLEDevice: CBPeripheralDelegate {
      :nodoc: Return the simple description (Manufacturer name, model and ID).
      */
     override public var description: String {
-        return String(describing: internal_manufacturerName + " " + internal_modelNumber + " " + id)
+        return String(describing: manufacturerName + " " + modelNumber + " " + id)
     }
 }

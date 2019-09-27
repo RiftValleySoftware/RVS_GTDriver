@@ -67,4 +67,51 @@ public class RVS_BLE_DeviceInfo_Service: RVS_BLEService {
 // MARK: - Extension -
 /* ###################################################################################################################################### */
 extension RVS_BLE_DeviceInfo_Service {
+    /* ################################################################## */
+    /**
+     - returns: The manufacturer name (if any). If none, an empty String is returned.
+     */
+    public var manufacturerNameString: String {
+        if  let value = self[RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue],
+            case let RVS_BLEDriver_ValueProtocol_Type_Enum.stringValue(inValueString) = value.value {
+            return inValueString ?? ""
+        }
+        return ""
+    }
+    
+    /* ################################################################## */
+    /**
+     - returns: The model name (if any). If none, an empty String is returned.
+     */
+    public var modelNameString: String {
+        if  let value = self[RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue],
+            case let RVS_BLEDriver_ValueProtocol_Type_Enum.stringValue(inValueString) = value.value {
+            return inValueString ?? ""
+        }
+        return ""
+    }
+    
+    /* ################################################################## */
+    /**
+     - returns: The hardware revision (if any). If none, an empty String is returned.
+     */
+    public var hardwareRevisionString: String {
+        if  let value = self[RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue],
+            case let RVS_BLEDriver_ValueProtocol_Type_Enum.stringValue(inValueString) = value.value {
+            return inValueString ?? ""
+        }
+        return ""
+    }
+    
+    /* ################################################################## */
+    /**
+     - returns: The firmware revision (if any). If none, an empty String is returned.
+     */
+    public var firmwareRevisionString: String {
+        if  let value = self[RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue],
+            case let RVS_BLEDriver_ValueProtocol_Type_Enum.stringValue(inValueString) = value.value {
+            return inValueString ?? ""
+        }
+        return ""
+    }
 }

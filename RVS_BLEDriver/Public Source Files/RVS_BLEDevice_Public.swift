@@ -219,7 +219,7 @@ extension RVS_BLEDevice {
      NOTE: This May not be in the main thread!
      */
     @objc dynamic public var manufacturerName: String {
-        return internal_manufacturerName
+        return deviceInfoService?.manufacturerNameString ?? ""
     }
     
     /* ################################################################## */
@@ -229,7 +229,7 @@ extension RVS_BLEDevice {
      NOTE: This May not be in the main thread!
      */
     @objc dynamic public var modelNumber: String {
-        return internal_modelNumber
+        return deviceInfoService?.modelNameString ?? ""
     }
     
     /* ################################################################## */
@@ -239,7 +239,7 @@ extension RVS_BLEDevice {
      NOTE: This May not be in the main thread!
      */
     @objc dynamic public var hardwareRevision: String {
-        return internal_hardwareRevision
+        return deviceInfoService?.hardwareRevisionString ?? ""
     }
     
     /* ################################################################## */
@@ -249,7 +249,7 @@ extension RVS_BLEDevice {
      NOTE: This May not be in the main thread!
      */
     @objc dynamic public var firmwareRevision: String {
-        return internal_firmwareRevision
+        return deviceInfoService?.firmwareRevisionString ?? ""
     }
     
     /* ################################################################## */

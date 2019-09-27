@@ -71,7 +71,7 @@ public class RVS_BLEDevice_DeviceSpec_GeneralPurpose: RVS_BLEDevice_DeviceSpec {
                                             CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue),
                                             CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)
             ]
-            return RVS_BLEService(inService, owner: inDevice, initialCharacteristics: initialCharacteristics)
+            return RVS_BLE_DeviceInfo_Service(inService, owner: inDevice, initialCharacteristics: initialCharacteristics)
         }
 
         return nil

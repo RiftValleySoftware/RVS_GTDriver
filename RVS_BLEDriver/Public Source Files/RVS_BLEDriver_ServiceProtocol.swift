@@ -43,6 +43,10 @@ public protocol RVS_BLEDriver_ServiceProtocol {
     static var serviceID: String { get }
     /// These are the characteristics, supplied as "values."
     var values: [RVS_BLEDriver_ValueProtocol] { get }
+    /* ################################################################## */
+    /**
+     */
+    subscript(_ inHash: String) -> RVS_BLEDriver_ValueProtocol? { get }
 }
 
 /* ###################################################################################################################################### */
@@ -54,6 +58,21 @@ extension RVS_BLEDriver_ServiceProtocol {
      Default is unknown.
      */
     public static var serviceID: String { return "" }
+    
+    /* ################################################################## */
+    /**
+     Simple subscript, where we search for a value by its subscript.
+     
+     - parameter inHash: The UUID of the value, as a String.
+     - returns: The value intance, masked as a protocol. Nil, if not found.
+     */
+    public subscript(_ inHash: String) -> RVS_BLEDriver_ValueProtocol? {
+        for value in values where (value.uuidString) == inHash {
+            return value
+        }
+        
+        return nil
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -104,6 +123,12 @@ public protocol RVS_BLEDriver_ValueProtocol {
      - returns: The user description of the value (if any). If none, the String will be empty.
      */
     var description: String { get }
+    
+    /* ################################################################## */
+    /**
+     - returns: The UUID of the value characteristic, as a String.
+     */
+    var uuidString: String { get }
 }
 
 /* ###################################################################################################################################### */

@@ -314,4 +314,14 @@ extension RVS_BLECharacteristic: RVS_BLEDriver_ValueProtocol {
 
         return ret
     }
+    
+    /* ################################################################## */
+    /**
+     We need to add the hex prefix, here. The BLE system strips it.
+     
+     - returns: The UUID of the value characteristic, as a String.
+     */
+    public var uuidString: String {
+        return "0x" + characteristic.uuid.uuidString
+    }
 }
