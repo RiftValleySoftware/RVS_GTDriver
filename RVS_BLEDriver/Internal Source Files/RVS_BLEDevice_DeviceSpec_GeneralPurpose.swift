@@ -28,35 +28,13 @@ import CoreBluetooth
 /**
  This is a "general-purpose" adapter. It provides some of the standard BLE services and characteristics.
  */
-class RVS_BLEDevice_DeviceSpec_GeneralPurpose: RVS_BLEDevice_DeviceSpec {
-    /* ###################################################################################################################################### */
-    // MARK: - Enums for Standard BLE Service and Characteristic UUIDs -
-    /* ###################################################################################################################################### */
-    /**
-     These are String-based enums that we use to reference various services and characteristics in our driver.
-     */
-    internal enum RVS_BLE_GATT_UUID: String, RawRepresentable {
-        // MARK: - Service IDs
-        /// The standard GATT Device Info service.
-        case deviceInfoService              =   "0x180A"
-        
-        // MARK: - Device Info Characteristic IDs
-        /// Manufacturer Name
-        case deviceInfoManufacturerName     =   "0x2A29"
-        /// Model Name
-        case deviceInfoModelName            =   "0x2A24"
-        /// Hardware Revision
-        case deviceInfoHardwareRevision     =   "0x2A27"
-        /// Firmware Revision
-        case deviceInfoFirmwareRevision     =   "0x2A26"
-    }
-    
+public class RVS_BLEDevice_DeviceSpec_GeneralPurpose: RVS_BLEDevice_DeviceSpec {    
     /* ################################################################## */
     /**
      - returns: An Array, with the UUIDs of all the services this handler will take.
      */
-    private var _serviceUUIDs: [CBUUID] = [
-        CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoService.rawValue)           // We handle proprietary services, too.
+    private var _serviceUUIDs: [CBUUID] = [ // We register for standard services
+        CBUUID(string: RVS_BLE_DeviceInfo_Service.serviceID)    // Device Info.
     ]
     
     /* ################################################################## */
@@ -86,11 +64,12 @@ class RVS_BLEDevice_DeviceSpec_GeneralPurpose: RVS_BLEDevice_DeviceSpec {
      - returns: An instance of a subclass of RVS_BLEService, if it is handled by this instance, or nil, if not.
      */
     func handleDiscoveredService(_ inService: CBService, forPeripheral inPeripheral: CBPeripheral, andDevice inDevice: RVS_BLEDevice) -> RVS_BLEService! {
-        if serviceUUIDs.contains(inService.uuid) {
-            let initialCharacteristics = [  CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue),
-                                            CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue),
-                                            CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue),
-                                            CBUUID(string: RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)
+        if  serviceUUIDs.contains(inService.uuid),
+            RVS_BLE_DeviceInfo_Service.serviceID == "0x" + inService.uuid.uuidString {
+            let initialCharacteristics = [  CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue),
+                                            CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue),
+                                            CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue),
+                                            CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)
             ]
             return RVS_BLEService(inService, owner: inDevice, initialCharacteristics: initialCharacteristics)
         }

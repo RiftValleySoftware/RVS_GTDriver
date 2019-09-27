@@ -214,7 +214,7 @@ extension RVS_BLEDevice {
         internal_services.append(inService)
 
         // See if we will load one of our references with this service.
-        if inService.service.uuid == CBUUID(string: RVS_BLEDevice_DeviceSpec_GeneralPurpose.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) {
+        if inService.service.uuid == CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) {
             deviceInfoService = inService
             setUpDeviceInfo()
         }
@@ -266,7 +266,7 @@ extension RVS_BLEDevice {
      This discovers just the device info service.
      */
     internal func discoverDeviceInfoService() {
-        discoverServices([CBUUID(string: RVS_BLEDevice_DeviceSpec_GeneralPurpose.RVS_BLE_GATT_UUID.deviceInfoService.rawValue)])
+        discoverServices([CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoService.rawValue)])
     }
     
     /* ################################################################## */
@@ -344,29 +344,29 @@ extension RVS_BLEDevice {
      */
     internal func setUpDeviceInfo() {
         // Start by getting the device info object.
-        if let deviceInfoService = serviceForThisUUID(CBUUID(string: RVS_BLEDevice_DeviceSpec_GeneralPurpose.RVS_BLE_GATT_UUID.deviceInfoService.rawValue)) {
-            if let manufacturerName = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLEDevice_DeviceSpec_GeneralPurpose.RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue))?.stringValue {
+        if let deviceInfoService = serviceForThisUUID(CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoService.rawValue)) {
+            if let manufacturerName = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue))?.stringValue {
                 #if DEBUG
                     print("Read the Manufacturer Name: \(manufacturerName).")
                 #endif
                 internal_manufacturerName = manufacturerName
             }
             
-            if let modelNumber = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLEDevice_DeviceSpec_GeneralPurpose.RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue))?.stringValue {
+            if let modelNumber = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue))?.stringValue {
                 #if DEBUG
                     print("Read the Model Number: \(modelNumber).")
                 #endif
                 internal_modelNumber = modelNumber
             }
             
-            if let hardwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLEDevice_DeviceSpec_GeneralPurpose.RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue))?.stringValue {
+            if let hardwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue))?.stringValue {
                 #if DEBUG
                     print("Read the Hardware Revision: \(hardwareRevision).")
                 #endif
                 internal_hardwareRevision = hardwareRevision
             }
             
-            if let firmwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLEDevice_DeviceSpec_GeneralPurpose.RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue))?.stringValue {
+            if let firmwareRevision = deviceInfoService.characteristicForThisUUID(CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue))?.stringValue {
                 #if DEBUG
                     print("Read the Firmaware Revision: \(firmwareRevision).")
                 #endif

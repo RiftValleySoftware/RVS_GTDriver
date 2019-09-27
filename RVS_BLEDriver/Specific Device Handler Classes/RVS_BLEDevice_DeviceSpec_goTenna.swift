@@ -119,3 +119,45 @@ internal class RVS_BLEService_goTenna: RVS_BLEService {
  */
 internal class RVS_BLECharacteristic_goTenna: RVS_BLECharacteristic {
 }
+
+/* ###################################################################################################################################### */
+// MARK: - Service Class for goTenna Service -
+/* ###################################################################################################################################### */
+/**
+ This class implements a BLE service wrapper, specialized for the goTenna Proprietary service.
+ */
+public class RVS_BLE_goTenna_Service: RVS_BLEService {
+    /* ###################################################################################################################################### */
+    // MARK: - Enums for Standard BLE Service and Characteristic UUIDs -
+    /* ###################################################################################################################################### */
+    /**
+     These are String-based enums that we use to reference various services and characteristics in our driver.
+     */
+    public enum RVS_BLE_GATT_UUID: String, RawRepresentable {
+        // MARK: - Service IDs
+        /// This is the basic goTenna proprietary service.
+        case goTennaProprietary             =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
+        
+        // MARK: - goTenna Proprietary Characteristic IDs
+        case goTennaProprietary001          =   "12762B18-DF5E-11E6-BF01-FE55135034F3"
+        case goTennaProprietary002          =   "1276B20A-DF5E-11E6-BF01-FE55135034F3"
+        case goTennaProprietary003          =   "1276B20B-DF5E-11E6-BF01-FE55135034F3"
+    }
+
+    /* ################################################################################################################################## */
+    // MARK: - RVS_BLEDriver_ServiceProtocol Support -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     - returns: The service UUID.
+     */
+    public static var serviceID: String {
+        return RVS_BLE_GATT_UUID.goTennaProprietary.rawValue
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Extension -
+/* ###################################################################################################################################### */
+extension RVS_BLE_goTenna_Service {
+}

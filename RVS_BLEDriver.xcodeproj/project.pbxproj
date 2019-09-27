@@ -49,6 +49,8 @@
 		D4580A6B2336AB11006C67A5 /* RVS_BLEDriver_DeviceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4580A6A2336AB11006C67A5 /* RVS_BLEDriver_DeviceSpec.swift */; };
 		D4580A6E2336ADD1006C67A5 /* RVS_BLEDevice_DeviceSpec_goTenna.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4580A6D2336ADD1006C67A5 /* RVS_BLEDevice_DeviceSpec_goTenna.swift */; };
 		D45962352330E577001A7EDE /* RVS_BLEDriverTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45962342330E577001A7EDE /* RVS_BLEDriverTools.swift */; };
+		D45E5285233E656A00C9A38A /* RVS_BLE_DeviceInfo_Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E5284233E656A00C9A38A /* RVS_BLE_DeviceInfo_Service.swift */; };
+		D45E5286233E656A00C9A38A /* RVS_BLE_DeviceInfo_Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E5284233E656A00C9A38A /* RVS_BLE_DeviceInfo_Service.swift */; };
 		D464068F233CE16A00C3783B /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D464068E233CE16A00C3783B /* RVS_String_Extensions.swift */; };
 		D4640690233CE16A00C3783B /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D464068E233CE16A00C3783B /* RVS_String_Extensions.swift */; };
 		D46F1546233189FE00E6282A /* RVS_BLEDriver_Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46F1545233189FE00E6282A /* RVS_BLEDriver_Public.swift */; };
@@ -111,6 +113,7 @@
 		D4580A6A2336AB11006C67A5 /* RVS_BLEDriver_DeviceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_DeviceSpec.swift; sourceTree = "<group>"; };
 		D4580A6D2336ADD1006C67A5 /* RVS_BLEDevice_DeviceSpec_goTenna.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BLEDevice_DeviceSpec_goTenna.swift; sourceTree = "<group>"; };
 		D45962342330E577001A7EDE /* RVS_BLEDriverTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriverTools.swift; sourceTree = "<group>"; };
+		D45E5284233E656A00C9A38A /* RVS_BLE_DeviceInfo_Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLE_DeviceInfo_Service.swift; sourceTree = "<group>"; };
 		D464068E233CE16A00C3783B /* RVS_String_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_String_Extensions.swift; path = ExtensionsAndExtras/RVS_String_Extensions.swift; sourceTree = "<group>"; };
 		D46F1545233189FE00E6282A /* RVS_BLEDriver_Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_Public.swift; sourceTree = "<group>"; };
 		D4B1FECE2332A676000B8736 /* RVS_BLEDriver_iOS_Test_Harness_SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_iOS_Test_Harness_SettingsViewController.swift; sourceTree = "<group>"; };
@@ -270,6 +273,7 @@
 				D46F1545233189FE00E6282A /* RVS_BLEDriver_Public.swift */,
 				D4040D2B2331ABAA007D9B15 /* RVS_BLEDevice_Public.swift */,
 				D4B89742233C152B0097095A /* RVS_BLEService_Public.swift */,
+				D45E5284233E656A00C9A38A /* RVS_BLE_DeviceInfo_Service.swift */,
 				D4DAE24A233B9496000B8FB0 /* RVS_BLEDriver_ServiceProtocol.swift */,
 			);
 			path = "Public Source Files";
@@ -509,6 +513,7 @@
 				D464068F233CE16A00C3783B /* RVS_String_Extensions.swift in Sources */,
 				D4040D2C2331ABAA007D9B15 /* RVS_BLEDevice_Public.swift in Sources */,
 				D43058D1232BBEE300B64056 /* RVS_BLEDevice.swift in Sources */,
+				D45E5285233E656A00C9A38A /* RVS_BLE_DeviceInfo_Service.swift in Sources */,
 				D4FC1EDC232D9FA80014FECF /* RVS_SequenceProtocol.swift in Sources */,
 				D4DAE24B233B9496000B8FB0 /* RVS_BLEDriver_ServiceProtocol.swift in Sources */,
 				D4E918812337D78200ABF286 /* RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift in Sources */,
@@ -526,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4640690233CE16A00C3783B /* RVS_String_Extensions.swift in Sources */,
+				D45E5286233E656A00C9A38A /* RVS_BLE_DeviceInfo_Service.swift in Sources */,
 				D4B89744233C152B0097095A /* RVS_BLEService_Public.swift in Sources */,
 				D44270C5233A9A46007EDA59 /* RVS_BLEDriverTools.swift in Sources */,
 				D44270BF233A9A46007EDA59 /* RVS_BLEService.swift in Sources */,

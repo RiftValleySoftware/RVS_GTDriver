@@ -39,7 +39,21 @@ public protocol RVS_BLEDriver_DeviceProtocol {
  This protocol describes a service, or collection of "values."
  */
 public protocol RVS_BLEDriver_ServiceProtocol {
+    /// This is the general service ID for the class.
+    static var serviceID: String { get }
+    /// These are the characteristics, supplied as "values."
     var values: [RVS_BLEDriver_ValueProtocol] { get }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Main Driver RVS_BLEDriver_ServiceProtocol Protocol -
+/* ###################################################################################################################################### */
+extension RVS_BLEDriver_ServiceProtocol {
+    /* ################################################################## */
+    /**
+     Default is unknown.
+     */
+    public static var serviceID: String { return "" }
 }
 
 /* ###################################################################################################################################### */

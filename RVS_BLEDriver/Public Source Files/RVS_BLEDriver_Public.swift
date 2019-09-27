@@ -320,6 +320,7 @@ extension RVS_BLEDriver {
                 for handler in type(of: self).handlers {
                     scanForTheseServices += handler.advertisedServiceUUIDs
                 }
+
                 internal_centralManager.scanForPeripherals(withServices: scanForTheseServices, options: options)
             }
         }

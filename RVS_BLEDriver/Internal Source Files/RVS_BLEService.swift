@@ -26,7 +26,7 @@ import CoreBluetooth
 // MARK: - Individual Service Instance Class -
 /* ###################################################################################################################################### */
 /**
- :nodoc: This class implements a BLE service wrapper, specialized for the goTenna driver.
+ :nodoc: This class implements a BLE service wrapper.
  
  This class also conforms to a Sequence protocol, so you can iterate and subscript characteristics.
  */
@@ -115,6 +115,16 @@ public class RVS_BLEService: NSObject, RVS_BLEDriver_ServiceProtocol {
      */
     internal func makeCharacteristicForThisCharacteristic(_ inCharacteristic: CBCharacteristic) -> RVS_BLECharacteristic? {
         return RVS_BLECharacteristic(inCharacteristic, owner: self)
+    }
+    
+    /* ################################################################## */
+    /**
+     This needs to be declared here, so it can be overridden.
+     
+     - returns: The service UUID. The base class is an unknown one.
+     */
+    public var serviceID: String {
+        return ""
     }
 }
 
