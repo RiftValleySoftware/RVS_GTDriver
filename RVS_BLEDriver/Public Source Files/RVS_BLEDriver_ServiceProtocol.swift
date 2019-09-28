@@ -86,11 +86,6 @@ extension RVS_BLEDriver_ServiceProtocol {
             return value
         }
         
-        // If the straight-up UUID didn't work, try adding the hex prefix.
-        for value in values where ("0x" + value.uuidString) == inHash {
-            return value
-        }
-        
         return nil
     }
 }

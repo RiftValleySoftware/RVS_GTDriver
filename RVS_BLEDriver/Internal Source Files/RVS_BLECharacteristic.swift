@@ -304,11 +304,6 @@ extension RVS_BLECharacteristic: RVS_BLEDriver_ValueProtocol {
             ret = String(describing: gattInst)
         }
         
-        if nil == ret || ret.isEmpty,
-            let gattInst = RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID(rawValue: "0x" + characteristic.uuid.uuidString) {  // Need to add the hex indicator.
-            ret = String(describing: gattInst)
-        }
-        
         if nil == ret || ret.isEmpty {
             ret = characteristic.uuid.uuidString
         }

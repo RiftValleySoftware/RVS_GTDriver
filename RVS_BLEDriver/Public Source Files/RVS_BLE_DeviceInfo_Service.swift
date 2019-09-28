@@ -38,17 +38,17 @@ public class RVS_BLE_DeviceInfo_Service: RVS_BLEService {
     public enum RVS_BLE_GATT_UUID: String, RawRepresentable {
         // MARK: - Service IDs
         /// The standard GATT Device Info service.
-        case deviceInfoService              =   "0x180A"
+        case deviceInfoService              =   "180A"
         
         // MARK: - Device Info Characteristic IDs
         /// Manufacturer Name
-        case deviceInfoManufacturerName     =   "0x2A29"
+        case deviceInfoManufacturerName     =   "2A29"
         /// Model Name
-        case deviceInfoModelName            =   "0x2A24"
+        case deviceInfoModelName            =   "2A24"
         /// Hardware Revision
-        case deviceInfoHardwareRevision     =   "0x2A27"
+        case deviceInfoHardwareRevision     =   "2A27"
         /// Firmware Revision
-        case deviceInfoFirmwareRevision     =   "0x2A26"
+        case deviceInfoFirmwareRevision     =   "2A26"
     }
 
     /* ################################################################################################################################## */
