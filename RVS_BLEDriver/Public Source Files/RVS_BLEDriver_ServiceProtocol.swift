@@ -23,28 +23,41 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
-// MARK: - Main Driver RVS_BLEDriver_DeviceProtocol Protocol -
-/* ###################################################################################################################################### */
-/**
- This protocol describes a device, or collection of "services."
- */
-public protocol RVS_BLEDriver_DeviceProtocol {
-    var services: [RVS_BLEDriver_ServiceProtocol] { get }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Main Driver RVS_BLEDriver_ServiceProtocol Protocol -
 /* ###################################################################################################################################### */
 /**
  This protocol describes a service, or collection of "values."
  */
 public protocol RVS_BLEDriver_ServiceProtocol {
-    /// This is the general service ID for the class.
-    static var serviceID: String { get }
-    /// These are the characteristics, supplied as "values."
-    var values: [RVS_BLEDriver_ValueProtocol] { get }
+    /* ################################################################################################################################## */
+    // MARK: - Required Properties -
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     These are the characteristics, supplied as "values."
+     - returns: an Array of characteristics, masked to be protocol instances ("values").
+     */
+    var values: [RVS_BLEDriver_ValueProtocol] { get }
+    
+    /* ################################################################################################################################## */
+    // MARK: - Optional Properties -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is the general service ID for the class.
+     - returns: The Service UUID, or a blank String, if unknown.
+     */
+    static var serviceID: String { get }
+
+    /* ################################################################################################################################## */
+    // MARK: - Optional Methods -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is a hashing subscript.
+     
+     - parameter inHash: The String representation of the characteristic (we call them "values") that we're looking for.
+     - returns: The value, cast as a protocol instance, or nil, if not found.
      */
     subscript(_ inHash: String) -> RVS_BLEDriver_ValueProtocol? { get }
 }

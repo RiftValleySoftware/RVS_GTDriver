@@ -64,8 +64,10 @@ public class RVS_BLEDevice_DeviceSpec_GeneralPurpose: RVS_BLEDevice_DeviceSpec {
      - returns: An instance of a subclass of RVS_BLEService, if it is handled by this instance, or nil, if not.
      */
     func handleDiscoveredService(_ inService: CBService, forPeripheral inPeripheral: CBPeripheral, andDevice inDevice: RVS_BLEDevice) -> RVS_BLEService! {
+        // If this is the device info service, we make an instance of the RVS_BLE_DeviceInfo_Service specialized subclass.
         if  serviceUUIDs.contains(inService.uuid),
             RVS_BLE_DeviceInfo_Service.serviceID == "0x" + inService.uuid.uuidString {
+            // We start off by looking for these four characteristics.
             let initialCharacteristics = [  CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue),
                                             CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue),
                                             CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue),

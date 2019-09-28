@@ -27,6 +27,8 @@ import CoreBluetooth
 /* ###################################################################################################################################### */
 /**
  This is the public face of the service structure.
+ 
+ The , RVS_BLEDriver_ServiceProtocol is declared internally.
  */
 extension RVS_BLEService {
     /* ################################################################## */

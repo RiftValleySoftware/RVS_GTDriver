@@ -48,6 +48,8 @@ public enum RVS_BLEDriver_ValueProtocol_Type_Enum {
 /* ###################################################################################################################################### */
 /**
  This protocol is used to describe one value in a service.
+ 
+ All properties are required.
  */
 public protocol RVS_BLEDriver_ValueProtocol {
     /* ################################################################################################################################## */
@@ -76,52 +78,4 @@ public protocol RVS_BLEDriver_ValueProtocol {
      - returns: The UUID of the value characteristic, as a String.
      */
     var uuidString: String { get }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Main Driver RVS_BLEDriver_ValueProtocol Protocol Default Implementations -
-/* ###################################################################################################################################### */
-/**
- This protocol is used to describe one value in a service.
- */
-extension RVS_BLEDriver_ValueProtocol {
-    /* ################################################################## */
-    /**
-     The default implementation returns nil.
-     
-     - returns: Nil
-     */
-    public var rawValue: Data? {
-        return nil
-    }
-    
-    /* ################################################################## */
-    /**
-     The default implementation returns undefined.
-     
-     - returns: Undefined data type.
-     */
-    public var value: RVS_BLEDriver_ValueProtocol_Type_Enum {
-        return .undefinedValue
-    }
-    
-    /* ################################################################## */
-    /**
-     The default description is an empty string.
-     
-     - returns: An empty String.
-     */
-    public var description: String {
-        return ""
-    }
-    
-    /* ################################################################## */
-    /**
-     The default UUID is an empty string.
-     
-     - returns: An empty String.
-     */
-    public var uuidString: String {
-        return ""
-    }
 }

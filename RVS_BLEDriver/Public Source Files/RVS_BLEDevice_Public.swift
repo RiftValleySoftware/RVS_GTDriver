@@ -23,6 +23,20 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
+// MARK: - Main Driver RVS_BLEDriver_DeviceProtocol Protocol -
+/* ###################################################################################################################################### */
+/**
+ This protocol describes a device, or collection of "services."
+ */
+public protocol RVS_BLEDriver_DeviceProtocol {
+    /* ################################################################## */
+    /**
+     Required. An Array of protocol instances of the contained services.
+     */
+    var services: [RVS_BLEDriver_ServiceProtocol] { get }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BLEDeviceDelegate Protocol -
 /* ###################################################################################################################################### */
 /**
