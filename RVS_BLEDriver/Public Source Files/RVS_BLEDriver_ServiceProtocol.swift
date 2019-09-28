@@ -57,7 +57,9 @@ extension RVS_BLEDriver_ServiceProtocol {
     /**
      Default is unknown.
      */
-    public static var serviceID: String { return "" }
+    public static var serviceID: String {
+        return ""
+    }
     
     /* ################################################################## */
     /**
@@ -71,100 +73,11 @@ extension RVS_BLEDriver_ServiceProtocol {
             return value
         }
         
+        // If the straight-up UUID didn't work, try adding the hex prefix.
+        for value in values where ("0x" + value.uuidString) == inHash {
+            return value
+        }
+        
         return nil
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Main Driver RVS_BLEDriver_ValueProtocol_Type_Enum, Used to Cast the Data -
-/* ###################################################################################################################################### */
-/**
- This enum is used to cast a value into its proper data type.
- */
-public enum RVS_BLEDriver_ValueProtocol_Type_Enum {
-    /// The data, cast to a String (associated value)
-    case stringValue(_: String!)
-    /// The data, cast to an Integer (associated value)
-    case intValue(_: Int!)
-    /// The data, cast to a Boolean (associated value)
-    case boolValue(_: Bool!)
-    /// The data, cast to a double-precision float (associated value)
-    case floatValue(_: Double!)
-    /// The data is not able to be cast, and is returned as the raw Data type.
-    case rawValue(_: Data!)
-    /// This is returned if the data is nil, or an undefined type (no associated value).
-    case undefinedValue
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Main Driver RVS_BLEDriver_ValueProtocol Protocol -
-/* ###################################################################################################################################### */
-/**
- This protocol is used to describe one value in a service.
- */
-public protocol RVS_BLEDriver_ValueProtocol {
-    /* ################################################################################################################################## */
-    // MARK: - Optional Calculated Properties -
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
-     */
-    var rawValue: Data? { get }
-    
-    /* ################################################################## */
-    /**
-     - returns: The Value, but cast into a specific data type (selected by the enum).
-     */
-    var value: RVS_BLEDriver_ValueProtocol_Type_Enum { get }
-    
-    /* ################################################################## */
-    /**
-     - returns: The user description of the value (if any). If none, the String will be empty.
-     */
-    var description: String { get }
-    
-    /* ################################################################## */
-    /**
-     - returns: The UUID of the value characteristic, as a String.
-     */
-    var uuidString: String { get }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Main Driver RVS_BLEDriver_ValueProtocol Protocol Default Implementations -
-/* ###################################################################################################################################### */
-/**
- This protocol is used to describe one value in a service.
- */
-extension RVS_BLEDriver_ValueProtocol {
-    /* ################################################################## */
-    /**
-     The default implementation returns nil.
-     
-     - returns: Nil
-     */
-    public var rawValue: Data? {
-        return nil
-    }
-    
-    /* ################################################################## */
-    /**
-     The default implementation returns undefined.
-     
-     - returns: Undefined data type.
-     */
-    public var value: RVS_BLEDriver_ValueProtocol_Type_Enum {
-        return .undefinedValue
-    }
-    
-    /* ################################################################## */
-    /**
-     The default description is an empty string.
-     
-     - returns: An empty String.
-     */
-    public var description: String {
-        return ""
     }
 }

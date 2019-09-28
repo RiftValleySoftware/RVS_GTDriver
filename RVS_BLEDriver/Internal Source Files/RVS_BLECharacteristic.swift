@@ -300,28 +300,27 @@ extension RVS_BLECharacteristic: RVS_BLEDriver_ValueProtocol {
         var ret: String! = descriptorString
         
         if nil == ret || ret.isEmpty,
-            let gattInst = RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID(rawValue: "0x" + characteristic.uuid.uuidString) { // Need to add the hex indicator.
+            let gattInst = RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID(rawValue: characteristic.uuid.uuidString) {         // Try first, without the hex prefix
+            ret = String(describing: gattInst)
+        }
+        
+        if nil == ret || ret.isEmpty,
+            let gattInst = RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID(rawValue: "0x" + characteristic.uuid.uuidString) {  // Need to add the hex indicator.
             ret = String(describing: gattInst)
         }
         
         if nil == ret || ret.isEmpty {
-            ret = "0x" + characteristic.uuid.uuidString
+            ret = characteristic.uuid.uuidString
         }
         
-        if nil == ret || ret.isEmpty {
-            ret = "ERROR"
-        }
-
         return ret
     }
     
     /* ################################################################## */
     /**
-     We need to add the hex prefix, here. The BLE system strips it.
-     
      - returns: The UUID of the value characteristic, as a String.
      */
     public var uuidString: String {
-        return "0x" + characteristic.uuid.uuidString
+        return characteristic.uuid.uuidString
     }
 }
