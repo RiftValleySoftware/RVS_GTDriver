@@ -29,19 +29,19 @@ import CoreBluetooth
  This class implements the main "skeleton" of the driver API.
  
  This driver has two modes: Not scanning, in which case it does not discover new devices, but the devices it does have may still be active and updating, and
- Scanning, in which case, it looks for goTenna devices.
+ Scanning, in which case, it looks for Bluetooth devices.
  
- If it finds a device, it adds it to a "Holding Pen," where it lives until some basic information has been read; namely, the Device Info service, and the proprietary goTenna service.
+ If it finds a device, it adds it to a "Holding Pen," where it lives until some basic information has been read; namely, the Device Info service, and the proprietary Bluetooth service.
  
  After all that has been gathered, the device is considered "shiny," and gets added to our main Array, and then it will ignore the same device, if that device shows up again in discovery.
  
- The idea is to build up an object model of the goTenna devices, and represent them to the API consumer as simply as possible.
+ The idea is to build up an object model of the Bluetooth devices, and represent them to the API consumer as simply as possible.
  
  It is important that the consumer provide delegates to the driver, device and service instances. Most of the action happens in delegate callbacks.
  
  Only the entities in the [RVS_BLEDriver_Public.swift](https://github.com/RiftValleySoftware/RVS_BLEDriver/blob/master/RVS_BLEDriver/RVS_BLEDriver_Public.swift) extension should be considered useful for API consumers.
  
- You may also treat the instance as [a Sequence](https://developer.apple.com/documentation/swift/sequence), with Element being instances of RVS_BLEDevice (goTenna devices).
+ You may also treat the instance as [a Sequence](https://developer.apple.com/documentation/swift/sequence), with Element being instances of RVS_BLEDevice (Bluetooth devices).
  You can access them directly with subscripts (count returns the number of devices).
  
  You will see that internal methods and properties are explicitly marked as "internal." This is to help clarify their scope.
@@ -49,7 +49,7 @@ import CoreBluetooth
  One of the goals of this driver is to abstract the [Core Bluetooth](https://developer.apple.com/documentation/corebluetooth) stuff from the consumer, so it can be swapped out with things like USB or WiFi.
  
  Internally, the driver will always run a [CBCentralManager](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) instance.
- It will scan for goTenna devices as [peripherals](https://developer.apple.com/documentation/corebluetooth/cbperipheral), and instantiate internal instances of [RVS_BLEDevice](https://github.com/RiftValleySoftware/RVS_BLEDriver/blob/master/RVS_BLEDriver/RVS_BLEDevice.swift)
+ It will scan for Bluetooth devices as [peripherals](https://developer.apple.com/documentation/corebluetooth/cbperipheral), and instantiate internal instances of [RVS_BLEDevice](https://github.com/RiftValleySoftware/RVS_BLEDriver/blob/master/RVS_BLEDriver/RVS_BLEDevice.swift)
  for each discovered peripheral device.
  
  Since this receives delegate callbacks from [Core Bluetooth](https://developer.apple.com/documentation/corebluetooth), it must derive from [NSObject](https://developer.apple.com/documentation/objectivec/1418956-nsobject?language=occ).
@@ -82,7 +82,7 @@ public class RVS_BLEDriver: NSObject {
     
     /* ################################################################## */
     /**
-     This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_BLEDevice.
+     This is an Array of our discovered and initialized Bluetooth devices, as represented by instances of RVS_BLEDevice.
      */
     private var _sequence_contents: [RVS_BLEDevice] = []
 
@@ -303,7 +303,7 @@ extension RVS_BLEDriver: RVS_SequenceProtocol {
     
     /* ################################################################## */
     /**
-     :nodoc: This is an Array of our discovered and initialized goTenna devices, as represented by instances of RVS_BLEDevice.
+     :nodoc: This is an Array of our discovered and initialized Bluetooth devices, as represented by instances of RVS_BLEDevice.
      READ-ONLY
      */
     public var sequence_contents: [RVS_BLEDevice] {
