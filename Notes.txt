@@ -1,0 +1,5 @@
+Outgoing to BT:
+    00000000-deca-fade-deca-deafdecacaff
+    
+Incoming from BT:
+    00000000-deca-fade-deca-deafdecacafe
