@@ -3,3 +3,5 @@ Outgoing to BT:
     
 Incoming from BT:
     00000000-deca-fade-deca-deafdecacafe
+    
+Uses basic serial profile.

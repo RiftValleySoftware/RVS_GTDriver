@@ -66,7 +66,9 @@ public class RVS_BLEDriver: NSObject {
         /// These are global services.
         RVS_BLEDevice_DeviceSpec_GeneralPurpose(),
         /// Handle goTenna devices.
-        RVS_BLEDevice_DeviceSpec_goTenna()
+        RVS_BLEDevice_DeviceSpec_goTenna(),
+        /// Handle BearTooth devices.
+        RVS_BLEDevice_DeviceSpec_BearTooth()
     ]
     
     /* ################################################################################################################################## */
@@ -380,6 +382,15 @@ extension RVS_BLEDriver: CBCentralManagerDelegate {
      - parameter inCentralManager: The manager instance.
     */
     public func centralManagerDidUpdateState(_ inCentralManager: CBCentralManager) {
+        switch inCentralManager.state {
+        case .unauthorized:
+            ()
+        case .poweredOn:
+            ()
+//            isScanning = true   // Trurn on scanning when we have powered on.
+        default:
+            ()
+        }
         sendDeviceUpdateToDelegegate()
     }
     
