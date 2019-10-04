@@ -73,12 +73,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D43058C8232BBECB00B64056 /* PBXContainerItemProxy */ = {
+		D40DA6B72347DD89008FDEA1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D4749B5D232A842A0073F7BC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D43058C2232BBECB00B64056;
-			remoteInfo = RVS_GTDriver_iOS;
+			remoteInfo = RVS_BLEDriver_iOS;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -141,13 +141,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D43058CA232BBECB00B64056 /* RVS_BLEDriver_iOS.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D43058C0232BBECB00B64056 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +317,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				D43058C9232BBECB00B64056 /* PBXTargetDependency */,
+				D40DA6B82347DD89008FDEA1 /* PBXTargetDependency */,
 			);
 			name = "RVS_BLEDriver_iOS_Test_Harness (Framework)";
 			productName = RVS_GTDriver_iOS_Test_Harness;
@@ -337,7 +330,6 @@
 			buildPhases = (
 				D403D358232BCAE20040EBA3 /* SwiftLint */,
 				D43058BF232BBECB00B64056 /* Sources */,
-				D43058C0232BBECB00B64056 /* Frameworks */,
 				D43058C1232BBECB00B64056 /* Resources */,
 			);
 			buildRules = (
@@ -571,10 +563,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D43058C9232BBECB00B64056 /* PBXTargetDependency */ = {
+		D40DA6B82347DD89008FDEA1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D43058C2232BBECB00B64056 /* RVS_BLEDriver_iOS */;
-			targetProxy = D43058C8232BBECB00B64056 /* PBXContainerItemProxy */;
+			targetProxy = D40DA6B72347DD89008FDEA1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -677,7 +669,7 @@
 				PRODUCT_NAME = RVS_BLEDriver_iOS;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -707,7 +699,7 @@
 				PRODUCT_NAME = RVS_BLEDriver_iOS;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 13.0;

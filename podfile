@@ -2,11 +2,11 @@ def shared_pods
     pod 'SwiftLint'
 end
 
-def shared_pods_macos
-    platform :macos, '10.14'
+def shared_pods_ios
+    platform :ios, '13'
     shared_pods
 end
 
-target 'RVS_GTDriver' do
-    shared_pods_macos
+target 'RVS_BLEDriver_iOS' do
+    shared_pods_ios
 end
