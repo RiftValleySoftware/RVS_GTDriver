@@ -491,7 +491,7 @@ extension RVS_BLEDevice: CBPeripheralDelegate {
                         sInstance = service
                     }
                 }
-
+                
                 if let sInstance = sInstance {
                     #if DEBUG
                         print("Adding Service: \(String(describing: sInstance)) To Holding Pen at index \(_holdingPen.count).")

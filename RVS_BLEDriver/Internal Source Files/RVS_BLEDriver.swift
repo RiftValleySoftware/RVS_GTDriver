@@ -387,7 +387,15 @@ extension RVS_BLEDriver: CBCentralManagerDelegate {
             ()
         case .poweredOn:
             ()
-//            isScanning = true   // Trurn on scanning when we have powered on.
+            let matchingOptions = [CBConnectionEventMatchingOption.serviceUUIDs: [
+                CBUUID(string: "0x1101"),
+                CBUUID(string: "1101"),
+                CBUUID(string: "00001101-0000-1000-8000-00805f9b34fb"),
+                CBUUID(string: "00000000-deca-fade-deca-deafdecacafe"),
+                CBUUID(string: "00000000-deca-fade-deca-deafdecacaff")
+                ]
+            ]
+            inCentralManager.registerForConnectionEvents(options: matchingOptions)
         default:
             ()
         }
@@ -449,6 +457,29 @@ extension RVS_BLEDriver: CBCentralManagerDelegate {
         } else if let device = deviceForThisPeripheral(inPeripheral) {
             device.reportDisconnection(inError)
             sendDeviceUpdateToDelegegate()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     :nodoc: Called when a peripheral is discovered.
+     
+     THIS IS NOT MEANT FOR API USE. IT IS INTERNAL-USE ONLY.
+     
+     - parameter inCentralManager: The manager instance.
+     - parameter connectionEventDidOccur: The peripheral instance that was discovered.
+    */
+    public func centralManager(_ inCentralManager: CBCentralManager, connectionEventDidOccur inEvent: CBConnectionEvent, for inPeripheral: CBPeripheral) {
+        #if DEBUG
+            print("connectionEventDidOccur: \(String(describing: inEvent)) for peripheral: \(String(describing: inPeripheral))")
+        #endif
+        switch inEvent {
+        case .peerConnected:
+            ()
+        case .peerDisconnected:
+            ()
+        default:
+            ()
         }
     }
 

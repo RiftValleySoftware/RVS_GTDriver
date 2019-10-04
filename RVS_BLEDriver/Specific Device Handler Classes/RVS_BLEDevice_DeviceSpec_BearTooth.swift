@@ -38,6 +38,7 @@ class RVS_BLEDevice_DeviceSpec_BearTooth: RVS_BLEDevice_DeviceSpec {
     internal enum RVS_BLE_GATT_UUID: String {
         // MARK: - Service IDs
         /// This is the basic goTenna proprietary service.
+        case gattSerial                     =   "0x1101"
         case bearToothOutgoingProprietary   =   "00000000-deca-fade-deca-deafdecacaff"
         case bearToothIncomingProprietary   =   "00000000-deca-fade-deca-deafdecacafe"
     }
@@ -47,7 +48,9 @@ class RVS_BLEDevice_DeviceSpec_BearTooth: RVS_BLEDevice_DeviceSpec {
      - returns: An Array, with the UUIDs of all the services this handler will take.
      */
     private var _serviceUUIDs: [CBUUID] = [
-        CBUUID(string: RVS_BLE_GATT_UUID.bearToothOutgoingProprietary.rawValue)           // We handle proprietary services, too.
+        CBUUID(string: RVS_BLE_GATT_UUID.gattSerial.rawValue),
+        CBUUID(string: RVS_BLE_GATT_UUID.bearToothIncomingProprietary.rawValue),
+        CBUUID(string: RVS_BLE_GATT_UUID.bearToothOutgoingProprietary.rawValue)
     ]
     
     /* ################################################################## */
