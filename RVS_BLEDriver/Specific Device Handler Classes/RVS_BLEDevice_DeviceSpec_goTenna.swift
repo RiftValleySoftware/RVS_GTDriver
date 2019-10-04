@@ -41,8 +41,11 @@ class RVS_BLEDevice_DeviceSpec_goTenna: RVS_BLEDevice_DeviceSpec {
         case goTennaProprietary             =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
         
         // MARK: - goTenna Proprietary Characteristic IDs
+        /// No idea what this is.
         case goTennaProprietary001          =   "12762B18-DF5E-11E6-BF01-FE55135034F3"
+        /// No idea what this is.
         case goTennaProprietary002          =   "1276B20A-DF5E-11E6-BF01-FE55135034F3"
+        /// No idea what this is.
         case goTennaProprietary003          =   "1276B20B-DF5E-11E6-BF01-FE55135034F3"
     }
     
@@ -139,8 +142,11 @@ public class RVS_BLE_goTenna_Service: RVS_BLEService {
         case goTennaProprietary             =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
         
         // MARK: - goTenna Proprietary Characteristic IDs
+        /// No idea what this is.
         case goTennaProprietary001          =   "12762B18-DF5E-11E6-BF01-FE55135034F3"
+        /// No idea what this is.
         case goTennaProprietary002          =   "1276B20A-DF5E-11E6-BF01-FE55135034F3"
+        /// No idea what this is.
         case goTennaProprietary003          =   "1276B20B-DF5E-11E6-BF01-FE55135034F3"
     }
 
