@@ -122,18 +122,6 @@ internal class RVS_BLECharacteristic_BearTooth: RVS_BLECharacteristic {
  This class implements a BLE service wrapper, specialized for the goTenna Proprietary service.
  */
 public class RVS_BLE_BearTooth_Service: RVS_BLEService {
-    /* ###################################################################################################################################### */
-    // MARK: - Enums for Standard BLE Service and Characteristic UUIDs -
-    /* ###################################################################################################################################### */
-    /**
-     These are String-based enums that we use to reference various services and characteristics in our driver.
-     */
-    public enum RVS_BLE_GATT_UUID: String, RawRepresentable {
-        // MARK: - Service IDs
-        /// This is the basic BearTooth proprietary service.
-        case bearToothProprietary             =   "00000000-deca-fade-deca-deafdecacaff"
-    }
-
     /* ################################################################################################################################## */
     // MARK: - RVS_BLEDriver_ServiceProtocol Support -
     /* ################################################################################################################################## */
@@ -142,7 +130,7 @@ public class RVS_BLE_BearTooth_Service: RVS_BLEService {
      - returns: The service UUID.
      */
     public static var serviceID: String {
-        return RVS_BLE_GATT_UUID.bearToothProprietary.rawValue
+        return RVS_BLEDevice_DeviceSpec_BearTooth.RVS_BLE_GATT_UUID.bearToothOutgoingProprietary.rawValue
     }
 }
 
