@@ -54,6 +54,10 @@
 		D464068F233CE16A00C3783B /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D464068E233CE16A00C3783B /* RVS_String_Extensions.swift */; };
 		D4640690233CE16A00C3783B /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D464068E233CE16A00C3783B /* RVS_String_Extensions.swift */; };
 		D46F1546233189FE00E6282A /* RVS_BLEDriver_Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46F1545233189FE00E6282A /* RVS_BLEDriver_Public.swift */; };
+		D47ADF84234A38B70072847B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47ADF83234A38B70072847B /* AppDelegate.swift */; };
+		D47ADF86234A38B70072847B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47ADF85234A38B70072847B /* ViewController.swift */; };
+		D47ADF88234A38B90072847B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D47ADF87234A38B90072847B /* Assets.xcassets */; };
+		D47ADF8B234A38B90072847B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D47ADF89234A38B90072847B /* Main.storyboard */; };
 		D48610A1233FBFB100610D87 /* RVS_BLEDriver_ValueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48610A0233FBFB100610D87 /* RVS_BLEDriver_ValueProtocol.swift */; };
 		D48610A2233FBFB100610D87 /* RVS_BLEDriver_ValueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48610A0233FBFB100610D87 /* RVS_BLEDriver_ValueProtocol.swift */; };
 		D4B1FECF2332A676000B8736 /* RVS_BLEDriver_iOS_Test_Harness_SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1FECE2332A676000B8736 /* RVS_BLEDriver_iOS_Test_Harness_SettingsViewController.swift */; };
@@ -65,6 +69,32 @@
 		D4CE096C2346753000057197 /* RVS_BLEDevice_DeviceSpec_BearTooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CE096A2346753000057197 /* RVS_BLEDevice_DeviceSpec_BearTooth.swift */; };
 		D4DAE24B233B9496000B8FB0 /* RVS_BLEDriver_ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DAE24A233B9496000B8FB0 /* RVS_BLEDriver_ServiceProtocol.swift */; };
 		D4E918812337D78200ABF286 /* RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E918802337D78200ABF286 /* RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift */; };
+		D4F07E64234A394700FC64CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47ADF85234A38B70072847B /* ViewController.swift */; };
+		D4F07E65234A394700FC64CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47ADF83234A38B70072847B /* AppDelegate.swift */; };
+		D4F07E68234A394700FC64CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D47ADF87234A38B90072847B /* Assets.xcassets */; };
+		D4F07E69234A394700FC64CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D47ADF89234A38B90072847B /* Main.storyboard */; };
+		D4F07E8C234A3A7400FC64CB /* RVS_BLEDriver_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43058C3232BBECB00B64056 /* RVS_BLEDriver_iOS.framework */; };
+		D4F07E8D234A3A7400FC64CB /* RVS_BLEDriver_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D43058C3232BBECB00B64056 /* RVS_BLEDriver_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D4F07E91234A3B7700FC64CB /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1FED12332A6F6000B8736 /* RVS_PersistentPrefs.swift */; };
+		D4F07E92234A3B7700FC64CB /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1FED12332A6F6000B8736 /* RVS_PersistentPrefs.swift */; };
+		D4F07E93234A3B7F00FC64CB /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D464068E233CE16A00C3783B /* RVS_String_Extensions.swift */; };
+		D4F07E94234A3B9800FC64CB /* RVS_BLEDevice_DeviceSpec_goTenna.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4580A6D2336ADD1006C67A5 /* RVS_BLEDevice_DeviceSpec_goTenna.swift */; };
+		D4F07E95234A3B9B00FC64CB /* RVS_BLEDevice_DeviceSpec_BearTooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CE096A2346753000057197 /* RVS_BLEDevice_DeviceSpec_BearTooth.swift */; };
+		D4F07E96234A3BA500FC64CB /* RVS_BLEDriver_Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46F1545233189FE00E6282A /* RVS_BLEDriver_Public.swift */; };
+		D4F07E97234A3BA500FC64CB /* RVS_BLEDevice_Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4040D2B2331ABAA007D9B15 /* RVS_BLEDevice_Public.swift */; };
+		D4F07E98234A3BA500FC64CB /* RVS_BLEService_Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B89742233C152B0097095A /* RVS_BLEService_Public.swift */; };
+		D4F07E99234A3BA500FC64CB /* RVS_BLE_DeviceInfo_Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E5284233E656A00C9A38A /* RVS_BLE_DeviceInfo_Service.swift */; };
+		D4F07E9A234A3BA500FC64CB /* RVS_BLEDriver_ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DAE24A233B9496000B8FB0 /* RVS_BLEDriver_ServiceProtocol.swift */; };
+		D4F07E9B234A3BA500FC64CB /* RVS_BLEDriver_ValueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48610A0233FBFB100610D87 /* RVS_BLEDriver_ValueProtocol.swift */; };
+		D4F07E9C234A3BA500FC64CB /* RVS_BLEDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40D8E70232A88FA00697259 /* RVS_BLEDriver.swift */; };
+		D4F07E9D234A3BA500FC64CB /* RVS_BLEDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A7E06232AEADF00A9C55A /* RVS_BLEDevice.swift */; };
+		D4F07E9E234A3BA500FC64CB /* RVS_BLEService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED7232D78B40014FECF /* RVS_BLEService.swift */; };
+		D4F07E9F234A3BA500FC64CB /* RVS_BLECharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED9232D7F780014FECF /* RVS_BLECharacteristic.swift */; };
+		D4F07EA0234A3BA500FC64CB /* RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E918802337D78200ABF286 /* RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift */; };
+		D4F07EA1234A3BA500FC64CB /* RVS_BLEDriver_DeviceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4580A6A2336AB11006C67A5 /* RVS_BLEDriver_DeviceSpec.swift */; };
+		D4F07EA2234A3BA500FC64CB /* RVS_BLEDriverTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45962342330E577001A7EDE /* RVS_BLEDriverTools.swift */; };
+		D4F07EA3234A3BA500FC64CB /* RVS_DebugTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1EDD232DD3810014FECF /* RVS_DebugTools.swift */; };
+		D4F07EA4234A3BA500FC64CB /* RVS_SequenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1EDB232D9FA80014FECF /* RVS_SequenceProtocol.swift */; };
 		D4F4D6FE2333D1B500F19883 /* RVS_BLEDriver_iOS_Test_Harness_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4D6FD2333D1B500F19883 /* RVS_BLEDriver_iOS_Test_Harness_Prefs.swift */; };
 		D4FC1ED8232D78B40014FECF /* RVS_BLEService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED7232D78B40014FECF /* RVS_BLEService.swift */; };
 		D4FC1EDA232D7F780014FECF /* RVS_BLECharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC1ED9232D7F780014FECF /* RVS_BLECharacteristic.swift */; };
@@ -74,6 +104,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		D40DA6B72347DD89008FDEA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4749B5D232A842A0073F7BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D43058C2232BBECB00B64056;
+			remoteInfo = RVS_BLEDriver_iOS;
+		};
+		D4F07E8E234A3A7400FC64CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D4749B5D232A842A0073F7BC /* Project object */;
 			proxyType = 1;
@@ -90,6 +127,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D43058CB232BBECB00B64056 /* RVS_BLEDriver_iOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4F07E90234A3A7400FC64CB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D4F07E8D234A3A7400FC64CB /* RVS_BLEDriver_iOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,6 +168,13 @@
 		D45E5284233E656A00C9A38A /* RVS_BLE_DeviceInfo_Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLE_DeviceInfo_Service.swift; sourceTree = "<group>"; };
 		D464068E233CE16A00C3783B /* RVS_String_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_String_Extensions.swift; path = ExtensionsAndExtras/RVS_String_Extensions.swift; sourceTree = "<group>"; };
 		D46F1545233189FE00E6282A /* RVS_BLEDriver_Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_Public.swift; sourceTree = "<group>"; };
+		D47ADF81234A38B70072847B /* RVS_BLEDriver_macOS_Test_Harness (Direct).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_BLEDriver_macOS_Test_Harness (Direct).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D47ADF83234A38B70072847B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D47ADF85234A38B70072847B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D47ADF87234A38B90072847B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D47ADF8A234A38B90072847B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D47ADF8C234A38B90072847B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D47ADF8D234A38B90072847B /* RVS_BLEDriver_macOS_Test_Harness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RVS_BLEDriver_macOS_Test_Harness.entitlements; sourceTree = "<group>"; };
 		D48610A0233FBFB100610D87 /* RVS_BLEDriver_ValueProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_ValueProtocol.swift; sourceTree = "<group>"; };
 		D4B1FECE2332A676000B8736 /* RVS_BLEDriver_iOS_Test_Harness_SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_iOS_Test_Harness_SettingsViewController.swift; sourceTree = "<group>"; };
 		D4B1FED12332A6F6000B8736 /* RVS_PersistentPrefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_PersistentPrefs.swift; path = ExtensionsAndExtras/RVS_PersistentPrefs.swift; sourceTree = "<group>"; };
@@ -127,6 +182,7 @@
 		D4CE096A2346753000057197 /* RVS_BLEDevice_DeviceSpec_BearTooth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLEDevice_DeviceSpec_BearTooth.swift; sourceTree = "<group>"; };
 		D4DAE24A233B9496000B8FB0 /* RVS_BLEDriver_ServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_ServiceProtocol.swift; sourceTree = "<group>"; };
 		D4E918802337D78200ABF286 /* RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift; sourceTree = "<group>"; };
+		D4F07E6D234A394700FC64CB /* RVS_BLEDriver_macOS_Test_Harness (Framework).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_BLEDriver_macOS_Test_Harness (Framework).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F26050233ABE7D00A4710F /* RVS_BLEDriver_iOS_Test_Harness_Direct_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RVS_BLEDriver_iOS_Test_Harness_Direct_Info.plist; sourceTree = "<group>"; };
 		D4F4D6FD2333D1B500F19883 /* RVS_BLEDriver_iOS_Test_Harness_Prefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BLEDriver_iOS_Test_Harness_Prefs.swift; sourceTree = "<group>"; };
 		D4FC1ED7232D78B40014FECF /* RVS_BLEService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BLEService.swift; sourceTree = "<group>"; };
@@ -141,6 +197,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				D43058CA232BBECB00B64056 /* RVS_BLEDriver_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D47ADF7E234A38B70072847B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4F07E66234A394700FC64CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4F07E8C234A3A7400FC64CB /* RVS_BLEDriver_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,14 +277,6 @@
 			path = RVS_BLEDriver_iOS_Test_Harness;
 			sourceTree = "<group>";
 		};
-		D43058D5232BC59700B64056 /* iOS Variant */ = {
-			isa = PBXGroup;
-			children = (
-				D43058D6232BC5A700B64056 /* Info.plist */,
-			);
-			name = "iOS Variant";
-			sourceTree = "<group>";
-		};
 		D43540E0232B143800C92A19 /* Extensions and Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,7 +304,9 @@
 				D4749B68232A842A0073F7BC /* RVS_BLEDriver */,
 				D43058A4232BBCE700B64056 /* RVS_BLEDriver_iOS_Test_Harness */,
 				D403D353232BCA830040EBA3 /* Meta */,
+				D47ADF82234A38B70072847B /* RVS_BLEDriver_macOS_Test_Harness */,
 				D4749B67232A842A0073F7BC /* Products */,
+				D4F07E8B234A3A7400FC64CB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -251,6 +316,8 @@
 				D43058A3232BBCE700B64056 /* RVS_BLEDriver_iOS_Test_Harness (Framework).app */,
 				D43058C3232BBECB00B64056 /* RVS_BLEDriver_iOS.framework */,
 				D44270B8233A9A0A007EDA59 /* RVS_BLEDriver_iOS_Test_Harness (Direct).app */,
+				D47ADF81234A38B70072847B /* RVS_BLEDriver_macOS_Test_Harness (Direct).app */,
+				D4F07E6D234A394700FC64CB /* RVS_BLEDriver_macOS_Test_Harness (Framework).app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -258,13 +325,26 @@
 		D4749B68232A842A0073F7BC /* RVS_BLEDriver */ = {
 			isa = PBXGroup;
 			children = (
+				D43058D6232BC5A700B64056 /* Info.plist */,
 				D4580A6C2336AD99006C67A5 /* Specific Device Handler Classes */,
 				D4B1FECC23327AFC000B8736 /* Public Source Files */,
 				D4B1FECD23327B13000B8736 /* Internal Source Files */,
 				D43540E0232B143800C92A19 /* Extensions and Protocols */,
-				D43058D5232BC59700B64056 /* iOS Variant */,
 			);
 			path = RVS_BLEDriver;
+			sourceTree = "<group>";
+		};
+		D47ADF82234A38B70072847B /* RVS_BLEDriver_macOS_Test_Harness */ = {
+			isa = PBXGroup;
+			children = (
+				D47ADF83234A38B70072847B /* AppDelegate.swift */,
+				D47ADF85234A38B70072847B /* ViewController.swift */,
+				D47ADF87234A38B90072847B /* Assets.xcassets */,
+				D47ADF89234A38B90072847B /* Main.storyboard */,
+				D47ADF8C234A38B90072847B /* Info.plist */,
+				D47ADF8D234A38B90072847B /* RVS_BLEDriver_macOS_Test_Harness.entitlements */,
+			);
+			path = RVS_BLEDriver_macOS_Test_Harness;
 			sourceTree = "<group>";
 		};
 		D4B1FECC23327AFC000B8736 /* Public Source Files */ = {
@@ -301,6 +381,13 @@
 			name = ExtensionsAndExtras;
 			sourceTree = "<group>";
 		};
+		D4F07E8B234A3A7400FC64CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -324,9 +411,9 @@
 			productReference = D43058A3232BBCE700B64056 /* RVS_BLEDriver_iOS_Test_Harness (Framework).app */;
 			productType = "com.apple.product-type.application";
 		};
-		D43058C2232BBECB00B64056 /* RVS_BLEDriver_iOS */ = {
+		D43058C2232BBECB00B64056 /* RVS_BLEDriver */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D43058CC232BBECB00B64056 /* Build configuration list for PBXNativeTarget "RVS_BLEDriver_iOS" */;
+			buildConfigurationList = D43058CC232BBECB00B64056 /* Build configuration list for PBXNativeTarget "RVS_BLEDriver" */;
 			buildPhases = (
 				D403D358232BCAE20040EBA3 /* SwiftLint */,
 				D43058BF232BBECB00B64056 /* Sources */,
@@ -336,7 +423,7 @@
 			);
 			dependencies = (
 			);
-			name = RVS_BLEDriver_iOS;
+			name = RVS_BLEDriver;
 			productName = RVS_GTDriver_iOS;
 			productReference = D43058C3232BBECB00B64056 /* RVS_BLEDriver_iOS.framework */;
 			productType = "com.apple.product-type.framework";
@@ -358,6 +445,42 @@
 			productReference = D44270B8233A9A0A007EDA59 /* RVS_BLEDriver_iOS_Test_Harness (Direct).app */;
 			productType = "com.apple.product-type.application";
 		};
+		D47ADF80234A38B70072847B /* RVS_BLEDriver_macOS_Test_Harness (Direct) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D47ADF90234A38B90072847B /* Build configuration list for PBXNativeTarget "RVS_BLEDriver_macOS_Test_Harness (Direct)" */;
+			buildPhases = (
+				D47ADF7D234A38B70072847B /* Sources */,
+				D47ADF7E234A38B70072847B /* Frameworks */,
+				D47ADF7F234A38B70072847B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RVS_BLEDriver_macOS_Test_Harness (Direct)";
+			productName = RVS_BLEDriver_macOS_Test_Harness;
+			productReference = D47ADF81234A38B70072847B /* RVS_BLEDriver_macOS_Test_Harness (Direct).app */;
+			productType = "com.apple.product-type.application";
+		};
+		D4F07E62234A394700FC64CB /* RVS_BLEDriver_macOS_Test_Harness (Framework) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4F07E6A234A394700FC64CB /* Build configuration list for PBXNativeTarget "RVS_BLEDriver_macOS_Test_Harness (Framework)" */;
+			buildPhases = (
+				D4F07E63234A394700FC64CB /* Sources */,
+				D4F07E66234A394700FC64CB /* Frameworks */,
+				D4F07E67234A394700FC64CB /* Resources */,
+				D4F07E90234A3A7400FC64CB /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4F07E8F234A3A7400FC64CB /* PBXTargetDependency */,
+			);
+			name = "RVS_BLEDriver_macOS_Test_Harness (Framework)";
+			productName = RVS_BLEDriver_macOS_Test_Harness;
+			productReference = D4F07E6D234A394700FC64CB /* RVS_BLEDriver_macOS_Test_Harness (Framework).app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -372,6 +495,9 @@
 						CreatedOnToolsVersion = 11.0;
 					};
 					D43058C2232BBECB00B64056 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					D47ADF80234A38B70072847B = {
 						CreatedOnToolsVersion = 11.0;
 					};
 				};
@@ -389,9 +515,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D43058C2232BBECB00B64056 /* RVS_BLEDriver_iOS */,
+				D43058C2232BBECB00B64056 /* RVS_BLEDriver */,
 				D442709E233A9A0A007EDA59 /* RVS_BLEDriver_iOS_Test_Harness (Direct) */,
 				D43058A2232BBCE700B64056 /* RVS_BLEDriver_iOS_Test_Harness (Framework) */,
+				D47ADF80234A38B70072847B /* RVS_BLEDriver_macOS_Test_Harness (Direct) */,
+				D4F07E62234A394700FC64CB /* RVS_BLEDriver_macOS_Test_Harness (Framework) */,
 			);
 		};
 /* End PBXProject section */
@@ -426,6 +554,24 @@
 				D44270B0233A9A0A007EDA59 /* Localizable.strings in Resources */,
 				D44270B1233A9A0A007EDA59 /* Assets.xcassets in Resources */,
 				D44270B2233A9A0A007EDA59 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D47ADF7F234A38B70072847B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D47ADF88234A38B90072847B /* Assets.xcassets in Resources */,
+				D47ADF8B234A38B90072847B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4F07E67234A394700FC64CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4F07E68234A394700FC64CB /* Assets.xcassets in Resources */,
+				D4F07E69234A394700FC64CB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,13 +706,56 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D47ADF7D234A38B70072847B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4F07EA2234A3BA500FC64CB /* RVS_BLEDriverTools.swift in Sources */,
+				D4F07E97234A3BA500FC64CB /* RVS_BLEDevice_Public.swift in Sources */,
+				D4F07EA4234A3BA500FC64CB /* RVS_SequenceProtocol.swift in Sources */,
+				D4F07E91234A3B7700FC64CB /* RVS_PersistentPrefs.swift in Sources */,
+				D4F07E99234A3BA500FC64CB /* RVS_BLE_DeviceInfo_Service.swift in Sources */,
+				D4F07E98234A3BA500FC64CB /* RVS_BLEService_Public.swift in Sources */,
+				D4F07E95234A3B9B00FC64CB /* RVS_BLEDevice_DeviceSpec_BearTooth.swift in Sources */,
+				D4F07E9E234A3BA500FC64CB /* RVS_BLEService.swift in Sources */,
+				D4F07E96234A3BA500FC64CB /* RVS_BLEDriver_Public.swift in Sources */,
+				D4F07E9C234A3BA500FC64CB /* RVS_BLEDriver.swift in Sources */,
+				D4F07EA3234A3BA500FC64CB /* RVS_DebugTools.swift in Sources */,
+				D4F07EA0234A3BA500FC64CB /* RVS_BLEDevice_DeviceSpec_GeneralPurpose.swift in Sources */,
+				D4F07E94234A3B9800FC64CB /* RVS_BLEDevice_DeviceSpec_goTenna.swift in Sources */,
+				D47ADF86234A38B70072847B /* ViewController.swift in Sources */,
+				D4F07E93234A3B7F00FC64CB /* RVS_String_Extensions.swift in Sources */,
+				D4F07E9B234A3BA500FC64CB /* RVS_BLEDriver_ValueProtocol.swift in Sources */,
+				D4F07E9F234A3BA500FC64CB /* RVS_BLECharacteristic.swift in Sources */,
+				D4F07EA1234A3BA500FC64CB /* RVS_BLEDriver_DeviceSpec.swift in Sources */,
+				D4F07E9D234A3BA500FC64CB /* RVS_BLEDevice.swift in Sources */,
+				D4F07E9A234A3BA500FC64CB /* RVS_BLEDriver_ServiceProtocol.swift in Sources */,
+				D47ADF84234A38B70072847B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4F07E63234A394700FC64CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4F07E92234A3B7700FC64CB /* RVS_PersistentPrefs.swift in Sources */,
+				D4F07E64234A394700FC64CB /* ViewController.swift in Sources */,
+				D4F07E65234A394700FC64CB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		D40DA6B82347DD89008FDEA1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D43058C2232BBECB00B64056 /* RVS_BLEDriver_iOS */;
+			target = D43058C2232BBECB00B64056 /* RVS_BLEDriver */;
 			targetProxy = D40DA6B72347DD89008FDEA1 /* PBXContainerItemProxy */;
+		};
+		D4F07E8F234A3A7400FC64CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D43058C2232BBECB00B64056 /* RVS_BLEDriver */;
+			targetProxy = D4F07E8E234A3A7400FC64CB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -593,6 +782,14 @@
 				D43058D3232BBFE100B64056 /* Base */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		D47ADF89234A38B90072847B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D47ADF8A234A38B90072847B /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -656,7 +853,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "${PROJECT_DIR}/RVS_BLEDriver_iOS/Info.plist";
+				INFOPLIST_FILE = "${PROJECT_DIR}/RVS_BLEDriver/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -686,7 +883,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "${PROJECT_DIR}/RVS_BLEDriver_iOS/Info.plist";
+				INFOPLIST_FILE = "${PROJECT_DIR}/RVS_BLEDriver/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -716,7 +913,6 @@
 				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
 					"DIRECT=1",
 				);
@@ -892,6 +1088,93 @@
 			};
 			name = Release;
 		};
+		D47ADF8E234A38B90072847B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RVS_BLEDriver_macOS_Test_Harness/RVS_BLEDriver_macOS_Test_Harness.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = KSAUGZFWP2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DIRECT=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RVS_BLEDriver_macOS_Test_Harness/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BLEDriver-macOS-Test-Harness";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DIRECT";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D47ADF8F234A38B90072847B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RVS_BLEDriver_macOS_Test_Harness/RVS_BLEDriver_macOS_Test_Harness.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = KSAUGZFWP2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "DIRECT=1";
+				INFOPLIST_FILE = RVS_BLEDriver_macOS_Test_Harness/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BLEDriver-macOS-Test-Harness";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DIRECT;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D4F07E6B234A394700FC64CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RVS_BLEDriver_macOS_Test_Harness/RVS_BLEDriver_macOS_Test_Harness.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = KSAUGZFWP2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "RVS_BLEDriver_macOS_Test_Harness copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BLEDriver-macOS-Test-Harness";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D4F07E6C234A394700FC64CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RVS_BLEDriver_macOS_Test_Harness/RVS_BLEDriver_macOS_Test_Harness.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = KSAUGZFWP2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "RVS_BLEDriver_macOS_Test_Harness copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BLEDriver-macOS-Test-Harness";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -904,7 +1187,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D43058CC232BBECB00B64056 /* Build configuration list for PBXNativeTarget "RVS_BLEDriver_iOS" */ = {
+		D43058CC232BBECB00B64056 /* Build configuration list for PBXNativeTarget "RVS_BLEDriver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D43058CD232BBECB00B64056 /* Debug */,
@@ -927,6 +1210,24 @@
 			buildConfigurations = (
 				D4749B78232A842A0073F7BC /* Debug */,
 				D4749B79232A842A0073F7BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D47ADF90234A38B90072847B /* Build configuration list for PBXNativeTarget "RVS_BLEDriver_macOS_Test_Harness (Direct)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D47ADF8E234A38B90072847B /* Debug */,
+				D47ADF8F234A38B90072847B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4F07E6A234A394700FC64CB /* Build configuration list for PBXNativeTarget "RVS_BLEDriver_macOS_Test_Harness (Framework)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4F07E6B234A394700FC64CB /* Debug */,
+				D4F07E6C234A394700FC64CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D43058C2232BBECB00B64056"
                BuildableName = "RVS_BLEDriver_iOS.framework"
-               BlueprintName = "RVS_BLEDriver_iOS"
+               BlueprintName = "RVS_BLEDriver"
                ReferencedContainer = "container:RVS_BLEDriver.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -62,7 +62,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D43058C2232BBECB00B64056"
             BuildableName = "RVS_BLEDriver_iOS.framework"
-            BlueprintName = "RVS_BLEDriver_iOS"
+            BlueprintName = "RVS_BLEDriver"
             ReferencedContainer = "container:RVS_BLEDriver.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
