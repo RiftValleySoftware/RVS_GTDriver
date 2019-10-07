@@ -130,26 +130,6 @@ internal class RVS_BLECharacteristic_goTenna: RVS_BLECharacteristic {
  This class implements a BLE service wrapper, specialized for the goTenna Proprietary service.
  */
 public class RVS_BLE_goTenna_Service: RVS_BLEService {
-    /* ###################################################################################################################################### */
-    // MARK: - Enums for Standard BLE Service and Characteristic UUIDs -
-    /* ###################################################################################################################################### */
-    /**
-     These are String-based enums that we use to reference various services and characteristics in our driver.
-     */
-    public enum RVS_BLE_GATT_UUID: String, RawRepresentable {
-        // MARK: - Service IDs
-        /// This is the basic goTenna proprietary service.
-        case goTennaProprietary             =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
-        
-        // MARK: - goTenna Proprietary Characteristic IDs
-        /// No idea what this is.
-        case goTennaProprietary001          =   "12762B18-DF5E-11E6-BF01-FE55135034F3"
-        /// No idea what this is.
-        case goTennaProprietary002          =   "1276B20A-DF5E-11E6-BF01-FE55135034F3"
-        /// No idea what this is.
-        case goTennaProprietary003          =   "1276B20B-DF5E-11E6-BF01-FE55135034F3"
-    }
-
     /* ################################################################################################################################## */
     // MARK: - RVS_BLEDriver_ServiceProtocol Support -
     /* ################################################################################################################################## */
@@ -158,7 +138,7 @@ public class RVS_BLE_goTenna_Service: RVS_BLEService {
      - returns: The service UUID.
      */
     public static var serviceID: String {
-        return RVS_BLE_GATT_UUID.goTennaProprietary.rawValue
+        return RVS_BLEDevice_DeviceSpec_goTenna.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue
     }
 }
 
