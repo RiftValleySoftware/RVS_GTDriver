@@ -20,7 +20,7 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import CoreBluetooth    // We need to import this for the one advanced method that looks at CB.
+import Foundation
 
 /* ###################################################################################################################################### */
 // MARK: - Main Driver RVS_BLEDriverDelegate Protocol -
@@ -74,25 +74,6 @@ public protocol RVS_BLEDriverDelegate: class {
      - parameter driver: The driver instance calling this.
      */
     func gtDriverStatusUpdate(_ driver: RVS_BLEDriver)
-
-    /* ###################################################################################################################################### */
-    // MARK: - Optional Advanced Methods
-    /* ###################################################################################################################################### */
-    /* ################################################################## */
-    /**
-     This is the only place that Core Bluetooth is exposed!
-     
-     Called when a peripheral is discovered, and before a device instance is instantiated. This gives your implementation the chance to "vet" a device before adding it to our list.
-     
-     You may return false, if you want to prevent the peripheral from being loaded. This will not remove the peripheral from discovery; it only prevents it from being loaded.
-     
-     This is optional, and is NOT guaranteed to be called in the main thread. If not specified, the device will always be added.
-     
-     - parameter driver: The driver instance calling this.
-     - parameter peripheralDiscovered: The peripheral object (CoreBluetooth CBPeripheral).
-     - returns: True, if the peripheral is to be instantiated.
-     */
-    func gtDriver(_ driver: RVS_BLEDriver, peripheralDiscovered: CBPeripheral) -> Bool
 }
 
 /* ###################################################################################################################################### */
@@ -118,18 +99,6 @@ extension RVS_BLEDriverDelegate {
      - parameter driver: The driver instance calling this.
      */
     public func gtDriverStatusUpdate(_ driver: RVS_BLEDriver) { }
-
-    /* ################################################################## */
-    /**
-     The default implementation always returns true.
-     
-     - parameter driver: The driver instance calling this.
-     - parameter peripheralDiscovered: The peripheral object.
-     - returns: True.
-     */
-    public func gtDriver(_ driver: RVS_BLEDriver, peripheralDiscovered: CBPeripheral) -> Bool {
-        return true
-    }
 }
 
 /* ###################################################################################################################################### */
@@ -304,24 +273,6 @@ extension RVS_BLEDriver {
             if !newValue {
                 internal_centralManager.stopScan()
             } else {
-                // If we are not powered on, then we report an error, and stop.
-                guard CBManagerState.poweredOn == internal_centralManager.state else {
-                    reportThisError(.bluetoothNotAvailable)
-                    return
-                }
-                // See if we want to be continuously scanning.
-                let options = [
-                    CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: internal_AllowDuplicatesInBLEScan)
-                ]
-                // We search for any devices that advertise the goTenna proprietary service.
-                var scanForTheseServices: [CBUUID]! = []
-                
-                // Go through our handlers, and fetch the advertised servce UUIDs.
-                for handler in type(of: self).handlers {
-                    scanForTheseServices += handler.advertisedServiceUUIDs
-                }
-
-                internal_centralManager.scanForPeripherals(withServices: scanForTheseServices, options: options)
             }
         }
     }

@@ -63,8 +63,6 @@ public class RVS_BLEDriver: NSObject {
      This contains our device handlers.
      */
     static internal let handlers: [RVS_BLEDevice_DeviceSpec] = [
-        /// These are global services.
-        RVS_BLEDevice_DeviceSpec_GeneralPurpose(),
         /// Handle goTenna devices.
         RVS_BLEDevice_DeviceSpec_goTenna()
     ]
@@ -464,28 +462,28 @@ extension RVS_BLEDriver: CBCentralManagerDelegate {
             }
             return
         }
-        // Make sure we don't already have this one.
-        if !containsThisPeripheral(inPeripheral) {
-            // Make sure that we are supposed to add this.
-            let shouldInstall = delegate.gtDriver(self, peripheralDiscovered: inPeripheral)
-            if shouldInstall {
-                #if DEBUG
-                    print("\n***> New Peripheral To Be Installed:")
-                    print("\tdidDiscover: \(String(describing: inPeripheral))\n")
-                    print("\t***\n")
-                    print("\tadvertisementData: \(String(describing: inAdvertisementData))\n")
-                    print("\t***\n")
-                    print("\trssi: \(String(describing: inRSSI))")
-                    print("<***\n")
-                #endif
-                // If so, we simply create the new device and add it to our holding pen.
-                _holdingPen.append(RVS_BLEDevice(inPeripheral, owner: self, remainConnected: stayConnected))
-            }
-            #if DEBUG
-                if !shouldInstall {
-                    print("Install of discovered peripheral canceled by API user.")
-                }
-            #endif
-        }
+//        // Make sure we don't already have this one.
+//        if !containsThisPeripheral(inPeripheral) {
+//            // Make sure that we are supposed to add this.
+//            let shouldInstall = delegate.gtDriver(self, errorEncountered: inPeripheral)
+//            if shouldInstall {
+//                #if DEBUG
+//                    print("\n***> New Peripheral To Be Installed:")
+//                    print("\tdidDiscover: \(String(describing: inPeripheral))\n")
+//                    print("\t***\n")
+//                    print("\tadvertisementData: \(String(describing: inAdvertisementData))\n")
+//                    print("\t***\n")
+//                    print("\trssi: \(String(describing: inRSSI))")
+//                    print("<***\n")
+//                #endif
+//                // If so, we simply create the new device and add it to our holding pen.
+//                _holdingPen.append(RVS_BLEDevice(inPeripheral, owner: self, remainConnected: stayConnected))
+//            }
+//            #if DEBUG
+//                if !shouldInstall {
+//                    print("Install of discovered peripheral canceled by API user.")
+//                }
+//            #endif
+//        }
     }
 }

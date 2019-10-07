@@ -22,13 +22,39 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 
 import CoreBluetooth
 
+/* ###################################################################################################################################### */
+// MARK: - RVS_BLEDevice_DeviceSpec_BLE_Delegate Protocol -
+/* ###################################################################################################################################### */
+/**
+ */
+protocol RVS_BLEDevice_DeviceSpec_BLE_Delegate: class {
+    /* ###################################################################################################################################### */
+    // MARK: - Optional Advanced Methods
+    /* ###################################################################################################################################### */
+    /* ################################################################## */
+    /**
+     This is the only place that Core Bluetooth is exposed!
+     
+     Called when a peripheral is discovered, and before a device instance is instantiated. This gives your implementation the chance to "vet" a device before adding it to our list.
+     
+     You may return false, if you want to prevent the peripheral from being loaded. This will not remove the peripheral from discovery; it only prevents it from being loaded.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread. If not specified, the device will always be added.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter peripheralDiscovered: The peripheral object (CoreBluetooth CBPeripheral).
+     - returns: True, if the peripheral is to be instantiated.
+     */
+    func gtDriver(_ driver: RVS_BLEDriver, peripheralDiscovered: CBPeripheral) -> Bool
+}
+
 /* ########################################################################################################################################## */
-// MARK: - Adapter Class for Any Device -
+// MARK: - Adapter Class for BLE Device -
 /* ########################################################################################################################################## */
 /**
- This is a "general-purpose" adapter. It provides some of the standard BLE services and characteristics.
+ This is a BLE-specific adapter. It provides some of the standard BLE services and characteristics.
  */
-public class RVS_BLEDevice_DeviceSpec_BLE: RVS_BLEDevice_DeviceSpec {
+public class RVS_BLEDevice_DeviceSpec_BLE: NSObject, RVS_BLEDevice_DeviceSpec {
     /* ################################################################## */
     /**
      - returns: An Array, with the UUIDs of all the services this handler will take.
@@ -36,7 +62,7 @@ public class RVS_BLEDevice_DeviceSpec_BLE: RVS_BLEDevice_DeviceSpec {
     private var _serviceUUIDs: [CBUUID] = [ // We register for standard services
         CBUUID(string: RVS_BLE_DeviceInfo_Service.serviceID)    // Device Info.
     ]
-
+    
     /* ################################################################## */
     /**
      - returns: An Array, with the UUIDs of all the services this handler will take.
@@ -52,8 +78,39 @@ public class RVS_BLEDevice_DeviceSpec_BLE: RVS_BLEDevice_DeviceSpec {
     var advertisedServiceUUIDs: [CBUUID] {
         return []
     }
+    
+    /* ################################################################## */
+    /**
+     This allows the handler to "adopt" a service.
+     This is a factory method for creating instances of our goTenna Services.
+     
+     - parameter inService: The discovered Core Bluetooth service.
+     - parameter forPeripheral: The Core Bluetooth peripheral that "owns" the discovered service.
+     - parameter andDevice: The Instance of the device that "owns" this service.
+     - returns: An instance of a subclass of RVS_BLEService, if it is handled by this instance, or nil, if not.
+     */
+    func handleDiscoveredService(_ inService: CBService, forPeripheral inPeripheral: CBPeripheral, andDevice inDevice: RVS_BLEDevice) -> RVS_BLEService! {
+        // If this is the device info service, we make an instance of the RVS_BLE_DeviceInfo_Service specialized subclass.
+        if  serviceUUIDs.contains(inService.uuid),
+            RVS_BLE_DeviceInfo_Service.serviceID == inService.uuid.uuidString {
+            // We start off by looking for these four characteristics.
+            let initialCharacteristics = [  CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue),
+                                            CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue),
+                                            CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue),
+                                            CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)
+            ]
+            return RVS_BLE_DeviceInfo_Service(inService, owner: inDevice, initialCharacteristics: initialCharacteristics)
+        }
 
-    func handleDiscoveredService(_ inService: CBService, forPeripheral inPeripheral: CBPeripheral, andDevice: RVS_BLEDevice) -> RVS_BLEService! {
         return nil
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - CBCentralManagerDelegate Methods (NOT FOR EXTERNAL USE) -
+/* ###################################################################################################################################### */
+extension RVS_BLEDevice_DeviceSpec_BLE: CBCentralManagerDelegate {
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        
     }
 }

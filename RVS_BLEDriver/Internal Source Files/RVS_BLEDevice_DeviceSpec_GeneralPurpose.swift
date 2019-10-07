@@ -20,62 +20,56 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import CoreBluetooth
-
-/* ########################################################################################################################################## */
-// MARK: - Adapter Class for Any Device -
-/* ########################################################################################################################################## */
+/* ###################################################################################################################################### */
+// MARK: - Main Driver RVS_BLEDriverDelegate Protocol -
+/* ###################################################################################################################################### */
 /**
- This is a "general-purpose" adapter. It provides some of the standard BLE services and characteristics.
+ A delegate object is required to instantiate an instance of the driver class.
+ 
+ This is the delegate protocol.
+ 
+ Protocols are an important part of this driver. The driver protocol is required. Protocols for devices and services are optional.
+ 
+ Each protocol has only one required method: an error receiver. We use an enum that wraps errors, and is returned in the handler.
  */
-public class RVS_BLEDevice_DeviceSpec_GeneralPurpose: RVS_BLEDevice_DeviceSpec {    
+public protocol RVS_BLEDevice_DeviceSpec_Delegate: class {
+    /* ###################################################################################################################################### */
+    // MARK: - Required Methods
+    /* ###################################################################################################################################### */
     /* ################################################################## */
     /**
-     - returns: An Array, with the UUIDs of all the services this handler will take.
-     */
-    private var _serviceUUIDs: [CBUUID] = [ // We register for standard services
-        CBUUID(string: RVS_BLE_DeviceInfo_Service.serviceID)    // Device Info.
-    ]
-    
-    /* ################################################################## */
-    /**
-     - returns: An Array, with the UUIDs of all the services this handler will take.
-     */
-    internal var serviceUUIDs: [CBUUID] {
-        return _serviceUUIDs
-    }
-
-    /* ################################################################## */
-    /**
-     - returns: An empty Array. We don't advertise.
-     */
-    var advertisedServiceUUIDs: [CBUUID] {
-        return []
-    }
-    
-    /* ################################################################## */
-    /**
-     This allows the handler to "adopt" a service.
-     This is a factory method for creating instances of our goTenna Services.
+     Called when an error is encountered by the main driver.
      
-     - parameter inService: The discovered Core Bluetooth service.
-     - parameter forPeripheral: The Core Bluetooth peripheral that "owns" the discovered service.
-     - parameter andDevice: The Instance of the device that "owns" this service.
-     - returns: An instance of a subclass of RVS_BLEService, if it is handled by this instance, or nil, if not.
+     This is required, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter errorEncountered: The error encountered.
      */
-    func handleDiscoveredService(_ inService: CBService, forPeripheral inPeripheral: CBPeripheral, andDevice inDevice: RVS_BLEDevice) -> RVS_BLEService! {
-        // If this is the device info service, we make an instance of the RVS_BLE_DeviceInfo_Service specialized subclass.
-        if  serviceUUIDs.contains(inService.uuid),
-            RVS_BLE_DeviceInfo_Service.serviceID == inService.uuid.uuidString {
-            // We start off by looking for these four characteristics.
-            let initialCharacteristics = [  CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoManufacturerName.rawValue),
-                                            CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoModelName.rawValue),
-                                            CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoHardwareRevision.rawValue),
-                                            CBUUID(string: RVS_BLE_DeviceInfo_Service.RVS_BLE_GATT_UUID.deviceInfoFirmwareRevision.rawValue)
-            ]
-            return RVS_BLE_DeviceInfo_Service(inService, owner: inDevice, initialCharacteristics: initialCharacteristics)
-        }
+    func gtDriver(_ driver: RVS_BLEDevice_DeviceSpec_Delegate, errorEncountered: RVS_BLEDriver.Errors)
 
-        return nil
-    }
+    /* ###################################################################################################################################### */
+    // MARK: - Optional Methods
+    /* ###################################################################################################################################### */
+    /* ################################################################## */
+    /**
+     Called when a device has been added and instantiated.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     - parameter newDeviceAdded: The device object.
+     */
+    func gtDriver(_ driver: RVS_BLEDevice_DeviceSpec_Delegate, newDeviceAdded: RVS_BLEDevice)
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver's status should be checked.
+     
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The driver instance calling this.
+     */
+    func gtDriverStatusUpdate(_ driver: RVS_BLEDevice_DeviceSpec_Delegate)
 }
