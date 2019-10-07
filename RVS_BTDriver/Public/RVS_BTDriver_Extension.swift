@@ -34,6 +34,11 @@ protocol RVS_BTDriverDelegate: class {
 // MARK: -
 /* ###################################################################################################################################### */
 /**
+ This is the main driver class. It is the "manager" for all the bluetooth-connected devices, which are accessible as `RVS_BTDriver_DeviceProtocol`-conformant instances.
+ 
+ The `RVS_BTDriver` instance can be treated like a [Sequence](https://developer.apple.com/documentation/swift/sequence), with an iterator, higher-order functions and subscripting.
+ 
+ Just remember that it aggregates a protocol, not a class/struct, so you see a "mask" over a different class that is known internally.
  */
 extension RVS_BTDriver {
     /* ################################################################################################################################## */
@@ -164,11 +169,40 @@ extension RVS_BTDriver {
      */
     public var delegate: RVS_BTDriverDelegate! {
         get {
-            return _delegate
+            return internal_delegate
         }
         
         set {
-            _delegate = newValue
+            internal_delegate = newValue
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver -
+/* ###################################################################################################################################### */
+/**
+ This sets up the Sequence protocol.
+ */
+extension RVS_BTDriver: RVS_SequenceProtocol {
+    /* ################################################################## */
+    /**
+     We aggregate devices.
+     */
+    public typealias Element = RVS_BTDriver_DeviceProtocol
+    
+    /* ################################################################## */
+    /**
+     This is a public read-only list of devices, masked by the protocol.
+     */
+    public internal(set) var sequence_contents: [Element] {
+        get {
+            return internal_device_list
+        }
+        
+        /// We do not allow the list to be modified from outside the driver.
+        set {
+            _ = newValue    // NOP
         }
     }
 }

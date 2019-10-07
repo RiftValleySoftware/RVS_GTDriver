@@ -404,8 +404,8 @@
 			isa = PBXGroup;
 			children = (
 				D4FEC4F8234BA596006D0A53 /* RVS_BTDriver.swift */,
-				D4FEC50F234BB9DD006D0A53 /* RVS_BTDriver_Service.swift */,
 				D40B6273234BC0AA00A3A334 /* RVS_BTDriver_Device.swift */,
+				D4FEC50F234BB9DD006D0A53 /* RVS_BTDriver_Service.swift */,
 				D4FEC511234BBA04006D0A53 /* RVS_BTDriver_Property.swift */,
 				D4FEC513234BBAB8006D0A53 /* Interfaces */,
 				D4FEC517234BBB52006D0A53 /* Vendor */,

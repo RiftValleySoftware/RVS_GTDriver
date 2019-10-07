@@ -30,7 +30,19 @@ import Foundation
 class RVS_BTDriver: NSObject {
     /* ################################################################## */
     /**
-     The delegate reference. It is a weak reference.
+     This contains instances that have not yet passed a credit check.
      */
-    internal weak var _delegate: RVS_BTDriverDelegate!
+    internal var internal_holding_pen: [RVS_BTDriver_Device] = []
+    
+    /* ################################################################## */
+    /**
+     This contains the device list for this instance of the driver.
+     */
+    internal var internal_device_list: [RVS_BTDriver_Device] = []
+    
+    /* ################################################################## */
+    /**
+     The delegate. It is a weak reference.
+     */
+    internal weak var internal_delegate: RVS_BTDriverDelegate!
 }
