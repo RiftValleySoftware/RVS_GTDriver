@@ -24,6 +24,6 @@
       </FileRef>
    </Group>
    <FileRef
-      location = "group:/Volumes/Development/RiftValley/RVS_GTDriver/RVS_BLEDriver.xcodeproj">
+      location = "group:/Volumes/Development/RiftValley/RVS_GTDriver/RVS_BTDriver.xcodeproj">
    </FileRef>
 </Workspace>

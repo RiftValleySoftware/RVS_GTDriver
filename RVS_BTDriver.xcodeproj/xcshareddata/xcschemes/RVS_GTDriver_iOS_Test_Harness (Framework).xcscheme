@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D43058A2232BBCE700B64056"
-               BuildableName = "RVS_BLEDriver_iOS_Test_Harness (Framework).app"
-               BlueprintName = "RVS_BLEDriver_iOS_Test_Harness (Framework)"
-               ReferencedContainer = "container:RVS_BLEDriver.xcodeproj">
+               BuildableName = "RVS_BTDriver_iOS_Test_Harness (Framework).app"
+               BlueprintName = "RVS_BTDriver_iOS_Test_Harness (Framework)"
+               ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "D403D362232BDC980040EBA3"
                BuildableName = "RVS_GTDriver_iOS_Tests.xctest"
                BlueprintName = "RVS_GTDriver_iOS_Tests"
-               ReferencedContainer = "container:RVS_BLEDriver.xcodeproj">
+               ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D43058A2232BBCE700B64056"
-            BuildableName = "RVS_BLEDriver_iOS_Test_Harness (Framework).app"
-            BlueprintName = "RVS_BLEDriver_iOS_Test_Harness (Framework)"
-            ReferencedContainer = "container:RVS_BLEDriver.xcodeproj">
+            BuildableName = "RVS_BTDriver_iOS_Test_Harness (Framework).app"
+            BlueprintName = "RVS_BTDriver_iOS_Test_Harness (Framework)"
+            ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D43058A2232BBCE700B64056"
-            BuildableName = "RVS_BLEDriver_iOS_Test_Harness (Framework).app"
-            BlueprintName = "RVS_BLEDriver_iOS_Test_Harness (Framework)"
-            ReferencedContainer = "container:RVS_BLEDriver.xcodeproj">
+            BuildableName = "RVS_BTDriver_iOS_Test_Harness (Framework).app"
+            BlueprintName = "RVS_BTDriver_iOS_Test_Harness (Framework)"
+            ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -14,30 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D43058C2232BBECB00B64056"
-               BuildableName = "RVS_BLEDriver_iOS.framework"
-               BlueprintName = "RVS_BLEDriver_iOS"
-               ReferencedContainer = "container:RVS_BLEDriver.xcodeproj">
+               BlueprintIdentifier = "D4FEC4E9234BA554006D0A53"
+               BuildableName = "RVS_BTDriver_iOS.framework"
+               BlueprintName = "RVS_BTDriver_iOS"
+               ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = ""
-      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D403D362232BDC980040EBA3"
-               BuildableName = "RVS_GTDriver_iOS_Tests.xctest"
-               BlueprintName = "RVS_GTDriver_iOS_Tests"
-               ReferencedContainer = "container:RVS_BLEDriver.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -60,10 +50,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D43058C2232BBECB00B64056"
-            BuildableName = "RVS_BLEDriver_iOS.framework"
-            BlueprintName = "RVS_BLEDriver_iOS"
-            ReferencedContainer = "container:RVS_BLEDriver.xcodeproj">
+            BlueprintIdentifier = "D4FEC4E9234BA554006D0A53"
+            BuildableName = "RVS_BTDriver_iOS.framework"
+            BlueprintName = "RVS_BTDriver_iOS"
+            ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
