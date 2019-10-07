@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D442709E233A9A0A007EDA59"
-               BuildableName = "RVS_BLEDriver_iOS_Test_Harness (Direct).app"
+               BuildableName = "RVS_BTDriver_iOS_Test_Harness (Direct).app"
                BlueprintName = "RVS_BTDriver_iOS_Test_Harness (Direct)"
                ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D442709E233A9A0A007EDA59"
-            BuildableName = "RVS_BLEDriver_iOS_Test_Harness (Direct).app"
+            BuildableName = "RVS_BTDriver_iOS_Test_Harness (Direct).app"
             BlueprintName = "RVS_BTDriver_iOS_Test_Harness (Direct)"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D442709E233A9A0A007EDA59"
-            BuildableName = "RVS_BLEDriver_iOS_Test_Harness (Direct).app"
+            BuildableName = "RVS_BTDriver_iOS_Test_Harness (Direct).app"
             BlueprintName = "RVS_BTDriver_iOS_Test_Harness (Direct)"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
