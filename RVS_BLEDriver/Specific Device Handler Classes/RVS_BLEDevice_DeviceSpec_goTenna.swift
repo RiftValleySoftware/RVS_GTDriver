@@ -28,7 +28,7 @@ import CoreBluetooth
 /**
  This class provides a set of constants and factories for handling goTenna devices.
  */
-class RVS_BLEDevice_DeviceSpec_goTenna: RVS_BLEDevice_DeviceSpec {
+class RVS_BLEDevice_DeviceSpec_goTenna: RVS_BLEDevice_DeviceSpec_BLE {
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
@@ -61,7 +61,7 @@ class RVS_BLEDevice_DeviceSpec_goTenna: RVS_BLEDevice_DeviceSpec {
     /**
      - returns: An Array, with the UUIDs of all the services this handler will take.
      */
-    internal var serviceUUIDs: [CBUUID] {
+    override internal var serviceUUIDs: [CBUUID] {
         return _serviceUUIDs
     }
 
@@ -69,7 +69,7 @@ class RVS_BLEDevice_DeviceSpec_goTenna: RVS_BLEDevice_DeviceSpec {
     /**
      - returns: An Array, with the UUIDs of the service[s] that the handler advertises (for a search).
      */
-    var advertisedServiceUUIDs: [CBUUID] {
+    override var advertisedServiceUUIDs: [CBUUID] {
         return serviceUUIDs
     }
     
@@ -83,7 +83,7 @@ class RVS_BLEDevice_DeviceSpec_goTenna: RVS_BLEDevice_DeviceSpec {
      - parameter andDevice: The Instance of the device that "owns" this service.
      - returns: An instance of a subclass of RVS_BLEService, if it is handled by this instance, or nil, if not.
      */
-    func handleDiscoveredService(_ inService: CBService, forPeripheral inPeripheral: CBPeripheral, andDevice inDevice: RVS_BLEDevice) -> RVS_BLEService! {
+    override func handleDiscoveredService(_ inService: CBService, forPeripheral inPeripheral: CBPeripheral, andDevice inDevice: RVS_BLEDevice) -> RVS_BLEService! {
         if serviceUUIDs.contains(inService.uuid) {
             let initialCharacteristics = [  CBUUID(string: RVS_BLE_GATT_UUID.goTennaProprietary001.rawValue),
                                             CBUUID(string: RVS_BLE_GATT_UUID.goTennaProprietary002.rawValue),
