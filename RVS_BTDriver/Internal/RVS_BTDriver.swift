@@ -43,6 +43,12 @@ public class RVS_BTDriver: NSObject {
     
     /* ################################################################## */
     /**
+     This contains any queue we're supposed to use. Nil (default) is the main queue.
+     */
+    internal var internal_queue: DispatchQueue!
+
+    /* ################################################################## */
+    /**
      The delegate. It is a weak reference.
      */
     internal weak var internal_delegate: RVS_BTDriverDelegate!
@@ -59,10 +65,6 @@ public class RVS_BTDriver: NSObject {
      */
     override private init() {
         super.init()
-        // We initialize with our vendors, which will also allow us to create any required interfaces.
-        vendors = [
-            RVS_BTDriver_Vendor_GoTenna_Mesh()
-        ]
     }
     
     /* ################################################################## */
@@ -70,10 +72,16 @@ public class RVS_BTDriver: NSObject {
      An internal convenience initializer (meant to be called from the public convenience init).
      
      - parameter inDelegate: The delegate instance. It is required, and cannot be nil.
+     - parameter queue: The queue we want to use. Default is nil (optional). Nil means use the main thread.
      */
-    internal convenience init(_ inDelegate: RVS_BTDriverDelegate) {
+    internal convenience init(_ inDelegate: RVS_BTDriverDelegate, queue inQueue: DispatchQueue! = nil) {
         self.init()
         internal_delegate = inDelegate
+        internal_queue = inQueue
+        // We initialize with our vendors, which will also allow us to create any required interfaces.
+        vendors = [
+            RVS_BTDriver_Vendor_GoTenna_Mesh()
+        ]
     }
 }
 

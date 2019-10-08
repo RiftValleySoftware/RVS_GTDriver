@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="deP-v5-jbO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -8,6 +8,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Driver iOS Test Harness Navigation Controller-->
+        <scene sceneID="Flf-5A-gut">
+            <objects>
+                <navigationController id="deP-v5-jbO" customClass="RVS_BLEDriver_iOS_Test_Harness_NavigationController" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0yL-m2-fLy">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="rFD-vZ-KCh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cT8-3S-Vgg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-691" y="139"/>
+        </scene>
         <!--Driver iOS Test Harness View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -20,7 +36,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoBT" translatesAutoresizingMaskIntoConstraints="NO" id="W99-6i-oEh">
-                                <rect key="frame" x="36.5" y="277.5" width="341.5" height="341.5"/>
+                                <rect key="frame" x="36.5" y="304.5" width="341.5" height="341.5"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -32,10 +48,13 @@
                             <constraint firstItem="W99-6i-oEh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VYk-3x-Exv"/>
                             <constraint firstItem="oKB-0U-CCP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XBB-CZ-uQX"/>
                             <constraint firstAttribute="bottom" secondItem="oKB-0U-CCP" secondAttribute="bottom" id="XId-za-gTP"/>
-                            <constraint firstItem="W99-6i-oEh" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fQM-A8-RNG"/>
+                            <constraint firstItem="W99-6i-oEh" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="fQM-A8-RNG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="EuO-TJ-Wyn">
+                        <barButtonItem key="leftBarButtonItem" image="Gear" id="7OE-I8-e38"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="noBTImageView" destination="W99-6i-oEh" id="uUO-j1-nI9"/>
                     </connections>
@@ -46,7 +65,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Gear" width="25" height="25"/>
         <image name="NoBT" width="341.5" height="341.5"/>
         <image name="background-gradient" width="1" height="1000"/>
     </resources>
+    <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

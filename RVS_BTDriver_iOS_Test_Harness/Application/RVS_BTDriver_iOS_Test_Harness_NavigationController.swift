@@ -26,18 +26,35 @@ import UIKit
 #endif
 
 /* ###################################################################################################################################### */
-// MARK: - Main NavigationController -
+// MARK: - Main Navigation Controller -
 /* ###################################################################################################################################### */
 /**
  */
-class RVS_BTDriver_iOS_Test_Harness_ViewController: UIViewController {
-    @IBOutlet weak var noBTImageView: UIImageView!
+class RVS_BTDriver_iOS_Test_Harness_NavigationController: UINavigationController {
+    /* ################################################################## */
+    /**
+     */
+    var driverInstance: RVS_BTDriver!
     
     /* ################################################################## */
     /**
-     Called after the view has completely loaded.
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        driverInstance = RVS_BTDriver(self)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriverDelegate Support -
+/* ###################################################################################################################################### */
+/**
+ */
+extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelegate {
+    func driver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
+        #if DEBUG
+            print("Error Message Received by Navigation Controller: \(inError.localizedDescription)")
+        #endif
     }
 }
