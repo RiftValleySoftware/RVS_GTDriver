@@ -103,11 +103,27 @@
 			path = Meta;
 			sourceTree = "<group>";
 		};
-		D443DEE4234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness */ = {
+		D41568CD234D18140038286D /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				D443DEE5234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		D41568CE234D182C0038286D /* ViewControllersAndViews */ = {
+			isa = PBXGroup;
+			children = (
 				D443DEE9234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_ViewController.swift */,
+			);
+			path = ViewControllersAndViews;
+			sourceTree = "<group>";
+		};
+		D443DEE4234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness */ = {
+			isa = PBXGroup;
+			children = (
+				D41568CD234D18140038286D /* Application */,
+				D41568CE234D182C0038286D /* ViewControllersAndViews */,
 				D4B1FED02332A6E1000B8736 /* ExtensionsAndExtras */,
 				D443DEFA234D0E5000F9DE47 /* Resources */,
 				D41568C9234D15490038286D /* Meta */,

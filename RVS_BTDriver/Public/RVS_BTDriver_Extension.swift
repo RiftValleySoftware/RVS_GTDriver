@@ -188,6 +188,7 @@ extension RVS_BTDriver {
     
     /* ################################################################## */
     /**
+     - returns: true, if even one of the vendor interfaces is in active scanning.
      */
     public var isScanning: Bool {
         for vendor in vendors where vendor.interface.isScanning {
@@ -198,6 +199,7 @@ extension RVS_BTDriver {
     
     /* ################################################################## */
     /**
+     Tells the vendor interfaces (all of them) to start scanning for services.
      */
     public func startScanning() {
         vendors.forEach {
@@ -207,6 +209,7 @@ extension RVS_BTDriver {
 
     /* ################################################################## */
     /**
+     Tells the vendor interfaces to stop scanning.
      */
     public func stopScanning() {
         vendors.forEach {

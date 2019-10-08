@@ -15,13 +15,38 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-gradient" translatesAutoresizingMaskIntoConstraints="NO" id="oKB-0U-CCP">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoBT" translatesAutoresizingMaskIntoConstraints="NO" id="W99-6i-oEh">
+                                <rect key="frame" x="36.5" y="277.5" width="341.5" height="341.5"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="W99-6i-oEh" firstAttribute="height" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="height" id="08k-LX-MgQ"/>
+                            <constraint firstItem="oKB-0U-CCP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="2sC-Fn-mA3"/>
+                            <constraint firstItem="W99-6i-oEh" firstAttribute="width" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="width" id="74R-n0-Y8O"/>
+                            <constraint firstItem="oKB-0U-CCP" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="7F1-tW-1gU"/>
+                            <constraint firstItem="W99-6i-oEh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VYk-3x-Exv"/>
+                            <constraint firstItem="oKB-0U-CCP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XBB-CZ-uQX"/>
+                            <constraint firstAttribute="bottom" secondItem="oKB-0U-CCP" secondAttribute="bottom" id="XId-za-gTP"/>
+                            <constraint firstItem="W99-6i-oEh" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fQM-A8-RNG"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="noBTImageView" destination="W99-6i-oEh" id="uUO-j1-nI9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="139"/>
+            <point key="canvasLocation" x="131.8840579710145" y="138.61607142857142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NoBT" width="341.5" height="341.5"/>
+        <image name="background-gradient" width="1" height="1000"/>
+    </resources>
 </document>

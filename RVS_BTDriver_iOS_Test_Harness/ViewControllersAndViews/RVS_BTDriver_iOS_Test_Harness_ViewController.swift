@@ -28,8 +28,11 @@ import UIKit
 /**
  */
 class RVS_BTDriver_iOS_Test_Harness_ViewController: UIViewController {
+    @IBOutlet weak var noBTImageView: UIImageView!
+    
     /* ################################################################## */
     /**
+     Called after the view has completely loaded.
      */
     override func viewDidLoad() {
         super.viewDidLoad()

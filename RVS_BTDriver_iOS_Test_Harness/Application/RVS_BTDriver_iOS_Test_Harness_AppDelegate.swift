@@ -29,10 +29,19 @@ import UIKit
  */
 @UIApplicationMain
 class RVS_BTDriver_iOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDelegate {
+    /// The window instance.
+    var window: UIWindow?
+    
     /* ################################################################## */
     /**
+     Called after the application has set itself up.
+     
+     - parameter inApplication: A reference to the application instance.
+     - parameter didFinishLaunchingWithOptions: The launch option set.
+     
+     - returns: false, if you want to abort the launch. True, otherwise.
      */
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ inApplication: UIApplication, didFinishLaunchingWithOptions inLaunchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         return true
     }
 }
