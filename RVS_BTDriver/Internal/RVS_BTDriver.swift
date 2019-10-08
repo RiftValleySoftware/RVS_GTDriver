@@ -46,3 +46,32 @@ class RVS_BTDriver: NSObject {
      */
     internal weak var internal_delegate: RVS_BTDriverDelegate!
 }
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver Sequence Support -
+/* ###################################################################################################################################### */
+/**
+ This sets up the Sequence protocol.
+ */
+extension RVS_BTDriver: RVS_SequenceProtocol {
+    /* ################################################################## */
+    /**
+     We aggregate devices.
+     */
+    public typealias Element = RVS_BTDriver_DeviceProtocol
+    
+    /* ################################################################## */
+    /**
+     This is a public read-only list of devices, masked by the protocol.
+     */
+    public internal(set) var sequence_contents: [Element] {
+        get {
+            return internal_device_list
+        }
+        
+        /// We do not allow the list to be modified from outside the driver.
+        set {
+            _ = newValue    // NOP
+        }
+    }
+}

@@ -23,9 +23,26 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_DeviceProtocol Protocol -
+// MARK: - RVS_BTDriver_DeviceProtocol Protocol (Aggregates Services) -
 /* ###################################################################################################################################### */
 /**
  */
-protocol RVS_BTDriver_DeviceProtocol {
+public protocol RVS_BTDriver_DeviceProtocol {
+    /* ################################################################## */
+    /**
+     This is the public read-only access to the service list.
+     */
+    var services: [RVS_BTDriver_ServiceProtocol] { get }
+    
+    /* ################################################################## */
+    /**
+     This is the read-only count of services.
+     */
+    var count: Int { get }
+
+    /* ################################################################## */
+    /**
+     This is a public read-only subscript to the service list.
+     */
+    subscript(_ inIndex: Int) -> RVS_BTDriver_ServiceProtocol { get }
 }

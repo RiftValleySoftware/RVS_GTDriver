@@ -27,5 +27,5 @@ import Foundation
 /* ###################################################################################################################################### */
 /**
  */
-protocol RVS_BTDriver_ServiceProtocol {
+public protocol RVS_BTDriver_ServiceProtocol {
 }

@@ -28,4 +28,50 @@ import Foundation
 /**
  */
 class RVS_BTDriver_Device: RVS_BTDriver_DeviceProtocol {
+    /* ################################################################################################################################## */
+    // MARK: - RVS_BTDriver_Device Sequence Support -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This contains instances that have not yet passed a credit check.
+     */
+    private var _holding_pen: [RVS_BTDriver_Service] = []
+    
+    /* ################################################################## */
+    /**
+     This contains the service list for this instance of the driver.
+     */
+    private var _service_list: [RVS_BTDriver_Service] = []
+}
+
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+extension RVS_BTDriver_Device {
+    /* ################################################################## */
+    /**
+     This is the public read-only access to the service list.
+     */
+    public var services: [RVS_BTDriver_ServiceProtocol] {
+        return _service_list
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the read-only count of services.
+     */
+    public var count: Int {
+        return _service_list.count
+    }
+
+    /* ################################################################## */
+    /**
+     This is a public read-only subscript to the service list.
+     */
+    public subscript(_ inIndex: Int) -> RVS_BTDriver_ServiceProtocol {
+        precondition((0..<_service_list.count).contains(inIndex), "Index Out of Range")
+        return services[inIndex]
+    }
 }
