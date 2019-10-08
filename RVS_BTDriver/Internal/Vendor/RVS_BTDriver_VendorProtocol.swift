@@ -27,5 +27,18 @@ import Foundation
 /* ###################################################################################################################################### */
 /**
  */
-protocol RVS_BTDriver_VendorProtocol {
+internal protocol RVS_BTDriver_VendorProtocol {
+    /* ################################################################## */
+    /**
+     REQUIRED: Factory method for creating an instance of the vendor device.
+     
+     - returns: adevice instance. Nil, if not successful.
+     */
+    func makeDevice() -> RVS_BTDriver_Device!
+    
+    /* ################################################################## */
+    /**
+     - returns: An instance of the interface for this type of device.
+     */
+    var interface: RVS_BTDriver_InterfaceProtocol! { get }
 }

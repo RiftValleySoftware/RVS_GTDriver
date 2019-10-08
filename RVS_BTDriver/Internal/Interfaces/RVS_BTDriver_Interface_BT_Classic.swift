@@ -23,9 +23,20 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_Vendor_GoTenna -
+// MARK: - RVS_BTDriver_Base_Interface_BT_Classic -
 /* ###################################################################################################################################### */
 /**
  */
-class RVS_BTDriver_Vendor_GoTenna: RVS_BTDriver_VendorProtocol {
+class RVS_BTDriver_Interface_BT_Classic: RVS_BTDriver_Base_Interface {
+    /* ################################################################## */
+    /**
+     This will create the SINGLETON, if it is not already created, or simply returns the one we have.
+     */
+    internal static var interface: RVS_BTDriver_InterfaceProtocol! {
+        if nil == internal_interface {
+            internal_interface = RVS_BTDriver_Interface_BT_Classic()
+        }
+        
+        return internal_interface
+    }
 }

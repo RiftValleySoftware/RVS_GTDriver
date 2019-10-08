@@ -26,6 +26,50 @@ import Foundation
 // MARK: - RVS_BTDriver_InterfaceProtocol Protocol -
 /* ###################################################################################################################################### */
 /**
+ This is a protocol that describes the basic transport abstraction for our bluetooth device connection. It will be specialized for Classic or BLE.
  */
-protocol RVS_BTDriver_InterfaceProtocol {
+internal protocol RVS_BTDriver_InterfaceProtocol: class {
+    /* ################################################################## */
+    /**
+     OPTIONAL (but actually required): This is a factory/accessor for the interface SINGLETON.
+     */
+    static var interface: RVS_BTDriver_InterfaceProtocol! { get }
+    
+    /* ################################################################## */
+    /**
+     REQUIRED: This is an "on/off" switch for scanning for peripherals.
+     
+     If set to true, scanning begins, if false, scanning stops.
+     */
+    var isScanning: Bool { get set }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_InterfaceProtocol Protocol Optionals -
+/* ###################################################################################################################################### */
+/**
+ */
+extension RVS_BTDriver_InterfaceProtocol {
+    /* ################################################################## */
+    /**
+     This allows us to skip the base class, so we don't need to override anything.
+     */
+    static var interface: RVS_BTDriver_InterfaceProtocol! {
+        preconditionFailure("Cannot Call the Base Class")
+    }
+    
+    /* ################################################################## */
+    /**
+     You cannot use the base class version of this. This is just here to satisfy the protocol.
+     */
+    var isScanning: Bool {
+        get {
+            preconditionFailure("Cannot Call the Base Class")
+        }
+        
+        set {
+            _ = newValue    // To keep SwiftLint happy.
+            preconditionFailure("Cannot Call the Base Class")
+        }
+    }
 }

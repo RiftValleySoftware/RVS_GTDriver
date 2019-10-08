@@ -23,9 +23,24 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_Base_Interface_BT_Classic -
+// MARK: - RVS_BTDriver_Base_Interface_BLE -
 /* ###################################################################################################################################### */
 /**
+ This is 
  */
-class RVS_BTDriver_Base_Interface_BT_Classic: RVS_BTDriver_Base_Interface {
+internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
+    /* ################################################################## */
+    /**
+     This will create the SINGLETON, if it is not already created, or simply returns the one we have.
+     */
+    internal static var interface: RVS_BTDriver_InterfaceProtocol! {
+        if nil == internal_interface {
+            internal_interface = RVS_BTDriver_Interface_BLE()
+        }
+        
+        return internal_interface
+    }
+}
+
+extension RVS_BTDriver_Interface_BLE {
 }

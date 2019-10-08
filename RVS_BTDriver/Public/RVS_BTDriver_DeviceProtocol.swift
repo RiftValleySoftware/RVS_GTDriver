@@ -26,6 +26,7 @@ import Foundation
 // MARK: - RVS_BTDriver_DeviceDelegate Protocol -
 /* ###################################################################################################################################### */
 /**
+ Each device can have a delegate. It's strongly reccommended that you do this.
  */
 public protocol RVS_BTDriver_DeviceDelegate: class {
     /* ################################################################## */

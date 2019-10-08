@@ -26,6 +26,9 @@ import Foundation
 // MARK: - RVS_BTDriver_Base_Interface -
 /* ###################################################################################################################################### */
 /**
+ This is the base class for our transport abstractions.
  */
-class RVS_BTDriver_Base_Interface: RVS_BTDriver_InterfaceProtocol {
+internal class RVS_BTDriver_Base_Interface: RVS_BTDriver_InterfaceProtocol {
+    /// Holds our SINGLETON
+    static var internal_interface: RVS_BTDriver_InterfaceProtocol!
 }

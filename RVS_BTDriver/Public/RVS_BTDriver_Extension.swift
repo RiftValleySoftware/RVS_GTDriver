@@ -26,6 +26,7 @@ import Foundation
 // MARK: - RVS_BTDriverDelegate Protocol -
 /* ###################################################################################################################################### */
 /**
+ This is the delegate for the driver instance. You should definitely do this.
  */
 public protocol RVS_BTDriverDelegate: class {
     /* ################################################################## */
@@ -183,5 +184,46 @@ extension RVS_BTDriver {
         set {
             internal_delegate = newValue
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    public var isScanning: Bool {
+        for vendor in vendors where vendor.interface.isScanning {
+            return true
+        }
+        return false
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    public func startScanning() {
+        vendors.forEach {
+            $0.interface.isScanning = true
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    public func stopScanning() {
+        vendors.forEach {
+            $0.interface.isScanning = false
+        }
+    }
+
+    /* ################################################################################################################################## */
+    // MARK: - Public Initializer -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     The main initializer for the class.
+     
+     - parameter delegate: The delegate instance. It is required, and cannot be nil.
+     */
+    public convenience init(delegate inDelegate: RVS_BTDriverDelegate) {
+        self.init(inDelegate)
     }
 }

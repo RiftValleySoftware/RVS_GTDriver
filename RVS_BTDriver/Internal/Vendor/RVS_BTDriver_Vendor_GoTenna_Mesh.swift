@@ -23,9 +23,33 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_Base_Interface_BLE -
+// MARK: - RVS_BTDriver_Vendor_GoTenna -
 /* ###################################################################################################################################### */
 /**
+ A factory class for goTenna Mesh devices
  */
-class RVS_BTDriver_Base_Interface_BLE: RVS_BTDriver_Base_Interface {
+class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_VendorProtocol {
+    /* ################################################################## */
+    /**
+     The interface for this device (BLE). It is instantiated once, then referenced thereafter.
+     */
+    private var _interface: RVS_BTDriver_Interface_BLE!
+    
+    /* ################################################################## */
+    /**
+     REQUIRED: Factory method for creating an instance of th vendor device.
+     
+     - returns: adevice instance. Nil, if not successful.
+     */
+    func makeDevice() -> RVS_BTDriver_Device! {
+        return nil
+    }
+
+    /* ################################################################## */
+    /**
+     - returns: An instance of the interface for this type of device.
+     */
+    var interface: RVS_BTDriver_InterfaceProtocol! {
+        return RVS_BTDriver_Interface_BLE.interface
+    }
 }

@@ -46,6 +46,35 @@ public class RVS_BTDriver: NSObject {
      The delegate. It is a weak reference.
      */
     internal weak var internal_delegate: RVS_BTDriverDelegate!
+    
+    /* ################################################################## */
+    /**
+     This will contain our vendor factory instances. This is loaded at instantiation time.
+     */
+    internal var vendors: [RVS_BTDriver_VendorProtocol] = []
+
+    /* ################################################################## */
+    /**
+     We declare a blank init as private, so it can't be called outside this file.
+     */
+    override private init() {
+        super.init()
+        // We initialize with our vendors, which will also allow us to create any required interfaces.
+        vendors = [
+            RVS_BTDriver_Vendor_GoTenna_Mesh()
+        ]
+    }
+    
+    /* ################################################################## */
+    /**
+     An internal convenience initializer (meant to be called from the public convenience init).
+     
+     - parameter inDelegate: The delegate instance. It is required, and cannot be nil.
+     */
+    internal convenience init(_ inDelegate: RVS_BTDriverDelegate) {
+        self.init()
+        internal_delegate = inDelegate
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -62,15 +91,13 @@ extension RVS_BTDriver: RVS_BTDriverTools {
      - parameter inError: The error to be sent to the delegate.
      */
     func reportThisError(_ inError: RVS_BTDriver.Errors) {
-        if let delegate = delegate {
+        if let delegate = delegate {    // We test, to make sure that we have a delegate. If so, we send the error thataways.
             #if DEBUG
                 print("Error Message Being Sent to Driver Delegate: \(inError.localizedDescription)")
             #endif
             delegate.driver(self, encounteredThisError: inError)
-        } else {
-            #if DEBUG
-                print("Error Message Ignored: \(inError.localizedDescription)")
-            #endif
+        } else {    // That's a Bozo No-No. I considered putting a precondition crash here, but that would be like kicking a sick kitten.
+            assert(false, "BAD NEWS! Error Message Ignored: \(inError.localizedDescription)")
         }
     }
 }
