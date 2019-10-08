@@ -27,7 +27,15 @@ import Foundation
 /* ###################################################################################################################################### */
 /**
  */
-protocol RVS_BTDriverDelegate: class {
+public protocol RVS_BTDriverDelegate: class {
+    /* ################################################################## */
+    /**
+     REQUIRED: Error reporting method.
+     
+     - parameter driver: The `RVS_BTDriver` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func driver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors)
 }
 
 /* ###################################################################################################################################### */

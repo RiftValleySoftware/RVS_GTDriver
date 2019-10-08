@@ -26,25 +26,53 @@ import Foundation
 // MARK: - RVS_BTDriver -
 /* ###################################################################################################################################### */
 /**
+ This is the public face of the main driver class.
  */
-class RVS_BTDriver: NSObject {
+public class RVS_BTDriver: NSObject {
     /* ################################################################## */
     /**
      This contains instances that have not yet passed a credit check.
      */
-    internal var internal_holding_pen: [RVS_BTDriver_Device] = []
+    private var _holding_pen: [RVS_BTDriver_Device] = []
     
     /* ################################################################## */
     /**
      This contains the device list for this instance of the driver.
      */
-    internal var internal_device_list: [RVS_BTDriver_Device] = []
+    private var _device_list: [RVS_BTDriver_Device] = []
     
     /* ################################################################## */
     /**
      The delegate. It is a weak reference.
      */
     internal weak var internal_delegate: RVS_BTDriverDelegate!
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Error Reporter Support -
+/* ###################################################################################################################################### */
+/**
+ We establish an error report chain, here.
+ */
+extension RVS_BTDriver: RVS_BTDriverTools {
+    /* ################################################################## */
+    /**
+     The buck stops here.
+     
+     - parameter inError: The error to be sent to the delegate.
+     */
+    func reportThisError(_ inError: RVS_BTDriver.Errors) {
+        if let delegate = delegate {
+            #if DEBUG
+                print("Error Message Being Sent to Delegate: \(inError.localizedDescription)")
+            #endif
+            delegate.driver(self, encounteredThisError: inError)
+        } else {
+            #if DEBUG
+                print("Error Message Ignored: \(inError.localizedDescription)")
+            #endif
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -64,14 +92,15 @@ extension RVS_BTDriver: RVS_SequenceProtocol {
     /**
      This is a public read-only list of devices, masked by the protocol.
      */
-    public internal(set) var sequence_contents: [Element] {
+    public var sequence_contents: [Element] {
         get {
-            return internal_device_list
+            return _device_list
         }
         
         /// We do not allow the list to be modified from outside the driver.
         set {
-            _ = newValue    // NOP
+            _ = newValue    // Just to shut up SwiftLint.
+            preconditionFailure("Value is Read-Only.")
         }
     }
 }

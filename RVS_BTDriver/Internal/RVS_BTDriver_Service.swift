@@ -28,4 +28,75 @@ import Foundation
 /**
  */
 class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
+    /* ################################################################################################################################## */
+    // MARK: - RVS_BTDriver_Service Sequence-Style Support -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This contains instances that have not yet passed a credit check.
+     */
+    private var _holding_pen: [RVS_BTDriver_PropertyProtocol] = []
+    
+    /* ################################################################## */
+    /**
+     This contains the property list for this instance of the driver.
+     */
+    private var _property_list: [RVS_BTDriver_PropertyProtocol] = []
+    
+    /* ################################################################## */
+    /**
+     This is a read-only accessor for the object that "owns" this instance.
+     */
+    internal var internal_owner: RVS_BTDriver_Device!
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Error Reporter Support -
+/* ###################################################################################################################################### */
+/**
+ We establish an error report chain, here.
+ */
+extension RVS_BTDriver_Service: RVS_BTDriverTools {
+    /* ################################################################## */
+    /**
+     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
+     
+     - parameter inError: The error to be sent to the owner.
+     */
+    func reportThisError(_ inError: RVS_BTDriver.Errors) {
+        internal_owner?.reportThisError(inError)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Sequence-Style Support -
+/* ###################################################################################################################################### */
+/**
+ Because of the requirement for either: A) iOS 13 or greater, or B) no associated type, we can't have a true Sequence support (we're relying on protocol masking), so we do this.
+ */
+extension RVS_BTDriver_Service {
+    /* ################################################################## */
+    /**
+     This is the public read-only access to the property list.
+     */
+    public var properties: [RVS_BTDriver_PropertyProtocol] {
+        return _property_list
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the read-only count of properties.
+     */
+    public var count: Int {
+        return _property_list.count
+    }
+
+    /* ################################################################## */
+    /**
+     This is a public read-only subscript to the property list.
+     */
+    public subscript(_ inIndex: Int) -> RVS_BTDriver_PropertyProtocol {
+        precondition((0..<count).contains(inIndex), "Index Out of Range")
+        return properties[inIndex]
+    }
 }

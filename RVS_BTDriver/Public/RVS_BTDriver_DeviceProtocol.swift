@@ -23,6 +23,22 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_DeviceDelegate Protocol -
+/* ###################################################################################################################################### */
+/**
+ */
+public protocol RVS_BTDriver_DeviceDelegate: class {
+    /* ################################################################## */
+    /**
+     REQUIRED: Error reporting method.
+     
+     - parameter device: The `RVS_BTDriver_DeviceProtocol` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func device(_ device: RVS_BTDriver_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors)
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_DeviceProtocol Protocol (Aggregates Services) -
 /* ###################################################################################################################################### */
 /**
@@ -45,4 +61,10 @@ public protocol RVS_BTDriver_DeviceProtocol {
      This is a public read-only subscript to the service list.
      */
     subscript(_ inIndex: Int) -> RVS_BTDriver_ServiceProtocol { get }
+    
+    /* ################################################################## */
+    /**
+     This is a read-write accessor for the delegate for this device. It is a weak reference.
+     */
+    var delegate: RVS_BTDriver_DeviceDelegate! { get set }
 }

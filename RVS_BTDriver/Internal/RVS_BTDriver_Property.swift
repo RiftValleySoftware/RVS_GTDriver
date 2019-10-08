@@ -26,6 +26,60 @@ import Foundation
 // MARK: - RVS_BTDriver_Property -
 /* ###################################################################################################################################### */
 /**
+ This is one "property," which maps to a bluetooth "characteristic."
  */
 class RVS_BTDriver_Property: RVS_BTDriver_PropertyProtocol {
+    /* ################################################################## */
+    /**
+     - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
+     */
+    var rawValue: Data?
+    
+    /* ################################################################## */
+    /**
+     - returns: The Value, but cast into a specific data type (selected by the enum).
+     */
+    var value: RVS_BTDriver_PropertyProtocol_Type_Enum {
+        if  let rawValue = rawValue,
+            let stringVal = String(data: rawValue, encoding: .utf8) {
+            return .stringValue(stringVal)
+        }
+        return .undefinedValue
+    }
+    
+    /* ################################################################## */
+    /**
+     - returns: The user description of the value (if any). If none, the String will be empty.
+     */
+    var description: String = ""
+    
+    /* ################################################################## */
+    /**
+     - returns: The UUID of the value characteristic, as a String.
+     */
+    var uuidString: String = ""
+    
+    /* ################################################################## */
+    /**
+     This is a read-only accessor for the object that "owns" this instance.
+     */
+    internal var internal_owner: RVS_BTDriver_Service!
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Error Reporter Support -
+/* ###################################################################################################################################### */
+/**
+ We establish an error report chain, here.
+ */
+extension RVS_BTDriver_Property: RVS_BTDriverTools {
+    /* ################################################################## */
+    /**
+     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
+     
+     - parameter inError: The error to be sent to the owner.
+     */
+    func reportThisError(_ inError: RVS_BTDriver.Errors) {
+        internal_owner?.reportThisError(inError)
+    }
 }

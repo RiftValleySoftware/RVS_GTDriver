@@ -26,10 +26,11 @@ import Foundation
 // MARK: - RVS_BTDriver_Device -
 /* ###################################################################################################################################### */
 /**
+ This is one "device," which maps to a bluetooth "peripheral."
  */
 class RVS_BTDriver_Device: RVS_BTDriver_DeviceProtocol {
     /* ################################################################################################################################## */
-    // MARK: - RVS_BTDriver_Device Sequence Support -
+    // MARK: - RVS_BTDriver_Device Sequence-Style Support -
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
@@ -42,12 +43,50 @@ class RVS_BTDriver_Device: RVS_BTDriver_DeviceProtocol {
      This contains the service list for this instance of the driver.
      */
     private var _service_list: [RVS_BTDriver_Service] = []
+    
+    /* ################################################################## */
+    /**
+     This is a read-only accessor for the object that "owns," this instance.
+     */
+    internal var internal_owner: RVS_BTDriver!
+
+    /* ################################################################## */
+    /**
+     This is a read-write accessor for the delegate for this device. It is a weak reference.
+     */
+    public var delegate: RVS_BTDriver_DeviceDelegate!
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - Error Reporter Support -
 /* ###################################################################################################################################### */
 /**
+ We establish an error report chain, here.
+ */
+extension RVS_BTDriver_Device: RVS_BTDriverTools {
+    /* ################################################################## */
+    /**
+     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
+     
+     - parameter inError: The error to be sent to the delegate.
+     */
+    func reportThisError(_ inError: RVS_BTDriver.Errors) {
+        if let delegate = delegate {
+            #if DEBUG
+                print("Error Message Being Sent to Delegate: \(inError.localizedDescription)")
+            #endif
+            delegate.device(self, encounteredThisError: inError)
+        } else {
+            internal_owner?.reportThisError(inError)
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Sequence-Style Support -
+/* ###################################################################################################################################### */
+/**
+ Because of the requirement for either: A) iOS 13 or greater, or B) no associated type, we can't have a true Sequence support (we're relying on protocol masking), so we do this.
  */
 extension RVS_BTDriver_Device {
     /* ################################################################## */
@@ -71,7 +110,7 @@ extension RVS_BTDriver_Device {
      This is a public read-only subscript to the service list.
      */
     public subscript(_ inIndex: Int) -> RVS_BTDriver_ServiceProtocol {
-        precondition((0..<_service_list.count).contains(inIndex), "Index Out of Range")
+        precondition((0..<count).contains(inIndex), "Index Out of Range")
         return services[inIndex]
     }
 }
