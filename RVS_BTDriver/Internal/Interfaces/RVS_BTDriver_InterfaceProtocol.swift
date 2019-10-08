@@ -31,9 +31,17 @@ import Foundation
 internal protocol RVS_BTDriver_InterfaceProtocol: class {
     /* ################################################################## */
     /**
+     Read-only accessor for the interface.
+     
+     - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface(:)` has not yet been called.
+     */
+    var interface: RVS_BTDriver_InterfaceProtocol! { get }
+
+    /* ################################################################## */
+    /**
      OPTIONAL (but actually required): This is a factory/accessor for the interface SINGLETON.
      */
-    static var interface: RVS_BTDriver_InterfaceProtocol! { get }
+    static func makeInterface(queue: DispatchQueue!) -> RVS_BTDriver_InterfaceProtocol!
     
     /* ################################################################## */
     /**
@@ -54,7 +62,15 @@ extension RVS_BTDriver_InterfaceProtocol {
     /**
      This allows us to skip the base class, so we don't need to override anything.
      */
-    static var interface: RVS_BTDriver_InterfaceProtocol! {
+    internal var interface: RVS_BTDriver_InterfaceProtocol! {
+        preconditionFailure("Cannot Call the Base Class")
+    }
+
+    /* ################################################################## */
+    /**
+     This allows us to skip the base class, so we don't need to override anything.
+     */
+    internal static func makeInterface(queue: DispatchQueue!) -> RVS_BTDriver_InterfaceProtocol! {
         preconditionFailure("Cannot Call the Base Class")
     }
     
@@ -62,7 +78,7 @@ extension RVS_BTDriver_InterfaceProtocol {
     /**
      You cannot use the base class version of this. This is just here to satisfy the protocol.
      */
-    var isScanning: Bool {
+    internal var isScanning: Bool {
         get {
             preconditionFailure("Cannot Call the Base Class")
         }

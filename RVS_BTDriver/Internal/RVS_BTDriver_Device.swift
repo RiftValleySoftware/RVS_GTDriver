@@ -60,13 +60,23 @@ class RVS_BTDriver_Device: RVS_BTDriver_DeviceProtocol {
     /**
      The interface for this device
      */
-    var interface: RVS_BTDriver_InterfaceProtocol!
+    internal var interface: RVS_BTDriver_InterfaceProtocol!
     
     /* ################################################################## */
     /**
      The vendor handler for this device
      */
-    var vendor: RVS_BTDriver_VendorProtocol!
+    internal var vendor: RVS_BTDriver_VendorProtocol!
+    
+    /* ################################################################## */
+    /**
+     The device initializer
+     
+     - parameter vendor: The vendor factory for the device.
+     */
+    internal init(vendor inVendor: RVS_BTDriver_VendorProtocol) {
+        vendor = inVendor
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -82,7 +92,7 @@ extension RVS_BTDriver_Device: RVS_BTDriverTools {
      
      - parameter inError: The error to be sent to the delegate.
      */
-    func reportThisError(_ inError: RVS_BTDriver.Errors) {
+    public func reportThisError(_ inError: RVS_BTDriver.Errors) {
         if let delegate = delegate {    // We test, to make sure that we have a delegate. If so, we send the error thataways.
             #if DEBUG
                 print("Error Message Being Sent to Device Delegate: \(inError.localizedDescription)")

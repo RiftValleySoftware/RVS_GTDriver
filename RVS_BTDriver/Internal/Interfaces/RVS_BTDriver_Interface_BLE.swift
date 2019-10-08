@@ -20,27 +20,41 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation
+import CoreBluetooth
 
 /* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_Base_Interface_BLE -
 /* ###################################################################################################################################### */
 /**
- This is 
+ This is an interface for Bluetooth Low Energy (BLE), using CoreBluetooth.
  */
 internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     /* ################################################################## */
     /**
      This will create the SINGLETON, if it is not already created, or simply returns the one we have.
      */
-    internal static var interface: RVS_BTDriver_InterfaceProtocol! {
+    internal static func makeInterface(queue inQueue: DispatchQueue!) -> RVS_BTDriver_InterfaceProtocol! {
         if nil == internal_interface {
-            internal_interface = RVS_BTDriver_Interface_BLE()
+            let interface = RVS_BTDriver_Interface_BLE()
+            interface.centralManager = CBCentralManager(delegate: interface, queue: inQueue)
+            internal_interface = interface
         }
         
         return internal_interface
     }
+    
+    /// The manager instance associated with this interface. There is only one.
+    internal var centralManager: CBCentralManager!
 }
 
-extension RVS_BTDriver_Interface_BLE {
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_Base_Interface_BLE -
+/* ###################################################################################################################################### */
+/**
+ This is an interface for Bluetooth Low Energy (BLE), using CoreBluetooth.
+ */
+extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
+    internal func centralManagerDidUpdateState(_ inCentral: CBCentralManager) {
+        
+    }
 }

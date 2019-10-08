@@ -23,7 +23,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import UIKit
 
 #if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
-    import RVS_BLEDriver_iOS
+    import RVS_BTDriver_iOS
 #endif
 
 /* ###################################################################################################################################### */
@@ -37,7 +37,7 @@ class RVS_BLEDriver_iOS_Test_Harness_MainViewController_TableViewCell: UITableVi
     /**
      The device associated with this cell.
      */
-    var gtDevice: RVS_BLEDevice!
+    var gtDevice: RVS_BTDevice!
     
     /* ################################################################## */
     /**

@@ -20,7 +20,7 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation
+import CoreBluetooth
 
 /* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_Vendor_GoTenna -
@@ -28,28 +28,43 @@ import Foundation
 /**
  A factory class for goTenna Mesh devices
  */
-class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_VendorProtocol {
+class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
     /* ################################################################## */
     /**
-     The interface for this device (BLE). It is instantiated once, then referenced thereafter.
+     Read-only accessor for the interface.
+     
+     - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface()` has not yet been called.
      */
-    private var _interface: RVS_BTDriver_Interface_BLE!
-    
+    var interface: RVS_BTDriver_InterfaceProtocol!
+
     /* ################################################################## */
     /**
      REQUIRED: Factory method for creating an instance of th vendor device.
      
-     - returns: adevice instance. Nil, if not successful.
+     - returns: a device instance.
      */
-    func makeDevice() -> RVS_BTDriver_Device! {
-        return nil
+    func makeDevice() -> RVS_BTDriver_Device {
+        return RVS_BTDriver_Device_GoTenna_Mesh(vendor: self)
     }
 
     /* ################################################################## */
     /**
-     - returns: An instance of the interface for this type of device.
+     Factory for creating (or referencing) the appropriate interface instance.
+     
+     - parameter queue: The DispatchQueue to use for this (can be nil, in which case, the main queue is used).
      */
-    var interface: RVS_BTDriver_InterfaceProtocol! {
-        return RVS_BTDriver_Interface_BLE.interface
+    internal func makeInterface(queue inQueue: DispatchQueue!) {
+        interface = RVS_BTDriver_Interface_BLE.makeInterface(queue: inQueue)
     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_Device_GoTenna_Mesh -
+/* ###################################################################################################################################### */
+/**
+ This is a class that implements a goTenna Mesh device instance.
+ */
+class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_Device {
+    /// The peripheral instance associated with this device.
+    var peripheral: CBPeripheral!
 }

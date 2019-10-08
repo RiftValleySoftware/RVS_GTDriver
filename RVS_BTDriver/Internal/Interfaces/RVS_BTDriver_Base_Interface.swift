@@ -28,7 +28,17 @@ import Foundation
 /**
  This is the base class for our transport abstractions.
  */
-internal class RVS_BTDriver_Base_Interface: RVS_BTDriver_InterfaceProtocol {
+internal class RVS_BTDriver_Base_Interface: NSObject, RVS_BTDriver_InterfaceProtocol {
     /// Holds our SINGLETON
-    static var internal_interface: RVS_BTDriver_InterfaceProtocol!
+    internal static var internal_interface: RVS_BTDriver_InterfaceProtocol!
+    
+    /* ################################################################## */
+    /**
+     Read-only accessor for the interface.
+     
+     - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface(:)` has not yet been called.
+     */
+    internal var interface: RVS_BTDriver_InterfaceProtocol! {
+        return type(of: self).internal_interface
+    }
 }

@@ -20,33 +20,19 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation
+import UIKit
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_VendorProtocol Protocol -
+// MARK: - Main Application Delegate -
 /* ###################################################################################################################################### */
 /**
  */
-internal protocol RVS_BTDriver_VendorProtocol {
+@UIApplicationMain
+class RVS_BTDriver_iOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDelegate {
     /* ################################################################## */
     /**
-     Read-only accessor for the interface.
-     
-     - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface()` has not yet been called.
      */
-    var interface: RVS_BTDriver_InterfaceProtocol! { get }
-
-    /* ################################################################## */
-    /**
-     REQUIRED: Factory method for creating an instance of the vendor device.
-     
-     - returns: adevice instance. Cannot be nil.
-     */
-    func makeDevice() -> RVS_BTDriver_Device
-    
-    /* ################################################################## */
-    /**
-     - parameter queue: The DispatchQueue to use for this (can be nil, in which case, the main queue is used).
-     */
-    func makeInterface(queue: DispatchQueue!)
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        return true
+    }
 }
