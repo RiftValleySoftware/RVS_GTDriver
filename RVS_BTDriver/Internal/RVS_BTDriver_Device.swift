@@ -73,7 +73,7 @@ extension RVS_BTDriver_Device: RVS_BTDriverTools {
     func reportThisError(_ inError: RVS_BTDriver.Errors) {
         if let delegate = delegate {
             #if DEBUG
-                print("Error Message Being Sent to Delegate: \(inError.localizedDescription)")
+                print("Error Message Being Sent to Device Delegate: \(inError.localizedDescription)")
             #endif
             delegate.device(self, encounteredThisError: inError)
         } else {
