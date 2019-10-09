@@ -11,7 +11,7 @@
         <!--Driver iOS Test Harness Navigation Controller-->
         <scene sceneID="Flf-5A-gut">
             <objects>
-                <navigationController id="deP-v5-jbO" customClass="RVS_BLEDriver_iOS_Test_Harness_NavigationController" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="deP-v5-jbO" customClass="RVS_BTDriver_iOS_Test_Harness_NavigationController" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0yL-m2-fLy">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -69,5 +69,5 @@
         <image name="NoBT" width="341.5" height="341.5"/>
         <image name="background-gradient" width="1" height="1000"/>
     </resources>
-    <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

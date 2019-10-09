@@ -31,6 +31,20 @@ import CoreBluetooth
 class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
     /* ################################################################## */
     /**
+     A weak reference to the main driver instance.
+     */
+    internal weak var internal_driver: RVS_BTDriver!
+    
+    /* ################################################################## */
+    /**
+     A read-only accessor to the main driver instance.
+     */
+    internal var driver: RVS_BTDriver! {
+        return internal_driver
+    }
+
+    /* ################################################################## */
+    /**
      Read-only accessor for the interface.
      
      - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface()` has not yet been called.
@@ -55,6 +69,19 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
      */
     internal func makeInterface(queue inQueue: DispatchQueue!) {
         interface = RVS_BTDriver_Interface_BLE.makeInterface(queue: inQueue)
+        interface.driver = driver   // Who's your daddy?
+    }
+    
+    /* ################################################################## */
+    /**
+     The default initializer.
+     
+     - parameter driver: The `RVS_BTDriver` instance that "owns" this instance.
+     */
+    init(driver inDriver: RVS_BTDriver) {
+        super.init()
+        makeInterface(queue: inDriver.internal_queue)
+        internal_driver = inDriver
     }
 }
 

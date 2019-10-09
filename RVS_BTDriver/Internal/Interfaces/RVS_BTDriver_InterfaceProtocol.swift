@@ -31,6 +31,12 @@ import Foundation
 internal protocol RVS_BTDriver_InterfaceProtocol: class {
     /* ################################################################## */
     /**
+     A reference to the main driver instance.
+     */
+    var driver: RVS_BTDriver! { get set }
+
+    /* ################################################################## */
+    /**
      Read-only accessor for the interface.
      
      - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface(:)` has not yet been called.
@@ -45,7 +51,13 @@ internal protocol RVS_BTDriver_InterfaceProtocol: class {
     
     /* ################################################################## */
     /**
-     REQUIRED: This is an "on/off" switch for scanning for peripherals.
+     OPTIONAL (but actually required): READ-ONLY. If true, then Bluetooth is available (powered on).
+     */
+    var isBTAvailable: Bool { get }
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL (but actually required): This is an "on/off" switch for scanning for peripherals.
      
      If set to true, scanning begins, if false, scanning stops.
      */
@@ -74,6 +86,14 @@ extension RVS_BTDriver_InterfaceProtocol {
         preconditionFailure("Cannot Call the Base Class")
     }
     
+    /* ################################################################## */
+    /**
+     You cannot use the base class version of this. This is just here to satisfy the protocol.
+     */
+    internal var isBTAvailable: Bool {
+        preconditionFailure("Cannot Call the Base Class")
+    }
+
     /* ################################################################## */
     /**
      You cannot use the base class version of this. This is just here to satisfy the protocol.

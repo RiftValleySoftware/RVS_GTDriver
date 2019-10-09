@@ -29,34 +29,71 @@ import Foundation
  This is the delegate for the driver instance. You should definitely do this.
  */
 public protocol RVS_BTDriverDelegate: class {
+    /* ###################################################################################################################################### */
+    // MARK: - Required Methods
+    /* ###################################################################################################################################### */
     /* ################################################################## */
     /**
-     REQUIRED: Error reporting method.
+     Error reporting method. This is required for the delegate.
      
      - parameter driver: The `RVS_BTDriver` instance that encountered the error.
      - parameter encounteredThisError: The error that was encountered.
      */
-    func driver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors)
+    func btDriver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors)
+    
+    /* ###################################################################################################################################### */
+    // MARK: - Optional Methods
+    /* ###################################################################################################################################### */
+    /* ################################################################## */
+    /**
+     Called when a device has been added and instantiated.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The `RVS_BTDriver` instance calling this.
+     - parameter newDeviceAdded: The device object, masked as a protocol.
+     */
+    func btDriver(_ driver: RVS_BTDriver, newDeviceAdded: RVS_BTDriver_DeviceProtocol)
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver's status should be checked.
+     
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The `RVS_BTDriver` instance calling this.
+     */
+    func btDriverStatusUpdate(_ driver: RVS_BTDriver)
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - RVS_BTDriverDelegate Default Implementations -
+/* ###################################################################################################################################### */
+extension RVS_BTDriverDelegate {
+    /* ################################################################## */
+    /**
+     The default implementation does nothing.
+     */
+    public func btDriver(_ driver: RVS_BTDriver, newDeviceAdded: RVS_BTDriver_DeviceProtocol) { }
+    
+    /* ################################################################## */
+    /**
+     The default implementation does nothing.
+     */
+    public func btDriverStatusUpdate(_ driver: RVS_BTDriver) { }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Public Error Enum -
 /* ###################################################################################################################################### */
 /**
- This is the main driver class. It is the "manager" for all the bluetooth-connected devices, which are accessible as `RVS_BTDriver_DeviceProtocol`-conformant instances.
- 
- The `RVS_BTDriver` instance can be treated like a [Sequence](https://developer.apple.com/documentation/swift/sequence), with an iterator, higher-order functions and subscripting.
- 
- Just remember that it aggregates a protocol, not a class/struct, so you see a "mask" over a different class that is known internally.
+ These are the various errors that can be returned by this class.
+ The enum is designed to provide keys for use by localization. If you access the "localizedDescription" calculated property, you will get a consistent string.
  */
 extension RVS_BTDriver {
-    /* ################################################################################################################################## */
-    // MARK: - Public Error Enum -
-    /* ################################################################################################################################## */
-    /**
-     These are the various errors that can be returned by this class.
-     The enum is designed to provide keys for use by localization. If you access the "localizedDescription" calculated property, you will get a consistent string.
-     */
+    /// The error enum declaration.
     public enum Errors: Error {
         /* ################################################################## */
         /**
@@ -168,10 +205,12 @@ extension RVS_BTDriver {
             return "RVS_BTDriver.Error.\(caseString)"
         }
     }
-    
-    /* ################################################################################################################################## */
-    // MARK: - Public Calculated Properties -
-    /* ################################################################################################################################## */
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Public Calculated Properties -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver {
     /* ################################################################## */
     /**
      A weak reference to the instance delegate.
@@ -188,15 +227,38 @@ extension RVS_BTDriver {
     
     /* ################################################################## */
     /**
+     This is KVO (READ-ONLY)
+     
+     - returns: true, if all of the vendor interfaces have Bluetooth powered on.
+     */
+    @objc dynamic public var isBTAvailable: Bool {
+        for vendor in vendors {
+            print("Vendor: \(String(describing: vendor))")
+            if !vendor.interface.isBTAvailable {
+                return false
+            }
+        }
+        return true
+    }
+    
+    /* ################################################################## */
+    /**
+     This is KVO (READ-ONLY)
+     
      - returns: true, if even one of the vendor interfaces is in active scanning.
      */
-    public var isScanning: Bool {
+    @objc dynamic public var isScanning: Bool {
         for vendor in vendors where vendor.interface.isScanning {
             return true
         }
         return false
     }
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Public Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver {
     /* ################################################################## */
     /**
      Tells the vendor interfaces (all of them) to start scanning for services.
@@ -216,10 +278,12 @@ extension RVS_BTDriver {
             $0.interface.isScanning = false
         }
     }
+}
 
-    /* ################################################################################################################################## */
-    // MARK: - Public Initializer -
-    /* ################################################################################################################################## */
+/* ###################################################################################################################################### */
+// MARK: - Public Initializer -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver {
     /* ################################################################## */
     /**
      The main initializer for the class.

@@ -43,6 +43,7 @@ extension RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
      Simple cast of our navigation controller to the proper class.
      */
     var mainNavController: RVS_BTDriver_iOS_Test_Harness_NavigationController! {
+        print("Navigation Controller: \(String(describing: navigationController))")
         return navigationController as? RVS_BTDriver_iOS_Test_Harness_NavigationController
     }
     
@@ -59,4 +60,13 @@ extension RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
 // MARK: - Internal Instance Methods -
 /* ###################################################################################################################################### */
 extension RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
+    /* ################################################################## */
+    /**
+     Simply puts up an alert, with the given error's `localizedDescription`, localized, as the message.
+     
+     - parameter inError: The error to be displayed.
+     */
+    internal func reportError(_ inError: Error) {
+        mainNavController?.displayAlert("SLUG-ERROR-HEADER", message: inError.localizedDescription.localizedVariant, presentedBy: self)
+    }
 }

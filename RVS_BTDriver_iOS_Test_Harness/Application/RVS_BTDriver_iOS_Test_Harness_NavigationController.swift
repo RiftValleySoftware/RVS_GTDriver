@@ -39,15 +39,6 @@ class RVS_BTDriver_iOS_Test_Harness_NavigationController: UINavigationController
      This is the instance of our driver class.
      */
     var driverInstance: RVS_BTDriver!
-    
-    /* ################################################################## */
-    /**
-     Called when the view has completed loading.
-     */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpDriver()
-    }
 }
 
 /* ###################################################################################################################################### */
@@ -77,9 +68,9 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController {
      */
     func displayAlert(_ inTitle: String, message inMessage: String, presentedBy inPresentingViewController: UIViewController! = nil ) {
         #if DEBUG
-            print("*** \(inTitle)\n\t\(inMessage)")
+            print("ALERT:\t\(inTitle)\n\t\t\(inMessage)")
         #endif
-        DispatchQueue.main.async {
+        DispatchQueue.main.async {  // In case we're called off-thread...
             var presentedBy = inPresentingViewController
             
             if nil == presentedBy {
@@ -106,9 +97,18 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController {
  These methods handle driver delegate callbacks, which are executed at this level.
  */
 extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelegate {
-    func driver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
+    /* ################################################################## */
+    /**
+     Simple error reporting method.
+     
+     - parameter inDriver: The `RVS_BTDriver` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func btDriver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
         #if DEBUG
             print("Error Message Received by Navigation Controller: \(inError.localizedDescription)")
         #endif
+        assert(inDriver == driverInstance, "Driver Instance Not Ours!")
+        displayAlert("SLUG-ERROR-HEADER", message: inError.localizedDescription.localizedVariant)
     }
 }

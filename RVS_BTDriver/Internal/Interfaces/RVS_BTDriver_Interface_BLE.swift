@@ -43,8 +43,19 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
         return internal_interface
     }
     
-    /// The manager instance associated with this interface. There is only one.
+    /* ################################################################## */
+    /**
+     The manager instance associated with this interface. There is only one.
+    */
     internal var centralManager: CBCentralManager!
+    
+    /* ################################################################## */
+    /**
+     If true, then Bluetooth is available (powered on).
+     */
+    internal var isBTAvailable: Bool {
+        return centralManager.state == .poweredOn
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -54,7 +65,19 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
  This is an interface for Bluetooth Low Energy (BLE), using CoreBluetooth.
  */
 extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
+    /* ################################################################## */
+    /**
+     Callback for when the central manager changes state.
+     
+     - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
+    */
     internal func centralManagerDidUpdateState(_ inCentral: CBCentralManager) {
-        
+        assert(inCentral == centralManager, "Central Manager Not Ours!")
+        switch inCentral.state {
+        case .poweredOff:
+            driver?.reportThisError(.bluetoothNotAvailable)
+        default:
+            ()
+        }
     }
 }

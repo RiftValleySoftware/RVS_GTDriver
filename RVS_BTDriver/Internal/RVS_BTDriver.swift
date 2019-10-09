@@ -23,10 +23,14 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver -
+// MARK: - The Main Driver Class -
 /* ###################################################################################################################################### */
 /**
- This is the public face of the main driver class.
+ This is the main driver class. It is the "manager" for all the bluetooth-connected devices, which are accessible as `RVS_BTDriver_DeviceProtocol`-conformant instances.
+ 
+ The `RVS_BTDriver` instance can be treated like a [Sequence](https://developer.apple.com/documentation/swift/sequence), with an iterator, higher-order functions and subscripting.
+ 
+ Just remember that it aggregates a protocol, not a class/struct, so you see a "mask" over a different class that is known internally.
  */
 public class RVS_BTDriver: NSObject {
     /* ################################################################## */
@@ -80,7 +84,7 @@ public class RVS_BTDriver: NSObject {
         internal_queue = inQueue
         // We initialize with our vendors, which will also allow us to create any required interfaces.
         vendors = [
-            RVS_BTDriver_Vendor_GoTenna_Mesh()
+            RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self)
         ]
     }
 }
@@ -103,7 +107,7 @@ extension RVS_BTDriver: RVS_BTDriverTools {
             #if DEBUG
                 print("Error Message Being Sent to Driver Delegate: \(inError.localizedDescription)")
             #endif
-            delegate.driver(self, encounteredThisError: inError)
+            delegate.btDriver(self, encounteredThisError: inError)
         } else {    // That's a Bozo No-No. I considered putting a precondition crash here, but that would be like kicking a sick kitten.
             assert(false, "BAD NEWS! Error Message Ignored: \(inError.localizedDescription)")
         }

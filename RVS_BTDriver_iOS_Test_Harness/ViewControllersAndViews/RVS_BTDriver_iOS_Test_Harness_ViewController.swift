@@ -32,12 +32,32 @@ import UIKit
  */
 class RVS_BTDriver_iOS_Test_Harness_ViewController: RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
     @IBOutlet weak var noBTImageView: UIImageView!
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Base Class Override Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_iOS_Test_Harness_ViewController {
     /* ################################################################## */
     /**
      Called after the view has completely loaded.
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainNavController.setUpDriver()
+        setup()
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_iOS_Test_Harness_ViewController {
+    /* ################################################################## */
+    /**
+     Sets up the UI Items.
+     */
+    func setup() {
+        noBTImageView?.isHidden = driverInstance?.isBTAvailable ?? false
     }
 }

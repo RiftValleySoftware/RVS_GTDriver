@@ -30,6 +30,12 @@ import Foundation
 internal protocol RVS_BTDriver_VendorProtocol {
     /* ################################################################## */
     /**
+     A reference to the main driver instance.
+     */
+    var driver: RVS_BTDriver! { get }
+
+    /* ################################################################## */
+    /**
      Read-only accessor for the interface.
      
      - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface()` has not yet been called.
