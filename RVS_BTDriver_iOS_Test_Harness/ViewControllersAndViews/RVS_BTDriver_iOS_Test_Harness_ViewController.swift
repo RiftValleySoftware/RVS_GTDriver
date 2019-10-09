@@ -26,11 +26,11 @@ import UIKit
 #endif
 
 /* ###################################################################################################################################### */
-// MARK: - Main NavigationController -
+// MARK: - Main List Controller -
 /* ###################################################################################################################################### */
 /**
  */
-class RVS_BTDriver_iOS_Test_Harness_ViewController: UIViewController {
+class RVS_BTDriver_iOS_Test_Harness_ViewController: RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
     @IBOutlet weak var noBTImageView: UIImageView!
     
     /* ################################################################## */

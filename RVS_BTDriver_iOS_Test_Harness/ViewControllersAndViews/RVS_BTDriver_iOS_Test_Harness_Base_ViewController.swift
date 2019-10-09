@@ -20,66 +20,43 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation
+import UIKit
+#if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
+    import RVS_BTDriver_iOS
+#endif
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_Property -
+// MARK: - Main ViewController Base Class -
 /* ###################################################################################################################################### */
 /**
- This is one "property," which maps to a bluetooth "characteristic."
+ This is a common base class for our navigation-managed view controllers.
  */
-internal class RVS_BTDriver_Property: RVS_BTDriver_PropertyProtocol {
-    /* ################################################################## */
-    /**
-     - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
-     */
-    public var rawValue: Data?
-    
-    /* ################################################################## */
-    /**
-     - returns: The Value, but cast into a specific data type (selected by the enum).
-     */
-    public var value: RVS_BTDriver_PropertyProtocol_Type_Enum {
-        if  let rawValue = rawValue,
-            let stringVal = String(data: rawValue, encoding: .utf8) {
-            return .stringValue(stringVal)
-        }
-        return .undefinedValue
-    }
-    
-    /* ################################################################## */
-    /**
-     - returns: The user description of the value (if any). If none, the String will be empty.
-     */
-    public var description: String = ""
-    
-    /* ################################################################## */
-    /**
-     - returns: The UUID of the value characteristic, as a String.
-     */
-    public var uuidString: String = ""
-    
-    /* ################################################################## */
-    /**
-     This is a read-only accessor for the object that "owns" this instance.
-     */
-    internal var internal_owner: RVS_BTDriver_Service!
+class RVS_BTDriver_iOS_Test_Harness_Base_ViewController: UIViewController {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Error Reporter Support -
+// MARK: - Internal Calculated Properties -
 /* ###################################################################################################################################### */
-/**
- We establish an error report chain, here.
- */
-extension RVS_BTDriver_Property: RVS_BTDriverTools {
+extension RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
     /* ################################################################## */
     /**
-     This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
-     
-     - parameter inError: The error to be sent to the owner.
+     Simple cast of our navigation controller to the proper class.
      */
-    internal func reportThisError(_ inError: RVS_BTDriver.Errors) {
-        internal_owner?.reportThisError(inError)
+    var mainNavController: RVS_BTDriver_iOS_Test_Harness_NavigationController! {
+        return navigationController as? RVS_BTDriver_iOS_Test_Harness_NavigationController
     }
+    
+    /* ################################################################## */
+    /**
+     Quick read-only accessor for our driver.
+     */
+    var driverInstance: RVS_BTDriver! {
+        return mainNavController?.driverInstance
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
 }

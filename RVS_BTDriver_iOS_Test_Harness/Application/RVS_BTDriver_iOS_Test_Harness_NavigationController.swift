@@ -29,20 +29,73 @@ import UIKit
 // MARK: - Main Navigation Controller -
 /* ###################################################################################################################################### */
 /**
+ The navigation controller is used to maintain the driver instance.
+ 
+ I know that I should define another class to do that, to be buzzword-compliant, but otherwise, this class would be empty, and there's no sense wasting the namespace.
  */
 class RVS_BTDriver_iOS_Test_Harness_NavigationController: UINavigationController {
     /* ################################################################## */
     /**
+     This is the instance of our driver class.
      */
     var driverInstance: RVS_BTDriver!
     
     /* ################################################################## */
     /**
+     Called when the view has completed loading.
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setUpDriver()
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_iOS_Test_Harness_NavigationController {
+    /* ################################################################## */
+    /**
+     This establishes the driver instance, wiping out any old one.
+     */
+    func setUpDriver() {
         driverInstance = RVS_BTDriver(self)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal UI Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_iOS_Test_Harness_NavigationController {
+    /* ################################################################## */
+    /**
+     Displays the given message and title in an alert with an "OK" button.
+     
+     - parameter inTitle: a string to be displayed as the title of the alert. It is localized by this method.
+     - parameter message: a string to be displayed as the message of the alert. It is localized by this method.
+     - parameter presentedBy: An optional UIViewController object that is acting as the presenter context for the alert. If nil, we use the top controller of the Navigation stack.
+     */
+    func displayAlert(_ inTitle: String, message inMessage: String, presentedBy inPresentingViewController: UIViewController! = nil ) {
+        #if DEBUG
+            print("*** \(inTitle)\n\t\(inMessage)")
+        #endif
+        DispatchQueue.main.async {
+            var presentedBy = inPresentingViewController
+            
+            if nil == presentedBy {
+                presentedBy = self.topViewController
+            }
+            
+            if nil != presentedBy {
+                let alertController = UIAlertController(title: inTitle, message: inMessage, preferredStyle: .actionSheet)
+                
+                let okAction = UIAlertAction(title: "SLUG-OK-BUTTON-TEXT".localizedVariant, style: UIAlertAction.Style.cancel, handler: nil)
+                
+                alertController.addAction(okAction)
+                
+                presentedBy?.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
 }
 
@@ -50,6 +103,7 @@ class RVS_BTDriver_iOS_Test_Harness_NavigationController: UINavigationController
 // MARK: - RVS_BTDriverDelegate Support -
 /* ###################################################################################################################################### */
 /**
+ These methods handle driver delegate callbacks, which are executed at this level.
  */
 extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelegate {
     func driver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {

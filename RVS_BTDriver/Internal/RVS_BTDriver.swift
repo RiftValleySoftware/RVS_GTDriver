@@ -98,7 +98,7 @@ extension RVS_BTDriver: RVS_BTDriverTools {
      
      - parameter inError: The error to be sent to the delegate.
      */
-    func reportThisError(_ inError: RVS_BTDriver.Errors) {
+    internal func reportThisError(_ inError: RVS_BTDriver.Errors) {
         if let delegate = delegate {    // We test, to make sure that we have a delegate. If so, we send the error thataways.
             #if DEBUG
                 print("Error Message Being Sent to Driver Delegate: \(inError.localizedDescription)")

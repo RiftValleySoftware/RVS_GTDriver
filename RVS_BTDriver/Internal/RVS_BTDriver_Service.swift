@@ -63,7 +63,7 @@ extension RVS_BTDriver_Service: RVS_BTDriverTools {
      
      - parameter inError: The error to be sent to the owner.
      */
-    func reportThisError(_ inError: RVS_BTDriver.Errors) {
+    internal func reportThisError(_ inError: RVS_BTDriver.Errors) {
         internal_owner?.reportThisError(inError)
     }
 }
