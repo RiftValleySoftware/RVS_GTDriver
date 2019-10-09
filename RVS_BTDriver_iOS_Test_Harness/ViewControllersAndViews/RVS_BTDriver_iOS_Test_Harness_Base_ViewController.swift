@@ -43,7 +43,6 @@ extension RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
      Simple cast of our navigation controller to the proper class.
      */
     var mainNavController: RVS_BTDriver_iOS_Test_Harness_NavigationController! {
-        print("Navigation Controller: \(String(describing: navigationController))")
         return navigationController as? RVS_BTDriver_iOS_Test_Harness_NavigationController
     }
     

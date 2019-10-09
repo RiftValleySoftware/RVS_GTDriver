@@ -90,12 +90,12 @@ public class RVS_BTDriver: NSObject {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Error Reporter Support -
+// MARK: - Communicator Support -
 /* ###################################################################################################################################### */
 /**
- We establish an error report chain, here.
+ We establish a communicator chain, here.
  */
-extension RVS_BTDriver: RVS_BTDriverTools {
+extension RVS_BTDriver: RVS_BTDriverCommunicatorTools {
     /* ################################################################## */
     /**
      The buck stops here.
@@ -111,6 +111,26 @@ extension RVS_BTDriver: RVS_BTDriverTools {
         } else {    // That's a Bozo No-No. I considered putting a precondition crash here, but that would be like kicking a sick kitten.
             assert(false, "BAD NEWS! Error Message Ignored: \(inError.localizedDescription)")
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     This method will send the driver delegate an update event, on behalf of a interface.
+     
+     - parameter inInterface: The interface that wants to send an update.
+     */
+    func sendInterfaceUpdate(_ inInterface: RVS_BTDriver_InterfaceProtocol) {
+        delegate?.btDriverStatusUpdate(self)
+    }
+    
+    /* ################################################################## */
+    /**
+     This method will send the driver delegate an update event, on behalf of a device.
+     
+     - parameter inDevice: The device that wants to send an update.
+     */
+    func sendDeviceUpdate(_ inDevice: RVS_BTDriver_Device) {
+        delegate?.btDriverStatusUpdate(self)
     }
 }
 

@@ -45,6 +45,14 @@ extension RVS_BTDriver_iOS_Test_Harness_ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainNavController.setUpDriver()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called just before the view is to lay out its various subviews.
+     */
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         setup()
     }
 }

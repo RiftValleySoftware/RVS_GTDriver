@@ -36,8 +36,8 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     internal static func makeInterface(queue inQueue: DispatchQueue!) -> RVS_BTDriver_InterfaceProtocol! {
         if nil == internal_interface {
             let interface = RVS_BTDriver_Interface_BLE()
-            interface.centralManager = CBCentralManager(delegate: interface, queue: inQueue)
             internal_interface = interface
+            interface.centralManager = CBCentralManager(delegate: interface, queue: inQueue)
         }
         
         return internal_interface
@@ -53,7 +53,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     /**
      If true, then Bluetooth is available (powered on).
      */
-    internal var isBTAvailable: Bool {
+    override internal var isBTAvailable: Bool {
         return centralManager.state == .poweredOn
     }
 }
@@ -72,12 +72,12 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
      - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
     */
     internal func centralManagerDidUpdateState(_ inCentral: CBCentralManager) {
-        assert(inCentral == centralManager, "Central Manager Not Ours!")
+        assert(inCentral === centralManager, "Central Manager Not Ours!")
         switch inCentral.state {
         case .poweredOff:
             driver?.reportThisError(.bluetoothNotAvailable)
         default:
-            ()
+            driver?.sendInterfaceUpdate(self)
         }
     }
 }

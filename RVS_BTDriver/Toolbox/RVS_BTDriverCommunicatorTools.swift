@@ -23,17 +23,53 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BLEDriverTools Protocol -
+// MARK: - RVS_BTDriverCommunicatorTools Protocol -
 /* ###################################################################################################################################### */
 /**
- This protocol allows aggregated instances to report errors through the main driver, without breaking the fourth wall.
+ This protocol allows aggregated instances to report stuff through the main driver, without breaking the fourth wall.
  */
-internal protocol RVS_BTDriverTools {
+internal protocol RVS_BTDriverCommunicatorTools {
     /* ################################################################## */
     /**
      This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
+     This is required.
      
      - parameter error: The error to be sent to the delegate.
      */
     func reportThisError(_ error: RVS_BTDriver.Errors)
+    
+    /* ################################################################## */
+    /**
+     This method will send the driver delegate an update event, on behalf of a interface.
+     This is optional.
+
+     - parameter interface: The interface that wants to send an update.
+     */
+    func sendInterfaceUpdate(_ interface: RVS_BTDriver_InterfaceProtocol)
+    
+    /* ################################################################## */
+    /**
+     This method will send the driver delegate an update event, on behalf of a device.
+     This is optional.
+     
+     - parameter device: The device that wants to send an update.
+     */
+    func sendDeviceUpdate(_ device: RVS_BTDriver_Device)
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriverCommunicatorTools Default Implementations -
+/* ###################################################################################################################################### */
+extension RVS_BTDriverCommunicatorTools {
+    /* ################################################################## */
+    /**
+     The default implementation does nothing.
+     */
+    internal func sendInterfaceUpdate(_ interface: RVS_BTDriver_InterfaceProtocol) { }
+    
+    /* ################################################################## */
+    /**
+     The default implementation does nothing.
+     */
+    internal func sendDeviceUpdate(_ device: RVS_BTDriver_Device) { }
 }

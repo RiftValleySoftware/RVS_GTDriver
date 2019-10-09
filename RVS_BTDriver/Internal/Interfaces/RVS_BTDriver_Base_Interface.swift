@@ -31,15 +31,23 @@ import Foundation
 internal class RVS_BTDriver_Base_Interface: NSObject, RVS_BTDriver_InterfaceProtocol {
     /* ################################################################## */
     /**
-     A weak reference to the main driver instance.
-     */
-    internal weak var driver: RVS_BTDriver!
-
-    /* ################################################################## */
-    /**
      Holds our SINGLETON
     */
     internal static var internal_interface: RVS_BTDriver_InterfaceProtocol!
+
+    /* ################################################################## */
+    /**
+     A weak reference to the main driver instance.
+     */
+    internal weak var driver: RVS_BTDriver!
+    
+    /* ################################################################## */
+    /**
+     You cannot use the base class version of this. This is just here to satisfy the protocol.
+     */
+    internal var isBTAvailable: Bool {
+        preconditionFailure("Cannot Call the Base Class")
+    }
 
     /* ################################################################## */
     /**
@@ -49,5 +57,20 @@ internal class RVS_BTDriver_Base_Interface: NSObject, RVS_BTDriver_InterfaceProt
      */
     internal var interface: RVS_BTDriver_InterfaceProtocol! {
         return type(of: self).internal_interface
+    }
+
+    /* ################################################################## */
+    /**
+     You cannot use the base class version of this. This is just here to satisfy the protocol.
+     */
+    internal var isScanning: Bool {
+        get {
+            preconditionFailure("Cannot Call the Base Class")
+        }
+        
+        set {
+            _ = newValue    // To keep SwiftLint happy.
+            preconditionFailure("Cannot Call the Base Class")
+        }
     }
 }

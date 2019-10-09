@@ -111,4 +111,22 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelega
         assert(inDriver == driverInstance, "Driver Instance Not Ours!")
         displayAlert("SLUG-ERROR-HEADER", message: inError.localizedDescription.localizedVariant)
     }
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver's status should be checked.
+     
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The `RVS_BTDriver` instance calling this.
+     */
+    func btDriverStatusUpdate(_ inDriver: RVS_BTDriver) {
+        #if DEBUG
+            print("Status Message Received by Navigation Controller")
+        #endif
+        assert(inDriver == driverInstance, "Driver Instance Not Ours!")
+        topViewController?.view.setNeedsLayout()
+    }
 }

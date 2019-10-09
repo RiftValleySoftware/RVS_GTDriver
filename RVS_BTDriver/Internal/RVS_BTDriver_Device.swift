@@ -80,12 +80,12 @@ class RVS_BTDriver_Device: RVS_BTDriver_DeviceProtocol {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Error Reporter Support -
+// MARK: - Communicator Support -
 /* ###################################################################################################################################### */
 /**
- We establish an error report chain, here.
+ We establish a communicator chain, here.
  */
-extension RVS_BTDriver_Device: RVS_BTDriverTools {
+extension RVS_BTDriver_Device: RVS_BTDriverCommunicatorTools {
     /* ################################################################## */
     /**
      This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.

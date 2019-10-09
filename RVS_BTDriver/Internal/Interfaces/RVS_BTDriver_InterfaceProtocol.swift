@@ -74,38 +74,15 @@ extension RVS_BTDriver_InterfaceProtocol {
     /**
      This allows us to skip the base class, so we don't need to override anything.
      */
-    internal var interface: RVS_BTDriver_InterfaceProtocol! {
-        preconditionFailure("Cannot Call the Base Class")
+    internal static func makeInterface(queue: DispatchQueue!) -> RVS_BTDriver_InterfaceProtocol! {
+        preconditionFailure("Cannot Call the Default Implementation")
     }
 
     /* ################################################################## */
     /**
      This allows us to skip the base class, so we don't need to override anything.
      */
-    internal static func makeInterface(queue: DispatchQueue!) -> RVS_BTDriver_InterfaceProtocol! {
-        preconditionFailure("Cannot Call the Base Class")
-    }
-    
-    /* ################################################################## */
-    /**
-     You cannot use the base class version of this. This is just here to satisfy the protocol.
-     */
-    internal var isBTAvailable: Bool {
-        preconditionFailure("Cannot Call the Base Class")
-    }
-
-    /* ################################################################## */
-    /**
-     You cannot use the base class version of this. This is just here to satisfy the protocol.
-     */
-    internal var isScanning: Bool {
-        get {
-            preconditionFailure("Cannot Call the Base Class")
-        }
-        
-        set {
-            _ = newValue    // To keep SwiftLint happy.
-            preconditionFailure("Cannot Call the Base Class")
-        }
+    internal var interface: RVS_BTDriver_InterfaceProtocol! {
+        preconditionFailure("Cannot Call the Default Implementation")
     }
 }

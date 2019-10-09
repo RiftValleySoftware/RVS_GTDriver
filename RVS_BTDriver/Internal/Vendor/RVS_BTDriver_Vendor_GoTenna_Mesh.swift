@@ -45,11 +45,11 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
 
     /* ################################################################## */
     /**
-     Read-only accessor for the interface.
+     Read-only accessor for the interface. This is a weak reference.
      
      - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface()` has not yet been called.
      */
-    var interface: RVS_BTDriver_InterfaceProtocol!
+    internal weak var interface: RVS_BTDriver_InterfaceProtocol!
 
     /* ################################################################## */
     /**
@@ -80,8 +80,8 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
      */
     init(driver inDriver: RVS_BTDriver) {
         super.init()
-        makeInterface(queue: inDriver.internal_queue)
         internal_driver = inDriver
+        makeInterface(queue: inDriver.internal_queue)
     }
 }
 
