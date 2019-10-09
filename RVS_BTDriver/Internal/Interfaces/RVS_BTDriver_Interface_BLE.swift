@@ -56,6 +56,25 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     override internal var isBTAvailable: Bool {
         return centralManager.state == .poweredOn
     }
+    
+    /* ################################################################## */
+    /**
+     Start or stop the scan for new peripherals.
+     */
+    override internal var isScanning: Bool {
+        get {
+            return centralManager.isScanning
+        }
+        
+        set {
+            if !centralManager.isScanning, newValue {
+                // Nil is just temporary.
+                centralManager.scanForPeripherals(withServices: nil, options: nil)
+            } else if centralManager.isScanning {
+                centralManager.stopScan()
+            }
+        }
+    }
 }
 
 /* ###################################################################################################################################### */

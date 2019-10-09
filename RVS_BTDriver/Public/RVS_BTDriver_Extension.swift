@@ -232,11 +232,8 @@ extension RVS_BTDriver {
      - returns: true, if all of the vendor interfaces have Bluetooth powered on.
      */
     @objc dynamic public var isBTAvailable: Bool {
-        for vendor in vendors {
-            print("Vendor: \(String(describing: vendor))")
-            if !vendor.interface.isBTAvailable {
-                return false
-            }
+        for vendor in vendors where !vendor.interface.isBTAvailable {
+            return false
         }
         return true
     }

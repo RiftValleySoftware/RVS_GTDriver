@@ -69,10 +69,17 @@ class RVS_BTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
      This is the toggle value button for the persistent connections switch.
      */
     @IBOutlet weak var persistentConnectionsToggleButton: UIButton!
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: - IBAction Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_iOS_Test_Harness_SettingsViewController {
     /* ################################################################## */
     /**
      Called when the thread switch changes state.
+     
+     - parameter inSwitch: The switch object.
      */
     @IBAction func threadSwitchChanged(_ inSwitch: UISwitch) {
         prefs.useDifferentThread = inSwitch.isOn
@@ -81,6 +88,8 @@ class RVS_BTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
     /* ################################################################## */
     /**
      Called when the scan switch changes state.
+     
+     - parameter inSwitch: The switch object.
      */
     @IBAction func scanSwitchChanged(_ inSwitch: UISwitch) {
         prefs.continuousScan = inSwitch.isOn
@@ -88,6 +97,9 @@ class RVS_BTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
     
     /* ################################################################## */
     /**
+     Called when the persistent connections switch changes.
+     
+     - parameter inSwitch: The switch object.
      */
     @IBAction func persistentConnectionsSwitchChanged(_ inSwitch: UISwitch) {
         prefs.persistentConnections = inSwitch.isOn
@@ -96,6 +108,8 @@ class RVS_BTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
     /* ################################################################## */
     /**
      Called when the label/button is tapped. It toggles the state of the pref (and the switch).
+     
+     - parameter inButton: The button object.
      */
     @IBAction func threadSwitchToggleHit(_ inButton: UIButton) {
         prefs.useDifferentThread = !prefs.useDifferentThread
@@ -105,6 +119,8 @@ class RVS_BTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
     /* ################################################################## */
     /**
      Called when the label/button is tapped. It toggles the state of the pref (and the switch).
+     
+     - parameter inButton: The button object.
      */
     @IBAction func scanSwitchToggleHit(_ inButton: UIButton) {
         prefs.continuousScan = !prefs.continuousScan
@@ -114,6 +130,8 @@ class RVS_BTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
     /* ################################################################## */
     /**
      Called when the label/button is tapped. It toggles the state of the pref (and the switch).
+     
+     - parameter inButton: The button object.
      */
     @IBAction func persistSwitchToggleHit(_ inButton: UIButton) {
         prefs.persistentConnections = !prefs.persistentConnections
@@ -133,7 +151,6 @@ extension RVS_BTDriver_iOS_Test_Harness_SettingsViewController {
      */
     override func viewWillAppear(_ inAnimated: Bool) {
         super.viewWillAppear(inAnimated)
-        navigationController?.isNavigationBarHidden = false
         navigationItem.title = navigationItem.title?.localizedVariant
         threadToggleButton.setTitle(threadToggleButton.title(for: .normal)?.localizedVariant, for: .normal)
         scanToggleButton.setTitle(scanToggleButton.title(for: .normal)?.localizedVariant, for: .normal)
