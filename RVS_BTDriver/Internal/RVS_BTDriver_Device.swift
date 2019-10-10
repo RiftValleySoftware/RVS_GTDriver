@@ -27,8 +27,10 @@ import Foundation
 /* ###################################################################################################################################### */
 /**
  This is one "device," which maps to a bluetooth "peripheral."
+ 
+ Must derive from NSObject, for purposes of being a delegate.
  */
-class RVS_BTDriver_Device: RVS_BTDriver_DeviceProtocol {
+class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_Device Sequence-Style Support -
     /* ################################################################################################################################## */

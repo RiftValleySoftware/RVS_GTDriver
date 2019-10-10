@@ -37,7 +37,11 @@ public class RVS_BTDriver: NSObject {
     /**
      This contains instances that have not yet passed a credit check.
      */
-    private var _holding_pen: [RVS_BTDriver_Device] = []
+    private var _holding_pen: [RVS_BTDriver_Device] = [] {
+        didSet {
+            triageHoldingPen()
+        }
+    }
     
     /* ################################################################## */
     /**
@@ -86,6 +90,14 @@ public class RVS_BTDriver: NSObject {
         vendors = [
             RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self)
         ]
+    }
+    
+    /* ################################################################## */
+    /**
+     This method runs through our "holding pen," and will start device on their initialization (if not started), or move them to the completed queue, if they are done.
+     */
+    internal func triageHoldingPen() {
+        
     }
 }
 

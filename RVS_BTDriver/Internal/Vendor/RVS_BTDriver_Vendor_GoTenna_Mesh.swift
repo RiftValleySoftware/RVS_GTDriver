@@ -60,7 +60,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
         /// Firmware Revision
         case deviceInfoFirmwareRevision     =   "2A26"
     }
-
+    
     /* ################################################################## */
     /**
      A weak reference to the main driver instance.
@@ -152,4 +152,64 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
 class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_Device {
     /// The peripheral instance associated with this device.
     var peripheral: CBPeripheral!
+    
+    /// The state machine callback.
+    private var _callBackFunc: RVS_BTDriver_State_Machine.RVS_BTDriver_State_MachineCallback!
+    
+    /// The initial state (unititialized).
+    private var _state: RVS_BTDriver_State_Machine_StateEnum = .uninitialized
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Core Bluetooth Peripheral Delegate Support -
+/* ###################################################################################################################################### */
+/**
+ This implements a way for the driver to track our initialization progress.
+ */
+extension RVS_BTDriver_Device_GoTenna_Mesh: CBPeripheralDelegate {
+    
+}
+
+/* ###################################################################################################################################### */
+// MARK: - State Machine Support -
+/* ###################################################################################################################################### */
+/**
+ This implements a way for the driver to track our initialization progress.
+ */
+extension RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_State_Machine {
+    /* ################################################################## */
+    /**
+     The state machine callback closure, supplied by the subscriber.
+     */
+    var callBack: RVS_BTDriver_State_Machine.RVS_BTDriver_State_MachineCallback! {
+        get {
+            return _callBackFunc
+        }
+        
+        set {
+            _callBackFunc = newValue
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     The current state of this instance.
+     */
+    var state: RVS_BTDriver_State_Machine_StateEnum {
+        return _state
+    }
+
+    /* ################################################################## */
+    /**
+     Start initialization.
+     */
+    func start() {
+    }
+
+    /* ################################################################## */
+    /**
+     Abort initialization.
+     */
+    func abort() {
+    }
 }
