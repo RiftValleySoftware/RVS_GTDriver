@@ -50,7 +50,7 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController {
      This establishes the driver instance, wiping out any old one.
      */
     func setUpDriver() {
-        driverInstance = RVS_BTDriver(self)
+        driverInstance = RVS_BTDriver(delegate: self)
     }
 }
 

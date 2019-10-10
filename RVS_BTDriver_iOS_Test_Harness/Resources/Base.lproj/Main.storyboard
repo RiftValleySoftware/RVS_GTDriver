@@ -15,6 +15,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0yL-m2-fLy">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="rFD-vZ-KCh"/>
@@ -148,7 +152,7 @@
                                     <constraint firstAttribute="height" constant="31" id="mHG-Jx-BSK"/>
                                 </constraints>
                                 <color key="onTintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="thumbTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="thumbTintColor" red="0.51200000000000001" green="0.22700000000000001" blue="0.67200000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="threadSwitchChanged:" destination="6LN-UB-VTn" eventType="valueChanged" id="d1Y-0t-egB"/>
                                 </connections>
@@ -160,7 +164,7 @@
                                     <constraint firstAttribute="height" constant="31" id="o6H-Fa-9Vk"/>
                                 </constraints>
                                 <color key="onTintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="thumbTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="thumbTintColor" red="0.51200000000000001" green="0.22700000000000001" blue="0.67200000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="scanSwitchChanged:" destination="6LN-UB-VTn" eventType="valueChanged" id="qOt-dy-lYH"/>
                                 </connections>
@@ -172,7 +176,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="SLUG-DIFFERENT-QUEUE">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.51200000000000001" green="0.22700000000000001" blue="0.67200000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="threadSwitchToggleHit:" destination="6LN-UB-VTn" eventType="touchUpInside" id="RwB-aq-hgB"/>
@@ -185,7 +189,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="SLUG-FULL-SCAN">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.51200000000000001" green="0.22700000000000001" blue="0.67200000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="scanSwitchToggleHit:" destination="6LN-UB-VTn" eventType="touchUpInside" id="9Vf-hp-mqT"/>
@@ -198,7 +202,7 @@
                                     <constraint firstAttribute="height" constant="31" id="DWw-Pz-XEH"/>
                                 </constraints>
                                 <color key="onTintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="thumbTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="thumbTintColor" red="0.51200000000000001" green="0.22700000000000001" blue="0.67200000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="persistSwitchToggleHit:" destination="6LN-UB-VTn" eventType="valueChanged" id="j4H-v4-62g"/>
                                     <action selector="persistentConnectionsSwitchChanged:" destination="6LN-UB-VTn" eventType="valueChanged" id="D3Q-GP-n4N"/>
@@ -211,7 +215,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="SLUG-PERSISTENT-CONNECTIONS">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.51200000000000001" green="0.22700000000000001" blue="0.67200000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="persistSwitchToggleHit:" destination="6LN-UB-VTn" eventType="touchUpInside" id="IAy-EQ-WNH"/>
