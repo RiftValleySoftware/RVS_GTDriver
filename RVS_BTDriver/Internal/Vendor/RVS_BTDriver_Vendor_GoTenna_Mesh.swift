@@ -95,10 +95,17 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
     /**
      REQUIRED: Factory method for creating an instance of the vendor device.
      
-     - returns: a device instance.
-     */
-    func makeDevice() -> RVS_BTDriver_Device {
-        return RVS_BTDriver_Device_GoTenna_Mesh(vendor: self)
+       - parameter inDeviceRecord: A typeless instance that contains the Bluetooth info for the device. It is the responsibility of the vendor to cast this.
+       - returns: a device instance. Can be nil, if this vendor can't instantiate the device.
+       */
+     func makeDevice(_ inDeviceRecord: Any) -> RVS_BTDriver_Device! {
+        if let device = inDeviceRecord as? CBPeripheral {
+            let ret = RVS_BTDriver_Device_GoTenna_Mesh(vendor: self)
+            ret.peripheral = device
+            return ret
+        }
+        
+        return nil
     }
 
     /* ################################################################## */
@@ -114,6 +121,13 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
         for serviceSignature in serviceSignatures where !interface.serviceSignatures.contains(serviceSignature) {
             interface.serviceSignatures.append(serviceSignature)
         }
+        
+        // If we are already on the guest list, then there's no need to add ourselves.
+        for vendor in interface.vendors where type(of: vendor) == type(of: self) {
+            return
+        }
+        
+        interface.vendors.append(self)
     }
     
     /* ################################################################## */

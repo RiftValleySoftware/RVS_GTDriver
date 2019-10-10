@@ -51,6 +51,34 @@ internal class RVS_BTDriver_Base_Interface: NSObject, RVS_BTDriver_InterfaceProt
 
     /* ################################################################## */
     /**
+     This flag tells the driver to maintain a persistent connection (until explicitly disconneted).
+     
+     Otherwise, connections are made and canceled for each transaction.
+     
+     Default is false.
+     */
+    var persistentConnection: Bool = false
+    
+    /* ################################################################## */
+    /**
+     A list of the vendors that are users of this interface.
+     */
+    var vendors: [RVS_BTDriver_VendorProtocol] = []
+
+    /* ################################################################## */
+    /**
+     This flag tells the driver to "remember" devices that it discovers in a scan.
+     
+     This means that when a device is "rediscovered," we don't get another discovery event.
+     
+     If true (default), then we only get one discovery event per device. If false, we keep getting discovery events.
+     
+     This can be useful for "rediscovering" devices that we remove from our list (set to `false` for that).
+     */
+    var rememberAdvertisedDevices: Bool = true
+
+    /* ################################################################## */
+    /**
      You cannot use the base class version of this. This is just here to satisfy the protocol.
      */
     internal var isBTAvailable: Bool {

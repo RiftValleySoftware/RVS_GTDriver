@@ -37,6 +37,12 @@ internal protocol RVS_BTDriver_InterfaceProtocol: class {
 
     /* ################################################################## */
     /**
+     A list of the vendors that are users of this interface.
+     */
+    var vendors: [RVS_BTDriver_VendorProtocol] { get set }
+    
+    /* ################################################################## */
+    /**
      Read-only accessor for the interface.
      
      - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface(:)` has not yet been called.
@@ -46,8 +52,30 @@ internal protocol RVS_BTDriver_InterfaceProtocol: class {
     /* ################################################################## */
     /**
      This is an Array of String that aggregates any services we scan for. An empty Array means scan for everything.
+     
+     This can be changed before a `isScanning = true` call.
      */
     var serviceSignatures: [String] { get set }
+    
+    /* ################################################################## */
+    /**
+     This flag tells the driver to maintain a persistent connection (until explicitly disconneted).
+     
+     Otherwise, connections are made and canceled for each transaction.
+     */
+    var persistentConnection: Bool { get set }
+    
+    /* ################################################################## */
+    /**
+     This flag tells the driver to "remember" devices that it discovers in a scan.
+     
+     This means that when a device is "rediscovered," we don't get another discovery event.
+     
+     If true (default), then we only get one discovery event per device. If false, we keep getting discovery events.
+     
+     This can be useful for "rediscovering" devices that we remove from our list (set to `false` for that).
+     */
+    var rememberAdvertisedDevices: Bool { get set }
 
     /* ################################################################## */
     /**

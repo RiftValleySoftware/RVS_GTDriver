@@ -79,13 +79,17 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
             if !centralManager.isScanning, newValue {
                 var serviceUUIDs: [CBUUID]!
                 
+                // We supply any service UUIDs that we have on hand.
                 if !serviceSignatures.isEmpty {
                     serviceUUIDs = serviceSignatures.compactMap {
                         CBUUID(string: $0)
                     }
                 }
                 
-                centralManager.scanForPeripherals(withServices: serviceUUIDs, options: nil)
+                // We check to see if we are going to be filtering out previous advertised devices (cuts down the noise).
+                let options: [String: Any]! = rememberAdvertisedDevices ? nil : [CBCentralManagerScanOptionAllowDuplicatesKey: 1]
+                
+                centralManager.scanForPeripherals(withServices: serviceUUIDs, options: options)
             } else if centralManager.isScanning {
                 centralManager.stopScan()
             }
@@ -158,7 +162,16 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
             return
         }
         
-        // If we made it here, we are a valid device, and ready for connection.
+        // If we made it here, we are a valid device, and ready for inspection.
+        for vendor in vendors {
+            if let device = vendor.makeDevice(inPeripheral) {
+                #if DEBUG
+                    print("\tVendor: \(vendor) has created a device to handle this peripheral.")
+                #endif
+                driver.addDiscoveredDevice(device)
+                break
+            }
+        }
     }
     
     /* ################################################################## */
