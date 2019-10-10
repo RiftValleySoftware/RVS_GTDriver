@@ -93,7 +93,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
 
     /* ################################################################## */
     /**
-     REQUIRED: Factory method for creating an instance of th vendor device.
+     REQUIRED: Factory method for creating an instance of the vendor device.
      
      - returns: a device instance.
      */
