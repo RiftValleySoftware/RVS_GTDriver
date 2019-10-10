@@ -79,6 +79,8 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     internal init(vendor inVendor: RVS_BTDriver_VendorProtocol) {
         vendor = inVendor
     }
+    
+    internal func connect() { }
 }
 
 /* ###################################################################################################################################### */

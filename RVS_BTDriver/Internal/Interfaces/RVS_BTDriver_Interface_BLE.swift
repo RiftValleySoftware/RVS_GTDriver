@@ -29,6 +29,10 @@ import CoreBluetooth
  This is an interface for Bluetooth Low Energy (BLE), using CoreBluetooth.
  */
 internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
+    /// This is how we get the information for creating our device instance.
+    /// The peripheral instance and the central manager instance are passed in.
+    typealias DeviceInfo = (peripheral: CBPeripheral, centralManager: CBCentralManager)
+    
     /* ################################################################################################################################## */
     // MARK: - Internal Instance Constants
     /* ################################################################################################################################## */
@@ -112,6 +116,9 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
     */
     internal func centralManagerDidUpdateState(_ inCentral: CBCentralManager) {
         assert(inCentral === centralManager, "Central Manager Not Ours!")
+        #if DEBUG
+            print("Central Manager: \(inCentral) has changed state to: \(inCentral.state).")
+        #endif
         switch inCentral.state {
         case .poweredOff:   // If we get a powered off event, that means there's "issues," and we should report an error.
             driver?.reportThisError(.bluetoothNotAvailable)
@@ -128,7 +135,10 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
      - parameter didFailToConnect: The peripheral object that failed to connect.
      - parameter error: The error that occurred during the failure. May be nil.
     */
-    internal func centralManager(_ central: CBCentralManager, didFailToConnect inPeripheral: CBPeripheral, error inError: Error?) {
+    internal func centralManager(_ inCentral: CBCentralManager, didFailToConnect inPeripheral: CBPeripheral, error inError: Error?) {
+        #if DEBUG
+            print("Central Manager: \(inCentral) failed to connect to: \(inPeripheral). The error was: \(String(describing: inError)).")
+        #endif
     }
     
     /* ################################################################## */
@@ -164,7 +174,8 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
         
         // If we made it here, we are a valid device, and ready for inspection.
         for vendor in vendors {
-            if let device = vendor.makeDevice(inPeripheral) {
+            let deviceInfo = DeviceInfo(peripheral: inPeripheral, centralManager: inCentral)
+            if let device = vendor.makeDevice(deviceInfo) {
                 #if DEBUG
                     print("\tVendor: \(vendor) has created a device to handle this peripheral.")
                 #endif
@@ -183,6 +194,28 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
      - parameter for: The peripheral object that was connected.
     */
     internal func centralManager(_ inCentral: CBCentralManager, connectionEventDidOccur inEvent: CBConnectionEvent, for inPeripheral: CBPeripheral) {
+        #if DEBUG
+            print("Central Manager: \(inCentral) has received a connection event for this peripheral: \(inPeripheral).")
+        #endif
+        // Scan through the stored devices in the holding pen.
+        for device in driver.internal_holding_pen where device is RVS_BTDriver_BLE_Device {
+            if  let bleDevice = device as? RVS_BTDriver_BLE_Device,
+                inCentral == centralManager,
+                bleDevice.centralManager == centralManager,
+                bleDevice.peripheral == inPeripheral {
+                bleDevice.continueInit()
+                return
+            }
+        }
+        
+        // Scan through the stored devices
+        for device in driver where device is RVS_BTDriver_BLE_Device {
+            if  let bleDevice = device as? RVS_BTDriver_BLE_Device,
+                inCentral == centralManager,
+                bleDevice.centralManager == centralManager,
+                bleDevice.peripheral == inPeripheral {
+            }
+        }
     }
     
     /* ################################################################## */
@@ -194,5 +227,86 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
      - parameter error: Any error that occurred during the disconnection. May be nil.
     */
     internal func centralManager(_ inCentral: CBCentralManager, didDisconnectPeripheral inPeripheral: CBPeripheral, error inError: Error?) {
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_BLE_Device -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_BLE_Device: RVS_BTDriver_Device {
+    /// The central manager that controls this peripheral.
+    internal var centralManager: CBCentralManager!
+    
+    /// The peripheral instance associated with this device.
+    var peripheral: CBPeripheral!
+    
+    /// The state machine callback.
+    private var _callBackFunc: RVS_BTDriver_State_Machine.RVS_BTDriver_State_MachineCallback!
+    
+    /// The initial state (unititialized).
+    private var _state: RVS_BTDriver_State_Machine_StateEnum = .uninitialized
+    
+    /// These are the services that we look up upon initialization connection.
+    internal var internal_initalServiceDiscovery: [CBUUID] = []
+}
+
+/* ###################################################################################################################################### */
+// MARK: - State Machine Support -
+/* ###################################################################################################################################### */
+/**
+ This implements a way for the driver to track our initialization progress.
+ */
+extension RVS_BTDriver_BLE_Device: RVS_BTDriver_State_Machine {
+    /* ################################################################## */
+    /**
+     The state machine callback closure, supplied by the subscriber.
+     */
+    internal var callBack: RVS_BTDriver_State_Machine.RVS_BTDriver_State_MachineCallback! {
+        get {
+            return _callBackFunc
+        }
+        
+        set {
+            _callBackFunc = newValue
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     The current state of this instance.
+     */
+    internal var state: RVS_BTDriver_State_Machine_StateEnum {
+        return _state
+    }
+
+    /* ################################################################## */
+    /**
+     Start initialization.
+     */
+    internal func startInit() {
+        #if DEBUG
+            print("Starting initialization of a BLE device: \(String(describing: self))")
+        #endif
+        _state = .initializationInProgress
+        connect()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called periodically, while initializing.
+     */
+    internal func continueInit() {
+        if .initializationInProgress == _state {
+            peripheral.discoverServices(internal_initalServiceDiscovery)
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     Abort initialization.
+     */
+    internal func abortInit() {
     }
 }

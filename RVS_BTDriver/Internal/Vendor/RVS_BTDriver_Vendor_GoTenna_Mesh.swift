@@ -95,13 +95,23 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
     /**
      REQUIRED: Factory method for creating an instance of the vendor device.
      
-       - parameter inDeviceRecord: A typeless instance that contains the Bluetooth info for the device. It is the responsibility of the vendor to cast this.
+       - parameter inDeviceRecord: The peripheral and central manager instances for this device.
        - returns: a device instance. Can be nil, if this vendor can't instantiate the device.
        */
-     func makeDevice(_ inDeviceRecord: Any) -> RVS_BTDriver_Device! {
-        if let device = inDeviceRecord as? CBPeripheral {
+     func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
+        if let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
             let ret = RVS_BTDriver_Device_GoTenna_Mesh(vendor: self)
-            ret.peripheral = device
+            
+            ret.peripheral = deviceRecord.peripheral
+            ret.centralManager = deviceRecord.centralManager
+            
+            /// These are the services we search for, after connecting.
+            ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.deviceInfoService.rawValue),
+                                                   CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue)
+            ]
+
+            deviceRecord.peripheral.delegate = ret
+
             return ret
         }
         
@@ -144,72 +154,49 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_Device_GoTenna_Mesh -
-/* ###################################################################################################################################### */
-/**
- This is a class that implements a goTenna Mesh device instance.
- */
-class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_Device {
-    /// The peripheral instance associated with this device.
-    var peripheral: CBPeripheral!
-    
-    /// The state machine callback.
-    private var _callBackFunc: RVS_BTDriver_State_Machine.RVS_BTDriver_State_MachineCallback!
-    
-    /// The initial state (unititialized).
-    private var _state: RVS_BTDriver_State_Machine_StateEnum = .uninitialized
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Core Bluetooth Peripheral Delegate Support -
 /* ###################################################################################################################################### */
 /**
  This implements a way for the driver to track our initialization progress.
  */
-extension RVS_BTDriver_Device_GoTenna_Mesh: CBPeripheralDelegate {
-    
-}
-
-/* ###################################################################################################################################### */
-// MARK: - State Machine Support -
-/* ###################################################################################################################################### */
-/**
- This implements a way for the driver to track our initialization progress.
- */
-extension RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_State_Machine {
+class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_BLE_Device, CBPeripheralDelegate {
     /* ################################################################## */
     /**
-     The state machine callback closure, supplied by the subscriber.
-     */
-    var callBack: RVS_BTDriver_State_Machine.RVS_BTDriver_State_MachineCallback! {
-        get {
-            return _callBackFunc
+     Called when we have discovered services for the peripheral.
+
+     - parameter inPeripheral: The peripheral we have received notification on.
+     - parameter didDiscoverServices: Any errors that ocurred.
+    */
+    internal func peripheral(_ inPeripheral: CBPeripheral, didDiscoverServices inError: Error?) {
+        if let error = inError {
+            #if DEBUG
+                print("\n***> Service Discovery Error: \(String(describing: inError))\n")
+            #endif
+            reportThisError(.unknownPeripheralDiscoveryError(error: error))
+        } else if let services = inPeripheral.services {
+            #if DEBUG
+                print("\n***> Services Discovered:\n\t\(String(describing: services))")
+            #endif
+        } else {
+            #if DEBUG
+                print("\tNo services. Just disconnecting.\n")
+            #endif
         }
         
-        set {
-            _callBackFunc = newValue
-        }
+        #if DEBUG
+            print("<***\n")
+        #endif
     }
     
     /* ################################################################## */
     /**
-     The current state of this instance.
-     */
-    var state: RVS_BTDriver_State_Machine_StateEnum {
-        return _state
-    }
-
-    /* ################################################################## */
-    /**
-     Start initialization.
-     */
-    func start() {
-    }
-
-    /* ################################################################## */
-    /**
-     Abort initialization.
-     */
-    func abort() {
+    */
+    override internal func connect() {
+        if .disconnected == peripheral.state { // Must be completely disconnected
+            #if DEBUG
+                print("Connecting the device: \(String(describing: self))")
+            #endif
+            centralManager.connect(peripheral, options: nil)
+        }
     }
 }

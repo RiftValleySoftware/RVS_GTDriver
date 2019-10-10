@@ -52,10 +52,10 @@ internal protocol RVS_BTDriver_VendorProtocol {
     /**
      REQUIRED: Factory method for creating an instance of the vendor device.
      
-     - parameter inDeviceRecord: A typeless instance that contains the Bluetooth info for the device. It is the responsibility of the vendor to cast this.
+     - parameter inDeviceRecord: The Bluetooth info for the device, the vendor should cast this to its device info. This can be nil. If so, then the method should return nil.
      - returns: a device instance. Can be nil, if the vendor can't instantiate the device.
      */
-    func makeDevice(_ inDeviceRecord: Any) -> RVS_BTDriver_Device!
+    func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device!
     
     /* ################################################################## */
     /**

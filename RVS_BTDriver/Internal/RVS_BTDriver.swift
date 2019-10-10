@@ -35,19 +35,19 @@ import Foundation
 public class RVS_BTDriver: NSObject {
     /* ################################################################## */
     /**
+     This contains the device list for this instance of the driver.
+     */
+    private var _device_list: [RVS_BTDriver_Device] = []
+    
+    /* ################################################################## */
+    /**
      This contains instances that have not yet passed a credit check.
      */
-    private var _holding_pen: [RVS_BTDriver_Device] = [] {
+    internal var internal_holding_pen: [RVS_BTDriver_Device] = [] {
         didSet {
             triageHoldingPen()
         }
     }
-    
-    /* ################################################################## */
-    /**
-     This contains the device list for this instance of the driver.
-     */
-    private var _device_list: [RVS_BTDriver_Device] = []
     
     /* ################################################################## */
     /**
@@ -97,7 +97,15 @@ public class RVS_BTDriver: NSObject {
      This method runs through our "holding pen," and will start device on their initialization (if not started), or move them to the completed queue, if they are done.
      */
     internal func triageHoldingPen() {
-        
+        internal_holding_pen.forEach {
+            if  let deviceAsStateMachine = $0 as? RVS_BTDriver_State_Machine,
+                .uninitialized == deviceAsStateMachine.state {
+                #if DEBUG
+                    print("Starting initialization of a device in the holding pen: \(String(describing: $0))")
+                #endif
+                deviceAsStateMachine.startInit()
+            }
+        }
     }
 }
 
@@ -115,7 +123,7 @@ extension RVS_BTDriver {
         #if DEBUG
             print("Adding a new device to the holding pen: \(String(describing: inDevice))")
         #endif
-        _holding_pen.append(inDevice)
+        internal_holding_pen.append(inDevice)
     }
 }
 

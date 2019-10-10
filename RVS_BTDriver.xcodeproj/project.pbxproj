@@ -188,8 +188,8 @@
 			children = (
 				D41568CD234D18140038286D /* Application */,
 				D41568CE234D182C0038286D /* ViewControllersAndViews */,
-				D443DEFA234D0E5000F9DE47 /* Resources */,
 				D4B1FED02332A6E1000B8736 /* ExtensionsAndExtras */,
+				D443DEFA234D0E5000F9DE47 /* Resources */,
 				D41568C9234D15490038286D /* Meta */,
 			);
 			path = RVS_BTDriver_iOS_Test_Harness;

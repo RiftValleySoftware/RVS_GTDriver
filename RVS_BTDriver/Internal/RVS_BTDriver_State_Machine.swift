@@ -34,8 +34,7 @@ internal enum RVS_BTDriver_State_Machine_StateEnum {
     /// Ready for Freddy!
     case initialized
     /// Uh...little problem, here...
-    /// Associated value is any error that occurred. It can be nil.
-    case error(error: Error?)
+    case error
 }
 
 /* ###################################################################################################################################### */
@@ -71,13 +70,19 @@ internal protocol RVS_BTDriver_State_Machine {
     /**
      Start whatever process is necessary to initialize.
      */
-    func start()
+    func startInit()
+    
+    /* ################################################################## */
+    /**
+     Called periodically, while initializing.
+     */
+    func continueInit()
     
     /* ################################################################## */
     /**
      Stop the initialization process.
      */
-    func abort()
+    func abortInit()
 }
 
 /* ###################################################################################################################################### */
@@ -107,11 +112,17 @@ extension RVS_BTDriver_State_Machine {
     /**
      Default Implementation does nothing.
      */
-    func start() { }
-
+    func startInit() { }
+    
     /* ################################################################## */
     /**
      Default Implementation does nothing.
      */
-    func abort() { }
+    func continueInit() { }
+    
+    /* ################################################################## */
+    /**
+     Default Implementation does nothing.
+     */
+    func abortInit() { }
 }
