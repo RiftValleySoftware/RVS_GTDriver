@@ -29,6 +29,38 @@ import CoreBluetooth
  A factory class for goTenna Mesh devices
  */
 class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
+    /* ###################################################################################################################################### */
+    // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
+    /* ###################################################################################################################################### */
+    /**
+     These are String-based enums that we use to reference various services and characteristics in our driver.
+     */
+    internal enum RVS_BLE_GATT_UUID: String {
+        /// The standard GATT Device Info service.
+        case deviceInfoService              =   "180A"
+        // MARK: - Service IDs
+        /// This is the basic goTenna proprietary service.
+        case goTennaProprietary             =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
+        
+        // MARK: - goTenna Proprietary Characteristic IDs
+        /// No idea what this is.
+        case goTennaProprietary001          =   "12762B18-DF5E-11E6-BF01-FE55135034F3"
+        /// No idea what this is.
+        case goTennaProprietary002          =   "1276B20A-DF5E-11E6-BF01-FE55135034F3"
+        /// No idea what this is.
+        case goTennaProprietary003          =   "1276B20B-DF5E-11E6-BF01-FE55135034F3"
+        
+        // MARK: - Device Info Characteristic IDs
+        /// Manufacturer Name
+        case deviceInfoManufacturerName     =   "2A29"
+        /// Model Name
+        case deviceInfoModelName            =   "2A24"
+        /// Hardware Revision
+        case deviceInfoHardwareRevision     =   "2A27"
+        /// Firmware Revision
+        case deviceInfoFirmwareRevision     =   "2A26"
+    }
+
     /* ################################################################## */
     /**
      A weak reference to the main driver instance.
@@ -41,6 +73,14 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
      */
     internal var driver: RVS_BTDriver! {
         return internal_driver
+    }
+    
+    /* ################################################################## */
+    /**
+     These are the services that we scan for. In our case, it is simply the goTenna proprietary service.
+     */
+    var serviceSignatures: [String] {
+        return [RVS_BLE_GATT_UUID.goTennaProprietary.rawValue]
     }
 
     /* ################################################################## */
@@ -70,6 +110,10 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
     internal func makeInterface(queue inQueue: DispatchQueue!) {
         interface = RVS_BTDriver_Interface_BLE.makeInterface(queue: inQueue)
         interface.driver = driver   // Who's your daddy?
+        // Scan for our devices. Don't bother adding if we are already there.
+        for serviceSignature in serviceSignatures where !interface.serviceSignatures.contains(serviceSignature) {
+            interface.serviceSignatures.append(serviceSignature)
+        }
     }
     
     /* ################################################################## */

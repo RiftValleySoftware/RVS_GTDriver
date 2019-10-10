@@ -42,6 +42,12 @@ internal protocol RVS_BTDriver_InterfaceProtocol: class {
      - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface(:)` has not yet been called.
      */
     var interface: RVS_BTDriver_InterfaceProtocol! { get }
+    
+    /* ################################################################## */
+    /**
+     This is an Array of String that aggregates any services we scan for. An empty Array means scan for everything.
+     */
+    var serviceSignatures: [String] { get set }
 
     /* ################################################################## */
     /**

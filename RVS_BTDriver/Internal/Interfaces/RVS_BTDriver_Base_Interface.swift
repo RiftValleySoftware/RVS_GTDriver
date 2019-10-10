@@ -43,6 +43,14 @@ internal class RVS_BTDriver_Base_Interface: NSObject, RVS_BTDriver_InterfaceProt
     
     /* ################################################################## */
     /**
+     This is an Array of String that aggregates any services we scan for. An empty Array means scan for everything.
+     
+     Default is scan for everything.
+     */
+    var serviceSignatures: [String] = []
+
+    /* ################################################################## */
+    /**
      You cannot use the base class version of this. This is just here to satisfy the protocol.
      */
     internal var isBTAvailable: Bool {
