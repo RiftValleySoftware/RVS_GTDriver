@@ -213,7 +213,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
                 inCentral == centralManager,
                 bleDevice.centralManager == centralManager,
                 bleDevice.peripheral == inPeripheral {
-                bleDevice.continueInit()
+                bleDevice.connectedPreInit()
                 return
             }
         }
@@ -246,7 +246,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
                 inCentral == centralManager,
                 bleDevice.centralManager == centralManager,
                 bleDevice.peripheral == inPeripheral {
-                bleDevice.continueInit()
+                bleDevice.connectedPreInit()
                 return
             }
         }
@@ -257,6 +257,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
                 inCentral == centralManager,
                 bleDevice.centralManager == centralManager,
                 bleDevice.peripheral == inPeripheral {
+                bleDevice.connectedPostInit()
             }
         }
     }
@@ -354,9 +355,9 @@ extension RVS_BTDriver_BLE_Device: RVS_BTDriver_State_Machine {
     
     /* ################################################################## */
     /**
-     Called periodically, while initializing.
+     Called if there was a connection, before initializing.
      */
-    internal func continueInit() {
+    internal func connectedPreInit() {
         if .initializationInProgress == _state {
             peripheral.discoverServices(internal_initalServiceDiscovery)
         }
@@ -367,5 +368,12 @@ extension RVS_BTDriver_BLE_Device: RVS_BTDriver_State_Machine {
      Abort initialization.
      */
     internal func abortInit() {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called if there was a connection, after initializing.
+     */
+    func connectedPostInit() {
     }
 }

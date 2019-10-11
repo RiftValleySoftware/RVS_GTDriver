@@ -74,15 +74,21 @@ internal protocol RVS_BTDriver_State_Machine {
     
     /* ################################################################## */
     /**
-     Called periodically, while initializing.
+     Called if there was a connection, before initializing.
      */
-    func continueInit()
+    func connectedPreInit()
     
     /* ################################################################## */
     /**
      Stop the initialization process.
      */
     func abortInit()
+    
+    /* ################################################################## */
+    /**
+     Called if there was a connection, after initializing.
+     */
+    func connectedPostInit()
 }
 
 /* ###################################################################################################################################### */
@@ -118,7 +124,7 @@ extension RVS_BTDriver_State_Machine {
     /**
      Default Implementation does nothing.
      */
-    func continueInit() { }
+    func connectedPreInit() { }
     
     /* ################################################################## */
     /**
