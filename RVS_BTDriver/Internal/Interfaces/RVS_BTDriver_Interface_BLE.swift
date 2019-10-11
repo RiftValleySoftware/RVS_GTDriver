@@ -230,6 +230,39 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
     
     /* ################################################################## */
     /**
+     Called when a peripheral connects.
+
+     - parameter inCentral: The manager instance.
+     - parameter didConnect: The peripheral that was successfully connected.
+    */
+    internal func centralManager(_ inCentral: CBCentralManager, didConnect inPeripheral: CBPeripheral) {
+        #if DEBUG
+            print("Central Manager: \(inCentral) has connected to this peripheral: \(inPeripheral).")
+        #endif
+        
+        // Scan through the stored devices in the holding pen.
+        for device in driver.internal_holding_pen where device is RVS_BTDriver_BLE_Device {
+            if  let bleDevice = device as? RVS_BTDriver_BLE_Device,
+                inCentral == centralManager,
+                bleDevice.centralManager == centralManager,
+                bleDevice.peripheral == inPeripheral {
+                bleDevice.continueInit()
+                return
+            }
+        }
+        
+        // Scan through the stored devices
+        for device in driver where device is RVS_BTDriver_BLE_Device {
+            if  let bleDevice = device as? RVS_BTDriver_BLE_Device,
+                inCentral == centralManager,
+                bleDevice.centralManager == centralManager,
+                bleDevice.peripheral == inPeripheral {
+            }
+        }
+    }
+
+    /* ################################################################## */
+    /**
      Callback for a disconnection.
      
      - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
