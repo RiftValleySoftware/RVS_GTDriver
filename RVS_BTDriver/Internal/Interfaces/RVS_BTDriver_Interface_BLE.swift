@@ -29,9 +29,19 @@ import CoreBluetooth
  This is an interface for Bluetooth Low Energy (BLE), using CoreBluetooth.
  */
 internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
+    /// This is a simple struct to transfer interface information between the interface and the vendor device implementation.
+    struct DeviceInfoStruct {
+        /// The peripheral (BLE)
+        let peripheral: CBPeripheral
+        /// The central BLE manager
+        let centralManager: CBCentralManager
+        /// Any advertising data supplied with the discovery.
+        let advertisementData: [String: Any]
+    }
+    
     /// This is how we get the information for creating our device instance.
     /// The peripheral instance and the central manager instance are passed in.
-    typealias DeviceInfo = (peripheral: CBPeripheral, centralManager: CBCentralManager)
+    typealias DeviceInfo = DeviceInfoStruct
     
     /* ################################################################################################################################## */
     // MARK: - Internal Instance Constants
@@ -174,7 +184,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
         
         // If we made it here, we are a valid device, and ready for inspection.
         for vendor in vendors {
-            let deviceInfo = DeviceInfo(peripheral: inPeripheral, centralManager: inCentral)
+            let deviceInfo = DeviceInfo(peripheral: inPeripheral, centralManager: inCentral, advertisementData: inAdvertisementData)
             if let device = vendor.makeDevice(deviceInfo) {
                 #if DEBUG
                     print("\tVendor: \(vendor) has created a device to handle this peripheral.")
@@ -227,6 +237,9 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
      - parameter error: Any error that occurred during the disconnection. May be nil.
     */
     internal func centralManager(_ inCentral: CBCentralManager, didDisconnectPeripheral inPeripheral: CBPeripheral, error inError: Error?) {
+        #if DEBUG
+            print("Central Manager: \(inCentral) has received a disconnection event for this peripheral: \(inPeripheral), with this error: \(String(describing: inError)).")
+        #endif
     }
 }
 
