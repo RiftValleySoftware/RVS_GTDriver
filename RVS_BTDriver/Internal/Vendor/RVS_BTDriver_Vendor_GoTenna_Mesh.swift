@@ -61,6 +61,10 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
         case deviceInfoFirmwareRevision     =   "2A26"
     }
     
+    /* ################################################################## */
+    /**
+     This is the data we need to match against the advertisement data.
+     */
     private let _manufacturerCode: [UInt8] = [0xfe, 0xff, 0x02]
 
     /* ################################################################## */
@@ -107,7 +111,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
                 _manufacturerCode.count == manufacturerCodeData.length {
                 
                 // We read in the manufacturer data, and match it against our own.
-                var uIntArray: [UInt8] = [0, 0, 0]
+                var uIntArray = [UInt8](repeating: 0, count: _manufacturerCode.count)
                 manufacturerCodeData.getBytes(&uIntArray, length: _manufacturerCode.count)
                 
                 if uIntArray == _manufacturerCode {
