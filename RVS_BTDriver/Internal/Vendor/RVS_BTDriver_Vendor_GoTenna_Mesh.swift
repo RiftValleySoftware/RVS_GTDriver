@@ -61,6 +61,8 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
         case deviceInfoFirmwareRevision     =   "2A26"
     }
     
+    private let _manufacturerCode: [UInt8] = [0xfe, 0xff, 0x02]
+
     /* ################################################################## */
     /**
      A weak reference to the main driver instance.
@@ -99,22 +101,32 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
        - returns: a device instance. Can be nil, if this vendor can't instantiate the device.
        */
      func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
-        if let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
-            let ret = RVS_BTDriver_Device_GoTenna_Mesh(vendor: self)
-            
-            ret.peripheral = deviceRecord.peripheral
-            ret.centralManager = deviceRecord.centralManager
-            
-            /// These are the services we search for, after connecting.
-            ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.deviceInfoService.rawValue),
-                                                   CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue)
-            ]
+        if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
+            // We check to see if the peripheral is one of ours.
+            if  let manufacturerCodeData = deviceRecord.advertisementData[CBAdvertisementDataManufacturerDataKey] as? NSData,
+                _manufacturerCode.count == manufacturerCodeData.length {
+                
+                // We read in the manufacturer data, and match it against our own.
+                var uIntArray: [UInt8] = [0, 0, 0]
+                manufacturerCodeData.getBytes(&uIntArray, length: _manufacturerCode.count)
+                
+                if uIntArray == _manufacturerCode {
+                    let ret = RVS_BTDriver_Device_GoTenna_Mesh(vendor: self)
+                    
+                    ret.peripheral = deviceRecord.peripheral
+                    ret.centralManager = deviceRecord.centralManager
+                    
+                    /// These are the services we search for, after connecting.
+                    ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.deviceInfoService.rawValue),
+                                                           CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue)
+                    ]
 
-            deviceRecord.peripheral.delegate = ret
+                    deviceRecord.peripheral.delegate = ret
 
-            return ret
+                    return ret
+                }
+            }
         }
-        
         return nil
     }
 
