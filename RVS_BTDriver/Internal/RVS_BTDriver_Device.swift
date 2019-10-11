@@ -158,8 +158,10 @@ extension RVS_BTDriver_Device {
      */
     internal func reportCompletion() {
         #if DEBUG
-            print("The holding pen is empty.")
+            print("The device holding pen is empty.")
         #endif
+        
+        internal_owner.moveDeviceFromHoldingPenToMainList(self)
     }
 }
 
