@@ -241,6 +241,19 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
             print("Central Manager: \(inCentral) has received a disconnection event for this peripheral: \(inPeripheral), with this error: \(String(describing: inError)).")
         #endif
     }
+    
+    /* ################################################################## */
+    /**
+     Callback for updating ANCS authorization.
+     
+     - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
+     - parameter didUpdateANCSAuthorizationFor: The peripheral object.
+    */
+    internal func centralManager(_ inCentral: CBCentralManager, didUpdateANCSAuthorizationFor inPeripheral: CBPeripheral) {
+        #if DEBUG
+            print("Central Manager: \(inCentral) didUpdateANCSAuthorizationFor for this peripheral: \(inPeripheral).")
+        #endif
+    }
 }
 
 /* ###################################################################################################################################### */

@@ -190,6 +190,19 @@ class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_BLE_Device, CBPeripheralDel
     
     /* ################################################################## */
     /**
+     Called when the peripheral is ready.
+     
+    - parameter toSendWriteWithoutResponse: The peripheral that is ready.
+    */
+    internal func peripheralIsReady(toSendWriteWithoutResponse inPeripheral: CBPeripheral) {
+        #if DEBUG
+            print("Peripheral Is Ready: \(inPeripheral)")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to initiate a connection.
     */
     override internal func connect() {
         if .disconnected == peripheral.state { // Must be completely disconnected
