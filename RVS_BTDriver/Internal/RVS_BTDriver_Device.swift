@@ -109,6 +109,10 @@ extension RVS_BTDriver_Device {
                 
                 internal_holding_pen.remove(at: index)
                 internal_service_list.append(service)
+                
+                if internal_holding_pen.isEmpty {
+                    reportCompletion()
+                }
             }
         }
     }
@@ -130,10 +134,6 @@ extension RVS_BTDriver_Device {
                 #endif
                 
                 internal_holding_pen.remove(at: index)
-                
-                if internal_holding_pen.isEmpty {
-                    reportCompletion()
-                }
             }
         }
         
