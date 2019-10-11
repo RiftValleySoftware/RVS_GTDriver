@@ -197,7 +197,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
     
     /* ################################################################## */
     /**
-     Callback for a successful device connection.
+     Callback for a connection event (as opposed to just a connection).
      
      - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
      - parameter connectionEventDidOccur: The connection event.
@@ -205,27 +205,9 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
     */
     internal func centralManager(_ inCentral: CBCentralManager, connectionEventDidOccur inEvent: CBConnectionEvent, for inPeripheral: CBPeripheral) {
         #if DEBUG
-            print("Central Manager: \(inCentral) has received a connection event for this peripheral: \(inPeripheral).")
+            print("Central Manager: \(inCentral) has received a connection event: \(inEvent), for this peripheral: \(inPeripheral).")
         #endif
-        // Scan through the stored devices in the holding pen.
-        for device in driver.internal_holding_pen where device is RVS_BTDriver_BLE_Device {
-            if  let bleDevice = device as? RVS_BTDriver_BLE_Device,
-                inCentral == centralManager,
-                bleDevice.centralManager == centralManager,
-                bleDevice.peripheral == inPeripheral {
-                bleDevice.connectedPreInit()
-                return
-            }
-        }
-        
-        // Scan through the stored devices
-        for device in driver where device is RVS_BTDriver_BLE_Device {
-            if  let bleDevice = device as? RVS_BTDriver_BLE_Device,
-                inCentral == centralManager,
-                bleDevice.centralManager == centralManager,
-                bleDevice.peripheral == inPeripheral {
-            }
-        }
+        centralManager(inCentral, didConnect: inPeripheral)
     }
     
     /* ################################################################## */
