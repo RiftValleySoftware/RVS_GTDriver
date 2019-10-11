@@ -110,6 +110,81 @@ public class RVS_BTDriver: NSObject {
 }
 
 /* ###################################################################################################################################### */
+// MARK: - Internal Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver {
+    /* ################################################################## */
+    /**
+     This method will move a device from the holding pen to the main list.
+     
+     - parameter inDevice: The device object to be moved.
+     */
+    internal func moveDeviceFromHoldingPenToMainList(_ inDevice: RVS_BTDriver_Device) {
+        for device in internal_holding_pen where device === inDevice {
+            if let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
+                return dev === inDevice
+                }) {
+                
+                #if DEBUG
+                    print("Removing Device at Index \(index) of the Holding Pen, and adding it to the main list at index \(_device_list.count).")
+                #endif
+                
+                internal_holding_pen.remove(at: index)
+                _device_list.append(device)
+                
+                if internal_holding_pen.isEmpty {
+                    reportCompletion()
+                }
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     This method will remove a device from the holding pen or the main list.
+     
+     - parameter inDevice: The device object to be removed.
+     */
+    internal func removeThisDevice(_ inDevice: RVS_BTDriver_Device) {
+        for device in internal_holding_pen where device === inDevice {
+            if let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
+                return dev === inDevice
+                }) {
+                
+                #if DEBUG
+                    print("Removing Device at Index \(index) of the Holding Pen.")
+                #endif
+                internal_holding_pen.remove(at: index)
+                return
+            }
+        }
+        
+        // If we found it in the holding pen, this should not happen, but better safe than sorry...
+        for device in _device_list where device === inDevice {
+            if let index = _device_list.firstIndex(where: { (dev) -> Bool in
+                return dev === inDevice
+                }) {
+                
+                #if DEBUG
+                    print("Removing Device at Index \(index) of the Main List.")
+                #endif
+                _device_list.remove(at: index)
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to report that our holding pen is empty.
+     */
+    internal func reportCompletion() {
+        #if DEBUG
+            print("The holding pen is empty.")
+        #endif
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Calls from the field Support -
 /* ###################################################################################################################################### */
 /**

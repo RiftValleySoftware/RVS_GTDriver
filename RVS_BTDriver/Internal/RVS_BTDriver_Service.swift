@@ -45,9 +45,27 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
     
     /* ################################################################## */
     /**
+     This is a String, holding the service UUID.
+     */
+    internal var internal_uuid: String! = ""
+    
+    /* ################################################################## */
+    /**
      This is a read-only accessor for the object that "owns" this instance.
      */
     internal var internal_owner: RVS_BTDriver_Device!
+    
+    /* ################################################################## */
+    /**
+     Main initializer.
+     
+     - parameter owner: The device that "owns" this service.
+     - parameter uuid: A String, with the service UUID.
+     */
+    internal init(owner inOwner: RVS_BTDriver_Device, uuid inUUID: String) {
+        internal_uuid = inUUID
+        internal_owner = inOwner
+    }
 }
 
 /* ###################################################################################################################################### */

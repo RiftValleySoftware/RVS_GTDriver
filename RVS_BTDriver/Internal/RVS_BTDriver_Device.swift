@@ -38,13 +38,13 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     /**
      This contains instances that have not yet passed a credit check.
      */
-    private var _holding_pen: [RVS_BTDriver_Service] = []
+    internal var internal_holding_pen: [RVS_BTDriver_Service] = []
     
     /* ################################################################## */
     /**
      This contains the service list for this instance of the driver.
      */
-    private var _service_list: [RVS_BTDriver_Service] = []
+    internal var internal_service_list: [RVS_BTDriver_Service] = []
     
     /* ################################################################## */
     /**
@@ -72,6 +72,12 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     
     /* ################################################################## */
     /**
+     This is just here to give a handle to subclasses. This class does nothing.
+     */
+    internal func connect() { }
+    
+    /* ################################################################## */
+    /**
      The device initializer
      
      - parameter vendor: The vendor factory for the device.
@@ -79,8 +85,82 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     internal init(vendor inVendor: RVS_BTDriver_VendorProtocol) {
         vendor = inVendor
     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_Device {
+    /* ################################################################## */
+    /**
+     This method will move a service from the holding pen to the main list.
+     
+     - parameter inService: The service object to be moved.
+     */
+    internal func moveServiceFromHoldingPenToMainList(_ inService: RVS_BTDriver_Service) {
+        for service in internal_holding_pen where service === inService {
+            if let index = internal_holding_pen.firstIndex(where: { (ser) -> Bool in
+                return ser === inService
+                }) {
+                
+                #if DEBUG
+                    print("Removing Service at Index \(index) of the Holding Pen, and adding it to the main list at index \(internal_service_list.count).")
+                #endif
+                
+                internal_holding_pen.remove(at: index)
+                internal_service_list.append(service)
+            }
+        }
+    }
     
-    internal func connect() { }
+    /* ################################################################## */
+    /**
+     This method will remove a service from the holding pen or the main list.
+     
+     - parameter inService: The service object to be removed.
+     */
+    internal func removeThisService(_ inService: RVS_BTDriver_Service) {
+        for service in internal_holding_pen where service === inService {
+            if let index = internal_holding_pen.firstIndex(where: { (ser) -> Bool in
+                return ser === inService
+                }) {
+                
+                #if DEBUG
+                    print("Removing Service at Index \(index) of the Holding Pen.")
+                #endif
+                
+                internal_holding_pen.remove(at: index)
+                
+                if internal_holding_pen.isEmpty {
+                    reportCompletion()
+                }
+            }
+        }
+        
+        // If we found it in the holding pen, this should not happen, but better safe than sorry...
+        for service in internal_service_list where service === inService {
+            if let index = internal_service_list.firstIndex(where: { (ser) -> Bool in
+                return ser === inService
+                }) {
+                
+                #if DEBUG
+                    print("Removing Service at Index \(index) of the Main List.")
+                #endif
+                
+                internal_service_list.remove(at: index)
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to report that our holding pen is empty.
+     */
+    internal func reportCompletion() {
+        #if DEBUG
+            print("The holding pen is empty.")
+        #endif
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -120,7 +200,7 @@ extension RVS_BTDriver_Device {
      This is the public read-only access to the service list.
      */
     public var services: [RVS_BTDriver_ServiceProtocol] {
-        return _service_list
+        return internal_service_list
     }
     
     /* ################################################################## */
@@ -128,7 +208,7 @@ extension RVS_BTDriver_Device {
      This is the read-only count of services.
      */
     public var count: Int {
-        return _service_list.count
+        return internal_service_list.count
     }
 
     /* ################################################################## */

@@ -175,57 +175,5 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
 /**
  This implements a way for the driver to track our initialization progress.
  */
-class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_BLE_Device, CBPeripheralDelegate {
-    /* ################################################################## */
-    /**
-     Called when we have discovered services for the peripheral.
-
-     - parameter inPeripheral: The peripheral we have received notification on.
-     - parameter didDiscoverServices: Any errors that ocurred.
-    */
-    internal func peripheral(_ inPeripheral: CBPeripheral, didDiscoverServices inError: Error?) {
-        if let error = inError {
-            #if DEBUG
-                print("\n***> Service Discovery Error: \(String(describing: inError))\n")
-            #endif
-            reportThisError(.unknownPeripheralDiscoveryError(error: error))
-        } else if let services = inPeripheral.services {
-            #if DEBUG
-                print("\n***> Services Discovered:\n\t\(String(describing: services))")
-            #endif
-        } else {
-            #if DEBUG
-                print("\tNo services. Just disconnecting.\n")
-            #endif
-        }
-        
-        #if DEBUG
-            print("<***\n")
-        #endif
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when the peripheral is ready.
-     
-    - parameter toSendWriteWithoutResponse: The peripheral that is ready.
-    */
-    internal func peripheralIsReady(toSendWriteWithoutResponse inPeripheral: CBPeripheral) {
-        #if DEBUG
-            print("Peripheral Is Ready: \(inPeripheral)")
-        #endif
-    }
-    
-    /* ################################################################## */
-    /**
-     Called to initiate a connection.
-    */
-    override internal func connect() {
-        if .disconnected == peripheral.state { // Must be completely disconnected
-            #if DEBUG
-                print("Connecting the device: \(String(describing: self))")
-            #endif
-            centralManager.connect(peripheral, options: nil)
-        }
-    }
+class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_BLE_Device {
 }

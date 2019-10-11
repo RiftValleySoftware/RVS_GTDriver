@@ -292,6 +292,19 @@ class RVS_BTDriver_BLE_Device: RVS_BTDriver_Device {
     
     /// These are the services that we look up upon initialization connection.
     internal var internal_initalServiceDiscovery: [CBUUID] = []
+    
+    /* ################################################################## */
+    /**
+     Called to initiate a connection.
+    */
+    override internal func connect() {
+        if .disconnected == peripheral.state { // Must be completely disconnected
+            #if DEBUG
+                print("Connecting the device: \(String(describing: self))")
+            #endif
+            centralManager.connect(peripheral, options: nil)
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -341,7 +354,44 @@ extension RVS_BTDriver_BLE_Device: RVS_BTDriver_State_Machine {
      */
     internal func connectedPreInit() {
         if .initializationInProgress == _state {
+            // If we are initializing, then we create service objects for our services, and add them to the holding pen.
+            internal_initalServiceDiscovery.forEach {
+                internal_holding_pen.append(RVS_BTDriver_Service_BLE(owner: self, uuid: $0.uuidString))
+            }
+            // Then we tell the device to discover these services.
             peripheral.discoverServices(internal_initalServiceDiscovery)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called if there was a service discovery event, before initializing.
+     */
+    internal func serviceDiscoveryPreInit() {
+        /* ############################################################## */
+        /**
+         Searches the device services for the one corresponding to the given ID.
+         
+         - parameter inIDString: The UUID of the service, as a String.
+         
+         - returns: The CBService for that ID. Nil, if not found.
+         */
+        func cbServiceForThisID(_ inIDString: String) -> CBService! {
+            if let services = peripheral?.services {
+                for service in services where service.uuid == CBUUID(string: inIDString) {
+                    return service
+                }
+            }
+            
+            return nil
+        }
+        
+        for service in internal_holding_pen {
+            if  let serviceObject = cbServiceForThisID(service.internal_uuid),
+                let serviceInstance = service as? RVS_BTDriver_Service_BLE {
+                serviceInstance.cbService = serviceObject
+                moveServiceFromHoldingPenToMainList(serviceInstance)
+            }
         }
     }
 
@@ -358,4 +408,75 @@ extension RVS_BTDriver_BLE_Device: RVS_BTDriver_State_Machine {
      */
     func connectedPostInit() {
     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Core Bluetooth Peripheral Delegate Support -
+/* ###################################################################################################################################### */
+/**
+ This implements a way for the driver to track our initialization progress.
+ */
+extension RVS_BTDriver_BLE_Device: CBPeripheralDelegate {
+    /* ################################################################## */
+    /**
+     Called when we have discovered services for the peripheral.
+
+     - parameter inPeripheral: The peripheral we have received notification on.
+     - parameter didDiscoverServices: Any errors that ocurred.
+    */
+    internal func peripheral(_ inPeripheral: CBPeripheral, didDiscoverServices inError: Error?) {
+        if let error = inError {
+            #if DEBUG
+                print("\n***> Service Discovery Error: \(String(describing: inError))\n")
+            #endif
+            reportThisError(.unknownPeripheralDiscoveryError(error: error))
+        } else if let services = inPeripheral.services {
+            #if DEBUG
+                print("\n***> Services Discovered:\n\t\(String(describing: services))")
+            #endif
+            func getHoldingPenInstanceForThisService(_ inService: CBService) -> RVS_BTDriver_Service_BLE! {
+                for serviceInstance in internal_holding_pen where serviceInstance.internal_uuid == inService.uuid.uuidString {
+                    return serviceInstance as? RVS_BTDriver_Service_BLE ?? nil
+                }
+                return nil
+            }
+            
+            for service in services {
+                if let serviceInstance = getHoldingPenInstanceForThisService(service) {
+                    serviceInstance.cbService = service
+                    moveServiceFromHoldingPenToMainList(serviceInstance)
+                }
+            }
+        } else {
+            #if DEBUG
+                print("\tNo services. Just disconnecting.\n")
+            #endif
+        }
+        
+        #if DEBUG
+            print("<***\n")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the peripheral is ready.
+     
+    - parameter toSendWriteWithoutResponse: The peripheral that is ready.
+    */
+    internal func peripheralIsReady(toSendWriteWithoutResponse inPeripheral: CBPeripheral) {
+        #if DEBUG
+            print("Peripheral Is Ready: \(inPeripheral)")
+        #endif
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Specialization of the Generic Service for BLE -
+/* ###################################################################################################################################### */
+/**
+ This implements a way for the driver to track our initialization progress.
+ */
+class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
+    var cbService: CBService!
 }

@@ -80,6 +80,12 @@ internal protocol RVS_BTDriver_State_Machine {
     
     /* ################################################################## */
     /**
+     Called if there was a service discovery event, before initializing.
+     */
+    func serviceDiscoveryPreInit()
+
+    /* ################################################################## */
+    /**
      Stop the initialization process.
      */
     func abortInit()
@@ -102,7 +108,7 @@ extension RVS_BTDriver_State_Machine {
     /**
      Default Implementation returns uninitialized.
      */
-    var state: RVS_BTDriver_State_Machine_StateEnum {
+    internal var state: RVS_BTDriver_State_Machine_StateEnum {
         return .uninitialized
     }
 
@@ -110,7 +116,7 @@ extension RVS_BTDriver_State_Machine {
     /**
      Default Implementation is nil.
      */
-    var callBack: RVS_BTDriver_State_MachineCallback! {
+    internal var callBack: RVS_BTDriver_State_MachineCallback! {
         return nil
     }
 
@@ -118,17 +124,29 @@ extension RVS_BTDriver_State_Machine {
     /**
      Default Implementation does nothing.
      */
-    func startInit() { }
+    internal func startInit() { }
     
     /* ################################################################## */
     /**
      Default Implementation does nothing.
      */
-    func connectedPreInit() { }
+    internal func connectedPreInit() { }
     
     /* ################################################################## */
     /**
      Default Implementation does nothing.
      */
-    func abortInit() { }
+    internal func serviceDiscoveryPreInit() { }
+
+    /* ################################################################## */
+    /**
+     Default Implementation does nothing.
+     */
+    internal func abortInit() { }
+    
+    /* ################################################################## */
+    /**
+     Default Implementation does nothing.
+     */
+    internal func connectedPostInit() { }
 }
