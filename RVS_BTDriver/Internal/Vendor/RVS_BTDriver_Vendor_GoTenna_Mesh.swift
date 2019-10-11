@@ -132,6 +132,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
                 }
             }
         }
+        
         return nil
     }
 
@@ -174,7 +175,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
 // MARK: - Core Bluetooth Peripheral Delegate Support -
 /* ###################################################################################################################################### */
 /**
- This implements a way for the driver to track our initialization progress.
+ This is a specialization of the device for the goTenna Mesh.
  */
 class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_BLE_Device {
 }

@@ -33,12 +33,6 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This contains instances that have not yet passed a credit check.
-     */
-    private var _holding_pen: [RVS_BTDriver_PropertyProtocol] = []
-    
-    /* ################################################################## */
-    /**
      This contains the property list for this instance of the driver.
      */
     private var _property_list: [RVS_BTDriver_PropertyProtocol] = []
@@ -66,6 +60,14 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
         internal_uuid = inUUID
         internal_owner = inOwner
     }
+    
+    /* ################################################################## */
+    /**
+     This is a placeholder for subclasses. This class doesn't do anything.
+     
+     Subclasses should use this to start a discovery process for their characteristics (properties).
+     */
+    internal func discoverInitialCharacteristics() { }
 }
 
 /* ###################################################################################################################################### */

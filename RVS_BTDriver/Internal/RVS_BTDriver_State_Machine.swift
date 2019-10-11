@@ -46,25 +46,9 @@ internal enum RVS_BTDriver_State_Machine_StateEnum {
 internal protocol RVS_BTDriver_State_Machine {
     /* ################################################################## */
     /**
-     This is the type for a callback of the state machine.
-     
-     - parameter stateMachine: The state machine making the call.
-     */
-    typealias RVS_BTDriver_State_MachineCallback = (_ stateMachine: RVS_BTDriver_State_Machine) -> Void
-    
-    /* ################################################################## */
-    /**
      This is the state of the instance.
      */
     var state: RVS_BTDriver_State_Machine_StateEnum { get }
-    
-    /* ################################################################## */
-    /**
-     This is a callback that is called whenever the state changes. It's basically a subscriber.
-     
-     This can be called in non-main threads.
-     */
-    var callBack: RVS_BTDriver_State_MachineCallback! { get set }
     
     /* ################################################################## */
     /**
@@ -80,9 +64,9 @@ internal protocol RVS_BTDriver_State_Machine {
     
     /* ################################################################## */
     /**
-     Called if there was a service discovery event, before initializing.
+     Called if there was a discovery event, before initializing.
      */
-    func serviceDiscoveryPreInit()
+    func discoveryPreInit()
 
     /* ################################################################## */
     /**
@@ -114,14 +98,6 @@ extension RVS_BTDriver_State_Machine {
 
     /* ################################################################## */
     /**
-     Default Implementation is nil.
-     */
-    internal var callBack: RVS_BTDriver_State_MachineCallback! {
-        return nil
-    }
-
-    /* ################################################################## */
-    /**
      Default Implementation does nothing.
      */
     internal func startInit() { }
@@ -136,7 +112,7 @@ extension RVS_BTDriver_State_Machine {
     /**
      Default Implementation does nothing.
      */
-    internal func serviceDiscoveryPreInit() { }
+    internal func discoveryPreInit() { }
 
     /* ################################################################## */
     /**

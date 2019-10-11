@@ -29,6 +29,17 @@ import CoreBluetooth
  This is an interface for Bluetooth Low Energy (BLE), using CoreBluetooth.
  */
 internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
+    /* ###################################################################################################################################### */
+    // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
+    /* ###################################################################################################################################### */
+    /**
+     These are String-based enums that we use to reference various services and characteristics in our driver.
+     */
+    internal enum RVS_BLE_GATT_UUID: String {
+        /// The standard GATT Device Info service.
+        case deviceInfoService  =   "180A"
+    }
+
     /// This is a simple struct to transfer interface information between the interface and the vendor device implementation.
     struct DeviceInfoStruct {
         /// The peripheral (BLE)
@@ -276,6 +287,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
 // MARK: - RVS_BTDriver_BLE_Device -
 /* ###################################################################################################################################### */
 /**
+ This is a specialized class for BLE devices (peripherals).
  */
 class RVS_BTDriver_BLE_Device: RVS_BTDriver_Device {
     /// The central manager that controls this peripheral.
@@ -283,9 +295,6 @@ class RVS_BTDriver_BLE_Device: RVS_BTDriver_Device {
     
     /// The peripheral instance associated with this device.
     var peripheral: CBPeripheral!
-    
-    /// The state machine callback.
-    private var _callBackFunc: RVS_BTDriver_State_Machine.RVS_BTDriver_State_MachineCallback!
     
     /// The initial state (unititialized).
     private var _state: RVS_BTDriver_State_Machine_StateEnum = .uninitialized
@@ -316,20 +325,6 @@ class RVS_BTDriver_BLE_Device: RVS_BTDriver_Device {
 extension RVS_BTDriver_BLE_Device: RVS_BTDriver_State_Machine {
     /* ################################################################## */
     /**
-     The state machine callback closure, supplied by the subscriber.
-     */
-    internal var callBack: RVS_BTDriver_State_Machine.RVS_BTDriver_State_MachineCallback! {
-        get {
-            return _callBackFunc
-        }
-        
-        set {
-            _callBackFunc = newValue
-        }
-    }
-    
-    /* ################################################################## */
-    /**
      The current state of this instance.
      */
     internal var state: RVS_BTDriver_State_Machine_StateEnum {
@@ -356,7 +351,13 @@ extension RVS_BTDriver_BLE_Device: RVS_BTDriver_State_Machine {
         if .initializationInProgress == _state {
             // If we are initializing, then we create service objects for our services, and add them to the holding pen.
             internal_initalServiceDiscovery.forEach {
-                internal_holding_pen.append(RVS_BTDriver_Service_BLE(owner: self, uuid: $0.uuidString))
+                switch $0.uuidString {
+                case RVS_BTDriver_Interface_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue:
+                    internal_holding_pen.append(RVS_BTDriver_Service_DeviceInfo_BLE(owner: self, uuid: $0.uuidString))
+                    
+                default:
+                    internal_holding_pen.append(RVS_BTDriver_Service_BLE(owner: self, uuid: $0.uuidString))
+                }
             }
             // Then we tell the device to discover these services.
             peripheral.discoverServices(internal_initalServiceDiscovery)
@@ -367,7 +368,7 @@ extension RVS_BTDriver_BLE_Device: RVS_BTDriver_State_Machine {
     /**
      Called if there was a service discovery event, before initializing.
      */
-    internal func serviceDiscoveryPreInit() {
+    internal func discoveryPreInit() {
         /* ############################################################## */
         /**
          Searches the device services for the one corresponding to the given ID.
@@ -425,6 +426,7 @@ extension RVS_BTDriver_BLE_Device: CBPeripheralDelegate {
      - parameter didDiscoverServices: Any errors that ocurred.
     */
     internal func peripheral(_ inPeripheral: CBPeripheral, didDiscoverServices inError: Error?) {
+        assert(inPeripheral === peripheral, "Wrong Peripheral!")
         if let error = inError {
             #if DEBUG
                 print("\n***> Service Discovery Error: \(String(describing: inError))\n")
@@ -449,7 +451,7 @@ extension RVS_BTDriver_BLE_Device: CBPeripheralDelegate {
             }
         } else {
             #if DEBUG
-                print("\tNo services. Just disconnecting.\n")
+                print("\n***> No services.\n")
             #endif
         }
         
@@ -462,11 +464,65 @@ extension RVS_BTDriver_BLE_Device: CBPeripheralDelegate {
     /**
      Called when the peripheral is ready.
      
+     - parameter inPeripheral: The peripheral that owns this service.
+     - parameter inService: The service with the characteristics that have been discovered.
+     - parameter error: Any error that may have occurred. It can be nil.
+    */
+    func peripheral(_ inPeripheral: CBPeripheral, didDiscoverCharacteristicsFor inService: CBService, error inError: Error?) {
+        assert(inPeripheral === peripheral, "Wrong Peripheral!")
+        if let error = inError {
+            #if DEBUG
+                print("\n***> Characteristic Discovery Error: \(String(describing: inError))\n")
+            #endif
+            reportThisError(.unknownCharacteristicsDiscoveryError(error: error))
+        } else if   let characteristics = inService.characteristics,
+                    !characteristics.isEmpty {
+            #if DEBUG
+                print("\n***> Discovered Characteristics: \(String(describing: characteristics))\n")
+            #endif
+            
+            for characteristic in characteristics {
+                let property = RVS_BTDriver_Property_BLE()
+                property.cbCharacteristic = characteristic
+                #if DEBUG
+                    print("\tNew Characteristic for \(inService): \(String(describing: characteristic))\n")
+                #endif
+                inPeripheral.readValue(for: characteristic)
+            }
+        } else {
+            #if DEBUG
+                print("\n***> No characteristics.\n")
+            #endif
+        }
+
+        #if DEBUG
+            print("<***\n")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the peripheral is ready.
+     
     - parameter toSendWriteWithoutResponse: The peripheral that is ready.
     */
     internal func peripheralIsReady(toSendWriteWithoutResponse inPeripheral: CBPeripheral) {
+        assert(inPeripheral === peripheral, "Wrong Peripheral!")
         #if DEBUG
             print("Peripheral Is Ready: \(inPeripheral)")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+    - parameter inPeripheral: The peripheral that owns this service.
+    - parameter didUpdateValueFor: The characteristic that was updated.
+    - parameter error: Any error that may have occurred. It can be nil.
+    */
+    func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
+        assert(inPeripheral === peripheral, "Wrong Peripheral!")
+        #if DEBUG
+            print("Peripheral  \(inPeripheral) Received an Update for This Characteristic: \(inCharacteristic), with this Error: \(String(describing: inError)).")
         #endif
     }
 }
@@ -478,5 +534,112 @@ extension RVS_BTDriver_BLE_Device: CBPeripheralDelegate {
  This implements a way for the driver to track our initialization progress.
  */
 class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
+    /// The CB service associated with this instance.
     var cbService: CBService!
+    
+    /* ################################################################## */
+    /**
+     Start a discovery process for all characteristics (properties).
+     */
+    override internal func discoverInitialCharacteristics() {
+        if let owner = internal_owner as? RVS_BTDriver_BLE_Device {
+            owner.peripheral.discoverCharacteristics(nil, for: cbService)
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Specialization of the Generic Property for BLE -
+/* ###################################################################################################################################### */
+/**
+ This implements a way for the driver to track our initialization progress.
+ */
+class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
+    /// The CB characteristic associated with this instance.
+    var cbCharacteristic: CBCharacteristic!
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Specialization of the Standard Device Info Service for BLE -
+/* ###################################################################################################################################### */
+/**
+ This implements a way for the driver to track our initialization progress.
+ */
+class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
+    /* ################################################################## */
+    /**
+     This is a list of the UUIDs for the standard Device Info charateristics.
+     */
+    internal enum RVS_BLE_GATT_UUID: String, CaseIterable {
+        /// This characteristic represents a structure containing an Organizationally Unique Identifier (OUI) followed by a manufacturer-defined identifier and is unique for each individual instance of the product.
+        case systemIDStruct         =   "2A23"
+        /// This characteristic represents the model number that is assigned by the device vendor.
+        case modelNumberString      =   "2A24"
+        /// This characteristic represents the serial number for a particular instance of the device.
+        case serialNumberString     =   "2A25"
+        /// This characteristic represents the firmware revision for the firmware within the device.
+        case firmwareRevisionString =   "2A26"
+        /// This characteristic represents the hardware revision for the hardware within the device.
+        case hardwareRevisionString =   "2A27"
+        /// This characteristic represents the software revision for the software within the device.
+        case softwareRevisionString =   "2A28"
+        /// This characteristic represents the name of the manufacturer of the device.
+        case manufacturerNameString =   "2A29"
+        /// This characteristic represents regulatory and certification information for the product in a list defined in IEEE 11073-20601.
+        case ieeRegulatoryList      =   "2A2A"
+        /// The PnP_ID characteristic is a set of values used to create a device ID value that is unique for this device.
+        case pnpIDSet               =   "2A50"
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    internal var internal_modelNumberString: String! {
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    internal var internal_serialNumberString: String! {
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    internal var internal_firmwareRevisionString: String! {
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    internal var internal_hardwareRevisionString: String! {
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    internal var internal_softwareRevisionString: String! {
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    internal var internal_manufacturerNameString: String! {
+        return nil
+    }
+
+    /* ################################################################## */
+    /**
+     Start a discovery process for basic characteristics (properties).
+     */
+    override internal func discoverInitialCharacteristics() {
+        if let owner = internal_owner as? RVS_BTDriver_BLE_Device {
+            owner.peripheral.discoverCharacteristics(nil, for: cbService)
+        }
+    }
 }
