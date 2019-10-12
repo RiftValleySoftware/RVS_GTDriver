@@ -38,7 +38,7 @@ class RVS_BTDriver_iOS_Test_Harness_NavigationController: UINavigationController
     /**
      This is the instance of our driver class.
      */
-    var driverInstance: RVS_BTDriver!
+    internal var driverInstance: RVS_BTDriver!
 }
 
 /* ###################################################################################################################################### */
@@ -127,6 +127,8 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelega
             print("Status Message Received by Navigation Controller")
         #endif
         assert(inDriver == driverInstance, "Driver Instance Not Ours!")
-        topViewController?.view.setNeedsLayout()
+        DispatchQueue.main.async {
+            self.topViewController?.view.setNeedsLayout()
+        }
     }
 }

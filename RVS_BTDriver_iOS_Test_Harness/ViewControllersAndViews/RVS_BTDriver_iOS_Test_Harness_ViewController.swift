@@ -60,7 +60,7 @@ class RVS_BTDriver_iOS_Test_Harness_ViewController: RVS_BTDriver_iOS_Test_Harnes
      The color to use for the segmented switch when scanning.
      */
     static let greenSelectedColor = UIColor(red: 0, green: 0.25, blue: 0, alpha: 1)
-    
+
     /* ################################################################## */
     /**
      The image that we display if there is no Bluetooth available.

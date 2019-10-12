@@ -28,11 +28,14 @@ import Foundation
 /**
  */
 class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
+    /* ################################################################################################################################## */
+    // MARK: - Subscriber Support -
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This is an Array of subscribers.
      */
-    private var _subscribers: [RVS_BTDriver_ServiceSubscriberProtocol] = []
+    internal var internal_subscribers: [RVS_BTDriver_ServiceSubscriberProtocol] = []
     
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_Service Sequence-Style Support -
@@ -41,7 +44,13 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
     /**
      This contains the property list for this instance of the driver.
      */
-    private var _property_list: [RVS_BTDriver_PropertyProtocol] = []
+    internal var internal_holding_pen: [RVS_BTDriver_Property] = []
+    
+    /* ################################################################## */
+    /**
+     This contains the property list for this instance of the driver.
+     */
+    internal var internal_property_list: [RVS_BTDriver_Property] = []
     
     /* ################################################################## */
     /**
@@ -57,6 +66,14 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
     
     /* ################################################################## */
     /**
+     This is a placeholder for subclasses. This class doesn't do anything.
+     
+     Subclasses should use this to start a discovery process for their characteristics (properties).
+     */
+    internal func discoverInitialCharacteristics() { }
+
+    /* ################################################################## */
+    /**
      Main initializer.
      
      - parameter owner: The device that "owns" this service.
@@ -66,14 +83,82 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
         internal_uuid = inUUID
         internal_owner = inOwner
     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_Service {
+    /* ################################################################## */
+    /**
+     This method will move a property from the holding pen to the main list.
+     
+     - parameter inProperty: The property object to be moved.
+     */
+    internal func movePropertyFromHoldingPenToMainList(_ inProperty: RVS_BTDriver_Property) {
+        for property in internal_holding_pen where property === inProperty {
+            if let index = internal_holding_pen.firstIndex(where: { (pro) -> Bool in
+                return pro === inProperty
+                }) {
+                
+                #if DEBUG
+                    print("Removing Property at Index \(index) of the Holding Pen, and adding it to the main list at index \(internal_property_list.count).")
+                #endif
+                
+                internal_holding_pen.remove(at: index)
+                internal_property_list.append(inProperty)
+                
+                if internal_holding_pen.isEmpty {
+                    reportCompletion()
+                }
+            }
+        }
+    }
     
     /* ################################################################## */
     /**
-     This is a placeholder for subclasses. This class doesn't do anything.
+     This method will remove a property from the holding pen or the main list.
      
-     Subclasses should use this to start a discovery process for their characteristics (properties).
+     - parameter inProperty: The property object to be removed.
      */
-    internal func discoverInitialCharacteristics() { }
+    internal func removeThisProperty(_ inProperty: RVS_BTDriver_Service) {
+        for property in internal_holding_pen where property === inProperty {
+            if let index = internal_holding_pen.firstIndex(where: { (pro) -> Bool in
+                return pro === inProperty
+                }) {
+                
+                #if DEBUG
+                    print("Removing Property at Index \(index) of the Holding Pen.")
+                #endif
+                
+                internal_holding_pen.remove(at: index)
+            }
+        }
+        
+        // If we found it in the holding pen, this should not happen, but better safe than sorry...
+        for property in internal_property_list where property === inProperty {
+            if let index = internal_property_list.firstIndex(where: { (pro) -> Bool in
+                return pro === inProperty
+                }) {
+                
+                #if DEBUG
+                    print("Removing Property at Index \(index) of the Main List.")
+                #endif
+                
+                internal_property_list.remove(at: index)
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to report that our holding pen is empty.
+     */
+    internal func reportCompletion() {
+        #if DEBUG
+            print("The device holding pen is empty.")
+        #endif
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -88,7 +173,7 @@ extension RVS_BTDriver_Service {
      - returns: True, if the instance is subscribed.
      */
     func isThisInstanceASubscriber(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) -> Bool {
-        return _subscribers.reduce(false) { (inCurrent, inNext) -> Bool in
+        return internal_subscribers.reduce(false) { (inCurrent, inNext) -> Bool in
             return inCurrent || inNext.uuid == inSubscriber.uuid
         }
     }
@@ -103,7 +188,7 @@ extension RVS_BTDriver_Service {
      */
     func subscribe(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) {
         if !isThisInstanceASubscriber(inSubscriber) {
-            _subscribers.append(inSubscriber)
+            internal_subscribers.append(inSubscriber)
         }
     }
 
@@ -114,10 +199,10 @@ extension RVS_BTDriver_Service {
      - parameter subscriber: The instance to unsubscribe. Nothing is done, if we are not already subscribed.
      */
     func unsubscribe(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) {
-        if let index = _subscribers.firstIndex(where: {
+        if let index = internal_subscribers.firstIndex(where: {
             $0.uuid == inSubscriber.uuid
         }) {
-            _subscribers.remove(at: index)
+            internal_subscribers.remove(at: index)
         }
     }
 }
@@ -152,7 +237,7 @@ extension RVS_BTDriver_Service {
      This is the public read-only access to the property list.
      */
     public var properties: [RVS_BTDriver_PropertyProtocol] {
-        return _property_list
+        return internal_property_list
     }
     
     /* ################################################################## */
@@ -160,7 +245,7 @@ extension RVS_BTDriver_Service {
      This is the read-only count of properties.
      */
     public var count: Int {
-        return _property_list.count
+        return internal_property_list.count
     }
 
     /* ################################################################## */

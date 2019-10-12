@@ -31,11 +31,14 @@ import Foundation
  Must derive from NSObject, for purposes of being a delegate.
  */
 class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
+    /* ################################################################################################################################## */
+    // MARK: - Subscriber Support -
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This is the list of subscribers to this instance.
      */
-    private var _subscribers: [RVS_BTDriver_DeviceSubscriberProtocol] = []
+    internal var internal_subscribers: [RVS_BTDriver_DeviceSubscriberProtocol] = []
     
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_Device Sequence-Style Support -
@@ -57,12 +60,6 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
      This is a read-only accessor for the object that "owns," this instance.
      */
     internal var internal_owner: RVS_BTDriver!
-
-    /* ################################################################## */
-    /**
-     This is a read-write accessor for the delegate for this device. It is a weak reference.
-     */
-    public var delegate: RVS_BTDriver_DeviceDelegate!
     
     /* ################################################################## */
     /**
@@ -91,6 +88,12 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     internal init(vendor inVendor: RVS_BTDriver_VendorProtocol) {
         vendor = inVendor
     }
+    
+    /* ################################################################## */
+    /**
+     This is a read-write accessor for the delegate for this device. It is a weak reference.
+     */
+    public var delegate: RVS_BTDriver_DeviceDelegate!
 }
 
 /* ###################################################################################################################################### */
@@ -105,7 +108,7 @@ extension RVS_BTDriver_Device {
      - returns: True, if the instance is subscribed.
      */
     func isThisInstanceASubscriber(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) -> Bool {
-        return _subscribers.reduce(false) { (inCurrent, inNext) -> Bool in
+        return internal_subscribers.reduce(false) { (inCurrent, inNext) -> Bool in
             return inCurrent || inNext.uuid == inSubscriber.uuid
         }
     }
@@ -120,7 +123,7 @@ extension RVS_BTDriver_Device {
      */
     func subscribe(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) {
         if !isThisInstanceASubscriber(inSubscriber) {
-            _subscribers.append(inSubscriber)
+            internal_subscribers.append(inSubscriber)
         }
     }
 
@@ -131,10 +134,10 @@ extension RVS_BTDriver_Device {
      - parameter subscriber: The instance to unsubscribe. Nothing is done, if we are not already subscribed.
      */
     func unsubscribe(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) {
-        if let index = _subscribers.firstIndex(where: {
+        if let index = internal_subscribers.firstIndex(where: {
             $0.uuid == inSubscriber.uuid
         }) {
-            _subscribers.remove(at: index)
+            internal_subscribers.remove(at: index)
         }
     }
 }
