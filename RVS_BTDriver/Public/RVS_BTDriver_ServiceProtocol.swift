@@ -27,6 +27,14 @@ import Foundation
 /* ###################################################################################################################################### */
 /**
  */
+public protocol RVS_BTDriver_ServiceSubscriberProtocol {
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_ServiceProtocol Protocol -
+/* ###################################################################################################################################### */
+/**
+ */
 public protocol RVS_BTDriver_ServiceProtocol {
     /* ################################################################## */
     /**
@@ -39,10 +47,28 @@ public protocol RVS_BTDriver_ServiceProtocol {
      This is the read-only count of properties.
      */
     var count: Int { get }
-
+    
     /* ################################################################## */
     /**
      This is a public read-only subscript to the property list.
      */
     subscript(_ inIndex: Int) -> RVS_BTDriver_PropertyProtocol { get }
+    
+    /* ################################################################## */
+    /**
+     Add an observer of the service.
+     
+     It should be noted that subscribers are held as strong references (if they are classes).
+     
+     - parameter subscriber: The instance to subscribe. Nothing is done, if we are already subscribed.
+     */
+    func subscribe(_ subscriber: RVS_BTDriver_ServiceSubscriberProtocol)
+    
+    /* ################################################################## */
+    /**
+     remove a subscriber from the list. Nothing happens if the subscriber is not already subscribed.
+     
+     - parameter subscriber: The instance to unsubscribe. Nothing is done, if we are not already subscribed.
+     */
+    func unsubscribe(_ subscriber: RVS_BTDriver_ServiceSubscriberProtocol)
 }

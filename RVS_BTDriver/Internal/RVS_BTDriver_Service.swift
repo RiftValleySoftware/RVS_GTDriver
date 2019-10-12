@@ -28,6 +28,11 @@ import Foundation
 /**
  */
 class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
+    /* ################################################################## */
+    /**
+     */
+    var subscribers: [RVS_BTDriver_ServiceSubscriberProtocol] = []
+    
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_Service Sequence-Style Support -
     /* ################################################################################################################################## */
@@ -68,6 +73,23 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
      Subclasses should use this to start a discovery process for their characteristics (properties).
      */
     internal func discoverInitialCharacteristics() { }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Subscription Support Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_Service {
+    /* ################################################################## */
+    /**
+     */
+    func subscribe(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) {
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    func unsubscribe(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) {
+    }
 }
 
 /* ###################################################################################################################################### */

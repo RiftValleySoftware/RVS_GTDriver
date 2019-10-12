@@ -31,6 +31,11 @@ import Foundation
  Must derive from NSObject, for purposes of being a delegate.
  */
 class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
+    /* ################################################################## */
+    /**
+     */
+    var subscribers: [RVS_BTDriver_DeviceSubscriberProtocol] = []
+    
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_Device Sequence-Style Support -
     /* ################################################################################################################################## */
@@ -84,6 +89,23 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
      */
     internal init(vendor inVendor: RVS_BTDriver_VendorProtocol) {
         vendor = inVendor
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Subscription Support Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_Device {
+    /* ################################################################## */
+    /**
+     */
+    func subscribe(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) {
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    func unsubscribe(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) {
     }
 }
 

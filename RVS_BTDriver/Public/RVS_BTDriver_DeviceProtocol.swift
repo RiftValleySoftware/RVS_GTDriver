@@ -23,6 +23,34 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_ServiceProtocol Protocol -
+/* ###################################################################################################################################### */
+/**
+ */
+public protocol RVS_BTDriver_DeviceSubscriberProtocol {
+    /* ################################################################## */
+    /**
+     REQUIRED: This is a unique UUID that needs to be assigned to each instance, so we can match subscribers.
+     
+     The implementor should declare this, and set it only once with this code:
+     
+     var uuid = UUID()
+     
+     After that, forget about it.
+     */
+    var uuid: UUID { get }
+
+    /* ################################################################## */
+    /**
+     REQUIRED: Error reporting method.
+     
+     - parameter device: The `RVS_BTDriver_DeviceProtocol` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func device(_ device: RVS_BTDriver_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors)
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_DeviceDelegate Protocol -
 /* ###################################################################################################################################### */
 /**
@@ -68,4 +96,22 @@ public protocol RVS_BTDriver_DeviceProtocol {
      This is a read-write accessor for the delegate for this device. It is a weak reference.
      */
     var delegate: RVS_BTDriver_DeviceDelegate! { get set }
+
+    /* ################################################################## */
+    /**
+     Add an observer of the device.
+     
+     It should be noted that subscribers are held as strong references (if they are classes).
+     
+     - parameter subscriber: The instance to subscribe. Nothing is done, if we are already subscribed.
+     */
+    func subscribe(_ subscriber: RVS_BTDriver_DeviceSubscriberProtocol)
+    
+    /* ################################################################## */
+    /**
+     remove a subscriber from the list. Nothing happens if the subscriber is not already subscribed.
+     
+     - parameter subscriber: The instance to unsubscribe. Nothing is done, if we are not already subscribed.
+     */
+    func unsubscribe(_ subscriber: RVS_BTDriver_DeviceSubscriberProtocol)
 }
