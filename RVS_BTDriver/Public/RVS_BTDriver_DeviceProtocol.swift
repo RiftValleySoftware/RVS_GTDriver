@@ -27,19 +27,7 @@ import Foundation
 /* ###################################################################################################################################### */
 /**
  */
-public protocol RVS_BTDriver_DeviceSubscriberProtocol {
-    /* ################################################################## */
-    /**
-     REQUIRED: This is a unique UUID that needs to be assigned to each instance, so we can match subscribers.
-     
-     The implementor should declare this, and set it only once with this code:
-     
-     var uuid = UUID()
-     
-     After that, forget about it.
-     */
-    var uuid: UUID { get }
-
+public protocol RVS_BTDriver_DeviceSubscriberProtocol: RVS_BTDriver_SubscriberProtocol {
     /* ################################################################## */
     /**
      REQUIRED: Error reporting method.
@@ -96,6 +84,15 @@ public protocol RVS_BTDriver_DeviceProtocol {
      This is a read-write accessor for the delegate for this device. It is a weak reference.
      */
     var delegate: RVS_BTDriver_DeviceDelegate! { get set }
+    
+    /* ################################################################## */
+    /**
+     Test to see if a subscriber is already subscribed.
+     
+     - parameter subscriber: The subscriber to test.
+     - returns: True, if the instance is subscribed.
+     */
+    func isThisInstanceASubscriber(_ subscriber: RVS_BTDriver_DeviceSubscriberProtocol) -> Bool
 
     /* ################################################################## */
     /**

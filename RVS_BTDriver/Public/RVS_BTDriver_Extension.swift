@@ -23,6 +23,26 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_SubscriberProtocol Protocol -
+/* ###################################################################################################################################### */
+/**
+ This is a "base" subscriber protocol for accessing driver elements.
+ */
+public protocol RVS_BTDriver_SubscriberProtocol {
+    /* ################################################################## */
+    /**
+     REQUIRED: This is a unique UUID that needs to be assigned to each instance, so we can match subscribers.
+     
+     The implementor should declare this, and set it only once with this code:
+     
+        `var uuid = UUID() /// Has to be a var, because protocol`
+     
+     After that, forget about it.
+     */
+    var uuid: UUID { get }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriverDelegate Protocol -
 /* ###################################################################################################################################### */
 /**

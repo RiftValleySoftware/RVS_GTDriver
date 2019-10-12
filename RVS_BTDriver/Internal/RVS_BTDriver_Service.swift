@@ -30,8 +30,9 @@ import Foundation
 class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
     /* ################################################################## */
     /**
+     This is an Array of subscribers.
      */
-    var subscribers: [RVS_BTDriver_ServiceSubscriberProtocol] = []
+    private var _subscribers: [RVS_BTDriver_ServiceSubscriberProtocol] = []
     
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_Service Sequence-Style Support -
@@ -81,14 +82,43 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
 extension RVS_BTDriver_Service {
     /* ################################################################## */
     /**
+     Test to see if a subscriber is already subscribed.
+     
+     - parameter inSubscriber: The subscriber to test.
+     - returns: True, if the instance is subscribed.
      */
-    func subscribe(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) {
+    func isThisInstanceASubscriber(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) -> Bool {
+        return _subscribers.reduce(false) { (inCurrent, inNext) -> Bool in
+            return inCurrent || inNext.uuid == inSubscriber.uuid
+        }
     }
 
     /* ################################################################## */
     /**
+     Add an observer of the service.
+     
+     It should be noted that subscribers are held as strong references (if they are classes).
+     
+     - parameter subscriber: The instance to subscribe. Nothing is done, if we are already subscribed.
+     */
+    func subscribe(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) {
+        if !isThisInstanceASubscriber(inSubscriber) {
+            _subscribers.append(inSubscriber)
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     remove a subscriber from the list. Nothing happens if the subscriber is not already subscribed.
+     
+     - parameter subscriber: The instance to unsubscribe. Nothing is done, if we are not already subscribed.
      */
     func unsubscribe(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) {
+        if let index = _subscribers.firstIndex(where: {
+            $0.uuid == inSubscriber.uuid
+        }) {
+            _subscribers.remove(at: index)
+        }
     }
 }
 

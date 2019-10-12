@@ -27,7 +27,15 @@ import Foundation
 /* ###################################################################################################################################### */
 /**
  */
-public protocol RVS_BTDriver_ServiceSubscriberProtocol {
+public protocol RVS_BTDriver_ServiceSubscriberProtocol: RVS_BTDriver_SubscriberProtocol {
+    /* ################################################################## */
+    /**
+     REQUIRED: Error reporting method.
+     
+     - parameter service: The `RVS_BTDriver_ServiceProtocol` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func service(_ service: RVS_BTDriver_ServiceProtocol, encounteredThisError: RVS_BTDriver.Errors)
 }
 
 /* ###################################################################################################################################### */
@@ -54,6 +62,15 @@ public protocol RVS_BTDriver_ServiceProtocol {
      */
     subscript(_ inIndex: Int) -> RVS_BTDriver_PropertyProtocol { get }
     
+    /* ################################################################## */
+    /**
+     Test to see if a subscriber is already subscribed.
+     
+     - parameter subscriber: The subscriber to test.
+     - returns: True, if the instance is subscribed.
+     */
+    func isThisInstanceASubscriber(_ subscriber: RVS_BTDriver_ServiceSubscriberProtocol) -> Bool
+
     /* ################################################################## */
     /**
      Add an observer of the service.
