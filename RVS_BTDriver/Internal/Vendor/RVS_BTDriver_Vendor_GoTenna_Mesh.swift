@@ -177,5 +177,5 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
 /**
  This is a specialization of the device for the goTenna Mesh.
  */
-class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_BLE_Device {
+class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_Device_BLE {
 }

@@ -30,18 +30,21 @@ import CoreBluetooth
  */
 internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     /* ###################################################################################################################################### */
-    // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
+    // MARK: - Enums for UUIDs -
     /* ###################################################################################################################################### */
     /**
-     These are String-based enums that we use to reference various services and characteristics in our driver.
+     These are standard service UUIDs
      */
     internal enum RVS_BLE_GATT_UUID: String {
         /// The standard GATT Device Info service.
         case deviceInfoService  =   "180A"
     }
 
+    /* ###################################################################################################################################### */
+    // MARK: - Internal Structs -
+    /* ###################################################################################################################################### */
     /// This is a simple struct to transfer interface information between the interface and the vendor device implementation.
-    struct DeviceInfoStruct {
+    internal struct DeviceInfoStruct {
         /// The peripheral (BLE)
         let peripheral: CBPeripheral
         /// The central BLE manager
@@ -50,9 +53,12 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
         let advertisementData: [String: Any]
     }
     
+    /* ###################################################################################################################################### */
+    // MARK: - Internal Types -
+    /* ###################################################################################################################################### */
     /// This is how we get the information for creating our device instance.
     /// The peripheral instance and the central manager instance are passed in.
-    typealias DeviceInfo = DeviceInfoStruct
+    internal typealias DeviceInfo = DeviceInfoStruct
     
     /* ################################################################################################################################## */
     // MARK: - Internal Instance Constants
@@ -234,8 +240,8 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
         #endif
         
         // Scan through the stored devices in the holding pen.
-        for device in driver.internal_holding_pen where device is RVS_BTDriver_BLE_Device {
-            if  let bleDevice = device as? RVS_BTDriver_BLE_Device,
+        for device in driver.internal_holding_pen where device is RVS_BTDriver_Device_BLE {
+            if  let bleDevice = device as? RVS_BTDriver_Device_BLE,
                 inCentral == centralManager,
                 bleDevice.centralManager == centralManager,
                 bleDevice.peripheral == inPeripheral {
@@ -245,8 +251,8 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
         }
         
         // Scan through the stored devices
-        for device in driver where device is RVS_BTDriver_BLE_Device {
-            if  let bleDevice = device as? RVS_BTDriver_BLE_Device,
+        for device in driver where device is RVS_BTDriver_Device_BLE {
+            if  let bleDevice = device as? RVS_BTDriver_Device_BLE,
                 inCentral == centralManager,
                 bleDevice.centralManager == centralManager,
                 bleDevice.peripheral == inPeripheral {
@@ -289,7 +295,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
 /**
  This is a specialized class for BLE devices (peripherals).
  */
-class RVS_BTDriver_BLE_Device: RVS_BTDriver_Device {
+class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /// The central manager that controls this peripheral.
     internal var centralManager: CBCentralManager!
     
@@ -314,6 +320,62 @@ class RVS_BTDriver_BLE_Device: RVS_BTDriver_Device {
             centralManager.connect(peripheral, options: nil)
         }
     }
+    
+    /* ################################################################## */
+    /**
+     This searches the device, and returns a service that "owns" the given characteristic.
+     
+     - parameter inCBCharacteristic: The CoreBluetooth Characteristic we are matching.
+     
+     - returns: The Service instance for the characteristic. Nil, if it can't be matched.
+     */
+    internal func serviceInstanceForCBCharacteristic(_ inCBCharacteristic: CBCharacteristic) -> RVS_BTDriver_Service_BLE! {
+        for serviceInstance in internal_holding_pen {
+            if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
+                if serviceInstance.cbService === inCBCharacteristic.service {
+                    return serviceInstance
+                }
+            }
+        }
+        
+        for serviceInstance in internal_service_list {
+            if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
+                if serviceInstance.cbService === inCBCharacteristic.service {
+                    return serviceInstance
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This searches the device, and returns a property that "owns" the given characteristic.
+     
+     - parameter inCBCharacteristic: The CoreBluetooth Characteristic we are matching.
+     
+     - returns: The Property instance for the characteristic. Nil, if it can't be matched.
+     */
+    internal func propertyInstanceForCBCharacteristic(_ inCBCharacteristic: CBCharacteristic) -> RVS_BTDriver_Property_BLE! {
+        for serviceInstance in internal_holding_pen {
+            if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
+                if serviceInstance.cbService === inCBCharacteristic.service {
+                    return serviceInstance.propertyInstanceForCBCharacteristic(inCBCharacteristic)
+                }
+            }
+        }
+        
+        for serviceInstance in internal_service_list {
+            if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
+                if serviceInstance.cbService === inCBCharacteristic.service {
+                    return serviceInstance.propertyInstanceForCBCharacteristic(inCBCharacteristic)
+                }
+            }
+        }
+
+        return nil
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -322,7 +384,7 @@ class RVS_BTDriver_BLE_Device: RVS_BTDriver_Device {
 /**
  This implements a way for the driver to track our initialization progress.
  */
-extension RVS_BTDriver_BLE_Device: RVS_BTDriver_State_Machine {
+extension RVS_BTDriver_Device_BLE: RVS_BTDriver_State_Machine {
     /* ################################################################## */
     /**
      The current state of this instance.
@@ -391,7 +453,7 @@ extension RVS_BTDriver_BLE_Device: RVS_BTDriver_State_Machine {
             if  let serviceObject = cbServiceForThisID(service.internal_uuid),
                 let serviceInstance = service as? RVS_BTDriver_Service_BLE {
                 serviceInstance.cbService = serviceObject
-                moveServiceFromHoldingPenToMainList(serviceInstance)
+//                moveServiceFromHoldingPenToMainList(serviceInstance)
             }
         }
     }
@@ -417,7 +479,7 @@ extension RVS_BTDriver_BLE_Device: RVS_BTDriver_State_Machine {
 /**
  This implements a way for the driver to track our initialization progress.
  */
-extension RVS_BTDriver_BLE_Device: CBPeripheralDelegate {
+extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
     /* ################################################################## */
     /**
      Called when we have discovered services for the peripheral.
@@ -446,7 +508,7 @@ extension RVS_BTDriver_BLE_Device: CBPeripheralDelegate {
             for service in services {
                 if let serviceInstance = getHoldingPenInstanceForThisService(service) {
                     serviceInstance.cbService = service
-                    moveServiceFromHoldingPenToMainList(serviceInstance)
+                    serviceInstance.discoverInitialCharacteristics()
                 }
             }
         } else {
@@ -487,7 +549,21 @@ extension RVS_BTDriver_BLE_Device: CBPeripheralDelegate {
                 #if DEBUG
                     print("\tNew Characteristic for \(inService): \(String(describing: characteristic))\n")
                 #endif
-                inPeripheral.readValue(for: characteristic)
+                
+                if let service = serviceInstanceForCBCharacteristic(characteristic) {
+                    let property = RVS_BTDriver_Property_BLE()
+                    #if DEBUG
+                        print("Property Added: \(property) to Service: \(service).")
+                    #endif
+                    property.cbCharacteristic = characteristic
+                    property.internal_owner = service
+                    service.addPropertyToList(property)
+                }
+            }
+            
+            // Just in case we had no prperties that required updates.
+            if internal_holding_pen.isEmpty {
+                reportCompletion()
             }
         } else {
             #if DEBUG
@@ -524,6 +600,15 @@ extension RVS_BTDriver_BLE_Device: CBPeripheralDelegate {
         #if DEBUG
             print("Peripheral  \(inPeripheral) Received an Update for This Characteristic: \(inCharacteristic), with this Error: \(String(describing: inError)).")
         #endif
+        
+        if let property = propertyInstanceForCBCharacteristic(inCharacteristic) {
+            #if DEBUG
+                print("Property Updated: \(property).")
+            #endif
+            property.executeUpdate()
+        } else {
+            assert(false, "Property Not Found for Characteristic: \(inCharacteristic)!")
+        }
     }
 }
 
@@ -535,15 +620,71 @@ extension RVS_BTDriver_BLE_Device: CBPeripheralDelegate {
  */
 class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
     /// The CB service associated with this instance.
-    var cbService: CBService!
+    internal var cbService: CBService!
     
     /* ################################################################## */
     /**
      Start a discovery process for all characteristics (properties).
      */
     override internal func discoverInitialCharacteristics() {
-        if let owner = internal_owner as? RVS_BTDriver_BLE_Device {
+        if let owner = internal_owner as? RVS_BTDriver_Device_BLE {
             owner.peripheral.discoverCharacteristics(nil, for: cbService)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     This searches the service, and returns a property that "owns" the given characteristic.
+     
+     - parameter inCBCharacteristic: The CoreBluetooth Characteristic we are matching.
+     
+     - returns: The Property instance for the characteristic. Nil, if it can't be matched.
+     */
+    internal func propertyInstanceForCBCharacteristic(_ inCBCharacteristic: CBCharacteristic) -> RVS_BTDriver_Property_BLE! {
+        for propertyInstance in internal_holding_pen {
+            if let propertyInstance = propertyInstance as? RVS_BTDriver_Property_BLE {
+                if propertyInstance.cbCharacteristic === inCBCharacteristic {
+                    return propertyInstance
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This adds a new property to the holding pen (if it can read), where an update will be requested, or directly into the main list.
+     
+     - parameter inPropertyObject: The property object we are adding.
+     */
+    internal func addPropertyToList(_ inPropertyObject: RVS_BTDriver_Property_BLE) {
+        // First, we check both our lists, and make sure we're not already there.
+        for propertyInstance in internal_holding_pen {
+            if let propertyInstance = propertyInstance as? RVS_BTDriver_Property_BLE {
+                if propertyInstance === inPropertyObject {
+                    assert(false, "Property Object: \(propertyInstance) is Already in the Holding Pen.")
+                    return
+                }
+            }
+        }
+        
+        for propertyInstance in internal_property_list {
+            if let propertyInstance = propertyInstance as? RVS_BTDriver_Property_BLE {
+                if propertyInstance === inPropertyObject {
+                    assert(false, "Property Object: \(propertyInstance) is Already in the Main List.")
+                    return
+                }
+            }
+        }
+        
+        // If we got here, then we are not already there.
+        if inPropertyObject.canRead,    // If we can read, then we go in the holding pen, and trigger an update.
+            let owner = internal_owner as? RVS_BTDriver_Device_BLE {
+            addPropertyToHoldingPen(inPropertyObject)
+            owner.peripheral.readValue(for: inPropertyObject.cbCharacteristic)
+        } else {    // Otherwise, we go straight into the main list.
+            addPropertyToMainList(inPropertyObject)
         }
     }
 }
@@ -557,6 +698,100 @@ class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
 class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /// The CB characteristic associated with this instance.
     var cbCharacteristic: CBCharacteristic!
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can broadcast its value.
+     */
+    internal var canBroadcast: Bool {
+        return cbCharacteristic.properties.contains(.broadcast)
+    }
+
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be read.
+     */
+    internal var canRead: Bool {
+        return cbCharacteristic.properties.contains(.read)
+    }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be written, with or without a response.
+     */
+    internal var canWrite: Bool {
+        return canWriteWithResponse || canWriteWithoutResponse
+    }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be written, with a response.
+     */
+    internal var canWriteWithResponse: Bool {
+        return cbCharacteristic.properties.contains(.write)
+    }
+
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be written, without a response.
+     */
+    internal var canWriteWithoutResponse: Bool {
+        return cbCharacteristic.properties.contains(.writeWithoutResponse)
+    }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can notify.
+     */
+    internal var canNotify: Bool {
+        return cbCharacteristic.properties.contains(.notify)
+    }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can indicate. The driver need sto respond to indications.
+     */
+    internal var canIndicate: Bool {
+        return cbCharacteristic.properties.contains(.indicate)
+    }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can have authenticated signed writes, without a response.
+     */
+    internal var canHaveAuthenticatedSignedWrites: Bool {
+        return cbCharacteristic.properties.contains(.indicate)
+    }
+    
+    /* ################################################################## */
+    /**
+     Only trusted devices can subscribe to notifications of this property.
+     */
+    internal var isEncryptionRequiredForNotify: Bool {
+        return cbCharacteristic.properties.contains(.notifyEncryptionRequired)
+    }
+    
+    /* ################################################################## */
+    /**
+     Only trusted devices can see indications of this property.
+     */
+    internal var isEncryptionRequiredForIndication: Bool {
+        return cbCharacteristic.properties.contains(.indicateEncryptionRequired)
+    }
+    
+    /* ################################################################## */
+    /**
+     - returns: The User description (if any) as a String. Nil, if none.
+     */
+    internal var descriptorString: String! {
+        if let descriptors = cbCharacteristic?.descriptors {
+            for descriptor in descriptors where CBUUIDCharacteristicUserDescriptionString == descriptor.uuid.uuidString {
+                return descriptor.value as? String
+            }
+        }
+        
+        return nil
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -638,7 +873,7 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
      Start a discovery process for basic characteristics (properties).
      */
     override internal func discoverInitialCharacteristics() {
-        if let owner = internal_owner as? RVS_BTDriver_BLE_Device {
+        if let owner = internal_owner as? RVS_BTDriver_Device_BLE {
             owner.peripheral.discoverCharacteristics(nil, for: cbService)
         }
     }

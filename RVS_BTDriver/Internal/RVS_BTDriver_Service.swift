@@ -106,7 +106,7 @@ extension RVS_BTDriver_Service {
                 #endif
                 
                 internal_holding_pen.remove(at: index)
-                internal_property_list.append(inProperty)
+                addPropertyToMainList(inProperty)
                 
                 if internal_holding_pen.isEmpty {
                     reportCompletion()
@@ -152,12 +152,94 @@ extension RVS_BTDriver_Service {
     
     /* ################################################################## */
     /**
+     This method adds a property to the holding pen.
+     
+     If already there, nothing happens.
+     
+     - parameter inProperty: The property object to be added.
+     */
+    internal func addPropertyToHoldingPen(_ inProperty: RVS_BTDriver_Property) {
+        // Make sure that we are not in the main list.
+        for property in internal_property_list where property === inProperty {
+            if let index = internal_property_list.firstIndex(where: { (pro) -> Bool in
+                return pro === inProperty
+                }) {
+                
+                assert(false, "Property Already Exists at Index \(index) of the Main List. This is not good.")
+
+                return
+            }
+        }
+
+        // Make sure that we are not in the holding pen.
+        for property in internal_holding_pen where property === inProperty {
+            if let index = internal_holding_pen.firstIndex(where: { (pro) -> Bool in
+                return pro === inProperty
+                }) {
+                
+                #if DEBUG
+                    print("Property Already Exists at Index \(index) of the Holding Pen. Not Adding.")
+                #endif
+                
+                return
+            }
+        }
+        
+        #if DEBUG
+            print("Adding Property to Holding Pen.")
+        #endif
+        internal_holding_pen.append(inProperty)
+    }
+    
+    /* ################################################################## */
+    /**
+     This method adds a property to the main list.
+     
+     If already there, nothing happens.
+     
+     - parameter inProperty: The property object to be added.
+     */
+    internal func addPropertyToMainList(_ inProperty: RVS_BTDriver_Property) {
+        // Make sure that we are not in the holding pen.
+        for property in internal_holding_pen where property === inProperty {
+            if let index = internal_holding_pen.firstIndex(where: { (pro) -> Bool in
+                return pro === inProperty
+                }) {
+                
+                assert(false, "Property Already Exists at Index \(index) of the Holding Pen. This is not good.")
+                
+                return
+            }
+        }
+        
+        for property in internal_property_list where property === inProperty {
+            if let index = internal_property_list.firstIndex(where: { (pro) -> Bool in
+                return pro === inProperty
+                }) {
+                
+                #if DEBUG
+                    print("Property Already Exists at Index \(index) of the Main List. Not Adding.")
+                #endif
+                
+                return
+            }
+        }
+        
+        #if DEBUG
+            print("Adding Property to Main List.")
+        #endif
+        internal_property_list.append(inProperty)
+    }
+
+    /* ################################################################## */
+    /**
      Called to report that our holding pen is empty.
      */
     internal func reportCompletion() {
         #if DEBUG
-            print("The device holding pen is empty.")
+            print("The service holding pen is empty.")
         #endif
+        internal_owner.moveServiceFromHoldingPenToMainList(self)
     }
 }
 

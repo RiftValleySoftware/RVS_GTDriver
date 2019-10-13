@@ -64,6 +64,15 @@ internal class RVS_BTDriver_Property: RVS_BTDriver_PropertyProtocol {
      This is a read-only accessor for the object that "owns" this instance.
      */
     internal var internal_owner: RVS_BTDriver_Service!
+    
+    /* ################################################################## */
+    /**
+     This is called when the property is updated.
+     */
+    internal func executeUpdate() {
+        // If we are still in the holding cell, then we move.
+        internal_owner.movePropertyFromHoldingPenToMainList(self)
+    }
 }
 
 /* ###################################################################################################################################### */
