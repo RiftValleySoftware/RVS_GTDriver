@@ -221,6 +221,10 @@ extension RVS_BTDriver_Service: RVS_BTDriverCommunicatorTools {
      - parameter inError: The error to be sent to the owner.
      */
     internal func reportThisError(_ inError: RVS_BTDriver.Errors) {
+        internal_subscribers.forEach {
+            $0.service(self, encounteredThisError: inError)
+        }
+        
         internal_owner?.reportThisError(inError)
     }
 }

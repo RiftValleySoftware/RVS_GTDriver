@@ -88,12 +88,6 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     internal init(vendor inVendor: RVS_BTDriver_VendorProtocol) {
         vendor = inVendor
     }
-    
-    /* ################################################################## */
-    /**
-     This is a read-write accessor for the delegate for this device. It is a weak reference.
-     */
-    public var delegate: RVS_BTDriver_DeviceDelegate!
 }
 
 /* ###################################################################################################################################### */
@@ -232,17 +226,14 @@ extension RVS_BTDriver_Device: RVS_BTDriverCommunicatorTools {
     /**
      This method will "kick the can" up to the driver, where the error will finally be sent to the delegate.
      
-     - parameter inError: The error to be sent to the delegate.
+     - parameter inError: The error to be sent to the subscribers, and up the chain.
      */
     public func reportThisError(_ inError: RVS_BTDriver.Errors) {
-        if let delegate = delegate {    // We test, to make sure that we have a delegate. If so, we send the error thataways.
-            #if DEBUG
-                print("Error Message Being Sent to Device Delegate: \(inError.localizedDescription)")
-            #endif
-            delegate.device(self, encounteredThisError: inError)
-        } else {    // Otherwise, we send it to the driver, for reporting there.
-            internal_owner?.reportThisError(inError)
+        internal_subscribers.forEach {
+            $0.device(self, encounteredThisError: inError)
         }
+        
+        internal_owner?.reportThisError(inError)
     }
 }
 

@@ -36,23 +36,26 @@ public protocol RVS_BTDriver_DeviceSubscriberProtocol: RVS_BTDriver_SubscriberPr
      - parameter encounteredThisError: The error that was encountered.
      */
     func device(_ device: RVS_BTDriver_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors)
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL: Called When a service is added to the main list.
+     
+     - parameter device: The `RVS_BTDriver_DeviceProtocol` instance that has the service.
+     - parameter serviceAdded: The `RVS_BTDriver_ServiceProtocol` service that was added.
+     */
+    func device(_ device: RVS_BTDriver_DeviceProtocol, serviceAdded: RVS_BTDriver_ServiceProtocol)
 }
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_DeviceDelegate Protocol -
+// MARK: - RVS_BTDriver_ServiceProtocol Default Implementations -
 /* ###################################################################################################################################### */
-/**
- Each device can have a delegate. It's strongly reccommended that you do this.
- */
-public protocol RVS_BTDriver_DeviceDelegate: class {
+extension RVS_BTDriver_DeviceSubscriberProtocol {
     /* ################################################################## */
     /**
-     REQUIRED: Error reporting method.
-     
-     - parameter device: The `RVS_BTDriver_DeviceProtocol` instance that encountered the error.
-     - parameter encounteredThisError: The error that was encountered.
+     Default does nothing.
      */
-    func device(_ device: RVS_BTDriver_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors)
+    func device(_ device: RVS_BTDriver_DeviceProtocol, serviceAdded: RVS_BTDriver_ServiceProtocol) { }
 }
 
 /* ###################################################################################################################################### */
@@ -78,12 +81,6 @@ public protocol RVS_BTDriver_DeviceProtocol {
      This is a public read-only subscript to the service list.
      */
     subscript(_ inIndex: Int) -> RVS_BTDriver_ServiceProtocol { get }
-    
-    /* ################################################################## */
-    /**
-     This is a read-write accessor for the delegate for this device. It is a weak reference.
-     */
-    var delegate: RVS_BTDriver_DeviceDelegate! { get set }
     
     /* ################################################################## */
     /**
