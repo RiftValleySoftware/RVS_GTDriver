@@ -159,7 +159,6 @@ extension RVS_BTDriver_Device {
                 
                 internal_holding_pen.remove(at: index)
                 internal_service_list.append(service)
-                service.discoverInitialCharacteristics()   // We start complete characteristic discovery, and don't for them to complete.
                 
                 if internal_holding_pen.isEmpty {
                     reportCompletion()
