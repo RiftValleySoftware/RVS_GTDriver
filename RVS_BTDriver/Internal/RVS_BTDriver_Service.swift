@@ -26,6 +26,7 @@ import Foundation
 // MARK: - RVS_BTDriver_Service -
 /* ###################################################################################################################################### */
 /**
+ This is a standard service class.
  */
 class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
     /* ################################################################################################################################## */
@@ -97,7 +98,7 @@ extension RVS_BTDriver_Service {
      */
     internal func movePropertyFromHoldingPenToMainList(_ inProperty: RVS_BTDriver_Property) {
         assert(!internal_holding_pen.isEmpty, "The holding pen is empty!")
-        for property in internal_holding_pen where property === inProperty {
+        for property in internal_holding_pen where property == inProperty {
             if let index = internal_holding_pen.firstIndex(where: { (pro) -> Bool in
                 return pro === inProperty
                 }) {
@@ -109,11 +110,13 @@ extension RVS_BTDriver_Service {
                 internal_holding_pen.remove(at: index)
                 addPropertyToMainList(inProperty)
                 
+                notifySubscribersOfNewProperty(inProperty)
+                
                 if internal_holding_pen.isEmpty {
                     reportCompletion()
                 }
             } else {
-                assert(false, "Property was not found in the holding pen!")
+                assert(false, "Property was not found in the holding pen! This is bad.")
             }
         }
     }
@@ -255,6 +258,7 @@ extension RVS_BTDriver_Service {
             print("The service is done with its initialization.")
         #endif
         internal_owner.moveServiceFromHoldingPenToMainList(self)
+        notifySubscribersOfStatusUpdate()
     }
 }
 
@@ -300,6 +304,28 @@ extension RVS_BTDriver_Service {
             $0.uuid == inSubscriber.uuid
         }) {
             internal_subscribers.remove(at: index)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Notifies subscribers of a new property.
+     
+     - parameter inProperty: The property to notify.
+     */
+    internal func notifySubscribersOfNewProperty(_ inProperty: RVS_BTDriver_Property) {
+        internal_subscribers.forEach {
+            $0.service(self, propertyAdded: inProperty)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Notifies subscribers of a status update.
+     */
+    internal func notifySubscribersOfStatusUpdate() {
+        internal_subscribers.forEach {
+            $0.serviceStatusUpdate(self)
         }
     }
 }

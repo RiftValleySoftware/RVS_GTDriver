@@ -45,6 +45,18 @@ public protocol RVS_BTDriver_DeviceSubscriberProtocol: RVS_BTDriver_SubscriberPr
      - parameter serviceAdded: The `RVS_BTDriver_ServiceProtocol` service that was added.
      */
     func device(_ device: RVS_BTDriver_DeviceProtocol, serviceAdded: RVS_BTDriver_ServiceProtocol)
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the device's status should be checked.
+     
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter device: The `RVS_BTDriver_DeviceProtocol` instance calling this.
+     */
+    func deviceStatusUpdate(_ device: RVS_BTDriver_DeviceProtocol)
 }
 
 /* ###################################################################################################################################### */

@@ -36,6 +36,27 @@ public protocol RVS_BTDriver_ServiceSubscriberProtocol: RVS_BTDriver_SubscriberP
      - parameter encounteredThisError: The error that was encountered.
      */
     func service(_ service: RVS_BTDriver_ServiceProtocol, encounteredThisError: RVS_BTDriver.Errors)
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL: Called When a property is added to the main list.
+     
+     - parameter service: The `RVS_BTDriver_ServiceProtocol` instance that has the service.
+     - parameter propertyAdded: The `RVS_BTDriver_PropertyProtocol` property that was added.
+     */
+    func service(_ service: RVS_BTDriver_ServiceProtocol, propertyAdded: RVS_BTDriver_PropertyProtocol)
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the service's status should be checked.
+     
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter service: The `RVS_BTDriver_ServiceProtocol` instance calling this.
+     */
+    func serviceStatusUpdate(_ service: RVS_BTDriver_ServiceProtocol)
 }
 
 /* ###################################################################################################################################### */

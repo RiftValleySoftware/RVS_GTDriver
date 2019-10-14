@@ -133,6 +133,9 @@ extension RVS_BTDriver {
                 internal_holding_pen.remove(at: index)
                 _device_list.append(device)
                 
+                // If we have a delegate, we send it a notification that a device was added.
+                delegate?.btDriver(self, newDeviceAdded: device)
+
                 if internal_holding_pen.isEmpty {
                     reportCompletion()
                 }
@@ -182,6 +185,8 @@ extension RVS_BTDriver {
         #if DEBUG
             print("The driver is done with its initialization.")
         #endif
+        // Send a simple status update to the delegate.
+        delegate?.btDriverStatusUpdate(self)
     }
 }
 

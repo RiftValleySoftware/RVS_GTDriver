@@ -134,6 +134,28 @@ extension RVS_BTDriver_Device {
             internal_subscribers.remove(at: index)
         }
     }
+    
+    /* ################################################################## */
+    /**
+     Notifies subscribers of a new service.
+     
+     - parameter inService: The service to notify.
+     */
+    internal func notifySubscribersOfNewService(_ inService: RVS_BTDriver_Service) {
+        internal_subscribers.forEach {
+            $0.device(self, serviceAdded: inService)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Notifies subscribers of a status update.
+     */
+    internal func notifySubscribersOfStatusUpdate() {
+        internal_subscribers.forEach {
+            $0.deviceStatusUpdate(self)
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -159,6 +181,8 @@ extension RVS_BTDriver_Device {
                 
                 internal_holding_pen.remove(at: index)
                 internal_service_list.append(service)
+                
+                notifySubscribersOfNewService(service)
                 
                 if internal_holding_pen.isEmpty {
                     reportCompletion()
@@ -227,6 +251,8 @@ extension RVS_BTDriver_Device {
         #endif
         
         internal_owner.moveDeviceFromHoldingPenToMainList(self)
+        
+        notifySubscribersOfStatusUpdate()
     }
 }
 
