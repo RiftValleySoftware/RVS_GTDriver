@@ -33,7 +33,7 @@ public protocol RVS_BTDriver_SubscriberProtocol {
     /**
      REQUIRED: This is a unique UUID that needs to be assigned to each instance, so we can match subscribers.
      
-     The implementor should declare this, and set it only once with this code:
+     The implementor should declare this, and set it only once with something like this code:
      
         `var uuid = UUID() /// Has to be a var, because protocol`
      

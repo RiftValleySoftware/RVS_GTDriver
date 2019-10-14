@@ -180,7 +180,7 @@ extension RVS_BTDriver {
      */
     internal func reportCompletion() {
         #if DEBUG
-            print("The driver holding pen is empty.")
+            print("The driver is done with its initialization.")
         #endif
     }
 }

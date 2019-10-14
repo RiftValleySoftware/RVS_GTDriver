@@ -176,6 +176,9 @@ extension RVS_BTDriver_Device {
      - parameter inService: The service object to be removed.
      */
     internal func removeThisService(_ inService: RVS_BTDriver_Service) {
+        #if DEBUG
+            var itWasRemoved = false
+        #endif
         for service in internal_holding_pen where service === inService {
             if let index = internal_holding_pen.firstIndex(where: { (ser) -> Bool in
                 return ser === inService
@@ -186,6 +189,9 @@ extension RVS_BTDriver_Device {
                 #endif
                 
                 internal_holding_pen.remove(at: index)
+                #if DEBUG
+                    itWasRemoved = true
+                #endif
             }
         }
         
@@ -200,8 +206,15 @@ extension RVS_BTDriver_Device {
                 #endif
                 
                 internal_service_list.remove(at: index)
+                #if DEBUG
+                    itWasRemoved = true
+                #endif
             }
         }
+        
+        #if DEBUG
+            assert(itWasRemoved, "The service was not found!")
+        #endif
     }
     
     /* ################################################################## */
@@ -210,7 +223,7 @@ extension RVS_BTDriver_Device {
      */
     internal func reportCompletion() {
         #if DEBUG
-            print("The device holding pen is empty.")
+            print("The device is done with its initialization.")
         #endif
         
         internal_owner.moveDeviceFromHoldingPenToMainList(self)

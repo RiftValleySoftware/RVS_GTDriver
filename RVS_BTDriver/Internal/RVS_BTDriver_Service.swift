@@ -125,6 +125,9 @@ extension RVS_BTDriver_Service {
      - parameter inProperty: The property object to be removed.
      */
     internal func removeThisProperty(_ inProperty: RVS_BTDriver_Service) {
+        #if DEBUG
+            var itWasRemoved = false
+        #endif
         for property in internal_holding_pen where property === inProperty {
             if let index = internal_holding_pen.firstIndex(where: { (pro) -> Bool in
                 return pro === inProperty
@@ -135,6 +138,9 @@ extension RVS_BTDriver_Service {
                 #endif
                 
                 internal_holding_pen.remove(at: index)
+                #if DEBUG
+                    itWasRemoved = true
+                #endif
             }
         }
         
@@ -149,8 +155,14 @@ extension RVS_BTDriver_Service {
                 #endif
                 
                 internal_property_list.remove(at: index)
+                #if DEBUG
+                    itWasRemoved = true
+                #endif
             }
         }
+        #if DEBUG
+            assert(itWasRemoved, "The property was not found!")
+        #endif
     }
     
     /* ################################################################## */
@@ -240,7 +252,7 @@ extension RVS_BTDriver_Service {
      */
     internal func reportCompletion() {
         #if DEBUG
-            print("The service holding pen is empty.")
+            print("The service is done with its initialization.")
         #endif
         internal_owner.moveServiceFromHoldingPenToMainList(self)
     }
