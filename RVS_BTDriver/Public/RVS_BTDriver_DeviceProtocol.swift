@@ -23,9 +23,10 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_ServiceProtocol Protocol -
+// MARK: - RVS_BTDriver_DeviceSubscriberProtocol Protocol -
 /* ###################################################################################################################################### */
 /**
+ This is a protocol for classes, structs or enums that want to "subscribe" to a device.
  */
 public protocol RVS_BTDriver_DeviceSubscriberProtocol: RVS_BTDriver_SubscriberProtocol {
     /* ################################################################## */
@@ -48,7 +49,7 @@ public protocol RVS_BTDriver_DeviceSubscriberProtocol: RVS_BTDriver_SubscriberPr
     
     /* ################################################################## */
     /**
-     Called to indicate that the device's status should be checked.
+     OPTIONAL: Called to indicate that the device's status should be checked.
      
      It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
      
@@ -68,6 +69,12 @@ extension RVS_BTDriver_DeviceSubscriberProtocol {
      Default does nothing.
      */
     func device(_ device: RVS_BTDriver_DeviceProtocol, serviceAdded: RVS_BTDriver_ServiceProtocol) { }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    func deviceStatusUpdate(_ device: RVS_BTDriver_DeviceProtocol) { }
 }
 
 /* ###################################################################################################################################### */

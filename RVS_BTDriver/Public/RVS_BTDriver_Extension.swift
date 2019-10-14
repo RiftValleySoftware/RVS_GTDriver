@@ -27,8 +27,10 @@ import Foundation
 /* ###################################################################################################################################### */
 /**
  This is a "base" subscriber protocol for accessing driver elements.
+ 
+ We require that subscribers be classes, so they will be referenced.
  */
-public protocol RVS_BTDriver_SubscriberProtocol {
+public protocol RVS_BTDriver_SubscriberProtocol: class {
     /* ################################################################## */
     /**
      REQUIRED: This is a unique UUID that needs to be assigned to each instance, so we can match subscribers.
