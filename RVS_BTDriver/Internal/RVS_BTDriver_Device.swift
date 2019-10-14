@@ -147,6 +147,7 @@ extension RVS_BTDriver_Device {
      - parameter inService: The service object to be moved.
      */
     internal func moveServiceFromHoldingPenToMainList(_ inService: RVS_BTDriver_Service) {
+        assert(!internal_holding_pen.isEmpty, "The holding pen is empty!")
         for service in internal_holding_pen where service === inService {
             if let index = internal_holding_pen.firstIndex(where: { (ser) -> Bool in
                 return ser === inService
@@ -163,6 +164,8 @@ extension RVS_BTDriver_Device {
                 if internal_holding_pen.isEmpty {
                     reportCompletion()
                 }
+            } else {
+                assert(false, "Service was not found in the holding pen!")
             }
         }
     }

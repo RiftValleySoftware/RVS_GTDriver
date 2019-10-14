@@ -28,7 +28,7 @@ import Foundation
 /**
  This is one "property," which maps to a bluetooth "characteristic."
  */
-internal class RVS_BTDriver_Property: RVS_BTDriver_PropertyProtocol {
+internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
     /* ################################################################## */
     /**
      - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
@@ -49,10 +49,18 @@ internal class RVS_BTDriver_Property: RVS_BTDriver_PropertyProtocol {
     
     /* ################################################################## */
     /**
-     - returns: The user description of the value (if any). If none, the String will be empty.
+     Simple check to see if this property has already been initialized.
+     
+     - returns: True, if the property is no longer in the "holding pen," which means that it has been initialized.
      */
-    public var description: String = ""
-    
+    internal var isInitialized: Bool {
+        for property in internal_owner.internal_property_list where property === self {
+            return true
+        }
+        
+        return false
+    }
+
     /* ################################################################## */
     /**
      - returns: The UUID of the value characteristic, as a String.

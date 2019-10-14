@@ -120,6 +120,7 @@ extension RVS_BTDriver {
      - parameter inDevice: The device object to be moved.
      */
     internal func moveDeviceFromHoldingPenToMainList(_ inDevice: RVS_BTDriver_Device) {
+        assert(!internal_holding_pen.isEmpty, "The holding pen is empty!")
         for device in internal_holding_pen where device === inDevice {
             if let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
                 return dev === inDevice

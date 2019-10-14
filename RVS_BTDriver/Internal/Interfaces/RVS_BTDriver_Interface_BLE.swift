@@ -431,31 +431,6 @@ extension RVS_BTDriver_Device_BLE: RVS_BTDriver_State_Machine {
      Called if there was a service discovery event, before initializing.
      */
     internal func discoveryPreInit() {
-        /* ############################################################## */
-        /**
-         Searches the device services for the one corresponding to the given ID.
-         
-         - parameter inIDString: The UUID of the service, as a String.
-         
-         - returns: The CBService for that ID. Nil, if not found.
-         */
-        func cbServiceForThisID(_ inIDString: String) -> CBService! {
-            if let services = peripheral?.services {
-                for service in services where service.uuid == CBUUID(string: inIDString) {
-                    return service
-                }
-            }
-            
-            return nil
-        }
-        
-        for service in internal_holding_pen {
-            if  let serviceObject = cbServiceForThisID(service.internal_uuid),
-                let serviceInstance = service as? RVS_BTDriver_Service_BLE {
-                serviceInstance.cbService = serviceObject
-//                moveServiceFromHoldingPenToMainList(serviceInstance)
-            }
-        }
     }
 
     /* ################################################################## */
@@ -560,11 +535,6 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
                     service.addPropertyToList(property)
                 }
             }
-            
-            // Just in case we had no prperties that required updates.
-            if internal_holding_pen.isEmpty {
-                reportCompletion()
-            }
         } else {
             #if DEBUG
                 print("\n***> No characteristics.\n")
@@ -604,7 +574,14 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
         if let property = propertyInstanceForCBCharacteristic(inCharacteristic) {
             #if DEBUG
                 print("Property Updated: \(property).")
+            
+                if property.isInitialized {
+                    print("\tProperty Has Been Initialized.")
+                } else {
+                    print("\tProperty Has Not Yet Been Initialized.")
+                }
             #endif
+            
             property.executeUpdate()
         } else {
             assert(false, "Property Not Found for Characteristic: \(inCharacteristic)!")
@@ -683,7 +660,13 @@ class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
             let owner = internal_owner as? RVS_BTDriver_Device_BLE {
             addPropertyToHoldingPen(inPropertyObject)
             owner.peripheral.readValue(for: inPropertyObject.cbCharacteristic)
+            #if DEBUG
+                print("Property Added to Holding Pen: \(inPropertyObject).")
+            #endif
         } else {    // Otherwise, we go straight into the main list.
+            #if DEBUG
+                print("Property Added to Directly to Main List: \(inPropertyObject).")
+            #endif
             addPropertyToMainList(inPropertyObject)
         }
     }
@@ -791,6 +774,61 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
         }
         
         return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     - returns: The user description of the property, including any capabilities.
+     */
+    override public var description: String {
+        var desc = super.description
+        
+        if  let descriptorString = descriptorString,
+            !descriptorString.isEmpty {
+            desc += "\n\tDescriptor: \"\(descriptorString))\""
+        }
+        
+        if  let cbCharacteristic = cbCharacteristic {
+            desc += "\n\tCharacteristic: \(cbCharacteristic))"
+
+            if canBroadcast {
+                desc += "\n\tCan Broadcast"
+            }
+            
+            if canRead {
+                desc += "\n\tCan Read"
+            }
+            
+            if canWriteWithResponse {
+                desc += "\n\tCan Write With Response"
+            }
+            
+            if canWriteWithoutResponse {
+                desc += "\n\tCan Write Without Response"
+            }
+            
+            if canNotify {
+                desc += "\n\tCan Notify"
+            }
+            
+            if canIndicate {
+                desc += "\n\tCan Indicate"
+            }
+            
+            if canHaveAuthenticatedSignedWrites {
+                desc += "\n\tCan Have Authenticated Signed Writes"
+            }
+            
+            if isEncryptionRequiredForNotify {
+                desc += "\n\tEncryption is Required for Notify"
+            }
+            
+            if isEncryptionRequiredForIndication {
+                desc += "\n\tEncryption is Required for Indicate"
+            }
+        }
+        
+        return desc
     }
 }
 
