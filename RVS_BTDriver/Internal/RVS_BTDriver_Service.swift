@@ -84,6 +84,30 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
         internal_uuid = inUUID
         internal_owner = inOwner
     }
+    
+    /* ################################################################## */
+    /**
+     Notifies subscribers of a new property.
+     This is defined here, so we can override.
+     
+     - parameter inProperty: The property to notify.
+     */
+    internal func notifySubscribersOfNewProperty(_ inProperty: RVS_BTDriver_Property) {
+        internal_subscribers.forEach {
+            $0.service(self, propertyAdded: inProperty)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Notifies subscribers of a status update.
+     This is defined here, so we can override.
+     */
+    internal func notifySubscribersOfStatusUpdate() {
+        internal_subscribers.forEach {
+            $0.serviceStatusUpdate(self)
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -304,28 +328,6 @@ extension RVS_BTDriver_Service {
             $0.uuid == inSubscriber.uuid
         }) {
             internal_subscribers.remove(at: index)
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     Notifies subscribers of a new property.
-     
-     - parameter inProperty: The property to notify.
-     */
-    internal func notifySubscribersOfNewProperty(_ inProperty: RVS_BTDriver_Property) {
-        internal_subscribers.forEach {
-            $0.service(self, propertyAdded: inProperty)
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     Notifies subscribers of a status update.
-     */
-    internal func notifySubscribersOfStatusUpdate() {
-        internal_subscribers.forEach {
-            $0.serviceStatusUpdate(self)
         }
     }
 }

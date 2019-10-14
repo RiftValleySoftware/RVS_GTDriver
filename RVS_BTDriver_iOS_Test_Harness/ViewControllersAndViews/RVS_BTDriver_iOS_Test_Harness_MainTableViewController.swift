@@ -25,12 +25,16 @@ import UIKit
     import RVS_BTDriver_iOS
 #endif
 
+class RVS_BTDriver_iOS_Test_Harness_MainTableViewController_TableViewCell: UITableViewCell {
+    var device: RVS_BTDriver_Device!
+}
+
 /* ###################################################################################################################################### */
 // MARK: - Main List Controller -
 /* ###################################################################################################################################### */
 /**
  */
-class RVS_BTDriver_iOS_Test_Harness_ViewController: RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
+class RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
     /* ################################################################## */
     /**
      The table cell prototype reuse ID
@@ -84,12 +88,18 @@ class RVS_BTDriver_iOS_Test_Harness_ViewController: RVS_BTDriver_iOS_Test_Harnes
      The scanning/not scanning switch.
      */
     @IBOutlet weak var scanModeSegmentedSwitch: UISegmentedControl!
+    
+    /* ################################################################## */
+    /**
+     This is for subscriber support.
+     */
+    var uuid = UUID()
 }
 
 /* ###################################################################################################################################### */
 // MARK: - IBAction Internal Instance Methods -
 /* ###################################################################################################################################### */
-extension RVS_BTDriver_iOS_Test_Harness_ViewController {
+extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
     /* ################################################################## */
     /**
      The scanning/not scanning switch changed.
@@ -107,34 +117,116 @@ extension RVS_BTDriver_iOS_Test_Harness_ViewController {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - UITableViewDelegate Support -
+// MARK: - RVS_BTDriverDelegate Support -
 /* ###################################################################################################################################### */
-extension RVS_BTDriver_iOS_Test_Harness_ViewController: UITableViewDelegate {
+extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriverDelegate {
+    func btDriver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors) {
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_DeviceSubscriberProtocol Support -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_DeviceSubscriberProtocol {
+    func device(_ device: RVS_BTDriver_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors) {
+    }
 }
 
 /* ###################################################################################################################################### */
 // MARK: - UITableViewDataSource Support -
 /* ###################################################################################################################################### */
-extension RVS_BTDriver_iOS_Test_Harness_ViewController: UITableViewDataSource {
+extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: UITableViewDataSource {
     /* ################################################################## */
     /**
+     - parameter inTableView: The table view that called this.
+     - parameter numberOfRowsInSection: An integer, with the 0-based section (always 0).
+     - returns: The number of rows (number of devices).
      */
     func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
-        return 0
+        // Make sure that we are the delegate for all devices.
+        for device in driverInstance {
+            device.subscribe(self)
+        }
+        
+        return driverInstance?.count ?? 0
     }
     
     /* ################################################################## */
     /**
+     Called to create a cell instance to populate a table cell.
+     
+     - parameter inTableView: The table view that called this.
+     - parameter cellForRowAt: An IndexPath to the selected cell that needs populating.
+     - returns: A newly-created cell instance.
      */
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = inTableView.dequeueReusableCell(withIdentifier: cellReuseIDentifier) as? RVS_BTDriver_iOS_Test_Harness_MainTableViewController_TableViewCell else { return UITableViewCell() }
+//        if let device = self.driverInstance?[inIndexPath.row] {
+//            let model = device.modelNumber.localizedVariant
+//            DispatchQueue.main.async {
+//                cell.gtDevice = device
+//                cell.displayLabel.text = model
+//                // This just gives us some stripes, so we can see the different rows.
+//                cell.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.clear : UIColor.white.withAlphaComponent(0.25)
+//            }
+//        }
+        return cell
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - UITableViewDelegate Support -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: UITableViewDelegate {
+    /* ################################################################## */
+    /**
+     This is called when someone taps on a row.
+     
+     We bring in the inspector for that device, and deselect the row.
+     
+     - parameter inTableView: The table view that called this.
+     - parameter willSelectRowAt: An IndexPath to the selected row.
+     - returns: An IndexPath, if the row is to remain selected and highlighted. It is always false, and we immediately deselect the row, anyway.
+     */
+    func tableView(_ inTableView: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
+        inTableView.deselectRow(at: inIndexPath, animated: false)    // Make sure to deselect the row, right away.
+//        let device = driverInstance?[inIndexPath.row]
+//        performSegue(withIdentifier: type(of: self).displaySegueID, sender: device)
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     Indicate that a row can be edited (for left-swipe delete).
+     
+     - parameter inTableView: The table view being checked
+     - parameter canEditRowAt: The indexpath of the row to be checked.
+     
+     - returns: true, always.
+     */
+    func tableView(_ inTableView: UITableView, canEditRowAt inIndexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to do a delete action.
+     
+     - parameter inTableView: The table view being checked
+     - parameter commit: The action to perform.
+     - parameter forRowAt: The indexpath of the row to be deleted.
+     */
+    func tableView(_ inTableView: UITableView, commit inEditingStyle: UITableViewCell.EditingStyle, forRowAt inIndexPath: IndexPath) {
+//        if inEditingStyle == UITableViewCell.EditingStyle.delete {
+//            driverInstance[inIndexPath.row].deleteThisDevice()   // We'll delete it when we get the callback.
+//        }
     }
 }
 
 /* ###################################################################################################################################### */
 // MARK: - Internal Base Class Override Instance Methods -
 /* ###################################################################################################################################### */
-extension RVS_BTDriver_iOS_Test_Harness_ViewController {
+extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
     /* ################################################################## */
     /**
      Called after the view has completely loaded.
@@ -162,7 +254,7 @@ extension RVS_BTDriver_iOS_Test_Harness_ViewController {
 /* ###################################################################################################################################### */
 // MARK: - Internal Instance Methods -
 /* ###################################################################################################################################### */
-extension RVS_BTDriver_iOS_Test_Harness_ViewController {
+extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
     /* ################################################################## */
     /**
      Sets up the UI Items.

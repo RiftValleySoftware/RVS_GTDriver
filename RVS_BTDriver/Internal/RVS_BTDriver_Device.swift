@@ -88,6 +88,42 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     internal init(vendor inVendor: RVS_BTDriver_VendorProtocol) {
         vendor = inVendor
     }
+
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a model name, it is available here.
+     */
+    public internal(set) var modelName: String!
+    
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a manufacturer name, it is available here.
+     */
+    public internal(set) var manufacturerName: String!
+    
+    /* ################################################################## */
+    /**
+     Notifies subscribers of a new service.
+     This is defined here, so we can override.
+
+     - parameter inService: The service to notify.
+     */
+    internal func notifySubscribersOfNewService(_ inService: RVS_BTDriver_Service) {
+        internal_subscribers.forEach {
+            $0.device(self, serviceAdded: inService)
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     Notifies subscribers of a status update.
+     This is defined here, so we can ovverride.
+     */
+    internal func notifySubscribersOfStatusUpdate() {
+        internal_subscribers.forEach {
+            $0.deviceStatusUpdate(self)
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -132,28 +168,6 @@ extension RVS_BTDriver_Device {
             $0.uuid == inSubscriber.uuid
         }) {
             internal_subscribers.remove(at: index)
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     Notifies subscribers of a new service.
-     
-     - parameter inService: The service to notify.
-     */
-    internal func notifySubscribersOfNewService(_ inService: RVS_BTDriver_Service) {
-        internal_subscribers.forEach {
-            $0.device(self, serviceAdded: inService)
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     Notifies subscribers of a status update.
-     */
-    internal func notifySubscribersOfStatusUpdate() {
-        internal_subscribers.forEach {
-            $0.deviceStatusUpdate(self)
         }
     }
 }

@@ -22,7 +22,7 @@
 		D443DECC234CF00400F9DE47 /* RVS_BTDriver_Base_Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC514234BBAD4006D0A53 /* RVS_BTDriver_Base_Interface.swift */; };
 		D443DECD234CF13600F9DE47 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC51A234BBB8E006D0A53 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift */; };
 		D443DEE6234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D443DEE5234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_AppDelegate.swift */; };
-		D443DEEA234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D443DEE9234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_ViewController.swift */; };
+		D443DEEA234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D443DEE9234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_MainTableViewController.swift */; };
 		D443DEED234D0D7B00F9DE47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D443DEEB234D0D7B00F9DE47 /* Main.storyboard */; };
 		D443DEF2234D0D7D00F9DE47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D443DEF0234D0D7D00F9DE47 /* LaunchScreen.storyboard */; };
 		D443DEF9234D0E4300F9DE47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D443DEF7234D0E4300F9DE47 /* Localizable.strings */; };
@@ -43,7 +43,7 @@
 		D443DF0C234D0EA300F9DE47 /* RVS_DebugTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC501234BB88A006D0A53 /* RVS_DebugTools.swift */; };
 		D443DF0D234D0EA300F9DE47 /* RVS_SequenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC503234BB88A006D0A53 /* RVS_SequenceProtocol.swift */; };
 		D443DF15234D115A00F9DE47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D443DF14234D115A00F9DE47 /* Assets.xcassets */; };
-		D4524B8F234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D443DEE9234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_ViewController.swift */; };
+		D4524B8F234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D443DEE9234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_MainTableViewController.swift */; };
 		D4524B91234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D443DEE5234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_AppDelegate.swift */; };
 		D4524B96234D3EEB00F3EC79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D443DEF0234D0D7D00F9DE47 /* LaunchScreen.storyboard */; };
 		D4524B98234D3EEB00F3EC79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D443DEF7234D0E4300F9DE47 /* Localizable.strings */; };
@@ -106,7 +106,7 @@
 		D4428F1E234E5CE400229A4C /* RVS_BTDriver_iOS_Test_Harness_SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_SettingsViewController.swift; sourceTree = "<group>"; };
 		D443DEE3234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness (Direct).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_BTDriver_iOS_Test_Harness (Direct).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D443DEE5234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_AppDelegate.swift; sourceTree = "<group>"; };
-		D443DEE9234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_ViewController.swift; sourceTree = "<group>"; };
+		D443DEE9234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_MainTableViewController.swift; sourceTree = "<group>"; };
 		D443DEEC234D0D7B00F9DE47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D443DEF1234D0D7D00F9DE47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D443DEF8234D0E4300F9DE47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				D4312A53234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift */,
-				D443DEE9234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_ViewController.swift */,
+				D443DEE9234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_MainTableViewController.swift */,
 				D4428F1E234E5CE400229A4C /* RVS_BTDriver_iOS_Test_Harness_SettingsViewController.swift */,
 			);
 			path = ViewControllersAndViews;
@@ -520,7 +520,7 @@
 				D41568CC234D158C0038286D /* RVS_BTDriverCommunicatorTools.swift in Sources */,
 				D443DF03234D0EA300F9DE47 /* RVS_BTDriver_Service.swift in Sources */,
 				D443DF05234D0EA300F9DE47 /* RVS_BTDriver_VendorProtocol.swift in Sources */,
-				D443DEEA234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_ViewController.swift in Sources */,
+				D443DEEA234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_MainTableViewController.swift in Sources */,
 				D443DF00234D0EA300F9DE47 /* RVS_BTDriver_PropertyProtocol.swift in Sources */,
 				D4428F1C234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift in Sources */,
 				D443DEE6234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_AppDelegate.swift in Sources */,
@@ -538,7 +538,7 @@
 				D4312A55234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift in Sources */,
 				D4524BA9234D40BA00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_NavigationController.swift in Sources */,
 				D4428F20234E5CE400229A4C /* RVS_BTDriver_iOS_Test_Harness_SettingsViewController.swift in Sources */,
-				D4524B8F234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_ViewController.swift in Sources */,
+				D4524B8F234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_MainTableViewController.swift in Sources */,
 				D4524B91234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_AppDelegate.swift in Sources */,
 				D4992FB5234FB69800EDA733 /* RVS_String_Extensions.swift in Sources */,
 				D4992FB3234FB69800EDA733 /* RVS_PersistentPrefs.swift in Sources */,

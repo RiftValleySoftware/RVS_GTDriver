@@ -483,6 +483,7 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
             for service in services {
                 if let serviceInstance = getHoldingPenInstanceForThisService(service) {
                     serviceInstance.cbService = service
+                    serviceInstance.internal_uuid = service.uuid.uuidString
                     serviceInstance.discoverInitialCharacteristics()
                 }
             }
@@ -531,6 +532,8 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
                         print("Property Added: \(property) to Service: \(service).")
                     #endif
                     property.cbCharacteristic = characteristic
+                    property.uuidString = characteristic.uuid.uuidString
+                    property.rawValue = characteristic.value
                     property.internal_owner = service
                     service.addPropertyToList(property)
                 }
@@ -778,6 +781,16 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     
     /* ################################################################## */
     /**
+     This is called when the property is updated.
+     We use this to set the value.
+     */
+    override internal func executeUpdate() {
+        rawValue = self.cbCharacteristic.value
+        super.executeUpdate()
+    }
+
+    /* ################################################################## */
+    /**
      - returns: The user description of the property, including any capabilities.
      */
     override public var description: String {
@@ -914,5 +927,33 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
         if let owner = internal_owner as? RVS_BTDriver_Device_BLE {
             owner.peripheral.discoverCharacteristics(nil, for: cbService)
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     Notifies subscribers of a new property.
+     
+     - parameter inProperty: The property to notify.
+     */
+    override internal func notifySubscribersOfNewProperty(_ inProperty: RVS_BTDriver_Property) {
+        let manufacturerNameUUID = RVS_BLE_GATT_UUID.manufacturerNameString.rawValue
+        let modelNameUUID = RVS_BLE_GATT_UUID.modelNumberString.rawValue
+        let propertyUUID = inProperty.uuidString
+        if  manufacturerNameUUID == propertyUUID,
+            case let RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue(stringVal) = inProperty.value,
+            let stringValue = stringVal {
+            #if DEBUG
+                print("Adding the Manufacturer Name (\"\(stringValue)\" to the device.")
+            #endif
+            internal_owner.manufacturerName = stringValue
+        } else if modelNameUUID == propertyUUID,
+            case let RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue(stringVal) = inProperty.value,
+            let stringValue = stringVal {
+            #if DEBUG
+                print("Adding the Model Name (\"\(stringValue)\" to the device.")
+            #endif
+            internal_owner.modelName = stringValue
+        }
+        super.notifySubscribersOfNewProperty(inProperty)
     }
 }

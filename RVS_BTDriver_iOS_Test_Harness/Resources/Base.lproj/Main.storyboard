@@ -31,7 +31,7 @@
         <!--SLUG-MAIN-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="RVS_BTDriver_iOS_Test_Harness_ViewController" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RVS_BTDriver_iOS_Test_Harness_MainTableViewController" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

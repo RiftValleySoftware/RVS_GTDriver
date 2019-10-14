@@ -85,6 +85,18 @@ extension RVS_BTDriver_DeviceSubscriberProtocol {
 public protocol RVS_BTDriver_DeviceProtocol {
     /* ################################################################## */
     /**
+     If the device has a Device Info Service with a model name, it is available here.
+     */
+    var modelName: String! { get }
+    
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a manufacturer name, it is available here.
+     */
+    var manufacturerName: String! { get }
+
+    /* ################################################################## */
+    /**
      This is the public read-only access to the service list.
      */
     var services: [RVS_BTDriver_ServiceProtocol] { get }
