@@ -254,7 +254,7 @@ extension RVS_BTDriver {
      - returns: true, if all of the vendor interfaces have Bluetooth powered on.
      */
     @objc dynamic public var isBTAvailable: Bool {
-        for vendor in vendors where !vendor.interface.isBTAvailable {
+        for vendor in internal_vendors where !vendor.interface.isBTAvailable {
             return false
         }
         return true
@@ -267,7 +267,7 @@ extension RVS_BTDriver {
      - returns: true, if even one of the vendor interfaces is in active scanning.
      */
     @objc dynamic public var isScanning: Bool {
-        for vendor in vendors where vendor.interface.isScanning {
+        for vendor in internal_vendors where vendor.interface.isScanning {
             return true
         }
         return false
@@ -283,7 +283,7 @@ extension RVS_BTDriver {
      Tells the vendor interfaces (all of them) to start scanning for services.
      */
     public func startScanning() {
-        vendors.forEach {
+        internal_vendors.forEach {
             $0.interface.isScanning = true
         }
     }
@@ -293,7 +293,7 @@ extension RVS_BTDriver {
      Tells the vendor interfaces to stop scanning.
      */
     public func stopScanning() {
-        vendors.forEach {
+        internal_vendors.forEach {
             $0.interface.isScanning = false
         }
     }
@@ -317,11 +317,25 @@ extension RVS_BTDriver {
 extension RVS_BTDriver {
     /* ################################################################## */
     /**
-     The main initializer for the class.
+     The main initializer.
      
-     - parameter delegate: The delegate instance. It is required, and cannot be nil.
+     - parameter delegate: The delegate to be used with this instance. It cannot be nil, and is a weak reference.
+     - parameter queue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
+     - parameter allowDuplicatesInBLEScan:  This is a flag that specifies that the scanner can be continuously running, and "re-finding" duplicate devices.
+                                            If true, it could adversely affect battery life. Default is false.
+     - parameter stayConnected: This is set to true, if you want all your device connections to be persistent. That is, once connected, they must be explicitly disconencted by the user.
+                                Otherwise, each device will be connected only while interacting.
+                                This is optional. Default is false.
      */
-    public convenience init(delegate inDelegate: RVS_BTDriverDelegate) {
-        self.init(inDelegate)
+    public convenience init(delegate inDelegate: RVS_BTDriverDelegate, queue inQueue: DispatchQueue? = nil, allowDuplicatesInBLEScan inAllowDuplicatesInBLEScan: Bool = false, stayConnected inStayConnected: Bool = false) {
+        self.init()
+        internal_AllowDuplicatesInBLEScan = inAllowDuplicatesInBLEScan
+        internal_stayConnected = inStayConnected
+        internal_delegate = inDelegate
+        internal_queue = inQueue
+        // We initialize with our vendors, which will also allow us to create any required interfaces.
+        internal_vendors = [
+            RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self)
+        ]
     }
 }

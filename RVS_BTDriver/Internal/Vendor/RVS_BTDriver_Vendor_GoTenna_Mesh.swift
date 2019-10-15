@@ -120,6 +120,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
                     ret.internal_owner = driver
                     ret.peripheral = deviceRecord.peripheral
                     ret.centralManager = deviceRecord.centralManager
+                    ret.uuid = deviceRecord.peripheral.identifier.uuidString
                     
                     /// These are the services we search for, after connecting.
                     ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.deviceInfoService.rawValue),
@@ -145,6 +146,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
     internal func makeInterface(queue inQueue: DispatchQueue!) {
         interface = RVS_BTDriver_Interface_BLE.makeInterface(queue: inQueue)
         interface.driver = driver   // Who's your daddy?
+        interface.rememberAdvertisedDevices = driver.internal_AllowDuplicatesInBLEScan  // This means that if a device is deleted while in scanning mode, and it will be found again.
         // Scan for our devices. Don't bother adding if we are already there.
         for serviceSignature in serviceSignatures where !interface.serviceSignatures.contains(serviceSignature) {
             interface.serviceSignatures.append(serviceSignature)

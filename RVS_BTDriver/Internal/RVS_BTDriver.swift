@@ -33,11 +33,30 @@ import Foundation
  Just remember that it aggregates a protocol, not a class/struct, so you see a "mask" over a different class that is known internally.
  */
 public class RVS_BTDriver: NSObject {
+    /* ################################################################################################################################## */
+    // MARK: - Private Instance Properties
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This contains the device list for this instance of the driver.
      */
     private var _device_list: [RVS_BTDriver_Device] = []
+    
+    /* ################################################################################################################################## */
+    // MARK: - Internal Instance Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is a flag that specifies that the scanner can be continuously running, and "re-finding" duplicate devices.
+     If true, it could adversely affect battery life. Default is false.
+     */
+    internal var internal_AllowDuplicatesInBLEScan: Bool = false
+    
+    /* ################################################################## */
+    /**
+     This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is false.
+     */
+    internal var internal_stayConnected: Bool = false
     
     /* ################################################################## */
     /**
@@ -65,47 +84,17 @@ public class RVS_BTDriver: NSObject {
     /**
      This will contain our vendor factory instances. This is loaded at instantiation time.
      */
-    internal var vendors: [RVS_BTDriver_VendorProtocol] = []
+    internal var internal_vendors: [RVS_BTDriver_VendorProtocol] = []
 
+    /* ################################################################################################################################## */
+    // MARK: - Internal Ininitailzer
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      We declare a blank init as private, so it can't be called outside this file.
      */
-    override private init() {
+    override internal init() {
         super.init()
-    }
-    
-    /* ################################################################## */
-    /**
-     An internal convenience initializer (meant to be called from the public convenience init).
-     
-     - parameter inDelegate: The delegate instance. It is required, and cannot be nil.
-     - parameter queue: The queue we want to use. Default is nil (optional). Nil means use the main thread.
-     */
-    internal convenience init(_ inDelegate: RVS_BTDriverDelegate, queue inQueue: DispatchQueue! = nil) {
-        self.init()
-        internal_delegate = inDelegate
-        internal_queue = inQueue
-        // We initialize with our vendors, which will also allow us to create any required interfaces.
-        vendors = [
-            RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self)
-        ]
-    }
-    
-    /* ################################################################## */
-    /**
-     This method runs through our "holding pen," and will start device on their initialization (if not started), or move them to the completed queue, if they are done.
-     */
-    internal func triageHoldingPen() {
-        internal_holding_pen.forEach {
-            if  let deviceAsStateMachine = $0 as? RVS_BTDriver_State_Machine,
-                .uninitialized == deviceAsStateMachine.state {
-                #if DEBUG
-                    print("Starting initialization of a device in the holding pen: \(String(describing: $0))")
-                #endif
-                deviceAsStateMachine.startInit()
-            }
-        }
     }
 }
 
@@ -143,6 +132,22 @@ extension RVS_BTDriver {
         }
     }
     
+    /* ################################################################## */
+    /**
+     This method runs through our "holding pen," and will start device on their initialization (if not started), or move them to the completed queue, if they are done.
+     */
+    internal func triageHoldingPen() {
+        internal_holding_pen.forEach {
+            if  let deviceAsStateMachine = $0 as? RVS_BTDriver_State_Machine,
+                .uninitialized == deviceAsStateMachine.state {
+                #if DEBUG
+                    print("Starting initialization of a device in the holding pen: \(String(describing: $0))")
+                #endif
+                deviceAsStateMachine.startInit()
+            }
+        }
+    }
+
     /* ################################################################## */
     /**
      This method will remove a device from the holding pen or the main list.

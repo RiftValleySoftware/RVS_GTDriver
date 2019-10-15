@@ -133,22 +133,6 @@ public class RVS_BLEDriver: NSObject {
      This is a flag that tells us to remain connected continuously, until explicitly disconnected by the user. Default is false.
      */
     internal var internal_stayConnected: Bool = false
-
-    /* ################################################################################################################################## */
-    // MARK: - Internal Main Initializer
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     The main initializer.
-     
-     - parameter delegate: The delegate to be used with this instance. It cannot be nil, and is a weak reference.
-     - parameter queue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
-     */
-    internal init(delegate inDelegate: RVS_BLEDriverDelegate, queue inQueue: DispatchQueue? = nil) {
-        super.init()
-        internal_delegate = inDelegate
-        internal_centralManager = CBCentralManager(delegate: self, queue: inQueue)
-    }
 }
 
 /* ###################################################################################################################################### */

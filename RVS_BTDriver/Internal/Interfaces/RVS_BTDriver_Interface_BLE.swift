@@ -199,6 +199,17 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
             return
         }
         
+        // Make sure that we don't already have this peripheral.
+        driver.forEach {
+            if  let device = $0 as? RVS_BTDriver_Device_BLE,
+                device.peripheral.identifier == inPeripheral.identifier {
+                #if DEBUG
+                    print("\tWe already have this peripheral.")
+                #endif
+                return
+            }
+        }
+        
         // If we made it here, we are a valid device, and ready for inspection.
         for vendor in vendors {
             let deviceInfo = DeviceInfo(peripheral: inPeripheral, centralManager: inCentral, advertisementData: inAdvertisementData)
@@ -800,7 +811,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
             !descriptorString.isEmpty {
             desc += "\n\tDescriptor: \"\(descriptorString))\""
         }
-        
+
         if  let cbCharacteristic = cbCharacteristic {
             desc += "\n\tCharacteristic: \(cbCharacteristic))"
 

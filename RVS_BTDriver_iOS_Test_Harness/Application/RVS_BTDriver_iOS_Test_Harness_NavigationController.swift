@@ -39,6 +39,12 @@ class RVS_BTDriver_iOS_Test_Harness_NavigationController: UINavigationController
      This is the instance of our driver class.
      */
     internal var driverInstance: RVS_BTDriver!
+    
+    /* ################################################################## */
+    /**
+     These represent the persistent state.
+     */
+    let prefs = RVS_BTDriver_iOS_Test_Harness_Prefs()
 }
 
 /* ###################################################################################################################################### */
@@ -50,7 +56,8 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController {
      This establishes the driver instance, wiping out any old one.
      */
     func setUpDriver() {
-        driverInstance = RVS_BTDriver(delegate: self)
+        let queue: DispatchQueue! = prefs.useDifferentThread ? DispatchQueue.global() : nil
+        driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
     }
 }
 

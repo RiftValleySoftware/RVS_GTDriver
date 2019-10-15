@@ -88,13 +88,19 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     internal init(vendor inVendor: RVS_BTDriver_VendorProtocol) {
         vendor = inVendor
     }
-
+    
+    /* ################################################################## */
+    /**
+     This is a String, containing a unique ID for this peripheral.
+     */
+    public internal(set) var uuid: String!
+    
     /* ################################################################## */
     /**
      If the device has a Device Info Service with a model name, it is available here.
      */
     public internal(set) var modelName: String!
-    
+
     /* ################################################################## */
     /**
      If the device has a Device Info Service with a manufacturer name, it is available here.
