@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>RVS_SequenceProtocol Protocol Reference</title>
+    <title>RVS_BTDriver_Device Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Protocol/RVS_SequenceProtocol" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Extension/RVS_BTDriver_Device" class="dashAnchor"></a>
 
-    <a title="RVS_SequenceProtocol Protocol Reference"></a>
+    <a title="RVS_BTDriver_Device Extension Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">RVS_BTDriver_iOS Reference</a>
       <img class="carat" src="../img/carat.png" />
-      RVS_SequenceProtocol Protocol Reference
+      RVS_BTDriver_Device Extension Reference
     </p>
 
     <div class="content-wrapper">
@@ -115,18 +115,14 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>RVS_SequenceProtocol</h1>
+            <h1>RVS_BTDriver_Device</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_SequenceProtocol</span> <span class="p">:</span> <span class="kt">Sequence</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_Device</span><span class="p">:</span> <span class="kt">RVS_BTDriverCommunicatorTools</span></code></pre>
 
                 </div>
               </div>
-            <p>If you conform to this protocol, you get a few basic Sequence attributes for free.</p>
-
-<p>You&rsquo;ll need to set up a sequence_contents Array (read/write), and set the Element type, and that&rsquo;s about all.</p>
-
-<p>This also gives you a read-only subscript.</p>
+            <p>We establish a communicator chain, here.</p>
 
           </div>
         </section>
@@ -138,32 +134,24 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:16RVS_BTDriver_iOS0A17_SequenceProtocolPy7ElementQzSicip"></a>
-                    <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_BTDriver_iOS0A17_SequenceProtocolPy7ElementQzSicip">subscript(_:)</a>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B7_DeviceC15reportThisErroryyAA0a1_B0C6ErrorsOF"></a>
+                    <a name="//apple_ref/swift/Method/reportThisError(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B7_DeviceC15reportThisErroryyAA0a1_B0C6ErrorsOF">reportThisError(_:)</a>
                     </code>
-                      <span class="declaration-note">
-                        Default implementation
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Subscript access is get-only (for safety).</p>
-
-                      </div>
-                      <h4>Default Implementation</h4>
-                      <div class="default_impl abstract">
-                        <p>Returns an indexed element.</p>
+                        <p>This method will <q>kick the can</q> up to the driver, where the error will finally be sent to the delegate.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">subscript</span><span class="p">(</span><span class="nv">inIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Element</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">reportThisError</span><span class="p">(</span><span class="n">_</span> <span class="nv">inError</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_BTDriver.html">RVS_BTDriver</a></span><span class="o">.</span><span class="kt">Errors</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -174,12 +162,12 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>index</em>
+                                <em>inError</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The 0-based index to subscript. Must be less than count.</p>
+                                  <p>The error to be sent to the subscribers, and up the chain.</p>
                                 </div>
                               </td>
                             </tr>
@@ -192,38 +180,28 @@
               </ul>
             </div>
             <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Makes%20Things%20Optional"></a>
-                <a name="//apple_ref/swift/Section/Makes Things Optional" class="dashAnchor"></a>
-                <a href="#/Makes%20Things%20Optional">
-                  <h3 class="section-name">Makes Things Optional</h3>
-                </a>
-              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:16RVS_BTDriver_iOS0A17_SequenceProtocolPAAE7isEmptySbvp"></a>
-                    <a name="//apple_ref/swift/Property/isEmpty" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_BTDriver_iOS0A17_SequenceProtocolPAAE7isEmptySbvp">isEmpty</a>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B7_DeviceC8servicesSayAA0a1_B16_ServiceProtocol_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/services" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B7_DeviceC8servicesSayAA0a1_B16_ServiceProtocol_pGvp">services</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns true, if yes, we have no bananas.</p>
+                        <p>This is the public read-only access to the service list.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isEmpty</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">services</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -233,20 +211,17 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:16RVS_BTDriver_iOS0A17_SequenceProtocolPAAE5countSivp"></a>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B7_DeviceC5countSivp"></a>
                     <a name="//apple_ref/swift/Property/count" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_BTDriver_iOS0A17_SequenceProtocolPAAE5countSivp">count</a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B7_DeviceC5countSivp">count</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The number of elements we have. 1-based. 0 is no elements (isEmpty is true).</p>
+                        <p>This is the read-only count of services.</p>
 
                       </div>
                       <div class="declaration">
@@ -254,6 +229,33 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B7_DeviceCyAA0a1_B16_ServiceProtocol_pSicip"></a>
+                    <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B7_DeviceCyAA0a1_B16_ServiceProtocol_pSicip">subscript(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a public read-only subscript to the service list.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">inIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
