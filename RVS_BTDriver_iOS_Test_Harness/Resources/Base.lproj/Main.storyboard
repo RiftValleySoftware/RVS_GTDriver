@@ -149,7 +149,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-gradient" translatesAutoresizingMaskIntoConstraints="NO" id="lG6-wG-f84">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ieZ-qd-EVf">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ieZ-qd-EVf">
                                 <rect key="frame" x="20" y="96" width="49" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="47" id="gZY-EF-1lA"/>
@@ -161,7 +161,7 @@
                                     <action selector="threadSwitchChanged:" destination="6LN-UB-VTn" eventType="valueChanged" id="d1Y-0t-egB"/>
                                 </connections>
                             </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WoP-dM-509">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WoP-dM-509">
                                 <rect key="frame" x="20" y="135" width="49" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="47" id="TrP-yz-cyw"/>
@@ -199,7 +199,7 @@
                                     <action selector="scanSwitchToggleHit:" destination="6LN-UB-VTn" eventType="touchUpInside" id="9Vf-hp-mqT"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d38-XF-OlS">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="d38-XF-OlS">
                                 <rect key="frame" x="20" y="174" width="49" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="47" id="2yL-Dn-4OR"/>

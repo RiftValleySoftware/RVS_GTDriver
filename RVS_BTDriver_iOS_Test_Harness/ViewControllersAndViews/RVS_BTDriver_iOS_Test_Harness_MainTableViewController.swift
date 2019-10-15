@@ -83,7 +83,7 @@ class RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_iOS_Te
     /**
      This is set to true, if the app was scanning before it segued.
      */
-    private var _wasScanning = false
+    internal var internal_wasScanning = false
     
     /* ################################################################## */
     /**
@@ -149,11 +149,11 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
         }
         
         // As you were...
-        if _wasScanning {
+        if internal_wasScanning {
             driverInstance.startScanning()
         }
         
-        _wasScanning = false
+        internal_wasScanning = false
     }
 }
 
@@ -295,13 +295,30 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
     
     /* ################################################################## */
     /**
+     This is called when we are about to dismiss the screen.
+     */
+    override func viewWillAppear(_ inAnimated: Bool) {
+        super.viewWillAppear(inAnimated)
+        mainNavController.setUpDriver()
+        devicesTableView.reloadData()
+        
+        // As you were...
+        if internal_wasScanning {
+            driverInstance.startScanning()
+        }
+        
+        internal_wasScanning = false
+    }
+
+    /* ################################################################## */
+    /**
      This is called as we prepare to open the device inspector screen. We use it to associate the device instance with the screen.
      
      - parameter for: The segue object.
      - parameter sender: The context we attached to the segue (the device object).
      */
     override func prepare(for inSegue: UIStoryboardSegue, sender inSender: Any?) {
-        _wasScanning = driverInstance.isScanning
+        internal_wasScanning = driverInstance.isScanning
         driverInstance.stopScanning()
         guard   let destination = inSegue.destination as? RVS_BTDriver_iOS_Test_Harness_DetailViewController,
                 let device = inSender as? RVS_BTDriver_DeviceProtocol else { return }

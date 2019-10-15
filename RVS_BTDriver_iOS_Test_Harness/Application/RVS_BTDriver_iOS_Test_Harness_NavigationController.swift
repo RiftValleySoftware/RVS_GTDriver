@@ -138,4 +138,21 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelega
             self.topViewController?.view.setNeedsLayout()
         }
     }
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver started or stopped scanning.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDriver: The `RVS_BTDriver` instance calling this.
+     - parameter isScanning: True, if the new state is scanning is on.
+     */
+    func btDriverScanningChanged(_ inDriver: RVS_BTDriver, isScanning inIsScanning: Bool) {
+        DispatchQueue.main.async {
+            if let mainController = self.viewControllers[0] as? RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
+                mainController.setup()
+            }
+        }
+    }
 }

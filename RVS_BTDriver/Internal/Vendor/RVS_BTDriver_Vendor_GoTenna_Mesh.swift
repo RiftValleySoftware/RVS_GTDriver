@@ -117,7 +117,6 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
                 if uIntArray == _manufacturerCode {
                     let ret = RVS_BTDriver_Device_GoTenna_Mesh(vendor: self)
                     
-                    ret.internal_owner = driver
                     ret.peripheral = deviceRecord.peripheral
                     ret.centralManager = deviceRecord.centralManager
                     

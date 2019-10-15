@@ -88,6 +88,17 @@ public protocol RVS_BTDriverDelegate: class {
      - parameter driver: The `RVS_BTDriver` instance calling this.
      */
     func btDriverStatusUpdate(_ driver: RVS_BTDriver)
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver started or stopped scanning.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The `RVS_BTDriver` instance calling this.
+     - parameter isScanning: True, if the new state is scanning is on.
+     */
+    func btDriverScanningChanged(_ driver: RVS_BTDriver, isScanning: Bool)
 }
 
 /* ###################################################################################################################################### */
@@ -105,6 +116,12 @@ extension RVS_BTDriverDelegate {
      The default implementation does nothing.
      */
     public func btDriverStatusUpdate(_ driver: RVS_BTDriver) { }
+    
+    /* ################################################################## */
+    /**
+     The default implementation does nothing.
+     */
+    public func btDriverScanningChanged(_ driver: RVS_BTDriver, isScanning: Bool) { }
 }
 
 /* ###################################################################################################################################### */
@@ -283,8 +300,14 @@ extension RVS_BTDriver {
      Tells the vendor interfaces (all of them) to start scanning for services.
      */
     public func startScanning() {
+        let wasScanning = isScanning
         internal_vendors.forEach {
             $0.interface.isScanning = true
+        }
+        
+        if !wasScanning {
+            delegate?.btDriverScanningChanged(self, isScanning: true)
+            delegate?.btDriverStatusUpdate(self)
         }
     }
 
@@ -293,8 +316,14 @@ extension RVS_BTDriver {
      Tells the vendor interfaces to stop scanning.
      */
     public func stopScanning() {
+        let wasScanning = isScanning
         internal_vendors.forEach {
             $0.interface.isScanning = false
+        }
+        
+        if wasScanning {
+            delegate?.btDriverScanningChanged(self, isScanning: false)
+            delegate?.btDriverStatusUpdate(self)
         }
     }
     

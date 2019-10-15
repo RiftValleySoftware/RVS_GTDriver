@@ -27,7 +27,7 @@ import UIKit
 /* ###################################################################################################################################### */
 /**
  */
-class RVS_BTDriver_iOS_Test_Harness_SettingsViewController: UIViewController {
+class RVS_BTDriver_iOS_Test_Harness_SettingsViewController: RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
     /* ################################################################## */
     /**
      These represent the persistent state.

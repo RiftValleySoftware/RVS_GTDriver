@@ -209,6 +209,7 @@ extension RVS_BTDriver {
         #if DEBUG
             print("Adding a new device to the holding pen: \(String(describing: inDevice))")
         #endif
+        inDevice.internal_owner = self
         internal_holding_pen.append(inDevice)
     }
 }
