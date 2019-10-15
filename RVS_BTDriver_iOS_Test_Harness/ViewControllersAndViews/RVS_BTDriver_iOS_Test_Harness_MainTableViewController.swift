@@ -25,8 +25,16 @@ import UIKit
     import RVS_BTDriver_iOS
 #endif
 
+/* ###################################################################################################################################### */
+// MARK: - Class for One Table Cell -
+/* ###################################################################################################################################### */
+/**
+ */
 class RVS_BTDriver_iOS_Test_Harness_MainTableViewController_TableViewCell: UITableViewCell {
-    var device: RVS_BTDriver_Device!
+    /// The device assigned to this cell.
+    var device: RVS_BTDriver_DeviceProtocol!
+    /// The label.
+    @IBOutlet weak var displayLabel: UILabel!
 }
 
 /* ###################################################################################################################################### */
@@ -40,6 +48,12 @@ class RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_iOS_Te
      The table cell prototype reuse ID
      */
     let cellReuseIDentifier = "device-cell"
+    
+    /* ################################################################## */
+    /**
+     The segue that will bring in a device details page.
+     */
+    let displaySegueID = "display-device"
     
     /* ################################################################## */
     /**
@@ -161,15 +175,15 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: UITableViewData
      */
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let cell = inTableView.dequeueReusableCell(withIdentifier: cellReuseIDentifier) as? RVS_BTDriver_iOS_Test_Harness_MainTableViewController_TableViewCell else { return UITableViewCell() }
-//        if let device = self.driverInstance?[inIndexPath.row] {
-//            let model = device.modelNumber.localizedVariant
-//            DispatchQueue.main.async {
-//                cell.gtDevice = device
-//                cell.displayLabel.text = model
-//                // This just gives us some stripes, so we can see the different rows.
-//                cell.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.clear : UIColor.white.withAlphaComponent(0.25)
-//            }
-//        }
+        if let device = self.driverInstance?[inIndexPath.row] {
+            let model = device.modelName.localizedVariant
+            DispatchQueue.main.async {
+                cell.device = device
+                cell.displayLabel.text = model
+                // This just gives us some stripes, so we can see the different rows.
+                cell.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.clear : UIColor.white.withAlphaComponent(0.25)
+            }
+        }
         return cell
     }
 }
@@ -190,8 +204,8 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: UITableViewDele
      */
     func tableView(_ inTableView: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
         inTableView.deselectRow(at: inIndexPath, animated: false)    // Make sure to deselect the row, right away.
-//        let device = driverInstance?[inIndexPath.row]
-//        performSegue(withIdentifier: type(of: self).displaySegueID, sender: device)
+        let device = driverInstance?[inIndexPath.row]
+        performSegue(withIdentifier: displaySegueID, sender: device)
         return nil
     }
     
@@ -217,9 +231,8 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: UITableViewDele
      - parameter forRowAt: The indexpath of the row to be deleted.
      */
     func tableView(_ inTableView: UITableView, commit inEditingStyle: UITableViewCell.EditingStyle, forRowAt inIndexPath: IndexPath) {
-//        if inEditingStyle == UITableViewCell.EditingStyle.delete {
-//            driverInstance[inIndexPath.row].deleteThisDevice()   // We'll delete it when we get the callback.
-//        }
+        if inEditingStyle == UITableViewCell.EditingStyle.delete {
+        }
     }
 }
 
@@ -248,6 +261,19 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setup()
+    }
+    
+    /* ################################################################## */
+    /**
+     This is called as we prepare to open the device inspector screen. We use it to associate the device instance with the screen.
+     
+     - parameter for: The segue object.
+     - parameter sender: The context we attached to the segue (the device object).
+     */
+    override func prepare(for inSegue: UIStoryboardSegue, sender inSender: Any?) {
+        guard   let destination = inSegue.destination as? RVS_BTDriver_iOS_Test_Harness_DetailViewController,
+                let device = inSender as? RVS_BTDriver_DeviceProtocol else { return }
+        destination.device = device
     }
 }
 

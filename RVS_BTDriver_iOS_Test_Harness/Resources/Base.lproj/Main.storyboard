@@ -62,7 +62,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="735"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="device-cell" textLabel="RB6-BX-uxV" style="IBUITableViewCellStyleDefault" id="Z1y-hp-4eg">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="device-cell" textLabel="RB6-BX-uxV" style="IBUITableViewCellStyleDefault" id="Z1y-hp-4eg" customClass="RVS_BTDriver_iOS_Test_Harness_MainTableViewController_TableViewCell" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z1y-hp-4eg" id="51l-05-PHq">
@@ -79,6 +79,9 @@
                                                     </subviews>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <outlet property="displayLabel" destination="RB6-BX-uxV" id="6hH-F1-6Th"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                         <connections>
@@ -128,6 +131,7 @@
                         <outlet property="devicesTableView" destination="wbD-BL-78k" id="O0g-LD-cXP"/>
                         <outlet property="noBTImageView" destination="W99-6i-oEh" id="uUO-j1-nI9"/>
                         <outlet property="scanModeSegmentedSwitch" destination="NGS-58-Gfb" id="w70-fC-NOT"/>
+                        <segue destination="rSS-Kk-xbf" kind="show" identifier="display-device" id="WIN-np-9Wo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -261,11 +265,39 @@
             </objects>
             <point key="canvasLocation" x="962" y="139"/>
         </scene>
+        <!--Driver iOS Test Harness Detail View Controller-->
+        <scene sceneID="czM-6w-Sjs">
+            <objects>
+                <viewController id="rSS-Kk-xbf" customClass="RVS_BTDriver_iOS_Test_Harness_DetailViewController" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gXe-QS-FL1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-gradient" translatesAutoresizingMaskIntoConstraints="NO" id="Vj9-dc-dRU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Vj9-dc-dRU" firstAttribute="top" secondItem="gXe-QS-FL1" secondAttribute="top" id="7dW-h4-oDq"/>
+                            <constraint firstItem="Vj9-dc-dRU" firstAttribute="trailing" secondItem="gXe-QS-FL1" secondAttribute="trailing" id="Vva-L4-V6l"/>
+                            <constraint firstItem="Vj9-dc-dRU" firstAttribute="leading" secondItem="gXe-QS-FL1" secondAttribute="leading" id="kO6-Im-kyB"/>
+                            <constraint firstAttribute="bottom" secondItem="Vj9-dc-dRU" secondAttribute="bottom" id="mRe-J7-Ljn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Pt7-1T-Gln"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="geL-oI-HMx"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gau-eV-6Mv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="961" y="866"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Gear" width="25" height="25"/>
         <image name="NoBT" width="341.5" height="341.5"/>
         <image name="background-gradient" width="1" height="1000"/>
     </resources>
-    <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

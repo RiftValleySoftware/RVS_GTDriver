@@ -936,23 +936,49 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
      - parameter inProperty: The property to notify.
      */
     override internal func notifySubscribersOfNewProperty(_ inProperty: RVS_BTDriver_Property) {
-        let manufacturerNameUUID = RVS_BLE_GATT_UUID.manufacturerNameString.rawValue
-        let modelNameUUID = RVS_BLE_GATT_UUID.modelNumberString.rawValue
-        let propertyUUID = inProperty.uuidString
-        if  manufacturerNameUUID == propertyUUID,
+        // In the case of the standard Device Info service, we can load the basic device record with some fundamental values.
+        if  RVS_BLE_GATT_UUID.manufacturerNameString.rawValue == inProperty.uuidString,
             case let RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue(stringVal) = inProperty.value,
             let stringValue = stringVal {
             #if DEBUG
                 print("Adding the Manufacturer Name (\"\(stringValue)\" to the device.")
             #endif
             internal_owner.manufacturerName = stringValue
-        } else if modelNameUUID == propertyUUID,
+        } else if RVS_BLE_GATT_UUID.modelNumberString.rawValue == inProperty.uuidString,
             case let RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue(stringVal) = inProperty.value,
             let stringValue = stringVal {
             #if DEBUG
                 print("Adding the Model Name (\"\(stringValue)\" to the device.")
             #endif
             internal_owner.modelName = stringValue
+        } else if RVS_BLE_GATT_UUID.serialNumberString.rawValue == inProperty.uuidString,
+            case let RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue(stringVal) = inProperty.value,
+            let stringValue = stringVal {
+            #if DEBUG
+                print("Adding the Serial Number (\"\(stringValue)\" to the device.")
+            #endif
+            internal_owner.serialNumber = stringValue
+        } else if RVS_BLE_GATT_UUID.hardwareRevisionString.rawValue == inProperty.uuidString,
+            case let RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue(stringVal) = inProperty.value,
+            let stringValue = stringVal {
+            #if DEBUG
+                print("Adding the Hardware Revision (\"\(stringValue)\" to the device.")
+            #endif
+            internal_owner.hardwareRevision = stringValue
+        } else if RVS_BLE_GATT_UUID.firmwareRevisionString.rawValue == inProperty.uuidString,
+            case let RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue(stringVal) = inProperty.value,
+            let stringValue = stringVal {
+            #if DEBUG
+                print("Adding the Firmware Revision (\"\(stringValue)\" to the device.")
+            #endif
+            internal_owner.firmwareRevision = stringValue
+        } else if RVS_BLE_GATT_UUID.softwareRevisionString.rawValue == inProperty.uuidString,
+            case let RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue(stringVal) = inProperty.value,
+            let stringValue = stringVal {
+            #if DEBUG
+                print("Adding the Software Revision (\"\(stringValue)\" to the device.")
+            #endif
+            internal_owner.softwareRevision = stringValue
         }
         super.notifySubscribersOfNewProperty(inProperty)
     }
