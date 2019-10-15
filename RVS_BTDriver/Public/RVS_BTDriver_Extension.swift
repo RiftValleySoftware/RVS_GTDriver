@@ -297,6 +297,18 @@ extension RVS_BTDriver {
             $0.interface.isScanning = false
         }
     }
+    
+    /* ################################################################## */
+    /**
+     Removes an indicated device from our list.
+     
+     - parameter inDevice: The device instance to be removed. After this call, it should be considered invalid.
+     */
+    public func removeDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) {
+        if let device = inDevice as? RVS_BTDriver_Device {
+            removeThisDevice(device)
+        }
+    }
 }
 
 /* ###################################################################################################################################### */

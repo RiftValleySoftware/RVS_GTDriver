@@ -231,7 +231,10 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: UITableViewDele
      - parameter forRowAt: The indexpath of the row to be deleted.
      */
     func tableView(_ inTableView: UITableView, commit inEditingStyle: UITableViewCell.EditingStyle, forRowAt inIndexPath: IndexPath) {
-        if inEditingStyle == UITableViewCell.EditingStyle.delete {
+        if  inEditingStyle == UITableViewCell.EditingStyle.delete,
+            let driver = driverInstance {
+            driverInstance.removeDevice(driver[inIndexPath.row])
+            inTableView.reloadData()
         }
     }
 }
