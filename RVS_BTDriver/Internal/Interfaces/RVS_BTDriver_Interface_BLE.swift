@@ -345,6 +345,19 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     
     /* ################################################################## */
     /**
+     Called to close a connection.
+    */
+    override internal func disconnect() {
+        if .disconnected != peripheral.state { // This applies everywhere except when explicitly disconnected.
+            #if DEBUG
+                print("Disonnecting the device: \(String(describing: self))")
+            #endif
+            centralManager.cancelPeripheralConnection(peripheral)
+        }
+    }
+
+    /* ################################################################## */
+    /**
      This searches the device, and returns a service that "owns" the given characteristic.
      
      - parameter inCBCharacteristic: The CoreBluetooth Characteristic we are matching.

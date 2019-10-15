@@ -81,6 +81,12 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     
     /* ################################################################## */
     /**
+     This is just here to give a handle to subclasses. This class does nothing.
+     */
+    internal func disconnect() { }
+
+    /* ################################################################## */
+    /**
      The device initializer
      
      - parameter vendor: The vendor factory for the device.
@@ -295,7 +301,9 @@ extension RVS_BTDriver_Device {
         #endif
         
         internal_owner.moveDeviceFromHoldingPenToMainList(self)
-        
+        if !internal_owner.internal_stayConnected {
+            disconnect()
+        }
         notifySubscribersOfStatusUpdate()
     }
 }

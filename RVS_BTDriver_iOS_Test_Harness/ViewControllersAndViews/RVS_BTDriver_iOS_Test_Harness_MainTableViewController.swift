@@ -81,6 +81,12 @@ class RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_iOS_Te
 
     /* ################################################################## */
     /**
+     This is set to true, if the app was scanning before it segued.
+     */
+    private var _wasScanning = false
+    
+    /* ################################################################## */
+    /**
      The image that we display if there is no Bluetooth available.
      */
     @IBOutlet weak var noBTImageView: UIImageView!
@@ -127,6 +133,27 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
             driverInstance?.stopScanning()
         }
         setup()
+    }
+    
+    /* ################################################################## */
+    /**
+     This forces the driver to reset after changing settings.
+     */
+    @IBAction func unwindToThisViewController(segue inSegue: UIStoryboardSegue) {
+        assert(self == inSegue.destination, "The segue is not aimed at us!")
+        
+        // If the settings changed, the driver needs to be completely reset.
+        if inSegue.source is RVS_BTDriver_iOS_Test_Harness_SettingsViewController {
+            mainNavController.setUpDriver()
+            devicesTableView.reloadData()
+        }
+        
+        // As you were...
+        if _wasScanning {
+            driverInstance.startScanning()
+        }
+        
+        _wasScanning = false
     }
 }
 
@@ -274,6 +301,8 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
      - parameter sender: The context we attached to the segue (the device object).
      */
     override func prepare(for inSegue: UIStoryboardSegue, sender inSender: Any?) {
+        _wasScanning = driverInstance.isScanning
+        driverInstance.stopScanning()
         guard   let destination = inSegue.destination as? RVS_BTDriver_iOS_Test_Harness_DetailViewController,
                 let device = inSender as? RVS_BTDriver_DeviceProtocol else { return }
         destination.device = device
