@@ -118,7 +118,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
                 }
                 
                 // We check to see if we are going to be filtering out previous advertised devices (cuts down the noise).
-                let options: [String: Any]! = rememberAdvertisedDevices ? nil : [CBCentralManagerScanOptionAllowDuplicatesKey: 1]
+                let options: [String: Any]! = rememberAdvertisedDevices ? [CBCentralManagerScanOptionAllowDuplicatesKey: 1] : nil
                 
                 centralManager.scanForPeripherals(withServices: serviceUUIDs, options: options)
             } else if centralManager.isScanning {
@@ -199,12 +199,23 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
             return
         }
         
-        // Make sure that we don't already have this peripheral.
-        driver.forEach {
-            if  let device = $0 as? RVS_BTDriver_Device_BLE,
-                device.peripheral.identifier == inPeripheral.identifier {
+        // Make sure that we don't already have this peripheral in our main list.
+        for device in driver {
+            if  let device = device as? RVS_BTDriver_Device_BLE,
+                device.uuid == inPeripheral.identifier.uuidString {
                 #if DEBUG
-                    print("\tWe already have this peripheral.")
+                    print("\tWe already have this peripheral in the main list.")
+                #endif
+                return
+            }
+        }
+        
+        // Make sure that we don't already have this peripheral in our holding pen.
+        for device in driver.internal_holding_pen {
+            if  let device = device as? RVS_BTDriver_Device_BLE,
+                device.uuid == inPeripheral.identifier.uuidString {
+                #if DEBUG
+                    print("\tWe already have this peripheral in the holding pen.")
                 #endif
                 return
             }

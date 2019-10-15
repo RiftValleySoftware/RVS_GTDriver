@@ -120,7 +120,6 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
                     ret.internal_owner = driver
                     ret.peripheral = deviceRecord.peripheral
                     ret.centralManager = deviceRecord.centralManager
-                    ret.uuid = deviceRecord.peripheral.identifier.uuidString
                     
                     /// These are the services we search for, after connecting.
                     ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.deviceInfoService.rawValue),
@@ -180,4 +179,17 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
  This is a specialization of the device for the goTenna Mesh.
  */
 class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_Device_BLE {
+    /* ################################################################## */
+    /**
+     This is a String, containing a unique ID for this peripheral.
+     */
+    override public internal(set) var uuid: String! {
+        get {
+            return peripheral.identifier.uuidString
+        }
+        
+        set {
+            _ = newValue
+        }
+    }
 }
