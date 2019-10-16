@@ -81,7 +81,7 @@ extension RVS_BTDriver_ServiceSubscriberProtocol {
 /* ###################################################################################################################################### */
 /**
  */
-public protocol RVS_BTDriver_ServiceProtocol {
+public protocol RVS_BTDriver_ServiceProtocol: class {
     /* ################################################################## */
     /**
      This is the public read-only access to the properties list.

@@ -82,7 +82,7 @@ extension RVS_BTDriver_DeviceSubscriberProtocol {
 /* ###################################################################################################################################### */
 /**
  */
-public protocol RVS_BTDriver_DeviceProtocol {
+public protocol RVS_BTDriver_DeviceProtocol: class {
     /* ################################################################## */
     /**
      If the device has a Device Info Service with a model name, it is available here.

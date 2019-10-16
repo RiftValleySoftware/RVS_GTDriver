@@ -63,7 +63,7 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
     /**
      This is a read-only accessor for the object that "owns" this instance.
      */
-    internal var internal_owner: RVS_BTDriver_Device!
+    internal weak var internal_owner: RVS_BTDriver_Device!
     
     /* ################################################################## */
     /**

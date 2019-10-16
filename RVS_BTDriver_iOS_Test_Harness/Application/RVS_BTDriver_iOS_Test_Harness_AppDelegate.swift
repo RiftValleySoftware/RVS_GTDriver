@@ -34,6 +34,26 @@ class RVS_BTDriver_iOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDeleg
     
     /* ################################################################## */
     /**
+     Quick access to the app delegate object.
+     */
+    class var appDelegateObject: RVS_BTDriver_iOS_Test_Harness_AppDelegate! {
+        return UIApplication.shared.delegate as? RVS_BTDriver_iOS_Test_Harness_AppDelegate
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the instance of our driver class.
+     */
+    internal var driverInstance: RVS_BTDriver! {
+        didSet {
+            #if DEBUG
+                print("Main Driver Instance Changed from \(String(describing: oldValue)) to \(String(describing: driverInstance)).")
+            #endif
+        }
+    }
+
+    /* ################################################################## */
+    /**
      Called after the application has set itself up.
      
      - parameter inApplication: A reference to the application instance.

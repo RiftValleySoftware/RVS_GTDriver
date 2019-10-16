@@ -59,7 +59,7 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     /**
      This is a read-only accessor for the object that "owns," this instance.
      */
-    internal var internal_owner: RVS_BTDriver!
+    internal weak var internal_owner: RVS_BTDriver!
     
     /* ################################################################## */
     /**

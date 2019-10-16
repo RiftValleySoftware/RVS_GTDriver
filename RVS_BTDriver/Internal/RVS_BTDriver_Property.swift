@@ -71,7 +71,7 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
     /**
      This is a read-only accessor for the object that "owns" this instance.
      */
-    internal var internal_owner: RVS_BTDriver_Service!
+    internal weak var internal_owner: RVS_BTDriver_Service!
     
     /* ################################################################## */
     /**

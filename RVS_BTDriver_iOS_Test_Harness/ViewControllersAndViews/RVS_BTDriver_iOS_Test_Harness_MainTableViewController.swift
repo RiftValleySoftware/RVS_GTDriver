@@ -32,7 +32,7 @@ import UIKit
  */
 class RVS_BTDriver_iOS_Test_Harness_MainTableViewController_TableViewCell: UITableViewCell {
     /// The device assigned to this cell.
-    var device: RVS_BTDriver_DeviceProtocol!
+    weak var device: RVS_BTDriver_DeviceProtocol!
     /// The label.
     @IBOutlet weak var displayLabel: UILabel!
 }
@@ -148,6 +148,7 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriverDel
      - parameter encounteredThisError: The error that was encountered.
      */
     func btDriver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
+        reportError(inError)
     }
 }
 
@@ -182,6 +183,7 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_De
      - parameter encounteredThisError: The error that was encountered.
      */
     func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+        reportError(inError)
     }
 }
 

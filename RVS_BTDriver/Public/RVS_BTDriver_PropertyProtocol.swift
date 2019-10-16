@@ -49,7 +49,7 @@ public enum RVS_BTDriver_PropertyProtocol_Type_Enum {
 /**
  This represents the public face of a "property," which maps to a bluetooth "characteristic."
  */
-public protocol RVS_BTDriver_PropertyProtocol {
+public protocol RVS_BTDriver_PropertyProtocol: class {
     /* ################################################################## */
     /**
      - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).

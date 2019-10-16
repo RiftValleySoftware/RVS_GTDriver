@@ -36,13 +36,15 @@ import UIKit
 class RVS_BTDriver_iOS_Test_Harness_NavigationController: UINavigationController {
     /* ################################################################## */
     /**
-     This is the instance of our driver class.
+     A simple pass-through of our driver.
      */
     internal var driverInstance: RVS_BTDriver! {
-        didSet {
-            #if DEBUG
-                print("Main Driver Instance Changed from \(String(describing: oldValue)) to \(String(describing: driverInstance)).")
-            #endif
+        get {
+            return RVS_BTDriver_iOS_Test_Harness_AppDelegate.appDelegateObject.driverInstance
+        }
+        
+        set {
+            RVS_BTDriver_iOS_Test_Harness_AppDelegate.appDelegateObject.driverInstance = newValue
         }
     }
     
