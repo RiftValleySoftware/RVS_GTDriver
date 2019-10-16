@@ -102,6 +102,14 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     
     /* ################################################################## */
     /**
+     Clean up after ourselves.
+    */
+    deinit {
+        centralManager = nil
+    }
+    
+    /* ################################################################## */
+    /**
      If true, then Bluetooth is available (powered on).
      */
     override internal var isBTAvailable: Bool {

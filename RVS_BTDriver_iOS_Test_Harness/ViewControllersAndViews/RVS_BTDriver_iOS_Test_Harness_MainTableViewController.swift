@@ -276,18 +276,26 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
     
     /* ################################################################## */
     /**
-     This is called when we are about to dismiss the screen.
+     This is called when the screen is about to appear.
      */
     override func viewWillAppear(_ inAnimated: Bool) {
         super.viewWillAppear(inAnimated)
         if nil == mainNavController?.driverInstance {
             mainNavController.setUpDriver()
-            setup()
-        } else if internal_wasScanning {
-            mainNavController?.driverInstance.startScanning()
         }
-        
-        internal_wasScanning = false
+    }
+    
+    /* ################################################################## */
+    /**
+     This is called when the screen has appeared.
+     */
+    override func viewDidAppear(_ inAnimated: Bool) {
+        super.viewDidAppear(inAnimated)
+        setup()
+        if internal_wasScanning {
+            mainNavController?.driverInstance.startScanning()
+            internal_wasScanning = false
+        }
     }
 
     /* ################################################################## */
@@ -305,7 +313,6 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
         // If we are going into the settings screen, we always stop scanning completely, and reload the driver when we come back.
         } else if inSegue.destination is RVS_BTDriver_iOS_Test_Harness_SettingsViewController {
             mainNavController.driverInstance = nil
-            setup()
         }
     }
 }
@@ -322,24 +329,26 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
         noBTImageView?.isHidden = mainNavController?.driverInstance?.isBTAvailable ?? false    // This is the "No Bluetooth" image.
         // In case there is no bluetooth service available, we can hide most of the stuff.
         activeBTItemContainerView.isHidden = !(mainNavController?.driverInstance?.isBTAvailable ?? false)
-        if mainNavController?.driverInstance?.isBTAvailable ?? false {
-            if let driverInstance = mainNavController?.driverInstance {
-                let isScanning = driverInstance.isScanning
-                let index = driverInstance.isScanning ? type(of: self).segmentedSwitchIsOnIndex : type(of: self).segmentedSwitchIsOffIndex
-                scanModeSegmentedSwitch.selectedSegmentIndex = index
-                // iOS 13 uses a different property to affect the tint color.
-                if #available(iOS 13.0, *) {
-                    scanModeSegmentedSwitch.selectedSegmentTintColor = isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
-                    // White text.
-                    scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: isScanning ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor], for: .normal)
-                    scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
-                } else {
-                    let textColor = isScanning ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor
-                    scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
-                    scanModeSegmentedSwitch.tintColor = isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
-                }
-            }
-            devicesTableView?.reloadData()
+        var isScanning = false
+        scanModeSegmentedSwitch.selectedSegmentIndex = type(of: self).segmentedSwitchIsOffIndex
+        
+        if let driverInstance = mainNavController?.driverInstance,
+            driverInstance.isScanning {
+            isScanning = true
+            scanModeSegmentedSwitch.selectedSegmentIndex = type(of: self).segmentedSwitchIsOnIndex
         }
+        
+        // iOS 13 uses a different property to affect the tint color.
+        if #available(iOS 13.0, *) {
+            scanModeSegmentedSwitch.selectedSegmentTintColor = isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+            // White text.
+            scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: isScanning ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor], for: .normal)
+            scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
+        } else {
+            let textColor = isScanning ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor
+            scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
+            scanModeSegmentedSwitch.tintColor = isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+        }
+        devicesTableView?.reloadData()
     }
 }

@@ -140,7 +140,7 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelega
         #if DEBUG
             print("Status Message Received by Navigation Controller")
         #endif
-        assert(inDriver == driverInstance, "Driver Instance Not Ours!")
+        assert(nil == driverInstance || inDriver == driverInstance, "Driver Instance Not Ours!")
         DispatchQueue.main.async {
             self.topViewController?.view.setNeedsLayout()
         }
@@ -156,6 +156,9 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelega
      - parameter isScanning: True, if the new state is scanning is on.
      */
     func btDriverScanningChanged(_ inDriver: RVS_BTDriver, isScanning inIsScanning: Bool) {
+        #if DEBUG
+            print("Scanning Status Change Received by Navigation Controller. The Driver is \(inIsScanning ? "" : "not ")scanning.")
+        #endif
         DispatchQueue.main.async {
             if let mainController = self.viewControllers[0] as? RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
                 mainController.setup()

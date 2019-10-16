@@ -118,21 +118,8 @@ public class RVS_BTDriver: NSObject {
      Make sure that everything is put back the way we found it...
      */
     deinit {
+        stopScanning()
         RVS_BTDriver_Base_Interface.internal_interface = nil
-
-        _device_list.forEach {
-            $0.disconnect()
-            $0.internal_subscribers = []    // Remove subscribers after disconnection.
-            $0.internal_holding_pen = []
-            $0.internal_service_list = []
-        }
-        
-        internal_holding_pen.forEach {
-            $0.disconnect()
-            $0.internal_subscribers = []
-            $0.internal_holding_pen = []
-            $0.internal_service_list = []
-        }
     }
 }
 
