@@ -140,7 +140,14 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
 // MARK: - RVS_BTDriverDelegate Support -
 /* ###################################################################################################################################### */
 extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriverDelegate {
-    func btDriver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors) {
+    /* ################################################################## */
+    /**
+     Called when the driver encounters an error.
+     
+     - parameter inDriver: The driver instance making the callback.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func btDriver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
     }
 }
 
@@ -148,7 +155,33 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriverDel
 // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Support -
 /* ###################################################################################################################################### */
 extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_DeviceSubscriberProtocol {
-    func device(_ device: RVS_BTDriver_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors) {
+    /* ################################################################## */
+    /**
+     Called when a new service is added to the device instance.
+     
+     - parameter inDevice: The device instance making the callback.
+     - parameter serviceAdded: The new service that was added to the device.
+     */
+    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, serviceAdded inService: RVS_BTDriver_ServiceProtocol) {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the device wants us to update our status.
+     
+     - parameter inDevice: The device instance making the callback.
+     */
+    func deviceStatusUpdate(_ inDevice: RVS_BTDriver_DeviceProtocol) {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the device encounters an error.
+     
+     - parameter inDevice: The device instance making the callback.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
     }
 }
 
