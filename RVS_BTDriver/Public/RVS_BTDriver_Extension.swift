@@ -357,14 +357,6 @@ extension RVS_BTDriver {
                                 This is optional. Default is false.
      */
     public convenience init(delegate inDelegate: RVS_BTDriverDelegate, queue inQueue: DispatchQueue? = nil, allowDuplicatesInBLEScan inAllowDuplicatesInBLEScan: Bool = false, stayConnected inStayConnected: Bool = false) {
-        self.init()
-        internal_AllowDuplicatesInBLEScan = inAllowDuplicatesInBLEScan
-        internal_stayConnected = inStayConnected
-        internal_delegate = inDelegate
-        internal_queue = inQueue
-        // We initialize with our vendors, which will also allow us to create any required interfaces.
-        internal_vendors = [
-            RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self)
-        ]
+        self.init(inDelegate, queue: inQueue, allowDuplicatesInBLEScan: inAllowDuplicatesInBLEScan, stayConnected: inStayConnected)
     }
 }

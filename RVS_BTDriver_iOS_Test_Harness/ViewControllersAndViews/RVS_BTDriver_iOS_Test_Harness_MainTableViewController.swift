@@ -87,6 +87,12 @@ class RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_iOS_Te
     
     /* ################################################################## */
     /**
+     This is set to true, if we need to completely reload the driver (after settings screen).
+     */
+    internal var internal_reload_driver = false
+    
+    /* ################################################################## */
+    /**
      The image that we display if there is no Bluetooth available.
      */
     @IBOutlet weak var noBTImageView: UIImageView!
@@ -202,8 +208,8 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: UITableViewData
      */
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let cell = inTableView.dequeueReusableCell(withIdentifier: cellReuseIDentifier) as? RVS_BTDriver_iOS_Test_Harness_MainTableViewController_TableViewCell else { return UITableViewCell() }
-        if let device = self.driverInstance?[inIndexPath.row] {
-            let model = device.modelName.localizedVariant
+        if  let device = self.driverInstance?[inIndexPath.row],
+            let model = device.modelName?.localizedVariant {
             DispatchQueue.main.async {
                 cell.device = device
                 cell.displayLabel.text = model
@@ -299,14 +305,18 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
      */
     override func viewWillAppear(_ inAnimated: Bool) {
         super.viewWillAppear(inAnimated)
-        mainNavController.setUpDriver()
-        devicesTableView.reloadData()
+        if internal_reload_driver {
+            mainNavController.setUpDriver()
+            devicesTableView.reloadData()
+            internal_wasScanning = false
+        }
         
         // As you were...
         if internal_wasScanning {
             driverInstance.startScanning()
         }
         
+        internal_reload_driver = false
         internal_wasScanning = false
     }
 
@@ -318,11 +328,16 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
      - parameter sender: The context we attached to the segue (the device object).
      */
     override func prepare(for inSegue: UIStoryboardSegue, sender inSender: Any?) {
+        if  let destination = inSegue.destination as? RVS_BTDriver_iOS_Test_Harness_DetailViewController,
+            let device = inSender as? RVS_BTDriver_DeviceProtocol {
+            internal_wasScanning = driverInstance.isScanning
+            destination.device = device
+        // If we are going into the settings screen, we always stop scanning completely, and reload the driver when we come back.
+        } else if inSegue.destination is RVS_BTDriver_iOS_Test_Harness_SettingsViewController {
+            internal_reload_driver = true
+        }
+        
         internal_wasScanning = driverInstance.isScanning
-        driverInstance.stopScanning()
-        guard   let destination = inSegue.destination as? RVS_BTDriver_iOS_Test_Harness_DetailViewController,
-                let device = inSender as? RVS_BTDriver_DeviceProtocol else { return }
-        destination.device = device
     }
 }
 

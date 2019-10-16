@@ -91,10 +91,46 @@ public class RVS_BTDriver: NSObject {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     We declare a blank init as private, so it can't be called outside this file.
+     The main internal initializer.
+     
+     - parameter inDelegate: The delegate to be used with this instance. It cannot be nil, and is a weak reference.
+     - parameter queue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
+     - parameter allowDuplicatesInBLEScan:  This is a flag that specifies that the scanner can be continuously running, and "re-finding" duplicate devices.
+                                            If true, it could adversely affect battery life. Default is false.
+     - parameter stayConnected: This is set to true, if you want all your device connections to be persistent. That is, once connected, they must be explicitly disconencted by the user.
+                                Otherwise, each device will be connected only while interacting.
+                                This is optional. Default is false.
      */
-    override internal init() {
+    internal init(_ inDelegate: RVS_BTDriverDelegate, queue inQueue: DispatchQueue? = nil, allowDuplicatesInBLEScan inAllowDuplicatesInBLEScan: Bool = false, stayConnected inStayConnected: Bool = false) {
         super.init()
+        internal_AllowDuplicatesInBLEScan = inAllowDuplicatesInBLEScan
+        internal_stayConnected = inStayConnected
+        internal_delegate = inDelegate
+        internal_queue = inQueue
+        // We initialize with our vendors, which will also allow us to create any required interfaces.
+        internal_vendors = [
+            RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self)
+        ]
+    }
+
+    /* ################################################################## */
+    /**
+     Make sure that everything is put back the way we found it...
+     */
+    deinit {
+        _device_list.forEach {
+            $0.disconnect()
+            $0.internal_subscribers = []    // Remove subscribers after disconnection.
+            $0.internal_holding_pen = []
+            $0.internal_service_list = []
+        }
+        
+        internal_holding_pen.forEach {
+            $0.disconnect()
+            $0.internal_subscribers = []
+            $0.internal_holding_pen = []
+            $0.internal_service_list = []
+        }
     }
 }
 

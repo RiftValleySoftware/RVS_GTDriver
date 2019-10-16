@@ -108,6 +108,16 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
             $0.serviceStatusUpdate(self)
         }
     }
+    
+    /* ################################################################## */
+    /**
+     Make sure that everything is put back the way we found it...
+     */
+    deinit {
+        internal_subscribers = []
+        internal_property_list = []
+        internal_holding_pen = []
+    }
 }
 
 /* ###################################################################################################################################### */
