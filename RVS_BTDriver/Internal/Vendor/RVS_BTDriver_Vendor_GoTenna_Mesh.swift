@@ -66,6 +66,14 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
      This is the data we need to match against the advertisement data.
      */
     private let _manufacturerCode: [UInt8] = [0xfe, 0xff, 0x02]
+    
+    /* ################################################################## */
+    /**
+     Read-only accessor for the interface. This is a weak reference.
+     
+     - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface()` has not yet been called.
+     */
+    internal weak var interface: RVS_BTDriver_InterfaceProtocol!
 
     /* ################################################################## */
     /**
@@ -77,7 +85,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
     /**
      A read-only accessor to the main driver instance.
      */
-    internal var driver: RVS_BTDriver! {
+    internal weak var driver: RVS_BTDriver! {
         return internal_driver
     }
     
@@ -88,14 +96,6 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
     var serviceSignatures: [String] {
         return [RVS_BLE_GATT_UUID.goTennaProprietary.rawValue]
     }
-
-    /* ################################################################## */
-    /**
-     Read-only accessor for the interface. This is a weak reference.
-     
-     - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface()` has not yet been called.
-     */
-    internal weak var interface: RVS_BTDriver_InterfaceProtocol!
 
     /* ################################################################## */
     /**

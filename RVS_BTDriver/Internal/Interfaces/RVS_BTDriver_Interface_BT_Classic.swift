@@ -30,6 +30,12 @@ import Foundation
 class RVS_BTDriver_Interface_BT_Classic: RVS_BTDriver_Base_Interface {
     /* ################################################################## */
     /**
+     Holds our SINGLETON
+    */
+    internal static var internal_interface: RVS_BTDriver_InterfaceProtocol!
+
+    /* ################################################################## */
+    /**
      This will create the SINGLETON, if it is not already created, or simply returns the one we have.
      */
     internal static var interface: RVS_BTDriver_InterfaceProtocol! {

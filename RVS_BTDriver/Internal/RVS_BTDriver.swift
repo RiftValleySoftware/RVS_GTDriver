@@ -72,7 +72,7 @@ public class RVS_BTDriver: NSObject {
     /**
      This contains any queue we're supposed to use. Nil (default) is the main queue.
      */
-    internal var internal_queue: DispatchQueue!
+    internal weak var internal_queue: DispatchQueue!
 
     /* ################################################################## */
     /**
@@ -85,7 +85,7 @@ public class RVS_BTDriver: NSObject {
      This will contain our vendor factory instances. This is loaded at instantiation time.
      */
     internal var internal_vendors: [RVS_BTDriver_VendorProtocol] = []
-
+    
     /* ################################################################################################################################## */
     // MARK: - Internal Ininitailzer
     /* ################################################################################################################################## */
@@ -119,7 +119,6 @@ public class RVS_BTDriver: NSObject {
      */
     deinit {
         stopScanning()
-        RVS_BTDriver_Base_Interface.internal_interface = nil
     }
 }
 

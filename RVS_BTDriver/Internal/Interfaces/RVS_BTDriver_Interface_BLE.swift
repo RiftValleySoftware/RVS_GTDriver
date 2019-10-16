@@ -68,6 +68,12 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
      This is the signal strength range. Optimal is -50.
      */
     private let _RSSI_range = -80..<(-30)
+    
+    /* ################################################################## */
+    /**
+     Holds our SINGLETON
+    */
+    internal static var internal_interface: RVS_BTDriver_InterfaceProtocol!
 
     /* ################################################################## */
     /**
@@ -144,6 +150,16 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
                 centralManager?.stopScan()
             }
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     Read-only accessor for the interface.
+     
+     - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface(:)` has not yet been called.
+     */
+    internal var interface: RVS_BTDriver_InterfaceProtocol! {
+        return type(of: self).internal_interface
     }
 }
 

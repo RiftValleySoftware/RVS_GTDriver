@@ -31,12 +31,6 @@ import Foundation
 internal class RVS_BTDriver_Base_Interface: NSObject, RVS_BTDriver_InterfaceProtocol {
     /* ################################################################## */
     /**
-     Holds our SINGLETON
-    */
-    internal static var internal_interface: RVS_BTDriver_InterfaceProtocol!
-
-    /* ################################################################## */
-    /**
      A weak reference to the main driver instance.
      */
     internal weak var driver: RVS_BTDriver!
@@ -83,16 +77,6 @@ internal class RVS_BTDriver_Base_Interface: NSObject, RVS_BTDriver_InterfaceProt
      */
     internal var isBTAvailable: Bool {
         preconditionFailure("Cannot Call the Base Class")
-    }
-
-    /* ################################################################## */
-    /**
-     Read-only accessor for the interface.
-     
-     - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface(:)` has not yet been called.
-     */
-    internal var interface: RVS_BTDriver_InterfaceProtocol! {
-        return type(of: self).internal_interface
     }
 
     /* ################################################################## */
