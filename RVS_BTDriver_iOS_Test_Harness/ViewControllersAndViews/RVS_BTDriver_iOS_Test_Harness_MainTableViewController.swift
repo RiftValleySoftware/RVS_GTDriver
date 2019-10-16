@@ -87,12 +87,6 @@ class RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_iOS_Te
     
     /* ################################################################## */
     /**
-     This is set to true, if we need to completely reload the driver (after settings screen).
-     */
-    internal var internal_reload_driver = false
-    
-    /* ################################################################## */
-    /**
      The image that we display if there is no Bluetooth available.
      */
     @IBOutlet weak var noBTImageView: UIImageView!
@@ -134,32 +128,11 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
      */
     @IBAction func scanModeSwitchChanged(_ inSwitch: UISegmentedControl) {
         if type(of: self).segmentedSwitchIsOnIndex == inSwitch.selectedSegmentIndex {
-            driverInstance?.startScanning()
+            mainNavController?.driverInstance?.startScanning()
         } else {
-            driverInstance?.stopScanning()
+            mainNavController?.driverInstance?.stopScanning()
         }
         setup()
-    }
-    
-    /* ################################################################## */
-    /**
-     This forces the driver to reset after changing settings.
-     */
-    @IBAction func unwindToThisViewController(segue inSegue: UIStoryboardSegue) {
-        assert(self == inSegue.destination, "The segue is not aimed at us!")
-        
-        // If the settings changed, the driver needs to be completely reset.
-        if inSegue.source is RVS_BTDriver_iOS_Test_Harness_SettingsViewController {
-            mainNavController.setUpDriver()
-            devicesTableView.reloadData()
-        }
-        
-        // As you were...
-        if internal_wasScanning {
-            driverInstance.startScanning()
-        }
-        
-        internal_wasScanning = false
     }
 }
 
@@ -191,11 +164,13 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: UITableViewData
      */
     func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
         // Make sure that we are the delegate for all devices.
-        for device in driverInstance {
-            device.subscribe(self)
+        if let driverInstance = mainNavController?.driverInstance {
+            for device in driverInstance {
+                device.subscribe(self)
+            }
         }
         
-        return driverInstance?.count ?? 0
+        return mainNavController?.driverInstance?.count ?? 0
     }
     
     /* ################################################################## */
@@ -208,7 +183,7 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: UITableViewData
      */
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let cell = inTableView.dequeueReusableCell(withIdentifier: cellReuseIDentifier) as? RVS_BTDriver_iOS_Test_Harness_MainTableViewController_TableViewCell else { return UITableViewCell() }
-        if  let device = self.driverInstance?[inIndexPath.row],
+        if  let device = self.mainNavController?.driverInstance?[inIndexPath.row],
             let model = device.modelName?.localizedVariant {
             DispatchQueue.main.async {
                 cell.device = device
@@ -237,7 +212,7 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: UITableViewDele
      */
     func tableView(_ inTableView: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
         inTableView.deselectRow(at: inIndexPath, animated: false)    // Make sure to deselect the row, right away.
-        let device = driverInstance?[inIndexPath.row]
+        let device = mainNavController?.driverInstance?[inIndexPath.row]
         performSegue(withIdentifier: displaySegueID, sender: device)
         return nil
     }
@@ -265,8 +240,8 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: UITableViewDele
      */
     func tableView(_ inTableView: UITableView, commit inEditingStyle: UITableViewCell.EditingStyle, forRowAt inIndexPath: IndexPath) {
         if  inEditingStyle == UITableViewCell.EditingStyle.delete,
-            let driver = driverInstance {
-            driverInstance.removeDevice(driver[inIndexPath.row])
+            let driver = mainNavController?.driverInstance {
+            mainNavController?.driverInstance?.removeDevice(driver[inIndexPath.row])
             inTableView.reloadData()
         }
     }
@@ -305,18 +280,13 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
      */
     override func viewWillAppear(_ inAnimated: Bool) {
         super.viewWillAppear(inAnimated)
-        if internal_reload_driver {
+        if nil == mainNavController?.driverInstance {
             mainNavController.setUpDriver()
-            devicesTableView.reloadData()
-            internal_wasScanning = false
+            setup()
+        } else if internal_wasScanning {
+            mainNavController?.driverInstance.startScanning()
         }
         
-        // As you were...
-        if internal_wasScanning {
-            driverInstance.startScanning()
-        }
-        
-        internal_reload_driver = false
         internal_wasScanning = false
     }
 
@@ -330,14 +300,13 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
     override func prepare(for inSegue: UIStoryboardSegue, sender inSender: Any?) {
         if  let destination = inSegue.destination as? RVS_BTDriver_iOS_Test_Harness_DetailViewController,
             let device = inSender as? RVS_BTDriver_DeviceProtocol {
-            internal_wasScanning = driverInstance.isScanning
+            internal_wasScanning = mainNavController?.driverInstance?.isScanning ?? false
             destination.device = device
         // If we are going into the settings screen, we always stop scanning completely, and reload the driver when we come back.
         } else if inSegue.destination is RVS_BTDriver_iOS_Test_Harness_SettingsViewController {
-            internal_reload_driver = true
+            mainNavController.driverInstance = nil
+            setup()
         }
-        
-        internal_wasScanning = driverInstance.isScanning
     }
 }
 
@@ -350,21 +319,25 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
      Sets up the UI Items.
      */
     func setup() {
-        noBTImageView?.isHidden = driverInstance?.isBTAvailable ?? false    // This is the "No Bluetooth" image.
+        noBTImageView?.isHidden = mainNavController?.driverInstance?.isBTAvailable ?? false    // This is the "No Bluetooth" image.
         // In case there is no bluetooth service available, we can hide most of the stuff.
-        activeBTItemContainerView.isHidden = !(driverInstance?.isBTAvailable ?? false)
-        if driverInstance?.isBTAvailable ?? false {
-            scanModeSegmentedSwitch.selectedSegmentIndex = driverInstance?.isScanning ?? false ? type(of: self).segmentedSwitchIsOnIndex : type(of: self).segmentedSwitchIsOffIndex
-            // iOS 13 uses a different property to affect the tint color.
-            if #available(iOS 13.0, *) {
-                scanModeSegmentedSwitch.selectedSegmentTintColor = driverInstance?.isScanning ?? false ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
-                // White text.
-                scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: driverInstance?.isScanning ?? false ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor], for: .normal)
-                scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
-            } else {
-                let textColor = driverInstance?.isScanning ?? false ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor
-                scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
-                scanModeSegmentedSwitch.tintColor = driverInstance?.isScanning ?? false ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+        activeBTItemContainerView.isHidden = !(mainNavController?.driverInstance?.isBTAvailable ?? false)
+        if mainNavController?.driverInstance?.isBTAvailable ?? false {
+            if let driverInstance = mainNavController?.driverInstance {
+                let isScanning = driverInstance.isScanning
+                let index = driverInstance.isScanning ? type(of: self).segmentedSwitchIsOnIndex : type(of: self).segmentedSwitchIsOffIndex
+                scanModeSegmentedSwitch.selectedSegmentIndex = index
+                // iOS 13 uses a different property to affect the tint color.
+                if #available(iOS 13.0, *) {
+                    scanModeSegmentedSwitch.selectedSegmentTintColor = isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+                    // White text.
+                    scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: isScanning ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor], for: .normal)
+                    scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
+                } else {
+                    let textColor = isScanning ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor
+                    scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
+                    scanModeSegmentedSwitch.tintColor = isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+                }
             }
             devicesTableView?.reloadData()
         }

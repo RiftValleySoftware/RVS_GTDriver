@@ -72,12 +72,12 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     /* ################################################################## */
     /**
      This will create the SINGLETON, if it is not already created, or simply returns the one we have.
+     
+     - parameter queue: The thread o use. Default is nil (main thread).
      */
     internal static func makeInterface(queue inQueue: DispatchQueue!) -> RVS_BTDriver_InterfaceProtocol! {
         if nil == internal_interface {
-            let interface = RVS_BTDriver_Interface_BLE()
-            internal_interface = interface
-            interface.centralManager = CBCentralManager(delegate: interface, queue: inQueue)
+            internal_interface = RVS_BTDriver_Interface_BLE(queue: inQueue)
         }
         
         return internal_interface
@@ -91,10 +91,21 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     
     /* ################################################################## */
     /**
+     Main initializer.
+     
+     - parameter queue: The thread o use. Default is nil (main thread).
+    */
+    init(queue inQueue: DispatchQueue! = nil) {
+        super.init()
+        centralManager = CBCentralManager(delegate: self, queue: inQueue)
+    }
+    
+    /* ################################################################## */
+    /**
      If true, then Bluetooth is available (powered on).
      */
     override internal var isBTAvailable: Bool {
-        return centralManager.state == .poweredOn
+        return centralManager?.state == .poweredOn
     }
     
     /* ################################################################## */
@@ -103,11 +114,11 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
      */
     override internal var isScanning: Bool {
         get {
-            return centralManager.isScanning
+            return centralManager?.isScanning ?? false
         }
         
         set {
-            if !centralManager.isScanning, newValue {
+            if !(centralManager?.isScanning ?? false), newValue {
                 var serviceUUIDs: [CBUUID]!
                 
                 // We supply any service UUIDs that we have on hand.
@@ -120,9 +131,9 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
                 // We check to see if we are going to be filtering out previous advertised devices (cuts down the noise).
                 let options: [String: Any]! = rememberAdvertisedDevices ? [CBCentralManagerScanOptionAllowDuplicatesKey: 1] : nil
                 
-                centralManager.scanForPeripherals(withServices: serviceUUIDs, options: options)
-            } else if centralManager.isScanning {
-                centralManager.stopScan()
+                centralManager?.scanForPeripherals(withServices: serviceUUIDs, options: options)
+            } else if centralManager?.isScanning ?? false {
+                centralManager?.stopScan()
             }
         }
     }
@@ -333,6 +344,9 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Calculated Properties -
     /* ################################################################################################################################## */
+    /**
+     These need to be declared here, as they are overrides of stored properties.
+     */
     /* ################################################################## */
     /**
      If the device has a Device Info Service with a model name, it is available here.

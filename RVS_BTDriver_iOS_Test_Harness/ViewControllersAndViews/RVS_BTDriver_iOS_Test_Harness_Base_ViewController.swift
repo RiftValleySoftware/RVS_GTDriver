@@ -45,14 +45,6 @@ extension RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
     var mainNavController: RVS_BTDriver_iOS_Test_Harness_NavigationController! {
         return navigationController as? RVS_BTDriver_iOS_Test_Harness_NavigationController
     }
-    
-    /* ################################################################## */
-    /**
-     Quick read-only accessor for our driver.
-     */
-    var driverInstance: RVS_BTDriver! {
-        return mainNavController?.driverInstance
-    }
 }
 
 /* ###################################################################################################################################### */

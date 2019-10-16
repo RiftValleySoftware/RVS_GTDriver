@@ -118,6 +118,8 @@ public class RVS_BTDriver: NSObject {
      Make sure that everything is put back the way we found it...
      */
     deinit {
+        RVS_BTDriver_Base_Interface.internal_interface = nil
+
         _device_list.forEach {
             $0.disconnect()
             $0.internal_subscribers = []    // Remove subscribers after disconnection.

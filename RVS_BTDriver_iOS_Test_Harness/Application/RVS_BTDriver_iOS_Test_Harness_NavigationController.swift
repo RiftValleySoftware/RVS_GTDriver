@@ -38,7 +38,13 @@ class RVS_BTDriver_iOS_Test_Harness_NavigationController: UINavigationController
     /**
      This is the instance of our driver class.
      */
-    internal var driverInstance: RVS_BTDriver!
+    internal var driverInstance: RVS_BTDriver! {
+        didSet {
+            #if DEBUG
+                print("Main Driver Instance Changed from \(String(describing: oldValue)) to \(String(describing: driverInstance)).")
+            #endif
+        }
+    }
     
     /* ################################################################## */
     /**

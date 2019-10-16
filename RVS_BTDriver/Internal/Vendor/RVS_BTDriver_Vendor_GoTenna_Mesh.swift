@@ -121,7 +121,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
                     ret.centralManager = deviceRecord.centralManager
                     
                     /// These are the services we search for, after connecting.
-                    ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.deviceInfoService.rawValue),
+                    ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Interface_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue),
                                                            CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue)
                     ]
 
