@@ -1,21 +1,21 @@
 ![Icon](./icon.png)
 
+<<<<<<< HEAD
 PRIVATE BRANCH REPO
 -
 
 RVS_BLEDriver (in GitHub as RVS_GTDriver, for Historical Reasons)
+=======
+RVS_BTDriver (in GitHub as RVS_GTDriver, for Historical Reasons)
+>>>>>>> master
 =
 This project is an open-source, low-level native Cocoa ([iOS](https://apple.com/ios), [macOS](https://apple.com/macos), [watchOS](https:apple.com/watchos) and [tvOS](https://apple.com/tvos)) [BLE (**B**luetooth **L**ow **E**nergy)](https://www.bluetooth.com) driver for mesh communication devices, like the  [goTenna](https://gotenna.com) devices.
 
-[This is the documentation site for this project.](https://riftvalleysoftware.github.io/RVS_BLEDriver/)
-
-NOTE:
-=
-The docs won't be available until I upgrade to Catalina. Jazzy doesn't like Xcode 11, running on Mojave.
+[This is the documentation site for this project.](https://riftvalleysoftware.github.io/RVS_GTDriver/)
 
 NOT A DEVICE DRIVER 
 -
-RVS_BLEDriver is a low-level native Swift (Apple) driver. It is not a "device driver," which usually sit at an operating system level (kernel or user space). It is designed to translate between a BLE connection to a device, and a user application; presenting an object model of the device.
+RVS_BTDriver is a low-level native Swift (Apple) driver. It is not a "device driver," which usually sit at an operating system level (kernel or user space). It is designed to translate between a bluetooth connection to a device, and a user application; presenting an object model of the device.
 
 REQUIREMENTS
 -
