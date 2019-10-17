@@ -156,6 +156,11 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelega
         #if DEBUG
             print("Status Message Received by Navigation Controller")
         #endif
+        DispatchQueue.main.async {
+            if let mainController = self.viewControllers[0] as? RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
+                mainController.setup()
+            }
+        }
     }
     
     /* ################################################################## */
