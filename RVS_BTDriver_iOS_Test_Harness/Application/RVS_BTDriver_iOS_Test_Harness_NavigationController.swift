@@ -36,20 +36,16 @@ import UIKit
 class RVS_BTDriver_iOS_Test_Harness_NavigationController: UINavigationController {
     /* ################################################################## */
     /**
-     A simple pass-through of our driver.
-     
-     This needs to be called in the main thread.
+     This is the instance of our driver class.
      */
     internal var driverInstance: RVS_BTDriver! {
-        get {
-            return RVS_BTDriver_iOS_Test_Harness_AppDelegate.appDelegateObject.driverInstance
-        }
-        
-        set {
-            RVS_BTDriver_iOS_Test_Harness_AppDelegate.appDelegateObject.driverInstance = newValue
+        didSet {
+            #if DEBUG
+                print("Main Driver Instance Changed from \(String(describing: oldValue)) to \(String(describing: driverInstance)).")
+            #endif
         }
     }
-    
+
     /* ################################################################## */
     /**
      These represent the persistent state.
@@ -126,10 +122,26 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelega
         #if DEBUG
             print("Error Message Received by Navigation Controller: \(inError.localizedDescription)")
         #endif
-        assert(inDriver == driverInstance, "Driver Instance Not Ours!")
         displayAlert("SLUG-ERROR-HEADER", message: inError.localizedDescription.localizedVariant)
     }
     
+    /* ################################################################## */
+    /**
+     Called when a device has been added and instantiated.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter inDriver: The `RVS_BTDriver` instance calling this.
+     - parameter newDeviceAdded: The device object, masked as a protocol.
+     */
+    func btDriver(_ inDriver: RVS_BTDriver, newDeviceAdded inDevice: RVS_BTDriver_DeviceProtocol) {
+        DispatchQueue.main.async {
+            if let mainController = self.viewControllers[0] as? RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
+                mainController.setup()
+            }
+        }
+    }
+
     /* ################################################################## */
     /**
      Called to indicate that the driver's status should be checked.
@@ -144,10 +156,6 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelega
         #if DEBUG
             print("Status Message Received by Navigation Controller")
         #endif
-        DispatchQueue.main.async {
-            assert(nil == self.driverInstance || inDriver == self.driverInstance, "Driver Instance Not Ours!")
-            self.topViewController?.view.setNeedsLayout()
-        }
     }
     
     /* ################################################################## */

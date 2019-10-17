@@ -316,18 +316,17 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
     override func viewWillAppear(_ inAnimated: Bool) {
         super.viewWillAppear(inAnimated)
         if nil == mainNavController?.driverInstance {
+            #if DEBUG
+                print("Driver instance is nil. Setting up a new driver instance.")
+            #endif
             mainNavController.setUpDriver()
+            setup()
         }
-    }
-    
-    /* ################################################################## */
-    /**
-     This is called when the screen has appeared.
-     */
-    override func viewDidAppear(_ inAnimated: Bool) {
-        super.viewDidAppear(inAnimated)
-        setup()
+        
         if internal_wasScanning {
+            #if DEBUG
+                print("We were scanning, so we will start scanning again.")
+            #endif
             mainNavController?.driverInstance.startScanning()
             internal_wasScanning = false
         }
@@ -343,10 +342,35 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
     override func prepare(for inSegue: UIStoryboardSegue, sender inSender: Any?) {
         if  let destination = inSegue.destination as? RVS_BTDriver_iOS_Test_Harness_DetailViewController,
             let device = inSender as? RVS_BTDriver_DeviceProtocol {
-            internal_wasScanning = mainNavController?.driverInstance?.isScanning ?? false
+            #if DEBUG
+                print("Preparing for detail view.")
+            #endif
+            if let driverInstance = mainNavController?.driverInstance {
+                if driverInstance.isScanning {
+                    #if DEBUG
+                        print("The driver is scanning.")
+                    #endif
+                    internal_wasScanning = true
+                } else {
+                    #if DEBUG
+                        print("The driver is not scanning.")
+                    #endif
+                    internal_wasScanning = false
+                }
+            } else {
+                #if DEBUG
+                    print("The driver instance is nil.")
+                #endif
+                internal_wasScanning = false
+            }
+            mainNavController?.driverInstance?.stopScanning()
             destination.device = device
         // If we are going into the settings screen, we always stop scanning completely, and reload the driver when we come back.
         } else if inSegue.destination is RVS_BTDriver_iOS_Test_Harness_SettingsViewController {
+            #if DEBUG
+                print("Preparing for settings view.")
+            #endif
+            internal_wasScanning = false
             mainNavController.driverInstance = nil
         }
     }
@@ -361,18 +385,32 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
      Sets up the UI Items.
      */
     func setup() {
+        #if DEBUG
+            print("Main Screen Setup Called.")
+        #endif
         noBTImageView?.isHidden = mainNavController?.driverInstance?.isBTAvailable ?? false    // This is the "No Bluetooth" image.
         // In case there is no bluetooth service available, we can hide most of the stuff.
         activeBTItemContainerView.isHidden = !(mainNavController?.driverInstance?.isBTAvailable ?? false)
         var isScanning = false
-        scanModeSegmentedSwitch.selectedSegmentIndex = type(of: self).segmentedSwitchIsOffIndex
         
-        if let driverInstance = mainNavController?.driverInstance,
-            driverInstance.isScanning {
-            isScanning = true
-            scanModeSegmentedSwitch.selectedSegmentIndex = type(of: self).segmentedSwitchIsOnIndex
+        if let driverInstance = mainNavController?.driverInstance {
+            if driverInstance.isScanning {
+                isScanning = true
+                scanModeSegmentedSwitch.selectedSegmentIndex = type(of: self).segmentedSwitchIsOnIndex
+            } else {
+                scanModeSegmentedSwitch.selectedSegmentIndex = type(of: self).segmentedSwitchIsOffIndex
+            }
+        } else {
+            #if DEBUG
+                print("The driver instance is nil.")
+            #endif
+            scanModeSegmentedSwitch.selectedSegmentIndex = type(of: self).segmentedSwitchIsOffIndex
         }
         
+        #if DEBUG
+            print(isScanning ? "The driver is scanning." : "The driver is not scanning.")
+        #endif
+
         // iOS 13 uses a different property to affect the tint color.
         if #available(iOS 13.0, *) {
             scanModeSegmentedSwitch.selectedSegmentTintColor = isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor

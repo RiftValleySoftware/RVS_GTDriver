@@ -128,6 +128,13 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
      */
     override internal var isScanning: Bool {
         get {
+            #if DEBUG
+                if nil == centralManager {
+                    print("The Central Manager Instance is Nil")
+                } else {
+                    print("The Central Manager Instance is \(centralManager.isScanning ? "" : "not ")scanning.")
+                }
+            #endif
             return centralManager?.isScanning ?? false
         }
         
