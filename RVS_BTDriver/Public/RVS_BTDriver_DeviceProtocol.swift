@@ -85,6 +85,12 @@ extension RVS_BTDriver_DeviceSubscriberProtocol {
 public protocol RVS_BTDriver_DeviceProtocol: class {
     /* ################################################################## */
     /**
+     This is a String, containing a unique ID for this peripheral.
+     */
+    var uuid: String! { get }
+    
+    /* ################################################################## */
+    /**
      If the device has a Device Info Service with a model name, it is available here.
      */
     var modelName: String! { get }

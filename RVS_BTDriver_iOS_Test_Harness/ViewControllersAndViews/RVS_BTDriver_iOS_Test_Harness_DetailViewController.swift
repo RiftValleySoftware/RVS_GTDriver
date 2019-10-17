@@ -63,6 +63,10 @@ class RVS_BTDriver_iOS_Test_Harness_DetailViewController: RVS_BTDriver_iOS_Test_
     override func viewWillAppear(_ inAnimated: Bool) {
         super.viewWillAppear(inAnimated)
         
+        if let value = device?.uuid {
+            deviceInfo["deviceInfoDeviceID"] = value
+        }
+        
         if let value = device?.manufacturerName {
             deviceInfo["deviceInfoManufacturerName"] = value
         }

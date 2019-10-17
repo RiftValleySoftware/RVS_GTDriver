@@ -288,14 +288,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7y-Ea-B2E">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7y-Ea-B2E">
                                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0W-Au-GPZ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.125" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K0W-Au-GPZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
@@ -309,7 +309,7 @@
                                                 <constraint firstItem="h7y-Ea-B2E" firstAttribute="top" secondItem="uVX-hW-KAl" secondAttribute="top" id="9dg-3a-Rwa"/>
                                                 <constraint firstAttribute="trailing" secondItem="K0W-Au-GPZ" secondAttribute="trailing" id="HVZ-UP-M73"/>
                                                 <constraint firstItem="K0W-Au-GPZ" firstAttribute="top" secondItem="uVX-hW-KAl" secondAttribute="top" id="O45-gO-LwR"/>
-                                                <constraint firstItem="h7y-Ea-B2E" firstAttribute="width" secondItem="uVX-hW-KAl" secondAttribute="width" multiplier="0.5" id="QYy-fX-fFb"/>
+                                                <constraint firstItem="h7y-Ea-B2E" firstAttribute="width" secondItem="uVX-hW-KAl" secondAttribute="width" multiplier="0.34" id="QYy-fX-fFb"/>
                                                 <constraint firstItem="h7y-Ea-B2E" firstAttribute="leading" secondItem="uVX-hW-KAl" secondAttribute="leading" id="g0w-f3-3Fl"/>
                                                 <constraint firstAttribute="bottom" secondItem="h7y-Ea-B2E" secondAttribute="bottom" id="iVe-1U-css"/>
                                                 <constraint firstItem="K0W-Au-GPZ" firstAttribute="leading" secondItem="h7y-Ea-B2E" secondAttribute="trailing" constant="4" id="vi8-jE-Bgp"/>
@@ -353,5 +353,5 @@
         <image name="NoBT" width="341.5" height="341.5"/>
         <image name="background-gradient" width="1" height="1000"/>
     </resources>
-    <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
