@@ -37,6 +37,8 @@ class RVS_BTDriver_iOS_Test_Harness_NavigationController: UINavigationController
     /* ################################################################## */
     /**
      A simple pass-through of our driver.
+     
+     This needs to be called in the main thread.
      */
     internal var driverInstance: RVS_BTDriver! {
         get {
@@ -142,8 +144,8 @@ extension RVS_BTDriver_iOS_Test_Harness_NavigationController: RVS_BTDriverDelega
         #if DEBUG
             print("Status Message Received by Navigation Controller")
         #endif
-        assert(nil == driverInstance || inDriver == driverInstance, "Driver Instance Not Ours!")
         DispatchQueue.main.async {
+            assert(nil == self.driverInstance || inDriver == self.driverInstance, "Driver Instance Not Ours!")
             self.topViewController?.view.setNeedsLayout()
         }
     }

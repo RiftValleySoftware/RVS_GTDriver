@@ -94,6 +94,30 @@ public protocol RVS_BTDriver_DeviceProtocol: class {
      If the device has a Device Info Service with a manufacturer name, it is available here.
      */
     var manufacturerName: String! { get }
+    
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a manufacturer name, it is available here.
+     */
+    var serialNumber: String! { get }
+
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a hardware revision, it is available here.
+     */
+    var hardwareRevision: String! { get }
+    
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a firmware revision, it is available here.
+     */
+    var firmwareRevision: String! { get }
+    
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a software revision, it is available here.
+     */
+    var softwareRevision: String! { get }
 
     /* ################################################################## */
     /**

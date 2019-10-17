@@ -26,6 +26,22 @@ import UIKit
 #endif
 
 /* ###################################################################################################################################### */
+// MARK: - Detail View Table Cell Class -
+/* ###################################################################################################################################### */
+/**
+ This class represents one row of the details display.
+ */
+class RVS_BTDriver_iOS_Test_Harness_DetailViewControllerTableCell: UITableViewCell {
+    /* ################################################################## */
+    /**
+     The reuse ID for instantiating these.
+     */
+    static let reuseID = "display-value"
+    @IBOutlet weak var labelLabel: UILabel!
+    @IBOutlet weak var valueLabel: UILabel!
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Detail View Controller Class -
 /* ###################################################################################################################################### */
 /**
@@ -33,6 +49,44 @@ import UIKit
 class RVS_BTDriver_iOS_Test_Harness_DetailViewController: RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
     /// The device for which this is a detailed view.
     var device: RVS_BTDriver_DeviceProtocol!
+    @IBOutlet weak var displayTableView: UITableView!
+    
+    // This will contain our DeviceInfo strings from the device record.
+    var deviceInfo: [String: String] = [:]
+    
+    /* ################################################################## */
+    /**
+     Called just prior to the view appearing.
+     
+     - parameter inAnimated: True, if the appearance is to be animated (ignored, but passed to the superclass).
+     */
+    override func viewWillAppear(_ inAnimated: Bool) {
+        super.viewWillAppear(inAnimated)
+        
+        if let value = device?.manufacturerName {
+            deviceInfo["deviceInfoManufacturerName"] = value
+        }
+        
+        if let value = device?.modelName {
+            deviceInfo["deviceInfoModelName"] = value
+        }
+        
+        if let value = device?.serialNumber {
+            deviceInfo["deviceInfoSerialNumber"] = value
+        }
+
+        if let value = device?.hardwareRevision {
+            deviceInfo["deviceInfoHardwareRevision"] = value
+        }
+        
+        if let value = device?.firmwareRevision {
+            deviceInfo["deviceInfoFirmwareRevision"] = value
+        }
+        
+        if let value = device?.softwareRevision {
+            deviceInfo["deviceInfoSoftwareRevision"] = value
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -48,5 +102,33 @@ extension RVS_BTDriver_iOS_Test_Harness_DetailViewController {
         if let deviceName = device.modelName {
             navigationItem.title = deviceName.localizedVariant
         }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - UITableViewDataSource Support -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_iOS_Test_Harness_DetailViewController: UITableViewDataSource {
+    /* ################################################################## */
+    /**
+     */
+    func tableView(_ inTableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return deviceInfo.count
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
+        let keys = deviceInfo.keys.sorted()
+        
+        let key = keys[inIndexPath.row]
+        
+        if let ret = inTableView.dequeueReusableCell(withIdentifier: RVS_BTDriver_iOS_Test_Harness_DetailViewControllerTableCell.reuseID) as? RVS_BTDriver_iOS_Test_Harness_DetailViewControllerTableCell {
+            ret.labelLabel.text = key.localizedVariant + ":"
+            ret.valueLabel.text = "\(deviceInfo[key] ?? "ERROR")"
+            return ret
+        }
+        return UITableViewCell()
     }
 }

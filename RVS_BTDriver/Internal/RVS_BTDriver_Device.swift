@@ -97,6 +97,14 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     
     /* ################################################################## */
     /**
+     Make sure that we disconnect upon deinit.
+     */
+    deinit {
+        disconnect()
+    }
+    
+    /* ################################################################## */
+    /**
      This is a String, containing a unique ID for this peripheral.
      */
     public internal(set) var uuid: String!
