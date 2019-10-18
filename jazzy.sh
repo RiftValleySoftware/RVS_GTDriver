@@ -13,6 +13,7 @@ jazzy   --github_url https://github.com/RiftValleySoftware/RVS_GTDriver \
         --min_acl public \
         --module RVS_BTDriver_iOS
 cp icon.png docs/icon.png
+cp img/* docs/img
 
 jazzy   --github_url https://github.com/RiftValleySoftware/RVS_GTDriver \
         --readme ./README.md \
@@ -24,5 +25,6 @@ jazzy   --github_url https://github.com/RiftValleySoftware/RVS_GTDriver \
         --min_acl private \
         --module RVS_BTDriver_iOS
 cp icon.png docs/internal/icon.png
+cp img/* docs/internal/img
 
 cd "${CWD}"
