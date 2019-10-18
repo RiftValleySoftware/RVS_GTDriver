@@ -13,9 +13,21 @@ Documentation Links:
 - [This is the documentation site for the public API.](https://riftvalleysoftware.github.io/RVS_GTDriver/)
 - [This is the documentation site for the public project internals.](https://riftvalleysoftware.github.io/RVS_GTDriver/internal/)
 
+WHERE THIS DRIVER FITS
+=
+
+![Overall Image](./img/SystemBlock.png)
+This is where the driver project fits in our system.
+
+The driver is a low-level transport abstraction layer. It is Bluetooth-specific, but is designed to abstract between [Bluetooth LE](https://en.wikipedia.org/wiki/Bluetooth_Low_Energy) and Bluetooth BR/EDR ("Classic"); presenting a common object model of data and interactions with Bluetooth devices.
+
 NOT A DEVICE DRIVER 
 -
 RVS_BTDriver is a low-level native Swift (Apple) driver. It is not a "device driver," which usually sit at an operating system level (kernel or user space). It is designed to translate between a bluetooth connection to a device, and a user application; presenting an object model of the device.
+
+CENTRAL MANAGER
+-
+The driver will act as [a Bluetooth LE "central Manager" (GATT Client)](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) only. It will not present itself as [a peripheral](https://developer.apple.com/documentation/corebluetooth/cbperipheral).
 
 REQUIREMENTS
 -
