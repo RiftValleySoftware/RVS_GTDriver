@@ -29,6 +29,23 @@ CENTRAL MANAGER
 -
 The driver will act as [a Bluetooth LE "central Manager" (GATT Client)](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) only. It will not present itself as [a peripheral](https://developer.apple.com/documentation/corebluetooth/cbperipheral).
 
+SYSTEM ARCHITECTURE
+=
+
+![Block Diagram](./img/BlockDiagram.png)
+The general class and protocol structure of the system.
+
+SIMPLE API
+-
+The job of the driver is to *abstract* the general Bluetooth structure, and present a set of [Swift Protocols](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html), in a hierarchical arrangement.
+
+The user of the API will instantiate an instance of RVS_BTDriver, which will, in turn, present collections of "devices" (RVS_BTDriver_DeviceProtocol), which will contain "Services" (RVS_BTDriver_ServiceProtocol), which will aggregate "properties" (RVS_BTDriver_PropertyProtocol).
+
+EXAMPLE MENTAL MODEL OF THE DRIVER
+-
+![Block Diagram](./img/MentalModel.png)
+This is an example of how the driver might present three goTenna devices (two Mesh devices and a Pro).
+
 REQUIREMENTS
 -
 The Driver is provided as a [Swift](https://developer.apple.com/swift/)-only shared dynamic [framework](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Frameworks.html).
