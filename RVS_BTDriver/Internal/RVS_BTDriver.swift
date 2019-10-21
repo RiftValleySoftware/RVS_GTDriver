@@ -107,9 +107,8 @@ public class RVS_BTDriver: NSObject {
         internal_stayConnected = inStayConnected
         internal_delegate = inDelegate
         internal_queue = inQueue
-        // We initialize with our vendors, which will also allow us to create any required interfaces.
         internal_vendors = [
-            RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self)
+                RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self)
         ]
     }
 
