@@ -278,21 +278,6 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
     
     /* ################################################################## */
     /**
-     Callback for a connection event (as opposed to just a connection).
-     
-     - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
-     - parameter connectionEventDidOccur: The connection event.
-     - parameter for: The peripheral object that was connected.
-    */
-    internal func centralManager(_ inCentral: CBCentralManager, connectionEventDidOccur inEvent: CBConnectionEvent, for inPeripheral: CBPeripheral) {
-        #if DEBUG
-            print("Central Manager: \(inCentral) has received a connection event: \(inEvent), for this peripheral: \(inPeripheral).")
-        #endif
-        centralManager(inCentral, didConnect: inPeripheral)
-    }
-    
-    /* ################################################################## */
-    /**
      Called when a peripheral connects.
 
      - parameter inCentral: The manager instance.
@@ -336,19 +321,6 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
     internal func centralManager(_ inCentral: CBCentralManager, didDisconnectPeripheral inPeripheral: CBPeripheral, error inError: Error?) {
         #if DEBUG
             print("Central Manager: \(inCentral) has received a disconnection event for this peripheral: \(inPeripheral), with this error: \(String(describing: inError)).")
-        #endif
-    }
-    
-    /* ################################################################## */
-    /**
-     Callback for updating ANCS authorization.
-     
-     - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
-     - parameter didUpdateANCSAuthorizationFor: The peripheral object.
-    */
-    internal func centralManager(_ inCentral: CBCentralManager, didUpdateANCSAuthorizationFor inPeripheral: CBPeripheral) {
-        #if DEBUG
-            print("Central Manager: \(inCentral) didUpdateANCSAuthorizationFor for this peripheral: \(inPeripheral).")
         #endif
     }
 }
