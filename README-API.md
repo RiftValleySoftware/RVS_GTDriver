@@ -9,6 +9,25 @@ Internal Documentation Links:
 
 - [This is the documentation site for the public project internals.](https://riftvalleysoftware.github.io/RVS_GTDriver/internal/)
 
+WHERE THIS DRIVER FITS
+=
+
+![Overall Image](./img/SystemBlock.png)
+This is where the driver project fits in our system.
+
+The driver is a low-level transport abstraction layer. It is Bluetooth-specific, but is designed to abstract between [Bluetooth LE](https://en.wikipedia.org/wiki/Bluetooth_Low_Energy) and Bluetooth BR/EDR ("Classic"); presenting a common object model of data and interactions with Bluetooth devices.
+
+SIMPLE API
+-
+The job of the driver is to *abstract* the general Bluetooth structure, and present a set of [Swift Protocols](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html), in a hierarchical arrangement.
+
+The user of the API will instantiate an instance of RVS_BTDriver, which will, in turn, present collections of "devices" (RVS_BTDriver_DeviceProtocol), which will contain "Services" (RVS_BTDriver_ServiceProtocol), which will aggregate "properties" (RVS_BTDriver_PropertyProtocol).
+
+EXAMPLE MENTAL MODEL OF THE DRIVER
+-
+![Block Diagram](./img/MentalModel.png)
+This is an example of how the driver might present three goTenna devices (two Mesh devices and a Pro).
+
 REQUIREMENTS
 -
 The Driver is provided as a [Swift](https://developer.apple.com/swift/)-only shared dynamic [framework](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Frameworks.html).
