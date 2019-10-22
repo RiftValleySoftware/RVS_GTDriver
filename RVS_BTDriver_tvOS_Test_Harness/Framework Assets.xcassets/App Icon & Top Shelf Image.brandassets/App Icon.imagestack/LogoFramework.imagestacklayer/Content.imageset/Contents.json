@@ -1,0 +1,18 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "images" : [
+    {
+      "filename" : "LogoFramework.png",
+      "idiom" : "tv",
+      "scale" : "1x"
+    },
+    {
+      "scale" : "2x",
+      "idiom" : "tv",
+      "filename" : "LogoFramework@2x.png"
+    }
+  ]
+}
