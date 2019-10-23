@@ -1908,7 +1908,7 @@
 		D443DEF5234D0D7D00F9DE47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1933,7 +1933,7 @@
 		D443DEF6234D0D7D00F9DE47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1959,7 +1959,7 @@
 		D4524B9C234D3EEB00F3EC79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = FrameworkAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iOS-FrameworkAppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -1981,7 +1981,7 @@
 		D4524B9D234D3EEB00F3EC79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = FrameworkAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iOS-FrameworkAppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "${inherited}";
@@ -2127,7 +2127,7 @@
 		D481A16F235E2774004DF47E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = FrameworkAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-FrameworkAppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2150,7 +2150,7 @@
 		D481A170235E2774004DF47E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = FrameworkAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-FrameworkAppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2266,7 +2266,7 @@
 		D4DBE183235E0DD700107353 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-AppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2292,7 +2292,7 @@
 		D4DBE184235E0DD700107353 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-AppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2473,7 +2473,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "WatchOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2497,7 +2497,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "WatchOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "DIRECT=1";
@@ -2586,7 +2586,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "WatchOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness__Framework__WatchKit_Extension;
@@ -2605,7 +2605,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "WatchOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness__Framework__WatchKit_Extension;
