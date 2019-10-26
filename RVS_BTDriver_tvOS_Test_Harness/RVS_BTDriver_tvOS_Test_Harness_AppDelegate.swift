@@ -1,33 +1,18 @@
-/**
-© Copyright 2019, The Great Rift Valley Software Company
-
-LICENSE:
-
-MIT License
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
-modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-The Great Rift Valley Software Company: https://riftvalleysoftware.com
-*/
+//
+//  AppDelegate.swift
+//  RVS_BTDriver_tvOS_TestHarness
+//
+//  Created by Chris Marshall on 10/23/19.
+//  Copyright © 2019 The Great Rift Valley Software Company. All rights reserved.
+//
 
 import UIKit
-#if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
-    import RVS_BTDriver_tvOS
-#endif
 
 @UIApplicationMain
-class RVS_BTDriver_tvOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
     var window: UIWindow?
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -50,4 +35,7 @@ class RVS_BTDriver_tvOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDele
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
+
+
 }
+

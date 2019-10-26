@@ -416,7 +416,6 @@
 		D4B19BD8235F28A30036EDF5 /* RVS_BTDriver_tvOS_Test_Harness_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_tvOS_Test_Harness_ViewController.swift; sourceTree = "<group>"; };
 		D4B19BDB235F28A30036EDF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D4B19BE0235F28A40036EDF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D4B19BFA235F2A060036EDF5 /* RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist; path = Meta/RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist; sourceTree = "<group>"; };
 		D4B19BFD235F2ABB0036EDF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4B19C1E235F2B1E0036EDF5 /* RVS_BTDriver_tvOS_Test_Harness (Framework).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_BTDriver_tvOS_Test_Harness (Framework).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4DBE176235E0DD600107353 /* RVS_BTDriver_MacOS_Test_Harness (Direct).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_BTDriver_MacOS_Test_Harness (Direct).app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -632,7 +631,6 @@
 		D4B19BF9235F29F50036EDF5 /* Meta */ = {
 			isa = PBXGroup;
 			children = (
-				D4B19BFA235F2A060036EDF5 /* RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist */,
 			);
 			name = Meta;
 			sourceTree = "<group>";
@@ -2180,7 +2178,7 @@
 					"DIRECT=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = RVS_BTDriver_tvOS_Test_Harness/Meta/RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness-Direct-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2202,7 +2200,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "DIRECT=1";
-				INFOPLIST_FILE = RVS_BTDriver_tvOS_Test_Harness/Meta/RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness-Direct-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2225,7 +2223,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = RVS_BTDriver_tvOS_Test_Harness/Meta/RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2247,7 +2245,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				INFOPLIST_FILE = RVS_BTDriver_tvOS_Test_Harness/Meta/RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
