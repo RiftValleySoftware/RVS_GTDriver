@@ -408,6 +408,8 @@
 		D481A179235E2895004DF47E /* RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist"; path = "Meta/RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist"; sourceTree = "<group>"; };
 		D486A7112355E92A00D8E34D /* RVS_BTDriver_iOS_Test_Harness_DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_DetailViewController.swift; sourceTree = "<group>"; };
 		D492DBEF234FAEFF00CA4C7C /* RVS_BTDriver_State_Machine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_State_Machine.swift; sourceTree = "<group>"; };
+		D49323C02364F8C50071FF58 /* RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist; path = Meta/RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist; sourceTree = "<group>"; };
+		D49323C12364F8C50071FF58 /* RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist; path = Meta/RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist; sourceTree = "<group>"; };
 		D4992FB0234FB69800EDA733 /* RVS_PersistentPrefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_PersistentPrefs.swift; path = ExtensionsAndExtras/RVS_PersistentPrefs.swift; sourceTree = SOURCE_ROOT; };
 		D4992FB1234FB69800EDA733 /* RVS_String_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_String_Extensions.swift; path = ExtensionsAndExtras/RVS_String_Extensions.swift; sourceTree = SOURCE_ROOT; };
 		D49C37FC235F7F5300D03250 /* Direct Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Direct Assets.xcassets"; sourceTree = "<group>"; };
@@ -631,6 +633,8 @@
 		D4B19BF9235F29F50036EDF5 /* Meta */ = {
 			isa = PBXGroup;
 			children = (
+				D49323C12364F8C50071FF58 /* RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist */,
+				D49323C02364F8C50071FF58 /* RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist */,
 			);
 			name = Meta;
 			sourceTree = "<group>";
@@ -1111,7 +1115,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "The Great Rift Valley Software Company";
 				TargetAttributes = {
 					D443DEE2234D0D7B00F9DE47 = {
@@ -2127,6 +2131,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-FrameworkAppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -2150,6 +2155,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-FrameworkAppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -2266,6 +2272,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-AppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -2292,6 +2299,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-AppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
