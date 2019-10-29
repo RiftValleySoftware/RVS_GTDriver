@@ -1,20 +1,20 @@
 {
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
   "properties" : {
     "canvasSize" : {
       "width" : 400,
       "height" : 240
     }
   },
-  "info" : {
-    "author" : "xcode",
-    "version" : 1
-  },
   "layers" : [
     {
       "filename" : "Mask.imagestacklayer"
     },
     {
-      "filename" : "LogoDirect.imagestacklayer"
+      "filename" : "Logo.imagestacklayer"
     },
     {
       "filename" : "Background.imagestacklayer"

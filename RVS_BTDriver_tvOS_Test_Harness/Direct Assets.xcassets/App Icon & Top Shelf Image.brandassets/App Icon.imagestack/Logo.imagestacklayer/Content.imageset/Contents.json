@@ -5,13 +5,14 @@
   },
   "images" : [
     {
+      "filename" : "Logo.png",
       "idiom" : "tv",
-      "filename" : "LogoDirect.png",
       "scale" : "1x"
     },
     {
       "scale" : "2x",
-      "idiom" : "tv"
+      "idiom" : "tv",
+      "filename" : "Logo@2x.png"
     }
   ]
 }

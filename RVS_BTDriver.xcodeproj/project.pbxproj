@@ -408,6 +408,8 @@
 		D481A179235E2895004DF47E /* RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist"; path = "Meta/RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist"; sourceTree = "<group>"; };
 		D486A7112355E92A00D8E34D /* RVS_BTDriver_iOS_Test_Harness_DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_DetailViewController.swift; sourceTree = "<group>"; };
 		D492DBEF234FAEFF00CA4C7C /* RVS_BTDriver_State_Machine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_State_Machine.swift; sourceTree = "<group>"; };
+		D49323C02364F8C50071FF58 /* RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist; path = Meta/RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist; sourceTree = "<group>"; };
+		D49323C12364F8C50071FF58 /* RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist; path = Meta/RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist; sourceTree = "<group>"; };
 		D4992FB0234FB69800EDA733 /* RVS_PersistentPrefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_PersistentPrefs.swift; path = ExtensionsAndExtras/RVS_PersistentPrefs.swift; sourceTree = SOURCE_ROOT; };
 		D4992FB1234FB69800EDA733 /* RVS_String_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_String_Extensions.swift; path = ExtensionsAndExtras/RVS_String_Extensions.swift; sourceTree = SOURCE_ROOT; };
 		D49C37FC235F7F5300D03250 /* Direct Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Direct Assets.xcassets"; sourceTree = "<group>"; };
@@ -416,7 +418,6 @@
 		D4B19BD8235F28A30036EDF5 /* RVS_BTDriver_tvOS_Test_Harness_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_tvOS_Test_Harness_ViewController.swift; sourceTree = "<group>"; };
 		D4B19BDB235F28A30036EDF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D4B19BE0235F28A40036EDF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D4B19BFA235F2A060036EDF5 /* RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist; path = Meta/RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist; sourceTree = "<group>"; };
 		D4B19BFD235F2ABB0036EDF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4B19C1E235F2B1E0036EDF5 /* RVS_BTDriver_tvOS_Test_Harness (Framework).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_BTDriver_tvOS_Test_Harness (Framework).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4DBE176235E0DD600107353 /* RVS_BTDriver_MacOS_Test_Harness (Direct).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_BTDriver_MacOS_Test_Harness (Direct).app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -561,6 +562,25 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D44A150423660327003AC8B6 /* Meta */ = {
+			isa = PBXGroup;
+			children = (
+				D4E87D04235E4AF100260E4F /* RVS_BTDriver_WatchOS_Test_Harness_Direct_Extension_Info.plist */,
+				D4F3314D235E66DB00F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness_Framework_Extension_Info.plist */,
+				D4E87D05235E4AF100260E4F /* RVS_BTDriver_WatchOS_Test_Harness_PushNotificationPayload.apns */,
+			);
+			path = Meta;
+			sourceTree = "<group>";
+		};
+		D44A1505236603C3003AC8B6 /* Meta */ = {
+			isa = PBXGroup;
+			children = (
+				D4E87CF2235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_Direct_Info.plist */,
+				D4F33144235E666E00F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness_Framework_Info.plist */,
+			);
+			path = Meta;
+			sourceTree = "<group>";
+		};
 		D44AC696235E25C5004FD702 /* Meta */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,7 +652,8 @@
 		D4B19BF9235F29F50036EDF5 /* Meta */ = {
 			isa = PBXGroup;
 			children = (
-				D4B19BFA235F2A060036EDF5 /* RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist */,
+				D49323C12364F8C50071FF58 /* RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist */,
+				D49323C02364F8C50071FF58 /* RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist */,
 			);
 			name = Meta;
 			sourceTree = "<group>";
@@ -706,8 +727,7 @@
 			children = (
 				D4E87CED235E4AEF00260E4F /* Interface.storyboard */,
 				D4E87CF0235E4AF000260E4F /* Assets.xcassets */,
-				D4E87CF2235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_Direct_Info.plist */,
-				D4F33144235E666E00F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness_Framework_Info.plist */,
+				D44A1505236603C3003AC8B6 /* Meta */,
 			);
 			path = "RVS_BTDriver_WatchOS_Test_Harness WatchKit App";
 			sourceTree = "<group>";
@@ -719,9 +739,7 @@
 				D4E87CFE235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate.swift */,
 				D4E87D00235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_NotificationController.swift */,
 				D4E87D02235E4AF100260E4F /* Assets.xcassets */,
-				D4E87D04235E4AF100260E4F /* RVS_BTDriver_WatchOS_Test_Harness_Direct_Extension_Info.plist */,
-				D4F3314D235E66DB00F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness_Framework_Extension_Info.plist */,
-				D4E87D05235E4AF100260E4F /* RVS_BTDriver_WatchOS_Test_Harness_PushNotificationPayload.apns */,
+				D44A150423660327003AC8B6 /* Meta */,
 			);
 			path = "RVS_BTDriver_WatchOS_Test_Harness WatchKit Extension";
 			sourceTree = "<group>";
@@ -1113,7 +1131,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "The Great Rift Valley Software Company";
 				TargetAttributes = {
 					D443DEE2234D0D7B00F9DE47 = {
@@ -1908,7 +1926,7 @@
 		D443DEF5234D0D7D00F9DE47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1933,7 +1951,7 @@
 		D443DEF6234D0D7D00F9DE47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1959,7 +1977,7 @@
 		D4524B9C234D3EEB00F3EC79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = FrameworkAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iOS-FrameworkAppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -1981,7 +1999,7 @@
 		D4524B9D234D3EEB00F3EC79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = FrameworkAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iOS-FrameworkAppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "${inherited}";
@@ -2127,8 +2145,9 @@
 		D481A16F235E2774004DF47E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = FrameworkAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-FrameworkAppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -2150,8 +2169,9 @@
 		D481A170235E2774004DF47E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = FrameworkAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-FrameworkAppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -2180,7 +2200,7 @@
 					"DIRECT=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = RVS_BTDriver_tvOS_Test_Harness/Meta/RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness-Direct-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2202,7 +2222,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "DIRECT=1";
-				INFOPLIST_FILE = RVS_BTDriver_tvOS_Test_Harness/Meta/RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness-Direct-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2225,7 +2245,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = RVS_BTDriver_tvOS_Test_Harness/Meta/RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2247,7 +2267,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				INFOPLIST_FILE = RVS_BTDriver_tvOS_Test_Harness/Meta/RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2266,8 +2286,9 @@
 		D4DBE183235E0DD700107353 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-AppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -2292,8 +2313,9 @@
 		D4DBE184235E0DD700107353 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-AppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -2427,7 +2449,7 @@
 					"DIRECT=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit Extension/RVS_BTDriver_WatchOS_Test_Harness_Direct_Extension_Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit Extension/Meta/RVS_BTDriver_WatchOS_Test_Harness_Direct_Extension_Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2451,7 +2473,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "DIRECT=1";
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit Extension/RVS_BTDriver_WatchOS_Test_Harness_Direct_Extension_Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit Extension/Meta/RVS_BTDriver_WatchOS_Test_Harness_Direct_Extension_Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2473,7 +2495,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "WatchOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2481,7 +2503,7 @@
 					"$(inherited)",
 				);
 				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit App/RVS_BTDriver_WatchOS_Test_Harness_Direct_Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit App/Meta/RVS_BTDriver_WatchOS_Test_Harness_Direct_Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-WatchOS-Test-Harness-Direct.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2497,12 +2519,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "WatchOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "DIRECT=1";
 				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit App/RVS_BTDriver_WatchOS_Test_Harness_Direct_Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit App/Meta/RVS_BTDriver_WatchOS_Test_Harness_Direct_Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-WatchOS-Test-Harness-Direct.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2586,11 +2608,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "WatchOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness__Framework__WatchKit_Extension;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit App/RVS_BTDriver_WatchOS_Test_Harness_Framework_Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit App/Meta/RVS_BTDriver_WatchOS_Test_Harness_Framework_Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-WatchOS-Test-Harness-Framework.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2605,11 +2627,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "WatchOS-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness__Framework__WatchKit_Extension;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit App/RVS_BTDriver_WatchOS_Test_Harness_Framework_Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit App/Meta/RVS_BTDriver_WatchOS_Test_Harness_Framework_Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-WatchOS-Test-Harness-Framework.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2627,7 +2649,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit Extension/RVS_BTDriver_WatchOS_Test_Harness_Framework_Extension_Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit Extension/Meta/RVS_BTDriver_WatchOS_Test_Harness_Framework_Extension_Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2649,7 +2671,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit Extension/RVS_BTDriver_WatchOS_Test_Harness_Framework_Extension_Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit Extension/Meta/RVS_BTDriver_WatchOS_Test_Harness_Framework_Extension_Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

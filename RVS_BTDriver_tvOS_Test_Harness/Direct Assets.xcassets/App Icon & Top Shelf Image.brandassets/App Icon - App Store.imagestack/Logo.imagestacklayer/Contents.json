@@ -4,13 +4,13 @@
     "version" : 1
   },
   "properties" : {
-    "frame-center" : {
-      "y" : 120,
-      "x" : 200
-    },
     "frame-size" : {
-      "width" : 400,
-      "height" : 240
+      "width" : 1280,
+      "height" : 768
+    },
+    "frame-center" : {
+      "x" : 640,
+      "y" : 384
     }
   }
 }

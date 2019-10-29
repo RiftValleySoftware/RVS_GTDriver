@@ -1,9 +1,9 @@
 {
   "images" : [
     {
-      "filename" : "Mask.png",
-      "idiom" : "tv",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "Logo.png",
+      "idiom" : "tv"
     },
     {
       "scale" : "2x",

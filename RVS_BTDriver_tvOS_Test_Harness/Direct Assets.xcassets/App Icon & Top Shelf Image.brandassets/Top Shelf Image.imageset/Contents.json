@@ -5,14 +5,14 @@
   },
   "images" : [
     {
-      "scale" : "1x",
       "filename" : "TopShelfImage.png",
-      "idiom" : "tv"
+      "idiom" : "tv",
+      "scale" : "1x"
     },
     {
+      "filename" : "TopShelfImage@2x.png",
       "scale" : "2x",
-      "idiom" : "tv",
-      "filename" : "TopShelfImage@2x.png"
+      "idiom" : "tv"
     }
   ]
 }
