@@ -26,6 +26,7 @@
                                                     <imageView alignment="center" verticalAlignment="center" image="Gear" id="Khj-nh-wo2"/>
                                                 </items>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="4" bottom="4"/>
                                             </group>
                                             <connections>
                                                 <action selector="settingsButtonHit" destination="AgC-eL-Hgc" id="xzx-KM-Jqe"/>
