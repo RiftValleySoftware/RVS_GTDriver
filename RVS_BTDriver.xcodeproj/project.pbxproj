@@ -24,6 +24,8 @@
 		D410E08D235F7E9C00ABE52D /* Framework Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D410E08C235F7E9C00ABE52D /* Framework Assets.xcassets */; };
 		D41568CB234D158C0038286D /* RVS_BTDriverCommunicatorTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC502234BB88A006D0A53 /* RVS_BTDriverCommunicatorTools.swift */; };
 		D41568CC234D158C0038286D /* RVS_BTDriverCommunicatorTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC502234BB88A006D0A53 /* RVS_BTDriverCommunicatorTools.swift */; };
+		D425953C236A16D50044A167 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D425953A236A16CC0044A167 /* Localizable.strings */; };
+		D425953D236A16D60044A167 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D425953A236A16CC0044A167 /* Localizable.strings */; };
 		D4312A54234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4312A53234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift */; };
 		D4312A55234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4312A53234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift */; };
 		D4428F1C234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4428F1B234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift */; };
@@ -400,6 +402,7 @@
 		D40B6271234BC08300A3A334 /* RVS_BTDriver_ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_ServiceProtocol.swift; sourceTree = "<group>"; };
 		D40B6273234BC0AA00A3A334 /* RVS_BTDriver_Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_Device.swift; sourceTree = "<group>"; };
 		D410E08C235F7E9C00ABE52D /* Framework Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Framework Assets.xcassets"; sourceTree = "<group>"; };
+		D425953B236A16CC0044A167 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4312A53234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift; sourceTree = "<group>"; };
 		D4428F1B234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_Prefs.swift; sourceTree = "<group>"; };
 		D4428F1E234E5CE400229A4C /* RVS_BTDriver_iOS_Test_Harness_SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_SettingsViewController.swift; sourceTree = "<group>"; };
@@ -738,6 +741,7 @@
 		D4E87CEC235E4AEF00260E4F /* RVS_BTDriver_WatchOS_Test_Harness WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
+				D425953A236A16CC0044A167 /* Localizable.strings */,
 				D4E87CED235E4AEF00260E4F /* Interface.storyboard */,
 				D4E87CF0235E4AF000260E4F /* Assets.xcassets */,
 				D44A1505236603C3003AC8B6 /* Meta */,
@@ -1145,7 +1149,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "The Great Rift Valley Software Company";
 				TargetAttributes = {
 					D443DEE2234D0D7B00F9DE47 = {
@@ -1300,6 +1304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E87CF1235E4AF000260E4F /* Assets.xcassets in Resources */,
+				D425953D236A16D60044A167 /* Localizable.strings in Resources */,
 				D4E87CEF235E4AEF00260E4F /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1325,6 +1330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4F33143235E665E00F7B5BE /* Assets.xcassets in Resources */,
+				D425953C236A16D50044A167 /* Localizable.strings in Resources */,
 				D4F33142235E665800F7B5BE /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1874,6 +1880,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D425953A236A16CC0044A167 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D425953B236A16CC0044A167 /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		D443DEEB234D0D7B00F9DE47 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

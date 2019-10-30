@@ -21,9 +21,6 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import WatchKit
-#if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
-    import RVS_BTDriver_WatchOS
-#endif
 
 /* ###################################################################################################################################### */
 // MARK: -
@@ -34,17 +31,6 @@ class RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: NSObject {
     /* ################################################################################################################################## */
     // MARK: -
     /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This is our instance of the actual BLE driver.
-     */
-    var driverInstance: RVS_BTDriver!
-    
-    /* ################################################################## */
-    /**
-     */
-    var prefs: RVS_BTDriver_WatchOS_Test_Harness_Prefs!
-    
     /* ################################################################## */
     /**
      Shortcut to fetch the delegate instance, cast correctly. May be nil.
@@ -64,30 +50,18 @@ extension RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: WKExtensionDelega
     /**
      */
     func applicationDidFinishLaunching() {
-        /* ################################################################## */
-        /**
-         This establishes the driver instance, wiping out any old one.
-         */
-        func setUpDriver() {
-            driverInstance = nil
-            let queue: DispatchQueue! = prefs.useDifferentThread ? DispatchQueue.global() : nil
-            driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
-        }
     }
 
     /* ################################################################## */
     /**
      */
     func applicationDidBecomeActive() {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
     /* ################################################################## */
     /**
      */
     func applicationWillResignActive() {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, etc.
     }
 
     /* ################################################################## */
@@ -121,25 +95,5 @@ extension RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: WKExtensionDelega
                 task.setTaskCompletedWithSnapshot(false)
             }
         }
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: -
-/* ###################################################################################################################################### */
-/**
- */
-extension RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: RVS_BTDriverDelegate {
-    /* ################################################################## */
-    /**
-     Simple error reporting method.
-     
-     - parameter inDriver: The `RVS_BTDriver` instance that encountered the error.
-     - parameter encounteredThisError: The error that was encountered.
-     */
-    func btDriver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
-        #if DEBUG
-            print("ERROR! \(String(describing: inError))")
-        #endif
     }
 }
