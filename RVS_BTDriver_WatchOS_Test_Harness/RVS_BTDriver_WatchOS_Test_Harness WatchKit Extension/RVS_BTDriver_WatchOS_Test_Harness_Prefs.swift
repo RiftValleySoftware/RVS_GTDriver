@@ -28,7 +28,7 @@ import Foundation
 /**
  This class extends the prefs class to provide persistent prefs storage.
  */
-class RVS_BTDriver_iOS_Test_Harness_Prefs: RVS_PersistentPrefs {
+class RVS_BTDriver_WatchOS_Test_Harness_Prefs: RVS_PersistentPrefs {
     /* ############################################################################################################################## */
     // MARK: - Internal Enums
     /* ############################################################################################################################## */

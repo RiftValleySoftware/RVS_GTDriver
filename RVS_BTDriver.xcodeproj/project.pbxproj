@@ -749,8 +749,8 @@
 			isa = PBXGroup;
 			children = (
 				D402E03B2369B096004709B9 /* RVS_BTDriver_WatchOS_Test_Harness_Prefs.swift */,
-				D4E87CFC235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_InterfaceController.swift */,
 				D4E87CFE235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate.swift */,
+				D4E87CFC235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_InterfaceController.swift */,
 				D4E87D00235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_NotificationController.swift */,
 				D4E87D02235E4AF100260E4F /* Assets.xcassets */,
 				D44A150423660327003AC8B6 /* Meta */,

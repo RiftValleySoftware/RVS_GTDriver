@@ -13,23 +13,24 @@
                     <items>
                         <group width="1" height="1" alignment="center" verticalAlignment="center" backgroundImage="background-gradient" layout="overlap" id="YSG-Cu-CcW">
                             <items>
+                                <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="eTf-xE-nmK">
+                                    <items>
+                                        <imageView width="1" height="1" alignment="center" verticalAlignment="center" image="NoBT" contentMode="scaleAspectFit" id="AJl-aJ-68d"/>
+                                    </items>
+                                </group>
                                 <group width="1" height="1" alignment="left" layout="vertical" id="PKh-Yl-IAg">
                                     <items>
                                         <button alignment="center" id="y2W-82-D52">
-                                            <group key="contentGroup" alignment="left" contentMode="center" layout="overlap" id="BSC-UL-fxf">
+                                            <group key="contentGroup" width="1" alignment="left" contentMode="center" layout="overlap" id="BSC-UL-fxf">
                                                 <items>
-                                                    <imageView alignment="left" image="Gear" id="Khj-nh-wo2"/>
+                                                    <imageView alignment="center" verticalAlignment="center" image="Gear" id="Khj-nh-wo2"/>
                                                 </items>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                                             </group>
                                             <connections>
                                                 <action selector="settingsButtonHit" destination="AgC-eL-Hgc" id="xzx-KM-Jqe"/>
                                             </connections>
                                         </button>
-                                        <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="eTf-xE-nmK">
-                                            <items>
-                                                <imageView alignment="left" image="NoBT" id="AJl-aJ-68d"/>
-                                            </items>
-                                        </group>
                                         <table alignment="left" id="xVM-qL-rVu">
                                             <items>
                                                 <tableRow identifier="standard-row" id="82b-fO-akn">

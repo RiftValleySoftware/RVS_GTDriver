@@ -30,12 +30,49 @@ import WatchKit
 /* ###################################################################################################################################### */
 /**
  */
-class RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: NSObject, WKExtensionDelegate {
+class RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: NSObject {
+    /* ################################################################################################################################## */
+    // MARK: -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is our instance of the actual BLE driver.
+     */
+    var driverInstance: RVS_BTDriver!
+    
+    /* ################################################################## */
+    /**
+     */
+    var prefs: RVS_BTDriver_WatchOS_Test_Harness_Prefs!
+    
+    /* ################################################################## */
+    /**
+     Shortcut to fetch the delegate instance, cast correctly. May be nil.
+     */
+    class var delegateObject: RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate! {
+        return WKExtension.shared().delegate as? RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+extension RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: WKExtensionDelegate {
     /* ################################################################## */
     /**
      */
     func applicationDidFinishLaunching() {
-        // Perform any final initialization of your application.
+        /* ################################################################## */
+        /**
+         This establishes the driver instance, wiping out any old one.
+         */
+        func setUpDriver() {
+            driverInstance = nil
+            let queue: DispatchQueue! = prefs.useDifferentThread ? DispatchQueue.global() : nil
+            driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
+        }
     }
 
     /* ################################################################## */
@@ -84,5 +121,25 @@ class RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: NSObject, WKExtension
                 task.setTaskCompletedWithSnapshot(false)
             }
         }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+extension RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: RVS_BTDriverDelegate {
+    /* ################################################################## */
+    /**
+     Simple error reporting method.
+     
+     - parameter inDriver: The `RVS_BTDriver` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func btDriver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
+        #if DEBUG
+            print("ERROR! \(String(describing: inError))")
+        #endif
     }
 }

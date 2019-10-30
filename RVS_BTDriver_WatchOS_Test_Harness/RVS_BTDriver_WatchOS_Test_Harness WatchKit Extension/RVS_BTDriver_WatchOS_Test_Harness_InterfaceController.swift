@@ -69,6 +69,9 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
     /**
      */
     @IBAction func settingsButtonHit() {
+        #if DEBUG
+            print("Settings Button Hit")
+        #endif
     }
     
     /* ################################################################################################################################## */
@@ -79,6 +82,10 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
      */
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+        // Make sure the correct items are shown or hidden.
+        let isBTAvailable = RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate.delegateObject?.driverInstance?.isBTAvailable ?? false
+        noBTDisplay.setHidden(isBTAvailable)
+        deviceDisplayTable.setHidden(!isBTAvailable)
     }
     
     /* ################################################################## */
