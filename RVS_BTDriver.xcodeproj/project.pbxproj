@@ -7,11 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D402E03C2369B096004709B9 /* RVS_BTDriver_WatchOS_Test_Harness_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D402E03B2369B096004709B9 /* RVS_BTDriver_WatchOS_Test_Harness_Prefs.swift */; };
+		D402E03D2369B096004709B9 /* RVS_BTDriver_WatchOS_Test_Harness_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D402E03B2369B096004709B9 /* RVS_BTDriver_WatchOS_Test_Harness_Prefs.swift */; };
+		D402E03E2369B10C004709B9 /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB0234FB69800EDA733 /* RVS_PersistentPrefs.swift */; };
+		D402E03F2369B10C004709B9 /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB1234FB69800EDA733 /* RVS_String_Extensions.swift */; };
+		D402E0402369B10C004709B9 /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB0234FB69800EDA733 /* RVS_PersistentPrefs.swift */; };
+		D402E0412369B10C004709B9 /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB1234FB69800EDA733 /* RVS_String_Extensions.swift */; };
+		D402E0422369B10F004709B9 /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB0234FB69800EDA733 /* RVS_PersistentPrefs.swift */; };
+		D402E0432369B10F004709B9 /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB1234FB69800EDA733 /* RVS_String_Extensions.swift */; };
+		D402E0442369B110004709B9 /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB0234FB69800EDA733 /* RVS_PersistentPrefs.swift */; };
+		D402E0452369B110004709B9 /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB1234FB69800EDA733 /* RVS_String_Extensions.swift */; };
+		D402E0462369B113004709B9 /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB0234FB69800EDA733 /* RVS_PersistentPrefs.swift */; };
+		D402E0472369B113004709B9 /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB1234FB69800EDA733 /* RVS_String_Extensions.swift */; };
 		D40B6272234BC08300A3A334 /* RVS_BTDriver_ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B6271234BC08300A3A334 /* RVS_BTDriver_ServiceProtocol.swift */; };
 		D40B6274234BC0AA00A3A334 /* RVS_BTDriver_Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B6273234BC0AA00A3A334 /* RVS_BTDriver_Device.swift */; };
 		D410E08D235F7E9C00ABE52D /* Framework Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D410E08C235F7E9C00ABE52D /* Framework Assets.xcassets */; };
 		D41568CB234D158C0038286D /* RVS_BTDriverCommunicatorTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC502234BB88A006D0A53 /* RVS_BTDriverCommunicatorTools.swift */; };
 		D41568CC234D158C0038286D /* RVS_BTDriverCommunicatorTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC502234BB88A006D0A53 /* RVS_BTDriverCommunicatorTools.swift */; };
+		D425953C236A16D50044A167 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D425953A236A16CC0044A167 /* Localizable.strings */; };
+		D425953D236A16D60044A167 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D425953A236A16CC0044A167 /* Localizable.strings */; };
 		D4312A54234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4312A53234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift */; };
 		D4312A55234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4312A53234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift */; };
 		D4428F1C234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4428F1B234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift */; };
@@ -383,10 +397,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D402E03B2369B096004709B9 /* RVS_BTDriver_WatchOS_Test_Harness_Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_WatchOS_Test_Harness_Prefs.swift; sourceTree = "<group>"; };
 		D403D354232BCA970040EBA3 /* Warnings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Warnings.xcconfig; path = Meta/Warnings.xcconfig; sourceTree = "<group>"; };
 		D40B6271234BC08300A3A334 /* RVS_BTDriver_ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_ServiceProtocol.swift; sourceTree = "<group>"; };
 		D40B6273234BC0AA00A3A334 /* RVS_BTDriver_Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_Device.swift; sourceTree = "<group>"; };
 		D410E08C235F7E9C00ABE52D /* Framework Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Framework Assets.xcassets"; sourceTree = "<group>"; };
+		D425953B236A16CC0044A167 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4312A53234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift; sourceTree = "<group>"; };
 		D4428F1B234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_Prefs.swift; sourceTree = "<group>"; };
 		D4428F1E234E5CE400229A4C /* RVS_BTDriver_iOS_Test_Harness_SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_SettingsViewController.swift; sourceTree = "<group>"; };
@@ -544,7 +560,6 @@
 			children = (
 				D41568CD234D18140038286D /* Application */,
 				D41568CE234D182C0038286D /* ViewControllersAndViews */,
-				D4B1FED02332A6E1000B8736 /* ExtensionsAndExtras */,
 				D443DEFA234D0E5000F9DE47 /* Resources */,
 				D41568C9234D15490038286D /* Meta */,
 			);
@@ -605,6 +620,7 @@
 			isa = PBXGroup;
 			children = (
 				D403D353232BCA830040EBA3 /* Meta */,
+				D4B1FED02332A6E1000B8736 /* ExtensionsAndExtras */,
 				D4FEC4EB234BA554006D0A53 /* RVS_BTDriver */,
 				D443DEE4234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness */,
 				D4DBE177235E0DD600107353 /* RVS_BTDriver_MacOS_Test_Harness */,
@@ -725,6 +741,7 @@
 		D4E87CEC235E4AEF00260E4F /* RVS_BTDriver_WatchOS_Test_Harness WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
+				D425953A236A16CC0044A167 /* Localizable.strings */,
 				D4E87CED235E4AEF00260E4F /* Interface.storyboard */,
 				D4E87CF0235E4AF000260E4F /* Assets.xcassets */,
 				D44A1505236603C3003AC8B6 /* Meta */,
@@ -735,8 +752,9 @@
 		D4E87CFB235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				D4E87CFC235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_InterfaceController.swift */,
+				D402E03B2369B096004709B9 /* RVS_BTDriver_WatchOS_Test_Harness_Prefs.swift */,
 				D4E87CFE235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate.swift */,
+				D4E87CFC235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_InterfaceController.swift */,
 				D4E87D00235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_NotificationController.swift */,
 				D4E87D02235E4AF100260E4F /* Assets.xcassets */,
 				D44A150423660327003AC8B6 /* Meta */,
@@ -1131,7 +1149,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "The Great Rift Valley Software Company";
 				TargetAttributes = {
 					D443DEE2234D0D7B00F9DE47 = {
@@ -1286,6 +1304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E87CF1235E4AF000260E4F /* Assets.xcassets in Resources */,
+				D425953D236A16D60044A167 /* Localizable.strings in Resources */,
 				D4E87CEF235E4AEF00260E4F /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1311,6 +1330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4F33143235E665E00F7B5BE /* Assets.xcassets in Resources */,
+				D425953C236A16D50044A167 /* Localizable.strings in Resources */,
 				D4F33142235E665800F7B5BE /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1600,7 +1620,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D402E0402369B10C004709B9 /* RVS_PersistentPrefs.swift in Sources */,
 				D481A156235E2774004DF47E /* RVS_BTDriver_MacOS_Test_Harness_ViewController.swift in Sources */,
+				D402E0412369B10C004709B9 /* RVS_String_Extensions.swift in Sources */,
 				D481A162235E2774004DF47E /* RVS_BTDriver_MacOS_Test_Harness_AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1609,12 +1631,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D402E0472369B113004709B9 /* RVS_String_Extensions.swift in Sources */,
 				D4B19BD9235F28A30036EDF5 /* RVS_BTDriver_tvOS_Test_Harness_ViewController.swift in Sources */,
 				D4B19BED235F29130036EDF5 /* RVS_BTDriver_Device.swift in Sources */,
 				D4B19BF8235F29130036EDF5 /* RVS_SequenceProtocol.swift in Sources */,
 				D4B19BF5235F29130036EDF5 /* RVS_BTDriver_Interface_BT_Classic.swift in Sources */,
 				D4B19BF4235F29130036EDF5 /* RVS_BTDriver_Interface_BLE.swift in Sources */,
 				D4B19BEF235F29130036EDF5 /* RVS_BTDriver_Property.swift in Sources */,
+				D402E0462369B113004709B9 /* RVS_PersistentPrefs.swift in Sources */,
 				D4B19BF7235F29130036EDF5 /* RVS_DebugTools.swift in Sources */,
 				D4B19BF2235F29130036EDF5 /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
 				D4B19BF1235F29130036EDF5 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */,
@@ -1636,12 +1660,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D402E03F2369B10C004709B9 /* RVS_String_Extensions.swift in Sources */,
 				D4DBE17B235E0DD600107353 /* RVS_BTDriver_MacOS_Test_Harness_ViewController.swift in Sources */,
 				D4DBE1CA235E0E3100107353 /* RVS_BTDriver_Device.swift in Sources */,
 				D4DBE1D5235E0E3100107353 /* RVS_SequenceProtocol.swift in Sources */,
 				D4DBE1D2235E0E3100107353 /* RVS_BTDriver_Interface_BT_Classic.swift in Sources */,
 				D4DBE1CC235E0E3100107353 /* RVS_BTDriver_Property.swift in Sources */,
 				D4DBE1D4235E0E3100107353 /* RVS_DebugTools.swift in Sources */,
+				D402E03E2369B10C004709B9 /* RVS_PersistentPrefs.swift in Sources */,
 				D4DBE1CF235E0E3100107353 /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
 				D4DBE1C9235E0E3100107353 /* RVS_BTDriver.swift in Sources */,
 				D4DBE1CB235E0E3100107353 /* RVS_BTDriver_Service.swift in Sources */,
@@ -1719,6 +1745,7 @@
 				D4E87D16235E4E9E00260E4F /* RVS_BTDriver_PropertyProtocol.swift in Sources */,
 				D4E87D1A235E4E9E00260E4F /* RVS_BTDriver_Service.swift in Sources */,
 				D4E87D1C235E4E9E00260E4F /* RVS_BTDriver_VendorProtocol.swift in Sources */,
+				D402E0432369B10F004709B9 /* RVS_String_Extensions.swift in Sources */,
 				D4E87CFF235E4AF000260E4F /* RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate.swift in Sources */,
 				D4E87D1F235E4E9E00260E4F /* RVS_BTDriver_Base_Interface.swift in Sources */,
 				D4E87D15235E4E9E00260E4F /* RVS_BTDriver_ServiceProtocol.swift in Sources */,
@@ -1733,7 +1760,9 @@
 				D4E87D13235E4E9E00260E4F /* RVS_BTDriver_Extension.swift in Sources */,
 				D4E87D1E235E4E9E00260E4F /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
 				D4E87D1B235E4E9E00260E4F /* RVS_BTDriver_Property.swift in Sources */,
+				D402E0422369B10F004709B9 /* RVS_PersistentPrefs.swift in Sources */,
 				D4E87D18235E4E9E00260E4F /* RVS_BTDriver.swift in Sources */,
+				D402E03C2369B096004709B9 /* RVS_BTDriver_WatchOS_Test_Harness_Prefs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1741,7 +1770,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D402E0452369B110004709B9 /* RVS_String_Extensions.swift in Sources */,
 				D4F33147235E667A00F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness_NotificationController.swift in Sources */,
+				D402E0442369B110004709B9 /* RVS_PersistentPrefs.swift in Sources */,
+				D402E03D2369B096004709B9 /* RVS_BTDriver_WatchOS_Test_Harness_Prefs.swift in Sources */,
 				D4F33145235E667A00F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness_InterfaceController.swift in Sources */,
 				D4F33146235E667A00F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate.swift in Sources */,
 			);
@@ -1848,6 +1880,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D425953A236A16CC0044A167 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D425953B236A16CC0044A167 /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		D443DEEB234D0D7B00F9DE47 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

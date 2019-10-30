@@ -26,22 +26,220 @@ import Foundation
     import RVS_BTDriver_WatchOS
 #endif
 
-class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceController {
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController_TableRowController: NSObject {
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var displayLabel: WKInterfaceLabel!
+}
 
-    override func awake(withContext context: Any?) {
-        super.awake(withContext: context)
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceController {
+    /* ################################################################################################################################## */
+    // MARK: -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     The string used to instantiate our table rows.
+     */
+    let rowIDString = "standard-row"
+    
+    /* ################################################################################################################################## */
+    // MARK: -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is our instance of the actual BLE driver.
+     */
+    var driverInstance: RVS_BTDriver!
+    
+    /* ################################################################## */
+    /**
+     */
+    var prefs = RVS_BTDriver_WatchOS_Test_Harness_Prefs()
+    
+    /* ################################################################################################################################## */
+    // MARK: -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var settingsButton: WKInterfaceButton!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var noBTDisplay: WKInterfaceGroup!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var deviceDisplayTable: WKInterfaceTable!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var scanningButton: WKInterfaceSwitch!
+    
+    /* ################################################################################################################################## */
+    // MARK: -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    @IBAction func scanningButtonHit(_ inValue: Bool) {
+        #if DEBUG
+            print("Scanning Button Hit")
+        #endif
         
-        // Configure interface objects here.
+        if inValue {
+            driverInstance?.startScanning()
+        } else {
+            driverInstance?.stopScanning()
+        }
     }
     
+    /* ################################################################## */
+    /**
+     */
+    @IBAction func settingsButtonHit() {
+        #if DEBUG
+            print("Settings Button Hit")
+        #endif
+    }
+    
+    /* ################################################################################################################################## */
+    // MARK: -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This establishes the driver instance, wiping out any old one.
+     */
+    func setUpDriver() {
+        driverInstance = nil
+        let queue: DispatchQueue! = prefs.useDifferentThread ? DispatchQueue.global() : nil
+        driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
+    }
+
+    /* ################################################################## */
+    /**
+     Make sure the correct items are shown or hidden.
+     */
+    func setUpUI() {
+        scanningButton.setTitle("SLUG-SCANNING".localizedVariant)
+        let isBTAvailable = driverInstance?.isBTAvailable ?? false
+        noBTDisplay.setHidden(isBTAvailable)
+        deviceDisplayTable.setHidden(!isBTAvailable)
+        scanningButton.setHidden(!isBTAvailable)
+        populateTable()
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func populateTable() {
+        if  let driverInstance = driverInstance,
+            driverInstance.isBTAvailable,
+            0 < driverInstance.count {
+            deviceDisplayTable.setNumberOfRows(driverInstance.count, withRowType: rowIDString)
+            
+            for index in 0..<driverInstance.count {
+                if let deviceRow = self.deviceDisplayTable.rowController(at: index) as? RVS_BTDriver_WatchOS_Test_Harness_InterfaceController_TableRowController {
+                    deviceRow.displayLabel.setText(driverInstance[index].modelName)
+                }
+            }
+        } else {
+            deviceDisplayTable.setNumberOfRows(0, withRowType: "")
+        }
+    }
+    
+    /* ################################################################################################################################## */
+    // MARK: -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
+        setUpDriver()
+        setUpUI()
+    }
+    
+    /* ################################################################## */
+    /**
+     */
     override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
         super.willActivate()
     }
     
+    /* ################################################################## */
+    /**
+     */
     override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
+}
 
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+extension RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: RVS_BTDriverDelegate {
+    /* ################################################################## */
+    /**
+     Simple error reporting method.
+     
+     - parameter inDriver: The `RVS_BTDriver` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func btDriver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
+        #if DEBUG
+            print("ERROR! \(String(describing: inError))")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a new device is discovered while scanning.
+     
+     - parameter inDriver: The `RVS_BTDriver` instance that is calling this.
+     - parameter newDeviceAdded: The new device instance.
+     */
+    func btDriver(_ inDriver: RVS_BTDriver, newDeviceAdded inDevice: RVS_BTDriver_DeviceProtocol) {
+        #if DEBUG
+            print("New Device Added: \(String(describing: inDevice))")
+        #endif
+        DispatchQueue.main.async {
+            self.populateTable()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver's status should be checked.
+     
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The `RVS_BTDriver` instance calling this.
+     */
+    func btDriverStatusUpdate(_ inDriver: RVS_BTDriver) {
+        #if DEBUG
+            print("Status Message Received by Navigation Controller")
+        #endif
+        DispatchQueue.main.async {
+            self.setUpUI()
+        }
+    }
 }

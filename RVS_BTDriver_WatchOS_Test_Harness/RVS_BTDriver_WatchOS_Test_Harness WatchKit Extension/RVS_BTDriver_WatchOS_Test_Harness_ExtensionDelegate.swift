@@ -21,25 +21,52 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import WatchKit
-#if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
-    import RVS_BTDriver_WatchOS
-#endif
 
-class RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: NSObject, WKExtensionDelegate {
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: NSObject {
+    /* ################################################################################################################################## */
+    // MARK: -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     Shortcut to fetch the delegate instance, cast correctly. May be nil.
+     */
+    class var delegateObject: RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate! {
+        return WKExtension.shared().delegate as? RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate
+    }
+}
 
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+extension RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: WKExtensionDelegate {
+    /* ################################################################## */
+    /**
+     */
     func applicationDidFinishLaunching() {
-        // Perform any final initialization of your application.
     }
 
+    /* ################################################################## */
+    /**
+     */
     func applicationDidBecomeActive() {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    /* ################################################################## */
+    /**
+     */
     func applicationWillResignActive() {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, etc.
     }
 
+    /* ################################################################## */
+    /**
+     */
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
         // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
         for task in backgroundTasks {
