@@ -9,9 +9,61 @@
         <!--Driver WatchOS Test Harness Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target"/>
+                <controller id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="1" alignment="center" verticalAlignment="center" backgroundImage="background-gradient" layout="overlap" id="YSG-Cu-CcW">
+                            <items>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="PKh-Yl-IAg">
+                                    <items>
+                                        <button alignment="center" id="y2W-82-D52">
+                                            <group key="contentGroup" alignment="left" contentMode="center" layout="overlap" id="BSC-UL-fxf">
+                                                <items>
+                                                    <imageView alignment="left" image="Gear" id="Khj-nh-wo2"/>
+                                                </items>
+                                            </group>
+                                            <connections>
+                                                <action selector="settingsButtonHit" destination="AgC-eL-Hgc" id="xzx-KM-Jqe"/>
+                                            </connections>
+                                        </button>
+                                        <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="eTf-xE-nmK">
+                                            <items>
+                                                <imageView alignment="left" image="NoBT" id="AJl-aJ-68d"/>
+                                            </items>
+                                        </group>
+                                        <table alignment="left" id="xVM-qL-rVu">
+                                            <items>
+                                                <tableRow identifier="standard-row" id="82b-fO-akn">
+                                                    <group key="rootItem" width="1" alignment="left" id="98O-Rw-z7W" customClass="RVS_BTDriver_WatchOS_Test_Harness_InterfaceController_TableRow" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                                                        <items>
+                                                            <label width="1" alignment="left" text="Label" numberOfLines="0" id="RFJ-cy-Nld">
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </label>
+                                                        </items>
+                                                    </group>
+                                                    <connections>
+                                                        <outlet property="displayLabel" destination="RFJ-cy-Nld" id="866-f4-um6"/>
+                                                    </connections>
+                                                </tableRow>
+                                            </items>
+                                        </table>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="deviceDisplayTable" destination="xVM-qL-rVu" id="jbh-o8-TgM"/>
+                        <outlet property="noBTDisplay" destination="eTf-xE-nmK" id="DhI-eh-VsK"/>
+                        <outlet property="settingsButton" destination="y2W-82-D52" id="NxZ-4E-GA9"/>
+                    </connections>
+                </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Gear" width="25" height="25"/>
+        <image name="NoBT" width="341.5" height="341.5"/>
+        <image name="background-gradient" width="1" height="1000"/>
+    </resources>
 </document>
