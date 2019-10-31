@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15504" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15504" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc" pageOrientation="vertical">
     <device id="watch38"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
     </dependencies>
     <scenes>
-        <!--Driver WatchOS Test Harness Interface Controller-->
+        <!--MAIN SCREEN-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
+                <controller identifier="MAIN" title="MAIN SCREEN" backgroundImage="background-gradient" fullBounds="YES" id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group width="1" height="1" alignment="center" verticalAlignment="center" backgroundImage="background-gradient" layout="overlap" id="YSG-Cu-CcW">
+                        <group width="1" height="1" alignment="center" verticalAlignment="center" layout="overlap" id="YSG-Cu-CcW">
                             <items>
                                 <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="eTf-xE-nmK">
                                     <items>
@@ -29,7 +29,7 @@
                                         </switch>
                                         <table alignment="left" id="xVM-qL-rVu">
                                             <items>
-                                                <tableRow identifier="standard-row" id="82b-fO-akn" customClass="RVS_BTDriver_WatchOS_Test_Harness_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                                                <tableRow identifier="standard-row" id="82b-fO-akn" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
                                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="98O-Rw-z7W">
                                                         <items>
                                                             <label width="1" alignment="left" text="Label" numberOfLines="0" id="RFJ-cy-Nld">
@@ -40,24 +40,26 @@
                                                     </group>
                                                     <connections>
                                                         <outlet property="displayLabel" destination="RFJ-cy-Nld" id="40e-z1-cXX"/>
+                                                        <segue destination="jkz-lt-qTy" kind="push" id="D3N-gh-LR7"/>
                                                     </connections>
                                                 </tableRow>
                                             </items>
                                         </table>
-                                        <button alignment="center" verticalAlignment="bottom" id="y2W-82-D52">
-                                            <group key="contentGroup" width="1" alignment="left" contentMode="center" layout="overlap" id="BSC-UL-fxf">
-                                                <items>
-                                                    <imageView alignment="center" verticalAlignment="center" image="Gear" id="Khj-nh-wo2"/>
-                                                </items>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
-                                                <edgeInsets key="margins" left="0.0" right="0.0" top="4" bottom="4"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="settingsButtonHit" destination="AgC-eL-Hgc" id="xzx-KM-Jqe"/>
-                                            </connections>
-                                        </button>
                                     </items>
                                 </group>
+                                <button alignment="left" verticalAlignment="bottom" id="Syj-Oi-PyQ">
+                                    <group key="contentGroup" width="1" alignment="left" id="KgA-XQ-hba">
+                                        <items>
+                                            <imageView alignment="center" verticalAlignment="center" image="Gear" id="9th-PX-HOv">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </imageView>
+                                        </items>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                    <connections>
+                                        <segue destination="LPq-H0-sRX" kind="push" identifier="settings-segue" id="BiA-8Z-Yye"/>
+                                    </connections>
+                                </button>
                             </items>
                         </group>
                     </items>
@@ -65,11 +67,71 @@
                         <outlet property="deviceDisplayTable" destination="xVM-qL-rVu" id="jbh-o8-TgM"/>
                         <outlet property="noBTDisplay" destination="eTf-xE-nmK" id="DhI-eh-VsK"/>
                         <outlet property="scanningButton" destination="baO-lj-kZ8" id="Fhu-Rx-m4C"/>
-                        <outlet property="settingsButton" destination="y2W-82-D52" id="NxZ-4E-GA9"/>
+                        <outlet property="settingsButton" destination="Syj-Oi-PyQ" id="FNb-Jb-xMh"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
+        </scene>
+        <!--SETTINGS-->
+        <scene sceneID="u5C-GZ-rgD">
+            <objects>
+                <controller identifier="SETTINGS" title="SETTINGS" backgroundImage="background-gradient" hidesWhenLoading="NO" fullBounds="YES" id="LPq-H0-sRX" customClass="RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="8eW-R5-uQ5">
+                            <items>
+                                <switch width="1" alignment="left" value="YES" title="THREAD" id="2Gg-gR-9Bi">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" red="0.0" green="0.5" blue="0.0048268906039999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="useDifferentThreadSwitchHit:" destination="LPq-H0-sRX" id="cxp-AA-9pl"/>
+                                    </connections>
+                                </switch>
+                                <switch width="1" alignment="left" value="YES" title="RESCAN" id="Bjx-hY-10O">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="tintColor" red="0.0" green="0.5" blue="0.0048268906039999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="rescanSwitchHit:" destination="LPq-H0-sRX" id="SYI-B7-bAE"/>
+                                    </connections>
+                                </switch>
+                                <switch width="1" alignment="left" value="YES" title="PERSIST" id="twa-II-nlE">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="tintColor" red="0.0" green="0.5" blue="0.0048268906039999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="persistentConnectionSwitchHit:" destination="LPq-H0-sRX" id="mrv-mZ-vyT"/>
+                                    </connections>
+                                </switch>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="persistentConnectionSwitch" destination="twa-II-nlE" id="8O3-vE-UEL"/>
+                        <outlet property="rescanSwitch" destination="Bjx-hY-10O" id="Epo-18-QQT"/>
+                        <outlet property="useDifferentThreadSwitch" destination="2Gg-gR-9Bi" id="c5m-Ia-9GK"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="572" y="345"/>
+        </scene>
+        <!--Driver WatchOS Test Harness Device Interface Controller-->
+        <scene sceneID="LL6-ep-Cpd">
+            <objects>
+                <controller hidesWhenLoading="NO" fullBounds="YES" id="jkz-lt-qTy" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" backgroundImage="background-gradient" id="hmf-1g-0uI">
+                            <items>
+                                <label width="1" height="1" alignment="left" numberOfLines="0" id="0f8-Zg-ejN">
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="displayLabel" destination="0f8-Zg-ejN" id="v7h-y6-NdX"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="572" y="691"/>
         </scene>
     </scenes>
     <resources>
