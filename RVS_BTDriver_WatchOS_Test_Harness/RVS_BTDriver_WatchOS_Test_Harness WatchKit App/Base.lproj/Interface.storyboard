@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15400" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc" pageOrientation="vertical">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15504" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc" pageOrientation="vertical">
     <device id="watch38"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15400"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
     </dependencies>
     <scenes>
         <!--MAIN SCREEN-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="MAIN" title="MAIN SCREEN" backgroundImage="background-gradient" fullBounds="YES" id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
+                <controller identifier="MAIN" title="MAIN SCREEN" backgroundImage="background-gradient" fullBounds="YES" id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                     <items>
                         <group width="1" height="1" alignment="center" verticalAlignment="center" layout="overlap" id="YSG-Cu-CcW">
                             <items>
@@ -29,7 +29,7 @@
                                         </switch>
                                         <table alignment="left" id="xVM-qL-rVu">
                                             <items>
-                                                <tableRow identifier="standard-row" id="82b-fO-akn" customClass="RVS_BTDriver_WatchOS_Test_Harness_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                                                <tableRow identifier="standard-row" id="82b-fO-akn" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
                                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="98O-Rw-z7W">
                                                         <items>
                                                             <label width="1" alignment="left" text="Label" numberOfLines="0" id="RFJ-cy-Nld">
@@ -40,6 +40,7 @@
                                                     </group>
                                                     <connections>
                                                         <outlet property="displayLabel" destination="RFJ-cy-Nld" id="40e-z1-cXX"/>
+                                                        <segue destination="jkz-lt-qTy" kind="push" id="D3N-gh-LR7"/>
                                                     </connections>
                                                 </tableRow>
                                             </items>
@@ -56,7 +57,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </group>
                                     <connections>
-                                        <segue destination="LPq-H0-sRX" kind="push" id="BiA-8Z-Yye"/>
+                                        <segue destination="LPq-H0-sRX" kind="push" identifier="settings-segue" id="BiA-8Z-Yye"/>
                                     </connections>
                                 </button>
                             </items>
@@ -111,6 +112,17 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="572" y="345"/>
+        </scene>
+        <!--Driver WatchOS Test Harness Device Interface Controller-->
+        <scene sceneID="LL6-ep-Cpd">
+            <objects>
+                <controller hidesWhenLoading="NO" fullBounds="YES" id="jkz-lt-qTy" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" backgroundImage="background-gradient" id="hmf-1g-0uI"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="572" y="691"/>
         </scene>
     </scenes>
     <resources>

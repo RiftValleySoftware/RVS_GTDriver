@@ -31,7 +31,7 @@ import WatchKit
 /* ###################################################################################################################################### */
 /**
  */
-class RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController: WKInterfaceController {
+class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController: WKInterfaceController {
     /* ################################################################################################################################## */
     // MARK: -
     /* ################################################################################################################################## */
@@ -39,66 +39,12 @@ class RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController: WKInterfac
     /**
      */
     var prefs = RVS_BTDriver_WatchOS_Test_Harness_Prefs()
-
-    /* ################################################################## */
-    /**
-     */
-    @IBOutlet weak var useDifferentThreadSwitch: WKInterfaceSwitch!
     
     /* ################################################################## */
     /**
      */
-    @IBOutlet weak var rescanSwitch: WKInterfaceSwitch!
+    var deviceInstance: RVS_BTDriver_Device!
     
-    /* ################################################################## */
-    /**
-     */
-    @IBOutlet weak var persistentConnectionSwitch: WKInterfaceSwitch!
-
-    /* ################################################################################################################################## */
-    // MARK: -
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    @IBAction func useDifferentThreadSwitchHit(_ inValue: Bool) {
-        #if DEBUG
-            print("The Use Different Thread Preference is now \(inValue ? "ON" : "OFF")")
-        #endif
-        prefs.useDifferentThread = inValue
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    @IBAction func rescanSwitchHit(_ inValue: Bool) {
-        #if DEBUG
-            print("The Rescan Preference is now \(inValue ? "ON" : "OFF")")
-        #endif
-        prefs.continuousScan = inValue
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    @IBAction func persistentConnectionSwitchHit(_ inValue: Bool) {
-        #if DEBUG
-            print("The Use Persistent Connection Preference is now \(inValue ? "ON" : "OFF")")
-        #endif
-        prefs.persistentConnections = inValue
-    }
-    
-    /* ################################################################################################################################## */
-    // MARK: -
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     Make sure the correct items are shown or hidden.
-     */
-    func setUpUI() {
-        useDifferentThreadSwitch.setTitle("SLUG-DIFFERENT-QUEUE".localizedVariant)
-    }
-
     /* ################################################################################################################################## */
     // MARK: -
     /* ################################################################################################################################## */
@@ -107,13 +53,21 @@ class RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController: WKInterfac
      */
     override func awake(withContext inContext: Any?) {
         super.awake(withContext: inContext)
-        setTitle("SLUG-SETTINGS".localizedVariant)
-        useDifferentThreadSwitch.setTitle("SLUG-DIFFERENT-QUEUE".localizedVariant)
-        rescanSwitch.setTitle("SLUG-FULL-SCAN".localizedVariant)
-        persistentConnectionSwitch.setTitle("SLUG-PERSISTENT-CONNECTIONS".localizedVariant)
-        
-        useDifferentThreadSwitch.setOn(prefs.useDifferentThread)
-        rescanSwitch.setOn(prefs.continuousScan)
-        persistentConnectionSwitch.setOn(prefs.persistentConnections)
+        deviceInstance = inContext as? RVS_BTDriver_Device
+        setTitle(deviceInstance?.modelName?.localizedVariant)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func willActivate() {
+        super.willActivate()
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func didDeactivate() {
+        super.didDeactivate()
     }
 }

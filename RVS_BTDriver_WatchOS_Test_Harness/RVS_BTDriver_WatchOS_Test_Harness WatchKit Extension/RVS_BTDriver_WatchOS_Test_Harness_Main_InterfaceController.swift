@@ -31,7 +31,7 @@ import WatchKit
 /* ###################################################################################################################################### */
 /**
  */
-class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController_TableRowController: NSObject {
+class RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController: NSObject {
     /* ################################################################## */
     /**
      */
@@ -43,7 +43,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController_TableRowController: 
 /* ###################################################################################################################################### */
 /**
  */
-class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceController {
+class RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController: WKInterfaceController {
     /* ################################################################################################################################## */
     // MARK: -
     /* ################################################################################################################################## */
@@ -53,6 +53,12 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
      */
     let rowIDString = "standard-row"
     
+    /* ################################################################## */
+    /**
+     The ID for our settings push. Used to reset the driver.
+     */
+    let settingsSegueID = "settings-segue"
+    
     /* ################################################################################################################################## */
     // MARK: -
     /* ################################################################################################################################## */
@@ -61,6 +67,12 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
      This is a simple semaphore, to re-enable scanning.
      */
     var wasScanning = false
+    
+    /* ################################################################## */
+    /**
+     This is a simple semaphore, to indicate that the settings screen was called.
+     */
+    var settingsCalled = false
     
     /* ################################################################## */
     /**
@@ -151,7 +163,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
             deviceDisplayTable.setNumberOfRows(driverInstance.count, withRowType: rowIDString)
             
             for index in 0..<driverInstance.count {
-                if let deviceRow = self.deviceDisplayTable.rowController(at: index) as? RVS_BTDriver_WatchOS_Test_Harness_InterfaceController_TableRowController {
+                if let deviceRow = self.deviceDisplayTable.rowController(at: index) as? RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController {
                     deviceRow.displayLabel.setText(driverInstance[index].modelName)
                 }
             }
@@ -170,6 +182,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
         super.awake(withContext: context)
         setTitle("SLUG-MAIN".localizedVariant)
         wasScanning = false
+        settingsCalled = true // We do this to force the driver to be set up the first time.
     }
     
     /* ################################################################## */
@@ -177,8 +190,14 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
      */
     override func willActivate() {
         super.willActivate()
-        setUpDriver()
+        
+        if settingsCalled {
+            setUpDriver()
+            settingsCalled = false
+        }
+        
         setUpUI()
+        
         if wasScanning {
             driverInstance?.startScanning()
             wasScanning = false
@@ -190,9 +209,32 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
      */
     override func didDeactivate() {
         super.didDeactivate()
-        wasScanning = driverInstance?.isScanning ?? false
         driverInstance?.stopScanning()
         scanningButton.setOn(false)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func contextForSegue(withIdentifier inSegueIdentifier: String, in inTable: WKInterfaceTable, rowIndex inRowIndex: Int) -> Any? {
+        settingsCalled = false
+        if let device = driverInstance?[inRowIndex] as? RVS_BTDriver_Device {
+            wasScanning = driverInstance?.isScanning ?? false
+            return device
+        }
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func contextForSegue(withIdentifier inSegueIdentifier: String) -> Any? {
+        settingsCalled = false
+        if settingsSegueID == inSegueIdentifier {
+            settingsCalled = true
+        }
+        wasScanning = driverInstance?.isScanning ?? false
+        return nil
     }
 }
 
@@ -201,7 +243,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
 /* ###################################################################################################################################### */
 /**
  */
-extension RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: RVS_BTDriverDelegate {
+extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController: RVS_BTDriverDelegate {
     /* ################################################################## */
     /**
      Simple error reporting method.
