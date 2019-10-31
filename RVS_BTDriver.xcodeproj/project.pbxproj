@@ -24,8 +24,6 @@
 		D410E08D235F7E9C00ABE52D /* Framework Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D410E08C235F7E9C00ABE52D /* Framework Assets.xcassets */; };
 		D41568CB234D158C0038286D /* RVS_BTDriverCommunicatorTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC502234BB88A006D0A53 /* RVS_BTDriverCommunicatorTools.swift */; };
 		D41568CC234D158C0038286D /* RVS_BTDriverCommunicatorTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC502234BB88A006D0A53 /* RVS_BTDriverCommunicatorTools.swift */; };
-		D425953C236A16D50044A167 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D425953A236A16CC0044A167 /* Localizable.strings */; };
-		D425953D236A16D60044A167 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D425953A236A16CC0044A167 /* Localizable.strings */; };
 		D4312A54234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4312A53234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift */; };
 		D4312A55234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4312A53234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift */; };
 		D4428F1C234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4428F1B234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift */; };
@@ -80,6 +78,8 @@
 		D481A16D235E2774004DF47E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4DBE17E235E0DD700107353 /* Main.storyboard */; };
 		D481A173235E27AD004DF47E /* RVS_BTDriver_MacOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DBE1A5235E0E0A00107353 /* RVS_BTDriver_MacOS.framework */; };
 		D481A174235E27AD004DF47E /* RVS_BTDriver_MacOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4DBE1A5235E0E0A00107353 /* RVS_BTDriver_MacOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D4830B07236B481B003C43F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D425953A236A16CC0044A167 /* Localizable.strings */; };
+		D4830B08236B481C003C43F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D425953A236A16CC0044A167 /* Localizable.strings */; };
 		D486A7122355E92A00D8E34D /* RVS_BTDriver_iOS_Test_Harness_DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486A7112355E92A00D8E34D /* RVS_BTDriver_iOS_Test_Harness_DetailViewController.swift */; };
 		D486A7132355E92A00D8E34D /* RVS_BTDriver_iOS_Test_Harness_DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486A7112355E92A00D8E34D /* RVS_BTDriver_iOS_Test_Harness_DetailViewController.swift */; };
 		D492DBF0234FAEFF00CA4C7C /* RVS_BTDriver_State_Machine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492DBEF234FAEFF00CA4C7C /* RVS_BTDriver_State_Machine.swift */; };
@@ -1308,7 +1308,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E87CF1235E4AF000260E4F /* Assets.xcassets in Resources */,
-				D425953D236A16D60044A167 /* Localizable.strings in Resources */,
 				D4E87CEF235E4AEF00260E4F /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1318,6 +1317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4F3314C235E66A000F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness_PushNotificationPayload.apns in Resources */,
+				D4830B08236B481C003C43F8 /* Localizable.strings in Resources */,
 				D4E87D03235E4AF100260E4F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1334,7 +1334,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4F33143235E665E00F7B5BE /* Assets.xcassets in Resources */,
-				D425953C236A16D50044A167 /* Localizable.strings in Resources */,
 				D4F33142235E665800F7B5BE /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1344,6 +1343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4F3314B235E669700F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness_PushNotificationPayload.apns in Resources */,
+				D4830B07236B481B003C43F8 /* Localizable.strings in Resources */,
 				D4F33148235E667A00F7B5BE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

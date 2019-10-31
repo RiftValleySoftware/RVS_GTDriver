@@ -58,6 +58,12 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     This is a simple semaphore, to re-enable scanning.
+     */
+    var wasScanning = false
+    
+    /* ################################################################## */
+    /**
      This is our instance of the actual BLE driver.
      */
     var driverInstance: RVS_BTDriver!
@@ -84,6 +90,11 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
     /**
      */
     @IBOutlet weak var scanningButton: WKInterfaceSwitch!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var settingsButton: WKInterfaceButton!
     
     /* ################################################################################################################################## */
     // MARK: -
@@ -126,6 +137,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
         noBTDisplay.setHidden(isBTAvailable)
         deviceDisplayTable.setHidden(!isBTAvailable)
         scanningButton.setHidden(!isBTAvailable)
+        scanningButton.setOn(driverInstance?.isScanning ?? false)
         populateTable()
     }
     
@@ -156,8 +168,8 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
      */
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        setUpDriver()
-        setUpUI()
+        setTitle("SLUG-MAIN".localizedVariant)
+        wasScanning = false
     }
     
     /* ################################################################## */
@@ -165,6 +177,12 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
      */
     override func willActivate() {
         super.willActivate()
+        setUpDriver()
+        setUpUI()
+        if wasScanning {
+            driverInstance?.startScanning()
+            wasScanning = false
+        }
     }
     
     /* ################################################################## */
@@ -172,6 +190,9 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
      */
     override func didDeactivate() {
         super.didDeactivate()
+        wasScanning = driverInstance?.isScanning ?? false
+        driverInstance?.stopScanning()
+        scanningButton.setOn(false)
     }
 }
 
