@@ -118,8 +118,17 @@
             <objects>
                 <controller hidesWhenLoading="NO" fullBounds="YES" id="jkz-lt-qTy" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" backgroundImage="background-gradient" id="hmf-1g-0uI"/>
+                        <group width="1" height="1" alignment="left" backgroundImage="background-gradient" id="hmf-1g-0uI">
+                            <items>
+                                <label width="1" height="1" alignment="left" numberOfLines="0" id="0f8-Zg-ejN">
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </label>
+                            </items>
+                        </group>
                     </items>
+                    <connections>
+                        <outlet property="displayLabel" destination="0f8-Zg-ejN" id="v7h-y6-NdX"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="572" y="691"/>

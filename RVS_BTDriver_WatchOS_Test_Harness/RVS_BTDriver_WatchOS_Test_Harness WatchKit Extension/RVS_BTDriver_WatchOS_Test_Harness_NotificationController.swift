@@ -28,7 +28,6 @@ import UserNotifications
 #endif
 
 class RVS_BTDriver_WatchOS_Test_Harness_NotificationController: WKUserNotificationInterfaceController {
-
     override init() {
         // Initialize variables here.
         super.init()

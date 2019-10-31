@@ -37,6 +37,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController: WKInterfaceC
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     These are the shared persistent prefs for the test harness app.
      */
     var prefs = RVS_BTDriver_WatchOS_Test_Harness_Prefs()
     
@@ -45,6 +46,18 @@ class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController: WKInterfaceC
      */
     var deviceInstance: RVS_BTDriver_Device!
     
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var displayLabel: WKInterfaceLabel!
+}
+
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
     /* ################################################################################################################################## */
     // MARK: -
     /* ################################################################################################################################## */
@@ -62,6 +75,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController: WKInterfaceC
      */
     override func willActivate() {
         super.willActivate()
+        displayLabel?.setText(deviceInstance?.description)
     }
     
     /* ################################################################## */
