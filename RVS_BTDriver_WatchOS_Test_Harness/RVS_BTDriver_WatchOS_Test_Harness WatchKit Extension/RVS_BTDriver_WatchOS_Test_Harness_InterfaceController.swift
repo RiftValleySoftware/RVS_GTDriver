@@ -21,7 +21,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import WatchKit
-import Foundation
+
 #if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
     import RVS_BTDriver_WatchOS
 #endif
@@ -73,11 +73,6 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
     /* ################################################################## */
     /**
      */
-    @IBOutlet weak var settingsButton: WKInterfaceButton!
-    
-    /* ################################################################## */
-    /**
-     */
     @IBOutlet weak var noBTDisplay: WKInterfaceGroup!
     
     /* ################################################################## */
@@ -106,15 +101,6 @@ class RVS_BTDriver_WatchOS_Test_Harness_InterfaceController: WKInterfaceControll
         } else {
             driverInstance?.stopScanning()
         }
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    @IBAction func settingsButtonHit() {
-        #if DEBUG
-            print("Settings Button Hit")
-        #endif
     }
     
     /* ################################################################################################################################## */

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15504" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15504" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc" pageOrientation="vertical">
     <device id="watch38"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
     </dependencies>
     <scenes>
-        <!--Driver WatchOS Test Harness Interface Controller-->
+        <!--MAIN SCREEN-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
+                <controller identifier="MAIN" title="MAIN SCREEN" backgroundImage="background-gradient" fullBounds="YES" fullScreen="YES" id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group width="1" height="1" alignment="center" verticalAlignment="center" backgroundImage="background-gradient" layout="overlap" id="YSG-Cu-CcW">
+                        <group width="1" height="1" alignment="center" verticalAlignment="center" layout="overlap" id="YSG-Cu-CcW">
                             <items>
                                 <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="eTf-xE-nmK">
                                     <items>
@@ -44,18 +44,6 @@
                                                 </tableRow>
                                             </items>
                                         </table>
-                                        <button alignment="center" verticalAlignment="bottom" id="y2W-82-D52">
-                                            <group key="contentGroup" width="1" alignment="left" contentMode="center" layout="overlap" id="BSC-UL-fxf">
-                                                <items>
-                                                    <imageView alignment="center" verticalAlignment="center" image="Gear" id="Khj-nh-wo2"/>
-                                                </items>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
-                                                <edgeInsets key="margins" left="0.0" right="0.0" top="4" bottom="4"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="settingsButtonHit" destination="AgC-eL-Hgc" id="xzx-KM-Jqe"/>
-                                            </connections>
-                                        </button>
                                     </items>
                                 </group>
                             </items>
@@ -65,15 +53,21 @@
                         <outlet property="deviceDisplayTable" destination="xVM-qL-rVu" id="jbh-o8-TgM"/>
                         <outlet property="noBTDisplay" destination="eTf-xE-nmK" id="DhI-eh-VsK"/>
                         <outlet property="scanningButton" destination="baO-lj-kZ8" id="Fhu-Rx-m4C"/>
-                        <outlet property="settingsButton" destination="y2W-82-D52" id="NxZ-4E-GA9"/>
+                        <segue destination="LPq-H0-sRX" kind="relationship" relationship="nextPage" id="kxz-qH-Hyf"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
         </scene>
+        <!--SETTINGS-->
+        <scene sceneID="u5C-GZ-rgD">
+            <objects>
+                <controller identifier="SETTINGS" title="SETTINGS" backgroundImage="background-gradient" hidesWhenLoading="NO" fullBounds="YES" fullScreen="YES" id="LPq-H0-sRX" customClass="RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="572" y="345"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="Gear" width="25" height="25"/>
         <image name="NoBT" width="341.5" height="341.5"/>
         <image name="background-gradient" width="1" height="1000"/>
     </resources>
