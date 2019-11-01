@@ -48,6 +48,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-PERSISTENT-CONNECTIONS"                               =       "Stay Connected to Devices";
 "SLUG-DELETE"                                               =       "DELETE";
 "SLUG-DELETE-QUESTION"                                      =       "DELETE?";
+"SLUG-DELETED"                                              =       "DEVICE DELETED";
 "SLUG-DELETE-YES"                                           =       "YES";
 "SLUG-DELETE-NO"                                            =       "NO";
 "deviceInfoDeviceID"                                        =       "Device ID";

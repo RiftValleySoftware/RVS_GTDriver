@@ -193,6 +193,7 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
             deviceDisplayTable.setNumberOfRows(0, withRowType: "")
         }
     }
+    
     /* ################################################################## */
     /**
      */
