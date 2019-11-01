@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15504" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc" pageOrientation="vertical">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15505" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc" pageOrientation="vertical">
     <device id="watch38"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
     </dependencies>
     <scenes>
@@ -113,25 +113,84 @@
             </objects>
             <point key="canvasLocation" x="572" y="345"/>
         </scene>
-        <!--Driver WatchOS Test Harness Device Interface Controller-->
+        <!--DISPLAY DEVICE-->
         <scene sceneID="LL6-ep-Cpd">
             <objects>
-                <controller hidesWhenLoading="NO" fullBounds="YES" id="jkz-lt-qTy" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                <controller title="DISPLAY DEVICE" hidesWhenLoading="NO" fullBounds="YES" id="jkz-lt-qTy" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" backgroundImage="background-gradient" id="hmf-1g-0uI">
+                        <group width="1" height="1" alignment="left" backgroundImage="background-gradient" layout="vertical" id="hmf-1g-0uI">
                             <items>
-                                <label width="1" height="1" alignment="left" numberOfLines="0" id="0f8-Zg-ejN">
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </label>
+                                <button width="1" alignment="center" verticalAlignment="bottom" title="DELETE" id="k9H-Ge-hEV">
+                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="15"/>
+                                    <connections>
+                                        <segue destination="Bh9-7Y-BVp" kind="modal" identifier="delete-segue" id="Kx0-jQ-oES"/>
+                                    </connections>
+                                </button>
+                                <table alignment="left" id="AhX-qP-qGh">
+                                    <items>
+                                        <tableRow identifier="display-device-value" selectable="NO" id="SF8-Q1-2hH" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                                            <group key="rootItem" width="1" alignment="left" layout="vertical" id="LEa-Fk-gNu">
+                                                <items>
+                                                    <label width="1" alignment="left" text="Key" textAlignment="center" numberOfLines="0" id="em6-bS-wvn">
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="font" type="boldSystem" pointSize="16"/>
+                                                    </label>
+                                                    <label width="1" alignment="left" text="Label" textAlignment="center" numberOfLines="0" id="KE0-qt-CGd">
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="font" type="italicSystem" pointSize="16"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                            <connections>
+                                                <outlet property="keyLabel" destination="em6-bS-wvn" id="46O-3q-oeE"/>
+                                                <outlet property="valueLabel" destination="KE0-qt-CGd" id="5Cu-dz-n9X"/>
+                                            </connections>
+                                        </tableRow>
+                                    </items>
+                                </table>
                             </items>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="displayLabel" destination="0f8-Zg-ejN" id="v7h-y6-NdX"/>
+                        <outlet property="deletButton" destination="k9H-Ge-hEV" id="0ca-Q9-5C1"/>
+                        <outlet property="displayTable" destination="AhX-qP-qGh" id="pfK-OX-D7g"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="572" y="691"/>
+        </scene>
+        <!--DELETE DEVICE-->
+        <scene sceneID="CpW-be-9gI">
+            <objects>
+                <controller title="DELETE DEVICE" backgroundImage="background-gradient" hidesWhenLoading="NO" fullBounds="YES" fullScreen="YES" id="Bh9-7Y-BVp" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                    <items>
+                        <label width="1" alignment="center" text="DELETE?" textAlignment="center" id="A2O-2m-Ctt">
+                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleTitle0"/>
+                        </label>
+                        <button width="1" alignment="left" verticalAlignment="center" title="YES" id="rXk-pl-spz">
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" type="boldSystem" pointSize="15"/>
+                            <connections>
+                                <action selector="yesButtonHit" destination="Bh9-7Y-BVp" id="tlm-Zy-gRh"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="NO" id="MZG-eq-Pee">
+                            <fontDescription key="font" type="boldSystem" pointSize="15"/>
+                            <connections>
+                                <action selector="noButtonHit" destination="Bh9-7Y-BVp" id="gS8-fl-iIR"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="deletePromptLabel" destination="A2O-2m-Ctt" id="UvM-gA-4WN"/>
+                        <outlet property="noButton" destination="MZG-eq-Pee" id="vt0-mj-tV0"/>
+                        <outlet property="yesButton" destination="rXk-pl-spz" id="l6t-U6-MD5"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="862" y="691"/>
         </scene>
     </scenes>
     <resources>
