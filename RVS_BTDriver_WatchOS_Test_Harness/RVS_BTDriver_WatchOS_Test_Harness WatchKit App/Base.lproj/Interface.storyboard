@@ -49,9 +49,9 @@
                                 <segue destination="LPq-H0-sRX" kind="push" identifier="settings-segue" id="BiA-8Z-Yye"/>
                             </connections>
                         </button>
-                        <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="eTf-xE-nmK">
+                        <group alignment="center" verticalAlignment="center" layout="vertical" id="eTf-xE-nmK">
                             <items>
-                                <imageView width="1" height="1" alignment="center" verticalAlignment="center" image="NoBT" contentMode="scaleAspectFit" id="AJl-aJ-68d"/>
+                                <imageView alignment="center" verticalAlignment="center" image="NoBT" contentMode="scaleAspectFit" id="AJl-aJ-68d"/>
                             </items>
                         </group>
                     </items>
