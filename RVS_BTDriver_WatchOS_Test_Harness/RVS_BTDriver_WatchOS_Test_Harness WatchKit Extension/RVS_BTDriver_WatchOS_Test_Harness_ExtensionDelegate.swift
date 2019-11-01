@@ -21,6 +21,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import WatchKit
+import Foundation
 
 /* ###################################################################################################################################### */
 // MARK: -

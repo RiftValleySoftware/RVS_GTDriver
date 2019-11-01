@@ -21,10 +21,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import WatchKit
-
-#if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
-    import RVS_BTDriver_WatchOS
-#endif
+import Foundation
 
 /* ###################################################################################################################################### */
 // MARK: -

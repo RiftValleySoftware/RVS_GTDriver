@@ -28,8 +28,6 @@
 		D4312A55234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4312A53234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift */; };
 		D43A2BEF236CAD2500A12170 /* RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D4F33128235E658300F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D43A2BF0236CADA900A12170 /* RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D4F33119235E658300F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D43A2BF1236CB0FB00A12170 /* RVS_BTDriver_WatchOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E87CC7235E4A3300260E4F /* RVS_BTDriver_WatchOS.framework */; };
-		D43A2BF2236CB0FB00A12170 /* RVS_BTDriver_WatchOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4E87CC7235E4A3300260E4F /* RVS_BTDriver_WatchOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4428F1C234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4428F1B234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift */; };
 		D4428F1D234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4428F1B234E5C7600229A4C /* RVS_BTDriver_iOS_Test_Harness_Prefs.swift */; };
 		D4428F1F234E5CE400229A4C /* RVS_BTDriver_iOS_Test_Harness_SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4428F1E234E5CE400229A4C /* RVS_BTDriver_iOS_Test_Harness_SettingsViewController.swift */; };
@@ -65,6 +63,8 @@
 		D44AC698235E25F8004FD702 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC51A234BBB8E006D0A53 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift */; };
 		D44AC699235E25F9004FD702 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC51A234BBB8E006D0A53 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift */; };
 		D44AC69D235E2665004FD702 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D44AC69B235E2665004FD702 /* Localizable.strings */; };
+		D44B0838236CD007006809A6 /* RVS_BTDriver_WatchOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4E87CC7235E4A3300260E4F /* RVS_BTDriver_WatchOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D44B0839236CD190006809A6 /* RVS_BTDriver_WatchOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E87CC7235E4A3300260E4F /* RVS_BTDriver_WatchOS.framework */; };
 		D4524B8F234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D443DEE9234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_MainTableViewController.swift */; };
 		D4524B91234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D443DEE5234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness_AppDelegate.swift */; };
 		D4524B96234D3EEB00F3EC79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D443DEF0234D0D7D00F9DE47 /* LaunchScreen.storyboard */; };
@@ -300,23 +300,16 @@
 			remoteGlobalIDString = D4F33127235E658300F7B5BE;
 			remoteInfo = "RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit Extension";
 		};
-		D4F33153235E68C200F7B5BE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D4749B5D232A842A0073F7BC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D4E87CC6235E4A3300260E4F;
-			remoteInfo = RVS_BTDriver_WatchOS;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D43A2BF5236CB0FB00A12170 /* Embed Frameworks */ = {
+		D44B0837236CCFFA006809A6 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D43A2BF2236CB0FB00A12170 /* RVS_BTDriver_WatchOS.framework in Embed Frameworks */,
+				D44B0838236CD007006809A6 /* RVS_BTDriver_WatchOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,7 +510,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D43A2BF1236CB0FB00A12170 /* RVS_BTDriver_WatchOS.framework in Frameworks */,
+				D44B0839236CD190006809A6 /* RVS_BTDriver_WatchOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1085,6 +1078,7 @@
 			buildPhases = (
 				D4F33117235E658300F7B5BE /* Resources */,
 				D4F3313C235E658400F7B5BE /* Embed App Extensions */,
+				D44B0837236CCFFA006809A6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1104,12 +1098,10 @@
 				D4F33124235E658300F7B5BE /* Sources */,
 				D4F33125235E658300F7B5BE /* Frameworks */,
 				D4F33126235E658300F7B5BE /* Resources */,
-				D43A2BF5236CB0FB00A12170 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D4F33154235E68C200F7B5BE /* PBXTargetDependency */,
 				D43A2BF4236CB0FB00A12170 /* PBXTargetDependency */,
 			);
 			name = "RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit Extension";
@@ -1875,11 +1867,6 @@
 			isa = PBXTargetDependency;
 			target = D4F33127235E658300F7B5BE /* RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit Extension */;
 			targetProxy = D4F3312A235E658300F7B5BE /* PBXContainerItemProxy */;
-		};
-		D4F33154235E68C200F7B5BE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D4E87CC6235E4A3300260E4F /* RVS_BTDriver_WatchOS */;
-			targetProxy = D4F33153235E68C200F7B5BE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -108,7 +108,7 @@
         <!--DISPLAY DEVICE-->
         <scene sceneID="LL6-ep-Cpd">
             <objects>
-                <controller title="DISPLAY DEVICE" backgroundImage="background-gradient" hidesWhenLoading="NO" id="jkz-lt-qTy" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                <controller title="DISPLAY DEVICE" backgroundImage="background-gradient" hidesWhenLoading="NO" id="jkz-lt-qTy" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                     <items>
                         <button width="1" alignment="center" verticalAlignment="bottom" title="DELETE" id="k9H-Ge-hEV" userLabel="Delete Button">
                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -151,7 +151,7 @@
         <!--DELETE DEVICE-->
         <scene sceneID="CpW-be-9gI">
             <objects>
-                <controller title="DELETE DEVICE" backgroundImage="background-gradient" hidesWhenLoading="NO" fullBounds="YES" fullScreen="YES" id="Bh9-7Y-BVp" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                <controller title="DELETE DEVICE" backgroundImage="background-gradient" hidesWhenLoading="NO" fullBounds="YES" fullScreen="YES" id="Bh9-7Y-BVp" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                     <items>
                         <label width="1" alignment="center" text="DELETE?" textAlignment="center" id="A2O-2m-Ctt">
                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
