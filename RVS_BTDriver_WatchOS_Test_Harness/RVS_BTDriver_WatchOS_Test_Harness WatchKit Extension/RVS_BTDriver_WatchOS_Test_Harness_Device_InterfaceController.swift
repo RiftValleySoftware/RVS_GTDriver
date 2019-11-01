@@ -31,6 +31,13 @@ import WatchKit
 /* ###################################################################################################################################### */
 /**
  */
+typealias RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DisplayStringTuple = (key: String, value: String)
+
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
 class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController: WKInterfaceController {
     var owner: RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController!
     
@@ -152,6 +159,11 @@ class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController: WKInterfaceC
     /* ################################################################## */
     /**
      */
+    var deviceData: [RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DisplayStringTuple] = []
+    
+    /* ################################################################## */
+    /**
+     */
     var owner: RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController!
     
     /* ################################################################## */
@@ -187,7 +199,26 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
                 print("Deleting This Device")
             #endif
             owner.deleteDevice(deviceInstance)
+            deviceData = [RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DisplayStringTuple(key: "SLUG-DELETED".localizedVariant, value: "")]
             iOffedMyself = true
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func populateTable() {
+        if  0 < deviceData.count {
+            displayTable.setNumberOfRows(deviceData.count, withRowType: RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_TableRowController.rowID)
+            
+            for i in deviceData.enumerated() {
+                if let deviceRow = self.displayTable.rowController(at: i.offset) as? RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_TableRowController {
+                    deviceRow.keyLabel.setText(i.element.key)
+                    deviceRow.valueLabel.setText(i.element.value)
+                }
+            }
+        } else {
+            displayTable.setNumberOfRows(0, withRowType: "")
         }
     }
 }
@@ -212,6 +243,42 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
             owner = context.owner
             setTitle(deviceInstance?.modelName?.localizedVariant)
             deletButton.setTitle("SLUG-DELETE".localizedVariant)
+            deviceData = []
+            if let manufacturerName = deviceInstance?.manufacturerName {
+                let key = "deviceInfoManufacturerName".localizedVariant
+                let value = manufacturerName
+                let data = RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DisplayStringTuple(key: key, value: value)
+                deviceData.append(data)
+            }
+            
+            if let modelName = deviceInstance?.modelName {
+                let key = "deviceInfoModelName".localizedVariant
+                let value = modelName
+                let data = RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DisplayStringTuple(key: key, value: value)
+                deviceData.append(data)
+            }
+            
+            if let hardwareRevision = deviceInstance?.firmwareRevision {
+                let key = "deviceInfoHardwareRevision".localizedVariant
+                let value = hardwareRevision
+                let data = RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DisplayStringTuple(key: key, value: value)
+                deviceData.append(data)
+            }
+            
+            if let firmwareRevision = deviceInstance?.firmwareRevision {
+                let key = "deviceInfoFirmwareRevision".localizedVariant
+                let value = firmwareRevision
+                let data = RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DisplayStringTuple(key: key, value: value)
+                deviceData.append(data)
+            }
+            
+            if let id = deviceInstance?.uuid {
+                let key = "deviceInfoDeviceID".localizedVariant
+                let value = id
+                let data = RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DisplayStringTuple(key: key, value: value)
+                deviceData.append(data)
+            }
+            populateTable()
         }
     }
     
@@ -222,6 +289,7 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
         super.willActivate()
         if iOffedMyself {
             deletButton.setHidden(true) // We can't delete the deleted.
+            populateTable()
         }
     }
     
