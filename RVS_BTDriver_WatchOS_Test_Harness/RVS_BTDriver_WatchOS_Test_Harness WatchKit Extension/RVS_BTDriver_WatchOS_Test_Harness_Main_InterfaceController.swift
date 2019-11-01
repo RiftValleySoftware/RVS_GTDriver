@@ -31,6 +31,13 @@ import WatchKit
 /* ###################################################################################################################################### */
 /**
  */
+typealias RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_DeviceContext = (owner: RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController, device: RVS_BTDriver_DeviceProtocol)
+
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
 class RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController: NSObject {
     /* ################################################################## */
     /**
@@ -186,6 +193,15 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
             deviceDisplayTable.setNumberOfRows(0, withRowType: "")
         }
     }
+    /* ################################################################## */
+    /**
+     */
+    func deleteDevice(_ inDeviceInstance: RVS_BTDriver_DeviceProtocol) {
+        #if DEBUG
+            print("Deleting Device: \(String(describing: inDeviceInstance))")
+        #endif
+        driverInstance?.removeDevice(inDeviceInstance)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -229,20 +245,10 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
     /* ################################################################## */
     /**
      */
-    override func didDeactivate() {
-        super.didDeactivate()
-        driverInstance?.stopScanning()
-        scanningButton.setOn(false)
-    }
-    
-    /* ################################################################## */
-    /**
-     */
     override func contextForSegue(withIdentifier inSegueIdentifier: String, in inTable: WKInterfaceTable, rowIndex inRowIndex: Int) -> Any? {
         settingsCalled = false
-        if let device = driverInstance?[inRowIndex] as? RVS_BTDriver_Device {
-            wasScanning = driverInstance?.isScanning ?? false
-            return device
+        if let deviceInstance = driverInstance?[inRowIndex] {
+            return RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_DeviceContext(owner: self, device: deviceInstance)
         }
         return nil
     }
@@ -256,6 +262,8 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
             settingsCalled = true
         }
         wasScanning = driverInstance?.isScanning ?? false
+        driverInstance?.stopScanning()
+        scanningButton.setOn(false)
         return nil
     }
 }

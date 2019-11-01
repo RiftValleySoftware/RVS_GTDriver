@@ -31,10 +31,113 @@ import WatchKit
 /* ###################################################################################################################################### */
 /**
  */
+class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController: WKInterfaceController {
+    var owner: RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var deletePromptLabel: WKInterfaceLabel!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var yesButton: WKInterfaceButton!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var noButton: WKInterfaceButton!
+}
+
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController {
+    /* ################################################################## */
+    /**
+     */
+    @IBAction func yesButtonHit() {
+        #if DEBUG
+            print("Delete Yes Hit")
+        #endif
+        
+        owner?.deleteMyself()
+        
+        dismiss()
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBAction func noButtonHit() {
+        #if DEBUG
+            print("Delete No Hit")
+        #endif
+        
+        dismiss()
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController {
+    /* ################################################################## */
+    /**
+     */
+    override func awake(withContext inContext: Any?) {
+        super.awake(withContext: inContext)
+        if let context = inContext as? RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
+            owner = context
+            setTitle(nil)   // This will cause the system "Cancel" to show. Redundant, but good to have.
+            deletePromptLabel.setText("SLUG-DELETE-QUESTION".localizedVariant)
+            yesButton.setTitle("SLUG-DELETE-YES".localizedVariant)
+            noButton.setTitle("SLUG-DELETE-NO".localizedVariant)
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_TableRowController: NSObject {
+    /* ################################################################## */
+    /**
+     */
+    static let rowID = "display-device-value"
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var keyLabel: WKInterfaceLabel!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var valueLabel: WKInterfaceLabel!
+}
+
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
 class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController: WKInterfaceController {
     /* ################################################################################################################################## */
     // MARK: -
     /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    let deleteSegueID = "delete-segue"
+    
     /* ################################################################## */
     /**
      These are the shared persistent prefs for the test harness app.
@@ -44,12 +147,49 @@ class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController: WKInterfaceC
     /* ################################################################## */
     /**
      */
-    var deviceInstance: RVS_BTDriver_Device!
+    var deviceInstance: RVS_BTDriver_DeviceProtocol!
     
     /* ################################################################## */
     /**
      */
-    @IBOutlet weak var displayLabel: WKInterfaceLabel!
+    var owner: RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController!
+    
+    /* ################################################################## */
+    /**
+     A semaphore, indicating that this device was deleted, so we will dismiss as soon as we come into play.
+     */
+    var iOffedMyself = false
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var deletButton: WKInterfaceButton!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var displayTable: WKInterfaceTable!
+}
+
+/* ###################################################################################################################################### */
+// MARK: -
+/* ###################################################################################################################################### */
+/**
+ */
+extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
+    /* ################################################################## */
+    /**
+     */
+    func deleteMyself() {
+        if  let owner = owner,
+            let deviceInstance = deviceInstance {
+            #if DEBUG
+                print("Deleting This Device")
+            #endif
+            owner.deleteDevice(deviceInstance)
+            iOffedMyself = true
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -66,8 +206,13 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
      */
     override func awake(withContext inContext: Any?) {
         super.awake(withContext: inContext)
-        deviceInstance = inContext as? RVS_BTDriver_Device
-        setTitle(deviceInstance?.modelName?.localizedVariant)
+        if let context = inContext as? RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_DeviceContext {
+            iOffedMyself = false
+            deviceInstance = context.device
+            owner = context.owner
+            setTitle(deviceInstance?.modelName?.localizedVariant)
+            deletButton.setTitle("SLUG-DELETE".localizedVariant)
+        }
     }
     
     /* ################################################################## */
@@ -75,7 +220,9 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
      */
     override func willActivate() {
         super.willActivate()
-        displayLabel?.setText(deviceInstance?.description)
+        if iOffedMyself {
+            deletButton.setHidden(true) // We can't delete the deleted.
+        }
     }
     
     /* ################################################################## */
@@ -83,5 +230,19 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
      */
     override func didDeactivate() {
         super.didDeactivate()
+        iOffedMyself = false
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func contextForSegue(withIdentifier inSegueIdentifier: String) -> Any? {
+        if deleteSegueID == inSegueIdentifier {
+            #if DEBUG
+                print("Delete Button Hit")
+            #endif
+        }
+        
+        return self
     }
 }
