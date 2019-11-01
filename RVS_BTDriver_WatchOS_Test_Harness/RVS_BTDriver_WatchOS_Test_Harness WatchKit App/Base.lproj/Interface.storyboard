@@ -11,24 +11,6 @@
             <objects>
                 <controller identifier="MAIN" title="MAIN SCREEN" backgroundImage="background-gradient" fullBounds="YES" id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="eTf-xE-nmK">
-                            <items>
-                                <imageView width="1" height="1" alignment="center" verticalAlignment="center" image="NoBT" contentMode="scaleAspectFit" id="AJl-aJ-68d"/>
-                            </items>
-                        </group>
-                        <button alignment="left" id="Syj-Oi-PyQ">
-                            <group key="contentGroup" width="1" alignment="left" id="KgA-XQ-hba">
-                                <items>
-                                    <imageView alignment="center" verticalAlignment="center" image="Gear" id="9th-PX-HOv">
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </imageView>
-                                </items>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </group>
-                            <connections>
-                                <segue destination="LPq-H0-sRX" kind="push" identifier="settings-segue" id="BiA-8Z-Yye"/>
-                            </connections>
-                        </button>
                         <switch width="1" alignment="left" title="Scanning" id="baO-lj-kZ8">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="tintColor" red="0.0016612800213382287" green="0.58506503807106602" blue="0.0025776272133743827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -54,6 +36,24 @@
                                 </tableRow>
                             </items>
                         </table>
+                        <button alignment="left" id="Syj-Oi-PyQ">
+                            <group key="contentGroup" width="1" alignment="left" id="KgA-XQ-hba">
+                                <items>
+                                    <imageView alignment="center" verticalAlignment="center" image="Gear" id="9th-PX-HOv">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                </items>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </group>
+                            <connections>
+                                <segue destination="LPq-H0-sRX" kind="push" identifier="settings-segue" id="BiA-8Z-Yye"/>
+                            </connections>
+                        </button>
+                        <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="eTf-xE-nmK">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" verticalAlignment="center" image="NoBT" contentMode="scaleAspectFit" id="AJl-aJ-68d"/>
+                            </items>
+                        </group>
                     </items>
                     <connections>
                         <outlet property="deviceDisplayTable" destination="xVM-qL-rVu" id="jbh-o8-TgM"/>
