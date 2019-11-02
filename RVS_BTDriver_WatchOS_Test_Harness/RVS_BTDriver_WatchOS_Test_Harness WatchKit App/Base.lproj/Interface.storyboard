@@ -20,7 +20,7 @@
                         </switch>
                         <table alignment="left" id="xVM-qL-rVu">
                             <items>
-                                <tableRow identifier="standard-row" id="82b-fO-akn" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                                <tableRow identifier="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController" id="82b-fO-akn" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="98O-Rw-z7W">
                                         <items>
                                             <label width="1" alignment="left" text="Label" numberOfLines="0" id="RFJ-cy-Nld">
@@ -119,7 +119,7 @@
                         </button>
                         <table alignment="left" id="AhX-qP-qGh">
                             <items>
-                                <tableRow identifier="display-device-value" selectable="NO" id="SF8-Q1-2hH" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                                <tableRow identifier="display-device-value" selectable="NO" id="SF8-Q1-2hH" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                                     <group key="rootItem" width="1" alignment="left" layout="vertical" id="LEa-Fk-gNu">
                                         <items>
                                             <label width="1" alignment="left" text="Key" textAlignment="center" numberOfLines="0" id="em6-bS-wvn">

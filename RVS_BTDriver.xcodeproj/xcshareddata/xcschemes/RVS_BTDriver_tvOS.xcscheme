@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D4720DF2236DFD9800C13791"
-               BuildableName = "RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit App.app"
-               BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit App"
+               BlueprintIdentifier = "D4FB614C235F26E400C3FECD"
+               BuildableName = "RVS_BTDriver_tvOS.framework"
+               BlueprintName = "RVS_BTDriver_tvOS"
                ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -39,20 +39,7 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES"
-      notificationPayloadFile = "RVS_BTDriver_WatchOS_Test_Harness/RVS_BTDriver_WatchOS_Test_Harness WatchKit Extension/Meta/RVS_BTDriver_WatchOS_Test_Harness_PushNotificationPayload.apns">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/$(PRODUCT_NAME)">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D4720DF2236DFD9800C13791"
-            BuildableName = "RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit App.app"
-            BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit App"
-            ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
-         </BuildableReference>
-      </RemoteRunnable>
+      allowLocationSimulation = "YES">
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -60,24 +47,12 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/RVS_BTDriver_WatchOS_Test_Harness (Direct) WatchKit App">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D4720DF2236DFD9800C13791"
-            BuildableName = "RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit App.app"
-            BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit App"
-            ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
-         </BuildableReference>
-      </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D4720DF2236DFD9800C13791"
-            BuildableName = "RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit App.app"
-            BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness (Framework) WatchKit App"
+            BlueprintIdentifier = "D4FB614C235F26E400C3FECD"
+            BuildableName = "RVS_BTDriver_tvOS.framework"
+            BlueprintName = "RVS_BTDriver_tvOS"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

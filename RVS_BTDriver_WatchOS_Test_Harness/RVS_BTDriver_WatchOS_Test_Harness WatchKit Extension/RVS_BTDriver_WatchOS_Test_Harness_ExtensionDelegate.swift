@@ -29,7 +29,7 @@ import Foundation
 /**
  This is the main extension delegate class for the Watch standalone app.
  */
-class RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: NSObject {
+class RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate: NSObject, WKExtensionDelegate {
     /* ################################################################################################################################## */
     // MARK: - Class Calculated Properties
     /* ################################################################################################################################## */

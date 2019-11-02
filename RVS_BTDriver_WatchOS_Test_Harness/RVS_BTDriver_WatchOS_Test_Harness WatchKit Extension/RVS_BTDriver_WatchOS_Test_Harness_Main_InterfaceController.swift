@@ -63,7 +63,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController: WKInterfaceCon
     /**
      The string used to instantiate our table rows.
      */
-    let rowIDString = "standard-row"
+    let rowIDString = "RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController"
     
     /* ################################################################## */
     /**
@@ -188,8 +188,13 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
             0 < driverInstance.count {
             deviceDisplayTable.setNumberOfRows(driverInstance.count, withRowType: rowIDString)
             
+            let rowControllerKludgeArray = [String](repeatElement("RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController", count: driverInstance.count))
+            
+            deviceDisplayTable.setRowTypes(rowControllerKludgeArray)
+            
             for index in 0..<driverInstance.count {
-                if let deviceRow = self.deviceDisplayTable.rowController(at: index) as? RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController {
+                if  let deviceRowRaw = self.deviceDisplayTable.rowController(at: index),
+                    let deviceRow = deviceRowRaw as? RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController {
                     let driverInst = driverInstance[index]
                     let modelName = driverInst.modelName
                     deviceRow.displayLabel.setText(modelName)
