@@ -190,7 +190,9 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
             
             for index in 0..<driverInstance.count {
                 if let deviceRow = self.deviceDisplayTable.rowController(at: index) as? RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController {
-                    deviceRow.displayLabel.setText(driverInstance[index].modelName)
+                    let driverInst = driverInstance[index]
+                    let modelName = driverInst.modelName
+                    deviceRow.displayLabel.setText(modelName)
                 }
             }
         } else {

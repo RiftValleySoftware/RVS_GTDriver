@@ -195,13 +195,14 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
      */
     func deleteMyself() {
         if  let owner = owner,
-            let deviceInstance = deviceInstance {
+            let deviceInst = deviceInstance {
             #if DEBUG
                 print("Deleting This Device")
             #endif
-            owner.deleteDevice(deviceInstance)
+            owner.deleteDevice(deviceInst)
             deviceData = [RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DisplayStringTuple(key: "SLUG-DELETED".localizedVariant, value: "")]
             iOffedMyself = true
+            deviceInstance = nil
         }
     }
     
