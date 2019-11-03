@@ -11,24 +11,6 @@
             <objects>
                 <controller identifier="MAIN" title="MAIN SCREEN" backgroundImage="background-gradient" fullBounds="YES" id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="eTf-xE-nmK">
-                            <items>
-                                <imageView width="1" height="1" alignment="center" verticalAlignment="center" image="NoBT" contentMode="scaleAspectFit" id="AJl-aJ-68d"/>
-                            </items>
-                        </group>
-                        <button alignment="left" id="Syj-Oi-PyQ">
-                            <group key="contentGroup" width="1" alignment="left" id="KgA-XQ-hba">
-                                <items>
-                                    <imageView alignment="center" verticalAlignment="center" image="Gear" id="9th-PX-HOv">
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </imageView>
-                                </items>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </group>
-                            <connections>
-                                <segue destination="LPq-H0-sRX" kind="push" identifier="settings-segue" id="BiA-8Z-Yye"/>
-                            </connections>
-                        </button>
                         <switch width="1" alignment="left" title="Scanning" id="baO-lj-kZ8">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="tintColor" red="0.0016612800213382287" green="0.58506503807106602" blue="0.0025776272133743827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -38,7 +20,7 @@
                         </switch>
                         <table alignment="left" id="xVM-qL-rVu">
                             <items>
-                                <tableRow identifier="standard-row" id="82b-fO-akn" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                                <tableRow identifier="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController" id="82b-fO-akn" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="98O-Rw-z7W">
                                         <items>
                                             <label width="1" alignment="left" text="Label" numberOfLines="0" id="RFJ-cy-Nld">
@@ -54,6 +36,24 @@
                                 </tableRow>
                             </items>
                         </table>
+                        <button alignment="left" id="Syj-Oi-PyQ">
+                            <group key="contentGroup" width="1" alignment="left" id="KgA-XQ-hba">
+                                <items>
+                                    <imageView alignment="center" verticalAlignment="center" image="Gear" id="9th-PX-HOv">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                </items>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </group>
+                            <connections>
+                                <segue destination="LPq-H0-sRX" kind="push" identifier="settings-segue" id="BiA-8Z-Yye"/>
+                            </connections>
+                        </button>
+                        <group alignment="center" verticalAlignment="center" layout="vertical" id="eTf-xE-nmK">
+                            <items>
+                                <imageView alignment="center" verticalAlignment="center" image="NoBT" contentMode="scaleAspectFit" id="AJl-aJ-68d"/>
+                            </items>
+                        </group>
                     </items>
                     <connections>
                         <outlet property="deviceDisplayTable" destination="xVM-qL-rVu" id="jbh-o8-TgM"/>
@@ -108,7 +108,7 @@
         <!--DISPLAY DEVICE-->
         <scene sceneID="LL6-ep-Cpd">
             <objects>
-                <controller title="DISPLAY DEVICE" backgroundImage="background-gradient" hidesWhenLoading="NO" id="jkz-lt-qTy" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                <controller title="DISPLAY DEVICE" backgroundImage="background-gradient" hidesWhenLoading="NO" id="jkz-lt-qTy" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                     <items>
                         <button width="1" alignment="center" verticalAlignment="bottom" title="DELETE" id="k9H-Ge-hEV" userLabel="Delete Button">
                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -119,7 +119,7 @@
                         </button>
                         <table alignment="left" id="AhX-qP-qGh">
                             <items>
-                                <tableRow identifier="display-device-value" selectable="NO" id="SF8-Q1-2hH" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                                <tableRow identifier="display-device-value" selectable="NO" id="SF8-Q1-2hH" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_TableRowController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                                     <group key="rootItem" width="1" alignment="left" layout="vertical" id="LEa-Fk-gNu">
                                         <items>
                                             <label width="1" alignment="left" text="Key" textAlignment="center" numberOfLines="0" id="em6-bS-wvn">
@@ -151,7 +151,7 @@
         <!--DELETE DEVICE-->
         <scene sceneID="CpW-be-9gI">
             <objects>
-                <controller title="DELETE DEVICE" backgroundImage="background-gradient" hidesWhenLoading="NO" fullBounds="YES" fullScreen="YES" id="Bh9-7Y-BVp" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_Extension">
+                <controller title="DELETE DEVICE" backgroundImage="background-gradient" hidesWhenLoading="NO" fullBounds="YES" fullScreen="YES" id="Bh9-7Y-BVp" customClass="RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController" customModule="RVS_BTDriver_WatchOS_Test_Harness__Direct__WatchKit_App" customModuleProvider="target">
                     <items>
                         <label width="1" alignment="center" text="DELETE?" textAlignment="center" id="A2O-2m-Ctt">
                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

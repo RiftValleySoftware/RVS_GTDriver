@@ -21,15 +21,17 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import WatchKit
+import Foundation
 
 #if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
     import RVS_BTDriver_WatchOS
 #endif
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - Special Typealiases
 /* ###################################################################################################################################### */
 /**
+ This typealias allows us to pass the main context, as well as the device instance, to the device listing sheet.
  */
 typealias RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_DeviceContext = (owner: RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController, device: RVS_BTDriver_DeviceProtocol)
 
@@ -37,10 +39,12 @@ typealias RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_DeviceConte
 // MARK: -
 /* ###################################################################################################################################### */
 /**
+ This describes one row of the table that displays devices.
  */
 class RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController: NSObject {
     /* ################################################################## */
     /**
+     The only item is a device name label.
      */
     @IBOutlet weak var displayLabel: WKInterfaceLabel!
 }
@@ -49,16 +53,17 @@ class RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowControl
 // MARK: -
 /* ###################################################################################################################################### */
 /**
+ This is the interface controller for the main screen (the one that lists devices).
  */
 class RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController: WKInterfaceController {
     /* ################################################################################################################################## */
-    // MARK: -
+    // MARK: - Constants
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      The string used to instantiate our table rows.
      */
-    let rowIDString = "standard-row"
+    let rowIDString = "RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController"
     
     /* ################################################################## */
     /**
@@ -67,7 +72,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController: WKInterfaceCon
     let settingsSegueID = "settings-segue"
     
     /* ################################################################################################################################## */
-    // MARK: -
+    // MARK: - Instance Properties
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
@@ -94,40 +99,43 @@ class RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController: WKInterfaceCon
     var prefs = RVS_BTDriver_WatchOS_Test_Harness_Prefs()
     
     /* ################################################################################################################################## */
-    // MARK: -
+    // MARK: - IBOutlet Properties
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     The group that contains the "No Bluetooth" image.
      */
     @IBOutlet weak var noBTDisplay: WKInterfaceGroup!
     
     /* ################################################################## */
     /**
+     The table that displays the list of discovered devices.
      */
     @IBOutlet weak var deviceDisplayTable: WKInterfaceTable!
     
     /* ################################################################## */
     /**
+     The switch that controls whether or not the app is scanning for devices.
      */
     @IBOutlet weak var scanningButton: WKInterfaceSwitch!
     
     /* ################################################################## */
     /**
+     The "gear" settings button. Touching this, brings in the settings screen.
      */
     @IBOutlet weak var settingsButton: WKInterfaceButton!
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - IBAction Methods
 /* ###################################################################################################################################### */
-/**
- */
 extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
-    /* ################################################################################################################################## */
-    // MARK: -
-    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     Called when the "Scanning" switch is pressed.
+     
+     - parameters:
+        - inValue: The on/off value of the scanning switch.
      */
     @IBAction func scanningButtonHit(_ inValue: Bool) {
         #if DEBUG
@@ -143,14 +151,9 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - Internal Methods
 /* ###################################################################################################################################### */
-/**
- */
 extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
-    /* ################################################################################################################################## */
-    // MARK: -
-    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This establishes the driver instance, wiping out any old one.
@@ -177,6 +180,7 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
     
     /* ################################################################## */
     /**
+     This adds devices to the table for display.
      */
     func populateTable() {
         if  let driverInstance = driverInstance,
@@ -184,9 +188,16 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
             0 < driverInstance.count {
             deviceDisplayTable.setNumberOfRows(driverInstance.count, withRowType: rowIDString)
             
+            let rowControllerKludgeArray = [String](repeatElement("RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController", count: driverInstance.count))
+            
+            deviceDisplayTable.setRowTypes(rowControllerKludgeArray)
+            
             for index in 0..<driverInstance.count {
-                if let deviceRow = self.deviceDisplayTable.rowController(at: index) as? RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController {
-                    deviceRow.displayLabel.setText(driverInstance[index].modelName)
+                if  let deviceRowRaw = self.deviceDisplayTable.rowController(at: index),
+                    let deviceRow = deviceRowRaw as? RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowController {
+                    let driverInst = driverInstance[index]
+                    let modelName = driverInst.modelName
+                    deviceRow.displayLabel.setText(modelName)
                 }
             }
         } else {
@@ -196,6 +207,12 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
     
     /* ################################################################## */
     /**
+     This is called by the details screen, to delete a device from the list.
+     
+     Upon return from this, it should be assumed that the device instance is now invalid.
+     
+     - parameters:
+        - inDeviceInstance: The device (driver class) that will be deleted.
      */
     func deleteDevice(_ inDeviceInstance: RVS_BTDriver_DeviceProtocol) {
         #if DEBUG
@@ -206,19 +223,18 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - Overridden Base Class Methods
 /* ###################################################################################################################################### */
-/**
- */
 extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
-    /* ################################################################################################################################## */
-    // MARK: -
-    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     Called when the instance is being initialized for use.
+     
+     - parameters:
+        - inContext: The context (We ignore, but pass it to the base class).
      */
-    override func awake(withContext context: Any?) {
-        super.awake(withContext: context)
+    override func awake(withContext inContext: Any?) {
+        super.awake(withContext: inContext)
         setTitle("SLUG-MAIN".localizedVariant)
         wasScanning = false
         settingsCalled = true // We do this to force the driver to be set up the first time.
@@ -226,6 +242,9 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
     
     /* ################################################################## */
     /**
+     Called just before we are displayed.
+     
+     We use this to update the UI, and reset things, if we need to do so (after settings).
      */
     override func willActivate() {
         super.willActivate()
@@ -245,6 +264,12 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
     
     /* ################################################################## */
     /**
+     Table touch handler.
+     
+     - parameters:
+        - withIdentifier: The segue ID for this (we ignore)
+        - in: The table instance
+        - rowIndex: The vertical position (0-based) of the row that was touched.
      */
     override func contextForSegue(withIdentifier inSegueIdentifier: String, in inTable: WKInterfaceTable, rowIndex inRowIndex: Int) -> Any? {
         settingsCalled = false
@@ -256,6 +281,10 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
     
     /* ################################################################## */
     /**
+     This is called when we are about to bring in another sheet.
+     
+     - parameters:
+        - withIdentifier: The segue ID for this (we ignore)
      */
     override func contextForSegue(withIdentifier inSegueIdentifier: String) -> Any? {
         settingsCalled = false
@@ -270,7 +299,7 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - Driver delegate Methods
 /* ###################################################################################################################################### */
 /**
  */
