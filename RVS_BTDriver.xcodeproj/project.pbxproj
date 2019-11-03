@@ -558,16 +558,16 @@
 			path = ViewControllersAndViews;
 			sourceTree = "<group>";
 		};
-		D424E44F236F164A003D68AA /* WatchKit App */ = {
+		D424E44F236F164A003D68AA /* Standalone WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
 				D42FB9E3236F32CD00D0F0A5 /* Resources */,
 				D424E477236F176C003D68AA /* Meta */,
 			);
-			path = "WatchKit App";
+			path = "Standalone WatchKit App";
 			sourceTree = "<group>";
 		};
-		D424E45E236F164D003D68AA /* WatchKit Extension */ = {
+		D424E45E236F164D003D68AA /* Standalone WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
 				D424E47A236F1837003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController.swift */,
@@ -579,7 +579,7 @@
 				D42FB9E2236F32BA00D0F0A5 /* Resources */,
 				D424E478236F17B6003D68AA /* Meta */,
 			);
-			path = "WatchKit Extension";
+			path = "Standalone WatchKit Extension";
 			sourceTree = "<group>";
 		};
 		D424E477236F176C003D68AA /* Meta */ = {
@@ -603,8 +603,8 @@
 		D42FB9E1236F314C00D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness */ = {
 			isa = PBXGroup;
 			children = (
-				D424E44F236F164A003D68AA /* WatchKit App */,
-				D424E45E236F164D003D68AA /* WatchKit Extension */,
+				D424E44F236F164A003D68AA /* Standalone WatchKit App */,
+				D424E45E236F164D003D68AA /* Standalone WatchKit Extension */,
 			);
 			path = RVS_BTDriver_WatchOS_Test_Harness;
 			sourceTree = "<group>";
@@ -1984,7 +1984,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness_Framework_WatchKit_Extension;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/WatchKit App/Meta/Framework-Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/Standalone WatchKit App/Meta/Framework-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-WatchOS-Test-Harness-Framework.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2002,7 +2002,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness_Framework_WatchKit_Extension;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/WatchKit App/Meta/Framework-Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/Standalone WatchKit App/Meta/Framework-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-WatchOS-Test-Harness-Framework.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2021,7 +2021,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/WatchKit Extension/Meta/Framework-Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/Standalone WatchKit Extension/Meta/Framework-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2046,7 +2046,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/WatchKit Extension/Meta/Framework-Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/Standalone WatchKit Extension/Meta/Framework-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2075,7 +2075,7 @@
 					"DIRECT=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/WatchKit Extension/Meta/Direct-Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/Standalone WatchKit Extension/Meta/Direct-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2102,7 +2102,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "DIRECT=1";
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/WatchKit Extension/Meta/Direct-Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/Standalone WatchKit Extension/Meta/Direct-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2128,7 +2128,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness_Direct_WatchKit_Extension;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/WatchKit App/Meta/Direct-Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/Standalone WatchKit App/Meta/Direct-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-WatchOS-Test-Harness-Direct.watchkitapp";
 				PRODUCT_NAME = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App";
 				SDKROOT = watchos;
@@ -2146,7 +2146,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness_Direct_WatchKit_Extension;
-				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/WatchKit App/Meta/Direct-Info.plist";
+				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/Standalone WatchKit App/Meta/Direct-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-WatchOS-Test-Harness-Direct.watchkitapp";
 				PRODUCT_NAME = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App";
 				SDKROOT = watchos;
