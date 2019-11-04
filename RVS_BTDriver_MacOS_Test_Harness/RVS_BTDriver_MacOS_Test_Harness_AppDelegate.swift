@@ -35,3 +35,21 @@ class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject, NSApplicationDelega
         // Insert code here to tear down your application
     }
 }
+
+/* ################################################################################################################################## */
+// MARK: - Basic Window Controller Class
+/* ################################################################################################################################## */
+/**
+ The main reason for creating this class was to allow us to interpret settings, and to fix an issue with Interface Builder.
+ */
+class RVS_MediaServer_WindowController: NSWindowController {
+    /* ################################################################## */
+    /**
+     This accounts for a bug in Xcode, where the [`restorable`](https://developer.apple.com/documentation/appkit/nswindow/1526255-restorable) flag is ignored. If you set the name here, it will restore.
+     */
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        window?.title = window?.title.localizedVariant ?? "ERROR"
+        self.windowFrameAutosaveName = window?.title ?? "ERROR" // This is because there seems to be a bug (maybe in IB), where the auto-restore setting is not saved unless we do this.
+    }
+}
