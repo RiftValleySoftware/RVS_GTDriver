@@ -36,7 +36,7 @@ import Foundation
 typealias RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_DeviceContext = (owner: RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController, device: RVS_BTDriver_DeviceProtocol)
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - The Controller For A Single Device Row
 /* ###################################################################################################################################### */
 /**
  This describes one row of the table that displays devices.
@@ -50,7 +50,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController_TableRowControl
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - The Main Device List Screen Controller
 /* ###################################################################################################################################### */
 /**
  This is the interface controller for the main screen (the one that lists devices).

@@ -28,44 +28,66 @@ import Foundation
 #endif
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - The Key/Value Type
 /* ###################################################################################################################################### */
 /**
+ This is a simple key/value tuple type that we use for our display.
+ 
+ - properties:
+    - key: A String, with the localized key of the value.
+    - value: A String, with the value to display.
  */
 typealias RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DisplayStringTuple = (key: String, value: String)
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - The Delete Confirmation Screen Controller
 /* ###################################################################################################################################### */
 /**
+ This handles the "Delete" confirmation screen.
  */
 class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController: WKInterfaceController {
-    var owner: RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController!
-    
+    /* ################################################################################################################################## */
+    // MARK: - Instance Properties
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     This is the presenting view controller.
+     
+     We use this to send the delete call up the chain.
+     */
+    var owner: RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController!
+    
+    /* ################################################################################################################################## */
+    // MARK: - IBOutlet Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     The lable for the "DELETE?" question.
      */
     @IBOutlet weak var deletePromptLabel: WKInterfaceLabel!
     
     /* ################################################################## */
     /**
+     The "YES" button.
      */
     @IBOutlet weak var yesButton: WKInterfaceButton!
     
     /* ################################################################## */
     /**
+     The "NO" button.
      */
     @IBOutlet weak var noButton: WKInterfaceButton!
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - IBAction Methods
 /* ###################################################################################################################################### */
-/**
- */
 extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController {
     /* ################################################################## */
     /**
+     Called when the "YES" button is hit.
+     
+     This deletes the device, and closes the screen.
      */
     @IBAction func yesButtonHit() {
         #if DEBUG
@@ -79,6 +101,9 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteCon
     
     /* ################################################################## */
     /**
+     Called when the "NO" button is hit.
+     
+     This cancels the screen with no changes.
      */
     @IBAction func noButtonHit() {
         #if DEBUG
@@ -90,13 +115,15 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteCon
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - Overridden Base Class Methods
 /* ###################################################################################################################################### */
-/**
- */
 extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteConfirmController {
     /* ################################################################## */
     /**
+     Called when the instance is being initialized for use.
+     
+     - parameters:
+        - inContext: The context (We ignore, but pass it to the base class).
      */
     override func awake(withContext inContext: Any?) {
         super.awake(withContext: inContext)
@@ -111,41 +138,56 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DeleteCon
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - The Device Info Display Single Table Row Controller
 /* ###################################################################################################################################### */
 /**
+ This class defines one row of the table that displays the values.
  */
 class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_TableRowController: NSObject {
+    /* ################################################################################################################################## */
+    // MARK: - Static Constants
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     The row ID for this class.
      */
     static let rowID = "display-device-value"
     
+    /* ################################################################################################################################## */
+    // MARK: - IBOutlet Properties
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     The label for the value key.
      */
     @IBOutlet weak var keyLabel: WKInterfaceLabel!
     
     /* ################################################################## */
     /**
+     The label for the value.
      */
     @IBOutlet weak var valueLabel: WKInterfaceLabel!
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - The Device Info Display Screen Controller
 /* ###################################################################################################################################### */
 /**
+ This displays the information for one device.
  */
 class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController: WKInterfaceController {
     /* ################################################################################################################################## */
-    // MARK: -
+    // MARK: - Instance Constants
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     The ID of the delete segue
      */
     let deleteSegueID = "delete-segue"
     
+    /* ################################################################################################################################## */
+    // MARK: - Instance Properties
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      These are the shared persistent prefs for the test harness app.
@@ -154,16 +196,19 @@ class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController: WKInterfaceC
     
     /* ################################################################## */
     /**
+     This is a reference to the device from the driver.
      */
     var deviceInstance: RVS_BTDriver_DeviceProtocol!
     
     /* ################################################################## */
     /**
+     This is an Array of key/value tuples, representing the data to be displayed.
      */
     var deviceData: [RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController_DisplayStringTuple] = []
     
     /* ################################################################## */
     /**
+     This refers to our presenting controller. We use this to kick the delete command back up the chain.
      */
     var owner: RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController!
     
@@ -173,25 +218,29 @@ class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController: WKInterfaceC
      */
     var iOffedMyself = false
     
+    /* ################################################################################################################################## */
+    // MARK: - IBOutlet Properties
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     */
-    @IBOutlet weak var deletButton: WKInterfaceButton!
-    
-    /* ################################################################## */
-    /**
+     The table, displaying the values.
      */
     @IBOutlet weak var displayTable: WKInterfaceTable!
+
+    /* ################################################################## */
+    /**
+     The Delete Button, shown at the bottom of the screen.
+     */
+    @IBOutlet weak var deletButton: WKInterfaceButton!
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - Instance Methods
 /* ###################################################################################################################################### */
-/**
- */
 extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
     /* ################################################################## */
     /**
+     Called by the delete screen, to delete this device.
      */
     func deleteMyself() {
         if  let owner = owner,
@@ -208,6 +257,7 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
     
     /* ################################################################## */
     /**
+     Called to set up the table of values.
      */
     func populateTable() {
         if  0 < deviceData.count {
@@ -226,16 +276,15 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - Overridden Base Class Methods
 /* ###################################################################################################################################### */
-/**
- */
 extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
-    /* ################################################################################################################################## */
-    // MARK: -
-    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     Called when the sheet is loaded.
+     
+     - parameters:
+        - withContext: The context that may have been set by the presenting view controller.
      */
     override func awake(withContext inContext: Any?) {
         super.awake(withContext: inContext)
@@ -245,6 +294,8 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
             owner = context.owner
             setTitle(deviceInstance?.modelName?.localizedVariant)
             deletButton.setTitle("SLUG-DELETE".localizedVariant)
+            
+            // We need to make sure that the various items we will use to populate the sheet are actually present in the device instance.
             deviceData = []
             if let manufacturerName = deviceInstance?.manufacturerName {
                 let key = "deviceInfoManufacturerName".localizedVariant
@@ -286,6 +337,7 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
     
     /* ################################################################## */
     /**
+     Called just before the screen is shown.
      */
     override func willActivate() {
         super.willActivate()
@@ -297,6 +349,7 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
     
     /* ################################################################## */
     /**
+     Called just after the screen disappears.
      */
     override func didDeactivate() {
         super.didDeactivate()
@@ -305,13 +358,17 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
     
     /* ################################################################## */
     /**
+     This is called just as a segue to the delete screen is called.
+     
+     - parameters:
+        - withIdentifier: The segue ID. It should always be for the delete screen.
      */
     override func contextForSegue(withIdentifier inSegueIdentifier: String) -> Any? {
-        if deleteSegueID == inSegueIdentifier {
-            #if DEBUG
-                print("Delete Button Hit")
-            #endif
-        }
+        assert(deleteSegueID == inSegueIdentifier, "The segue ID is not the expected one!")
+        
+        #if DEBUG
+            print("Delete Button Hit")
+        #endif
         
         return self
     }

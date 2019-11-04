@@ -22,8 +22,7 @@ jazzy   --github_url https://github.com/RiftValleySoftware/RVS_GTDriver \
         --author_url https://riftvalleysoftware.com \
         --title RVS_BTDriver\ Public\ Internal\ Code\ Doumentation \
         --output docs/internal \
-        --min_acl private \
-        --module RVS_BTDriver_iOS
+        --min_acl private
 cp icon.png docs/internal/icon.png
 cp img/* docs/internal/img
 

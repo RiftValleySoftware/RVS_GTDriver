@@ -24,13 +24,14 @@ import WatchKit
 import Foundation
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - The Settings Class
 /* ###################################################################################################################################### */
 /**
+ This class controls the display of the settings screen.
  */
 class RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController: WKInterfaceController {
     /* ################################################################################################################################## */
-    // MARK: -
+    // MARK: - Instance Properties
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
@@ -38,33 +39,38 @@ class RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController: WKInterfac
      */
     var prefs = RVS_BTDriver_WatchOS_Test_Harness_Prefs()
 
+    /* ################################################################################################################################## */
+    // MARK: - IBOutlet Properties
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     This is a switch that reflects and controls whether or not the driver will be set up to use a non-main thread. True means that it uses the Global Thread.
      */
     @IBOutlet weak var useDifferentThreadSwitch: WKInterfaceSwitch!
     
     /* ################################################################## */
     /**
+     This is a switch that reflects and controls whether the scan will "discover" the device, even if it has been removed. If false, then removing a device -even while scanning- will cause it to remain removed until scanning is toggled again.
      */
     @IBOutlet weak var rescanSwitch: WKInterfaceSwitch!
     
     /* ################################################################## */
     /**
+     This is a switch that reflects and controls whether or not the initial connection (to get device info) is retained, so the device remains in connected state. If true, then the connection will remain on. If false, the connection is terminated just after reading the info.
      */
     @IBOutlet weak var persistentConnectionSwitch: WKInterfaceSwitch!
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - IBAction Handler Methods
 /* ###################################################################################################################################### */
-/**
- */
 extension RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController {
-    /* ################################################################################################################################## */
-    // MARK: -
-    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
+     This is called when the Use Different Thread switch is toggled.
+     
+     - parameters:
+        - inValue: The new value of the switch.
      */
     @IBAction func useDifferentThreadSwitchHit(_ inValue: Bool) {
         #if DEBUG
@@ -75,6 +81,10 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController {
     
     /* ################################################################## */
     /**
+     This is called when the Rescan switch is toggled.
+     
+     - parameters:
+        - inValue: The new value of the switch.
      */
     @IBAction func rescanSwitchHit(_ inValue: Bool) {
         #if DEBUG
@@ -85,6 +95,10 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController {
     
     /* ################################################################## */
     /**
+     This is called when the Persistent Connection switch is toggled.
+     
+     - parameters:
+        - inValue: The new value of the switch.
      */
     @IBAction func persistentConnectionSwitchHit(_ inValue: Bool) {
         #if DEBUG
@@ -95,34 +109,15 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController {
 }
 
 /* ###################################################################################################################################### */
-// MARK: -
+// MARK: - Overridden Base Class Methods
 /* ###################################################################################################################################### */
-/**
- */
 extension RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController {
-    /* ################################################################################################################################## */
-    // MARK: -
-    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     Make sure the correct items are shown or hidden.
-     */
-    func setUpUI() {
-        useDifferentThreadSwitch.setTitle("SLUG-DIFFERENT-QUEUE".localizedVariant)
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: -
-/* ###################################################################################################################################### */
-/**
- */
-extension RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController {
-    /* ################################################################################################################################## */
-    // MARK: -
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
+     Called when the sheet is loaded.
+     
+     - parameters:
+        - withContext: The context that may have been set by the presenting view controller.
      */
     override func awake(withContext inContext: Any?) {
         super.awake(withContext: inContext)
