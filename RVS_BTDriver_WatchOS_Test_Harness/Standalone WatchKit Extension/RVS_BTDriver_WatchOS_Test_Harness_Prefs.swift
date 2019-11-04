@@ -23,7 +23,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ################################################################################################################################## */
-// MARK: - Public Calculated Properties
+// MARK: - The Preferences Specialization Class
 /* ################################################################################################################################## */
 /**
  This class extends the prefs class to provide persistent prefs storage.
