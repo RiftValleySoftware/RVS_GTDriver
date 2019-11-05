@@ -23,12 +23,12 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ################################################################################################################################## */
-// MARK: - Public Calculated Properties
+// MARK: - The Preferences Specialization Class
 /* ################################################################################################################################## */
 /**
- This class extends the prefs class to provide persistent prefs storage.
+ This class extends the prefs class to provide persistent prefs storage. This is used across all test harnesses.
  */
-class RVS_BTDriver_iOS_Test_Harness_Prefs: RVS_PersistentPrefs {
+class RVS_BTDriver_Test_Harness_Prefs: RVS_PersistentPrefs {
     /* ############################################################################################################################## */
     // MARK: - Internal Enums
     /* ############################################################################################################################## */

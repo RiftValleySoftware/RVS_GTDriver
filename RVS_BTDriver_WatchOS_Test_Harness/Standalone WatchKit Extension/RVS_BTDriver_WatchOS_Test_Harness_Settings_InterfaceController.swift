@@ -37,7 +37,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController: WKInterfac
     /**
      These are the shared persistent prefs for the test harness app.
      */
-    var prefs = RVS_BTDriver_WatchOS_Test_Harness_Prefs()
+    var prefs = RVS_BTDriver_Test_Harness_Prefs()
 
     /* ################################################################################################################################## */
     // MARK: - IBOutlet Properties

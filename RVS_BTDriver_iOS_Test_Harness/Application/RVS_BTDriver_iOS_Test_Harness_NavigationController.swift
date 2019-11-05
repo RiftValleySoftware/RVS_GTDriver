@@ -50,7 +50,7 @@ class RVS_BTDriver_iOS_Test_Harness_NavigationController: UINavigationController
     /**
      These represent the persistent state.
      */
-    let prefs = RVS_BTDriver_iOS_Test_Harness_Prefs()
+    let prefs = RVS_BTDriver_Test_Harness_Prefs()
 }
 
 /* ###################################################################################################################################### */
