@@ -184,15 +184,17 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
      - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
     */
     internal func centralManagerDidUpdateState(_ inCentral: CBCentralManager) {
-        assert(inCentral === centralManager, "Central Manager Not Ours!")
-        #if DEBUG
-            print("Central Manager: \(inCentral) has changed state to: \(inCentral.state).")
-        #endif
-        switch inCentral.state {
-        case .poweredOff:   // If we get a powered off event, that means there's "issues," and we should report an error.
-            driver?.reportThisError(.bluetoothNotAvailable)
-        default:
-            driver?.sendInterfaceUpdate(self)
+        if nil != centralManager {   // Make sure that we aren't getting called prematurely.
+            assert(inCentral === centralManager, "Central Manager Not Ours!")
+            #if DEBUG
+                print("Central Manager: \(inCentral) has changed state to: \(inCentral.state).")
+            #endif
+            switch inCentral.state {
+            case .poweredOff:   // If we get a powered off event, that means there's "issues," and we should report an error.
+                driver?.reportThisError(.bluetoothNotAvailable)
+            default:
+                driver?.sendInterfaceUpdate(self)
+            }
         }
     }
     

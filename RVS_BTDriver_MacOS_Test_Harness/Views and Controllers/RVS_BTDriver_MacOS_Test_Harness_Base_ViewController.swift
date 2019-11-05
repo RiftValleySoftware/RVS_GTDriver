@@ -36,5 +36,5 @@ class RVS_BTDriver_MacOS_Test_Harness_Base_ViewController: NSViewController {
     /**
      These are the shared persistent prefs for the test harness app.
      */
-    var prefs = RVS_BTDriver_Test_Harness_Prefs()
+    @objc dynamic var prefs = RVS_BTDriver_Test_Harness_Prefs()
 }
