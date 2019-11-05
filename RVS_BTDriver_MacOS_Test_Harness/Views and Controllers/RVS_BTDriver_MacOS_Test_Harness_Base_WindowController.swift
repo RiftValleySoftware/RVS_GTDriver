@@ -23,24 +23,19 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Cocoa
 
 /* ################################################################################################################################## */
-// MARK: - The Main Screen View Controller Class
+// MARK: - Basic Window Controller Class
 /* ################################################################################################################################## */
 /**
- This class controls the main listing screen (the one that displays a list of devices).
+ The main reason for creating this class was to allow us to interpret settings, and to fix an issue with Interface Builder.
  */
-class RVS_BTDriver_MacOS_Test_Harness_ViewController: RVS_BTDriver_MacOS_Test_Harness_Base_ViewController {
-}
-
-/* ################################################################################################################################## */
-// MARK: - Base Class Override Methods
-/* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_ViewController {
+class RVS_BTDriver_MacOS_Test_Harness_Base_WindowController: NSWindowController {
     /* ################################################################## */
     /**
-     Called after the view has loaded and initialized from the storyboard.
+     This accounts for a bug in Xcode, where the [`restorable`](https://developer.apple.com/documentation/appkit/nswindow/1526255-restorable) flag is ignored. If you set the name here, it will restore.
      */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.window?.title = view.window?.title.localizedVariant ?? "ERROR"
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        window?.title = window?.title.localizedVariant ?? "ERROR"
+        self.windowFrameAutosaveName = window?.title ?? "ERROR" // This is because there seems to be a bug (maybe in IB), where the auto-restore setting is not saved unless we do this.
     }
 }

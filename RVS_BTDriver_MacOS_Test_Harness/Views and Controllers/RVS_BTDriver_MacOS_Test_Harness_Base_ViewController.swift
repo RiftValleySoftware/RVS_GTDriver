@@ -21,26 +21,20 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import Cocoa
+#if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
+    import RVS_BTDriver_MacOS
+#endif
 
 /* ################################################################################################################################## */
-// MARK: - The Main Screen View Controller Class
+// MARK: - The Base (Common) View Controller Class
 /* ################################################################################################################################## */
 /**
- This class controls the main listing screen (the one that displays a list of devices).
+ This class provides some common tools for all view controllers.
  */
-class RVS_BTDriver_MacOS_Test_Harness_ViewController: RVS_BTDriver_MacOS_Test_Harness_Base_ViewController {
-}
-
-/* ################################################################################################################################## */
-// MARK: - Base Class Override Methods
-/* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_ViewController {
+class RVS_BTDriver_MacOS_Test_Harness_Base_ViewController: NSViewController {
     /* ################################################################## */
     /**
-     Called after the view has loaded and initialized from the storyboard.
+     These are the shared persistent prefs for the test harness app.
      */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.window?.title = view.window?.title.localizedVariant ?? "ERROR"
-    }
+    var prefs = RVS_BTDriver_Test_Harness_Prefs()
 }

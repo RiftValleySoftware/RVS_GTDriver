@@ -25,31 +25,46 @@ import Cocoa
     import RVS_BTDriver_MacOS
 #endif
 
+/* ################################################################################################################################## */
+// MARK: - The Main Application Class
+/* ################################################################################################################################## */
+/**
+ */
 @NSApplicationMain
-class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate {
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
-    }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject {
+    /* ############################################################################################################################## */
+    // MARK: - Internal Class Calculated Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is a quick way to get this object instance (it's a SINGLETON), cast as the correct class.
+     
+     - returns: the app delegate object, in its natural environment.
+     */
+    class var appDelegateObject: RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
+        return (NSApplication.shared.delegate as? RVS_BTDriver_MacOS_Test_Harness_AppDelegate)!
     }
 }
 
 /* ################################################################################################################################## */
-// MARK: - Basic Window Controller Class
+// MARK: - Instance Methods
 /* ################################################################################################################################## */
-/**
- The main reason for creating this class was to allow us to interpret settings, and to fix an issue with Interface Builder.
- */
-class RVS_MediaServer_WindowController: NSWindowController {
+extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
+}
+
+/* ################################################################################################################################## */
+// MARK: - NSApplicationDelegate Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSApplicationDelegate {
     /* ################################################################## */
     /**
-     This accounts for a bug in Xcode, where the [`restorable`](https://developer.apple.com/documentation/appkit/nswindow/1526255-restorable) flag is ignored. If you set the name here, it will restore.
      */
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        window?.title = window?.title.localizedVariant ?? "ERROR"
-        self.windowFrameAutosaveName = window?.title ?? "ERROR" // This is because there seems to be a bug (maybe in IB), where the auto-restore setting is not saved unless we do this.
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    func applicationWillTerminate(_ aNotification: Notification) {
     }
 }
