@@ -44,12 +44,46 @@ class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject {
     class var appDelegateObject: RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
         return (NSApplication.shared.delegate as? RVS_BTDriver_MacOS_Test_Harness_AppDelegate)!
     }
+    
+    /* ############################################################################################################################## */
+    // MARK: - Internal Instance Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is our instance of the actual BLE driver.
+     */
+    var driverInstance: RVS_BTDriver!
 }
 
 /* ################################################################################################################################## */
 // MARK: - Instance Methods
 /* ################################################################################################################################## */
 extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
+    /* ################################################################## */
+    /**
+     This establishes the driver instance, wiping out any old one.
+     */
+    func setUpDriver() {
+        let prefs = RVS_BTDriver_Test_Harness_Prefs()
+        driverInstance = nil
+        let queue: DispatchQueue! = prefs.useDifferentThread ? DispatchQueue.global() : nil
+        driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
+    }
+    
+    /* ################################################################## */
+    /**
+     This displays a simple alert, with an OK button.
+     
+     - parameter header: The header to display at the top.
+     - parameter message: A String, containing whatever messge is to be displayed below the header.
+     */
+    class func displayAlert(header inHeader: String, message inMessage: String = "") {
+        let alert = NSAlert()
+        alert.messageText = inHeader.localizedVariant
+        alert.informativeText = inMessage.localizedVariant
+        alert.addButton(withTitle: "SLUG-OK-BUTTON-TEXT".localizedVariant)
+        alert.runModal()
+    }
 }
 
 /* ################################################################################################################################## */
@@ -60,11 +94,61 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSApplicationDelegate {
     /**
      */
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        setUpDriver()
     }
 
     /* ################################################################## */
     /**
      */
     func applicationWillTerminate(_ aNotification: Notification) {
+        driverInstance?.stopScanning()
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - RVS_BTDriverDelegate Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
+    /* ################################################################## */
+    /**
+     Simple error reporting method.
+     
+     - parameter inDriver: The `RVS_BTDriver` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func btDriver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
+        #if DEBUG
+            print("ERROR! \(String(describing: inError))")
+        #endif
+        type(of: self).displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a new device is discovered while scanning.
+     
+     - parameter inDriver: The `RVS_BTDriver` instance that is calling this.
+     - parameter newDeviceAdded: The new device instance.
+     */
+    func btDriver(_ inDriver: RVS_BTDriver, newDeviceAdded inDevice: RVS_BTDriver_DeviceProtocol) {
+        #if DEBUG
+            print("New Device Added: \(String(describing: inDevice))")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver's status should be checked.
+     
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The `RVS_BTDriver` instance calling this.
+     */
+    func btDriverStatusUpdate(_ inDriver: RVS_BTDriver) {
+        #if DEBUG
+            print("Status Message Received")
+        #endif
     }
 }
