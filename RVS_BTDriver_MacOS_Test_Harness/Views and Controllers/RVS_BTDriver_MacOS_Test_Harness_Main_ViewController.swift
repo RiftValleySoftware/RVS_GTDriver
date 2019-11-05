@@ -28,13 +28,45 @@ import Cocoa
 /**
  This class controls the main listing screen (the one that displays a list of devices).
  */
-class RVS_BTDriver_MacOS_Test_Harness_ViewController: RVS_BTDriver_MacOS_Test_Harness_Base_ViewController {
+class RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: RVS_BTDriver_MacOS_Test_Harness_Base_ViewController {
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var scanningCheckbox: NSButton!
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var deviceListTable: NSTableView!
+}
+
+/* ################################################################################################################################## */
+// MARK: - IBAction Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController {
+    /* ################################################################## */
+    /**
+     */
+    @IBAction func scanningCheckboxToggled(_ sender: NSButton) {
+        #if DEBUG
+            print("Scanning Checkbox Toggled")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBAction func preferencesButtonPressed(_ sender: Any) {
+        #if DEBUG
+            print("Preferences Button Hit")
+        #endif
+    }
 }
 
 /* ################################################################################################################################## */
 // MARK: - Base Class Override Methods
 /* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_ViewController {
+extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController {
     /* ################################################################## */
     /**
      Called after the view has loaded and initialized from the storyboard.
@@ -42,5 +74,6 @@ extension RVS_BTDriver_MacOS_Test_Harness_ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.window?.title = view.window?.title.localizedVariant ?? "ERROR"
+        scanningCheckbox?.title = scanningCheckbox?.title.localizedVariant ?? "ERROR"
     }
 }
