@@ -31,16 +31,19 @@ import Cocoa
 class RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController: RVS_BTDriver_MacOS_Test_Harness_Base_ViewController {
     /* ################################################################## */
     /**
+     The checkbox for selecting whether or not to use an alternate thread.
      */
     @IBOutlet weak var useDifferentQueueCheckbox: NSButton!
     
     /* ################################################################## */
     /**
+     A checkbox to indicate that deleted devices will be "rediscovered."
      */
     @IBOutlet weak var rescanCheckbox: NSButton!
     
     /* ################################################################## */
     /**
+     A checkbox to instruct the driver to retain connections to discovered devices.
      */
     @IBOutlet weak var persistentConnectionCheckbox: NSButton!
 }

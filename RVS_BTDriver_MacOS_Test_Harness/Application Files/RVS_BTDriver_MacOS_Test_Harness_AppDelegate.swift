@@ -26,9 +26,12 @@ import Cocoa
 #endif
 
 /* ################################################################################################################################## */
-// MARK: - The Main Application Class
+// MARK: - The Main Application Delegate Class
 /* ################################################################################################################################## */
 /**
+ This class is the main application delegate.
+ 
+ It is also the "owner" of the driver instance, and acts as the delegate for the driver.
  */
 @NSApplicationMain
 class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject {
@@ -53,6 +56,12 @@ class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject {
      This is our instance of the actual BLE driver.
      */
     @objc dynamic var driverInstance: RVS_BTDriver!
+    
+    /* ################################################################## */
+    /**
+     A convenient store for a reference to the main display table.
+     */
+    var mainDisplayScreen: RVS_BTDriver_MacOS_Test_Harness_Main_ViewController!
     
     /* ############################################################################################################################## */
     // MARK: - Internal Instance Calculated Properties
@@ -91,12 +100,9 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
     func setUpDriver() {
         let wasScanning = driverInstance?.isScanning ?? false
         let prefs = RVS_BTDriver_Test_Harness_Prefs()
-        driverInstance = nil
         let queue: DispatchQueue! = prefs.useDifferentThread ? DispatchQueue.global() : nil
         driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
-        if wasScanning {
-            isScanning = true
-        }
+        isScanning = wasScanning
         
         #if DEBUG
             print(String(describing: driverInstance))
@@ -125,16 +131,11 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
 extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSApplicationDelegate {
     /* ################################################################## */
     /**
+     Called after the application has completed its launching process.
+     We use it to set up the driver.
      */
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         setUpDriver()
-    }
-
-    /* ################################################################## */
-    /**
-     */
-    func applicationWillTerminate(_ aNotification: Notification) {
-        driverInstance?.stopScanning()
     }
 }
 
@@ -167,6 +168,8 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
         #if DEBUG
             print("New Device Added: \(String(describing: inDevice))")
         #endif
+        
+        mainDisplayScreen?.reloadTable()
     }
     
     /* ################################################################## */

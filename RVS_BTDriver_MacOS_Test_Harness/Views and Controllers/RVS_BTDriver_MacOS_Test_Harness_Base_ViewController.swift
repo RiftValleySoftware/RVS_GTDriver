@@ -46,7 +46,7 @@ class RVS_BTDriver_MacOS_Test_Harness_Base_ViewController: NSViewController {
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
-     This is a read-only access to our app delegate object.
+     This is an accessor to our app delegate object. READ-ONLY
      */
     @objc dynamic var appDelegateObject: RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
         return RVS_BTDriver_MacOS_Test_Harness_AppDelegate.appDelegateObject
