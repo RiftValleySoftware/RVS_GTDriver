@@ -274,7 +274,7 @@ extension RVS_BTDriver {
         for vendor in internal_vendors where !vendor.interface.isBTAvailable {
             return false
         }
-        return true
+        return 0 < internal_vendors.count   // Just in case we don't have any vendors (should never happen, but what the hey).
     }
     
     /* ################################################################## */
@@ -300,14 +300,20 @@ extension RVS_BTDriver {
      Tells the vendor interfaces (all of them) to start scanning for services.
      */
     public func startScanning() {
-        let wasScanning = isScanning
-        internal_vendors.forEach {
-            $0.interface.isScanning = true
-        }
-        
-        if !wasScanning {
-            delegate?.btDriverScanningChanged(self, isScanning: true)
-            delegate?.btDriverStatusUpdate(self)
+        if isBTAvailable {
+            let wasScanning = isScanning
+            internal_vendors.forEach {
+                $0.interface.isScanning = true
+            }
+            
+            if !wasScanning {
+                delegate?.btDriverScanningChanged(self, isScanning: true)
+                delegate?.btDriverStatusUpdate(self)
+            }
+        } else {
+            #if DEBUG
+                print("Scanning not started, because BT is not available.")
+            #endif
         }
     }
 
@@ -358,5 +364,18 @@ extension RVS_BTDriver {
      */
     public convenience init(delegate inDelegate: RVS_BTDriverDelegate, queue inQueue: DispatchQueue? = nil, allowDuplicatesInBLEScan inAllowDuplicatesInBLEScan: Bool = false, stayConnected inStayConnected: Bool = false) {
         self.init(inDelegate, queue: inQueue, allowDuplicatesInBLEScan: inAllowDuplicatesInBLEScan, stayConnected: inStayConnected)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Public Description -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver {
+    @objc dynamic public override var description: String {
+        return  "RVS_BTDriver Instance.\n"
+            +   "\tBluetooth is " + (isBTAvailable ? "" : "not ") + "available.\n"
+            +   "\tThe driver is " + (isScanning ? "" : "not ") + "scanning.\n"
+            +   "\tThe driver has \(count) devices discovered"
+            +   (0 < count ? ":\n\t" + String(describing: sequence_contents) : ".")
     }
 }

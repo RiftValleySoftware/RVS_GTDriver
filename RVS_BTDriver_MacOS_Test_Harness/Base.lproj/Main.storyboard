@@ -750,6 +750,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <action selector="checkboxChanged:" target="spq-FA-2wy" id="892-Gj-kd4"/>
                                     <binding destination="spq-FA-2wy" name="value" keyPath="self.prefs.useDifferentThread" id="7og-O2-2HF"/>
                                 </connections>
                             </button>
@@ -763,6 +764,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <action selector="checkboxChanged:" target="spq-FA-2wy" id="qgY-Kc-s0b"/>
                                     <binding destination="spq-FA-2wy" name="value" keyPath="prefs.continuousScan" id="cQl-DM-5E9"/>
                                 </connections>
                             </button>
@@ -776,6 +778,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <action selector="checkboxChanged:" target="spq-FA-2wy" id="hsw-Kq-R5X"/>
                                     <binding destination="spq-FA-2wy" name="value" keyPath="self.prefs.persistentConnections" id="14Y-Dx-g4f"/>
                                 </connections>
                             </button>
@@ -842,7 +845,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="deh-aw-VBQ" kind="modal" id="Keh-nT-a56"/>
+                                    <segue destination="deh-aw-VBQ" kind="show" id="Keh-nT-a56"/>
                                 </connections>
                             </button>
                             <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="IlE-bZ-A6H">
@@ -860,7 +863,7 @@
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="434" minWidth="40" maxWidth="1000" id="ppg-4n-ihY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -898,6 +901,10 @@
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <outlet property="dataSource" destination="XfG-lQ-9wD" id="HFb-dE-8ay"/>
+                                                <outlet property="delegate" destination="XfG-lQ-9wD" id="MUf-0W-Iif"/>
+                                            </connections>
                                         </tableView>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
