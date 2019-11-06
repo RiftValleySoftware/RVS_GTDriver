@@ -21,32 +21,9 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import Cocoa
-
-/* ################################################################################################################################## */
-// MARK: - Image Extension Allows Colorizing Template Images
-/* ################################################################################################################################## */
-/**
- This was cribbed from here: https://stackoverflow.com/a/53609793/879365
- */
-extension NSImage {
-    /* ################################################################## */
-    /**
-     This takes a template image, and returns it as a simple, 1-color (no gradient) "colorized" version.
-     
-     - parameter inTintColor: The NSColor that you want the colorized image to be.
-     */
-    func withTintColor(_ inTintColor: NSColor) -> NSImage {
-        guard isTemplate else { return self }
-        guard let copiedImage = self.copy() as? NSImage else { return self }
-        copiedImage.lockFocus()
-        inTintColor.set()
-        let imageBounds = CGRect(x: 0, y: 0, width: copiedImage.size.width, height: copiedImage.size.height)
-        imageBounds.fill(using: .sourceAtop)
-        copiedImage.unlockFocus()
-        copiedImage.isTemplate = false
-        return copiedImage
-    }
-}
+#if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
+    import RVS_BTDriver_MacOS
+#endif
 
 /* ################################################################################################################################## */
 // MARK: - The Main Screen View Controller Class
@@ -60,24 +37,28 @@ class RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: RVS_BTDriver_MacOS_Te
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
+     The column ID for the device name.
      */
     let deviceNameID = "device-name"
     
     /* ################################################################## */
     /**
+     The column ID for the "Is Connected" text.
      */
     let isConnectedID = "device-connected"
     
     /* ################################################################## */
     /**
+     The storyboard ID for the the modal device info view controller.
      */
-    let deleteDeviceID = "device-delete"
+    let deviceInfoControllerID = "device-info-controller"
 
     /* ################################################################## */
     /**
+     This will hold a selected device, for presentation to the user. It is ephemeral.
      */
-    let infoDeviceID = "device-info"
-
+    var selectedDevice: RVS_BTDriver_DeviceProtocol!
+    
     /* ############################################################################################################################## */
     // MARK: - IB Properties
     /* ############################################################################################################################## */
@@ -103,6 +84,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController {
      Simply forces the table to reload.
      */
     func reloadTable() {
+        selectedDevice = nil
         deviceListTable?.reloadData()
     }
 }
@@ -166,16 +148,52 @@ extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: NSTableViewDelega
             }
             return "ERROR"
 
-        case deleteDeviceID:
-            return NSImage(imageLiteralResourceName: "TrashcanMan").withTintColor(NSColor.red)
-
-        case infoDeviceID:
-            return NSImage(imageLiteralResourceName: "GoThataways").withTintColor(NSColor.blue)
-
         default:
             ()
         }
         
         return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This is called when a row is selected. We match the device to the row, set that in the semaphore, and approve the selection.
+     
+     - parameters:
+        - inTableView: The table instance.
+        - shouldSelectRow: 0-based Int, with the index of the row, within the column.
+     
+     - returns: False (always).
+     */
+    func tableView(_ inTableView: NSTableView, shouldSelectRow inRow: Int) -> Bool {
+        if  let device = driverInstance?[inRow] {
+            #if DEBUG
+                print("Row \(inRow) was selected.")
+            #endif
+            selectedDevice = device
+            return true
+        }
+        
+        selectedDevice = nil
+        return false
+    }
+    
+    /* ################################################################## */
+    /**
+     Called after the selection was set up and approved.
+     
+     We open a modal window, with the device info.
+     
+     - parameter: Ignored
+     */
+    func tableViewSelectionDidChange(_: Notification) {
+        if  let device = selectedDevice,
+            let newController = storyboard?.instantiateController(withIdentifier: deviceInfoControllerID) as? RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
+            newController.deviceInstance = device
+            presentAsModalWindow(newController)
+        }
+        
+        selectedDevice = nil
+        deviceListTable.deselectAll(nil)
     }
 }

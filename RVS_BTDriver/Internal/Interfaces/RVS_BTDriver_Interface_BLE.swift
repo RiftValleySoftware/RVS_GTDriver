@@ -477,7 +477,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     
     /* ################################################################## */
     /**
-     Read-only connection indicator.
+     Connection indicator.
      
      - returns: true, if the peripheral is currently connected.
      */
@@ -487,7 +487,11 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
         }
         
         set {
-            _ = newValue
+            if newValue {
+                connect()
+            } else {
+                disconnect()
+            }
         }
     }
 
