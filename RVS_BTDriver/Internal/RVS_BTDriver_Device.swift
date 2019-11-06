@@ -147,9 +147,9 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     
     /* ################################################################## */
     /**
-     This is the public read-only flag, determining whether or not the device is connected.
+     This is the public flag, determining whether or not the device is connected.
      */
-    public internal(set) var isConnected: Bool = false
+    public var isConnected: Bool = false
 
     /* ################################################################## */
     /**
