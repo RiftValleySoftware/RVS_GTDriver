@@ -46,6 +46,26 @@ class RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController: RVS_BTDriver_MacO
 }
 
 /* ################################################################################################################################## */
+// MARK: - IBAction Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController {
+    /* ################################################################## */
+    /**
+     Called when any of the checkboxes change.
+     
+     When a change is made, we reset the driver.
+     
+     - parameter: Ignored.
+     */
+    @IBAction func checkboxChanged(_: Any) {
+        #if DEBUG
+            print("Checkbox changed state, so we are resetting the driver")
+        #endif
+        appDelegateObject.setUpDriver()
+    }
+}
+
+/* ################################################################################################################################## */
 // MARK: - Base Class Override Methods
 /* ################################################################################################################################## */
 extension RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController {

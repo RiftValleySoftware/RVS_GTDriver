@@ -89,10 +89,18 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
      This establishes the driver instance, wiping out any old one.
      */
     func setUpDriver() {
+        let wasScanning = driverInstance?.isScanning ?? false
         let prefs = RVS_BTDriver_Test_Harness_Prefs()
         driverInstance = nil
         let queue: DispatchQueue! = prefs.useDifferentThread ? DispatchQueue.global() : nil
         driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
+        if wasScanning {
+            isScanning = true
+        }
+        
+        #if DEBUG
+            print(String(describing: driverInstance))
+        #endif
     }
     
     /* ################################################################## */
@@ -174,6 +182,21 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
     func btDriverStatusUpdate(_ inDriver: RVS_BTDriver) {
         #if DEBUG
             print("Status Message Received")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver started or stopped scanning.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The `RVS_BTDriver` instance calling this.
+     - parameter isScanning: True, if the new state is scanning is on.
+     */
+    func btDriverScanningChanged(_ driver: RVS_BTDriver, isScanning: Bool) {
+        #if DEBUG
+            print("The driver is" + (isScanning ? " now" : " not") + " scanning.")
         #endif
     }
 }

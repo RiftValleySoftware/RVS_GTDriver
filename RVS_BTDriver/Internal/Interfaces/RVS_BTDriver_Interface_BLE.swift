@@ -119,7 +119,12 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
      If true, then Bluetooth is available (powered on).
      */
     override internal var isBTAvailable: Bool {
-        return centralManager?.state == .poweredOn
+        if  let centralManager = centralManager,
+            .poweredOn == centralManager.state {
+            return true
+        }
+        
+        return false
     }
     
     /* ################################################################## */
@@ -198,7 +203,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
                 if nil == centralManager {
                     print("We have not yet initialized our own Central Manager.")
                 }
-                print("The Central Manager: \(inCentral) has changed state to: \(inCentral.state).")
+                print("The Central Manager: \(inCentral) has changed state.")
             #endif
             switch inCentral.state {
             case .poweredOff:   // If we get a powered off event, that means there's "issues," and we should report an error.
