@@ -124,13 +124,19 @@ public protocol RVS_BTDriver_DeviceProtocol: class {
      If the device has a Device Info Service with a software revision, it is available here.
      */
     var softwareRevision: String! { get }
-
+    
     /* ################################################################## */
     /**
      This is the public read-only access to the service list.
      */
     var services: [RVS_BTDriver_ServiceProtocol] { get }
     
+    /* ################################################################## */
+    /**
+     This is the public read-only flag, determining whether or not the device is connected.
+     */
+    var isConnected: Bool { get }
+
     /* ################################################################## */
     /**
      This is the read-only count of services.

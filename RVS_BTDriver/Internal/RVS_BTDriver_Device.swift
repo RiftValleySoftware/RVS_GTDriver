@@ -144,6 +144,12 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
      If the device has a Device Info Service with a software revision, it is available here.
      */
     public internal(set) var softwareRevision: String!
+    
+    /* ################################################################## */
+    /**
+     This is the public read-only flag, determining whether or not the device is connected.
+     */
+    public internal(set) var isConnected: Bool = false
 
     /* ################################################################## */
     /**

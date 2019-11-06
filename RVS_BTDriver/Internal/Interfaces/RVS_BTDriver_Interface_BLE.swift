@@ -126,7 +126,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
         
         return false
     }
-    
+
     /* ################################################################## */
     /**
      Start or stop the scan for new peripherals.
@@ -475,6 +475,22 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
        }
    }
     
+    /* ################################################################## */
+    /**
+     Read-only connection indicator.
+     
+     - returns: true, if the peripheral is currently connected.
+     */
+    override internal var isConnected: Bool {
+        get {
+            return .connected == peripheral.state
+        }
+        
+        set {
+            _ = newValue
+        }
+    }
+
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Methods -
     /* ################################################################################################################################## */
