@@ -23,12 +23,64 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Cocoa
 
 /* ################################################################################################################################## */
+// MARK: - Image Extension Allows Colorizing Template Images
+/* ################################################################################################################################## */
+/**
+ This was cribbed from here: https://stackoverflow.com/a/53609793/879365
+ */
+extension NSImage {
+    /* ################################################################## */
+    /**
+     This takes a template image, and returns it as a simple, 1-color (no gradient) "colorized" version.
+     
+     - parameter inTintColor: The NSColor that you want the colorized image to be.
+     */
+    func withTintColor(_ inTintColor: NSColor) -> NSImage {
+        guard isTemplate else { return self }
+        guard let copiedImage = self.copy() as? NSImage else { return self }
+        copiedImage.lockFocus()
+        inTintColor.set()
+        let imageBounds = CGRect(x: 0, y: 0, width: copiedImage.size.width, height: copiedImage.size.height)
+        imageBounds.fill(using: .sourceAtop)
+        copiedImage.unlockFocus()
+        copiedImage.isTemplate = false
+        return copiedImage
+    }
+}
+
+/* ################################################################################################################################## */
 // MARK: - The Main Screen View Controller Class
 /* ################################################################################################################################## */
 /**
  This class controls the main listing screen (the one that displays a list of devices).
  */
 class RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: RVS_BTDriver_MacOS_Test_Harness_Base_ViewController {
+    /* ############################################################################################################################## */
+    // MARK: - Instance Constants
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    let deviceNameID = "device-name"
+    
+    /* ################################################################## */
+    /**
+     */
+    let isConnectedID = "device-connected"
+    
+    /* ################################################################## */
+    /**
+     */
+    let deleteDeviceID = "device-delete"
+
+    /* ################################################################## */
+    /**
+     */
+    let infoDeviceID = "device-info"
+
+    /* ############################################################################################################################## */
+    // MARK: - IB Properties
+    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      The checkbox for "scanning" state.
@@ -99,16 +151,31 @@ extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: NSTableViewDelega
      
      - returns: A new Text View, with the device model name.
      */
-    func tableView(_ inTableView: NSTableView, viewFor inTableColumn: NSTableColumn?, row inRow: Int) -> NSView? {
-        let cell = NSTextView()
-        cell.string = "ERROR"
-        cell.backgroundColor = NSColor.clear
-        
-        if  let device = driverInstance?[inRow],
-            let name = device.modelName {
-            cell.string = name
+    func tableView(_ tableView: NSTableView, objectValueFor inTableColumn: NSTableColumn?, row inRow: Int) -> Any? {
+        switch inTableColumn?.identifier.rawValue {
+        case deviceNameID:
+            if  let device = driverInstance?[inRow],
+                let name = device.modelName {
+                return name
+            }
+            return "ERROR"
+            
+        case isConnectedID:
+            if  let device = driverInstance?[inRow] {
+                return device.isConnected ? "SLUG-CONNECTED".localizedVariant : "SLUG-NOT-CONNECTED".localizedVariant
+            }
+            return "ERROR"
+
+        case deleteDeviceID:
+            return NSImage(imageLiteralResourceName: "TrashcanMan").withTintColor(NSColor.red)
+
+        case infoDeviceID:
+            return NSImage(imageLiteralResourceName: "GoThataways").withTintColor(NSColor.blue)
+
+        default:
+            ()
         }
         
-        return cell
+        return nil
     }
 }

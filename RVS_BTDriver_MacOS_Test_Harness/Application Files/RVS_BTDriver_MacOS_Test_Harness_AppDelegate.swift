@@ -96,6 +96,8 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
     /* ################################################################## */
     /**
      This establishes the driver instance, wiping out any old one.
+     
+     If the driver was previously scanning, it will start scanning again. This may mean that deleted devices get rediscovered.
      */
     func setUpDriver() {
         let wasScanning = driverInstance?.isScanning ?? false
