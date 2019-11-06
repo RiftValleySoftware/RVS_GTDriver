@@ -41,7 +41,7 @@ class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject {
      
      - returns: the app delegate object, in its natural environment.
      */
-    class var appDelegateObject: RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
+    @objc dynamic class var appDelegateObject: RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
         return (NSApplication.shared.delegate as? RVS_BTDriver_MacOS_Test_Harness_AppDelegate)!
     }
     
@@ -52,7 +52,32 @@ class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject {
     /**
      This is our instance of the actual BLE driver.
      */
-    var driverInstance: RVS_BTDriver!
+    @objc dynamic var driverInstance: RVS_BTDriver!
+    
+    /* ############################################################################################################################## */
+    // MARK: - Internal Instance Calculated Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This indicates that the driver is scanning for new devices. If set to true, and the driver is initialized, the driver will start scanning (unless it is already scanning).
+     If it is set to false, and the driver is initialized and scanning, the driver will stop scanning.
+     Otherwise, it is ignored.
+     */
+    @objc dynamic var isScanning: Bool {
+        get {
+            return type(of: self).appDelegateObject.driverInstance?.isScanning ?? false
+        }
+        
+        set {
+            if  newValue,
+                let driverInstance = type(of: self).appDelegateObject.driverInstance,
+                !driverInstance.isScanning {
+                driverInstance.startScanning()
+            } else if let driverInstance = type(of: self).appDelegateObject.driverInstance {
+                driverInstance.stopScanning()
+            }
+        }
+    }
 }
 
 /* ################################################################################################################################## */

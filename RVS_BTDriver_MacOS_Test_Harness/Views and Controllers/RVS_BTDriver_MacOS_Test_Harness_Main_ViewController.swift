@@ -41,29 +41,6 @@ class RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: RVS_BTDriver_MacOS_Te
 }
 
 /* ################################################################################################################################## */
-// MARK: - IBAction Methods
-/* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController {
-    /* ################################################################## */
-    /**
-     */
-    @IBAction func scanningCheckboxToggled(_ sender: NSButton) {
-        #if DEBUG
-            print("Scanning Checkbox Toggled")
-        #endif
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    @IBAction func preferencesButtonPressed(_ sender: Any) {
-        #if DEBUG
-            print("Preferences Button Hit")
-        #endif
-    }
-}
-
-/* ################################################################################################################################## */
 // MARK: - Base Class Override Methods
 /* ################################################################################################################################## */
 extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController {

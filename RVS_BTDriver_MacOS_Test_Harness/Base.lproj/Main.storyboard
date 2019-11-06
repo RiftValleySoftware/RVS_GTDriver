@@ -828,7 +828,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="scanningCheckboxToggled:" target="XfG-lQ-9wD" id="pss-k1-onN"/>
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.appDelegateObject.isScanning" id="YRj-Sj-Wjm"/>
                                 </connections>
                             </button>
                             <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sCT-aw-lZO">
@@ -842,7 +842,6 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="preferencesButtonPressed:" target="XfG-lQ-9wD" id="XX5-Uw-nmA"/>
                                     <segue destination="deh-aw-VBQ" kind="modal" id="Keh-nT-a56"/>
                                 </connections>
                             </button>

@@ -132,7 +132,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
                 if nil == centralManager {
                     print("The Central Manager Instance is Nil")
                 } else {
-                    print("The Central Manager Instance is \(centralManager.isScanning ? "" : "not ")scanning.")
+                    print("The Central Manager Instance is \(centralManager.isScanning ? "" : "not ")currently scanning.")
                 }
             #endif
             return centralManager?.isScanning ?? false
@@ -156,6 +156,14 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
             } else if centralManager?.isScanning ?? false {
                 centralManager?.stopScan()
             }
+            
+            #if DEBUG
+                if nil == centralManager {
+                    print("The Central Manager Instance is Nil")
+                } else {
+                    print("The Central Manager Instance is \(centralManager.isScanning ? "now" : "no longer") scanning.")
+                }
+            #endif
         }
     }
     

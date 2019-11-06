@@ -32,9 +32,31 @@ import Cocoa
  This class provides some common tools for all view controllers.
  */
 class RVS_BTDriver_MacOS_Test_Harness_Base_ViewController: NSViewController {
+    /* ############################################################################################################################## */
+    // MARK: - Instance Properties
+    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      These are the shared persistent prefs for the test harness app.
      */
-    @objc dynamic var prefs = RVS_BTDriver_Test_Harness_Prefs()
+    @objc dynamic internal let prefs = RVS_BTDriver_Test_Harness_Prefs()
+    
+    /* ############################################################################################################################## */
+    // MARK: - Instance Calculated Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is a read-only access to our app delegate object.
+     */
+    @objc dynamic var appDelegateObject: RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
+        return RVS_BTDriver_MacOS_Test_Harness_AppDelegate.appDelegateObject
+    }
+    
+    /* ################################################################## */
+    /**
+     This is our instance of the actual BLE driver. We fetch it from the app delegate. READ-ONLY
+     */
+    @objc dynamic var driverInstance: RVS_BTDriver! {
+        return RVS_BTDriver_MacOS_Test_Harness_AppDelegate.appDelegateObject.driverInstance
+    }
 }
