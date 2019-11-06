@@ -25,31 +25,155 @@ import Cocoa
     import RVS_BTDriver_MacOS
 #endif
 
+/* ################################################################################################################################## */
+// MARK: - The Main Application Class
+/* ################################################################################################################################## */
+/**
+ */
 @NSApplicationMain
-class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate {
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject {
+    /* ############################################################################################################################## */
+    // MARK: - Internal Class Calculated Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is a quick way to get this object instance (it's a SINGLETON), cast as the correct class.
+     
+     - returns: the app delegate object, in its natural environment.
+     */
+    @objc dynamic class var appDelegateObject: RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
+        return (NSApplication.shared.delegate as? RVS_BTDriver_MacOS_Test_Harness_AppDelegate)!
     }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+    
+    /* ############################################################################################################################## */
+    // MARK: - Internal Instance Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is our instance of the actual BLE driver.
+     */
+    @objc dynamic var driverInstance: RVS_BTDriver!
+    
+    /* ############################################################################################################################## */
+    // MARK: - Internal Instance Calculated Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This indicates that the driver is scanning for new devices. If set to true, and the driver is initialized, the driver will start scanning (unless it is already scanning).
+     If it is set to false, and the driver is initialized and scanning, the driver will stop scanning.
+     Otherwise, it is ignored.
+     */
+    @objc dynamic var isScanning: Bool {
+        get {
+            return type(of: self).appDelegateObject.driverInstance?.isScanning ?? false
+        }
+        
+        set {
+            if  newValue,
+                let driverInstance = type(of: self).appDelegateObject.driverInstance,
+                !driverInstance.isScanning {
+                driverInstance.startScanning()
+            } else if let driverInstance = type(of: self).appDelegateObject.driverInstance {
+                driverInstance.stopScanning()
+            }
+        }
     }
 }
 
 /* ################################################################################################################################## */
-// MARK: - Basic Window Controller Class
+// MARK: - Instance Methods
 /* ################################################################################################################################## */
-/**
- The main reason for creating this class was to allow us to interpret settings, and to fix an issue with Interface Builder.
- */
-class RVS_MediaServer_WindowController: NSWindowController {
+extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
     /* ################################################################## */
     /**
-     This accounts for a bug in Xcode, where the [`restorable`](https://developer.apple.com/documentation/appkit/nswindow/1526255-restorable) flag is ignored. If you set the name here, it will restore.
+     This establishes the driver instance, wiping out any old one.
      */
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        window?.title = window?.title.localizedVariant ?? "ERROR"
-        self.windowFrameAutosaveName = window?.title ?? "ERROR" // This is because there seems to be a bug (maybe in IB), where the auto-restore setting is not saved unless we do this.
+    func setUpDriver() {
+        let prefs = RVS_BTDriver_Test_Harness_Prefs()
+        driverInstance = nil
+        let queue: DispatchQueue! = prefs.useDifferentThread ? DispatchQueue.global() : nil
+        driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
+    }
+    
+    /* ################################################################## */
+    /**
+     This displays a simple alert, with an OK button.
+     
+     - parameter header: The header to display at the top.
+     - parameter message: A String, containing whatever messge is to be displayed below the header.
+     */
+    class func displayAlert(header inHeader: String, message inMessage: String = "") {
+        let alert = NSAlert()
+        alert.messageText = inHeader.localizedVariant
+        alert.informativeText = inMessage.localizedVariant
+        alert.addButton(withTitle: "SLUG-OK-BUTTON-TEXT".localizedVariant)
+        alert.runModal()
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - NSApplicationDelegate Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSApplicationDelegate {
+    /* ################################################################## */
+    /**
+     */
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        setUpDriver()
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    func applicationWillTerminate(_ aNotification: Notification) {
+        driverInstance?.stopScanning()
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - RVS_BTDriverDelegate Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
+    /* ################################################################## */
+    /**
+     Simple error reporting method.
+     
+     - parameter inDriver: The `RVS_BTDriver` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func btDriver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
+        #if DEBUG
+            print("ERROR! \(String(describing: inError))")
+        #endif
+        type(of: self).displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a new device is discovered while scanning.
+     
+     - parameter inDriver: The `RVS_BTDriver` instance that is calling this.
+     - parameter newDeviceAdded: The new device instance.
+     */
+    func btDriver(_ inDriver: RVS_BTDriver, newDeviceAdded inDevice: RVS_BTDriver_DeviceProtocol) {
+        #if DEBUG
+            print("New Device Added: \(String(describing: inDevice))")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to indicate that the driver's status should be checked.
+     
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter driver: The `RVS_BTDriver` instance calling this.
+     */
+    func btDriverStatusUpdate(_ inDriver: RVS_BTDriver) {
+        #if DEBUG
+            print("Status Message Received")
+        #endif
     }
 }

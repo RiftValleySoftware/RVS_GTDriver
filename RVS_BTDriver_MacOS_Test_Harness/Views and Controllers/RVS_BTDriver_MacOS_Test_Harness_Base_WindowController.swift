@@ -22,16 +22,20 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 
 import Cocoa
 
-class RVS_BTDriver_MacOS_Test_Harness_ViewController: NSViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+/* ################################################################################################################################## */
+// MARK: - Basic Window Controller Class
+/* ################################################################################################################################## */
+/**
+ The main reason for creating this class was to allow us to interpret settings, and to fix an issue with Interface Builder.
+ */
+class RVS_BTDriver_MacOS_Test_Harness_Base_WindowController: NSWindowController {
+    /* ################################################################## */
+    /**
+     This accounts for a bug in Xcode, where the [`restorable`](https://developer.apple.com/documentation/appkit/nswindow/1526255-restorable) flag is ignored. If you set the name here, it will restore.
+     */
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        window?.title = window?.title.localizedVariant ?? "ERROR"
+        self.windowFrameAutosaveName = window?.title ?? "ERROR" // This is because there seems to be a bug (maybe in IB), where the auto-restore setting is not saved unless we do this.
     }
 }

@@ -220,6 +220,28 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
         #endif
         driverInstance?.removeDevice(inDeviceInstance)
     }
+    
+    /* ################################################################## */
+    /**
+     Displays the given message and title in an alert with an "OK" button.
+     
+     - parameter inTitle: a string to be displayed as the title of the alert. It is localized by this method.
+     - parameter message: a string to be displayed as the message of the alert. It is localized by this method.
+     */
+    func displayAlert(header inTitle: String, message inMessage: String) {
+        #if DEBUG
+            print("ALERT:\t\(inTitle)\n\t\t\(inMessage)")
+        #endif
+        DispatchQueue.main.async {  // In case we're called off-thread...
+            let okAction = WKAlertAction(title: "SLUG-OK-BUTTON-TEXT".localizedVariant, style: WKAlertActionStyle.default) {
+                #if DEBUG
+                    print("Alert Dismissed")
+                #endif
+            }
+            
+            self.presentAlert(withTitle: inTitle.localizedVariant, message: inMessage.localizedVariant, preferredStyle: WKAlertControllerStyle.alert, actions: [okAction])
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -315,6 +337,7 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController: RVS_BTDriv
         #if DEBUG
             print("ERROR! \(String(describing: inError))")
         #endif
+        displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
     }
     
     /* ################################################################## */
@@ -345,7 +368,7 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController: RVS_BTDriv
      */
     func btDriverStatusUpdate(_ inDriver: RVS_BTDriver) {
         #if DEBUG
-            print("Status Message Received by Navigation Controller")
+            print("Status Message Received by Main Extension")
         #endif
         DispatchQueue.main.async {
             self.setUpUI()
