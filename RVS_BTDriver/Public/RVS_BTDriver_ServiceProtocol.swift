@@ -84,6 +84,12 @@ extension RVS_BTDriver_ServiceSubscriberProtocol {
 public protocol RVS_BTDriver_ServiceProtocol: class {
     /* ################################################################## */
     /**
+     This refers to the device instance that "owns" this service.
+     */
+    var owner: RVS_BTDriver_DeviceProtocol! { get }
+    
+    /* ################################################################## */
+    /**
      This is the public read-only access to the properties list.
      */
     var properties: [RVS_BTDriver_PropertyProtocol] { get }

@@ -63,16 +63,19 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
 
     /* ################################################################## */
     /**
+     This is a read-only accessor for the object that "owns" this instance.
+     */
+    internal weak var internal_owner: RVS_BTDriver_Service!
+
+    /* ################################################################## */
+    /**
      - returns: The UUID of the value characteristic, as a String.
      */
     public var uuid: String = ""
     
-    /* ################################################################## */
-    /**
-     This is a read-only accessor for the object that "owns" this instance.
-     */
-    internal weak var internal_owner: RVS_BTDriver_Service!
-    
+    /* ################################################################################################################################## */
+    // MARK: - Internal Methods for Overriding
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This is called when the property is updated.
@@ -80,6 +83,19 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
     internal func executeUpdate() {
         // If we are still in the holding cell, then we move.
         internal_owner.movePropertyFromHoldingPenToMainList(self)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Public RVS_BTDriver_PropertyProtocol Support
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_Property {
+    /* ################################################################## */
+    /**
+     This is a read-only accessor for the object that "owns" this instance.
+     */
+    public var owner: RVS_BTDriver_ServiceProtocol! {
+        return internal_owner
     }
 }
 

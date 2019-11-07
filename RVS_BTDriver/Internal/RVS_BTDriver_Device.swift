@@ -153,6 +153,14 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
 
     /* ################################################################## */
     /**
+     This refers to the driver instance that "owns" this device.
+     */
+    var owner: RVS_BTDriver! {
+        return internal_owner
+    }
+    
+    /* ################################################################## */
+    /**
      Notifies subscribers of a new service.
      This is defined here, so we can override.
 

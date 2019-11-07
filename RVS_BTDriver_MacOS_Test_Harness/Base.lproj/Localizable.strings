@@ -21,6 +21,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 "SLUG-OK-BUTTON-TEXT"                                       =       "OK";
+"SLUG-CANCEL-BUTTON-TEXT"                                   =       "CANCEL";
 "SLUG-NOT-SCANNING"                                         =       "NOT SCANNING";
 "SLUG-SCANNING"                                             =       "SCANNING";
 "SLUG-PLACEHOLDER-TEXT"                                     =       "goTenna Device";
@@ -43,6 +44,8 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-ID-LABEL-PREFIX"                                      =       "ID:";
 "SLUG-SETTINGS"                                             =       "Settings";
 "SLUG-INFO"                                                 =       "MORE INFO";
+"SLUG-DELETE-CONFIRM-HEADER"                                =       "ARE YOU SURE?";
+"SLUG-DELETE-CONFIRM-TEXT"                                  =       "If you press \"OK\", this device will be deleted from the list.";
 "SLUG-DELETE"                                               =       "DELETE";
 "SLUG-CONNECTED"                                            =       "CONNECTED";
 "SLUG-NOT-CONNECTED"                                        =       "NOT CONNECTED";

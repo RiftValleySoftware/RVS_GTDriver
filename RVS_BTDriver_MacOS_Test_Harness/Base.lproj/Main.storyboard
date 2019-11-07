@@ -863,7 +863,7 @@
                                             <tableColumns>
                                                 <tableColumn identifier="device-name" editable="NO" width="471" minWidth="100" maxWidth="50000" id="ppg-4n-ihY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -945,7 +945,7 @@
                                     <action selector="connectDisconnectHit:" target="Sti-J1-ndu" id="VLR-cK-C1d"/>
                                 </connections>
                             </button>
-                            <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eg8-mU-iac">
+                            <button focusRingType="none" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="eg8-mU-iac">
                                 <rect key="frame" x="20" y="20" width="93" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="Efv-99-d2p"/>
@@ -988,7 +988,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="data-value" width="285" minWidth="100" maxWidth="50000" id="Ro8-C1-jhE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1035,7 +1035,8 @@
                     </view>
                     <connections>
                         <outlet property="connectDisconnectButton" destination="1To-1W-PnZ" id="LdM-Tf-JLo"/>
-                        <outlet property="deleteButton" destination="32n-TO-dI9" id="zWz-OO-NdN"/>
+                        <outlet property="deleteButton" destination="eg8-mU-iac" id="TCf-ph-1b0"/>
+                        <outlet property="deleteButtonCell" destination="32n-TO-dI9" id="cwa-OV-qo1"/>
                         <outlet property="propertyTable" destination="eR6-dG-Ybf" id="BlA-r7-kCK"/>
                     </connections>
                 </viewController>

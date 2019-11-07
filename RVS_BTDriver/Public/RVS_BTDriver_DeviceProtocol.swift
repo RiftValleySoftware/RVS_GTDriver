@@ -85,6 +85,12 @@ extension RVS_BTDriver_DeviceSubscriberProtocol {
 public protocol RVS_BTDriver_DeviceProtocol: class {
     /* ################################################################## */
     /**
+     This refers to the driver instance that "owns" this device.
+     */
+    var owner: RVS_BTDriver! { get }
+    
+    /* ################################################################## */
+    /**
      This is a String, containing a unique ID for this peripheral.
      */
     var uuid: String! { get }

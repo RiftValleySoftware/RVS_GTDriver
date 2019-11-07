@@ -52,6 +52,12 @@ public enum RVS_BTDriver_PropertyProtocol_Type_Enum {
 public protocol RVS_BTDriver_PropertyProtocol: class {
     /* ################################################################## */
     /**
+     This is a read-only accessor for the object that "owns" this instance.
+     */
+    var owner: RVS_BTDriver_ServiceProtocol! { get }
+    
+    /* ################################################################## */
+    /**
      - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
      */
     var rawValue: Data? { get }
