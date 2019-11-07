@@ -2452,7 +2452,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-FrameworkAppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -2476,7 +2476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-FrameworkAppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -2596,7 +2596,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-AppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -2623,7 +2623,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "MacOS-AppIcon";
 				CODE_SIGN_ENTITLEMENTS = RVS_BTDriver_MacOS_Test_Harness/Meta/RVS_BTDriver_MacOS_Test_Harness.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -2645,6 +2645,7 @@
 		D4DBE1AF235E0E0A00107353 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -2670,6 +2671,7 @@
 		D4DBE1B0235E0E0A00107353 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
