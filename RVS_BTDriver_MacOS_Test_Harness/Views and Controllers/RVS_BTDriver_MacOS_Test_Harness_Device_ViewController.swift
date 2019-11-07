@@ -25,6 +25,8 @@ import Cocoa
     import RVS_BTDriver_MacOS
 #endif
 
+typealias RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple = (key: String, value: String)
+
 /* ################################################################################################################################## */
 // MARK: - The Device Screen View Controller Class
 /* ################################################################################################################################## */
@@ -32,12 +34,50 @@ import Cocoa
  This class controls the device info listing screen (the one that displays a list of device information).
  */
 class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_Test_Harness_Base_ViewController {
+    /* ############################################################################################################################## */
+    // MARK: - Instance Constants
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     Key for the "Key" column.
+     */
+    let keyColumnID = "data-key"
+
+    /* ################################################################## */
+    /**
+     Key for the "Value" column.
+     */
+    let valueColumnID = "data-value"
+
+    /* ############################################################################################################################## */
+    // MARK: - Instance Properties
+    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      The device instance, associated with this screen.
      */
     var deviceInstance: RVS_BTDriver_DeviceProtocol!
+    
+    /* ################################################################## */
+    /**
+     This is an Array of tuples, used to populate the table.
+     
+     The reason that this is an Array of tuples, is so we can enforce order without using a stupid key-sorting closure.
+     */
+    var tableData = [RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple]()
 
+    /* ############################################################################################################################## */
+    // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is a UUID, that identifies this screen for subscriber puproses.
+     */
+    var uuid = UUID()
+    
+    /* ############################################################################################################################## */
+    // MARK: - Instance IBOutlets
+    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      The Connect/Disconnect button.
@@ -55,6 +95,14 @@ class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_
      The Table, Displaying the Properties.
      */
     @IBOutlet weak var propertyTable: NSTableView!
+    
+    /* ################################################################## */
+    /**
+     Make sure that we clean up after ourselves.
+     */
+    deinit {
+        deviceInstance?.unsubscribe(self)
+    }
 }
 
 /* ################################################################################################################################## */
@@ -71,6 +119,9 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
         #if DEBUG
             print("\(((deviceInstance?.isConnected ?? false) ? "SLUG-DISCONNECT".localizedVariant : "SLUG-CONNECT".localizedVariant)) Button Hit.")
         #endif
+        
+        // The weird test here, is so that we don't send true to a nonexistent device. Doesn't really matter, as we're using a chained optional.
+        deviceInstance?.isConnected = !(deviceInstance?.isConnected ?? true)
     }
 
     /* ################################################################## */
@@ -87,6 +138,65 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
 }
 
 /* ################################################################################################################################## */
+// MARK: - Instance Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
+    /* ################################################################## */
+    /**
+     Sets up the UI to reflect the current state.
+     */
+    func setUpUI() {
+        connectDisconnectButton?.title = ((deviceInstance?.isConnected ?? false) ? "SLUG-DISCONNECT".localizedVariant : "SLUG-CONNECT".localizedVariant)
+        connectDisconnectButton?.contentTintColor = ((deviceInstance?.isConnected ?? false) ? NSColor.red : NSColor.green)
+        populateTable()
+    }
+    
+    /* ################################################################## */
+    /**
+     Sets up the table data.
+     */
+    func setUpTableData() {
+        tableData = []
+        
+        if let deviceInstance = deviceInstance {
+            if let value = deviceInstance.uuid {
+                let dataItem = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "deviceInfoDeviceID".localizedVariant, value: value)
+                tableData.append(dataItem)
+            }
+            
+            if let value = deviceInstance.manufacturerName {
+                let dataItem = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "deviceInfoManufacturerName".localizedVariant, value: value)
+                tableData.append(dataItem)
+            }
+            
+            if let value = deviceInstance.modelName {
+                let dataItem = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "deviceInfoModelName".localizedVariant, value: value)
+                tableData.append(dataItem)
+            }
+            
+            if let value = deviceInstance.hardwareRevision {
+                let dataItem = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "deviceInfoHardwareRevision".localizedVariant, value: value)
+                tableData.append(dataItem)
+            }
+            
+            if let value = deviceInstance.firmwareRevision {
+                let dataItem = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "deviceInfoFirmwareRevision".localizedVariant, value: value)
+                tableData.append(dataItem)
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Sets up the table.
+     */
+    func populateTable() {
+        setUpTableData()
+        propertyTable?.reloadData()
+    }
+}
+
+/* ################################################################################################################################## */
 // MARK: - Base Class Override Methods
 /* ################################################################################################################################## */
 extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
@@ -96,15 +206,16 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+
         if let modelTitle = deviceInstance?.modelName {
-            title = modelTitle + ((deviceInstance?.isConnected ?? false) ? " (" + "SLUG-CONNECTED".localizedVariant + ")" : "")
+            title = modelTitle
         }
-        
-        connectDisconnectButton?.title = ((deviceInstance?.isConnected ?? false) ? "SLUG-DISCONNECT".localizedVariant : "SLUG-CONNECT".localizedVariant)
-        connectDisconnectButton?.contentTintColor = ((deviceInstance?.isConnected ?? false) ? NSColor.red : NSColor.green)
         
         deleteButton?.title = deleteButton.title.localizedVariant
         deleteButton?.backgroundColor = NSColor.red
+        setUpUI()
+        
+        deviceInstance?.subscribe(self)
     }
 }
 
@@ -122,7 +233,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: NSTableViewData
      - returns: A 1-based Int, with 0 being no rows.
      */
     func numberOfRows(in inTableView: NSTableView) -> Int {
-        return 0
+        return tableData.count
     }
 
     /* ################################################################## */
@@ -137,6 +248,38 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: NSTableViewData
      - returns: A new Text View, with the device model name.
      */
     func tableView(_ inTableView: NSTableView, objectValueFor inTableColumn: NSTableColumn?, row inRow: Int) -> Any? {
-        return nil
+        switch inTableColumn?.identifier.rawValue {
+        case keyColumnID:
+            return tableData[inRow].key
+        default:
+            return tableData[inRow].value
+        }
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - RVS_BTDriver_DeviceSubscriberProtocol Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_DeviceSubscriberProtocol {
+    /* ################################################################## */
+    /**
+     */
+    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+        #if DEBUG
+            print("DEVICE ERROR! \(String(describing: inError))")
+        #endif
+        RVS_BTDriver_MacOS_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func deviceStatusUpdate(_ inDevice: RVS_BTDriver_DeviceProtocol) {
+        #if DEBUG
+            print("Device Status Changed")
+        #endif
+        DispatchQueue.main.async {
+            self.setUpUI()
+        }
     }
 }
