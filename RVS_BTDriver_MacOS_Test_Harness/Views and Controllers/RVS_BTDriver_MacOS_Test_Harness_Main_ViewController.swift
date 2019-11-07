@@ -134,25 +134,11 @@ extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: NSTableViewDelega
      - returns: A new Text View, with the device model name.
      */
     func tableView(_ inTableView: NSTableView, objectValueFor inTableColumn: NSTableColumn?, row inRow: Int) -> Any? {
-        switch inTableColumn?.identifier.rawValue {
-        case deviceNameID:
-            if  let device = driverInstance?[inRow],
-                let name = device.modelName {
-                return name
-            }
-            return "ERROR"
-            
-        case isConnectedID:
-            if  let device = driverInstance?[inRow] {
-                return device.isConnected ? "SLUG-CONNECTED".localizedVariant : "SLUG-NOT-CONNECTED".localizedVariant
-            }
-            return "ERROR"
-
-        default:
-            ()
+        if  let device = driverInstance?[inRow],
+            let name = device.modelName {
+            return name
         }
-        
-        return nil
+        return "ERROR"
     }
     
     /* ################################################################## */
