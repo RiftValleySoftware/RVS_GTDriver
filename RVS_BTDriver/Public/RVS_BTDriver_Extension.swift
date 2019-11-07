@@ -391,6 +391,10 @@ extension RVS_BTDriver {
 // MARK: - Public Description -
 /* ###################################################################################################################################### */
 extension RVS_BTDriver {
+    /* ################################################################## */
+    /**
+     This is a simplified, readable description of the instance that should be quite useful.
+     */
     @objc dynamic public override var description: String {
         return  "RVS_BTDriver Instance.\n"
             +   "\tBluetooth is " + (isBTAvailable ? "" : "not ") + "available.\n"
