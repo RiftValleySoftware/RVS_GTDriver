@@ -68,6 +68,9 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
      - parameter: ignored.
      */
     @IBAction func connectDisconnectHit(_: Any) {
+        #if DEBUG
+            print("\(((deviceInstance?.isConnected ?? false) ? "SLUG-DISCONNECT".localizedVariant : "SLUG-CONNECT".localizedVariant)) Button Hit.")
+        #endif
     }
 
     /* ################################################################## */
@@ -77,6 +80,9 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
      - parameter: ignored.
      */
     @IBAction func deleteButtonHit(_: Any) {
+        #if DEBUG
+            print("DELETE Button Hit.")
+        #endif
     }
 }
 
