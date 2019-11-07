@@ -339,6 +339,13 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
         #if DEBUG
             print("Central Manager: \(inCentral) has received a disconnection event for this peripheral: \(inPeripheral), with this error: \(String(describing: inError)).")
         #endif
+        // Scan through the stored devices
+        for device in driver where device is RVS_BTDriver_Device_BLE {
+            if  let bleDevice = device as? RVS_BTDriver_Device_BLE,
+                bleDevice.peripheral == inPeripheral {
+                bleDevice.disconnectedPostInit()
+            }
+        }
     }
 }
 
@@ -646,6 +653,9 @@ extension RVS_BTDriver_Device_BLE: RVS_BTDriver_State_Machine {
      Called if there was a connection, before initializing.
      */
     internal func connectedPreInit() {
+        #if DEBUG
+            print("CONNECTED (BLE Pre-Init)")
+        #endif
         if .initializationInProgress == _state {
             // If we are initializing, then we create service objects for our services, and add them to the holding pen.
             internal_initalServiceDiscovery.forEach {
@@ -681,6 +691,21 @@ extension RVS_BTDriver_Device_BLE: RVS_BTDriver_State_Machine {
      Called if there was a connection, after initializing.
      */
     func connectedPostInit() {
+        #if DEBUG
+            print("CONNECTED (BLE Post-Init)")
+        #endif
+        notifySubscribersOfStatusUpdate()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called if there was a disconnection, after initializing.
+     */
+    func disconnectedPostInit() {
+        #if DEBUG
+            print("DISCONNECTED (BLE Post-Init)")
+        #endif
+        notifySubscribersOfStatusUpdate()
     }
 }
 
