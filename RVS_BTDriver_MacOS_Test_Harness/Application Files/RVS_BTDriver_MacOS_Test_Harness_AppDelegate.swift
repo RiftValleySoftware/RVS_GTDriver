@@ -156,7 +156,9 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
         #if DEBUG
             print("ERROR! \(String(describing: inError))")
         #endif
-        type(of: self).displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+        DispatchQueue.main.async {
+            type(of: self).displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+        }
     }
     
     /* ################################################################## */
@@ -171,9 +173,11 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
             print("New Device Added: \(String(describing: inDevice))")
         #endif
         
-        mainDisplayScreen?.reloadTable()
+        DispatchQueue.main.async {
+            self.mainDisplayScreen?.reloadTable()
+        }
     }
-    
+        
     /* ################################################################## */
     /**
      Called to indicate that the driver's status should be checked.

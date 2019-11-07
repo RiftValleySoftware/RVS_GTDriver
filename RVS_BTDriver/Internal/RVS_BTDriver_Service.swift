@@ -307,7 +307,7 @@ extension RVS_BTDriver_Service {
      - parameter inSubscriber: The subscriber to test.
      - returns: True, if the instance is subscribed.
      */
-    func isThisInstanceASubscriber(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) -> Bool {
+    public func isThisInstanceASubscriber(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) -> Bool {
         return internal_subscribers.reduce(false) { (inCurrent, inNext) -> Bool in
             return inCurrent || inNext.uuid == inSubscriber.uuid
         }
@@ -321,7 +321,7 @@ extension RVS_BTDriver_Service {
      
      - parameter subscriber: The instance to subscribe. Nothing is done, if we are already subscribed.
      */
-    func subscribe(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) {
+    public func subscribe(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) {
         if !isThisInstanceASubscriber(inSubscriber) {
             internal_subscribers.append(inSubscriber)
         }
@@ -333,7 +333,7 @@ extension RVS_BTDriver_Service {
      
      - parameter subscriber: The instance to unsubscribe. Nothing is done, if we are not already subscribed.
      */
-    func unsubscribe(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) {
+    public func unsubscribe(_ inSubscriber: RVS_BTDriver_ServiceSubscriberProtocol) {
         if let index = internal_subscribers.firstIndex(where: {
             $0.uuid == inSubscriber.uuid
         }) {
@@ -420,7 +420,15 @@ extension RVS_BTDriver_Service {
     /**
      This is the read-only unique ID for this service.
      */
-    var uuid: String {
+    public var uuid: String {
         return internal_uuid
+    }
+    
+    /* ################################################################## */
+    /**
+     This refers to the device instance that "owns" this service.
+     */
+    public var owner: RVS_BTDriver_DeviceProtocol! {
+        return internal_owner
     }
 }

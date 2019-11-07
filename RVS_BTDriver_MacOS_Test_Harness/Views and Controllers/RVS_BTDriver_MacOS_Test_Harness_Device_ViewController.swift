@@ -42,12 +42,18 @@ class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_
      Key for the "Key" column.
      */
     let keyColumnID = "data-key"
-
+    
     /* ################################################################## */
     /**
      Key for the "Value" column.
      */
     let valueColumnID = "data-value"
+    
+    /* ################################################################## */
+    /**
+     The "OK" button was hit by the user in the delete confirm.
+     */
+    let modalResponseOK = 1000
 
     /* ############################################################################################################################## */
     // MARK: - Instance Properties
@@ -88,7 +94,13 @@ class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_
     /**
      The Delete button.
      */
-    @IBOutlet weak var deleteButton: NSButtonCell!
+    @IBOutlet weak var deleteButton: NSButton!
+    
+    /* ################################################################## */
+    /**
+     The Delete button text display cell.
+     */
+    @IBOutlet weak var deleteButtonCell: NSButtonCell!
     
     /* ################################################################## */
     /**
@@ -134,6 +146,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
         #if DEBUG
             print("DELETE Button Hit.")
         #endif
+        displayDeleteConfirmAlert()
     }
 }
 
@@ -188,11 +201,50 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
     
     /* ################################################################## */
     /**
+     Called to remove the device from the driver.
+     */
+    func deleteMyself() {
+        driverInstance?.removeDevice(deviceInstance)
+        DispatchQueue.main.async {
+            self.appDelegateObject.mainDisplayScreen.reloadTable()
+            self.dismiss(nil)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
      Sets up the table.
      */
     func populateTable() {
         setUpTableData()
         propertyTable?.reloadData()
+    }
+    
+    /* ################################################################## */
+    /**
+     This displays a simple alert, with an OK button.
+     */
+    func displayDeleteConfirmAlert() {
+        if let window = view.window {
+            let alert = NSAlert()
+            alert.messageText = "SLUG-DELETE-CONFIRM-HEADER".localizedVariant
+            alert.informativeText = "SLUG-DELETE-CONFIRM-TEXT".localizedVariant
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: "SLUG-OK-BUTTON-TEXT".localizedVariant)
+            alert.addButton(withTitle: "SLUG-CANCEL-BUTTON-TEXT".localizedVariant)
+            alert.beginSheetModal(for: window) { [weak self] (_ inModalResponse: NSApplication.ModalResponse) in
+                if self?.modalResponseOK == inModalResponse.rawValue {
+                    #if DEBUG
+                        print("The User Chose to Delete.")
+                    #endif
+                    self?.deleteMyself()
+                } else {
+                    #if DEBUG
+                        print("Deletion will not Occur (\(inModalResponse)).")
+                    #endif
+                }
+            }
+        }
     }
 }
 
@@ -211,10 +263,9 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
             title = modelTitle
         }
         
-        deleteButton?.title = deleteButton.title.localizedVariant
-        deleteButton?.backgroundColor = NSColor.red
+        deleteButtonCell?.title = " " + deleteButton.title.localizedVariant + " "
+        deleteButtonCell?.backgroundColor = NSColor.red
         setUpUI()
-        
         deviceInstance?.subscribe(self)
     }
 }
@@ -263,16 +314,26 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: NSTableViewData
 extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_DeviceSubscriberProtocol {
     /* ################################################################## */
     /**
+     Called if the device encounters an error.
+     
+     - parameters:
+        - inDevice: The device instance that is calling this.
+        - encounteredThisError: The error that is being returned.
      */
     func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
         #if DEBUG
             print("DEVICE ERROR! \(String(describing: inError))")
         #endif
-        RVS_BTDriver_MacOS_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+        DispatchQueue.main.async {
+            RVS_BTDriver_MacOS_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+        }
     }
     
     /* ################################################################## */
     /**
+     Called if the device state changes, in some way.
+     
+     - parameter inDevice: The device instance that is calling this.
      */
     func deviceStatusUpdate(_ inDevice: RVS_BTDriver_DeviceProtocol) {
         #if DEBUG
