@@ -342,6 +342,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
         // Scan through the stored devices
         for device in driver where device is RVS_BTDriver_Device_BLE {
             if  let bleDevice = device as? RVS_BTDriver_Device_BLE,
+                bleDevice.centralManager == centralManager,
                 bleDevice.peripheral == inPeripheral {
                 bleDevice.disconnectedPostInit()
             }
