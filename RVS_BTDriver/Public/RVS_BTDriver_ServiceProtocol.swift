@@ -90,10 +90,16 @@ public protocol RVS_BTDriver_ServiceProtocol: class {
     
     /* ################################################################## */
     /**
+     This is the read-only unique ID for this service.
+     */
+    var uuid: String { get }
+    
+    /* ################################################################## */
+    /**
      This is the read-only count of properties.
      */
     var count: Int { get }
-    
+
     /* ################################################################## */
     /**
      This is a public read-only subscript to the property list.

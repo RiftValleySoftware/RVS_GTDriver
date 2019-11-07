@@ -768,7 +768,7 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
                         print("Property Added: \(property) to Service: \(service).")
                     #endif
                     property.cbCharacteristic = characteristic
-                    property.uuidString = characteristic.uuid.uuidString
+                    property.uuid = characteristic.uuid.uuidString
                     property.rawValue = characteristic.value
                     property.internal_owner = service
                     service.addPropertyToList(property)
@@ -887,7 +887,7 @@ class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
     internal func propertyInstanceForCBUUID(_ inUUIDString: String) -> RVS_BTDriver_Property_BLE! {
         for propertyInstance in internal_holding_pen {
             if let propertyInstance = propertyInstance as? RVS_BTDriver_Property_BLE {
-                if propertyInstance.uuidString == inUUIDString {
+                if propertyInstance.uuid == inUUIDString {
                     return propertyInstance
                 }
             }
@@ -895,7 +895,7 @@ class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
         
         for propertyInstance in internal_property_list {
             if let propertyInstance = propertyInstance as? RVS_BTDriver_Property_BLE {
-                if propertyInstance.uuidString == inUUIDString {
+                if propertyInstance.uuid == inUUIDString {
                     return propertyInstance
                 }
             }

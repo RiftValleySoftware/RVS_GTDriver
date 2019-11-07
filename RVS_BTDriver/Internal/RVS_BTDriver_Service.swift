@@ -386,13 +386,41 @@ extension RVS_BTDriver_Service {
     public var count: Int {
         return internal_property_list.count
     }
-
+    
     /* ################################################################## */
     /**
-     This is a public read-only subscript to the property list.
+     This is a public read-only 0-based integer subscript to the property list.
      */
     public subscript(_ inIndex: Int) -> RVS_BTDriver_PropertyProtocol {
         precondition((0..<count).contains(inIndex), "Index Out of Range")
         return properties[inIndex]
+    }
+
+    /* ################################################################## */
+    /**
+     Simple "String Key" subscript, so we can treat the array as a dictionary.
+     
+     - parameter inStringKey: A String, containing the unique UUID of the property we are looking for.
+     
+     - returns: The property, or nil, if not found.
+     */
+    public subscript(_ inStringKey: String) -> RVS_BTDriver_PropertyProtocol! {
+        for item in properties where  item.uuid == inStringKey {
+            return item
+        }
+        return nil
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Public Calculated Properties -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_Service {
+    /* ################################################################## */
+    /**
+     This is the read-only unique ID for this service.
+     */
+    var uuid: String {
+        return internal_uuid
     }
 }

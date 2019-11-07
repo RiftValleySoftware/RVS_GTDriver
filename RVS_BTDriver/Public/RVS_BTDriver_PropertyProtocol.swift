@@ -72,5 +72,5 @@ public protocol RVS_BTDriver_PropertyProtocol: class {
     /**
      - returns: The UUID of the value characteristic, as a String.
      */
-    var uuidString: String { get }
+    var uuid: String { get }
 }

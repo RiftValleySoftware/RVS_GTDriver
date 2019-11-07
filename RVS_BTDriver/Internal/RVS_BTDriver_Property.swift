@@ -65,7 +65,7 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
     /**
      - returns: The UUID of the value characteristic, as a String.
      */
-    public var uuidString: String = ""
+    public var uuid: String = ""
     
     /* ################################################################## */
     /**

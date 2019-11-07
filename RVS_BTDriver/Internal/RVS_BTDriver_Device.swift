@@ -177,6 +177,26 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
 }
 
 /* ###################################################################################################################################### */
+// MARK: - Public Subscript -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_Device {
+    /* ################################################################## */
+    /**
+     Simple "String Key" subscript, so we can treat the array as a dictionary.
+     
+     - parameter inStringKey: A String, containing the unique UUID of the service we are looking for.
+     
+     - returns: The service, or nil, if not found.
+     */
+    public subscript(_ inStringKey: String) -> RVS_BTDriver_ServiceProtocol! {
+        for item in internal_service_list where  item.uuid == inStringKey {
+            return item
+        }
+        return nil
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Subscription Support Methods -
 /* ###################################################################################################################################### */
 extension RVS_BTDriver_Device {

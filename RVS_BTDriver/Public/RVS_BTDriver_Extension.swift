@@ -247,6 +247,26 @@ extension RVS_BTDriver {
 }
 
 /* ###################################################################################################################################### */
+// MARK: - Public Subscript -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver {
+    /* ################################################################## */
+    /**
+     Simple "String Key" subscript, so we can treat the array as a dictionary.
+     
+     - parameter inStringKey: A String, containing the unique UUID of the device we are looking for.
+     
+     - returns: The device, or nil, if not found.
+     */
+    public subscript(_ inStringKey: String) -> RVS_BTDriver_DeviceProtocol! {
+        for item in sequence_contents where  item.uuid == inStringKey {
+            return item
+        }
+        return nil
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Public Calculated Properties -
 /* ###################################################################################################################################### */
 extension RVS_BTDriver {

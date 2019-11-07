@@ -37,6 +37,47 @@ class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_
      The device instance, associated with this screen.
      */
     var deviceInstance: RVS_BTDriver_DeviceProtocol!
+
+    /* ################################################################## */
+    /**
+     The Connect/Disconnect button.
+     */
+    @IBOutlet weak var connectDisconnectButton: NSButton!
+
+    /* ################################################################## */
+    /**
+     The Delete button.
+     */
+    @IBOutlet weak var deleteButton: NSButtonCell!
+    
+    /* ################################################################## */
+    /**
+     The Table, Displaying the Properties.
+     */
+    @IBOutlet weak var propertyTable: NSTableView!
+}
+
+/* ################################################################################################################################## */
+// MARK: - IBAction Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
+    /* ################################################################## */
+    /**
+     Called when the Connect/Disconnect button is hit.
+     
+     - parameter: ignored.
+     */
+    @IBAction func connectDisconnectHit(_: Any) {
+    }
+
+    /* ################################################################## */
+    /**
+     Called when the Delete button is hit.
+     
+     - parameter: ignored.
+     */
+    @IBAction func deleteButtonHit(_: Any) {
+    }
 }
 
 /* ################################################################################################################################## */
@@ -50,7 +91,46 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let modelTitle = deviceInstance?.modelName {
-            title = modelTitle + ((deviceInstance?.isConnected ?? false) ? " (CONNECTED)" : "")
+            title = modelTitle + ((deviceInstance?.isConnected ?? false) ? " (" + "SLUG-CONNECTED".localizedVariant + ")" : "")
         }
+        
+        connectDisconnectButton?.title = ((deviceInstance?.isConnected ?? false) ? "SLUG-DISCONNECT".localizedVariant : "SLUG-CONNECT".localizedVariant)
+        connectDisconnectButton?.contentTintColor = ((deviceInstance?.isConnected ?? false) ? NSColor.red : NSColor.green)
+        
+        deleteButton?.title = deleteButton.title.localizedVariant
+        deleteButton?.backgroundColor = NSColor.red
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - NSTableViewDataSource Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: NSTableViewDataSource {
+    /* ################################################################## */
+    /**
+     Called to supply the number of rows in the table.
+     
+     - parameters:
+        - inTableView: The table instance.
+     
+     - returns: A 1-based Int, with 0 being no rows.
+     */
+    func numberOfRows(in inTableView: NSTableView) -> Int {
+        return 0
+    }
+
+    /* ################################################################## */
+    /**
+     This is called to supply the string display for one row that corresponds to a device.
+     
+     - parameters:
+        - inTableView: The table instance.
+        - viewFor: Container object for the column that holds the row.
+        - row: 0-based Int, with the index of the row, within the column.
+     
+     - returns: A new Text View, with the device model name.
+     */
+    func tableView(_ inTableView: NSTableView, objectValueFor inTableColumn: NSTableColumn?, row inRow: Int) -> Any? {
+        return nil
     }
 }

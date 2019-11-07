@@ -46,6 +46,8 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-DELETE"                                               =       "DELETE";
 "SLUG-CONNECTED"                                            =       "CONNECTED";
 "SLUG-NOT-CONNECTED"                                        =       "NOT CONNECTED";
+"SLUG-CONNECT"                                              =       "CONNECT";
+"SLUG-DISCONNECT"                                           =       "DISCONNECT";
 "SLUG-MAIN"                                                 =       "Main Screen";
 "SLUG-DIFFERENT-QUEUE"                                      =       "Use Different Thread";
 "SLUG-FULL-SCAN"                                            =       "Rescan After Delete";
