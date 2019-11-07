@@ -68,13 +68,13 @@ extension RVS_BTDriver_DeviceSubscriberProtocol {
     /**
      Default does nothing.
      */
-    func device(_ device: RVS_BTDriver_DeviceProtocol, serviceAdded: RVS_BTDriver_ServiceProtocol) { }
+    public func device(_ device: RVS_BTDriver_DeviceProtocol, serviceAdded: RVS_BTDriver_ServiceProtocol) { }
     
     /* ################################################################## */
     /**
      Default does nothing.
      */
-    func deviceStatusUpdate(_ device: RVS_BTDriver_DeviceProtocol) { }
+    public func deviceStatusUpdate(_ device: RVS_BTDriver_DeviceProtocol) { }
 }
 
 /* ###################################################################################################################################### */
