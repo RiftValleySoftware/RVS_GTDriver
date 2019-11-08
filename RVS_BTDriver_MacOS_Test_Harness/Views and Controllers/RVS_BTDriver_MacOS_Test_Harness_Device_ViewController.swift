@@ -79,7 +79,7 @@ class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_
     /**
      This is a UUID, that identifies this screen for subscriber puproses.
      */
-    var uuid = UUID()
+    var uuid: UUID!
     
     /* ############################################################################################################################## */
     // MARK: - Instance IBOutlets

@@ -35,13 +35,34 @@ public protocol RVS_BTDriver_SubscriberProtocol: class {
     /**
      REQUIRED: This is a unique UUID that needs to be assigned to each instance, so we can match subscribers.
      
-     The implementor should declare this, and set it only once with something like this code:
-     
-        `var uuid = UUID() /// Has to be a var, because protocol`
-     
-     After that, forget about it.
+     The subscriber should declare the property, and leave it unassigned, or set to nil.
      */
-    var uuid: UUID { get }
+    var uuid: UUID! { get set }
+    
+    /* ################################################################## */
+    /**
+     DO NOT IMPLEMENT: This is a method that is called by the class handling the subscription.
+     
+     You should not implement this, and let the default implementation handle it.
+     */
+    func setUpUUID()
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Default Implementation
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_SubscriberProtocol {
+    /* ################################################################## */
+    /**
+     This simply generates a new UUID for the subscriber.
+     
+     It will only generate it the first time.
+     */
+    func setUpUUID() {
+        if nil == uuid {
+            uuid = UUID()
+        }
+    }
 }
 
 /* ###################################################################################################################################### */

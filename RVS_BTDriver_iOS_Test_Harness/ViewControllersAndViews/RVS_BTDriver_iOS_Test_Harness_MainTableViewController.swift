@@ -113,7 +113,7 @@ class RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_iOS_Te
     /**
      This is for subscriber support.
      */
-    var uuid = UUID()
+    var uuid: UUID!
 }
 
 /* ###################################################################################################################################### */
