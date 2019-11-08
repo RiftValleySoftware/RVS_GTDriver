@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -814,28 +813,40 @@
             <objects>
                 <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="RVS_BTDriver_MacOS_Test_Harness_Main_ViewController" customModule="RVS_BTDriver_MacOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="512" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="512" height="342"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8eC-9s-c0Z">
-                                <rect key="frame" x="0.0" y="0.0" width="511" height="270"/>
+                                <rect key="frame" x="0.0" y="0.0" width="511" height="342"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="axesIndependently" image="background-gradient" id="h97-AB-u6V"/>
                             </imageView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zCD-y2-iz2">
-                                <rect key="frame" x="38" y="230" width="455" height="20"/>
+                            <imageView hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aFZ-zx-Sl6">
+                                <rect key="frame" x="0.0" y="0.0" width="512" height="342"/>
+                                <imageCell key="cell" enabled="NO" focusRingType="none" alignment="left" imageScaling="proportionallyDown" image="NoBT" id="LLR-SR-9d2"/>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="hidden" keyPath="self.appDelegateObject.isBTAvailable" id="JBI-R0-ZaS"/>
+                                </connections>
+                            </imageView>
+                            <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zCD-y2-iz2">
+                                <rect key="frame" x="38" y="302" width="455" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="Iam-D3-WjW"/>
                                 </constraints>
-                                <buttonCell key="cell" type="check" title="SLUG-SCANNING" bezelStyle="regularSquare" imagePosition="trailing" alignment="right" inset="2" id="ZNa-tj-bUE">
+                                <buttonCell key="cell" type="check" title="SLUG-SCANNING" bezelStyle="regularSquare" imagePosition="trailing" alignment="right" focusRingType="none" inset="2" id="ZNa-tj-bUE">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <binding destination="XfG-lQ-9wD" name="hidden" keyPath="self.appDelegateObject.isBTAvailable" id="AYo-Ql-qlb">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
                                     <binding destination="XfG-lQ-9wD" name="value" keyPath="self.appDelegateObject.isScanning" id="YRj-Sj-Wjm"/>
                                 </connections>
                             </button>
                             <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sCT-aw-lZO">
-                                <rect key="frame" x="14" y="223" width="32" height="31"/>
+                                <rect key="frame" x="14" y="295" width="32" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="B2q-zg-63y"/>
                                     <constraint firstAttribute="width" secondItem="sCT-aw-lZO" secondAttribute="height" multiplier="1:1" id="glD-nI-35P"/>
@@ -849,13 +860,13 @@
                                 </connections>
                             </button>
                             <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IlE-bZ-A6H">
-                                <rect key="frame" x="20" y="20" width="471" height="202"/>
+                                <rect key="frame" x="20" y="20" width="471" height="274"/>
                                 <clipView key="contentView" focusRingType="none" drawsBackground="NO" copiesOnScroll="NO" id="kuL-0A-q17">
-                                    <rect key="frame" x="0.0" y="0.0" width="471" height="202"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="471" height="274"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="20" id="hoJ-Ma-fUV">
-                                            <rect key="frame" x="0.0" y="0.0" width="475" height="202"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="475" height="274"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="4" height="4"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -863,7 +874,7 @@
                                             <tableColumns>
                                                 <tableColumn identifier="device-name" editable="NO" width="471" minWidth="100" maxWidth="50000" id="ppg-4n-ihY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -891,26 +902,38 @@
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="hidden" keyPath="self.appDelegateObject.isBTAvailable" id="Thr-BI-YQg">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aFZ-zx-Sl6" secondAttribute="trailing" id="4Sv-Vi-eUE"/>
                             <constraint firstAttribute="bottom" secondItem="8eC-9s-c0Z" secondAttribute="bottom" id="CAB-QY-c0X"/>
                             <constraint firstItem="IlE-bZ-A6H" firstAttribute="top" secondItem="sCT-aw-lZO" secondAttribute="bottom" constant="8" id="Ex2-6s-adu"/>
                             <constraint firstItem="8eC-9s-c0Z" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="FEL-Aq-fnh"/>
                             <constraint firstAttribute="bottom" secondItem="IlE-bZ-A6H" secondAttribute="bottom" constant="20" id="Jmw-9O-awN"/>
+                            <constraint firstAttribute="bottom" secondItem="aFZ-zx-Sl6" secondAttribute="bottom" id="Mix-CH-HU8"/>
                             <constraint firstItem="IlE-bZ-A6H" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="O5C-UL-W45"/>
                             <constraint firstItem="sCT-aw-lZO" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="PcC-zT-0ya"/>
                             <constraint firstAttribute="trailing" secondItem="IlE-bZ-A6H" secondAttribute="trailing" constant="21" id="XBA-SC-V6m"/>
                             <constraint firstAttribute="trailing" secondItem="8eC-9s-c0Z" secondAttribute="trailing" constant="1" id="dcT-0Q-KAW"/>
                             <constraint firstAttribute="trailing" secondItem="zCD-y2-iz2" secondAttribute="trailing" constant="21" id="ggi-VX-3L8"/>
+                            <constraint firstItem="aFZ-zx-Sl6" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="l8i-bq-LzI"/>
                             <constraint firstItem="zCD-y2-iz2" firstAttribute="centerY" secondItem="sCT-aw-lZO" secondAttribute="centerY" id="lxa-9X-GGN"/>
                             <constraint firstItem="zCD-y2-iz2" firstAttribute="leading" secondItem="sCT-aw-lZO" secondAttribute="trailing" id="qq4-oS-M74"/>
                             <constraint firstItem="8eC-9s-c0Z" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="qvT-op-azr"/>
                             <constraint firstItem="sCT-aw-lZO" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="xF6-Fd-gez"/>
+                            <constraint firstItem="aFZ-zx-Sl6" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="xYV-gw-bHy"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="deviceListTable" destination="hoJ-Ma-fUV" id="YJq-d5-eY3"/>
+                        <outlet property="noBTImage" destination="aFZ-zx-Sl6" id="x1n-cl-tdt"/>
                         <outlet property="scanningCheckbox" destination="zCD-y2-iz2" id="NeG-Rl-xEC"/>
                     </connections>
                 </viewController>
@@ -988,7 +1011,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="data-value" width="285" minWidth="100" maxWidth="50000" id="Ro8-C1-jhE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1047,6 +1070,7 @@
     </scenes>
     <resources>
         <image name="Gear" width="25" height="25"/>
+        <image name="NoBT" width="342" height="342"/>
         <image name="background-gradient" width="1" height="1000"/>
     </resources>
 </document>

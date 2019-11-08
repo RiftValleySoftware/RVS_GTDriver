@@ -34,7 +34,13 @@ import Cocoa
  It is also the "owner" of the driver instance, and acts as the delegate for the driver.
  */
 @NSApplicationMain
-class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject {
+class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate {
+    /* ################################################################## */
+    /**
+     This is the internal holder for the driver instance. It is initialized as a singleton, the first time it's accessed.
+     */
+    private var _driverInstance: RVS_BTDriver!
+
     /* ############################################################################################################################## */
     // MARK: - Internal Class Calculated Properties
     /* ############################################################################################################################## */
@@ -54,8 +60,15 @@ class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject {
     /* ################################################################## */
     /**
      This is our instance of the actual BLE driver.
+     We initialize the singleton, here.
      */
-    @objc dynamic var driverInstance: RVS_BTDriver!
+    @objc dynamic var driverInstance: RVS_BTDriver! {
+        if nil == _driverInstance {
+            setUpDriver()
+        }
+        
+        return _driverInstance
+    }
     
     /* ################################################################## */
     /**
@@ -87,6 +100,14 @@ class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject {
             }
         }
     }
+    
+    /* ################################################################## */
+    /**
+     Returns true, if bluetooth is available. READ-ONLY
+     */
+    @objc dynamic var isBTAvailable: Bool {
+        return type(of: self).appDelegateObject.driverInstance?.isBTAvailable ?? false
+    }
 }
 
 /* ################################################################################################################################## */
@@ -100,14 +121,14 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
      If the driver was previously scanning, it will start scanning again. This may mean that deleted devices get rediscovered.
      */
     func setUpDriver() {
-        let wasScanning = driverInstance?.isScanning ?? false
+        let wasScanning = nil != _driverInstance ? driverInstance.isScanning : false
         let prefs = RVS_BTDriver_Test_Harness_Prefs()
         let queue: DispatchQueue! = prefs.useDifferentThread ? DispatchQueue.global() : nil
-        driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
+        _driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
         isScanning = wasScanning
         
         #if DEBUG
-            print(String(describing: driverInstance))
+            print(String(describing: _driverInstance))
         #endif
     }
     
@@ -124,20 +145,6 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate {
         alert.informativeText = inMessage.localizedVariant
         alert.addButton(withTitle: "SLUG-OK-BUTTON-TEXT".localizedVariant)
         alert.runModal()
-    }
-}
-
-/* ################################################################################################################################## */
-// MARK: - NSApplicationDelegate Methods
-/* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSApplicationDelegate {
-    /* ################################################################## */
-    /**
-     Called after the application has completed its launching process.
-     We use it to set up the driver.
-     */
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        setUpDriver()
     }
 }
 

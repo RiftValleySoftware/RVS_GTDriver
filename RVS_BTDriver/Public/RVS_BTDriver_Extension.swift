@@ -58,7 +58,7 @@ extension RVS_BTDriver_SubscriberProtocol {
      
      It will only generate it the first time.
      */
-    func setUpUUID() {
+    public func setUpUUID() {
         if nil == uuid {
             uuid = UUID()
         }
@@ -312,7 +312,7 @@ extension RVS_BTDriver {
      - returns: true, if all of the vendor interfaces have Bluetooth powered on.
      */
     @objc dynamic public var isBTAvailable: Bool {
-        for vendor in internal_vendors where !vendor.interface.isBTAvailable {
+        for vendor in internal_vendors where !(vendor.interface?.isBTAvailable ?? false) {
             return false
         }
         return 0 < internal_vendors.count   // Just in case we don't have any vendors (should never happen, but what the hey).
@@ -325,7 +325,7 @@ extension RVS_BTDriver {
      - returns: true, if even one of the vendor interfaces is in active scanning.
      */
     @objc dynamic public var isScanning: Bool {
-        for vendor in internal_vendors where vendor.interface.isScanning {
+        for vendor in internal_vendors where (vendor.interface?.isScanning ?? false) {
             return true
         }
         return false
@@ -344,7 +344,7 @@ extension RVS_BTDriver {
         if isBTAvailable {
             let wasScanning = isScanning
             internal_vendors.forEach {
-                $0.interface.isScanning = true
+                $0.interface?.isScanning = true
             }
             
             if !wasScanning {
@@ -365,7 +365,7 @@ extension RVS_BTDriver {
     public func stopScanning() {
         let wasScanning = isScanning
         internal_vendors.forEach {
-            $0.interface.isScanning = false
+            $0.interface?.isScanning = false
         }
         
         if wasScanning {

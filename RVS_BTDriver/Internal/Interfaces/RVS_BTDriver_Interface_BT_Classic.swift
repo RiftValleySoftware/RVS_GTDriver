@@ -20,7 +20,7 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation
+import CoreBluetooth
 
 /* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_Base_Interface_BT_Classic -
@@ -45,4 +45,13 @@ class RVS_BTDriver_Interface_BT_Classic: RVS_BTDriver_Base_Interface {
         
         return internal_interface
     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_BLE_Device -
+/* ###################################################################################################################################### */
+/**
+ This is a specialized class for BT Classic devices (peripherals).
+ */
+class RVS_BTDriver_Device_BT_Classic: RVS_BTDriver_Device {
 }

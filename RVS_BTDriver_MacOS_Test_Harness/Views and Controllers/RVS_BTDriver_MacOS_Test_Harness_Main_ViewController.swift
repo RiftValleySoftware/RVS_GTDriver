@@ -70,6 +70,12 @@ class RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: RVS_BTDriver_MacOS_Te
     
     /* ################################################################## */
     /**
+     The "No Bluetooth" image.
+     */
+    @IBOutlet weak var noBTImage: NSImageView!
+    
+    /* ################################################################## */
+    /**
      A table, containing rows for the discovered devices.
      */
     @IBOutlet weak var deviceListTable: NSTableView!
