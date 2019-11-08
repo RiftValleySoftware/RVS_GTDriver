@@ -197,20 +197,20 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
      - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
     */
     internal func centralManagerDidUpdateState(_ inCentral: CBCentralManager) {
-            // We are allowed to not have a central manager set up quite yet, but if we do, it needs to be us.
-            assert(nil == centralManager || inCentral === centralManager, "Central Manager Not Ours!")
-            #if DEBUG
-                if nil == centralManager {
-                    print("We have not yet initialized our own Central Manager.")
-                }
-                print("The Central Manager: \(inCentral) has changed state.")
-            #endif
-            switch inCentral.state {
-            case .poweredOff:   // If we get a powered off event, that means there's "issues," and we should report an error.
-                driver?.reportThisError(.bluetoothNotAvailable)
-            default:
-                driver?.sendInterfaceUpdate(self)
+        // We are allowed to not have a central manager set up quite yet, but if we do, it needs to be us.
+        assert(nil == centralManager || inCentral === centralManager, "Central Manager Not Ours!")
+        #if DEBUG
+            if nil == centralManager {
+                print("We have not yet initialized our own Central Manager.")
             }
+            print("The Central Manager: \(inCentral) has changed state.")
+        #endif
+        switch inCentral.state {
+        case .poweredOff:   // If we get a powered off event, that means there's "issues," and we should report an error.
+            driver?.reportThisError(.bluetoothNotAvailable)
+        default:
+            driver?.sendInterfaceUpdate(self)
+        }
     }
     
     /* ################################################################## */
@@ -351,7 +351,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_BLE_Device -
+// MARK: - RVS_BTDriver_Device_BLE -
 /* ###################################################################################################################################### */
 /**
  This is a specialized class for BLE devices (peripherals).

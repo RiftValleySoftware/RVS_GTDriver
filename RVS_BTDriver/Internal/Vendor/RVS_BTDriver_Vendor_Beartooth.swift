@@ -77,7 +77,12 @@ class RVS_BTDriver_Vendor_Beartooth: NSObject, RVS_BTDriver_VendorProtocol {
         interface.vendors.append(self)
     }
 
+    /* ################################################################## */
+    /**
+     */
     internal init(driver inDriver: RVS_BTDriver) {
+        super.init()
         driver = inDriver
+        makeInterface(queue: inDriver.internal_queue)
     }
 }
