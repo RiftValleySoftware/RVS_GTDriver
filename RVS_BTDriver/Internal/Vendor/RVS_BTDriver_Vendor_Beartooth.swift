@@ -26,21 +26,24 @@ import CoreBluetooth
 // MARK: - RVS_BTDriver_Vendor_GoTenna -
 /* ###################################################################################################################################### */
 /**
- A factory class for goTenna Mesh devices
+ A factory class for Beartooth devices
  */
 class RVS_BTDriver_Vendor_Beartooth: NSObject, RVS_BTDriver_VendorProtocol {
     /* ################################################################## */
     /**
+     The driver instance that "owns" this vendor instance.
      */
     var driver: RVS_BTDriver!
     
     /* ################################################################## */
     /**
+     The interface object that handles the Bluetooth connections.
      */
     var interface: RVS_BTDriver_InterfaceProtocol!
     
     /* ################################################################## */
     /**
+     These are services that we are looking for.
      */
     var serviceSignatures: [String] = []
 

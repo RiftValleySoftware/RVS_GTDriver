@@ -26,6 +26,7 @@ import Foundation
 // MARK: - RVS_BTDriver_VendorProtocol Protocol -
 /* ###################################################################################################################################### */
 /**
+ A base protocol for vendors.
  */
 internal protocol RVS_BTDriver_VendorProtocol {
     /* ################################################################## */

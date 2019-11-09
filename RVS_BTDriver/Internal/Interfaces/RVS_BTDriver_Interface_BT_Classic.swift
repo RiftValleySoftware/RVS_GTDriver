@@ -26,6 +26,7 @@ import CoreBluetooth
 // MARK: - RVS_BTDriver_Base_Interface_BT_Classic -
 /* ###################################################################################################################################### */
 /**
+ This class handles Bluetooth BR/EDR (Classic), via CoreBluetooth.
  */
 class RVS_BTDriver_Interface_BT_Classic: RVS_BTDriver_Base_Interface {
     /* ###################################################################################################################################### */
