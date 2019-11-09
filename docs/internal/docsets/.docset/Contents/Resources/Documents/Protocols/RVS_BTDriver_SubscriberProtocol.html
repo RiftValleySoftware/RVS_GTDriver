@@ -69,6 +69,9 @@
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_BLE.html">RVS_BTDriver_Device_BLE</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_BT_Classic.html">RVS_BTDriver_Device_BT_Classic</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_GoTenna_Mesh.html">RVS_BTDriver_Device_GoTenna_Mesh</a>
               </li>
               <li class="nav-group-task">
@@ -82,6 +85,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BT_Classic.html">RVS_BTDriver_Interface_BT_Classic</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BT_Classic/DeviceInfoStruct.html">– DeviceInfoStruct</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Property.html">RVS_BTDriver_Property</a>
@@ -100,6 +106,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Service_DeviceInfo_BLE/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_Beartooth.html">RVS_BTDriver_Vendor_Beartooth</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna_Mesh.html">RVS_BTDriver_Vendor_GoTenna_Mesh</a>
@@ -191,9 +200,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:16RVS_BTDriver_iOS0a1_B19_SubscriberProtocolP4uuid10Foundation4UUIDVvp"></a>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B19_SubscriberProtocolP4uuid10Foundation4UUIDVSgvp"></a>
                     <a name="//apple_ref/swift/Property/uuid" class="dashAnchor"></a>
-                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B19_SubscriberProtocolP4uuid10Foundation4UUIDVvp">uuid</a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B19_SubscriberProtocolP4uuid10Foundation4UUIDVSgvp">uuid</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -203,18 +212,53 @@
                       <div class="abstract">
                         <p>REQUIRED: This is a unique UUID that needs to be assigned to each instance, so we can match subscribers.</p>
 
-<p>The implementor should declare this, and set it only once with something like this code:</p>
-
-<p><code>var uuid = UUID() /// Has to be a var, because protocol</code></p>
-
-<p>After that, forget about it.</p>
+<p>The subscriber should declare the property, and leave it unassigned, or set to nil.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">uuid</span><span class="p">:</span> <span class="kt">UUID</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">uuid</span><span class="p">:</span> <span class="kt">UUID</span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B19_SubscriberProtocolP9setUpUUIDyyF"></a>
+                    <a name="//apple_ref/swift/Method/setUpUUID()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B19_SubscriberProtocolP9setUpUUIDyyF">setUpUUID()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>DO NOT IMPLEMENT: This is a method that is called by the class handling the subscription.</p>
+
+<p>You should not implement this, and let the default implementation handle it.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>This simply generates a new UUID for the subscriber.</p>
+
+<p>It will only generate it the first time.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setUpUUID</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -229,7 +273,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-11-07)</p>
+      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-11-09)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

@@ -69,6 +69,9 @@
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_BLE.html">RVS_BTDriver_Device_BLE</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_BT_Classic.html">RVS_BTDriver_Device_BT_Classic</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_GoTenna_Mesh.html">RVS_BTDriver_Device_GoTenna_Mesh</a>
               </li>
               <li class="nav-group-task">
@@ -82,6 +85,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BT_Classic.html">RVS_BTDriver_Interface_BT_Classic</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BT_Classic/DeviceInfoStruct.html">– DeviceInfoStruct</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Property.html">RVS_BTDriver_Property</a>
@@ -100,6 +106,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Service_DeviceInfo_BLE/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_Beartooth.html">RVS_BTDriver_Vendor_Beartooth</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna_Mesh.html">RVS_BTDriver_Vendor_GoTenna_Mesh</a>
@@ -177,14 +186,89 @@
 
                 </div>
               </div>
-            
+            <p>This class handles Bluetooth BR/EDR (Classic), via CoreBluetooth.</p>
+
           </div>
         </section>
 
         <section class="section">
           <div class="section-content">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Internal%20Structs"></a>
+                <a name="//apple_ref/swift/Section/Internal Structs" class="dashAnchor"></a>
+                <a href="#/Internal%20Structs">
+                  <h3 class="section-name">Internal Structs</h3>
+                </a>
+              </div>
               <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC16DeviceInfoStructV"></a>
+                    <a name="//apple_ref/swift/Struct/DeviceInfoStruct" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC16DeviceInfoStructV">DeviceInfoStruct</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a simple struct to transfer interface information between the interface and the vendor device implementation.</p>
+
+                        <a href="../Classes/RVS_BTDriver_Interface_BT_Classic/DeviceInfoStruct.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">struct</span> <span class="kt">DeviceInfoStruct</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Internal%20Types"></a>
+                <a name="//apple_ref/swift/Section/Internal Types" class="dashAnchor"></a>
+                <a href="#/Internal%20Types">
+                  <h3 class="section-name">Internal Types</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC10DeviceInfoa"></a>
+                    <a name="//apple_ref/swift/Alias/DeviceInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC10DeviceInfoa">DeviceInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is how we get the information for creating our device instance.
+The peripheral instance and the central manager instance are passed in.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">typealias</span> <span class="kt">DeviceInfo</span> <span class="o">=</span> <span class="kt"><a href="../Classes/RVS_BTDriver_Interface_BT_Classic/DeviceInfoStruct.html">DeviceInfoStruct</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -206,6 +290,33 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">internal_interface</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_InterfaceProtocol.html">RVS_BTDriver_InterfaceProtocol</a></span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC14centralManagerSo09CBCentralH0CSgvp"></a>
+                    <a name="//apple_ref/swift/Property/centralManager" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC14centralManagerSo09CBCentralH0CSgvp">centralManager</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The manager instance associated with this interface. There is only one.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">centralManager</span><span class="p">:</span> <span class="kt">CBCentralManager</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -239,6 +350,209 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC04makeD05queueAA0a1_b1_D8Protocol_pSgSo0c10_dispatch_H0CSg_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/makeInterface(queue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC04makeD05queueAA0a1_b1_D8Protocol_pSgSo0c10_dispatch_H0CSg_tFZ">makeInterface(queue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This will create the SINGLETON, if it is not already created, or simply returns the one we have.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">makeInterface</span><span class="p">(</span><span class="n">queue</span> <span class="nv">inQueue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="o">!</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_InterfaceProtocol.html">RVS_BTDriver_InterfaceProtocol</a></span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The thread o use. Default is nil (main thread).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC10isScanningSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isScanning" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC10isScanningSbvp">isScanning</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Start or stop the scan for new peripherals.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">internal</span> <span class="k">var</span> <span class="nv">isScanning</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC13isBTAvailableSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isBTAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC13isBTAvailableSbvp">isBTAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If true, then Bluetooth is available (powered on).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">internal</span> <span class="k">var</span> <span class="nv">isBTAvailable</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC5queueACSo0c10_dispatch_G0CSg_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(queue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:16RVS_BTDriver_iOS0a1_B21_Interface_BT_ClassicC5queueACSo0c10_dispatch_G0CSg_tcfc">init(queue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Main initializer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">queue</span> <span class="nv">inQueue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The thread o use. Default is nil (main thread).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/RVS_BTDriver_Interface_BT_Classic"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_Interface_BT_Classic" class="dashAnchor"></a>
+                <a href="#/RVS_BTDriver_Interface_BT_Classic">
+                  <h3 class="section-name">RVS_BTDriver_Interface_BT_Classic</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_BTDriver_iOS@objc(cs)RVS_BTDriver_Interface_BT_Classic(im)centralManagerDidUpdateState:"></a>
+                    <a name="//apple_ref/swift/Method/centralManagerDidUpdateState(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_BTDriver_iOS@objc(cs)RVS_BTDriver_Interface_BT_Classic(im)centralManagerDidUpdateState:">centralManagerDidUpdateState(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Callback for when the central manager changes state.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">centralManagerDidUpdateState</span><span class="p">(</span><span class="n">_</span> <span class="nv">inCentral</span><span class="p">:</span> <span class="kt">CBCentralManager</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inCentral</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The CoreBluetooth Central Manager instance calling this.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
@@ -247,7 +561,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-11-07)</p>
+      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-11-09)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
