@@ -29,6 +29,27 @@ import Foundation
  This is the base class for our transport abstractions.
  */
 internal class RVS_BTDriver_Base_Interface: NSObject, RVS_BTDriver_InterfaceProtocol {
+    /* ###################################################################################################################################### */
+    // MARK: - Enums for UUIDs -
+    /* ###################################################################################################################################### */
+    /**
+     These are standard service UUIDs
+     */
+    internal enum RVS_GATT_UUID: String {
+        /// The standard GATT Device Info service.
+        case deviceInfoService              =   "180A"
+        
+        // MARK: - Device Info Characteristic IDs
+        /// Manufacturer Name
+        case deviceInfoManufacturerName     =   "2A29"
+        /// Model Name
+        case deviceInfoModelName            =   "2A24"
+        /// Hardware Revision
+        case deviceInfoHardwareRevision     =   "2A27"
+        /// Firmware Revision
+        case deviceInfoFirmwareRevision     =   "2A26"
+    }
+
     /* ################################################################## */
     /**
      A weak reference to the main driver instance.

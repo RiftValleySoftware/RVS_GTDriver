@@ -36,8 +36,6 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
-        /// The standard GATT Device Info service.
-        case deviceInfoService              =   "180A"
         // MARK: - Service IDs
         /// This is the basic goTenna proprietary service.
         case goTennaProprietary             =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
@@ -121,7 +119,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
                     ret.centralManager = deviceRecord.centralManager
                     
                     /// These are the services we search for, after connecting.
-                    ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Interface_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue),
+                    ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Base_Interface.RVS_GATT_UUID.deviceInfoService.rawValue),
                                                            CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue)
                     ]
 
@@ -142,6 +140,9 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
      - parameter queue: The DispatchQueue to use for this (can be nil, in which case, the main queue is used).
      */
     internal func makeInterface(queue inQueue: DispatchQueue!) {
+        #if DEBUG
+            print("Making goTenna Mesh interface.")
+        #endif
         interface = RVS_BTDriver_Interface_BLE.makeInterface(queue: inQueue)
         interface.driver = driver   // Who's your daddy?
         interface.rememberAdvertisedDevices = driver.internal_AllowDuplicatesInBLEScan  // This means that if a device is deleted while in scanning mode, and it will be found again.
@@ -152,6 +153,9 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
         
         // If we are already on the guest list, then there's no need to add ourselves.
         for vendor in interface.vendors where type(of: vendor) == type(of: self) {
+            #if DEBUG
+                print("goTenna Mesh interface already loaded.")
+            #endif
             return
         }
         
@@ -172,7 +176,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Core Bluetooth Peripheral Delegate Support -
+// MARK: - goTenna Mesh Device Specialization -
 /* ###################################################################################################################################### */
 /**
  This is a specialization of the device for the goTenna Mesh.

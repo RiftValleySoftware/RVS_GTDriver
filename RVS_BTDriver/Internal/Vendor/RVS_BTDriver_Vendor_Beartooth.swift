@@ -29,6 +29,30 @@ import CoreBluetooth
  A factory class for Beartooth devices
  */
 class RVS_BTDriver_Vendor_Beartooth: NSObject, RVS_BTDriver_VendorProtocol {
+    /* ###################################################################################################################################### */
+    // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
+    /* ###################################################################################################################################### */
+    /**
+     These are String-based enums that we use to reference various services and characteristics in our driver.
+     */
+    internal enum RVS_BT_Classic_GATT_UUID: String {
+        // MARK: - Device Info Characteristic IDs
+        /// Manufacturer Name
+        case deviceInfoManufacturerName     =   "2A29"
+        /// Model Name
+        case deviceInfoModelName            =   "2A24"
+        /// Hardware Revision
+        case deviceInfoHardwareRevision     =   "2A27"
+        /// Firmware Revision
+        case deviceInfoFirmwareRevision     =   "2A26"
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the data we need to match against the advertisement data.
+     */
+    private let _manufacturerCode: [UInt8] = [0xfe, 0xff, 0x02]
+
     /* ################################################################## */
     /**
      The driver instance that "owns" this vendor instance.
@@ -43,9 +67,11 @@ class RVS_BTDriver_Vendor_Beartooth: NSObject, RVS_BTDriver_VendorProtocol {
     
     /* ################################################################## */
     /**
-     These are services that we are looking for.
+     These are the services that we scan for.
      */
-    var serviceSignatures: [String] = []
+    var serviceSignatures: [String] {
+        return [RVS_BTDriver_Base_Interface.RVS_GATT_UUID.deviceInfoService.rawValue]
+    }
 
     /* ################################################################## */
     /**
@@ -55,6 +81,32 @@ class RVS_BTDriver_Vendor_Beartooth: NSObject, RVS_BTDriver_VendorProtocol {
        - returns: a device instance. Can be nil, if this vendor can't instantiate the device.
        */
      func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
+        if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
+            // We check to see if the peripheral is one of ours.
+            if  let manufacturerCodeData = deviceRecord.advertisementData[CBAdvertisementDataManufacturerDataKey] as? NSData,
+                _manufacturerCode.count == manufacturerCodeData.length {
+                
+                // We read in the manufacturer data, and match it against our own.
+                var uIntArray = [UInt8](repeating: 0, count: _manufacturerCode.count)
+                manufacturerCodeData.getBytes(&uIntArray, length: _manufacturerCode.count)
+                
+                if uIntArray == _manufacturerCode {
+                    let ret = RVS_BTDriver_Device_Beartooth(vendor: self)
+                    
+                    ret.peripheral = deviceRecord.peripheral
+                    ret.centralManager = deviceRecord.centralManager
+                    
+                    /// These are the services we search for, after connecting.
+                    ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Base_Interface.RVS_GATT_UUID.deviceInfoService.rawValue)
+                    ]
+
+                    deviceRecord.peripheral.delegate = ret
+
+                    return ret
+                }
+            }
+        }
+        
         return nil
     }
 
@@ -65,6 +117,9 @@ class RVS_BTDriver_Vendor_Beartooth: NSObject, RVS_BTDriver_VendorProtocol {
      - parameter queue: The DispatchQueue to use for this (can be nil, in which case, the main queue is used).
      */
     internal func makeInterface(queue inQueue: DispatchQueue!) {
+        #if DEBUG
+            print("Making Beartooth interface.")
+        #endif
         interface = RVS_BTDriver_Interface_BT_Classic.makeInterface(queue: inQueue)
         interface.driver = driver   // Who's your daddy?
         // Scan for our devices. Don't bother adding if we are already there.
@@ -74,6 +129,9 @@ class RVS_BTDriver_Vendor_Beartooth: NSObject, RVS_BTDriver_VendorProtocol {
         
         // If we are already on the guest list, then there's no need to add ourselves.
         for vendor in interface.vendors where type(of: vendor) == type(of: self) {
+            #if DEBUG
+                print("Beartooth interface already loaded.")
+            #endif
             return
         }
         
@@ -87,5 +145,27 @@ class RVS_BTDriver_Vendor_Beartooth: NSObject, RVS_BTDriver_VendorProtocol {
         super.init()
         driver = inDriver
         makeInterface(queue: inDriver.internal_queue)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Beartooth Device Specialization -
+/* ###################################################################################################################################### */
+/**
+ This is a specialization of the device for the goTenna Mesh.
+ */
+class RVS_BTDriver_Device_Beartooth: RVS_BTDriver_Device_BT_Classic {
+    /* ################################################################## */
+    /**
+     This is a String, containing a unique ID for this peripheral.
+     */
+    override public internal(set) var uuid: String! {
+        get {
+            return peripheral.identifier.uuidString
+        }
+        
+        set {
+            _ = newValue
+        }
     }
 }

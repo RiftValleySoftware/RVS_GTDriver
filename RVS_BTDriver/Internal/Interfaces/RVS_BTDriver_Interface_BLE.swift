@@ -30,17 +30,6 @@ import CoreBluetooth
  */
 internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     /* ###################################################################################################################################### */
-    // MARK: - Enums for UUIDs -
-    /* ###################################################################################################################################### */
-    /**
-     These are standard service UUIDs
-     */
-    internal enum RVS_BLE_GATT_UUID: String {
-        /// The standard GATT Device Info service.
-        case deviceInfoService  =   "180A"
-    }
-
-    /* ###################################################################################################################################### */
     // MARK: - Internal Structs -
     /* ###################################################################################################################################### */
     /// This is a simple struct to transfer interface information between the interface and the vendor device implementation.
@@ -99,7 +88,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     /**
      Main initializer.
      
-     - parameter queue: The thread o use. Default is nil (main thread).
+     - parameter queue: The thread to use. Default is nil (main thread).
     */
     init(queue inQueue: DispatchQueue! = nil) {
         super.init()
@@ -661,7 +650,7 @@ extension RVS_BTDriver_Device_BLE: RVS_BTDriver_State_Machine {
             // If we are initializing, then we create service objects for our services, and add them to the holding pen.
             internal_initalServiceDiscovery.forEach {
                 switch $0.uuidString {
-                case RVS_BTDriver_Interface_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue:
+                case RVS_BTDriver_Base_Interface.RVS_GATT_UUID.deviceInfoService.rawValue:
                     internal_holding_pen.append(RVS_BTDriver_Service_DeviceInfo_BLE(owner: self, uuid: $0.uuidString))
                     
                 default:

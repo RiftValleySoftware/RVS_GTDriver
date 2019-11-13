@@ -77,7 +77,7 @@ class RVS_BTDriver_Interface_BT_Classic: RVS_BTDriver_Base_Interface {
     /**
      This will create the SINGLETON, if it is not already created, or simply returns the one we have.
      
-     - parameter queue: The thread o use. Default is nil (main thread).
+     - parameter queue: The thread to use. Default is nil (main thread).
      */
     internal static func makeInterface(queue inQueue: DispatchQueue!) -> RVS_BTDriver_InterfaceProtocol! {
         if nil == internal_interface {
@@ -188,9 +188,59 @@ extension RVS_BTDriver_Interface_BT_Classic: CBCentralManagerDelegate {
         switch inCentral.state {
         case .poweredOff:   // If we get a powered off event, that means there's "issues," and we should report an error.
             driver?.reportThisError(.bluetoothNotAvailable)
+        case .poweredOn:
+            #if DEBUG
+                print("The Central Manager: \(inCentral) is ready, and we will register for connection events.")
+            #endif
+            let matchingOptions = [CBConnectionEventMatchingOption.serviceUUIDs: [CBUUID(string: RVS_GATT_UUID.deviceInfoService.rawValue)]]
+            inCentral.registerForConnectionEvents(options: matchingOptions)
+            driver?.sendInterfaceUpdate(self)
         default:
             driver?.sendInterfaceUpdate(self)
         }
+    }
+
+    /* ################################################################## */
+    /**
+     Callback for when a peripheral connects.
+     
+     - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
+     - parameter didConnect: The peripheral that was connected.
+    */
+    func centralManager(_ inCentral: CBCentralManager, didConnect inPeripheral: CBPeripheral) {
+        #if DEBUG
+            print("peripheral: \(inPeripheral) connected")
+        #endif
+        
+        inPeripheral.discoverServices([CBUUID(string: RVS_GATT_UUID.deviceInfoService.rawValue)])
+    }
+
+    /* ################################################################## */
+    /**
+     Callback for when a peripheral fails to connect.
+     
+     - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
+     - parameter didFailToConnect: The peripheral that was not connected.
+     - parameter error: Any error that ocurred.
+    */
+    func centralManager(_ inCentral: CBCentralManager, didFailToConnect inPeripheral: CBPeripheral, error inError: Error?) {
+        #if DEBUG
+            print("peripheral: \(inPeripheral) failed to connect with error: \(String(describing: inError))")
+        #endif
+    }
+
+    /* ################################################################## */
+    /**
+     Callback for when a peripheral disconnects.
+     
+     - parameter inCentral: The CoreBluetooth Central Manager instance calling this.
+     - parameter didDisconnectPeripheral: The peripheral that was disconnected.
+     - parameter error: Any error that ocurred.
+    */
+    func centralManager(_ inCentral: CBCentralManager, didDisconnectPeripheral inPeripheral: CBPeripheral, error inError: Error?) {
+        #if DEBUG
+        print("peripheral: \(inPeripheral) disconnected with error: \(String(describing: inError))")
+        #endif
     }
 }
 
@@ -505,7 +555,7 @@ extension RVS_BTDriver_Device_BT_Classic: RVS_BTDriver_State_Machine {
             // If we are initializing, then we create service objects for our services, and add them to the holding pen.
             internal_initalServiceDiscovery.forEach {
                 switch $0.uuidString {
-                case RVS_BTDriver_Interface_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue:
+                case RVS_BTDriver_Base_Interface.RVS_GATT_UUID.deviceInfoService.rawValue:
                     internal_holding_pen.append(RVS_BTDriver_Service_DeviceInfo_BLE(owner: self, uuid: $0.uuidString))
                     
                 default:
