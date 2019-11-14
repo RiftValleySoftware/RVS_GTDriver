@@ -120,7 +120,7 @@ class RVS_BTDriver_Vendor_Beartooth: NSObject, RVS_BTDriver_VendorProtocol {
         #if DEBUG
             print("Making Beartooth interface.")
         #endif
-        interface = RVS_BTDriver_Interface_BT_Classic.makeInterface(queue: inQueue)
+        interface = RVS_BTDriver_Interface_BT_Classic_IOBluetooth.makeInterface(queue: inQueue)
         interface.driver = driver   // Who's your daddy?
         // Scan for our devices. Don't bother adding if we are already there.
         for serviceSignature in serviceSignatures where !interface.serviceSignatures.contains(serviceSignature) {

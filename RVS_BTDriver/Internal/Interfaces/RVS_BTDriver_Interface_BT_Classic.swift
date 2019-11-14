@@ -192,8 +192,8 @@ extension RVS_BTDriver_Interface_BT_Classic: CBCentralManagerDelegate {
             #if DEBUG
                 print("The Central Manager: \(inCentral) is ready, and we will register for connection events.")
             #endif
-            let matchingOptions = [CBConnectionEventMatchingOption.serviceUUIDs: [CBUUID(string: RVS_GATT_UUID.deviceInfoService.rawValue)]]
-            inCentral.registerForConnectionEvents(options: matchingOptions)
+//            let matchingOptions = [CBConnectionEventMatchingOption.serviceUUIDs: [CBUUID(string: RVS_GATT_UUID.deviceInfoService.rawValue)]]
+//            inCentral.registerForConnectionEvents(options: matchingOptions)
             driver?.sendInterfaceUpdate(self)
         default:
             driver?.sendInterfaceUpdate(self)
