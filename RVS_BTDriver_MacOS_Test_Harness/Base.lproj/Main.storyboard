@@ -19,6 +19,7 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                                                <segue destination="Xbq-Yg-8EV" kind="modal" id="wum-mw-4XG"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
@@ -678,7 +679,41 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="-374"/>
+            <point key="canvasLocation" x="721" y="-509"/>
+        </scene>
+        <!--About Window Controller-->
+        <scene sceneID="RGn-3R-7Wj">
+            <objects>
+                <windowController id="Xbq-Yg-8EV" userLabel="About Window Controller" sceneMemberID="viewController">
+                    <window key="window" title="SLUG-ABOUT-TITLE" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="D7g-n5-bRR">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="947" y="461" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="5120" height="1417"/>
+                        <connections>
+                            <outlet property="delegate" destination="Xbq-Yg-8EV" id="DK9-qT-whr"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="AGj-XH-gXs" kind="relationship" relationship="window.shadowedContentViewController" id="TE3-KK-jTV"/>
+                    </connections>
+                </windowController>
+                <customObject id="nhf-GD-Kha" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="720" y="-95"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="UHa-Pg-ul6">
+            <objects>
+                <viewController title="SLUG-ABOUT-TITLE" id="AGj-XH-gXs" userLabel="About View Controller" customClass="RVS_BTDriver_MacOS_Test_Harness_About_ViewController" customModule="RVS_BTDriver_MacOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="2IO-mr-B0G">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="AbT-1L-hwQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1323" y="-95"/>
         </scene>
         <!--Main Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -874,7 +909,7 @@
                                             <tableColumns>
                                                 <tableColumn identifier="device-name" editable="NO" width="471" minWidth="100" maxWidth="50000" id="ppg-4n-ihY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1011,7 +1046,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="data-value" width="285" minWidth="100" maxWidth="50000" id="Ro8-C1-jhE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>

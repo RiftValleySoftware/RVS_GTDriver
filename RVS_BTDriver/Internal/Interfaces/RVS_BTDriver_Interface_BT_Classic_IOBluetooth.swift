@@ -51,6 +51,28 @@ class RVS_BTDriver_Interface_BT_Classic_IOBluetooth: RVS_BTDriver_Base_Interface
     
     /* ################################################################## */
     /**
+     Start or stop the scan for new peripherals.
+     */
+    override internal var isScanning: Bool {
+        get {
+            return false
+        }
+        
+        set {
+            _ = newValue
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     If true, then Bluetooth is available (powered on).
+     */
+    override internal var isBTAvailable: Bool {
+        return false
+    }
+
+    /* ################################################################## */
+    /**
      Main initializer.
      
      - parameter queue: The thread o use. Default is nil (main thread).

@@ -55,6 +55,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-DIFFERENT-QUEUE"                                      =       "Use Different Thread";
 "SLUG-FULL-SCAN"                                            =       "Rescan After Delete";
 "SLUG-PERSISTENT-CONNECTIONS"                               =       "Stay Connected to Devices";
+"SLUG-ABOUT-TITLE"                                          =       "About the Mac Test Harness App";
 "deviceInfoDeviceID"                                        =       "Device ID";
 "deviceInfoService"                                         =       "Device Information Service";
 "deviceInfoManufacturerName"                                =       "Manufacturer Name";
