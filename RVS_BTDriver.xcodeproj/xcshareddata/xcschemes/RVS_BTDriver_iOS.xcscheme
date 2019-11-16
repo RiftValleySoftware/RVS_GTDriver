@@ -14,17 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-<<<<<<< HEAD:RVS_BTDriver.xcodeproj/xcshareddata/xcschemes/RVS_GTDriver.xcscheme
-               BlueprintIdentifier = "D43058C2232BBECB00B64056"
-               BuildableName = "RVS_BLEDriver_iOS.framework"
-               BlueprintName = "RVS_BLEDriver"
-               ReferencedContainer = "container:RVS_BLEDriver.xcodeproj">
-=======
                BlueprintIdentifier = "D4FEC4E9234BA554006D0A53"
                BuildableName = "RVS_BTDriver_iOS.framework"
                BlueprintName = "RVS_BTDriver_iOS"
                ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
->>>>>>> master:RVS_BTDriver.xcodeproj/xcshareddata/xcschemes/RVS_BTDriver_iOS.xcscheme
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -57,17 +50,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-<<<<<<< HEAD:RVS_BTDriver.xcodeproj/xcshareddata/xcschemes/RVS_GTDriver.xcscheme
-            BlueprintIdentifier = "D43058C2232BBECB00B64056"
-            BuildableName = "RVS_BLEDriver_iOS.framework"
-            BlueprintName = "RVS_BLEDriver"
-            ReferencedContainer = "container:RVS_BLEDriver.xcodeproj">
-=======
             BlueprintIdentifier = "D4FEC4E9234BA554006D0A53"
             BuildableName = "RVS_BTDriver_iOS.framework"
             BlueprintName = "RVS_BTDriver_iOS"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
->>>>>>> master:RVS_BTDriver.xcodeproj/xcshareddata/xcschemes/RVS_BTDriver_iOS.xcscheme
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
