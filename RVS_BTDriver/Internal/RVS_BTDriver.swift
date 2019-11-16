@@ -108,8 +108,7 @@ public class RVS_BTDriver: NSObject {
         internal_delegate = inDelegate
         internal_queue = inQueue
         internal_vendors = [
-//            RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self),
-            RVS_BTDriver_Vendor_Beartooth(driver: self)
+            RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self)
         ]
     }
 
