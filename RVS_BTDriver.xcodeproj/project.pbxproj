@@ -985,9 +985,9 @@
 			productReference = D42FB9B9236F2D9000D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
-		D42FB9BF236F2DD700D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Framework copy */ = {
+		D42FB9BF236F2DD700D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Direct */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D42FB9C4236F2DD700D0F0A5 /* Build configuration list for PBXNativeTarget "RVS_BTDriver_WatchOS_Test_Harness_Framework copy" */;
+			buildConfigurationList = D42FB9C4236F2DD700D0F0A5 /* Build configuration list for PBXNativeTarget "RVS_BTDriver_WatchOS_Test_Harness_Direct" */;
 			buildPhases = (
 				D42FB9C2236F2DD700D0F0A5 /* Embed Watch Content */,
 			);
@@ -996,7 +996,7 @@
 			dependencies = (
 				D42FB9C9236F2E0600D0F0A5 /* PBXTargetDependency */,
 			);
-			name = "RVS_BTDriver_WatchOS_Test_Harness_Framework copy";
+			name = RVS_BTDriver_WatchOS_Test_Harness_Direct;
 			productName = RVS_BT_Driver_WatchOS_Test_Harness_Framework;
 			productReference = D42FB9C7236F2DD700D0F0A5 /* RVS_BT_Driver_WatchOS_Test_Harness_Direct.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
@@ -1240,7 +1240,7 @@
 				D443DEE2234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness (Direct) */,
 				D4524B7D234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness (Framework) */,
 				D4E87CC6235E4A3300260E4F /* RVS_BTDriver_WatchOS */,
-				D42FB9BF236F2DD700D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Framework copy */,
+				D42FB9BF236F2DD700D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Direct */,
 				D42FB9AE236F2D9000D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App */,
 				D42FB996236F2D0100D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit Extension */,
 				D424E447236F164A003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework */,
@@ -2896,7 +2896,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D42FB9C4236F2DD700D0F0A5 /* Build configuration list for PBXNativeTarget "RVS_BTDriver_WatchOS_Test_Harness_Framework copy" */ = {
+		D42FB9C4236F2DD700D0F0A5 /* Build configuration list for PBXNativeTarget "RVS_BTDriver_WatchOS_Test_Harness_Direct" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D42FB9C5236F2DD700D0F0A5 /* Debug */,

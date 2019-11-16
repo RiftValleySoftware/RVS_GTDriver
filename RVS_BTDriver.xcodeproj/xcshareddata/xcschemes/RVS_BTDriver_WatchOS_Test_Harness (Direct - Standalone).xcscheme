@@ -30,7 +30,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D42FB9BF236F2DD700D0F0A5"
                BuildableName = "RVS_BT_Driver_WatchOS_Test_Harness_Direct.app"
-               BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness_Framework copy"
+               BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness_Direct"
                ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
