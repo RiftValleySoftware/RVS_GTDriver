@@ -294,7 +294,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
             print("Central Manager: \(inCentral) has connected to this peripheral: \(inPeripheral).")
         #endif
         
-        // Scan through the stored devices in the holding pen.
+        // Scan through the instantiated (but not stored) devices in the holding pen.
         for device in driver.internal_holding_pen where device is RVS_BTDriver_Device_BLE {
             if  let bleDevice = device as? RVS_BTDriver_Device_BLE,
                 inCentral == centralManager,

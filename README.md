@@ -16,7 +16,7 @@ WHERE THIS DRIVER FITS
 ![Overall Image](./img/SystemBlock.png)
 This is where the driver project fits in our system.
 
-The driver is a low-level transport abstraction layer. It is Bluetooth-specific, but is designed to abstract between [Bluetooth LE](https://en.wikipedia.org/wiki/Bluetooth_Low_Energy) and Bluetooth BR/EDR ("Classic"); presenting a common object model of data and interactions with Bluetooth devices.
+The driver is a low-level transport abstraction layer. It is Bluetooth-specific, but is designed to abstract [Bluetooth LE](https://en.wikipedia.org/wiki/Bluetooth_Low_Energy); presenting a common object model of data and interactions with Bluetooth devices.
 
 NOT A DEVICE DRIVER 
 -
