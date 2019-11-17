@@ -231,6 +231,15 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
             print("\tAdvertisement Data: \(String(describing: inAdvertisementData))")
             print("\tSignal Strength: \(inRSSI)dB")
         #endif
+        
+        // We must be connectable. Not connectable is immediate grounds for terminating the relationship.
+        guard 1 == (inAdvertisementData[CBAdvertisementDataIsConnectable] as? Int ?? 0) else {
+            #if DEBUG
+                print("\tDevice cannot be connected.")
+            #endif
+            return
+        }
+        
         // Check to make sure the signal is strong enough.
         guard _RSSI_range.contains(inRSSI.intValue) else {
             #if DEBUG

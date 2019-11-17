@@ -142,7 +142,7 @@ public protocol RVS_BTDriver_DeviceProtocol: class {
      This is the public flag, determining whether or not the device is connected.
      */
     var isConnected: Bool { get set }
-
+    
     /* ################################################################## */
     /**
      This is the read-only count of services.
