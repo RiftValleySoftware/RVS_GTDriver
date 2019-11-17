@@ -90,7 +90,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
      
      - parameter queue: The thread to use. Default is nil (main thread).
     */
-    init(queue inQueue: DispatchQueue! = nil) {
+    internal init(queue inQueue: DispatchQueue! = nil) {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: inQueue)
     }
@@ -231,14 +231,6 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
             print("\tAdvertisement Data: \(String(describing: inAdvertisementData))")
             print("\tSignal Strength: \(inRSSI)dB")
         #endif
-        
-        // We must be connectable. Not connectable is immediate grounds for terminating the relationship.
-        guard 1 == (inAdvertisementData[CBAdvertisementDataIsConnectable] as? Int ?? 0) else {
-            #if DEBUG
-                print("\tDevice cannot be connected.")
-            #endif
-            return
-        }
         
         // Check to make sure the signal is strong enough.
         guard _RSSI_range.contains(inRSSI.intValue) else {
@@ -500,7 +492,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
             }
         }
     }
-
+    
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Methods -
     /* ################################################################################################################################## */
@@ -509,6 +501,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      Called to initiate a connection.
     */
     override internal func connect() {
+        precondition(canConnect, "Device Cannot be Connected!")
         if .disconnected == peripheral.state { // Must be completely disconnected
             #if DEBUG
                 print("Connecting the device: \(String(describing: self))")
@@ -689,7 +682,7 @@ extension RVS_BTDriver_Device_BLE: RVS_BTDriver_State_Machine {
     /**
      Called if there was a connection, after initializing.
      */
-    func connectedPostInit() {
+    internal func connectedPostInit() {
         #if DEBUG
             print("CONNECTED (BLE Post-Init)")
         #endif
@@ -700,7 +693,7 @@ extension RVS_BTDriver_Device_BLE: RVS_BTDriver_State_Machine {
     /**
      Called if there was a disconnection, after initializing.
      */
-    func disconnectedPostInit() {
+    internal func disconnectedPostInit() {
         #if DEBUG
             print("DISCONNECTED (BLE Post-Init)")
         #endif
@@ -766,7 +759,7 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
      - parameter inService: The service with the characteristics that have been discovered.
      - parameter error: Any error that may have occurred. It can be nil.
     */
-    func peripheral(_ inPeripheral: CBPeripheral, didDiscoverCharacteristicsFor inService: CBService, error inError: Error?) {
+    internal func peripheral(_ inPeripheral: CBPeripheral, didDiscoverCharacteristicsFor inService: CBService, error inError: Error?) {
         assert(inPeripheral === peripheral, "Wrong Peripheral!")
         if let error = inError {
             #if DEBUG
@@ -828,7 +821,7 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
     - parameter didUpdateValueFor: The characteristic that was updated.
     - parameter error: Any error that may have occurred. It can be nil.
     */
-    func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
+    internal func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
         assert(inPeripheral === peripheral, "Wrong Peripheral!")
         #if DEBUG
             print("Peripheral  \(inPeripheral) Received an Update for This Characteristic: \(inCharacteristic), with this Error: \(String(describing: inError)).")
@@ -979,7 +972,7 @@ class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
  */
 class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /// The CB characteristic associated with this instance.
-    var cbCharacteristic: CBCharacteristic!
+    internal var cbCharacteristic: CBCharacteristic!
     
     /* ################################################################## */
     /**

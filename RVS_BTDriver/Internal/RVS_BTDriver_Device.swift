@@ -107,49 +107,55 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     /**
      This is a String, containing a unique ID for this peripheral.
      */
-    public internal(set) var uuid: String!
+    @objc dynamic public internal(set) var uuid: String!
     
     /* ################################################################## */
     /**
      If the device has a Device Info Service with a model name, it is available here.
      */
-    public internal(set) var modelName: String!
+    @objc dynamic public internal(set) var modelName: String!
 
     /* ################################################################## */
     /**
      If the device has a Device Info Service with a manufacturer name, it is available here.
      */
-    public internal(set) var manufacturerName: String!
+    @objc dynamic public internal(set) var manufacturerName: String!
     
     /* ################################################################## */
     /**
      If the device has a Device Info Service with a serial number, it is available here.
      */
-    public internal(set) var serialNumber: String!
+    @objc dynamic public internal(set) var serialNumber: String!
     
     /* ################################################################## */
     /**
      If the device has a Device Info Service with a hardware revision, it is available here.
      */
-    public internal(set) var hardwareRevision: String!
+    @objc dynamic public internal(set) var hardwareRevision: String!
     
     /* ################################################################## */
     /**
      If the device has a Device Info Service with a firmware revision, it is available here.
      */
-    public internal(set) var firmwareRevision: String!
+    @objc dynamic public internal(set) var firmwareRevision: String!
     
     /* ################################################################## */
     /**
      If the device has a Device Info Service with a software revision, it is available here.
      */
-    public internal(set) var softwareRevision: String!
+    @objc dynamic public internal(set) var softwareRevision: String!
     
     /* ################################################################## */
     /**
      This is the public flag, determining whether or not the device is connected.
      */
-    public var isConnected: Bool = false
+    @objc dynamic public var isConnected: Bool = false
+    
+    /* ################################################################## */
+    /**
+     This is true, if the device can be connected.
+     */
+    @objc dynamic public internal(set) var canConnect: Bool  = false
 
     /* ################################################################## */
     /**

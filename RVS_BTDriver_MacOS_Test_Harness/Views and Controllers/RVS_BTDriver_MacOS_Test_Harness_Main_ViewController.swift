@@ -188,4 +188,14 @@ extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: NSTableViewDelega
         selectedDevice = nil
         deviceListTable.deselectAll(nil)
     }
+    
+    /* ################################################################## */
+    /**
+     */
+    func setup() {
+        noBTImage?.isHidden = driverInstance.isBTAvailable
+        deviceListTable?.isHidden = !driverInstance.isBTAvailable
+        scanningCheckbox?.isHidden = !driverInstance.isBTAvailable
+        reloadTable()
+    }
 }

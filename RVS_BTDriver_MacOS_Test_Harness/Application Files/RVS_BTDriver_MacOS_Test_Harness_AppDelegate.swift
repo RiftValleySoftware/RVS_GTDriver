@@ -199,6 +199,10 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
         #if DEBUG
             print("Status Message Received")
         #endif
+        
+        DispatchQueue.main.async {
+            self.mainDisplayScreen?.setup()
+        }
     }
     
     /* ################################################################## */
