@@ -1075,7 +1075,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override internal func executeUpdate() {
         rawValue = self.cbCharacteristic.value
-        super.executeUpdate()
+        super.executeUpdate()   // This will move the updated property from the holding pen (if it is still there), into the main array.
     }
 
     /* ################################################################## */

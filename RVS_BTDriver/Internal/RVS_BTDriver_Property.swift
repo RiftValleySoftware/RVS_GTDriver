@@ -31,22 +31,10 @@ import Foundation
 internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
     /* ################################################################## */
     /**
-     - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
+     This is a read-only accessor for the object that "owns" this instance.
      */
-    public var rawValue: Data?
-    
-    /* ################################################################## */
-    /**
-     - returns: The Value, but cast into a specific data type (selected by the enum).
-     */
-    public var value: RVS_BTDriver_PropertyProtocol_Type_Enum {
-        if  let rawValue = rawValue,
-            let stringVal = String(data: rawValue, encoding: .utf8) {
-            return .stringValue(stringVal)
-        }
-        return .undefinedValue
-    }
-    
+    internal weak var internal_owner: RVS_BTDriver_Service!
+
     /* ################################################################## */
     /**
      Simple check to see if this property has already been initialized.
@@ -54,25 +42,15 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      - returns: True, if the property is no longer in the "holding pen," which means that it has been initialized.
      */
     internal var isInitialized: Bool {
-        for property in internal_owner.internal_property_list where property === self {
-            return true
+        if let internal_owner = internal_owner {
+            for property in internal_owner.internal_property_list where property === self {
+                return true
+            }
         }
         
         return false
     }
 
-    /* ################################################################## */
-    /**
-     This is a read-only accessor for the object that "owns" this instance.
-     */
-    internal weak var internal_owner: RVS_BTDriver_Service!
-
-    /* ################################################################## */
-    /**
-     - returns: The UUID of the value characteristic, as a String.
-     */
-    public var uuid: String = ""
-    
     /* ################################################################################################################################## */
     // MARK: - Internal Methods for Overriding
     /* ################################################################################################################################## */
@@ -82,7 +60,43 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     internal func executeUpdate() {
         // If we are still in the holding cell, then we move.
-        internal_owner.movePropertyFromHoldingPenToMainList(self)
+        internal_owner?.movePropertyFromHoldingPenToMainList(self)
+    }
+    
+    /* ################################################################################################################################## */
+    // MARK: - Public RVS_BTDriver_PropertyProtocol Properties and Computed Properties
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
+     */
+    public internal(set) var rawValue: Data?
+    
+    /* ################################################################## */
+    /**
+     - returns: The UUID of the value characteristic, as a String.
+     */
+    public internal(set) var uuid: String = ""
+    
+    /* ################################################################## */
+    /**
+     - returns: The Value, but cast into a specific data type (selected by the enum).
+     */
+    public var value: RVS_BTDriver_PropertyProtocol_Type_Enum {
+        if  let rawValue = rawValue {
+            if let stringVal = String(data: rawValue, encoding: .utf8) {
+                if let floatVal = Double(stringVal) {   // See if we are a number.
+                    if floatVal == Double(Int(floatVal)) {  // Quick Integer test.
+                        return .intValue(Int(floatVal))
+                    } else {
+                        return .floatValue(floatVal)
+                    }
+                }
+                return .stringValue(stringVal)
+            }
+        }
+        
+        return .undefinedValue
     }
 }
 

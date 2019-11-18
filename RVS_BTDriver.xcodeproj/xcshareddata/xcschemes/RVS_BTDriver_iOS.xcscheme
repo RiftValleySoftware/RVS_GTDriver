@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D419701D2382E6E2009480A5"
+               BuildableName = "RVS_BTDriver_iOS_Tests.xctest"
+               BlueprintName = "RVS_BTDriver_iOS_Tests"
+               ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
