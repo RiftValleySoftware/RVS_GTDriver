@@ -87,7 +87,7 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
             if let stringVal = String(data: rawValue, encoding: .utf8) {
                 if let floatVal = Double(stringVal) {   // See if we are a number.
                     if  floatVal == floor(floatVal),    // Quick Integer test.
-                        Double(Int32.max) >= floatVal,   // We clamp to 32-bit Int to be safe. Double conversions can have weirdness.
+                        Double(Int32.max) >= floatVal,  // We clamp to 32-bit Int to be safe. Double conversions from String can have precision weirdness.
                         Double(Int32.min) <= floatVal {
                         return .intValue(Int(floatVal))
                     } else {
@@ -95,6 +95,8 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
                     }
                 }
                 return .stringValue(stringVal)
+            } else {
+                return .rawValue(rawValue)
             }
         }
         

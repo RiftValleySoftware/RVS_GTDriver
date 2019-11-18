@@ -39,7 +39,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
         if case let .intValue(val) = testTarget {
             XCTAssertEqual(0, val, "Should be Zero!")
         } else {
-            XCTFail("Not A Proper Type!")
+            XCTFail("Not the Expected Type!")
         }
     }
     
@@ -54,7 +54,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
         if case let .intValue(val) = testTarget {
             XCTAssertEqual(Int(Int32.max), val, "Should be Int32 Max!")
         } else {
-            XCTFail("Not A Proper Type!")
+            XCTFail("Not the Expected Type!")
         }
     }
     
@@ -69,7 +69,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
         if case let .intValue(val) = testTarget {
             XCTAssertEqual(Int(Int32.min), val, "Should be Int32 Min!")
         } else {
-            XCTFail("Not A Proper Type!")
+            XCTFail("Not the Expected Type!")
         }
     }
     
@@ -84,7 +84,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
         if case let .intValue(val) = testTarget {
             XCTAssertEqual(1, val, "Should be 1!")
         } else {
-            XCTFail("Not A Proper Type!")
+            XCTFail("Not the Expected Type!")
         }
     }
     
@@ -99,7 +99,37 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
         if case let .intValue(val) = testTarget {
             XCTAssertEqual(-1, val, "Should be -1!")
         } else {
-            XCTFail("Not A Proper Type!")
+            XCTFail("Not the Expected Type!")
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testPropertyDataTypeSimpleFloat() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_SimpleFloat()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.floatValue(1.2345)
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .floatValue(val) = testTarget {
+            XCTAssertEqual(1.2345, val, "Should be 1.2345!")
+        } else {
+            XCTFail("Not the Expected Type!")
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testPropertyDataTypeSimpleNegativeFloat() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_SimpleNegativeFloat()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.floatValue(-1.2345)
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .floatValue(val) = testTarget {
+            XCTAssertEqual(-1.2345, val, "Should be -1.2345!")
+        } else {
+            XCTFail("Not the Expected Type!")
         }
     }
 }
