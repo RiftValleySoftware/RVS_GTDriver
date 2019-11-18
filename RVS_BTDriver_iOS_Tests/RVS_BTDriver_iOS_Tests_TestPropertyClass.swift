@@ -28,13 +28,79 @@ import XCTest
 /**
  */
 class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
-    override func setUp() {
+    /* ################################################################## */
+    /**
+     */
+    func testPropertyDataTypeZero() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_Zero()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.intValue(0)
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .intValue(val) = testTarget {
+            XCTAssertEqual(0, val, "Should be Zero!")
+        } else {
+            XCTFail("Not A Proper Type!")
+        }
     }
-
-    override func tearDown() {
+    
+    /* ################################################################## */
+    /**
+     */
+    func testPropertyDataTypeMax() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_MaxInt()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.intValue(Int(Int32.max))
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .intValue(val) = testTarget {
+            XCTAssertEqual(Int(Int32.max), val, "Should be Int32 Max!")
+        } else {
+            XCTFail("Not A Proper Type!")
+        }
     }
-
-    func testPropertyDataType() {
+    
+    /* ################################################################## */
+    /**
+     */
+    func testPropertyDataTypeMin() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_MinInt()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.intValue(Int(Int32.min))
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .intValue(val) = testTarget {
+            XCTAssertEqual(Int(Int32.min), val, "Should be Int32 Min!")
+        } else {
+            XCTFail("Not A Proper Type!")
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testPropertyDataTypeWithDecimal() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_IntWithDecimal()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.intValue(1)
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .intValue(val) = testTarget {
+            XCTAssertEqual(1, val, "Should be 1!")
+        } else {
+            XCTFail("Not A Proper Type!")
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testPropertyDataTypeWithDecimalNegative() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_NegativeIntWithDecimal()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.intValue(-1)
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .intValue(val) = testTarget {
+            XCTAssertEqual(-1, val, "Should be -1!")
+        } else {
+            XCTFail("Not A Proper Type!")
+        }
     }
 }
 
@@ -58,7 +124,7 @@ class RVS_BTDriver_iOS_Tests_Property_Int_Zero: RVS_BTDriver_Property {
 class RVS_BTDriver_iOS_Tests_Property_Int_MaxInt: RVS_BTDriver_Property {
     override init() {
         super.init()
-        rawValue = "\(Int.max)".data(using: .utf8)
+        rawValue = "\(Int32.max)".data(using: .utf8)
     }
 }
 
@@ -70,7 +136,7 @@ class RVS_BTDriver_iOS_Tests_Property_Int_MaxInt: RVS_BTDriver_Property {
 class RVS_BTDriver_iOS_Tests_Property_Int_MinInt: RVS_BTDriver_Property {
     override init() {
         super.init()
-        rawValue = "\(Int.min)".data(using: .utf8)
+        rawValue = "\(Int32.min)".data(using: .utf8)
     }
 }
 

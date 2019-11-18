@@ -28,7 +28,7 @@ import Foundation
 /**
  This enum is used to cast a property value into its proper data type.
  */
-public enum RVS_BTDriver_PropertyProtocol_Type_Enum {
+public enum RVS_BTDriver_PropertyProtocol_Type_Enum: Equatable {
     /// The data, cast to a String (associated value)
     case stringValue(_: String!)
     /// The data, cast to an Integer (associated value)
