@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -858,9 +859,6 @@
                             <imageView hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aFZ-zx-Sl6">
                                 <rect key="frame" x="0.0" y="0.0" width="512" height="342"/>
                                 <imageCell key="cell" enabled="NO" focusRingType="none" alignment="left" imageScaling="proportionallyDown" image="NoBT" id="LLR-SR-9d2"/>
-                                <connections>
-                                    <binding destination="XfG-lQ-9wD" name="hidden" keyPath="self.appDelegateObject.isBTAvailable" id="JBI-R0-ZaS"/>
-                                </connections>
                             </imageView>
                             <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zCD-y2-iz2">
                                 <rect key="frame" x="38" y="302" width="455" height="20"/>
@@ -872,11 +870,6 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="XfG-lQ-9wD" name="hidden" keyPath="self.appDelegateObject.isBTAvailable" id="AYo-Ql-qlb">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
                                     <binding destination="XfG-lQ-9wD" name="value" keyPath="self.appDelegateObject.isScanning" id="YRj-Sj-Wjm"/>
                                 </connections>
                             </button>
@@ -909,7 +902,7 @@
                                             <tableColumns>
                                                 <tableColumn identifier="device-name" editable="NO" width="471" minWidth="100" maxWidth="50000" id="ppg-4n-ihY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -937,13 +930,6 @@
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <connections>
-                                    <binding destination="XfG-lQ-9wD" name="hidden" keyPath="self.appDelegateObject.isBTAvailable" id="Thr-BI-YQg">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
                             </scrollView>
                         </subviews>
                         <constraints>
@@ -1046,7 +1032,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="data-value" width="285" minWidth="100" maxWidth="50000" id="Ro8-C1-jhE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>

@@ -244,6 +244,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
         guard 1 == inAdvertisementData[CBAdvertisementDataIsConnectable] as? Int else {
             #if DEBUG
                 print("\tPeripheral: \(inPeripheral) is not connectable.")
+                print("\tAdvertisement Data: \(String(describing: inAdvertisementData))")
             #endif
             return
         }
@@ -874,6 +875,7 @@ class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
      - returns: The Property instance for the characteristic. Nil, if it can't be matched.
      */
     internal func propertyInstanceForCBCharacteristic(_ inCBCharacteristic: CBCharacteristic) -> RVS_BTDriver_Property_BLE! {
+        // First, we check the "holding pen."
         for propertyInstance in internal_holding_pen {
             if let propertyInstance = propertyInstance as? RVS_BTDriver_Property_BLE {
                 if propertyInstance.cbCharacteristic === inCBCharacteristic {
@@ -882,6 +884,7 @@ class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
             }
         }
         
+        // Then, we check the property storage.
         for propertyInstance in internal_property_list {
             if let propertyInstance = propertyInstance as? RVS_BTDriver_Property_BLE {
                 if propertyInstance.cbCharacteristic === inCBCharacteristic {
@@ -902,6 +905,7 @@ class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
      - returns: The Property instance for the UID. Nil, if it can't be matched.
      */
     internal func propertyInstanceForCBUUID(_ inUUIDString: String) -> RVS_BTDriver_Property_BLE! {
+        // First, we check the "holding pen."
         for propertyInstance in internal_holding_pen {
             if let propertyInstance = propertyInstance as? RVS_BTDriver_Property_BLE {
                 if propertyInstance.uuid == inUUIDString {
@@ -910,6 +914,7 @@ class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
             }
         }
         
+        // Then, we check the property storage.
         for propertyInstance in internal_property_list {
             if let propertyInstance = propertyInstance as? RVS_BTDriver_Property_BLE {
                 if propertyInstance.uuid == inUUIDString {
@@ -1075,6 +1080,9 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override internal func executeUpdate() {
         rawValue = self.cbCharacteristic.value
+        #if DEBUG
+            print("Property : \(String(describing: self)) added a property: \(String(describing: rawValue)).")
+        #endif
         super.executeUpdate()   // This will move the updated property from the holding pen (if it is still there), into the main array.
     }
 
