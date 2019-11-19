@@ -187,6 +187,70 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
             XCTFail("Not the Expected Type!")
         }
     }
+    
+    /* ################################################################## */
+    /**
+     This test forces the number to be a String, by prepending a space.
+     */
+    func testPropertyDataTypeMinMinusOneStringy() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_MinIntMinusOneStringy()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue(" " + String(Double(Int32.min) - 1))
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .stringValue(val) = testTarget {
+            XCTAssertEqual(" " + String(Double(Int32.min) - 1), val, "Should be Int32 Min - 1!")
+        } else {
+            XCTFail("Not the Expected Type!")
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     This does the same, by suffixing a space. It also is a String that could be an Int.
+     */
+    func testPropertyDataTypeMaxMinusOneStringy() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_MaxIntMinusOneStringy()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue(String(Int32.max - 1) + " ")
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .stringValue(val) = testTarget {
+            XCTAssertEqual(String(Int32.max - 1) + " ", val, "Should be Int32 Max - 1!")
+        } else {
+            XCTFail("Not the Expected Type!")
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     This tests a pure string, with no numerical characters.
+     */
+    func testPropertyDataTypeString() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_String()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue("Open the pod bay doors, Hal.")
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .stringValue(val) = testTarget {
+            XCTAssertEqual("Open the pod bay doors, Hal.", val, "Should be 'Open the pod bay doors, Hal.'")
+        } else {
+            XCTFail("Not the Expected Type!")
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     This tests a pure string, in Japanese.
+     */
+    func testPropertyDataTypeStringJapanese() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_StringJapanese()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.stringValue("ポッドベイドア、Halを開きます。")
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .stringValue(val) = testTarget {
+            XCTAssertEqual("ポッドベイドア、Halを開きます。", val, "Should be 'ポッドベイドア、Halを開きます。'")
+        } else {
+            XCTFail("Not the Expected Type!")
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -299,7 +363,7 @@ class RVS_BTDriver_iOS_Tests_Property_Int_MaxIntPlusOne: RVS_BTDriver_Property {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Specialization of the Generic Property for Maximum Int Plus One -
+// MARK: - Specialization of the Generic Property for Minimum Int Minus One -
 /* ###################################################################################################################################### */
 /**
  */
@@ -308,5 +372,55 @@ class RVS_BTDriver_iOS_Tests_Property_Int_MinIntMinusOne: RVS_BTDriver_Property 
         super.init()
         let doubleVal = Double(Int32.min) - 1
         rawValue = "\(doubleVal)".data(using: .utf8)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Specialization of the Generic Property for Minimum Int Minus One, but preceded by a space; which makes it a String -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_iOS_Tests_Property_Int_MinIntMinusOneStringy: RVS_BTDriver_Property {
+    override init() {
+        super.init()
+        let doubleVal = Double(Int32.min) - 1
+        rawValue = " \(doubleVal)".data(using: .utf8)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Specialization of the Generic Property for Maximum Int Minus One, but succeeded by a space; which makes it a String -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_iOS_Tests_Property_Int_MaxIntMinusOneStringy: RVS_BTDriver_Property {
+    override init() {
+        super.init()
+        let val = Int32.max - 1
+        rawValue = "\(val) ".data(using: .utf8)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Specialization of the Generic Property for a Pure String -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_iOS_Tests_Property_String: RVS_BTDriver_Property {
+    override init() {
+        super.init()
+        rawValue = "Open the pod bay doors, Hal.".data(using: .utf8)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Specialization of the Generic Property for a Pure String, in Japanese characters -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_iOS_Tests_Property_StringJapanese: RVS_BTDriver_Property {
+    override init() {
+        super.init()
+        rawValue = "ポッドベイドア、Halを開きます。".data(using: .utf8)
     }
 }
