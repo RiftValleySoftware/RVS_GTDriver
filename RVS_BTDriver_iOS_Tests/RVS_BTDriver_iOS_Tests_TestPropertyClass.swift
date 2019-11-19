@@ -30,6 +30,7 @@ import XCTest
 class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
     /* ################################################################## */
     /**
+     Test Integer zero
      */
     func testPropertyDataTypeZero() {
         let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_Zero()
@@ -45,6 +46,23 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
     
     /* ################################################################## */
     /**
+     Test Integer zero
+     */
+    func testPropertyDataTypeZeroDecimal() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_ZeroDecimal()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.intValue(0)
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .intValue(val) = testTarget {
+            XCTAssertEqual(0, val, "Should be Zero!")
+        } else {
+            XCTFail("Not the Expected Type!")
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Test highest Int (Int32.max)
      */
     func testPropertyDataTypeMax() {
         let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_MaxInt()
@@ -60,6 +78,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
     
     /* ################################################################## */
     /**
+     Test lowest Int (Int32.min)
      */
     func testPropertyDataTypeMin() {
         let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_MinInt()
@@ -75,6 +94,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
     
     /* ################################################################## */
     /**
+     Make sure that a string containing a decimal number, where the decimal is 0, is returned as an Int.
      */
     func testPropertyDataTypeWithDecimal() {
         let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_IntWithDecimal()
@@ -90,6 +110,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
     
     /* ################################################################## */
     /**
+     Make sure that a string containing a decimal number, where the decimal is 0, is returned as an Int (Negative).
      */
     func testPropertyDataTypeWithDecimalNegative() {
         let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_NegativeIntWithDecimal()
@@ -105,6 +126,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
     
     /* ################################################################## */
     /**
+     Make sure that positive Doubles are returned.
      */
     func testPropertyDataTypeSimpleFloat() {
         let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_SimpleFloat()
@@ -120,6 +142,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
     
     /* ################################################################## */
     /**
+     Make sure that negative Doubles are returned.
      */
     func testPropertyDataTypeSimpleNegativeFloat() {
         let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_SimpleNegativeFloat()
@@ -128,6 +151,38 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
         XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
         if case let .floatValue(val) = testTarget {
             XCTAssertEqual(-1.2345, val, "Should be -1.2345!")
+        } else {
+            XCTFail("Not the Expected Type!")
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     In this test, we ensure that values beyond Int32.max are returned as Double.
+     */
+    func testPropertyDataTypeMaxPlusOne() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_MaxIntPlusOne()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.floatValue(Double(Int32.max) + 1)
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .floatValue(val) = testTarget {
+            XCTAssertEqual(Double(Int32.max) + 1, val, "Should be Int32 Max + 1!")
+        } else {
+            XCTFail("Not the Expected Type!")
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     In this test, we ensure that values below Int32.min are returned as Double.
+     */
+    func testPropertyDataTypeMinMinusOne() {
+        let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_MinIntMinusOne()
+        let testTarget = testTargetInstance.value
+        let comparisonTarget = RVS_BTDriver_PropertyProtocol_Type_Enum.floatValue(Double(Int32.min) - 1)
+        XCTAssertEqual(testTarget, comparisonTarget, "Values Don't Match!")
+        if case let .floatValue(val) = testTarget {
+            XCTAssertEqual(Double(Int32.min) - 1, val, "Should be Int32 Min - 1!")
         } else {
             XCTFail("Not the Expected Type!")
         }
@@ -143,6 +198,18 @@ class RVS_BTDriver_iOS_Tests_Property_Int_Zero: RVS_BTDriver_Property {
     override init() {
         super.init()
         rawValue = "0".data(using: .utf8)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Specialization of the Generic Property for Int As Zero, but expressed with a decimal point. -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_iOS_Tests_Property_Int_ZeroDecimal: RVS_BTDriver_Property {
+    override init() {
+        super.init()
+        rawValue = "0.0000".data(using: .utf8)
     }
 }
 
@@ -207,7 +274,7 @@ class RVS_BTDriver_iOS_Tests_Property_SimpleFloat: RVS_BTDriver_Property {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Specialization of the Generic Property for Double -
+// MARK: - Specialization of the Generic Property for Double Negative -
 /* ###################################################################################################################################### */
 /**
  */
@@ -215,5 +282,31 @@ class RVS_BTDriver_iOS_Tests_Property_SimpleNegativeFloat: RVS_BTDriver_Property
     override init() {
         super.init()
         rawValue = "-1.2345".data(using: .utf8)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Specialization of the Generic Property for Maximum Int Plus One -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_iOS_Tests_Property_Int_MaxIntPlusOne: RVS_BTDriver_Property {
+    override init() {
+        super.init()
+        let doubleVal = Double(Int32.max) + 1
+        rawValue = "\(doubleVal)".data(using: .utf8)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Specialization of the Generic Property for Maximum Int Plus One -
+/* ###################################################################################################################################### */
+/**
+ */
+class RVS_BTDriver_iOS_Tests_Property_Int_MinIntMinusOne: RVS_BTDriver_Property {
+    override init() {
+        super.init()
+        let doubleVal = Double(Int32.min) - 1
+        rawValue = "\(doubleVal)".data(using: .utf8)
     }
 }
