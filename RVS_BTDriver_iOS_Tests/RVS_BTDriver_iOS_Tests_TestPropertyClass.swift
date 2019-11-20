@@ -46,7 +46,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
     
     /* ################################################################## */
     /**
-     Test Integer zero
+     Test Integer zero (decimal)
      */
     func testPropertyDataTypeZeroDecimal() {
         let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_Int_ZeroDecimal()
@@ -94,7 +94,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
     
     /* ################################################################## */
     /**
-     Make sure that a string containing a decimal number, where the decimal is 0, is returned as an Int.
+     Make sure that a string containing a decimal number, where the decimal is .0000, is returned as an Int.
      */
     func testPropertyDataTypeWithDecimal() {
         let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_IntWithDecimal()
@@ -110,7 +110,7 @@ class RVS_BTDriver_iOS_Tests_TestPropertyClass: XCTestCase {
     
     /* ################################################################## */
     /**
-     Make sure that a string containing a decimal number, where the decimal is 0, is returned as an Int (Negative).
+     Make sure that a string containing a decimal number, where the decimal is .0000, is returned as an Int (Negative).
      */
     func testPropertyDataTypeWithDecimalNegative() {
         let testTargetInstance = RVS_BTDriver_iOS_Tests_Property_NegativeIntWithDecimal()
