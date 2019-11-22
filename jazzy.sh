@@ -36,6 +36,7 @@ jazzy   --github_url https://github.com/RiftValleySoftware/RVS_GTDriver \
         --build-tool-arguments -scheme,RVS_BTDriver_MacOS_Test_Harness \
         --module RVS_BTDriver_MacOS_Test_Harness \
         --min_acl private
-cp img/MacOSTestHarnessIcon.png docs/macOSTestHarness/icon.png
+cp img/TestHarnessIcon.png docs/macOSTestHarness/icon.png
+cp img/* docs/macOSTestHarness/img
 
 cd "${CWD}"
