@@ -37,7 +37,7 @@ echo "Creating MacOS Test Harness Docs"
 
 jazzy   --github_url https://github.com/RiftValleySoftware/RVS_GTDriver \
         --theme fullwidth \
-        --readme ./README-API.md \
+        --readme ./README-MacOS-Harness.md \
         --author The\ Great\ Rift\ Valley\ Software\ Company \
         --author_url https://riftvalleysoftware.com \
         --title RVS_BTDriver\ MacOS Test Harness Project\ Code\ Doumentation \
@@ -52,7 +52,7 @@ echo "Creating iOS Test Harness Docs"
 
 jazzy   --github_url https://github.com/RiftValleySoftware/RVS_GTDriver \
         --theme fullwidth \
-        --readme ./README-API.md \
+        --readme ./README-iOS-Harness.md \
         --author The\ Great\ Rift\ Valley\ Software\ Company \
         --author_url https://riftvalleysoftware.com \
         --title RVS_BTDriver\ iOS/iPadOS Test Harness Project\ Code\ Doumentation \
@@ -67,7 +67,7 @@ echo "Creating WatchOS Test Harness Docs"
 
 jazzy   --github_url https://github.com/RiftValleySoftware/RVS_GTDriver \
         --theme fullwidth \
-        --readme ./README-API.md \
+        --readme ./README-WatchOS-Harness.md \
         --author The\ Great\ Rift\ Valley\ Software\ Company \
         --author_url https://riftvalleysoftware.com \
         --title RVS_BTDriver\ WatchOS Test Harness Project\ Code\ Doumentation \
