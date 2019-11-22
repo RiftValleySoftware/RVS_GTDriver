@@ -5,6 +5,9 @@
       location = "container:"
       name = "Meta">
       <FileRef
+         location = "group:README-API.md">
+      </FileRef>
+      <FileRef
          location = "group:README.md">
       </FileRef>
       <FileRef

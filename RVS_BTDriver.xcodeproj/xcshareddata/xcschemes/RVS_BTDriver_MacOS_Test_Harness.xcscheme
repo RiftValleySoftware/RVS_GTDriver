@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D4524B7D234D3EEB00F3EC79"
-               BuildableName = "RVS_BTDriver_iOS_Test_Harness (Framework).app"
-               BlueprintName = "RVS_BTDriver_iOS_Test_Harness (Framework)"
+               BlueprintIdentifier = "D481A153235E2774004DF47E"
+               BuildableName = "RVS_BTDriver_MacOS_Test_Harness.app"
+               BlueprintName = "RVS_BTDriver_MacOS_Test_Harness"
                ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D4524B7D234D3EEB00F3EC79"
-            BuildableName = "RVS_BTDriver_iOS_Test_Harness (Framework).app"
-            BlueprintName = "RVS_BTDriver_iOS_Test_Harness (Framework)"
+            BlueprintIdentifier = "D481A153235E2774004DF47E"
+            BuildableName = "RVS_BTDriver_MacOS_Test_Harness.app"
+            BlueprintName = "RVS_BTDriver_MacOS_Test_Harness"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D4524B7D234D3EEB00F3EC79"
-            BuildableName = "RVS_BTDriver_iOS_Test_Harness (Framework).app"
-            BlueprintName = "RVS_BTDriver_iOS_Test_Harness (Framework)"
+            BlueprintIdentifier = "D481A153235E2774004DF47E"
+            BuildableName = "RVS_BTDriver_MacOS_Test_Harness.app"
+            BlueprintName = "RVS_BTDriver_MacOS_Test_Harness"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D481A153235E2774004DF47E"
-               BuildableName = "RVS_BTDriver_MacOS_Test_Harness (Framework).app"
-               BlueprintName = "RVS_BTDriver_MacOS_Test_Harness (Framework)"
+               BlueprintIdentifier = "D4B19BFF235F2B1E0036EDF5"
+               BuildableName = "RVS_BTDriver_tvOS_Test_Harness.app"
+               BlueprintName = "RVS_BTDriver_tvOS_Test_Harness"
                ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D481A153235E2774004DF47E"
-            BuildableName = "RVS_BTDriver_MacOS_Test_Harness (Framework).app"
-            BlueprintName = "RVS_BTDriver_MacOS_Test_Harness (Framework)"
+            BlueprintIdentifier = "D4B19BFF235F2B1E0036EDF5"
+            BuildableName = "RVS_BTDriver_tvOS_Test_Harness.app"
+            BlueprintName = "RVS_BTDriver_tvOS_Test_Harness"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D481A153235E2774004DF47E"
-            BuildableName = "RVS_BTDriver_MacOS_Test_Harness (Framework).app"
-            BlueprintName = "RVS_BTDriver_MacOS_Test_Harness (Framework)"
+            BlueprintIdentifier = "D4B19BFF235F2B1E0036EDF5"
+            BuildableName = "RVS_BTDriver_tvOS_Test_Harness.app"
+            BlueprintName = "RVS_BTDriver_tvOS_Test_Harness"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

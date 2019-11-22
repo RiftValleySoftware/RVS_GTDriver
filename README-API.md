@@ -36,6 +36,37 @@ The Driver is provided as a [Swift](https://developer.apple.com/swift/)-only sha
 
 This is meant for [iOS](https://www.apple.com/ios/), [macOS](https://www.apple.com/macos/), [watchOS](https://www.apple.com/watchos/), [tvOS](https://www.apple.com/tvos/) and [ipadOS](https://www.apple.com/ipados/) only.
 
+USING THE DRIVER
+-
+In order to establish a connection to supported devices, you will need to include the driver module into your application:
+
+**TODO - ADD DETAILS ON INTEGRATION**
+
+You then need to instantiate the `RVS_BTDriver` class:
+
+    let driverInstance = RVS_BTDriver(delegate: <REQUIRED: YOUR DELEGATE INSTANCE>,
+                                         queue: <OPTIONAL: ALTERNATIVE DISPATCH QUEUE>,
+                      allowDuplicatesInBLEScan: <OPTIONAL: TRUE IF WE ALLOW THE SCAN TO INCLUDE DUPLICATES>,
+                                 stayConnected: <OPTIONAL: TRUE IF WE WANT THE DRIVER TO MAINTAIN A CONNECTION AFTER DISCOVERY AND INITIAL QUERY>)
+
+
+The above parameters are:
+- `delegate`: The delegate to be used with this instance. It cannot be nil, and is a weak reference.
+- `queue`: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
+- `allowDuplicatesInBLEScan`: This is a flag that specifies that the scanner can be continuously running, and "re-finding" duplicate devices.  If true, it could adversely affect battery life. Default is false.
+- `stayConnected`:  This is set to true, if you want all your device connections to be persistent. That is, once connected, they must be explicitly disconencted by the user. Otherwise, each device will be connected only while interacting. This is optional. Default is false.
+
+At minimum, you need to have a delegate. The driver uses the [Delegation](https://en.wikipedia.org/wiki/Delegation_pattern) pattern and the [Observer](https://en.wikipedia.org/wiki/Observer_pattern) pattern to operate.
+
+**EXAMPLE PROJECTS:**
+
+The four test harness projects, supplied with the driver, are designed to provide high-quality, easy-to-understand examples of using the driver:
+
+- [The MacOS Test Harness Project](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_MacOS_Test_Harness) ([Documentation](https://riftvalleysoftware.github.io/RVS_GTDriver/macOSTestHarness))
+- [The WatchOS Test Harness Project](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_WatchOS_Test_Harness)
+- [The iOS/iPadOS Test Harness Project](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_iOS_Test_Harness)
+- [The TVOS Test Harness Project](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness)
+
 LICENSE
 -
 © Copyright 2019, [The Great Rift Valley Software Company](https://riftvalleysoftware.com)

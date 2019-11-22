@@ -25,6 +25,10 @@ import Cocoa
     import RVS_BTDriver_MacOS
 #endif
 
+/* ################################################################################################################################## */
+/**
+ This is a handy typealias for the tuple we'll use to transmit table data.
+ */
 typealias RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple = (key: String, value: String)
 
 /* ################################################################################################################################## */

@@ -26,4 +26,16 @@ jazzy   --github_url https://github.com/RiftValleySoftware/RVS_GTDriver \
 cp icon.png docs/internal/icon.png
 cp img/* docs/internal/img
 
+jazzy   --github_url https://github.com/RiftValleySoftware/RVS_GTDriver \
+        --theme fullwidth \
+        --readme ./README-API.md \
+        --author The\ Great\ Rift\ Valley\ Software\ Company \
+        --author_url https://riftvalleysoftware.com \
+        --title RVS_BTDriver\ MacOS Test Harness Project\ Code\ Doumentation \
+        --output docs/macOSTestHarness \
+        --build-tool-arguments -scheme,RVS_BTDriver_MacOS_Test_Harness \
+        --module RVS_BTDriver_MacOS_Test_Harness \
+        --min_acl private
+cp img/MacOSTestHarnessIcon.png docs/macOSTestHarness/icon.png
+
 cd "${CWD}"
