@@ -45,7 +45,7 @@
 		D424E484236F1838003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D424E47E236F1838003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController.swift */; };
 		D424E486236F1879003D68AA /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB1234FB69800EDA733 /* RVS_String_Extensions.swift */; };
 		D424E48C236F1968003D68AA /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D424E48A236F1968003D68AA /* Interface.storyboard */; };
-		D42FB98B236F1E5F00D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D424E45A236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D42FB98B236F1E5F00D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D424E45A236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D42FB993236F225900D0F0A5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D42FB991236F225900D0F0A5 /* Localizable.strings */; };
 		D42FB99B236F2D0100D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D424E47A236F1837003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController.swift */; };
 		D42FB99D236F2D0100D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D424E47C236F1838003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController.swift */; };
@@ -357,7 +357,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				D42FB98B236F1E5F00D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension.appex in Embed App Extensions */,
+				D42FB98B236F1E5F00D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,7 +430,7 @@
 		D424E448236F164A003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVS_BTDriver_WatchOS_Test_Harness_Framework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D424E44B236F164A003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D424E453236F164C003D68AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D424E45A236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D424E45A236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RVS_BTDriver_WatchOS_Test_Harness.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D424E463236F164D003D68AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D424E479236F1837003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_WatchOS_Test_Harness_ExtensionDelegate.swift; sourceTree = "<group>"; };
 		D424E47A236F1837003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController.swift; sourceTree = "<group>"; };
@@ -769,7 +769,7 @@
 				D4B19C1E235F2B1E0036EDF5 /* RVS_BTDriver_tvOS_Test_Harness.app */,
 				D424E448236F164A003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework.app */,
 				D424E44B236F164A003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit App.app */,
-				D424E45A236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension.appex */,
+				D424E45A236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness.appex */,
 				D42FB9AC236F2D0100D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit Extension.appex */,
 				D42FB9B9236F2D9000D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App.app */,
 				D42FB9C7236F2DD700D0F0A5 /* RVS_BT_Driver_WatchOS_Test_Harness_Direct.app */,
@@ -996,9 +996,9 @@
 			productReference = D424E44B236F164A003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit App.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
-		D424E459236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension */ = {
+		D424E459236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D424E46E236F164D003D68AA /* Build configuration list for PBXNativeTarget "RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension" */;
+			buildConfigurationList = D424E46E236F164D003D68AA /* Build configuration list for PBXNativeTarget "RVS_BTDriver_WatchOS_Test_Harness" */;
 			buildPhases = (
 				D4B9B8C4236F340600E8C552 /* SwiftLint */,
 				D424E456236F164D003D68AA /* Sources */,
@@ -1011,9 +1011,9 @@
 			dependencies = (
 				D424E474236F16FC003D68AA /* PBXTargetDependency */,
 			);
-			name = "RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension";
+			name = RVS_BTDriver_WatchOS_Test_Harness;
 			productName = "RVS_BT_Driver_WatchOS_Test_Harness_Framework WatchKit Extension";
-			productReference = D424E45A236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension.appex */;
+			productReference = D424E45A236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		D42FB996236F2D0100D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit Extension */ = {
@@ -1315,7 +1315,7 @@
 				D42FB996236F2D0100D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit Extension */,
 				D424E447236F164A003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework */,
 				D424E44A236F164A003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit App */,
-				D424E459236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension */,
+				D424E459236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness */,
 				D4DBE1A4235E0E0A00107353 /* RVS_BTDriver_MacOS */,
 				D4DBE175235E0DD600107353 /* RVS_BTDriver_MacOS_Test_Harness (Direct) */,
 				D481A153235E2774004DF47E /* RVS_BTDriver_MacOS_Test_Harness */,
@@ -1970,7 +1970,7 @@
 		};
 		D42FB98D236F1E5F00D0F0A5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D424E459236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension */;
+			target = D424E459236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness */;
 			targetProxy = D42FB98C236F1E5F00D0F0A5 /* PBXContainerItemProxy */;
 		};
 		D42FB9BD236F2DAA00D0F0A5 /* PBXTargetDependency */ = {
@@ -2697,7 +2697,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-tvOS-Test-Harness";
-				PRODUCT_NAME = RVS_BTDriver_tvOS_Test_Harness;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2721,7 +2721,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-tvOS-Test-Harness";
-				PRODUCT_NAME = RVS_BTDriver_tvOS_Test_Harness;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_VERSION = 5.0;
@@ -3012,7 +3012,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D424E46E236F164D003D68AA /* Build configuration list for PBXNativeTarget "RVS_BTDriver_WatchOS_Test_Harness_Framework WatchKit Extension" */ = {
+		D424E46E236F164D003D68AA /* Build configuration list for PBXNativeTarget "RVS_BTDriver_WatchOS_Test_Harness" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D424E46C236F164D003D68AA /* Debug */,

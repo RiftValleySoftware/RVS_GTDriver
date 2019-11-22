@@ -37,7 +37,15 @@ class RVS_BTDriver_iOS_Test_Harness_DetailViewControllerTableCell: UITableViewCe
      The reuse ID for instantiating these.
      */
     static let reuseID = "display-value"
+    /* ################################################################## */
+    /**
+     The label that displays the key.
+     */
     @IBOutlet weak var labelLabel: UILabel!
+    /* ################################################################## */
+    /**
+     The label that displays the value.
+     */
     @IBOutlet weak var valueLabel: UILabel!
 }
 
@@ -49,9 +57,16 @@ class RVS_BTDriver_iOS_Test_Harness_DetailViewControllerTableCell: UITableViewCe
 class RVS_BTDriver_iOS_Test_Harness_DetailViewController: RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
     /// The device for which this is a detailed view.
     var device: RVS_BTDriver_DeviceProtocol!
+    /* ################################################################## */
+    /**
+     The table that displays the values.
+     */
     @IBOutlet weak var displayTableView: UITableView!
     
-    // This will contain our DeviceInfo strings from the device record.
+    /* ################################################################## */
+    /**
+     This will contain our DeviceInfo strings from the device record.
+     */
     var deviceInfo: [String: String] = [:]
     
     /* ################################################################## */
