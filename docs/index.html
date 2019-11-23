@@ -135,10 +135,10 @@
 <p>The four test harness projects, supplied with the driver, are designed to provide high-quality, easy-to-understand examples of using the driver:</p>
 
 <ul>
-<li><a href="https://riftvalleysoftware.github.io/RVS_GTDriver/macOSTestHarness">The MacOS Test Harness Project</a> (<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_MacOS_Test_Harness">GitHubRepo</a>)</li>
-<li><a href="https://riftvalleysoftware.github.io/RVS_GTDriver/watchOSTestHarness">The WatchOS Test Harness Project</a>  (<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_WatchOS_Test_Harness">GitHubRepo</a>)</li>
-<li><a href="https://riftvalleysoftware.github.io/RVS_GTDriver/iOSTestHarness">The iOS/iPadOS Test Harness Project</a> (<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_iOS_Test_Harness">GitHubRepo</a>)</li>
-<li>The TVOS Test Harness Project (<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness">GitHubRepo</a>)</li>
+<li><a href="https://riftvalleysoftware.github.io/RVS_GTDriver/macOSTestHarness">The MacOS Test Harness Project</a> <em>(<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_MacOS_Test_Harness">GitHub Repo Directory</a>)</em></li>
+<li><a href="https://riftvalleysoftware.github.io/RVS_GTDriver/watchOSTestHarness">The WatchOS Test Harness Project</a> <em>(<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_WatchOS_Test_Harness">GitHub Repo Directory</a>)</em></li>
+<li><a href="https://riftvalleysoftware.github.io/RVS_GTDriver/iOSTestHarness">The iOS/iPadOS Test Harness Project</a> <em>(<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_iOS_Test_Harness">GitHub Repo Directory</a>)</em></li>
+<li>The TVOS Test Harness Project <em>(<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness">GitHub Repo Directory</a>)</em></li>
 </ul>
 <h1 id='where-this-driver-fits' class='heading'>WHERE THIS DRIVER FITS</h1>
 
@@ -155,6 +155,24 @@ This is where the driver project fits in our system.</p>
 
 <p><img src="./img/MentalModel.png" alt="Block Diagram">
 This is an example of how the driver might present three goTenna devices (two Mesh devices and a Pro).</p>
+<h2 id='devices-services-and-properties-are-protocol-instances' class='heading'>DEVICES, SERVICES, AND PROPERTIES ARE PROTOCOL INSTANCES</h2>
+
+<p>Even though, under the hood, devices, services and protocols (more on these in a minute) are class instances, they are presented to the API user as instances that conform to protocols. This allows maximum flexibility, for both the user and the driver developer.</p>
+
+<p><strong>SYSTEM LAYOUT:</strong></p>
+
+<p>As the mental model above shows, the BT_Driver instance will have an internal Array of devices; each of which is presented as an instance that conforms to the <code><a href="Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a></code> protocol.
+The driver instance can actually be iterated and subscripted directly in order to access these devices.</p>
+
+<p>Each Device instance will have an internal Array of <code><a href="Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a></code> protocol-conformant instances.
+The device can be subscripted, but not iterated.</p>
+
+<p>Each Service instance will have an Array of <code><a href="Protocols/RVS_BTDriver_PropertyProtocol.html">RVS_BTDriver_PropertyProtocol</a></code> protocol-confomant instances, representing the states and control points for services.
+The service can be subscripted, but not iterated.</p>
+
+<p>Once you instantiate the <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code> instance, it will discover and list the devices, which will, in turn, discover and list services, which will discover and list properties (the equivalent of Bluetooth <q>characteristics</q>).</p>
+
+<p>Once a device has been added to the driver Array, it can be considered to have completed the discovery process entirely, and is ready for use.</p>
 <h2 id='requirements' class='heading'>REQUIREMENTS</h2>
 
 <p>The Driver is provided as a <a href="https://developer.apple.com/swift/">Swift</a>-only shared dynamic <a href="https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Frameworks.html">framework</a>.</p>
@@ -188,14 +206,35 @@ This is an example of how the driver might present three goTenna devices (two Me
 
 <p>When you first instantiate the <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code> class, you pass in a delegate object.</p>
 
-<p>The delegate needs to be a Swift class, and there is one required method: <code>func btDriver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors)</code>. The parameter signature for that is:</p>
+<p><strong>Required Methods</strong></p>
+
+<p>The delegate needs to be a Swift class, and there is one required method:</p>
+
+<p><code>func btDriver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors)</code></p>
+
+<p>The parameter signature for that is:</p>
 
 <ul>
 <li><code>driver: The</code>RVS_BTDriver` instance that encountered the error.</li>
-<li><code>encounteredThisError</code>: The error that was encountered.</li>
+<li><code>encounteredThisError</code>: The error that was encountered. This is a special enum, with associated values:
+
+<ul>
+<li><code>bluetoothNotAvailable</code>  This is returned if the manager can&rsquo;t power on.</li>
+<li><code>connectionAttemptFailed(error: Error?)</code> This is returned if we cannot connect to the device. The associated value is any error that occurred.</li>
+<li><code>connectionAttemptFailedNoDevice</code> This is returned if we connected, but no device was available. This should never happen.</li>
+<li><code>disconnectionAttemptFailed(error: Error?)</code> This is returned if we cannot disconnect from the device. The associated value is any error that occurred.</li>
+<li><code>unknownDisconnectionError</code> This is a <q>catchall</q> error for a disconnection issue.</li>
+<li><code>unknownPeripheralDiscoveryError(error: Error?)</code> This is a <q>catchall</q> error for peripheral discovery. The associated value is any error that occurred.</li>
+<li><code>characteristicValueMissing</code> This means that we did not get a characteristic value.</li>
+<li><code>unknownCharacteristicsDiscoveryError(error: Error?)</code> This is a <q>catchall</q> error for characteristics discovery. The associated value is any error that occurred.</li>
+<li><code>unknownCharacteristicsReadValueError(error: Error?)</code> This is a <q>catchall</q> error for characteristics value read. The associated value is any error that occurred.</li>
+<li><code>unknownError(error: Error?)</code> This is a <q>catchall</q> error. The associated value is any error that occurred.</li>
+</ul></li>
 </ul>
 
 <p>This method is called whenever an error is encountered at the driver (main instance) level.</p>
+
+<p><strong>Optional Methods</strong></p>
 
 <p>There are several optional (default does nothing) methods that it is highly recommended that you implement:</p>
 

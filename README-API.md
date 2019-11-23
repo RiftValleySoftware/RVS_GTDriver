@@ -13,10 +13,10 @@ Internal Documentation Links:
 
 The four test harness projects, supplied with the driver, are designed to provide high-quality, easy-to-understand examples of using the driver:
 
-- [The MacOS Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/macOSTestHarness) ([GitHubRepo](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_MacOS_Test_Harness))
-- [The WatchOS Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/watchOSTestHarness)  ([GitHubRepo](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_WatchOS_Test_Harness))
-- [The iOS/iPadOS Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/iOSTestHarness) ([GitHubRepo](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_iOS_Test_Harness))
-- The TVOS Test Harness Project ([GitHubRepo](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness))
+- [The MacOS Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/macOSTestHarness) *([GitHub Repo Directory](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_MacOS_Test_Harness))*
+- [The WatchOS Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/watchOSTestHarness) *([GitHub Repo Directory](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_WatchOS_Test_Harness))*
+- [The iOS/iPadOS Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/iOSTestHarness) *([GitHub Repo Directory](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_iOS_Test_Harness))*
+- The TVOS Test Harness Project *([GitHub Repo Directory](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness))*
 
 WHERE THIS DRIVER FITS
 =
@@ -36,6 +36,25 @@ EXAMPLE MENTAL MODEL OF THE DRIVER
 -
 ![Block Diagram](./img/MentalModel.png)
 This is an example of how the driver might present three goTenna devices (two Mesh devices and a Pro).
+
+DEVICES, SERVICES, AND PROPERTIES ARE PROTOCOL INSTANCES
+-
+Even though, under the hood, devices, services and protocols (more on these in a minute) are class instances, they are presented to the API user as instances that conform to protocols. This allows maximum flexibility, for both the user and the driver developer.
+
+**SYSTEM LAYOUT:**
+
+As the mental model above shows, the BT_Driver instance will have an internal Array of devices; each of which is presented as an instance that conforms to the `RVS_BTDriver_DeviceProtocol` protocol.
+The driver instance can actually be iterated and subscripted directly in order to access these devices.
+
+Each Device instance will have an internal Array of `RVS_BTDriver_ServiceProtocol` protocol-conformant instances.
+The device can be subscripted, but not iterated.
+
+Each Service instance will have an Array of `RVS_BTDriver_PropertyProtocol` protocol-confomant instances, representing the states and control points for services.
+The service can be subscripted, but not iterated.
+
+Once you instantiate the `RVS_BTDriver` instance, it will discover and list the devices, which will, in turn, discover and list services, which will discover and list properties (the equivalent of Bluetooth "characteristics").
+
+Once a device has been added to the driver Array, it can be considered to have completed the discovery process entirely, and is ready for use.
 
 REQUIREMENTS
 -
@@ -69,12 +88,30 @@ At minimum, you need to have a delegate. The driver uses the [Delegation](https:
 
 When you first instantiate the `RVS_BTDriver` class, you pass in a delegate object.
 
-The delegate needs to be a Swift class, and there is one required method: `func btDriver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors)`. The parameter signature for that is:
+**Required Methods**
+
+The delegate needs to be a Swift class, and there is one required method:
+
+`func btDriver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors)`
+
+The parameter signature for that is:
 
 - `driver: The `RVS_BTDriver` instance that encountered the error.
-- `encounteredThisError`: The error that was encountered.
+- `encounteredThisError`: The error that was encountered. This is a special enum, with associated values:
+    - `bluetoothNotAvailable`  This is returned if the manager can't power on.
+    - `connectionAttemptFailed(error: Error?)` This is returned if we cannot connect to the device. The associated value is any error that occurred.
+    - `connectionAttemptFailedNoDevice` This is returned if we connected, but no device was available. This should never happen.
+    - `disconnectionAttemptFailed(error: Error?)` This is returned if we cannot disconnect from the device. The associated value is any error that occurred.
+    - `unknownDisconnectionError` This is a "catchall" error for a disconnection issue.
+    - `unknownPeripheralDiscoveryError(error: Error?)` This is a "catchall" error for peripheral discovery. The associated value is any error that occurred.
+    - `characteristicValueMissing` This means that we did not get a characteristic value.
+    - `unknownCharacteristicsDiscoveryError(error: Error?)` This is a "catchall" error for characteristics discovery. The associated value is any error that occurred.
+    - `unknownCharacteristicsReadValueError(error: Error?)` This is a "catchall" error for characteristics value read. The associated value is any error that occurred.
+    - `unknownError(error: Error?)` This is a "catchall" error. The associated value is any error that occurred.
 
 This method is called whenever an error is encountered at the driver (main instance) level.
+
+**Optional Methods**
 
 There are several optional (default does nothing) methods that it is highly recommended that you implement:
 
@@ -105,7 +142,6 @@ The parameter signature for that is:
 
 -  `driver`: The `RVS_BTDriver` instance calling this.
 - `isScanning`: True, if the new state is scanning is on.
-
 
 **ALL CALLBACKS CAN BE CALLED IN DIFFERENT THREADS**
 
