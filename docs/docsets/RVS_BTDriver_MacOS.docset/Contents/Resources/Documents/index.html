@@ -124,8 +124,21 @@
 <p>This project is an open-source, low-level native Cocoa (<a href="https://apple.com/ios">iOS</a>, <a href="https://apple.com/macos">macOS</a>, <a href="https:apple.com/watchos">watchOS</a> and <a href="https://apple.com/tvos">tvOS</a>) <a href="https://www.bluetooth.com">BLE (<strong>B</strong>luetooth <strong>L</strong>ow <strong>E</strong>nergy)</a> driver for mesh communication devices, like the  <a href="https://gotenna.com">goTenna</a> devices.</p>
 <h2 id='internal-documentation-links' class='heading'>Internal Documentation Links:</h2>
 
+<p><strong>A DEEPER DIVE:</strong></p>
+
 <ul>
 <li><a href="https://riftvalleysoftware.github.io/RVS_GTDriver/internal/">This is the documentation site for the public project internals.</a></li>
+</ul>
+
+<p><strong>EXAMPLE PROJECTS:</strong></p>
+
+<p>The four test harness projects, supplied with the driver, are designed to provide high-quality, easy-to-understand examples of using the driver:</p>
+
+<ul>
+<li><a href="https://riftvalleysoftware.github.io/RVS_GTDriver/macOSTestHarness">The MacOS Test Harness Project</a> (<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_MacOS_Test_Harness">GitHubRepo</a>)</li>
+<li><a href="https://riftvalleysoftware.github.io/RVS_GTDriver/watchOSTestHarness">The WatchOS Test Harness Project</a>  (<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_WatchOS_Test_Harness">GitHubRepo</a>)</li>
+<li><a href="https://riftvalleysoftware.github.io/RVS_GTDriver/iOSTestHarness">The iOS/iPadOS Test Harness Project</a> (<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_iOS_Test_Harness">GitHubRepo</a>)</li>
+<li>The TVOS Test Harness Project (<a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness">GitHubRepo</a>)</li>
 </ul>
 <h1 id='where-this-driver-fits' class='heading'>WHERE THIS DRIVER FITS</h1>
 
@@ -169,18 +182,60 @@ This is an example of how the driver might present three goTenna devices (two Me
 <li><code>stayConnected</code>:  This is set to true, if you want all your device connections to be persistent. That is, once connected, they must be explicitly disconencted by the user. Otherwise, each device will be connected only while interacting. This is optional. Default is false.</li>
 </ul>
 
+<p><strong>DELEGATION IS CRUCIAL</strong></p>
+
 <p>At minimum, you need to have a delegate. The driver uses the <a href="https://en.wikipedia.org/wiki/Delegation_pattern">Delegation</a> pattern and the <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer</a> pattern to operate.</p>
 
-<p><strong>EXAMPLE PROJECTS:</strong></p>
+<p>When you first instantiate the <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code> class, you pass in a delegate object.</p>
 
-<p>The four test harness projects, supplied with the driver, are designed to provide high-quality, easy-to-understand examples of using the driver:</p>
+<p>The delegate needs to be a Swift class, and there is one required method: <code>func btDriver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors)</code>. The parameter signature for that is:</p>
 
 <ul>
-<li><a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_MacOS_Test_Harness">The MacOS Test Harness Project</a> (<a href="https://riftvalleysoftware.github.io/RVS_GTDriver/macOSTestHarness">Documentation</a>)</li>
-<li><a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_WatchOS_Test_Harness">The WatchOS Test Harness Project</a> (<a href="https://riftvalleysoftware.github.io/RVS_GTDriver/watchOSTestHarness">Documentation</a>)</li>
-<li><a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_iOS_Test_Harness">The iOS/iPadOS Test Harness Project</a> (<a href="https://riftvalleysoftware.github.io/RVS_GTDriver/iOSTestHarness">Documentation</a>)</li>
-<li><a href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness">The TVOS Test Harness Project</a></li>
+<li><code>driver: The</code>RVS_BTDriver` instance that encountered the error.</li>
+<li><code>encounteredThisError</code>: The error that was encountered.</li>
 </ul>
+
+<p>This method is called whenever an error is encountered at the driver (main instance) level.</p>
+
+<p>There are several optional (default does nothing) methods that it is highly recommended that you implement:</p>
+
+<p>This method is called whenever a new device has been discovered, queried for its device info, and added to the internal list of devices.</p>
+
+<p>Once this is called, the device can be considered added to the driver device Array.</p>
+
+<p><code>func btDriver(_ driver: RVS_BTDriver, newDeviceAdded: RVS_BTDriver_DeviceProtocol)</code></p>
+
+<p>The parameter signature for that is:</p>
+
+<ul>
+<li><code>driver</code>: The <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code> instance calling this.</li>
+<li><code>newDeviceAdded</code>: The device object, masked as a protocol.</li>
+</ul>
+
+<p>This is called whenever the driver experiences a status change event. The event is not specified, so this should be considered a queue to examine the state of the driver object.</p>
+
+<p><code>func btDriverStatusUpdate(_ driver: RVS_BTDriver)</code></p>
+
+<p>The parameter signature for that is:</p>
+
+<ul>
+<li><code>driver</code>: The <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code> instance calling this.</li>
+</ul>
+
+<p>This is called if the scanning state of the driver changes.</p>
+
+<p><code>func btDriverScanningChanged(_ driver: RVS_BTDriver, isScanning: Bool)</code></p>
+
+<p>The parameter signature for that is:</p>
+
+<ul>
+<li><code>driver</code>: The <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code> instance calling this.</li>
+<li><code>isScanning</code>: True, if the new state is scanning is on.</li>
+</ul>
+
+<p><strong>ALL CALLBACKS CAN BE CALLED IN DIFFERENT THREADS</strong></p>
+
+<p>There is no guarantee that callbacks to delegates or observers will be made in the main dispatch thread. This needs to be accounted for, when calling UI code.</p>
 <h2 id='license' class='heading'>LICENSE</h2>
 
 <p>© Copyright 2019, <a href="https://riftvalleysoftware.com">The Great Rift Valley Software Company</a></p>
@@ -206,7 +261,7 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-11-22)</p>
+      <p>&copy; 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a>. All rights reserved. (Last updated: 2019-11-23)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

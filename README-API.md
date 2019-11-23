@@ -5,8 +5,18 @@ This project is an open-source, low-level native Cocoa ([iOS](https://apple.com/
 
 Internal Documentation Links:
 -
+**A DEEPER DIVE:**
 
 - [This is the documentation site for the public project internals.](https://riftvalleysoftware.github.io/RVS_GTDriver/internal/)
+
+**EXAMPLE PROJECTS:**
+
+The four test harness projects, supplied with the driver, are designed to provide high-quality, easy-to-understand examples of using the driver:
+
+- [The MacOS Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/macOSTestHarness) ([GitHubRepo](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_MacOS_Test_Harness))
+- [The WatchOS Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/watchOSTestHarness)  ([GitHubRepo](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_WatchOS_Test_Harness))
+- [The iOS/iPadOS Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/iOSTestHarness) ([GitHubRepo](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_iOS_Test_Harness))
+- The TVOS Test Harness Project ([GitHubRepo](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness))
 
 WHERE THIS DRIVER FITS
 =
@@ -53,16 +63,53 @@ The above parameters are:
 - `allowDuplicatesInBLEScan`: This is a flag that specifies that the scanner can be continuously running, and "re-finding" duplicate devices.  If true, it could adversely affect battery life. Default is false.
 - `stayConnected`:  This is set to true, if you want all your device connections to be persistent. That is, once connected, they must be explicitly disconencted by the user. Otherwise, each device will be connected only while interacting. This is optional. Default is false.
 
+**DELEGATION IS CRUCIAL**
+
 At minimum, you need to have a delegate. The driver uses the [Delegation](https://en.wikipedia.org/wiki/Delegation_pattern) pattern and the [Observer](https://en.wikipedia.org/wiki/Observer_pattern) pattern to operate.
 
-**EXAMPLE PROJECTS:**
+When you first instantiate the `RVS_BTDriver` class, you pass in a delegate object.
 
-The four test harness projects, supplied with the driver, are designed to provide high-quality, easy-to-understand examples of using the driver:
+The delegate needs to be a Swift class, and there is one required method: `func btDriver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors)`. The parameter signature for that is:
 
-- [The MacOS Test Harness Project](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_MacOS_Test_Harness) ([Documentation](https://riftvalleysoftware.github.io/RVS_GTDriver/macOSTestHarness))
-- [The WatchOS Test Harness Project](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_WatchOS_Test_Harness) ([Documentation](https://riftvalleysoftware.github.io/RVS_GTDriver/watchOSTestHarness))
-- [The iOS/iPadOS Test Harness Project](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_iOS_Test_Harness) ([Documentation](https://riftvalleysoftware.github.io/RVS_GTDriver/iOSTestHarness))
-- [The TVOS Test Harness Project](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness)
+- `driver: The `RVS_BTDriver` instance that encountered the error.
+- `encounteredThisError`: The error that was encountered.
+
+This method is called whenever an error is encountered at the driver (main instance) level.
+
+There are several optional (default does nothing) methods that it is highly recommended that you implement:
+
+This method is called whenever a new device has been discovered, queried for its device info, and added to the internal list of devices.
+
+Once this is called, the device can be considered added to the driver device Array.
+
+`func btDriver(_ driver: RVS_BTDriver, newDeviceAdded: RVS_BTDriver_DeviceProtocol)`
+
+The parameter signature for that is:
+
+- `driver`: The `RVS_BTDriver` instance calling this.
+- `newDeviceAdded`: The device object, masked as a protocol.
+
+This is called whenever the driver experiences a status change event. The event is not specified, so this should be considered a queue to examine the state of the driver object.
+
+`func btDriverStatusUpdate(_ driver: RVS_BTDriver)`
+
+The parameter signature for that is:
+
+- `driver`: The `RVS_BTDriver` instance calling this.
+
+This is called if the scanning state of the driver changes.
+
+`func btDriverScanningChanged(_ driver: RVS_BTDriver, isScanning: Bool)`
+
+The parameter signature for that is:
+
+-  `driver`: The `RVS_BTDriver` instance calling this.
+- `isScanning`: True, if the new state is scanning is on.
+
+
+**ALL CALLBACKS CAN BE CALLED IN DIFFERENT THREADS**
+
+There is no guarantee that callbacks to delegates or observers will be made in the main dispatch thread. This needs to be accounted for, when calling UI code.
 
 LICENSE
 -
