@@ -82,8 +82,8 @@ The above parameters are:
 - `allowDuplicatesInBLEScan`: This is a flag that specifies that the scanner can be continuously running, and "re-finding" duplicate devices.  If true, it could adversely affect battery life. Default is false.
 - `stayConnected`:  This is set to true, if you want all your device connections to be persistent. That is, once connected, they must be explicitly disconencted by the user. Otherwise, each device will be connected only while interacting. This is optional. Default is false.
 
-**DELEGATION IS CRUCIAL**
-
+DELEGATION
+-
 At minimum, you need to have a delegate. The driver uses the [Delegation](https://en.wikipedia.org/wiki/Delegation_pattern) pattern and the [Observer](https://en.wikipedia.org/wiki/Observer_pattern) pattern to operate.
 
 When you first instantiate the `RVS_BTDriver` class, you pass in a delegate object.
@@ -92,11 +92,11 @@ When you first instantiate the `RVS_BTDriver` class, you pass in a delegate obje
 
 The delegate needs to be a Swift class, and there is one required method:
 
-`func btDriver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors)`
+    func btDriver(_ driver: RVS_BTDriver, encounteredThisError: RVS_BTDriver.Errors)
 
 The parameter signature for that is:
 
-- `driver: The `RVS_BTDriver` instance that encountered the error.
+- `driver`: The `RVS_BTDriver` instance that encountered the error.
 - `encounteredThisError`: The error that was encountered. This is a special enum, with associated values:
     - `bluetoothNotAvailable`  This is returned if the manager can't power on.
     - `connectionAttemptFailed(error: Error?)` This is returned if we cannot connect to the device. The associated value is any error that occurred.
@@ -119,7 +119,7 @@ This method is called whenever a new device has been discovered, queried for its
 
 Once this is called, the device can be considered added to the driver device Array.
 
-`func btDriver(_ driver: RVS_BTDriver, newDeviceAdded: RVS_BTDriver_DeviceProtocol)`
+    func btDriver(_ driver: RVS_BTDriver, newDeviceAdded: RVS_BTDriver_DeviceProtocol)
 
 The parameter signature for that is:
 
@@ -128,7 +128,7 @@ The parameter signature for that is:
 
 This is called whenever the driver experiences a status change event. The event is not specified, so this should be considered a queue to examine the state of the driver object.
 
-`func btDriverStatusUpdate(_ driver: RVS_BTDriver)`
+    func btDriverStatusUpdate(_ driver: RVS_BTDriver)
 
 The parameter signature for that is:
 
@@ -136,7 +136,9 @@ The parameter signature for that is:
 
 This is called if the scanning state of the driver changes.
 
-`func btDriverScanningChanged(_ driver: RVS_BTDriver, isScanning: Bool)`
+It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+
+    func btDriverScanningChanged(_ driver: RVS_BTDriver, isScanning: Bool)
 
 The parameter signature for that is:
 
@@ -146,6 +148,127 @@ The parameter signature for that is:
 **ALL CALLBACKS CAN BE CALLED IN DIFFERENT THREADS**
 
 There is no guarantee that callbacks to delegates or observers will be made in the main dispatch thread. This needs to be accounted for, when calling UI code.
+
+OBSERVERS
+-
+Interaction with Devices and Services is done via [observers](https://en.wikipedia.org/wiki/Observer_pattern). You can subscribe one or more instances that conform to observer protocols to instances, and the observers will be notified of events and state changes.
+
+**DEVICE OBSERVERS**
+You subscribe to devices, using the `RVS_BTDriver_DeviceSubscriberProtocol` protocol. If you conform to this protocol, you can subscribe to an instance that conforms to `RVS_BTDriver_DeviceProtocol` via its `subscribe(_:)` method:
+
+    func subscribe(_: RVS_BTDriver_DeviceSubscriberProtocol)
+
+Where the parameter is the subscriber.
+
+You unsubscribe by calling the `unsubscribe(_:)` method:
+
+    func unsubscribe(_: RVS_BTDriver_DeviceSubscriberProtocol)
+
+Where the parameter is the subscriber to be removed.
+
+**Required Methods**
+
+The observer needs to be a Swift class (not struct or enum), and there is one required method:
+
+    func device(_ device: RVS_BTDriver_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors)
+
+The parameter signature for that is:
+
+- `device`: The `RVS_BTDriver_DeviceProtocol` instance that encountered the error.
+- `encounteredThisError`: The error that was encountered. This is a special enum, with associated values:
+    - `bluetoothNotAvailable`  This is returned if the manager can't power on.
+    - `connectionAttemptFailed(error: Error?)` This is returned if we cannot connect to the device. The associated value is any error that occurred.
+    - `connectionAttemptFailedNoDevice` This is returned if we connected, but no device was available. This should never happen.
+    - `disconnectionAttemptFailed(error: Error?)` This is returned if we cannot disconnect from the device. The associated value is any error that occurred.
+    - `unknownDisconnectionError` This is a "catchall" error for a disconnection issue.
+    - `unknownPeripheralDiscoveryError(error: Error?)` This is a "catchall" error for peripheral discovery. The associated value is any error that occurred.
+    - `characteristicValueMissing` This means that we did not get a characteristic value.
+    - `unknownCharacteristicsDiscoveryError(error: Error?)` This is a "catchall" error for characteristics discovery. The associated value is any error that occurred.
+    - `unknownCharacteristicsReadValueError(error: Error?)` This is a "catchall" error for characteristics value read. The associated value is any error that occurred.
+    - `unknownError(error: Error?)` This is a "catchall" error. The associated value is any error that occurred.
+
+**Optional Methods**
+
+This is called When a service is added to the main list.
+
+    func device(_ device: RVS_BTDriver_DeviceProtocol, serviceAdded: RVS_BTDriver_ServiceProtocol)
+    
+The parameter signature for that is:
+
+- `device`: The `RVS_BTDriver_DeviceProtocol` instance that has the service
+- `serviceAdded`: The `RVS_BTDriver_ServiceProtocol` service that was added.
+
+This is called to indicate that the device's status should be checked.
+
+It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+
+    func deviceStatusUpdate(_ device: RVS_BTDriver_DeviceProtocol)
+    
+The parameter signature for that is:
+
+- `device`: The `RVS_BTDriver_DeviceProtocol` instance calling this.
+
+**SERVICE OBSERVERS**
+You subscribe to services, using the `RVS_BTDriver_ServiceSubscriberProtocol` protocol. If you conform to this protocol, you can subscribe to an instance that conforms to `RVS_BTDriver_ServiceProtocol` via its `subscribe(_:)` method:
+
+    func subscribe(_: RVS_BTDriver_ServiceSubscriberProtocol)
+
+Where the parameter is the subscriber.
+
+You unsubscribe by calling the `unsubscribe(_:)` method:
+
+    func unsubscribe(_: RVS_BTDriver_ServiceSubscriberProtocol)
+
+Where the parameter is the subscriber to be removed.
+
+**Required Methods**
+
+The observer needs to be a Swift class (not struct or enum), and there is one required method:
+
+    func service(_ service: RVS_BTDriver_ServiceProtocol, encounteredThisError: RVS_BTDriver.Errors)
+
+The parameter signature for that is:
+
+- `service`: The `RVS_BTDriver_ServiceProtocol` instance that encountered the error.
+- `encounteredThisError`: The error that was encountered. This is a sp/Volumes/Development/RiftValley/RVS_GTDriver/Cartfileecial enum, with associated values:
+    - `bluetoothNotAvailable`  This is returned if the manager can't power on.
+    - `connectionAttemptFailed(error: Error?)` This is returned if we cannot connect to the device. The associated value is any error that occurred.
+    - `connectionAttemptFailedNoDevice` This is returned if we connected, but no device was available. This should never happen.
+    - `disconnectionAttemptFailed(error: Error?)` This is returned if we cannot disconnect from the device. The associated value is any error that occurred.
+    - `unknownDisconnectionError` This is a "catchall" error for a disconnection issue.
+    - `unknownPeripheralDiscoveryError(error: Error?)` This is a "catchall" error for peripheral discovery. The associated value is any error that occurred.
+    - `characteristicValueMissing` This means that we did not get a characteristic value.
+    - `unknownCharacteristicsDiscoveryError(error: Error?)` This is a "catchall" error for characteristics discovery. The associated value is any error that occurred.
+    - `unknownCharacteristicsReadValueError(error: Error?)` This is a "catchall" error for characteristics value read. The associated value is any error that occurred.
+    - `unknownError(error: Error?)` This is a "catchall" error. The associated value is any error that occurred.
+
+**Optional Methods**
+
+This is called When a property is added to the main list.
+
+    func service(_ service: RVS_BTDriver_ServiceProtocol, propertyAdded: RVS_BTDriver_PropertyProtocol)
+
+- `service`: The `RVS_BTDriver_ServiceProtocol` instance that has the service.
+- `propertyAdded`: The `RVS_BTDriver_PropertyProtocol` property that was added.
+
+This is called to indicate that the services's status should be checked.
+
+It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+
+    func serviceStatusUpdate(_ service: RVS_BTDriver_ServiceProtocol)
+
+The parameter signature for that is:
+
+- `service`: The `RVS_BTDriver_ServiceProtocol` instance that called this.
+
+This is called to indicate that the state of a property "owned" by the service has changed state.
+
+    func propertyStatusUpdate(_ service: RVS_BTDriver_ServiceProtocol, property: RVS_BTDriver_PropertyProtocol)
+
+The parameter signature for that is:
+
+- `service`: The `RVS_BTDriver_ServiceProtocol` instance that called this.
+- `property`: The `RVS_BTDriver_PropertyProtocol` instance that changed state.
 
 LICENSE
 -

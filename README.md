@@ -43,6 +43,25 @@ EXAMPLE MENTAL MODEL OF THE DRIVER
 ![Block Diagram](./img/MentalModel.png)
 This is an example of how the driver might present three goTenna devices (two Mesh devices and a Pro).
 
+DEVICES, SERVICES, AND PROPERTIES ARE PROTOCOL INSTANCES
+-
+Even though, under the hood, devices, services and protocols (more on these in a minute) are class instances, they are presented to the API user as instances that conform to protocols. This allows maximum flexibility, for both the user and the driver developer.
+
+**SYSTEM LAYOUT:**
+
+As the mental model above shows, the BT_Driver instance will have an internal Array of devices; each of which is presented as an instance that conforms to the `RVS_BTDriver_DeviceProtocol` protocol.
+The driver instance can actually be iterated and subscripted directly in order to access these devices.
+
+Each Device instance will have an internal Array of `RVS_BTDriver_ServiceProtocol` protocol-conformant instances.
+The device can be subscripted, but not iterated.
+
+Each Service instance will have an Array of `RVS_BTDriver_PropertyProtocol` protocol-confomant instances, representing the states and control points for services.
+The service can be subscripted, but not iterated.
+
+Once you instantiate the `RVS_BTDriver` instance, it will discover and list the devices, which will, in turn, discover and list services, which will discover and list properties (the equivalent of Bluetooth "characteristics").
+
+Once a device has been added to the driver Array, it can be considered to have completed the discovery process entirely, and is ready for use.
+
 REQUIREMENTS
 -
 The Driver is provided as a [Swift](https://developer.apple.com/swift/)-only shared dynamic [framework](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Frameworks.html).

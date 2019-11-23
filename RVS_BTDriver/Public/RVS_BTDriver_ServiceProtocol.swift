@@ -57,6 +57,19 @@ public protocol RVS_BTDriver_ServiceSubscriberProtocol: RVS_BTDriver_SubscriberP
      - parameter service: The `RVS_BTDriver_ServiceProtocol` instance calling this.
      */
     func serviceStatusUpdate(_ service: RVS_BTDriver_ServiceProtocol)
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL: Called to indicate that a property's status should be checked.
+     
+     It may be called frequently, and there may not be any changes. This is mereley a "make you aware of the POSSIBILITY of a change" call.
+     
+     This is optional, and is NOT guaranteed to be called in the main thread.
+     
+     - parameter service: The `RVS_BTDriver_ServiceProtocol` instance calling this.
+     - parameter property: The `RVS_BTDriver_PropertyProtocol` instance that changed state.
+     */
+    func propertyStatusUpdate(_ service: RVS_BTDriver_ServiceProtocol, property: RVS_BTDriver_PropertyProtocol)
 }
 
 /* ###################################################################################################################################### */
@@ -74,6 +87,12 @@ extension RVS_BTDriver_ServiceSubscriberProtocol {
      Default does nothing.
      */
     public func serviceStatusUpdate(_ service: RVS_BTDriver_ServiceProtocol) { }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    public func propertyStatusUpdate(_ service: RVS_BTDriver_ServiceProtocol, property: RVS_BTDriver_PropertyProtocol) { }
 }
 
 /* ###################################################################################################################################### */

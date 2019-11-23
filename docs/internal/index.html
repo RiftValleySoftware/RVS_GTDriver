@@ -202,6 +202,24 @@ The general class and protocol structure of the system.</p>
 
 <p><img src="./img/MentalModel.png" alt="Block Diagram">
 This is an example of how the driver might present three goTenna devices (two Mesh devices and a Pro).</p>
+<h2 id='devices-services-and-properties-are-protocol-instances' class='heading'>DEVICES, SERVICES, AND PROPERTIES ARE PROTOCOL INSTANCES</h2>
+
+<p>Even though, under the hood, devices, services and protocols (more on these in a minute) are class instances, they are presented to the API user as instances that conform to protocols. This allows maximum flexibility, for both the user and the driver developer.</p>
+
+<p><strong>SYSTEM LAYOUT:</strong></p>
+
+<p>As the mental model above shows, the BT_Driver instance will have an internal Array of devices; each of which is presented as an instance that conforms to the <code><a href="Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a></code> protocol.
+The driver instance can actually be iterated and subscripted directly in order to access these devices.</p>
+
+<p>Each Device instance will have an internal Array of <code><a href="Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a></code> protocol-conformant instances.
+The device can be subscripted, but not iterated.</p>
+
+<p>Each Service instance will have an Array of <code><a href="Protocols/RVS_BTDriver_PropertyProtocol.html">RVS_BTDriver_PropertyProtocol</a></code> protocol-confomant instances, representing the states and control points for services.
+The service can be subscripted, but not iterated.</p>
+
+<p>Once you instantiate the <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code> instance, it will discover and list the devices, which will, in turn, discover and list services, which will discover and list properties (the equivalent of Bluetooth <q>characteristics</q>).</p>
+
+<p>Once a device has been added to the driver Array, it can be considered to have completed the discovery process entirely, and is ready for use.</p>
 <h2 id='requirements' class='heading'>REQUIREMENTS</h2>
 
 <p>The Driver is provided as a <a href="https://developer.apple.com/swift/">Swift</a>-only shared dynamic <a href="https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Frameworks.html">framework</a>.</p>
