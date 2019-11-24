@@ -10,14 +10,6 @@ Documentation Links:
 - [This is the documentation site for the public API.](https://riftvalleysoftware.github.io/RVS_GTDriver/)
 - [This is the documentation site for the public project internals.](https://riftvalleysoftware.github.io/RVS_GTDriver/internal/)
 
-WHERE THIS DRIVER FITS
-=
-
-![Overall Image](./img/SystemBlock.png)
-This is where the driver project fits in our system.
-
-The driver is a low-level transport abstraction layer. It is Bluetooth-specific, but is designed to abstract [Bluetooth LE](https://en.wikipedia.org/wiki/Bluetooth_Low_Energy); presenting a common object model of data and interactions with Bluetooth devices.
-
 NOT A DEVICE DRIVER 
 -
 RVS_BTDriver is a low-level native Swift (Apple) driver. It is not a "device driver," which usually sit at an operating system level (kernel or user space). It is designed to translate between a bluetooth connection to a device, and a user application; presenting an object model of the device.
@@ -32,16 +24,9 @@ SYSTEM ARCHITECTURE
 ![Block Diagram](./img/BlockDiagram.png)
 The general class and protocol structure of the system.
 
-SIMPLE API
--
 The job of the driver is to *abstract* the general Bluetooth structure, and present a set of [Swift Protocols](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html), in a hierarchical arrangement.
 
 The user of the API will instantiate an instance of RVS_BTDriver, which will, in turn, present collections of "devices" (RVS_BTDriver_DeviceProtocol), which will contain "Services" (RVS_BTDriver_ServiceProtocol), which will aggregate "properties" (RVS_BTDriver_PropertyProtocol).
-
-EXAMPLE MENTAL MODEL OF THE DRIVER
--
-![Block Diagram](./img/MentalModel.png)
-This is an example of how the driver might present three goTenna devices (two Mesh devices and a Pro).
 
 DEVICES, SERVICES, AND PROPERTIES ARE PROTOCOL INSTANCES
 -
@@ -61,6 +46,10 @@ The service can be subscripted, but not iterated.
 Once you instantiate the `RVS_BTDriver` instance, it will discover and list the devices, which will, in turn, discover and list services, which will discover and list properties (the equivalent of Bluetooth "characteristics").
 
 Once a device has been added to the driver Array, it can be considered to have completed the discovery process entirely, and is ready for use.
+
+VENDORS AND INTERFACES
+-
+The driver will use [adapters](https://en.wikipedia.org/wiki/Adapter_pattern) to abstract "vendors," and "interfaces." Currently, the only interface is BLE, but this gives us the possibility of adding different interfaces. Vendors are device-specific "wrappers," that will allow us to have behaviors and data that are unique to particular devices and device families.
 
 REQUIREMENTS
 -
