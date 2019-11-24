@@ -45,7 +45,7 @@ This is an example of how the driver might present three goTenna devices (two Me
 
 DEVICES, SERVICES, AND PROPERTIES ARE PROTOCOL INSTANCES
 -
-Even though, under the hood, devices, services and protocols (more on these in a minute) are class instances, they are presented to the API user as instances that conform to protocols. This allows maximum flexibility, for both the user and the driver developer.
+Even though, under the hood, devices, services and protocols are class instances, they are presented to the API user as instances that conform to protocols. This allows maximum flexibility, for both the user and the driver developer.
 
 **SYSTEM LAYOUT:**
 
