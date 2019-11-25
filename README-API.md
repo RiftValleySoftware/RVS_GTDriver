@@ -30,7 +30,7 @@ SIMPLE API
 -
 The job of the driver is to *abstract* the general Bluetooth structure, and present a set of [Swift Protocols](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html), in a hierarchical arrangement.
 
-The user of the API will instantiate an instance of RVS_BTDriver, which will, in turn, present collections of "devices" (RVS_BTDriver_DeviceProtocol), which will contain "Services" (RVS_BTDriver_ServiceProtocol), which will aggregate "properties" (RVS_BTDriver_PropertyProtocol).
+The user of the API will instantiate an instance of `RVS_BTDriver`, which will, in turn, present collections of "devices" (`RVS_BTDriver_DeviceProtocol`), which will contain "Services" (`RVS_BTDriver_ServiceProtocol`), which will aggregate "properties" (`RVS_BTDriver_PropertyProtocol`).
 
 EXAMPLE MENTAL MODEL OF THE DRIVER
 -
@@ -43,7 +43,7 @@ Even though, under the hood, devices, services and protocols (more on these in a
 
 **SYSTEM LAYOUT:**
 
-As the mental model above shows, the BT_Driver instance will have an internal Array of devices; each of which is presented as an instance that conforms to the `RVS_BTDriver_DeviceProtocol` protocol.
+As the mental model above shows, the `BT_Driver` instance will have an internal Array of devices; each of which is presented as an instance that conforms to the `RVS_BTDriver_DeviceProtocol` protocol.
 The driver instance can actually be iterated and subscripted directly in order to access these devices.
 
 Each Device instance will have an internal Array of `RVS_BTDriver_ServiceProtocol` protocol-conformant instances.
@@ -142,7 +142,7 @@ It may be called frequently, and there may not be any changes. This is mereley a
 
 The parameter signature for that is:
 
--  `driver`: The `RVS_BTDriver` instance calling this.
+- `driver`: The `RVS_BTDriver` instance calling this.
 - `isScanning`: True, if the new state is scanning is on.
 
 **ALL CALLBACKS CAN BE CALLED IN DIFFERENT THREADS**

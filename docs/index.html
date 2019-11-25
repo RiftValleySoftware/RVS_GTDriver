@@ -150,7 +150,7 @@ This is where the driver project fits in our system.</p>
 
 <p>The job of the driver is to <em>abstract</em> the general Bluetooth structure, and present a set of <a href="https://docs.swift.org/swift-book/LanguageGuide/Protocols.html">Swift Protocols</a>, in a hierarchical arrangement.</p>
 
-<p>The user of the API will instantiate an instance of RVS_BTDriver, which will, in turn, present collections of <q>devices</q> (RVS_BTDriver_DeviceProtocol), which will contain <q>Services</q> (RVS_BTDriver_ServiceProtocol), which will aggregate <q>properties</q> (RVS_BTDriver_PropertyProtocol).</p>
+<p>The user of the API will instantiate an instance of <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code>, which will, in turn, present collections of <q>devices</q> (<code><a href="Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a></code>), which will contain <q>Services</q> (<code><a href="Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a></code>), which will aggregate <q>properties</q> (<code><a href="Protocols/RVS_BTDriver_PropertyProtocol.html">RVS_BTDriver_PropertyProtocol</a></code>).</p>
 <h2 id='example-mental-model-of-the-driver' class='heading'>EXAMPLE MENTAL MODEL OF THE DRIVER</h2>
 
 <p><img src="./img/MentalModel.png" alt="Block Diagram">
@@ -161,7 +161,7 @@ This is an example of how the driver might present three goTenna devices (two Me
 
 <p><strong>SYSTEM LAYOUT:</strong></p>
 
-<p>As the mental model above shows, the BT_Driver instance will have an internal Array of devices; each of which is presented as an instance that conforms to the <code><a href="Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a></code> protocol.
+<p>As the mental model above shows, the <code>BT_Driver</code> instance will have an internal Array of devices; each of which is presented as an instance that conforms to the <code><a href="Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a></code> protocol.
 The driver instance can actually be iterated and subscripted directly in order to access these devices.</p>
 
 <p>Each Device instance will have an internal Array of <code><a href="Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a></code> protocol-conformant instances.
