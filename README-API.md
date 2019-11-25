@@ -43,7 +43,7 @@ Even though, under the hood, devices, services and protocols (more on these in a
 
 **SYSTEM LAYOUT:**
 
-As the mental model above shows, the `BT_Driver` instance will have an internal Array of devices; each of which is presented as an instance that conforms to the `RVS_BTDriver_DeviceProtocol` protocol.
+As the mental model above shows, the `RVS_BTDriver` instance will have an internal Array of devices; each of which is presented as an instance that conforms to the `RVS_BTDriver_DeviceProtocol` protocol.
 The driver instance can actually be iterated and subscripted directly in order to access these devices.
 
 Each Device instance will have an internal Array of `RVS_BTDriver_ServiceProtocol` protocol-conformant instances.
