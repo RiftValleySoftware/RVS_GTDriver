@@ -37,6 +37,9 @@
       <FileRef
          location = "group:jazzy.sh">
       </FileRef>
+      <FileRef
+         location = "group:.jazzy.yaml">
+      </FileRef>
    </Group>
    <FileRef
       location = "group:/Volumes/Development/RiftValley/RVS_GTDriver/RVS_BTDriver.xcodeproj">
