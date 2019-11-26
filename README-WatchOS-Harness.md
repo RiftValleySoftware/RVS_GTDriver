@@ -1,6 +1,9 @@
 ![Icon](./icon.png)
 RVS_BTDriver WATCHOS TEST HARNESS PROJECT DOCUMENTATION
 =
+This is a test harness for the `RVS_BTDriver` library, but it has also been specifically designed to be useful to those that would like to have samples of implementation.
+
+It has been designed as a fully-qualified WatchOS application, complete with localization, release-quality user experience, error management and structure.
 
 LICENSE
 -
