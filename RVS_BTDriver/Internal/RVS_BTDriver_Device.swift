@@ -268,27 +268,31 @@ extension RVS_BTDriver_Device {
      - parameter inService: The service object to be moved.
      */
     internal func moveServiceFromHoldingPenToMainList(_ inService: RVS_BTDriver_Service) {
-        assert(!internal_holding_pen.isEmpty, "The holding pen is empty!")
         for service in internal_holding_pen where service === inService {
             if let index = internal_holding_pen.firstIndex(where: { (ser) -> Bool in
                 return ser === inService
                 }) {
                 
                 #if DEBUG
-                    print("Removing Service at Index \(index) of the Holding Pen, and adding it to the main list at index \(internal_service_list.count).")
+                print("Removing Service (\(inService.uuid)) at Index \(index) of the Holding Pen, and adding it to the main list at index \(internal_service_list.count).")
                 #endif
                 
                 internal_holding_pen.remove(at: index)
                 internal_service_list.append(service)
                 
                 notifySubscribersOfNewService(service)
-                
-                if internal_holding_pen.isEmpty {
-                    reportCompletion()
-                }
+                break
             } else {
                 assert(false, "Service was not found in the holding pen!")
+                return
             }
+        }
+        
+        if internal_holding_pen.isEmpty {
+            #if DEBUG
+                print("All Services Discovered.")
+            #endif
+            reportCompletion()
         }
     }
     

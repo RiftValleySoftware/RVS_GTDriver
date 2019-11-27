@@ -121,27 +121,30 @@ extension RVS_BTDriver_Service {
      - parameter inProperty: The property object to be moved.
      */
     internal func movePropertyFromHoldingPenToMainList(_ inProperty: RVS_BTDriver_Property) {
-        assert(!internal_holding_pen.isEmpty, "The holding pen is empty!")
         for property in internal_holding_pen where property == inProperty {
             if let index = internal_holding_pen.firstIndex(where: { (pro) -> Bool in
                 return pro === inProperty
                 }) {
                 
                 #if DEBUG
-                    print("Removing Property at Index \(index) of the Holding Pen, and adding it to the main list at index \(internal_property_list.count).")
+                    print("Removing Property (\(inProperty.uuid)) at Index \(index) of the Holding Pen, and adding it to the main list at index \(internal_property_list.count).")
                 #endif
                 
                 internal_holding_pen.remove(at: index)
                 addPropertyToMainList(inProperty)
                 
                 notifySubscribersOfNewProperty(inProperty)
-                
-                if internal_holding_pen.isEmpty {
-                    reportCompletion()
-                }
             } else {
                 assert(false, "Property was not found in the holding pen! This is bad.")
+                return
             }
+        }
+        
+        if internal_holding_pen.isEmpty {
+            #if DEBUG
+                print("All Properties Discovered.")
+            #endif
+            reportCompletion()
         }
     }
     

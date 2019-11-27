@@ -738,6 +738,9 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
                 if let serviceInstance = getHoldingPenInstanceForThisService(service) {
                     serviceInstance.cbService = service
                     serviceInstance.internal_uuid = service.uuid.uuidString
+                    #if DEBUG
+                        print("Discovering Initial Characteristics for this Service: \(String(describing: serviceInstance.internal_uuid))")
+                    #endif
                     serviceInstance.discoverInitialCharacteristics()
                 }
             }
@@ -955,16 +958,24 @@ class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
         // If we got here, then we are not already there.
         if inPropertyObject.canRead,    // If we can read, then we go in the holding pen, and trigger an update.
             let owner = internal_owner as? RVS_BTDriver_Device_BLE {
+            #if DEBUG
+                print("Readable Property Added to Holding Pen: \(inPropertyObject).")
+            #endif
             addPropertyToHoldingPen(inPropertyObject)
             owner.peripheral.readValue(for: inPropertyObject.cbCharacteristic)
-            #if DEBUG
-                print("Property Added to Holding Pen: \(inPropertyObject).")
-            #endif
         } else {    // Otherwise, we go straight into the main list.
             #if DEBUG
-                print("Property Added to Directly to Main List: \(inPropertyObject).")
+                print("Non-Readable Property Added Directly to Main List: \(inPropertyObject).")
             #endif
             addPropertyToMainList(inPropertyObject)
+            notifySubscribersOfNewProperty(inPropertyObject)
+            
+            if internal_holding_pen.isEmpty {
+                #if DEBUG
+                    print("All Properties Discovered.")
+                #endif
+                reportCompletion()
+            }
         }
     }
 }
