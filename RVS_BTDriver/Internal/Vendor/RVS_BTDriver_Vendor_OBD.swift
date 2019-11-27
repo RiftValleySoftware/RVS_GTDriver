@@ -72,7 +72,7 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
      These are the services that we scan for. In our case, it is simply the goTenna proprietary service.
      */
     var serviceSignatures: [String] {
-        return [RVS_BLE_GATT_UUID.userDefinedService.rawValue]
+        return [] // [RVS_BLE_GATT_UUID.userDefinedService.rawValue]
     }
 
     /* ################################################################## */
