@@ -36,7 +36,7 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
-        case unknown = ""
+        case userDefinedService =   "FFF0"
     }
     
     /* ################################################################## */
@@ -72,7 +72,7 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
      These are the services that we scan for. In our case, it is simply the goTenna proprietary service.
      */
     var serviceSignatures: [String] {
-        return []
+        return [RVS_BLE_GATT_UUID.userDefinedService.rawValue]
     }
 
     /* ################################################################## */
@@ -84,29 +84,20 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
        */
      func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
-            // We check to see if the peripheral is one of ours.
-            if  let manufacturerCodeData = deviceRecord.advertisementData[CBAdvertisementDataManufacturerDataKey] as? NSData,
-                _manufacturerCode.count == manufacturerCodeData.length {
-                
-                // We read in the manufacturer data, and match it against our own.
-                var uIntArray = [UInt8](repeating: 0, count: _manufacturerCode.count)
-                manufacturerCodeData.getBytes(&uIntArray, length: _manufacturerCode.count)
-                
-                if uIntArray == _manufacturerCode {
-                    let ret = RVS_BTDriver_Device_OBD(vendor: self)
-                    
-                    ret.peripheral = deviceRecord.peripheral
-                    ret.centralManager = deviceRecord.centralManager
-                    ret.canConnect = 1 == (deviceRecord.advertisementData[CBAdvertisementDataIsConnectable] as? Int ?? 0)
-                    
-                    /// These are the services we search for, after connecting.
-                    ret.internal_initalServiceDiscovery = []
+            let ret = RVS_BTDriver_Device_OBD(vendor: self)
+            
+            ret.peripheral = deviceRecord.peripheral
+            ret.centralManager = deviceRecord.centralManager
+            ret.canConnect = 1 == (deviceRecord.advertisementData[CBAdvertisementDataIsConnectable] as? Int ?? 0)
+            
+            /// These are the services we search for, after connecting.
+            ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Base_Interface.RVS_GATT_UUID.deviceInfoService.rawValue)
+//                                                   CBUUID(string: Self.RVS_BLE_GATT_UUID.userDefinedService.rawValue)
+            ]
 
-                    deviceRecord.peripheral.delegate = ret
+            deviceRecord.peripheral.delegate = ret
 
-                    return ret
-                }
-            }
+            return ret
         }
         
         return nil

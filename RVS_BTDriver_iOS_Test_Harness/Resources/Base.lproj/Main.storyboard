@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="deP-v5-jbO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="deP-v5-jbO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +11,7 @@
         <!--Driver iOS Test Harness Navigation Controller-->
         <scene sceneID="Flf-5A-gut">
             <objects>
-                <navigationController id="deP-v5-jbO" customClass="RVS_BTDriver_iOS_Test_Harness_NavigationController" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="deP-v5-jbO" customClass="RVS_BTDriver_iOS_Test_Harness_NavigationController" customModule="RVS_BTDriver_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0yL-m2-fLy">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -31,7 +31,7 @@
         <!--SLUG-MAIN-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="RVS_BTDriver_iOS_Test_Harness_MainTableViewController" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RVS_BTDriver_iOS_Test_Harness_MainTableViewController" customModule="RVS_BTDriver_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -62,7 +62,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="735"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="device-cell" textLabel="RB6-BX-uxV" style="IBUITableViewCellStyleDefault" id="Z1y-hp-4eg" customClass="RVS_BTDriver_iOS_Test_Harness_MainTableViewController_TableViewCell" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="device-cell" textLabel="RB6-BX-uxV" style="IBUITableViewCellStyleDefault" id="Z1y-hp-4eg" customClass="RVS_BTDriver_iOS_Test_Harness_MainTableViewController_TableViewCell" customModule="RVS_BTDriver_iOS_Test_Harness" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z1y-hp-4eg" id="51l-05-PHq">
@@ -73,7 +73,7 @@
                                                             <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -141,7 +141,7 @@
         <!--SLUG-SETTINGS-->
         <scene sceneID="H8O-eF-PuD">
             <objects>
-                <viewController id="6LN-UB-VTn" customClass="RVS_BTDriver_iOS_Test_Harness_SettingsViewController" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6LN-UB-VTn" customClass="RVS_BTDriver_iOS_Test_Harness_SettingsViewController" customModule="RVS_BTDriver_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WdU-2M-3U5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -268,7 +268,7 @@
         <!--Driver iOS Test Harness Detail View Controller-->
         <scene sceneID="czM-6w-Sjs">
             <objects>
-                <viewController id="rSS-Kk-xbf" customClass="RVS_BTDriver_iOS_Test_Harness_DetailViewController" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rSS-Kk-xbf" customClass="RVS_BTDriver_iOS_Test_Harness_DetailViewController" customModule="RVS_BTDriver_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gXe-QS-FL1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -281,7 +281,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="display-value" id="8wf-4f-G6I" customClass="RVS_BTDriver_iOS_Test_Harness_DetailViewControllerTableCell" customModule="RVS_BTDriver_iOS_Test_Harness__Direct_" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="display-value" id="8wf-4f-G6I" customClass="RVS_BTDriver_iOS_Test_Harness_DetailViewControllerTableCell" customModule="RVS_BTDriver_iOS_Test_Harness" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="374" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8wf-4f-G6I" id="uVX-hW-KAl">
@@ -292,14 +292,14 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.125" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K0W-Au-GPZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -353,5 +353,5 @@
         <image name="NoBT" width="341.5" height="341.5"/>
         <image name="background-gradient" width="1" height="1000"/>
     </resources>
-    <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

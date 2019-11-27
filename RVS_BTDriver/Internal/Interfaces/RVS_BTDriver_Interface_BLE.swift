@@ -270,7 +270,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
                 return
             }
         }
-        
+
         // If we made it here, we are a valid device, and ready for inspection.
         for vendor in vendors {
             let deviceInfo = DeviceInfo(peripheral: inPeripheral, centralManager: inCentral, advertisementData: inAdvertisementData)
