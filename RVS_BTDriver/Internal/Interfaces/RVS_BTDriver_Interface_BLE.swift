@@ -657,7 +657,7 @@ extension RVS_BTDriver_Device_BLE: RVS_BTDriver_State_Machine {
             // If we are initializing, then we create service objects for our services, and add them to the holding pen.
             internal_initalServiceDiscovery.forEach {
                 switch $0.uuidString {
-                case RVS_BTDriver_Base_Interface.RVS_GATT_UUID.deviceInfoService.rawValue:
+                case RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue:
                     internal_holding_pen.append(RVS_BTDriver_Service_DeviceInfo_BLE(owner: self, uuid: $0.uuidString))
                     
                 default:
@@ -1173,6 +1173,9 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
      This is a list of the UUIDs for the standard Device Info charateristics.
      */
     internal enum RVS_BLE_GATT_UUID: String, CaseIterable {
+        /// This is the actual device info service ID
+        case deviceInfoService      =   "180A"
+        
         /// This characteristic represents a structure containing an Organizationally Unique Identifier (OUI) followed by a manufacturer-defined identifier and is unique for each individual instance of the product.
         case systemIDStruct         =   "2A23"
         /// This characteristic represents the model number that is assigned by the device vendor.

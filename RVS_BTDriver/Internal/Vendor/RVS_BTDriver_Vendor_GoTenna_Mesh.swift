@@ -47,16 +47,6 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
         case goTennaProprietary002          =   "1276B20A-DF5E-11E6-BF01-FE55135034F3"
         /// No idea what this is.
         case goTennaProprietary003          =   "1276B20B-DF5E-11E6-BF01-FE55135034F3"
-        
-        // MARK: - Device Info Characteristic IDs
-        /// Manufacturer Name
-        case deviceInfoManufacturerName     =   "2A29"
-        /// Model Name
-        case deviceInfoModelName            =   "2A24"
-        /// Hardware Revision
-        case deviceInfoHardwareRevision     =   "2A27"
-        /// Firmware Revision
-        case deviceInfoFirmwareRevision     =   "2A26"
     }
     
     /* ################################################################## */
@@ -120,7 +110,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
                     ret.canConnect = 1 == (deviceRecord.advertisementData[CBAdvertisementDataIsConnectable] as? Int ?? 0)
                     
                     /// These are the services we search for, after connecting.
-                    ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Base_Interface.RVS_GATT_UUID.deviceInfoService.rawValue),
+                    ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue),
                                                            CBUUID(string: RVS_BTDriver_Vendor_GoTenna_Mesh.RVS_BLE_GATT_UUID.goTennaProprietary.rawValue)
                     ]
 

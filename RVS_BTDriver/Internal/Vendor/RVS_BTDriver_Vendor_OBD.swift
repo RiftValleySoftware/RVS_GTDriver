@@ -93,7 +93,7 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
             /// These are the services we search for, after connecting.
 //            ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Base_Interface.RVS_GATT_UUID.deviceInfoService.rawValue),
 //                                                   CBUUID(string: Self.RVS_BLE_GATT_UUID.userDefinedService.rawValue)
-            ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Base_Interface.RVS_GATT_UUID.deviceInfoService.rawValue)
+            ret.internal_initalServiceDiscovery = [CBUUID(string: RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue)
             ]
 
             deviceRecord.peripheral.delegate = ret
