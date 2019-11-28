@@ -328,7 +328,11 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
     */
     internal func centralManager(_ inCentral: CBCentralManager, didDisconnectPeripheral inPeripheral: CBPeripheral, error inError: Error?) {
         #if DEBUG
-            print("Central Manager: \(inCentral) has received a disconnection event for this peripheral: \(inPeripheral), with this error: \(String(describing: inError)).")
+            var suffix = ""
+            if let errVal = inError {
+                suffix = ", with this Error: \(String(describing: errVal))"
+            }
+            print("Central Manager: \(inCentral) has received a disconnection event for this peripheral: \(inPeripheral)\(suffix).")
         #endif
         // Scan through the stored devices
         for device in driver where device is RVS_BTDriver_Device_BLE {
@@ -828,7 +832,11 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
     internal func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
         assert(inPeripheral === peripheral, "Wrong Peripheral!")
         #if DEBUG
-            print("Peripheral  \(inPeripheral) Received an Update for This Characteristic: \(inCharacteristic), with this Error: \(String(describing: inError)).")
+            var suffix = ""
+            if let errVal = inError {
+                suffix = ", with this Error: \(String(describing: errVal))"
+            }
+            print("Peripheral  \(inPeripheral) Received an Update for This Characteristic: \(inCharacteristic)\(suffix).")
         #endif
         
         if let property = propertyInstanceForCBCharacteristic(inCharacteristic) {
