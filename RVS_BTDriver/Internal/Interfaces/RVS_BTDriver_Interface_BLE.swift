@@ -363,6 +363,17 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     
     /// These are the services that we look up upon initialization connection.
     internal var internal_initalServiceDiscovery: [CBUUID] = []
+    
+    /* ################################################################################################################################## */
+    // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Calculated Properties -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     If the device has a Device Info service, we access the service instance here.
+     */
+    var deviceInfoService: RVS_BTDriver_Service_DeviceInfo_BLE! {
+        return nil
+    }
 
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Calculated Properties -
@@ -376,10 +387,10 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      */
     override public internal(set) var modelName: String! {
         get {
-            if let propertyValue = propertyInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.modelNumberString.rawValue)?.rawValue {
-                return String(data: propertyValue, encoding: .utf8)
+            if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
+                return service.modelName
             }
-            
+
             return nil
         }
         
@@ -394,10 +405,10 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      */
     override public internal(set) var manufacturerName: String! {
        get {
-           if let propertyValue = propertyInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.manufacturerNameString.rawValue)?.rawValue {
-               return String(data: propertyValue, encoding: .utf8)
+           if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
+               return service.manufacturerName
            }
-           
+
            return nil
        }
        
@@ -412,10 +423,10 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      */
     override public internal(set) var serialNumber: String! {
        get {
-           if let propertyValue = propertyInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.serialNumberString.rawValue)?.rawValue {
-               return String(data: propertyValue, encoding: .utf8)
+           if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
+               return service.serialNumber
            }
-           
+
            return nil
        }
        
@@ -430,10 +441,10 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      */
     override public internal(set) var hardwareRevision: String! {
        get {
-           if let propertyValue = propertyInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.hardwareRevisionString.rawValue)?.rawValue {
-               return String(data: propertyValue, encoding: .utf8)
+           if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
+               return service.hardwareRevision
            }
-           
+
            return nil
        }
        
@@ -448,10 +459,10 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      */
     override public internal(set) var firmwareRevision: String! {
        get {
-           if let propertyValue = propertyInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.firmwareRevisionString.rawValue)?.rawValue {
-               return String(data: propertyValue, encoding: .utf8)
+           if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
+               return service.firmwareRevision
            }
-           
+
            return nil
        }
        
@@ -466,10 +477,10 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      */
     override public internal(set) var softwareRevision: String! {
        get {
-           if let propertyValue = propertyInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.softwareRevisionString.rawValue)?.rawValue {
-               return String(data: propertyValue, encoding: .utf8)
+           if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
+               return service.softwareRevision
            }
-           
+
            return nil
        }
        
@@ -553,6 +564,34 @@ extension RVS_BTDriver_Device_BLE {
         for serviceInstance in internal_service_list {
             if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
                 if serviceInstance.cbService === inCBCharacteristic.service {
+                    return serviceInstance
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This searches the device, and returns a service that has a certain UUID.
+     
+     - parameter inUUID: A String, with the UUID we are searching for.
+     
+     - returns: The Service instance for the UUID. Nil, if it can't be matched.
+     */
+    internal func serviceInstanceForCBUUID(_ inUUID: String) -> RVS_BTDriver_Service_BLE! {
+        for serviceInstance in internal_holding_pen {
+            if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
+                if serviceInstance.uuid == inUUID {
+                    return serviceInstance
+                }
+            }
+        }
+        
+        for serviceInstance in internal_service_list {
+            if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
+                if serviceInstance.uuid == inUUID {
                     return serviceInstance
                 }
             }
@@ -1204,5 +1243,76 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
         if let owner = internal_owner as? RVS_BTDriver_Device_BLE {
             owner.peripheral.discoverCharacteristics(nil, for: cbService)
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a model name, it is available here.
+     */
+    public var modelName: String! {
+        if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.modelNumberString.rawValue)?.rawValue {
+            return String(data: propertyValue, encoding: .utf8)
+        }
+        return nil
+    }
+
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a manufacturer name, it is available here.
+     */
+    public var manufacturerName: String! {
+       if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.manufacturerNameString.rawValue)?.rawValue {
+           return String(data: propertyValue, encoding: .utf8)
+       }
+       
+       return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a serial number, it is available here.
+     */
+    public var serialNumber: String! {
+       if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.serialNumberString.rawValue)?.rawValue {
+           return String(data: propertyValue, encoding: .utf8)
+       }
+       
+       return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a hardware revision, it is available here.
+     */
+    public var hardwareRevision: String! {
+       if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.hardwareRevisionString.rawValue)?.rawValue {
+           return String(data: propertyValue, encoding: .utf8)
+       }
+       
+       return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a firmware revision, it is available here.
+     */
+    public var firmwareRevision: String! {
+        if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.firmwareRevisionString.rawValue)?.rawValue {
+            return String(data: propertyValue, encoding: .utf8)
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     If the device has a Device Info Service with a software revision, it is available here.
+     */
+    public var softwareRevision: String! {
+        if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.softwareRevisionString.rawValue)?.rawValue {
+            return String(data: propertyValue, encoding: .utf8)
+        }
+        
+        return nil
     }
 }
