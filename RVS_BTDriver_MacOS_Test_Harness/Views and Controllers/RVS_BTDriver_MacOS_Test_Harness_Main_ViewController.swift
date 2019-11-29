@@ -46,12 +46,6 @@ class RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: RVS_BTDriver_MacOS_Te
      The column ID for the "Is Connected" text.
      */
     let isConnectedID = "device-connected"
-    
-    /* ################################################################## */
-    /**
-     The storyboard ID for the the modal device info view controller.
-     */
-    let deviceInfoControllerID = "device-info-controller"
 
     /* ################################################################## */
     /**
@@ -180,7 +174,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: NSTableViewDelega
      */
     func tableViewSelectionDidChange(_: Notification) {
         if  let device = selectedDevice,
-            let newController = storyboard?.instantiateController(withIdentifier: deviceInfoControllerID) as? RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
+            let newController = storyboard?.instantiateController(withIdentifier: RVS_BTDriver_MacOS_Test_Harness_Device_ViewController.storyboardID) as? RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
             newController.deviceInstance = device
             presentAsModalWindow(newController)
         }

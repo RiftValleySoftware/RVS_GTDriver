@@ -29,15 +29,15 @@ import Cocoa
 /**
  This is a handy typealias for the tuple we'll use to transmit table data.
  */
-typealias RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple = (key: String, value: String)
+typealias RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple = (key: String, value: String)
 
 /* ################################################################################################################################## */
 // MARK: - The Device Screen View Controller Class
 /* ################################################################################################################################## */
 /**
- This class controls the device info listing screen (the one that displays a list of device information).
+ This class controls the properties info listing screen (the one that displays a list of individual properties).
  */
-class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_Test_Harness_Base_ViewController {
+class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_MacOS_Test_Harness_Base_ViewController {
     /* ############################################################################################################################## */
     // MARK: - Static Constants
     /* ############################################################################################################################## */
@@ -45,7 +45,7 @@ class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_
     /**
      The Storyboard ID for this class.
      */
-    static let storyboardID = "device-info-controller"
+    static let storyboardID = "properties-inspector-controller"
     
     /* ############################################################################################################################## */
     // MARK: - Instance Constants
@@ -73,10 +73,10 @@ class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
-     The device instance, associated with this screen.
+     The service instance, associated with this screen.
      */
-    var deviceInstance: RVS_BTDriver_DeviceProtocol!
-    
+    var serviceInstance: RVS_BTDriver_ServiceProtocol!
+
     /* ################################################################## */
     /**
      This is an Array of tuples, used to populate the table.
@@ -126,54 +126,25 @@ class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_
      Make sure that we clean up after ourselves.
      */
     deinit {
-        deviceInstance?.unsubscribe(self)
+        serviceInstance?.unsubscribe(self)
     }
 }
 
 /* ################################################################################################################################## */
 // MARK: - IBAction Methods
 /* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
-    /* ################################################################## */
-    /**
-     Called when the Connect/Disconnect button is hit.
-     
-     - parameter: ignored.
-     */
-    @IBAction func connectDisconnectHit(_: Any) {
-        #if DEBUG
-            print("\(((deviceInstance?.isConnected ?? false) ? "SLUG-DISCONNECT".localizedVariant : "SLUG-CONNECT".localizedVariant)) Button Hit.")
-        #endif
-        
-        // The weird test here, is so that we don't send true to a nonexistent device. Doesn't really matter, as we're using a chained optional.
-        deviceInstance?.isConnected = !(deviceInstance?.isConnected ?? true)
-    }
-
-    /* ################################################################## */
-    /**
-     Called when the Delete button is hit.
-     
-     - parameter: ignored.
-     */
-    @IBAction func deleteButtonHit(_: Any) {
-        #if DEBUG
-            print("DELETE Button Hit.")
-        #endif
-        displayDeleteConfirmAlert()
-    }
+extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
 }
 
 /* ################################################################################################################################## */
 // MARK: - Instance Methods
 /* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
+extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
     /* ################################################################## */
     /**
      Sets up the UI to reflect the current state.
      */
     func setUpUI() {
-        connectDisconnectButton?.title = ((deviceInstance?.isConnected ?? false) ? "SLUG-DISCONNECT".localizedVariant : "SLUG-CONNECT".localizedVariant)
-        connectDisconnectButton?.contentTintColor = ((deviceInstance?.isConnected ?? false) ? NSColor.red : NSColor.green)
         populateTable()
     }
     
@@ -183,33 +154,6 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
      */
     func setUpTableData() {
         tableData = []
-        
-        if let deviceInstance = deviceInstance {
-            if let value = deviceInstance.uuid {
-                let dataItem = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "deviceInfoDeviceID".localizedVariant, value: value)
-                tableData.append(dataItem)
-            }
-            
-            if let value = deviceInstance.manufacturerName {
-                let dataItem = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "deviceInfoManufacturerName".localizedVariant, value: value)
-                tableData.append(dataItem)
-            }
-            
-            if let value = deviceInstance.modelName {
-                let dataItem = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "deviceInfoModelName".localizedVariant, value: value)
-                tableData.append(dataItem)
-            }
-            
-            if let value = deviceInstance.hardwareRevision {
-                let dataItem = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "deviceInfoHardwareRevision".localizedVariant, value: value)
-                tableData.append(dataItem)
-            }
-            
-            if let value = deviceInstance.firmwareRevision {
-                let dataItem = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "deviceInfoFirmwareRevision".localizedVariant, value: value)
-                tableData.append(dataItem)
-            }
-        }
     }
     
     /* ################################################################## */
@@ -217,7 +161,6 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
      Called to remove the device from the driver.
      */
     func deleteMyself() {
-        driverInstance?.removeDevice(deviceInstance)
         DispatchQueue.main.async {
             self.appDelegateObject.mainDisplayScreen.reloadTable()
             self.dismiss(nil)
@@ -264,29 +207,20 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
 /* ################################################################################################################################## */
 // MARK: - Base Class Override Methods
 /* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
+extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
     /* ################################################################## */
     /**
      Called after the view has loaded and initialized from the storyboard.
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let modelTitle = deviceInstance?.modelName {
-            title = modelTitle
-        }
-        
-        deleteButtonCell?.title = " " + deleteButton.title.localizedVariant + " "
-        deleteButtonCell?.backgroundColor = NSColor.red
-        setUpUI()
-        deviceInstance?.subscribe(self)
     }
 }
 
 /* ################################################################################################################################## */
 // MARK: - NSTableViewDataSource Methods
 /* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: NSTableViewDataSource {
+extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableViewDataSource {
     /* ################################################################## */
     /**
      Called to supply the number of rows in the table.
@@ -322,20 +256,30 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: NSTableViewData
 }
 
 /* ################################################################################################################################## */
-// MARK: - RVS_BTDriver_DeviceSubscriberProtocol Methods
+// MARK: - RVS_BTDriver_ServiceSubscriberProtocol Methods
 /* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_DeviceSubscriberProtocol {
+extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_ServiceSubscriberProtocol {
     /* ################################################################## */
     /**
-     Called if the device encounters an error.
+     Called if the service adds a new property.
+     
+     - inService: The service instance that is calling this.
+     - propertyAdded: The property that was added.
+     */
+    func service(_ inService: RVS_BTDriver_ServiceProtocol, propertyAdded inProperty: RVS_BTDriver_PropertyProtocol) {
+    }
+    
+    /* ################################################################## */
+    /**
+     Called if the service encounters an error.
      
      - parameters:
-        - inDevice: The device instance that is calling this.
+        - inService: The service instance that is calling this.
         - encounteredThisError: The error that is being returned.
      */
-    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+    func service(_ inService: RVS_BTDriver_ServiceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
         #if DEBUG
-            print("DEVICE ERROR! \(String(describing: inError))")
+            print("SERVICE ERROR! \(String(describing: inError))")
         #endif
         DispatchQueue.main.async {
             RVS_BTDriver_MacOS_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
@@ -344,13 +288,13 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_De
     
     /* ################################################################## */
     /**
-     Called if the device state changes, in some way.
+     Called if the service state changes, in some way.
      
-     - parameter inDevice: The device instance that is calling this.
+     - inService: The service instance that is calling this.
      */
-    func deviceStatusUpdate(_ inDevice: RVS_BTDriver_DeviceProtocol) {
+    func serviceStatusUpdate(_ inDevice: RVS_BTDriver_ServiceProtocol) {
         #if DEBUG
-            print("Device Status Changed")
+            print("Service Status Changed")
         #endif
         DispatchQueue.main.async {
             self.setUpUI()
