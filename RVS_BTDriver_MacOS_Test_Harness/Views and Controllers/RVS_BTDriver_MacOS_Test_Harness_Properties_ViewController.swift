@@ -48,6 +48,15 @@ class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_Ma
     static let storyboardID = "properties-inspector-controller"
     
     /* ############################################################################################################################## */
+    // MARK: - RVS_BTDriver_ServiceSubscriberProtocol Support
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This will be used to hold an automatically-generated UUID for this subscriber.
+     */
+    var _uuid: UUID!
+    
+    /* ############################################################################################################################## */
     // MARK: - Instance Constants
     /* ############################################################################################################################## */
     /* ################################################################## */
@@ -84,37 +93,10 @@ class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_Ma
      The reason that this is an Array of tuples, is so we can enforce order without using a stupid key-sorting closure.
      */
     var tableData = [RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple]()
-
-    /* ############################################################################################################################## */
-    // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Properties
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This is a UUID, that identifies this screen for subscriber puproses.
-     */
-    var uuid: UUID!
     
     /* ############################################################################################################################## */
     // MARK: - Instance IBOutlets
     /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     The Connect/Disconnect button.
-     */
-    @IBOutlet weak var connectDisconnectButton: NSButton!
-
-    /* ################################################################## */
-    /**
-     The Delete button.
-     */
-    @IBOutlet weak var deleteButton: NSButton!
-    
-    /* ################################################################## */
-    /**
-     The Delete button text display cell.
-     */
-    @IBOutlet weak var deleteButtonCell: NSButtonCell!
-    
     /* ################################################################## */
     /**
      The Table, Displaying the Properties.

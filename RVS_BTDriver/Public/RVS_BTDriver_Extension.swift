@@ -33,19 +33,18 @@ import Foundation
 public protocol RVS_BTDriver_SubscriberProtocol: class {
     /* ################################################################## */
     /**
-     REQUIRED: This is a unique UUID that needs to be assigned to each instance, so we can match subscribers.
-     
-     The subscriber should declare the property, and leave it unassigned, or set to nil.
+     REQUIRED: The implementation is required to provide this. The implementation should not do anything with it; simply provide a read/write instance property.
      */
-    var uuid: UUID! { get set }
+    var _uuid: UUID! { get set }
     
+    /* ################################################################################################################################## */
+    // MARK: - Required Instance Propeties
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     DO NOT IMPLEMENT: This is a method that is called by the class handling the subscription.
-     
-     You should not implement this, and let the default implementation handle it.
+     This is a unique UUID that needs to be assigned to each instance, so we can match subscribers.
      */
-    func setUpUUID()
+    var uuid: UUID! { get }
 }
 
 /* ###################################################################################################################################### */
@@ -58,10 +57,12 @@ extension RVS_BTDriver_SubscriberProtocol {
      
      It will only generate it the first time.
      */
-    public func setUpUUID() {
-        if nil == uuid {
-            uuid = UUID()
+    public var uuid: UUID! {
+        if nil == _uuid {
+            _uuid = UUID()
         }
+        
+        return _uuid
     }
 }
 

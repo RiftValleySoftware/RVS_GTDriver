@@ -108,12 +108,6 @@ class RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_iOS_Te
      The scanning/not scanning switch.
      */
     @IBOutlet weak var scanModeSegmentedSwitch: UISegmentedControl!
-    
-    /* ################################################################## */
-    /**
-     This is for subscriber support.
-     */
-    var uuid: UUID!
 }
 
 /* ###################################################################################################################################### */

@@ -237,7 +237,6 @@ extension RVS_BTDriver_Device {
      */
     func subscribe(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) {
         if !isThisInstanceASubscriber(inSubscriber) {
-            inSubscriber.setUpUUID()
             internal_subscribers.append(inSubscriber)
         }
     }

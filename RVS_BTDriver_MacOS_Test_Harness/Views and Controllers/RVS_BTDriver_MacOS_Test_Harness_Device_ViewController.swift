@@ -48,6 +48,15 @@ class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_
     static let storyboardID = "device-info-controller"
     
     /* ############################################################################################################################## */
+    // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Support
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This will be used to hold an automatically-generated UUID for this subscriber.
+     */
+    var _uuid: UUID!
+
+    /* ############################################################################################################################## */
     // MARK: - Instance Constants
     /* ############################################################################################################################## */
     /* ################################################################## */
@@ -84,15 +93,6 @@ class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_
      The reason that this is an Array of tuples, is so we can enforce order without using a stupid key-sorting closure.
      */
     var tableData = [RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple]()
-
-    /* ############################################################################################################################## */
-    // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Properties
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This is a UUID, that identifies this screen for subscriber puproses.
-     */
-    var uuid: UUID!
     
     /* ############################################################################################################################## */
     // MARK: - Instance IBOutlets
