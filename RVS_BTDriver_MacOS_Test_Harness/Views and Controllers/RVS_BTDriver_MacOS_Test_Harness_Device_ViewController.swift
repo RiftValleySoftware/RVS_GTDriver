@@ -102,6 +102,12 @@ class RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_MacOS_
      The Connect/Disconnect button.
      */
     @IBOutlet weak var connectDisconnectButton: NSButton!
+    
+    /* ################################################################## */
+    /**
+     The Details button.
+     */
+    @IBOutlet weak var detailsButton: NSButton!
 
     /* ################################################################## */
     /**
@@ -276,6 +282,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
             title = modelTitle
         }
         
+        detailsButton?.title = detailsButton?.title.localizedVariant ?? "ERROR"
         deleteButtonCell?.title = " " + deleteButton.title.localizedVariant + " "
         deleteButtonCell?.backgroundColor = NSColor.red
         setUpUI()

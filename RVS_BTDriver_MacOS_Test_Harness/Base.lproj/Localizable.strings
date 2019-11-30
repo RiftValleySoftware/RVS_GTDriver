@@ -47,6 +47,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-DELETE-CONFIRM-HEADER"                                =       "ARE YOU SURE?";
 "SLUG-DELETE-CONFIRM-TEXT"                                  =       "If you press \"OK\", this device will be deleted from the list.";
 "SLUG-DELETE"                                               =       "DELETE";
+"SLUG-DETAILS-BUTTON"                                       =       "DETAILS";
 "SLUG-CONNECTED"                                            =       "CONNECTED";
 "SLUG-NOT-CONNECTED"                                        =       "NOT CONNECTED";
 "SLUG-CONNECT"                                              =       "CONNECT";
