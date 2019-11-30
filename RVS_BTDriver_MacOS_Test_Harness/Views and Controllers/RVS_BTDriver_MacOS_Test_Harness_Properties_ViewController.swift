@@ -165,7 +165,9 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
                 if let header = serviceHeader,
                 0 < serviceProperties.count {
                     tableData.append(header)
-                    tableData += serviceProperties
+                    tableData += serviceProperties.sorted(by: { (a, b) -> Bool in
+                        return a.key < b.key
+                    })
                 }
             }
         }
@@ -202,6 +204,9 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let modelTitle = deviceInstance?.modelName {
+            title = modelTitle
+        }
         populateTable()
     }
 }
