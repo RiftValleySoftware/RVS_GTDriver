@@ -28,8 +28,10 @@ import Cocoa
 /* ################################################################################################################################## */
 /**
  This is a handy typealias for the tuple we'll use to transmit table data.
+ 
+ if this is a Service separateor (
  */
-typealias RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple = (key: String?, value: String?)
+typealias RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple = (key: String, value: String)
 
 /* ################################################################################################################################## */
 // MARK: - The Device Screen View Controller Class
@@ -220,11 +222,32 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableView
      - returns: A new Text View, with the device model name.
      */
     func tableView(_ inTableView: NSTableView, objectValueFor inTableColumn: NSTableColumn?, row inRow: Int) -> Any? {
-        switch inTableColumn?.identifier.rawValue {
-        case keyColumnID:
+        if tableView(inTableView, isGroupRow: inRow) {
             return tableData[inRow].key
-        default:
-            return tableData[inRow].value
+        } else {
+            switch inTableColumn?.identifier.rawValue {
+            case keyColumnID:
+                return tableData[inRow].key
+            default:
+                return tableData[inRow].value
+            }
         }
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - NSTableViewDataSource Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableViewDelegate {
+    /* ################################################################## */
+    /**
+     Called to indicate whether or not the row is a group header (indicated by no value).
+     
+     - parameters:
+        - inTableView: The table instance.
+        - isGroupRow: The 0-based Int index of the row.
+     */
+    func tableView(_ inTableView: NSTableView, isGroupRow inRow: Int) -> Bool {
+        return tableData[inRow].value.isEmpty
     }
 }
