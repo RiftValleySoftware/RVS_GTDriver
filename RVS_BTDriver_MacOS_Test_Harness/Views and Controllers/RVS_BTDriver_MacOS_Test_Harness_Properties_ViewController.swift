@@ -65,13 +65,13 @@ class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_Ma
     /**
      Key for the "Key" column.
      */
-    let keyColumnID = "data-key"
+    let keyColumnID = NSUserInterfaceItemIdentifier("data-key")
     
     /* ################################################################## */
     /**
      Key for the "Value" column.
      */
-    let valueColumnID = "data-value"
+    let valueColumnID = NSUserInterfaceItemIdentifier("data-value")
     
     /* ################################################################## */
     /**
@@ -130,6 +130,45 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
      */
     func setUpTableData() {
         tableData = []
+        
+        var serviceHeader: RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple!
+        var serviceProperties = [RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple]()
+        
+        if let deviceInstance = deviceInstance {
+            for service in deviceInstance.services {
+                serviceHeader = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "SERVICE: \(service.uuid)", value: "")
+                for property in service.properties {
+                    switch property.value {
+                    case .stringValue(let value):
+                        if let value = value {
+                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: property.uuid, value: value))
+                        }
+                        
+                    case .intValue(let value):
+                        if let value = value {
+                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: property.uuid, value: String(value)))
+                        }
+                        
+                    case .floatValue(let value):
+                        if let value = value {
+                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: property.uuid, value: String(value)))
+                        }
+                        
+                    default:
+                        #if DEBUG
+                            print("Unknown Value Type: \(String(describing: property.value))")
+                        #endif
+                        ()
+                    }
+                }
+                
+                if let header = serviceHeader,
+                0 < serviceProperties.count {
+                    tableData.append(header)
+                    tableData += serviceProperties
+                }
+            }
+        }
     }
     
     /* ################################################################## */
@@ -151,33 +190,6 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
         setUpTableData()
         propertyTable?.reloadData()
     }
-    
-    /* ################################################################## */
-    /**
-     This displays a simple alert, with an OK button.
-     */
-    func displayDeleteConfirmAlert() {
-        if let window = view.window {
-            let alert = NSAlert()
-            alert.messageText = "SLUG-DELETE-CONFIRM-HEADER".localizedVariant
-            alert.informativeText = "SLUG-DELETE-CONFIRM-TEXT".localizedVariant
-            alert.alertStyle = .warning
-            alert.addButton(withTitle: "SLUG-OK-BUTTON-TEXT".localizedVariant)
-            alert.addButton(withTitle: "SLUG-CANCEL-BUTTON-TEXT".localizedVariant)
-            alert.beginSheetModal(for: window) { [weak self] (_ inModalResponse: NSApplication.ModalResponse) in
-                if self?.modalResponseOK == inModalResponse.rawValue {
-                    #if DEBUG
-                        print("The User Chose to Delete.")
-                    #endif
-                    self?.deleteMyself()
-                } else {
-                    #if DEBUG
-                        print("Deletion will not Occur (\(inModalResponse)).")
-                    #endif
-                }
-            }
-        }
-    }
 }
 
 /* ################################################################################################################################## */
@@ -190,6 +202,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        populateTable()
     }
 }
 
@@ -222,15 +235,11 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableView
      - returns: A new Text View, with the device model name.
      */
     func tableView(_ inTableView: NSTableView, objectValueFor inTableColumn: NSTableColumn?, row inRow: Int) -> Any? {
-        if tableView(inTableView, isGroupRow: inRow) {
+        switch inTableColumn?.identifier {
+        case keyColumnID:
             return tableData[inRow].key
-        } else {
-            switch inTableColumn?.identifier.rawValue {
-            case keyColumnID:
-                return tableData[inRow].key
-            default:
-                return tableData[inRow].value
-            }
+        default:
+            return tableView(inTableView, isGroupRow: inRow) ? nil : tableData[inRow].value
         }
     }
 }
