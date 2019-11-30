@@ -29,7 +29,7 @@ import Cocoa
 /**
  This is a handy typealias for the tuple we'll use to transmit table data.
  */
-typealias RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple = (key: String, value: String)
+typealias RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple = (key: String?, value: String?)
 
 /* ################################################################################################################################## */
 // MARK: - The Device Screen View Controller Class
@@ -82,9 +82,9 @@ class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_Ma
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
-     The service instance, associated with this screen.
+     The device instance, associated with this screen.
      */
-    var serviceInstance: RVS_BTDriver_ServiceProtocol!
+    var deviceInstance: RVS_BTDriver_DeviceProtocol!
 
     /* ################################################################## */
     /**
@@ -102,14 +102,6 @@ class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_Ma
      The Table, Displaying the Properties.
      */
     @IBOutlet weak var propertyTable: NSTableView!
-    
-    /* ################################################################## */
-    /**
-     Make sure that we clean up after ourselves.
-     */
-    deinit {
-        serviceInstance?.unsubscribe(self)
-    }
 }
 
 /* ################################################################################################################################## */
@@ -233,53 +225,6 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableView
             return tableData[inRow].key
         default:
             return tableData[inRow].value
-        }
-    }
-}
-
-/* ################################################################################################################################## */
-// MARK: - RVS_BTDriver_ServiceSubscriberProtocol Methods
-/* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_ServiceSubscriberProtocol {
-    /* ################################################################## */
-    /**
-     Called if the service adds a new property.
-     
-     - inService: The service instance that is calling this.
-     - propertyAdded: The property that was added.
-     */
-    func service(_ inService: RVS_BTDriver_ServiceProtocol, propertyAdded inProperty: RVS_BTDriver_PropertyProtocol) {
-    }
-    
-    /* ################################################################## */
-    /**
-     Called if the service encounters an error.
-     
-     - parameters:
-        - inService: The service instance that is calling this.
-        - encounteredThisError: The error that is being returned.
-     */
-    func service(_ inService: RVS_BTDriver_ServiceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
-        #if DEBUG
-            print("SERVICE ERROR! \(String(describing: inError))")
-        #endif
-        DispatchQueue.main.async {
-            RVS_BTDriver_MacOS_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     Called if the service state changes, in some way.
-     
-     - inService: The service instance that is calling this.
-     */
-    func serviceStatusUpdate(_ inDevice: RVS_BTDriver_ServiceProtocol) {
-        #if DEBUG
-            print("Service Status Changed")
-        #endif
-        DispatchQueue.main.async {
-            self.setUpUI()
         }
     }
 }

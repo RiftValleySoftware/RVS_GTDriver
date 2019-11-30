@@ -288,6 +288,20 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
         setUpUI()
         deviceInstance?.subscribe(self)
     }
+    
+    /* ################################################################## */
+    /**
+     Called just before we switch to the device services and properties inspector screen.
+     
+     - parameters:
+        - for: The segue being executed.
+        - sender: Any data to be associated with the calle (ignored).
+     */
+    override func prepare(for segue: NSStoryboardSegue, sender inSender: Any?) {
+        if let destination = segue.destinationController as? RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
+            destination.deviceInstance = deviceInstance
+        }
+    }
 }
 
 /* ################################################################################################################################## */
