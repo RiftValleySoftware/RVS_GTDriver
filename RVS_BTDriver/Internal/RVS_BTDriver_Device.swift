@@ -167,6 +167,26 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     
     /* ################################################################## */
     /**
+     This displays a useful debug display of the device data.
+     */
+    override var description: String {
+        var ret =   "Generic Device:\n"
+                    + "\tManufacturer Name:\t\(manufacturerName ?? "NOT AVAILABLE")\n"
+                    + "\tModel Name:\t\t\t\(modelName ?? "NOT AVAILABLE")\n"
+                    + "\tSerial Number:\t\t\(serialNumber ?? "NOT AVAILABLE")\n"
+                    + "\tHardware Revision:\t\(hardwareRevision ?? "NOT AVAILABLE")\n"
+                    + "\tFirmware Revision:\t\(firmwareRevision ?? "NOT AVAILABLE")\n"
+                    + "\tSoftware Revision:\t\(softwareRevision ?? "NOT AVAILABLE")\n"
+        
+        for service in services {
+            ret += "\t\tService (\(service.uuid):\t\(String(describing: service))\n"
+        }
+        
+        return ret
+    }
+    
+    /* ################################################################## */
+    /**
      Notifies subscribers of a new service.
      This is defined here, so we can override.
 

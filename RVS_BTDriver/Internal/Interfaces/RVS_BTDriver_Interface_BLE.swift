@@ -276,7 +276,7 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
             let deviceInfo = DeviceInfo(peripheral: inPeripheral, centralManager: inCentral, advertisementData: inAdvertisementData)
             if let device = vendor.makeDevice(deviceInfo) {
                 #if DEBUG
-                    print("\tVendor: \(vendor) has created a device to handle this peripheral.")
+                    print("\tVendor: \(vendor) has created a device to handle this peripheral: \(inPeripheral).")
                 #endif
                 driver.addDiscoveredDevice(device)
                 break
@@ -509,6 +509,27 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
         }
     }
     
+    /* ################################################################## */
+    /**
+     This displays a useful debug display of the device data.
+     */
+    override var description: String {
+        var ret =   "BLE Device:\n"
+                    + "\tPeripheral Name:\t\(peripheral?.name ?? "NOT AVAILABLE")\n"
+                    + "\tManufacturer Name:\t\(manufacturerName ?? "NOT AVAILABLE")\n"
+                    + "\tModel Name:\t\t\t\(modelName ?? "NOT AVAILABLE")\n"
+                    + "\tSerial Number:\t\t\(serialNumber ?? "NOT AVAILABLE")\n"
+                    + "\tHardware Revision:\t\(hardwareRevision ?? "NOT AVAILABLE")\n"
+                    + "\tFirmware Revision:\t\(firmwareRevision ?? "NOT AVAILABLE")\n"
+                    + "\tSoftware Revision:\t\(softwareRevision ?? "NOT AVAILABLE")\n"
+        
+        for service in services {
+            ret += "\tService (\(service.uuid)):\n\(String(describing: service))\n"
+        }
+        
+        return ret
+    }
+
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Methods -
     /* ################################################################################################################################## */

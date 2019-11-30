@@ -28,7 +28,7 @@ import Foundation
 /**
  This is a standard service class.
  */
-class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
+class RVS_BTDriver_Service: NSObject, RVS_BTDriver_ServiceProtocol {
     /* ################################################################################################################################## */
     // MARK: - Subscriber Support -
     /* ################################################################################################################################## */
@@ -107,6 +107,19 @@ class RVS_BTDriver_Service: RVS_BTDriver_ServiceProtocol {
         internal_subscribers.forEach {
             $0.serviceStatusUpdate(self)
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     This displays a useful debug display of the service data.
+     */
+    override var description: String {
+        var ret = ""
+        
+        for property in properties {
+            ret += "\t\tProperty (\(property.uuid)):\t\(String(describing: property.value))\n"
+        }
+        return ret
     }
 }
 

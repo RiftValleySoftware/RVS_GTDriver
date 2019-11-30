@@ -147,6 +147,9 @@ extension RVS_BTDriver {
                 
                 // If we have a delegate, we send it a notification that a device was added.
                 delegate?.btDriver(self, newDeviceAdded: device)
+                #if DEBUG
+                    print("The new device: \(String(describing: device))")
+                #endif
             }
         }
 
