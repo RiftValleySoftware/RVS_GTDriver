@@ -548,7 +548,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     override internal func disconnect() {
         if .disconnected != peripheral.state { // This applies everywhere except when explicitly disconnected.
             #if DEBUG
-                print("Disonnecting the device: \(String(describing: self))")
+                print("Disconnecting the device: \(String(describing: self))")
             #endif
             centralManager.cancelPeripheralConnection(peripheral)
         }
@@ -595,6 +595,10 @@ extension RVS_BTDriver_Device_BLE {
             }
         }
         
+        #if DEBUG
+            print("No Service for this characteristic: \(inCBCharacteristic)\n")
+        #endif
+        
         return nil
     }
     
@@ -602,14 +606,24 @@ extension RVS_BTDriver_Device_BLE {
     /**
      This searches the device, and returns a service that has a certain UUID.
      
-     - parameter inUUID: A String, with the UUID we are searching for.
+     - parameter inUUIDString: A String, with the UUID we are searching for.
      
      - returns: The Service instance for the UUID. Nil, if it can't be matched.
      */
-    internal func serviceInstanceForCBUUID(_ inUUID: String) -> RVS_BTDriver_Service_BLE! {
+    internal func serviceInstanceForCBUUID(_ inUUIDString: String) -> RVS_BTDriver_Service_BLE! {
+        #if DEBUG
+            print("Searching for a service instance for this UUID: \(inUUIDString)")
+        #endif
+        
         for serviceInstance in internal_holding_pen {
             if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
-                if serviceInstance.uuid == inUUID {
+                #if DEBUG
+                    print("\tHolding Pen Service: \(serviceInstance.uuid)")
+                #endif
+                if serviceInstance.uuid == inUUIDString {
+                    #if DEBUG
+                        print("Found Holding Pen Service: \(serviceInstance.uuid)\n")
+                    #endif
                     return serviceInstance
                 }
             }
@@ -617,12 +631,22 @@ extension RVS_BTDriver_Device_BLE {
         
         for serviceInstance in internal_service_list {
             if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
-                if serviceInstance.uuid == inUUID {
+                #if DEBUG
+                    print("\tMain List Service: \(serviceInstance.uuid)")
+                #endif
+                if serviceInstance.uuid == inUUIDString {
+                    #if DEBUG
+                        print("Found Main List Service: \(serviceInstance.uuid)\n")
+                    #endif
                     return serviceInstance
                 }
             }
         }
         
+        #if DEBUG
+            print("No Service for this UUID: \(inUUIDString)\n")
+        #endif
+
         return nil
     }
     
@@ -650,6 +674,10 @@ extension RVS_BTDriver_Device_BLE {
                 }
             }
         }
+        
+        #if DEBUG
+            print("No Property for this characteristic: \(inCBCharacteristic)\n")
+        #endif
 
         return nil
     }
@@ -663,9 +691,19 @@ extension RVS_BTDriver_Device_BLE {
      - returns: The Property instance for the UID. Nil, if it can't be matched.
      */
     internal func propertyInstanceForCBUUID(_ inUUIDString: String) -> RVS_BTDriver_Property_BLE! {
+        #if DEBUG
+            print("Searching for a property instance for this UUID: \(inUUIDString)\n")
+        #endif
+        
         for serviceInstance in internal_holding_pen {
             if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
+                #if DEBUG
+                    print("\tHolding Pen Service: \(serviceInstance.uuid)")
+                #endif
                 if let propertyInstance = serviceInstance.propertyInstanceForCBUUID(inUUIDString) {
+                    #if DEBUG
+                        print("Found Holding Pen Service Property: \(propertyInstance.uuid)")
+                    #endif
                     return propertyInstance
                 }
             }
@@ -673,11 +711,21 @@ extension RVS_BTDriver_Device_BLE {
         
         for serviceInstance in internal_service_list {
             if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
+                #if DEBUG
+                    print("\tMain List Service: \(serviceInstance.uuid)")
+                #endif
                 if let propertyInstance = serviceInstance.propertyInstanceForCBUUID(inUUIDString) {
+                    #if DEBUG
+                        print("Found Main List Property: \(propertyInstance.uuid)\n")
+                    #endif
                     return propertyInstance
                 }
             }
         }
+        
+        #if DEBUG
+            print("No property for this UUID: \(inUUIDString)\n")
+        #endif
 
         return nil
     }
