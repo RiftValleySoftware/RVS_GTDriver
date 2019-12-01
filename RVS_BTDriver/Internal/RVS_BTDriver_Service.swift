@@ -147,6 +147,7 @@ extension RVS_BTDriver_Service {
                 addPropertyToMainList(inProperty)
                 
                 notifySubscribersOfNewProperty(inProperty)
+                notifySubscribersOfStatusUpdate()
             } else {
                 assert(false, "Property was not found in the holding pen! This is bad.")
                 return

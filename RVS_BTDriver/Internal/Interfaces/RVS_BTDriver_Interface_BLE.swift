@@ -380,6 +380,24 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      */
     /* ################################################################## */
     /**
+     A name for the device (may be the model name, may be something else).
+     */
+    override public internal(set) var deviceName: String! {
+        get {
+            if let name = peripheral?.name {
+                return name
+            }
+            
+            return modelName
+        }
+        
+        set {
+            _ = newValue
+        }
+    }
+
+    /* ################################################################## */
+    /**
      If the device has a Device Info Service with a model name, it is available here.
      */
     override public internal(set) var modelName: String! {
@@ -504,27 +522,6 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
                 disconnect()
             }
         }
-    }
-    
-    /* ################################################################## */
-    /**
-     This displays a useful debug display of the device data.
-     */
-    override var description: String {
-        var ret =   "BLE Device:\n"
-                    + "\tPeripheral Name:\t\(peripheral?.name ?? "NOT AVAILABLE")\n"
-                    + "\tManufacturer Name:\t\(manufacturerName ?? "NOT AVAILABLE")\n"
-                    + "\tModel Name:\t\t\t\(modelName ?? "NOT AVAILABLE")\n"
-                    + "\tSerial Number:\t\t\(serialNumber ?? "NOT AVAILABLE")\n"
-                    + "\tHardware Revision:\t\(hardwareRevision ?? "NOT AVAILABLE")\n"
-                    + "\tFirmware Revision:\t\(firmwareRevision ?? "NOT AVAILABLE")\n"
-                    + "\tSoftware Revision:\t\(softwareRevision ?? "NOT AVAILABLE")\n"
-        
-        for service in services {
-            ret += "\tService (\(service.uuid)):\n\(String(describing: service))\n"
-        }
-        
-        return ret
     }
 
     /* ################################################################################################################################## */

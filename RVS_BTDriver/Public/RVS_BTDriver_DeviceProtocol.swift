@@ -97,10 +97,16 @@ public protocol RVS_BTDriver_DeviceProtocol: class {
     
     /* ################################################################## */
     /**
+     A name for the device (may be the model name, may be something else).
+     */
+    var deviceName: String! { get }
+    
+    /* ################################################################## */
+    /**
      If the device has a Device Info Service with a model name, it is available here.
      */
     var modelName: String! { get }
-    
+
     /* ################################################################## */
     /**
      If the device has a Device Info Service with a manufacturer name, it is available here.

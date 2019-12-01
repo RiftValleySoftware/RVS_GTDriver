@@ -111,6 +111,12 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     
     /* ################################################################## */
     /**
+     A name for the device (may be the model name, may be something else).
+     */
+    public internal(set) var deviceName: String!
+
+    /* ################################################################## */
+    /**
      If the device has a Device Info Service with a model name, it is available here.
      */
     public internal(set) var modelName: String!
@@ -171,6 +177,7 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
      */
     override var description: String {
         var ret =   "Generic Device:\n"
+                    + "\tDevice Name:\t\t\(deviceName ?? "NOT AVAILABLE")\n"
                     + "\tManufacturer Name:\t\(manufacturerName ?? "NOT AVAILABLE")\n"
                     + "\tModel Name:\t\t\t\(modelName ?? "NOT AVAILABLE")\n"
                     + "\tSerial Number:\t\t\(serialNumber ?? "NOT AVAILABLE")\n"
@@ -179,7 +186,7 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
                     + "\tSoftware Revision:\t\(softwareRevision ?? "NOT AVAILABLE")\n"
         
         for service in services {
-            ret += "\t\tService (\(service.uuid):\t\(String(describing: service))\n"
+            ret += "\n\tService (\(service.uuid)):\n\(String(describing: service))\n"
         }
         
         return ret
@@ -300,6 +307,7 @@ extension RVS_BTDriver_Device {
                 internal_service_list.append(service)
                 
                 notifySubscribersOfNewService(service)
+                notifySubscribersOfStatusUpdate()
                 break
             } else {
                 assert(false, "Service was not found in the holding pen!")

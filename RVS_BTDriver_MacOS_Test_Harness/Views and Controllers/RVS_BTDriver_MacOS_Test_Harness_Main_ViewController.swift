@@ -135,10 +135,11 @@ extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: NSTableViewDelega
      */
     func tableView(_ inTableView: NSTableView, objectValueFor inTableColumn: NSTableColumn?, row inRow: Int) -> Any? {
         if  let device = driverInstance?[inRow],
-            let name = device.modelName {
+            let name = device.deviceName {
             return name
         }
-        return "ERROR"
+        
+        return "NO DEVICE NAME"
     }
     
     /* ################################################################## */
