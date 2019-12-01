@@ -21,6 +21,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import Foundation
+import CoreBluetooth
 
 /* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_VendorProtocol Protocol -
@@ -48,7 +49,7 @@ internal protocol RVS_BTDriver_VendorProtocol {
      - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface()` has not yet been called.
      */
     var interface: RVS_BTDriver_InterfaceProtocol! { get }
-
+    
     /* ################################################################## */
     /**
      REQUIRED: Factory method for creating an instance of the vendor device.
@@ -58,6 +59,16 @@ internal protocol RVS_BTDriver_VendorProtocol {
      */
     func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device!
     
+    /* ################################################################## */
+    /**
+     REQUIRED: Factory method for creating an instance of a service.
+     
+     - parameter inServiceRecord: The Bluetooth info for the service, the vendor should cast this to its service info. This can be nil. If so, then the method should return nil.
+     - parameter forDevice: The device that "owns" this service.
+     - returns: a service instance. Can be nil, if the vendor can't instantiate the service.
+     */
+    func makeService(_ inServiceRecord: CBService?, forDevice inDeviceRecord: RVS_BTDriver_Device) -> RVS_BTDriver_Service!
+
     /* ################################################################## */
     /**
      - parameter queue: The DispatchQueue to use for this (can be nil, in which case, the main queue is used).

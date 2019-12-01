@@ -118,6 +118,24 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
         
         return nil
     }
+    
+    /* ################################################################## */
+    /**
+     REQUIRED: Factory method for creating an instance of a service.
+     
+     - parameter inServiceRecord: The Bluetooth info for the service, the vendor should cast this to its service info. This can be nil. If so, then the method should return nil.
+     - returns: a service instance. Can be nil, if the vendor can't instantiate the service.
+     */
+    func makeService(_ inServiceRecord: CBService?, forDevice inDeviceRecord: RVS_BTDriver_Device) -> RVS_BTDriver_Service! {
+        if let service = inServiceRecord {
+            let ret = RVS_BTDriver_Service_BLE(owner: inDeviceRecord, uuid: service.uuid.uuidString)
+            ret.cbService = inServiceRecord
+            
+            return ret
+        }
+        
+        return nil
+    }
 
     /* ################################################################## */
     /**

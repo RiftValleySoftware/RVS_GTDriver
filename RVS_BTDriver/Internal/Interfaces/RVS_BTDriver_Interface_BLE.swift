@@ -803,14 +803,14 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
                             print("Creating DeviceInfo Service.")
                         #endif
                         serviceInstance = RVS_BTDriver_Service_DeviceInfo_BLE(owner: self, uuid: service.uuid.uuidString)
+                        
+                        serviceInstance.cbService = service
                     } else {
                         #if DEBUG
-                            print("Creating Generic Service.")
+                            print("Creating Vendor-specific Service.")
                         #endif
-                        serviceInstance = RVS_BTDriver_Service_BLE(owner: self, uuid: service.uuid.uuidString)
+                        serviceInstance = vendor?.makeService(service, forDevice: self) as? RVS_BTDriver_Service_BLE
                     }
-                    
-                    serviceInstance.cbService = service
                     
                     #if DEBUG
                         print("Discovering Initial Characteristics for this Service: \(String(describing: serviceInstance.internal_uuid))")
