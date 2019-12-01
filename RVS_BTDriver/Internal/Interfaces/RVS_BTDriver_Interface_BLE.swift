@@ -361,9 +361,6 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /// The initial state (unititialized).
     private var _state: RVS_BTDriver_State_Machine_StateEnum = .uninitialized
     
-    /// These are the services that we look up upon initialization connection.
-    internal var internal_initalServiceDiscovery: [CBUUID] = []
-    
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Calculated Properties -
     /* ################################################################################################################################## */
@@ -714,18 +711,8 @@ extension RVS_BTDriver_Device_BLE: RVS_BTDriver_State_Machine {
             print("CONNECTED (BLE Pre-Init)")
         #endif
         if .initializationInProgress == _state {
-            // If we are initializing, then we create service objects for our services, and add them to the holding pen.
-            internal_initalServiceDiscovery.forEach {
-                switch $0.uuidString {
-                case RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue:
-                    internal_holding_pen.append(RVS_BTDriver_Service_DeviceInfo_BLE(owner: self, uuid: $0.uuidString))
-                    
-                default:
-                    internal_holding_pen.append(RVS_BTDriver_Service_BLE(owner: self, uuid: $0.uuidString))
-                }
-            }
-            // Then we tell the device to discover these services.
-            peripheral.discoverServices(internal_initalServiceDiscovery)
+            // We tell the device to discover all services.
+            peripheral.discoverServices(nil)
         }
     }
     
@@ -781,6 +768,20 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
      - parameter didDiscoverServices: Any errors that ocurred.
     */
     internal func peripheral(_ inPeripheral: CBPeripheral, didDiscoverServices inError: Error?) {
+        /* ################################################################## */
+        /**
+         This searches the holding pen for instances of a given Service object.
+         
+         - parameter inService: The service object we're looking for.
+         - returns: tre, if we already have the service.
+        */
+        func getHoldingPenInstanceForThisService(_ inService: CBService) -> RVS_BTDriver_Service_BLE! {
+            for serviceInstance in internal_holding_pen where serviceInstance.internal_uuid == inService.uuid.uuidString {
+                return serviceInstance as? RVS_BTDriver_Service_BLE
+            }
+            return nil
+        }
+        
         assert(inPeripheral === peripheral, "Wrong Peripheral!")
         if let error = inError {
             #if DEBUG
@@ -791,22 +792,42 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
             #if DEBUG
                 print("\n***> Services Discovered:\n\t\(String(describing: services))")
             #endif
-            func getHoldingPenInstanceForThisService(_ inService: CBService) -> RVS_BTDriver_Service_BLE! {
-                for serviceInstance in internal_holding_pen where serviceInstance.internal_uuid == inService.uuid.uuidString {
-                    return serviceInstance as? RVS_BTDriver_Service_BLE ?? nil
-                }
-                return nil
-            }
             
             for service in services {
-                if let serviceInstance = getHoldingPenInstanceForThisService(service) {
+                var serviceInstance: RVS_BTDriver_Service_BLE!
+                
+                // If we have not discovered the service, we need to create a new instance of the service, and add it to the holding pen, first.
+                if nil == getHoldingPenInstanceForThisService(service) {
+                    if service.uuid.uuidString == RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue {
+                        #if DEBUG
+                            print("Creating DeviceInfo Service.")
+                        #endif
+                        serviceInstance = RVS_BTDriver_Service_DeviceInfo_BLE(owner: self, uuid: service.uuid.uuidString)
+                    } else {
+                        #if DEBUG
+                            print("Creating Generic Service.")
+                        #endif
+                        serviceInstance = RVS_BTDriver_Service_BLE(owner: self, uuid: service.uuid.uuidString)
+                    }
+                    
                     serviceInstance.cbService = service
-                    serviceInstance.internal_uuid = service.uuid.uuidString
+                    
                     #if DEBUG
                         print("Discovering Initial Characteristics for this Service: \(String(describing: serviceInstance.internal_uuid))")
                     #endif
-                    serviceInstance.discoverInitialCharacteristics()
+                    
+                    internal_holding_pen.append(serviceInstance)
+                } else {
+                    // If we already have the service in our holding pen, we don't need to do anything more. Bug out.
+                    #if DEBUG
+                        print("Service already in holding pen.")
+                    #endif
                 }
+            }
+            
+            // After we have catalogued everything, then we start the process of discovering characteristics.
+            for serviceInstance in internal_holding_pen {
+                serviceInstance.discoverInitialCharacteristics()
             }
         } else {
             #if DEBUG
