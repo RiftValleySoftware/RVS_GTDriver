@@ -136,7 +136,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
         
         if let deviceInstance = deviceInstance {
             for service in deviceInstance.services {
-                serviceHeader = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: "SERVICE: \(service.uuid)", value: "")
+                serviceHeader = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: service.uuid, value: "")
                 for property in service.properties {
                     switch property.value {
                     case .stringValue(let value):
@@ -175,17 +175,6 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
     
     /* ################################################################## */
     /**
-     Called to remove the device from the driver.
-     */
-    func deleteMyself() {
-        DispatchQueue.main.async {
-            self.appDelegateObject.mainDisplayScreen.reloadTable()
-            self.dismiss(nil)
-        }
-    }
-    
-    /* ################################################################## */
-    /**
      Sets up the table.
      */
     func populateTable() {
@@ -207,6 +196,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
         if let modelTitle = deviceInstance?.modelName {
             title = modelTitle
         }
+        propertyTable?.floatsGroupRows = true
         populateTable()
     }
 }
@@ -227,30 +217,10 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableView
     func numberOfRows(in inTableView: NSTableView) -> Int {
         return tableData.count
     }
-
-    /* ################################################################## */
-    /**
-     This is called to supply the string display for one row that corresponds to a device.
-     
-     - parameters:
-        - inTableView: The table instance.
-        - viewFor: Container object for the column that holds the row.
-        - row: 0-based Int, with the index of the row, within the column.
-     
-     - returns: A new Text View, with the device model name.
-     */
-    func tableView(_ inTableView: NSTableView, objectValueFor inTableColumn: NSTableColumn?, row inRow: Int) -> Any? {
-        switch inTableColumn?.identifier {
-        case keyColumnID:
-            return tableData[inRow].key
-        default:
-            return tableView(inTableView, isGroupRow: inRow) ? nil : tableData[inRow].value
-        }
-    }
 }
 
 /* ################################################################################################################################## */
-// MARK: - NSTableViewDataSource Methods
+// MARK: - NSTableViewDelegate Methods
 /* ################################################################################################################################## */
 extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableViewDelegate {
     /* ################################################################## */
@@ -260,8 +230,52 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableView
      - parameters:
         - inTableView: The table instance.
         - isGroupRow: The 0-based Int index of the row.
+     
+     - returns: True, if this is a group header row.
      */
     func tableView(_ inTableView: NSTableView, isGroupRow inRow: Int) -> Bool {
         return tableData[inRow].value.isEmpty
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to provide a view to use for the cell.
+     
+     - parameters:
+        - inTableView: The table instance.
+        - viewFor: Container object for the column that holds the row.
+        - row: 0-based Int, with the index of the row, within the column.
+     
+     - returns: A new view object, with the value, therein.
+     */
+    func tableView(_ inTableView: NSTableView, viewFor inTableColumn: NSTableColumn?, row inRow: Int) -> NSView? {
+        // If we have a column, then we are a regular, two-part row.
+        if  let column = inTableColumn,
+            let cell = inTableView.makeView(withIdentifier: column.identifier, owner: nil) as? NSTableCellView {
+            cell.textField?.isEditable = false
+            cell.textField?.drawsBackground = true
+            cell.textField?.textColor = NSColor.black
+            cell.textField?.backgroundColor = (0 == inRow % 2) ? NSColor.clear : NSColor(red: 1, green: 1, blue: 1, alpha: 0.25)
+            switch inTableColumn?.identifier {
+            case keyColumnID:
+                cell.textField?.stringValue = tableData[inRow].key
+                cell.textField?.font = NSFont.boldSystemFont(ofSize: 10)
+                cell.textField?.alignment = .right
+            default:
+                cell.textField?.stringValue = tableData[inRow].value
+                cell.textField?.font = NSFont.systemFont(ofSize: 10)
+            }
+            return cell
+        } else {    // Otherwise, we are a one-part header.
+            let groupHeader = NSTextView()
+            groupHeader.isEditable = false
+            groupHeader.font = NSFont.boldSystemFont(ofSize: 12)
+            groupHeader.alignment = .center
+            groupHeader.string = tableData[inRow].key
+            groupHeader.drawsBackground = true
+            groupHeader.backgroundColor = NSColor.black
+            groupHeader.textColor = NSColor.white
+            return groupHeader
+        }
     }
 }
