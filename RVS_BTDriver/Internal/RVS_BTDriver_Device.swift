@@ -215,6 +215,16 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
             $0.deviceStatusUpdate(self)
         }
     }
+    
+    /* ################################################################## */
+    /**
+     This is declared here, so it can be overridden.
+     
+     This one does nothing. It should be overridden.
+     */
+    public func discoverServices() {
+        precondition(false, "Cannot Call the Base Instance!")
+    }
 }
 
 /* ###################################################################################################################################### */

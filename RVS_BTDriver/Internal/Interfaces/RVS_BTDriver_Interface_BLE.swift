@@ -273,12 +273,12 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
 
         // If we made it here, we are a valid device, and ready for inspection.
         for vendor in vendors {
-            let deviceInfo = DeviceInfo(peripheral: inPeripheral, centralManager: inCentral, advertisementData: inAdvertisementData)
-            if let device = vendor.makeDevice(deviceInfo) {
+            if let device = vendor.makeDevice(DeviceInfo(peripheral: inPeripheral, centralManager: inCentral, advertisementData: inAdvertisementData)) {
                 #if DEBUG
                     print("\tVendor: \(vendor) has created a device to handle this peripheral: \(inPeripheral).")
                 #endif
                 driver.addDiscoveredDevice(device)
+                device.isConnected = true   // We connect, in order to start service discovery.
                 break
             }
         }
@@ -553,6 +553,17 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
             centralManager.cancelPeripheralConnection(peripheral)
         }
     }
+    
+    /* ################################################################## */
+    /**
+     This one does nothing. It should be overridden.
+     */
+    override public func discoverServices() {
+        if .initializationInProgress == _state {
+            // We tell the device to discover all services.
+            peripheral.discoverServices(nil)
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -707,10 +718,7 @@ extension RVS_BTDriver_Device_BLE: RVS_BTDriver_State_Machine {
         #if DEBUG
             print("CONNECTED (BLE Pre-Init)")
         #endif
-        if .initializationInProgress == _state {
-            // We tell the device to discover all services.
-            peripheral.discoverServices(nil)
-        }
+        discoverServices()
     }
     
     /* ################################################################## */
