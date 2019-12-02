@@ -561,6 +561,9 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     override public func discoverServices() {
         if .initializationInProgress == _state {
             // We tell the device to discover all services.
+            #if DEBUG
+                print("Discovering all services for the device: \(String(describing: self))")
+            #endif
             peripheral.discoverServices(nil)
         }
     }
@@ -580,16 +583,28 @@ extension RVS_BTDriver_Device_BLE {
      */
     internal func serviceInstanceForCBCharacteristic(_ inCBCharacteristic: CBCharacteristic) -> RVS_BTDriver_Service_BLE! {
         for serviceInstance in internal_holding_pen {
+            #if DEBUG
+                print("\tHolding Pen Service: \(serviceInstance.uuid)")
+            #endif
             if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
                 if serviceInstance.cbService === inCBCharacteristic.service {
+                    #if DEBUG
+                        print("Service: \(serviceInstance) found in the holding pen for the characteristic: \(inCBCharacteristic)\n")
+                    #endif
                     return serviceInstance
                 }
             }
         }
         
         for serviceInstance in internal_service_list {
+            #if DEBUG
+                print("\tMain List Service: \(serviceInstance.uuid)")
+            #endif
             if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
                 if serviceInstance.cbService === inCBCharacteristic.service {
+                    #if DEBUG
+                        print("Service: \(serviceInstance) found in main list for the characteristic: \(inCBCharacteristic)\n")
+                    #endif
                     return serviceInstance
                 }
             }
@@ -660,17 +675,41 @@ extension RVS_BTDriver_Device_BLE {
      */
     internal func propertyInstanceForCBCharacteristic(_ inCBCharacteristic: CBCharacteristic) -> RVS_BTDriver_Property_BLE! {
         for serviceInstance in internal_holding_pen {
+            #if DEBUG
+                print("\tHolding Pen Service: \(serviceInstance.uuid)")
+            #endif
             if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
                 if serviceInstance.cbService === inCBCharacteristic.service {
-                    return serviceInstance.propertyInstanceForCBCharacteristic(inCBCharacteristic)
+                    #if DEBUG
+                        print("\tSearching For Holding Pen Property for Characteristic: \(inCBCharacteristic)\n")
+                    #endif
+                    
+                    if let property = serviceInstance.propertyInstanceForCBCharacteristic(inCBCharacteristic) {
+                        #if DEBUG
+                            print("Found Holding Pen Property: \(property)\n")
+                        #endif
+                        return property
+                    }
                 }
             }
         }
         
         for serviceInstance in internal_service_list {
+            #if DEBUG
+                print("\tMain List Service: \(serviceInstance.uuid)")
+            #endif
             if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
                 if serviceInstance.cbService === inCBCharacteristic.service {
-                    return serviceInstance.propertyInstanceForCBCharacteristic(inCBCharacteristic)
+                    #if DEBUG
+                        print("\tSearching For Main List Property for Characteristic: \(inCBCharacteristic)\n")
+                    #endif
+                    
+                    if let property = serviceInstance.propertyInstanceForCBCharacteristic(inCBCharacteristic) {
+                        #if DEBUG
+                            print("Found Main List Property: \(property)\n")
+                        #endif
+                        return property
+                    }
                 }
             }
         }
@@ -702,7 +741,7 @@ extension RVS_BTDriver_Device_BLE {
                 #endif
                 if let propertyInstance = serviceInstance.propertyInstanceForCBUUID(inUUIDString) {
                     #if DEBUG
-                        print("Found Holding Pen Service Property: \(propertyInstance.uuid)")
+                        print("Found Holding Pen Property: \(propertyInstance.uuid)")
                     #endif
                     return propertyInstance
                 }
