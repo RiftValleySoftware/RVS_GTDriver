@@ -63,9 +63,6 @@
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Base_Interface.html">RVS_BTDriver_Base_Interface</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Base_Interface/RVS_GATT_UUID.html">– RVS_GATT_UUID</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device.html">RVS_BTDriver_Device</a>
               </li>
               <li class="nav-group-task">
@@ -73,6 +70,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_GoTenna_Mesh.html">RVS_BTDriver_Device_GoTenna_Mesh</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_OBD.html">RVS_BTDriver_Device_OBD</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BLE.html">RVS_BTDriver_Interface_BLE</a>
@@ -103,6 +103,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna_Mesh/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD.html">RVS_BTDriver_Vendor_OBD</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
               </li>
             </ul>
           </li>
@@ -264,33 +270,6 @@
                     </section>
                   </div>
                 </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B11_Device_BLEC31internal_initalServiceDiscoverySaySo6CBUUIDCGvp"></a>
-                    <a name="//apple_ref/swift/Property/internal_initalServiceDiscovery" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B11_Device_BLEC31internal_initalServiceDiscoverySaySo6CBUUIDCGvp">internal_initalServiceDiscovery</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>These are the services that we look up upon initialization connection.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">internal_initalServiceDiscovery</span><span class="p">:</span> <span class="p">[</span><span class="kt">CBUUID</span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -302,6 +281,71 @@
                 </a>
               </div>
               <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B11_Device_BLEC17deviceInfoServiceAA0a1_b1_i1_eh1_F0CSgvp"></a>
+                    <a name="//apple_ref/swift/Property/deviceInfoService" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B11_Device_BLEC17deviceInfoServiceAA0a1_b1_i1_eh1_F0CSgvp">deviceInfoService</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If the device has a Device Info service, we access the service instance here.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">deviceInfoService</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_BTDriver_Service_DeviceInfo_BLE.html">RVS_BTDriver_Service_DeviceInfo_BLE</a></span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/RVS_BTDriver_BLE_Device%20Internal%20Base%20Class%20Override%20Calculated%20Properties2"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_BLE_Device Internal Base Class Override Calculated Properties" class="dashAnchor"></a>
+                <a href="#/RVS_BTDriver_BLE_Device%20Internal%20Base%20Class%20Override%20Calculated%20Properties2">
+                  <h3 class="section-name">RVS_BTDriver_BLE_Device Internal Base Class Override Calculated Properties</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B11_Device_BLEC10deviceNameSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/deviceName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B11_Device_BLEC10deviceNameSSSgvp">deviceName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A name for the device (may be the model name, may be something else).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">public</span> <span class="kd">internal(set)</span> <span class="k">var</span> <span class="nv">deviceName</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -560,6 +604,33 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B11_Device_BLEC16discoverServicesyyF"></a>
+                    <a name="//apple_ref/swift/Method/discoverServices()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B11_Device_BLEC16discoverServicesyyF">discoverServices()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This one does nothing. It should be overridden.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">discoverServices</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -617,6 +688,56 @@
                       <div>
                         <h4>Return Value</h4>
                         <p>The Service instance for the characteristic. Nil, if it can&rsquo;t be matched.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B11_Device_BLEC24serviceInstanceForCBUUIDyAA0a1_b9_Service_F0CSgSSF"></a>
+                    <a name="//apple_ref/swift/Method/serviceInstanceForCBUUID(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B11_Device_BLEC24serviceInstanceForCBUUIDyAA0a1_b9_Service_F0CSgSSF">serviceInstanceForCBUUID(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This searches the device, and returns a service that has a certain UUID.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">func</span> <span class="nf">serviceInstanceForCBUUID</span><span class="p">(</span><span class="n">_</span> <span class="nv">inUUIDString</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RVS_BTDriver_Service_BLE.html">RVS_BTDriver_Service_BLE</a></span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inUUIDString</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A String, with the UUID we are searching for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The Service instance for the UUID. Nil, if it can&rsquo;t be matched.</p>
                       </div>
                     </section>
                   </div>
@@ -947,6 +1068,7 @@
                       <div class="abstract">
                         <p>Called when we have discovered services for the peripheral.</p>
 
+                        <a href="../Classes/RVS_BTDriver_Device_BLE/peripheral%28_%3AdidDiscoverServices%3A%29.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>

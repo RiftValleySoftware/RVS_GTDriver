@@ -63,9 +63,6 @@
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Base_Interface.html">RVS_BTDriver_Base_Interface</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Base_Interface/RVS_GATT_UUID.html">– RVS_GATT_UUID</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device.html">RVS_BTDriver_Device</a>
               </li>
               <li class="nav-group-task">
@@ -73,6 +70,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_GoTenna_Mesh.html">RVS_BTDriver_Device_GoTenna_Mesh</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_OBD.html">RVS_BTDriver_Device_OBD</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BLE.html">RVS_BTDriver_Interface_BLE</a>
@@ -103,6 +103,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna_Mesh/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD.html">RVS_BTDriver_Vendor_OBD</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
               </li>
             </ul>
           </li>
@@ -196,7 +202,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This is a read-only accessor for the object that <q>owns</q> this instance.</p>
+                        <p>REQUIRED: This is a read-only accessor for the object that <q>owns</q> this instance.</p>
 
                       </div>
                       <div class="declaration">
@@ -223,19 +229,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>REQUIRED: The value, expressed as raw Data. Nil, if no value available (or not available as Data).</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">rawValue</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">rawValue</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The value, expressed as raw Data. Nil, if no value available (or not available as Data).</p>
                       </div>
                     </section>
                   </div>
@@ -253,7 +256,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>REQUIRED: The Value, but cast into a specific data type (selected by the enum).</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -262,10 +266,6 @@
                           <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Enums/RVS_BTDriver_PropertyProtocol_Type_Enum.html">RVS_BTDriver_PropertyProtocol_Type_Enum</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The Value, but cast into a specific data type (selected by the enum).</p>
                       </div>
                     </section>
                   </div>
@@ -283,7 +283,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>REQUIRED: The user description of the value (if any). If none, the String will be empty.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -292,10 +293,6 @@
                           <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The user description of the value (if any). If none, the String will be empty.</p>
                       </div>
                     </section>
                   </div>
@@ -313,19 +310,286 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>REQUIRED: The UUID of the value characteristic, as a String.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">uuid</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">uuid</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The UUID of the value characteristic, as a String.</p>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP12canBroadcastSbvp"></a>
+                    <a name="//apple_ref/swift/Property/canBroadcast" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP12canBroadcastSbvp">canBroadcast</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>REQUIRED: True, if the characteristic can broadcast its value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">canBroadcast</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP7canReadSbvp"></a>
+                    <a name="//apple_ref/swift/Property/canRead" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP7canReadSbvp">canRead</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>REQUIRED: True, if the characteristic can be read.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">canRead</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP8canWriteSbvp"></a>
+                    <a name="//apple_ref/swift/Property/canWrite" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP8canWriteSbvp">canWrite</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>REQUIRED: True, if the characteristic can be written, with or without a response.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">canWrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP20canWriteWithResponseSbvp"></a>
+                    <a name="//apple_ref/swift/Property/canWriteWithResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP20canWriteWithResponseSbvp">canWriteWithResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>REQUIRED: True, if the characteristic can be written, with a response.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">canWriteWithResponse</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP23canWriteWithoutResponseSbvp"></a>
+                    <a name="//apple_ref/swift/Property/canWriteWithoutResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP23canWriteWithoutResponseSbvp">canWriteWithoutResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>REQUIRED: True, if the characteristic can be written, without a response.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">canWriteWithoutResponse</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP9canNotifySbvp"></a>
+                    <a name="//apple_ref/swift/Property/canNotify" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP9canNotifySbvp">canNotify</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>REQUIRED: True, if the characteristic can notify.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">canNotify</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP11canIndicateSbvp"></a>
+                    <a name="//apple_ref/swift/Property/canIndicate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP11canIndicateSbvp">canIndicate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>REQUIRED: True, if the characteristic can indicate. The driver need sto respond to indications.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">canIndicate</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP32canHaveAuthenticatedSignedWritesSbvp"></a>
+                    <a name="//apple_ref/swift/Property/canHaveAuthenticatedSignedWrites" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP32canHaveAuthenticatedSignedWritesSbvp">canHaveAuthenticatedSignedWrites</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>REQUIRED: True, if the characteristic can have authenticated signed writes, without a response.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">canHaveAuthenticatedSignedWrites</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP29isEncryptionRequiredForNotifySbvp"></a>
+                    <a name="//apple_ref/swift/Property/isEncryptionRequiredForNotify" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP29isEncryptionRequiredForNotifySbvp">isEncryptionRequiredForNotify</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>REQUIRED: Only trusted devices can subscribe to notifications of this property.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isEncryptionRequiredForNotify</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP33isEncryptionRequiredForIndicationSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isEncryptionRequiredForIndication" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B17_PropertyProtocolP33isEncryptionRequiredForIndicationSbvp">isEncryptionRequiredForIndication</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>REQUIRED: Only trusted devices can see indications of this property.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isEncryptionRequiredForIndication</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>

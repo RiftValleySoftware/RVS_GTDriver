@@ -63,9 +63,6 @@
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Base_Interface.html">RVS_BTDriver_Base_Interface</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Base_Interface/RVS_GATT_UUID.html">– RVS_GATT_UUID</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device.html">RVS_BTDriver_Device</a>
               </li>
               <li class="nav-group-task">
@@ -73,6 +70,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_GoTenna_Mesh.html">RVS_BTDriver_Device_GoTenna_Mesh</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_OBD.html">RVS_BTDriver_Device_OBD</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BLE.html">RVS_BTDriver_Interface_BLE</a>
@@ -103,6 +103,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna_Mesh/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD.html">RVS_BTDriver_Vendor_OBD</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
               </li>
             </ul>
           </li>
@@ -170,7 +176,7 @@
             <h1>RVS_BTDriver_Service</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Service</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Service</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a></span></code></pre>
 
                 </div>
               </div>
@@ -492,6 +498,33 @@ This is defined here, so we can override.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">func</span> <span class="nf">notifySubscribersOfStatusUpdate</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Service(py)description"></a>
+                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Service(py)description">description</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This displays a useful debug display of the service data.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>

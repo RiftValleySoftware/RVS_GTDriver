@@ -63,9 +63,6 @@
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Base_Interface.html">RVS_BTDriver_Base_Interface</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Base_Interface/RVS_GATT_UUID.html">– RVS_GATT_UUID</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device.html">RVS_BTDriver_Device</a>
               </li>
               <li class="nav-group-task">
@@ -73,6 +70,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_GoTenna_Mesh.html">RVS_BTDriver_Device_GoTenna_Mesh</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_OBD.html">RVS_BTDriver_Device_OBD</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BLE.html">RVS_BTDriver_Interface_BLE</a>
@@ -103,6 +103,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna_Mesh/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD.html">RVS_BTDriver_Vendor_OBD</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
               </li>
             </ul>
           </li>
@@ -314,6 +320,68 @@
                       <div>
                         <h4>Return Value</h4>
                         <p>a device instance. Can be nil, if the vendor can&rsquo;t instantiate the device.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B15_VendorProtocolP11makeService_9forDeviceAA0a1_b1_H0CSgSo9CBServiceCSg_AA0a1_b1_J0CtF"></a>
+                    <a name="//apple_ref/swift/Method/makeService(_:forDevice:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B15_VendorProtocolP11makeService_9forDeviceAA0a1_b1_H0CSgSo9CBServiceCSg_AA0a1_b1_J0CtF">makeService(_:forDevice:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>REQUIRED: Factory method for creating an instance of a service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">makeService</span><span class="p">(</span><span class="n">_</span> <span class="nv">inServiceRecord</span><span class="p">:</span> <span class="kt">CBService</span><span class="p">?,</span> <span class="n">forDevice</span> <span class="nv">inDeviceRecord</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_BTDriver_Device.html">RVS_BTDriver_Device</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RVS_BTDriver_Service.html">RVS_BTDriver_Service</a></span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inServiceRecord</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The Bluetooth info for the service, the vendor should cast this to its service info. This can be nil. If so, then the method should return nil.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forDevice</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The device that <q>owns</q> this service.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>a service instance. Can be nil, if the vendor can&rsquo;t instantiate the service.</p>
                       </div>
                     </section>
                   </div>

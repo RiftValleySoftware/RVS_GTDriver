@@ -58,85 +58,85 @@ public protocol RVS_BTDriver_PropertyProtocol: class {
     
     /* ################################################################## */
     /**
-     OPTIONAL: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
+     REQUIRED: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
      */
     var rawValue: Data? { get set }
     
     /* ################################################################## */
     /**
-     OPTIONAL: The Value, but cast into a specific data type (selected by the enum).
+     REQUIRED: The Value, but cast into a specific data type (selected by the enum).
      */
     var value: RVS_BTDriver_PropertyProtocol_Type_Enum { get }
     
     /* ################################################################## */
     /**
-     OPTIONAL: The user description of the value (if any). If none, the String will be empty.
+     REQUIRED: The user description of the value (if any). If none, the String will be empty.
      */
     var description: String { get }
     
     /* ################################################################## */
     /**
-     OPTIONAL: The UUID of the value characteristic, as a String.
+     REQUIRED: The UUID of the value characteristic, as a String.
      */
     var uuid: String { get set }
     
     /* ################################################################## */
     /**
-     OPTIONAL: True, if the characteristic can broadcast its value.
+     REQUIRED: True, if the characteristic can broadcast its value.
      */
     var canBroadcast: Bool { get set }
 
     /* ################################################################## */
     /**
-     OPTIONAL: True, if the characteristic can be read.
+     REQUIRED: True, if the characteristic can be read.
      */
     var canRead: Bool { get set }
     
     /* ################################################################## */
     /**
-     OPTIONAL: True, if the characteristic can be written, with or without a response.
+     REQUIRED: True, if the characteristic can be written, with or without a response.
      */
     var canWrite: Bool { get set }
     
     /* ################################################################## */
     /**
-     OPTIONAL: True, if the characteristic can be written, with a response.
+     REQUIRED: True, if the characteristic can be written, with a response.
      */
     var canWriteWithResponse: Bool { get set }
 
     /* ################################################################## */
     /**
-     OPTIONAL: True, if the characteristic can be written, without a response.
+     REQUIRED: True, if the characteristic can be written, without a response.
      */
     var canWriteWithoutResponse: Bool { get set }
     
     /* ################################################################## */
     /**
-     OPTIONAL: True, if the characteristic can notify.
+     REQUIRED: True, if the characteristic can notify.
      */
     var canNotify: Bool { get set }
     
     /* ################################################################## */
     /**
-     OPTIONAL: True, if the characteristic can indicate. The driver need sto respond to indications.
+     REQUIRED: True, if the characteristic can indicate. The driver need sto respond to indications.
      */
     var canIndicate: Bool { get set }
     
     /* ################################################################## */
     /**
-     OPTIONAL: True, if the characteristic can have authenticated signed writes, without a response.
+     REQUIRED: True, if the characteristic can have authenticated signed writes, without a response.
      */
     var canHaveAuthenticatedSignedWrites: Bool { get set }
     
     /* ################################################################## */
     /**
-     OPTIONAL: Only trusted devices can subscribe to notifications of this property.
+     REQUIRED: Only trusted devices can subscribe to notifications of this property.
      */
     var isEncryptionRequiredForNotify: Bool { get set }
     
     /* ################################################################## */
     /**
-     OPTIONAL: Only trusted devices can see indications of this property.
+     REQUIRED: Only trusted devices can see indications of this property.
      */
     var isEncryptionRequiredForIndication: Bool { get set }
 }

@@ -1,6 +1,12 @@
 {
   "warnings": [
-
+    {
+      "file": "/Volumes/Development/RiftValley/RVS_GTDriver/RVS_BTDriver/Internal/Vendor/RVS_BTDriver_Vendor_OBD.swift",
+      "line": 39,
+      "symbol": "RVS_BTDriver_Vendor_OBD.RVS_BLE_GATT_UUID.userDefinedService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Volumes/Development/RiftValley/RVS_GTDriver"
 }
