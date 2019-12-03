@@ -78,6 +78,107 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     public internal(set) var uuid: String = ""
     
+    /* ###################################################################################################################################### */
+    // MARK: - Public RVS_BTDriver_PropertyProtocol Support
+    /* ###################################################################################################################################### */
+    /* ################################################################## */
+    /**
+     This is a read-only accessor for the object that "owns" this instance.
+     */
+    public var owner: RVS_BTDriver_ServiceProtocol! {
+        return internal_owner
+    }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    public var canBroadcast: Bool {
+        get { return false }
+        set { _ = newValue }
+    }
+
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    public var canRead: Bool {
+        get { return false }
+        set { _ = newValue }
+    }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    public var canWrite: Bool {
+        get { return false }
+        set { _ = newValue }
+    }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    public var canWriteWithResponse: Bool {
+        get { return false }
+        set { _ = newValue }
+    }
+
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    public var canWriteWithoutResponse: Bool {
+        get { return false }
+        set { _ = newValue }
+    }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    public var canNotify: Bool {
+        get { return false }
+        set { _ = newValue }
+    }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    public var canIndicate: Bool {
+        get { return false }
+        set { _ = newValue }
+    }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    public var canHaveAuthenticatedSignedWrites: Bool {
+        get { return false }
+        set { _ = newValue }
+    }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    public var isEncryptionRequiredForNotify: Bool {
+        get { return false }
+        set { _ = newValue }
+    }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing.
+     */
+    public var isEncryptionRequiredForIndication: Bool {
+        get { return false }
+        set { _ = newValue }
+    }
+
     /* ################################################################## */
     /**
      - returns: The Value, but cast into a specific data type (selected by the enum).
@@ -101,19 +202,6 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
         }
         
         return .undefinedValue
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Public RVS_BTDriver_PropertyProtocol Support
-/* ###################################################################################################################################### */
-extension RVS_BTDriver_Property {
-    /* ################################################################## */
-    /**
-     This is a read-only accessor for the object that "owns" this instance.
-     */
-    public var owner: RVS_BTDriver_ServiceProtocol! {
-        return internal_owner
     }
 }
 

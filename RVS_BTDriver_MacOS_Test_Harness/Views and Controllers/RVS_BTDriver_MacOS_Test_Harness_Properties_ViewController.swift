@@ -168,31 +168,29 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
                 var serviceProperties = [RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple]()
 
                 for property in service.properties {
-                    if let property = property as? RVS_BTDriver_Property_BLE {
-                        let key = property.uuid
-                        
-                        switch property.value {
-                        case .stringValue(let value):
-                            if let value = value {
-                                serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: value, read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
-                            }
-                            
-                        case .intValue(let value):
-                            if let value = value {
-                                serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: String(value), read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
-                            }
-                            
-                        case .floatValue(let value):
-                            if let value = value {
-                                serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: String(value), read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
-                            }
-                            
-                        default:
-                            #if DEBUG
-                                print("Unknown Value Type: \(String(describing: property.value))")
-                            #endif
-                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: "UNKNOWN VALUE", read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
+                    let key = property.uuid
+                    
+                    switch property.value {
+                    case .stringValue(let value):
+                        if let value = value {
+                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: value, read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
                         }
+                        
+                    case .intValue(let value):
+                        if let value = value {
+                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: String(value), read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
+                        }
+                        
+                    case .floatValue(let value):
+                        if let value = value {
+                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: String(value), read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
+                        }
+                        
+                    default:
+                        #if DEBUG
+                            print("Unknown Value Type: \(String(describing: property.value))")
+                        #endif
+                        serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: "UNKNOWN VALUE", read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
                     }
                 }
                 

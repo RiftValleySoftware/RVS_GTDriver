@@ -52,31 +52,91 @@ public enum RVS_BTDriver_PropertyProtocol_Type_Enum: Equatable {
 public protocol RVS_BTDriver_PropertyProtocol: class {
     /* ################################################################## */
     /**
-     This is a read-only accessor for the object that "owns" this instance.
+     REQUIRED: This is a read-only accessor for the object that "owns" this instance.
      */
     var owner: RVS_BTDriver_ServiceProtocol! { get }
     
     /* ################################################################## */
     /**
-     - returns: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
+     OPTIONAL: The value, expressed as raw Data. Nil, if no value available (or not available as Data).
      */
-    var rawValue: Data? { get }
+    var rawValue: Data? { get set }
     
     /* ################################################################## */
     /**
-     - returns: The Value, but cast into a specific data type (selected by the enum).
+     OPTIONAL: The Value, but cast into a specific data type (selected by the enum).
      */
     var value: RVS_BTDriver_PropertyProtocol_Type_Enum { get }
     
     /* ################################################################## */
     /**
-     - returns: The user description of the value (if any). If none, the String will be empty.
+     OPTIONAL: The user description of the value (if any). If none, the String will be empty.
      */
     var description: String { get }
     
     /* ################################################################## */
     /**
-     - returns: The UUID of the value characteristic, as a String.
+     OPTIONAL: The UUID of the value characteristic, as a String.
      */
-    var uuid: String { get }
+    var uuid: String { get set }
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL: True, if the characteristic can broadcast its value.
+     */
+    var canBroadcast: Bool { get set }
+
+    /* ################################################################## */
+    /**
+     OPTIONAL: True, if the characteristic can be read.
+     */
+    var canRead: Bool { get set }
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL: True, if the characteristic can be written, with or without a response.
+     */
+    var canWrite: Bool { get set }
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL: True, if the characteristic can be written, with a response.
+     */
+    var canWriteWithResponse: Bool { get set }
+
+    /* ################################################################## */
+    /**
+     OPTIONAL: True, if the characteristic can be written, without a response.
+     */
+    var canWriteWithoutResponse: Bool { get set }
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL: True, if the characteristic can notify.
+     */
+    var canNotify: Bool { get set }
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL: True, if the characteristic can indicate. The driver need sto respond to indications.
+     */
+    var canIndicate: Bool { get set }
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL: True, if the characteristic can have authenticated signed writes, without a response.
+     */
+    var canHaveAuthenticatedSignedWrites: Bool { get set }
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL: Only trusted devices can subscribe to notifications of this property.
+     */
+    var isEncryptionRequiredForNotify: Bool { get set }
+    
+    /* ################################################################## */
+    /**
+     OPTIONAL: Only trusted devices can see indications of this property.
+     */
+    var isEncryptionRequiredForIndication: Bool { get set }
 }

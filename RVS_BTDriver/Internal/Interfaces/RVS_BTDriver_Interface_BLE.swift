@@ -1173,86 +1173,6 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     
     /* ################################################################## */
     /**
-     True, if the characteristic can broadcast its value.
-     */
-    internal var canBroadcast: Bool {
-        return cbCharacteristic.properties.contains(.broadcast)
-    }
-
-    /* ################################################################## */
-    /**
-     True, if the characteristic can be read.
-     */
-    internal var canRead: Bool {
-        return cbCharacteristic.properties.contains(.read)
-    }
-    
-    /* ################################################################## */
-    /**
-     True, if the characteristic can be written, with or without a response.
-     */
-    internal var canWrite: Bool {
-        return canWriteWithResponse || canWriteWithoutResponse
-    }
-    
-    /* ################################################################## */
-    /**
-     True, if the characteristic can be written, with a response.
-     */
-    internal var canWriteWithResponse: Bool {
-        return cbCharacteristic.properties.contains(.write)
-    }
-
-    /* ################################################################## */
-    /**
-     True, if the characteristic can be written, without a response.
-     */
-    internal var canWriteWithoutResponse: Bool {
-        return cbCharacteristic.properties.contains(.writeWithoutResponse)
-    }
-    
-    /* ################################################################## */
-    /**
-     True, if the characteristic can notify.
-     */
-    internal var canNotify: Bool {
-        return cbCharacteristic.properties.contains(.notify)
-    }
-    
-    /* ################################################################## */
-    /**
-     True, if the characteristic can indicate. The driver need sto respond to indications.
-     */
-    internal var canIndicate: Bool {
-        return cbCharacteristic.properties.contains(.indicate)
-    }
-    
-    /* ################################################################## */
-    /**
-     True, if the characteristic can have authenticated signed writes, without a response.
-     */
-    internal var canHaveAuthenticatedSignedWrites: Bool {
-        return cbCharacteristic.properties.contains(.indicate)
-    }
-    
-    /* ################################################################## */
-    /**
-     Only trusted devices can subscribe to notifications of this property.
-     */
-    internal var isEncryptionRequiredForNotify: Bool {
-        return cbCharacteristic.properties.contains(.notifyEncryptionRequired)
-    }
-    
-    /* ################################################################## */
-    /**
-     Only trusted devices can see indications of this property.
-     */
-    internal var isEncryptionRequiredForIndication: Bool {
-        return cbCharacteristic.properties.contains(.indicateEncryptionRequired)
-    }
-    
-    /* ################################################################## */
-    /**
      - returns: The User description (if any) as a String. Nil, if none.
      */
     internal var descriptorString: String! {
@@ -1332,6 +1252,105 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
         
         return desc
     }
+    
+    /* ################################################################## */
+    /**
+     True, if the characteristic can broadcast its value.
+     */
+    override public var canBroadcast: Bool {
+        get { return cbCharacteristic.properties.contains(.broadcast) }
+        set { _ = newValue }
+    }
+
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be read.
+     */
+    override public var canRead: Bool {
+        get { return cbCharacteristic.properties.contains(.read) }
+        set { _ = newValue }
+    }
+
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be written, with or without a response.
+     */
+    override public var canWrite: Bool {
+        get { return canWriteWithResponse || canWriteWithoutResponse }
+        set { _ = newValue }
+    }
+
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be written, with a response.
+     */
+    override public var canWriteWithResponse: Bool {
+        get { return cbCharacteristic.properties.contains(.write) }
+        set { _ = newValue }
+    }
+
+    /* ################################################################## */
+    /**
+     True, if the characteristic can be written, without a response.
+     */
+    override public var canWriteWithoutResponse: Bool {
+        get { return cbCharacteristic.properties.contains(.writeWithoutResponse) }
+        set { _ = newValue }
+    }
+
+    /* ################################################################## */
+    /**
+     True, if the characteristic can notify.
+     */
+    override public var canNotify: Bool {
+        get { return cbCharacteristic.properties.contains(.notify) }
+        set { _ = newValue }
+    }
+
+    /* ################################################################## */
+    /**
+     True, if the characteristic can indicate. The driver need sto respond to indications.
+     */
+    override public var canIndicate: Bool {
+        get { return cbCharacteristic.properties.contains(.indicate) }
+        set { _ = newValue }
+    }
+
+    /* ################################################################## */
+    /**
+     True, if the characteristic can have authenticated signed writes, without a response.
+     */
+    override public var canHaveAuthenticatedSignedWrites: Bool {
+        get { return cbCharacteristic.properties.contains(.authenticatedSignedWrites) }
+        set { _ = newValue }
+    }
+
+    /* ################################################################## */
+    /**
+     Only trusted devices can subscribe to notifications of this property.
+     */
+    override public var isEncryptionRequiredForNotify: Bool {
+        get { return cbCharacteristic.properties.contains(.notifyEncryptionRequired) }
+        set { _ = newValue }
+    }
+
+    /* ################################################################## */
+    /**
+     Only trusted devices can see indications of this property.
+     */
+    override public var isEncryptionRequiredForIndication: Bool {
+        get { return cbCharacteristic.properties.contains(.indicateEncryptionRequired) }
+        set { _ = newValue }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Protocol Support for the various flags -
+/* ###################################################################################################################################### */
+/**
+ These are condition/property flags for each characteristic/property.
+ */
+extension RVS_BTDriver_Property_BLE {
 }
 
 /* ###################################################################################################################################### */
