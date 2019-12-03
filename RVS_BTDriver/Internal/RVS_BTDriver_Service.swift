@@ -114,7 +114,7 @@ class RVS_BTDriver_Service: NSObject, RVS_BTDriver_ServiceProtocol {
      This displays a useful debug display of the service data.
      */
     override var description: String {
-        var ret = ""
+        var ret = "\t\tDevice UUID: \(owner?.uuid ?? "ERROR")\n"
         
         for property in properties {
             ret += "\t\tProperty (\(property.uuid)):\t\(String(describing: property.value))\n"

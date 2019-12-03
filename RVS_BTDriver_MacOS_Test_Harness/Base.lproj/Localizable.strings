@@ -63,3 +63,4 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "deviceInfoModelName"                                       =       "Model Name";
 "deviceInfoHardwareRevision"                                =       "Hardware Revision";
 "deviceInfoFirmwareRevision"                                =       "Firmware Revision";
+"180A"                                                      =       "Device Info Service";

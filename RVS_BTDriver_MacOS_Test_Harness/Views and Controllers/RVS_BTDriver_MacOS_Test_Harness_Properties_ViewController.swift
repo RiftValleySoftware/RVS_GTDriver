@@ -144,27 +144,29 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
                 var serviceProperties = [RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple]()
 
                 for property in service.properties {
+                    let key = property.uuid
+                    
                     switch property.value {
                     case .stringValue(let value):
                         if let value = value {
-                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: property.uuid, value: value))
+                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: key, value: value))
                         }
                         
                     case .intValue(let value):
                         if let value = value {
-                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: property.uuid, value: String(value)))
+                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: key, value: String(value)))
                         }
                         
                     case .floatValue(let value):
                         if let value = value {
-                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: property.uuid, value: String(value)))
+                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: key, value: String(value)))
                         }
                         
                     default:
                         #if DEBUG
                             print("Unknown Value Type: \(String(describing: property.value))")
                         #endif
-                        ()
+                        serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple(key: key, value: "UNKNOWN VALUE"))
                     }
                 }
                 
@@ -264,11 +266,11 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableView
             cell.textField?.backgroundColor = (0 == inRow % 2) ? NSColor.clear : NSColor(red: 1, green: 1, blue: 1, alpha: 0.25)
             switch inTableColumn?.identifier {
             case keyColumnID:
-                cell.textField?.stringValue = tableData[inRow].key
+                cell.textField?.stringValue = tableData[inRow].key.localizedVariant
                 cell.textField?.font = NSFont.boldSystemFont(ofSize: 10)
                 cell.textField?.alignment = .right
             default:
-                cell.textField?.stringValue = tableData[inRow].value
+                cell.textField?.stringValue = tableData[inRow].value.localizedVariant
                 cell.textField?.font = NSFont.systemFont(ofSize: 10)
             }
             return cell
@@ -277,7 +279,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableView
             groupHeader.isEditable = false
             groupHeader.font = NSFont.boldSystemFont(ofSize: 12)
             groupHeader.alignment = .center
-            groupHeader.string = tableData[inRow].key
+            groupHeader.string = tableData[inRow].key.localizedVariant
             groupHeader.drawsBackground = true
             groupHeader.backgroundColor = NSColor.black
             groupHeader.textColor = NSColor.white
