@@ -278,7 +278,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let modelTitle = deviceInstance?.modelName {
+        if let modelTitle = deviceInstance?.deviceName {
             title = modelTitle
         }
         
