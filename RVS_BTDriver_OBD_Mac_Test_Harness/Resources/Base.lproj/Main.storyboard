@@ -674,7 +674,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate" customModule="RVS_BTDriver_OBD_Mac_Test_Harness" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -687,7 +687,7 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="106" y="748" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
@@ -704,10 +704,22 @@
         <!--DriverOBD Mac Test Harness View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="RVS_BTDriver_OBD_Mac_Test_Harness_ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="RVS_BTDriver_OBD_Mac_Test_Harness_ViewController" customModule="RVS_BTDriver_OBD_Mac_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="MfC-sP-eXx">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="background-gradient" id="bCg-nR-Ok3"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="MfC-sP-eXx" secondAttribute="bottom" id="2iE-2V-HVO"/>
+                            <constraint firstAttribute="trailing" secondItem="MfC-sP-eXx" secondAttribute="trailing" id="60a-At-Mfz"/>
+                            <constraint firstItem="MfC-sP-eXx" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="OMN-ri-Ogw"/>
+                            <constraint firstItem="MfC-sP-eXx" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="ghR-lo-MDg"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -715,4 +727,7 @@
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="background-gradient" width="1" height="1000"/>
+    </resources>
 </document>
