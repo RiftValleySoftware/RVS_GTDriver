@@ -128,10 +128,10 @@ extension RVS_BTDriver_MacOS_Test_Harness_Main_ViewController: NSTableViewDelega
      
      - parameters:
         - inTableView: The table instance.
-        - viewFor: Container object for the column that holds the row.
+        - objectValueFor: Container object for the column that holds the row.
         - row: 0-based Int, with the index of the row, within the column.
      
-     - returns: A new Text View, with the device model name.
+     - returns: A String, with the device name.
      */
     func tableView(_ inTableView: NSTableView, objectValueFor inTableColumn: NSTableColumn?, row inRow: Int) -> Any? {
         if  let device = driverInstance?[inRow],

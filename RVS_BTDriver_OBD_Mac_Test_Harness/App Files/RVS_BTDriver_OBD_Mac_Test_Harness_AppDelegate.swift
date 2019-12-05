@@ -185,6 +185,9 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
         #if DEBUG
             print("New Device Added: \(String(describing: inDevice))")
         #endif
+        DispatchQueue.main.async {
+            self.mainViewController?.setUpUI()  // This will let the view show or hide any items that reflect the driver state.
+        }
     }
         
     /* ################################################################## */
