@@ -40,7 +40,7 @@ class RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: RVS_BTDriver_OBD_MacOS_T
         super.viewDidLoad()
         RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.appDelegateObject.mainViewController = self
         setUpUI()
-        RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.appDelegateObject.setUpDriver()
+        RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.appDelegateObject.setUpDriver()   // Once we load, then we ask the app delegate to establish the driver, so we can react (We need to have the view loaded before getting callbacks).
     }
     
     /* ################################################################## */

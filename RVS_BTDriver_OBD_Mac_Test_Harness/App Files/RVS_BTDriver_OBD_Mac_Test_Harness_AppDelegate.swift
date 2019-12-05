@@ -202,7 +202,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
             print("Status Message Received")
         #endif
         DispatchQueue.main.async {
-            self.mainViewController.setUpUI()
+            self.mainViewController?.setUpUI()  // This will let the view show or hide any items that reflect the driver state.
         }
     }
     
