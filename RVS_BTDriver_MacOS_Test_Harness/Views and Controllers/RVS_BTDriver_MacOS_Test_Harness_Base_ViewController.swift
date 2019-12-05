@@ -42,7 +42,7 @@ class RVS_BTDriver_MacOS_Test_Harness_Base_ViewController: NSViewController {
     @objc dynamic internal let prefs = RVS_BTDriver_Test_Harness_Prefs()
     
     /* ############################################################################################################################## */
-    // MARK: - Instance Calculated Properties
+    // MARK: - Instance Computed Properties
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**

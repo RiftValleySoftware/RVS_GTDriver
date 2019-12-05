@@ -42,7 +42,7 @@ class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject, NSApplicationDelega
     private var _driverInstance: RVS_BTDriver!
 
     /* ############################################################################################################################## */
-    // MARK: - Internal Class Calculated Properties
+    // MARK: - Internal Class Computed Properties
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
@@ -77,7 +77,7 @@ class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject, NSApplicationDelega
     var mainDisplayScreen: RVS_BTDriver_MacOS_Test_Harness_Main_ViewController!
     
     /* ############################################################################################################################## */
-    // MARK: - Internal Instance Calculated Properties
+    // MARK: - Internal Instance Computed Properties
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**

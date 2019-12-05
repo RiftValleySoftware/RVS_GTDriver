@@ -35,7 +35,7 @@ class RVS_BTDriver_iOS_Test_Harness_Base_ViewController: UIViewController {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Internal Calculated Properties -
+// MARK: - Internal Computed Properties -
 /* ###################################################################################################################################### */
 extension RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
     /* ################################################################## */

@@ -362,7 +362,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     private var _state: RVS_BTDriver_State_Machine_StateEnum = .uninitialized
     
     /* ################################################################################################################################## */
-    // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Calculated Properties -
+    // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Computed Properties -
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
@@ -373,7 +373,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     }
 
     /* ################################################################################################################################## */
-    // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Calculated Properties -
+    // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Computed Properties -
     /* ################################################################################################################################## */
     /**
      These need to be declared here, as they are overrides of stored properties.

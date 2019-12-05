@@ -151,7 +151,7 @@ extension RVS_BTDriverDelegate {
 /* ###################################################################################################################################### */
 /**
  These are the various errors that can be returned by this class.
- The enum is designed to provide keys for use by localization. If you access the "localizedDescription" calculated property, you will get a consistent string.
+ The enum is designed to provide keys for use by localization. If you access the "localizedDescription" computed property, you will get a consistent string.
  */
 extension RVS_BTDriver {
     /// The error enum declaration.
@@ -289,7 +289,7 @@ extension RVS_BTDriver {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Public Calculated Properties -
+// MARK: - Public Computed Properties -
 /* ###################################################################################################################################### */
 extension RVS_BTDriver {
     /* ################################################################## */
