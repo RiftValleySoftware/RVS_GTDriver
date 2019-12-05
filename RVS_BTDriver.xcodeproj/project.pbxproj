@@ -667,7 +667,7 @@
 			isa = PBXGroup;
 			children = (
 				D4803661239951D3007FF2EF /* App Files */,
-				D4803662239951E1007FF2EF /* View Controllers */,
+				D4803662239951E1007FF2EF /* Views And Controllers */,
 				D41B6B84239835D3008F4E7D /* Resources */,
 				D41B6B85239835E8008F4E7D /* Meta */,
 			);
@@ -873,14 +873,14 @@
 			path = "App Files";
 			sourceTree = "<group>";
 		};
-		D4803662239951E1007FF2EF /* View Controllers */ = {
+		D4803662239951E1007FF2EF /* Views And Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				D480365F23995164007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_WindowController.swift */,
 				D480365D23995107007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift */,
 				D41B6B66239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness_ViewController.swift */,
 			);
-			path = "View Controllers";
+			path = "Views And Controllers";
 			sourceTree = "<group>";
 		};
 		D4B19BD5235F28A30036EDF5 /* RVS_BTDriver_tvOS_Test_Harness */ = {

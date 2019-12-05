@@ -26,15 +26,36 @@ import Cocoa
 // MARK: - Main View Controller Class -
 /* ###################################################################################################################################### */
 /**
+ This view controller manages the main device selection screen.
  */
 class RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController {
     /* ################################################################## */
     /**
+     This is the image that is displayed if there is no bluetooth available.
      */
     @IBOutlet weak var noBTImageView: NSImageView!
-
+    
     /* ################################################################## */
     /**
+     This is the image that is displayed if there is no bluetooth available.
+     */
+    @IBOutlet weak var deviceTableView: NSTableView!
+    /* ################################################################## */
+    /**
+     Called when we're going away. This needs to be in the main declaration area. You can't have it in extensions.
+     */
+    deinit {
+        RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.appDelegateObject.mainViewController = nil
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Superclass Overrides -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController {
+    /* ################################################################## */
+    /**
+     Called when the view has completed loading.
      */
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,18 +63,32 @@ class RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: RVS_BTDriver_OBD_MacOS_T
         setUpUI()
         RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.appDelegateObject.setUpDriver()   // Once we load, then we ask the app delegate to establish the driver, so we can react (We need to have the view loaded before getting callbacks).
     }
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController {
     /* ################################################################## */
     /**
-     */
-    deinit {
-        RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.appDelegateObject.mainViewController = nil
-    }
-    
-    /* ################################################################## */
-    /**
+     This just sets up the UI to match the current driver state.
      */
     func setUpUI() {
         noBTImageView.isHidden = isBTAvailable
+        deviceTableView.isHidden = !isBTAvailable
     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - NSTableViewDelegate Support -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: NSTableViewDelegate {
+    
+}
+
+/* ###################################################################################################################################### */
+// MARK: - NSTableViewDataSource Support -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: NSTableViewDataSource {
+    
 }
