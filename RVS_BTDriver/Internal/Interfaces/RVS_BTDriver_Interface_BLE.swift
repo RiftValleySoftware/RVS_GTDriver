@@ -118,7 +118,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
         } else {
             #if DEBUG
                 var centralState = ""
-                
+                // The reason that we do this, is because the reflection doesn't go below the type, and if we want to display the value, we have to unwind the enum.
                 switch centralManager.state {
                 case .poweredOff:
                     centralState = "Powered Off"
