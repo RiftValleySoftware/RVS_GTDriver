@@ -111,6 +111,35 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
         if  let centralManager = centralManager,
             .poweredOn == centralManager.state {
             return true
+        } else if nil == centralManager {
+            #if DEBUG
+                print("The Central Manager Instance is Nil")
+            #endif
+        } else {
+            #if DEBUG
+                var centralState = ""
+                
+                switch centralManager.state {
+                case .poweredOff:
+                    centralState = "Powered Off"
+                    
+                case .resetting:
+                    centralState = "Resetting"
+
+                case .unauthorized:
+                    centralState = "Unauthorized"
+                    
+                case .unsupported:
+                    centralState = "Unsupported"
+
+                case .poweredOn:
+                    centralState = "Powered On"
+                    
+                default:
+                    centralState = "Unknown"
+                }
+                print("The Central Manager State is \(centralState)")
+            #endif
         }
         
         return false
@@ -133,6 +162,8 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
         }
         
         set {
+            let oldValue = centralManager.isScanning    // We do this, to see if anything actually changed.
+            
             if !(centralManager?.isScanning ?? false), newValue {
                 var serviceUUIDs: [CBUUID]!
                 
@@ -154,7 +185,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
             #if DEBUG
                 if nil == centralManager {
                     print("The Central Manager Instance is Nil")
-                } else {
+                } else if newValue != oldValue {
                     print("The Central Manager Instance is \(centralManager.isScanning ? "now" : "no longer") scanning.")
                 }
             #endif

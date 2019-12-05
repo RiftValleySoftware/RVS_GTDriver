@@ -27,22 +27,33 @@ import Cocoa
 /* ###################################################################################################################################### */
 /**
  */
-class RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: NSViewController {
+class RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController {
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var noBTImageView: NSImageView!
+
     /* ################################################################## */
     /**
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.appDelegateObject.mainViewController = self
+        setUpUI()
+        RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.appDelegateObject.setUpDriver()
     }
-
+    
     /* ################################################################## */
     /**
      */
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+    deinit {
+        RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.appDelegateObject.mainViewController = nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func setUpUI() {
+        noBTImageView.isHidden = isBTAvailable
     }
 }

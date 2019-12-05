@@ -26,14 +26,21 @@ import Cocoa
 // MARK: - Main Application Delegate Class -
 /* ###################################################################################################################################### */
 /**
+ This is the main application delegate for the OBD-specialized test harness Mac app.
  */
 @NSApplicationMain
-class RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate {
+class RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: NSObject {
     /* ################################################################## */
     /**
      This is the internal holder for the driver instance. It is initialized as a singleton, the first time it's accessed.
      */
     private var _driverInstance: RVS_BTDriver!
+    
+    /* ################################################################## */
+    /**
+     This is the main viewcontroller.
+     */
+    var mainViewController: RVS_BTDriver_OBD_Mac_Test_Harness_ViewController!
 
     /* ############################################################################################################################## */
     // MARK: - Internal Class Computed Properties
@@ -95,6 +102,17 @@ class RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDele
      */
     @objc dynamic var isBTAvailable: Bool {
         return type(of: self).appDelegateObject.driverInstance?.isBTAvailable ?? false
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Application Delegate Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: NSApplicationDelegate {
+    /* ################################################################## */
+    /**
+     */
+    func applicationDidFinishLaunching(_ notification: Notification) {
     }
 }
 
@@ -183,6 +201,9 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
         #if DEBUG
             print("Status Message Received")
         #endif
+        DispatchQueue.main.async {
+            self.mainViewController.setUpUI()
+        }
     }
     
     /* ################################################################## */

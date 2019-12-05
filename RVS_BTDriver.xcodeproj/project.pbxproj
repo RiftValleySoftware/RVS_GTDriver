@@ -155,6 +155,8 @@
 		D4524BA9234D40BA00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4524BA7234D40BA00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_NavigationController.swift */; };
 		D453E0B12371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453E0B02371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift */; };
 		D453E0B22371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453E0B02371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift */; };
+		D480365E23995107007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D480365D23995107007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift */; };
+		D480366023995164007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D480365F23995164007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_WindowController.swift */; };
 		D481A156235E2774004DF47E /* RVS_BTDriver_MacOS_Test_Harness_Main_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DBE17A235E0DD600107353 /* RVS_BTDriver_MacOS_Test_Harness_Main_ViewController.swift */; };
 		D481A162235E2774004DF47E /* RVS_BTDriver_MacOS_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DBE178235E0DD600107353 /* RVS_BTDriver_MacOS_Test_Harness_AppDelegate.swift */; };
 		D481A16B235E2774004DF47E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4DBE17C235E0DD700107353 /* Assets.xcassets */; };
@@ -508,6 +510,8 @@
 		D4524B9E234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVS_BTDriver_iOS_Test_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4524BA7234D40BA00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_NavigationController.swift; sourceTree = "<group>"; };
 		D453E0B02371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift; sourceTree = "<group>"; };
+		D480365D23995107007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift; sourceTree = "<group>"; };
+		D480365F23995164007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_OBD_MacOS_Test_Harness_Base_WindowController.swift; sourceTree = "<group>"; };
 		D481A171235E2774004DF47E /* RVS_BTDriver_MacOS_Test_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVS_BTDriver_MacOS_Test_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D481A179235E2895004DF47E /* RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist"; path = "Meta/RVS_BTDriver_MacOS_Test_Harness-Framework-Info.plist"; sourceTree = "<group>"; };
 		D486C3D42373695400B10B02 /* RVS_BTDriver_MacOS_Test_Harness_Device_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_MacOS_Test_Harness_Device_ViewController.swift; sourceTree = "<group>"; };
@@ -662,8 +666,8 @@
 		D41B6B63239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness */ = {
 			isa = PBXGroup;
 			children = (
-				D41B6B64239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.swift */,
-				D41B6B66239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness_ViewController.swift */,
+				D4803661239951D3007FF2EF /* App Files */,
+				D4803662239951E1007FF2EF /* View Controllers */,
 				D41B6B84239835D3008F4E7D /* Resources */,
 				D41B6B85239835E8008F4E7D /* Meta */,
 			);
@@ -859,6 +863,24 @@
 				D41B6B62239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D4803661239951D3007FF2EF /* App Files */ = {
+			isa = PBXGroup;
+			children = (
+				D41B6B64239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.swift */,
+			);
+			path = "App Files";
+			sourceTree = "<group>";
+		};
+		D4803662239951E1007FF2EF /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D480365F23995164007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_WindowController.swift */,
+				D480365D23995107007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift */,
+				D41B6B66239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness_ViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		D4B19BD5235F28A30036EDF5 /* RVS_BTDriver_tvOS_Test_Harness */ = {
@@ -1820,8 +1842,10 @@
 				D41B6B74239834DD008F4E7D /* RVS_BTDriver_ServiceProtocol.swift in Sources */,
 				D41B6B81239834DD008F4E7D /* RVS_BTDriverCommunicatorTools.swift in Sources */,
 				D4397F4F239922F900A30F6D /* RVS_BTDriver_Test_Harness_Prefs.swift in Sources */,
+				D480365E23995107007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift in Sources */,
 				D41B6B7E239834DD008F4E7D /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
 				D41B6B77239834DD008F4E7D /* RVS_BTDriver_State_Machine.swift in Sources */,
+				D480366023995164007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_WindowController.swift in Sources */,
 				D41B6B76239834DD008F4E7D /* RVS_BTDriver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
