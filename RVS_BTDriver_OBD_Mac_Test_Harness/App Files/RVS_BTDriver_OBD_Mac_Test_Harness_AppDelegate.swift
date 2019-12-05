@@ -217,7 +217,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
      */
     func btDriverScanningChanged(_ driver: RVS_BTDriver, isScanning: Bool) {
         #if DEBUG
-            print("The driver is" + (isScanning ? " now" : " not") + " scanning.")
+            print("BT Callback. The driver is" + (isScanning ? " now" : " no longer") + " scanning.")
         #endif
     }
 }
