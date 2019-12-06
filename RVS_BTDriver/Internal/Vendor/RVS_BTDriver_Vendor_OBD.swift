@@ -135,7 +135,7 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
             device.deviceType = .testing
         }
     }
-
+    
     /* ################################################################## */
     /**
      Factory for creating (or referencing) the appropriate interface instance.
