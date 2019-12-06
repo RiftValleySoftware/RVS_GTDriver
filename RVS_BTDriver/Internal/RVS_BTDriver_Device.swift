@@ -316,7 +316,7 @@ extension RVS_BTDriver_Device {
                 }) {
                 
                 #if DEBUG
-                print("Removing Service (\(inService.uuid)) at Index \(index) of the Holding Pen, and adding it to the main list at index \(internal_service_list.count).")
+                    print("Removing Service (\(inService.uuid)) at Index \(index) of the Holding Pen, and adding it to the main list at index \(internal_service_list.count).")
                 #endif
                 
                 internal_holding_pen.remove(at: index)
