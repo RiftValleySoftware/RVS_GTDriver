@@ -417,7 +417,9 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
         
         set {
             _ = newValue
+            precondition(false, "Cannot Set This Property!")
         }
+
     }
 
     /* ################################################################## */
@@ -435,7 +437,9 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
         
         set {
             _ = newValue
+            precondition(false, "Cannot Set This Property!")
         }
+
     }
 
     /* ################################################################## */
@@ -453,6 +457,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
        
        set {
            _ = newValue
+           precondition(false, "Cannot Set This Property!")
        }
    }
     
@@ -471,6 +476,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
        
        set {
            _ = newValue
+           precondition(false, "Cannot Set This Property!")
        }
    }
     
@@ -489,6 +495,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
        
        set {
            _ = newValue
+           precondition(false, "Cannot Set This Property!")
        }
    }
     
@@ -507,6 +514,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
        
        set {
            _ = newValue
+           precondition(false, "Cannot Set This Property!")
        }
    }
     
@@ -525,6 +533,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
        
        set {
            _ = newValue
+           precondition(false, "Cannot Set This Property!")
        }
    }
     
@@ -1283,7 +1292,10 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override public var canBroadcast: Bool {
         get { return cbCharacteristic.properties.contains(.broadcast) }
-        set { _ = newValue }
+        set {
+           _ = newValue
+           precondition(false, "Cannot Set This Property!")
+       }
     }
 
     /* ################################################################## */
@@ -1292,7 +1304,10 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override public var canRead: Bool {
         get { return cbCharacteristic.properties.contains(.read) }
-        set { _ = newValue }
+        set {
+           _ = newValue
+           precondition(false, "Cannot Set This Property!")
+       }
     }
 
     /* ################################################################## */
@@ -1301,7 +1316,10 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override public var canWrite: Bool {
         get { return canWriteWithResponse || canWriteWithoutResponse }
-        set { _ = newValue }
+        set {
+           _ = newValue
+           precondition(false, "Cannot Set This Property!")
+       }
     }
 
     /* ################################################################## */
@@ -1310,7 +1328,10 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override public var canWriteWithResponse: Bool {
         get { return cbCharacteristic.properties.contains(.write) }
-        set { _ = newValue }
+        set {
+           _ = newValue
+           precondition(false, "Cannot Set This Property!")
+       }
     }
 
     /* ################################################################## */
@@ -1319,7 +1340,10 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override public var canWriteWithoutResponse: Bool {
         get { return cbCharacteristic.properties.contains(.writeWithoutResponse) }
-        set { _ = newValue }
+        set {
+           _ = newValue
+           precondition(false, "Cannot Set This Property!")
+       }
     }
 
     /* ################################################################## */
@@ -1328,7 +1352,10 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override public var canNotify: Bool {
         get { return cbCharacteristic.properties.contains(.notify) }
-        set { _ = newValue }
+        set {
+           _ = newValue
+           precondition(false, "Cannot Set This Property!")
+       }
     }
 
     /* ################################################################## */
@@ -1337,7 +1364,10 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override public var canIndicate: Bool {
         get { return cbCharacteristic.properties.contains(.indicate) }
-        set { _ = newValue }
+        set {
+           _ = newValue
+           precondition(false, "Cannot Set This Property!")
+       }
     }
 
     /* ################################################################## */
@@ -1346,7 +1376,10 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override public var canHaveAuthenticatedSignedWrites: Bool {
         get { return cbCharacteristic.properties.contains(.authenticatedSignedWrites) }
-        set { _ = newValue }
+        set {
+           _ = newValue
+           precondition(false, "Cannot Set This Property!")
+       }
     }
 
     /* ################################################################## */
@@ -1355,7 +1388,10 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override public var isEncryptionRequiredForNotify: Bool {
         get { return cbCharacteristic.properties.contains(.notifyEncryptionRequired) }
-        set { _ = newValue }
+        set {
+           _ = newValue
+           precondition(false, "Cannot Set This Property!")
+       }
     }
 
     /* ################################################################## */
@@ -1364,7 +1400,10 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      */
     override public var isEncryptionRequiredForIndication: Bool {
         get { return cbCharacteristic.properties.contains(.indicateEncryptionRequired) }
-        set { _ = newValue }
+        set {
+           _ = newValue
+           precondition(false, "Cannot Set This Property!")
+       }
     }
 }
 

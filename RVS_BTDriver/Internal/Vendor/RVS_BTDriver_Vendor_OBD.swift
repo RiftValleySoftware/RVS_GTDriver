@@ -175,10 +175,10 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - goTenna Mesh Device Specialization -
+// MARK: - OBD Device Specialization -
 /* ###################################################################################################################################### */
 /**
- This is a specialization of the device for the goTenna Mesh.
+ This is a specialization of the device for OBD Devices.
  */
 class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE {
     /* ################################################################## */
@@ -190,8 +190,10 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE {
             return peripheral.identifier.uuidString
         }
         
-        set {
+                set {
             _ = newValue
+            precondition(false, "Cannot Set This Property!")
         }
+
     }
 }

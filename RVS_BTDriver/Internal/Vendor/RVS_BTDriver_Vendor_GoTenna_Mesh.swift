@@ -216,8 +216,9 @@ class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_Device_BLE {
             return peripheral.identifier.uuidString
         }
         
-        set {
+                set {
             _ = newValue
+            precondition(false, "Cannot Set This Property!")
         }
     }
 }

@@ -95,7 +95,10 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     public var canBroadcast: Bool {
         get { return false }
-        set { _ = newValue }
+        set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property!")
+        }
     }
 
     /* ################################################################## */
@@ -104,7 +107,11 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     public var canRead: Bool {
         get { return false }
-        set { _ = newValue }
+                set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property!")
+        }
+
     }
     
     /* ################################################################## */
@@ -113,7 +120,11 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     public var canWrite: Bool {
         get { return false }
-        set { _ = newValue }
+                set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property!")
+        }
+
     }
     
     /* ################################################################## */
@@ -122,7 +133,11 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     public var canWriteWithResponse: Bool {
         get { return false }
-        set { _ = newValue }
+                set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property!")
+        }
+
     }
 
     /* ################################################################## */
@@ -131,7 +146,11 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     public var canWriteWithoutResponse: Bool {
         get { return false }
-        set { _ = newValue }
+                set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property!")
+        }
+
     }
     
     /* ################################################################## */
@@ -140,7 +159,11 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     public var canNotify: Bool {
         get { return false }
-        set { _ = newValue }
+                set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property!")
+        }
+
     }
     
     /* ################################################################## */
@@ -149,7 +172,11 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     public var canIndicate: Bool {
         get { return false }
-        set { _ = newValue }
+                set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property!")
+        }
+
     }
     
     /* ################################################################## */
@@ -158,7 +185,11 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     public var canHaveAuthenticatedSignedWrites: Bool {
         get { return false }
-        set { _ = newValue }
+                set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property!")
+        }
+
     }
     
     /* ################################################################## */
@@ -167,7 +198,11 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     public var isEncryptionRequiredForNotify: Bool {
         get { return false }
-        set { _ = newValue }
+                set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property!")
+        }
+
     }
     
     /* ################################################################## */
@@ -176,7 +211,11 @@ internal class RVS_BTDriver_Property: NSObject, RVS_BTDriver_PropertyProtocol {
      */
     public var isEncryptionRequiredForIndication: Bool {
         get { return false }
-        set { _ = newValue }
+                set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property!")
+        }
+
     }
 
     /* ################################################################## */
