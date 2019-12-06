@@ -137,26 +137,42 @@ extension RVS_BTDriver {
             if let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
                 return dev === inDevice
                 }) {
+                var moveDevice: Bool = true
                 
-                #if DEBUG
-                    print("Removing Device at Index \(index) of the Holding Pen, and adding it to the main list at index \(_device_list.count).")
-                #endif
-                
-                internal_holding_pen.remove(at: index)
-                _device_list.append(device)
-                
-                // Determine the type of this device.
+                // See if the device still needs testing before it is moved.
                 for vendor in internal_vendors {
-                    if vendor.iOwnThisDevice(inDevice) {
+                    vendor.testDevice(device)
+                    if .testing == device.deviceType {
+                        #if DEBUG
+                            print("Device at Index \(index) of the Holding Pen is undergoing testing, and is not yet ready to move.")
+                        #endif
+                        moveDevice = false
                         break
                     }
                 }
+                
+                // If we are still moving the device after the test, we do so now. Otherwise, we go on to the next one.
+                if moveDevice {
+                    #if DEBUG
+                        print("Removing Device at Index \(index) of the Holding Pen, and adding it to the main list at index \(_device_list.count).")
+                    #endif
+                    
+                    internal_holding_pen.remove(at: index)
+                    _device_list.append(device)
+                    
+                    // Determine the type of this device.
+                    for vendor in internal_vendors {
+                        if vendor.iOwnThisDevice(inDevice) {
+                            break
+                        }
+                    }
 
-                // If we have a delegate, we send it a notification that a device was added.
-                delegate?.btDriver(self, newDeviceAdded: device)
-                #if DEBUG
-                    print("The new device: \(String(describing: device))")
-                #endif
+                    // If we have a delegate, we send it a notification that a device was added.
+                    delegate?.btDriver(self, newDeviceAdded: device)
+                    #if DEBUG
+                        print("The new device: \(String(describing: device))")
+                    #endif
+                }
             }
         }
 

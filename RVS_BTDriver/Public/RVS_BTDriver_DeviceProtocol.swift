@@ -29,8 +29,15 @@ import Foundation
  This enum is used to help identify what the device is.
  */
 public enum RVS_BTDriver_DeviceType: String {
+    /// The goTenna Mesh device
     case goTennaMesh
+    /// A generic OBD device
     case genericOBD
+    /// The device is unknown, and untested.
+    case unTested
+    /// The device is currently being tested.
+    case testing
+    /// The device is unknown.
     case unknown
 }
 
@@ -175,7 +182,9 @@ public protocol RVS_BTDriver_DeviceProtocol: class {
     
     /* ################################################################## */
     /**
-     This is the device type. Default is .unknown
+     This is the device type. Default is .unTested
+     If the device is still being tested, then this will return .testing.
+     .testing and .unTested can be considered the same as .unknown, but things may change, once testing is complete.
      */
     var deviceType: RVS_BTDriver_DeviceType { get }
 

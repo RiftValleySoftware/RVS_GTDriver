@@ -153,9 +153,9 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     
     /* ################################################################## */
     /**
-     This is the device type. Default is .unknown
+     This is the device type. Default is .unTested
      */
-    public internal(set) var deviceType: RVS_BTDriver_DeviceType = .unknown
+    public internal(set) var deviceType: RVS_BTDriver_DeviceType = .unTested
 
     /* ################################################################## */
     /**
@@ -264,7 +264,7 @@ extension RVS_BTDriver_Device {
      - parameter inSubscriber: The subscriber to test.
      - returns: True, if the instance is subscribed.
      */
-    func isThisInstanceASubscriber(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) -> Bool {
+    public func isThisInstanceASubscriber(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) -> Bool {
         return internal_subscribers.reduce(false) { (inCurrent, inNext) -> Bool in
             return inCurrent || inNext.uuid == inSubscriber.uuid
         }
@@ -278,7 +278,7 @@ extension RVS_BTDriver_Device {
      
      - parameter subscriber: The instance to subscribe. Nothing is done, if we are already subscribed.
      */
-    func subscribe(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) {
+    public func subscribe(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) {
         if !isThisInstanceASubscriber(inSubscriber) {
             internal_subscribers.append(inSubscriber)
         }
@@ -290,7 +290,7 @@ extension RVS_BTDriver_Device {
      
      - parameter subscriber: The instance to unsubscribe. Nothing is done, if we are not already subscribed.
      */
-    func unsubscribe(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) {
+    public func unsubscribe(_ inSubscriber: RVS_BTDriver_DeviceSubscriberProtocol) {
         if let index = internal_subscribers.firstIndex(where: {
             $0.uuid == inSubscriber.uuid
         }) {

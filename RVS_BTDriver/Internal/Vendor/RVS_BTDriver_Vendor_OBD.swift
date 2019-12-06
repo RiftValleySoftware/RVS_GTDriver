@@ -74,7 +74,7 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
        - parameter inDeviceRecord: The peripheral and central manager instances for this device.
        - returns: a device instance. Can be nil, if this vendor can't instantiate the device.
        */
-     func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
+     internal func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
             let ret = RVS_BTDriver_Device_OBD(vendor: self)
             
@@ -97,7 +97,7 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
      - parameter inServiceRecord: The Bluetooth info for the service, the vendor should cast this to its service info. This can be nil. If so, then the method should return nil.
      - returns: a service instance. Can be nil, if the vendor can't instantiate the service.
      */
-    func makeService(_ inServiceRecord: CBService?, forDevice inDeviceRecord: RVS_BTDriver_Device) -> RVS_BTDriver_Service! {
+    internal func makeService(_ inServiceRecord: CBService?, forDevice inDeviceRecord: RVS_BTDriver_Device) -> RVS_BTDriver_Service! {
         if let service = inServiceRecord {
             let ret = RVS_BTDriver_Service_BLE(owner: inDeviceRecord, uuid: service.uuid.uuidString)
             ret.cbService = inServiceRecord
@@ -116,8 +116,24 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
      
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
-    func iOwnThisDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) -> Bool {
+    internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) -> Bool {
         return false
+    }
+    
+    /* ################################################################## */
+    /**
+     This is called to ask the vendor to test a device for "ownership."
+     
+     In some cases, the test may be a NOP, but in others, it may require some back-and-forth, before it is resolved.
+     
+     - parameter inDevice: The device we're testing for ownership.
+     */
+    internal func testDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) {
+        // We need it to be a BLE device, and that device can't be identified, yet, or under test.
+        if  let device = inDevice as? RVS_BTDriver_Device_BLE,
+            .unTested == device.deviceType {
+            device.deviceType = .testing
+        }
     }
 
     /* ################################################################## */
@@ -151,7 +167,7 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
      
      - parameter driver: The `RVS_BTDriver` instance that "owns" this instance.
      */
-    init(driver inDriver: RVS_BTDriver) {
+    internal init(driver inDriver: RVS_BTDriver) {
         super.init()
         internal_driver = inDriver
         makeInterface(queue: inDriver.internal_queue)

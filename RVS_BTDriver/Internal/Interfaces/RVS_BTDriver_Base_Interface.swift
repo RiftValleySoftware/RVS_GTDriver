@@ -43,13 +43,13 @@ internal class RVS_BTDriver_Base_Interface: NSObject, RVS_BTDriver_InterfaceProt
      
      Default is false.
      */
-    var persistentConnection: Bool = false
+    internal var persistentConnection: Bool = false
     
     /* ################################################################## */
     /**
      A list of the vendors that are users of this interface.
      */
-    var vendors: [RVS_BTDriver_VendorProtocol] = []
+    internal var vendors: [RVS_BTDriver_VendorProtocol] = []
 
     /* ################################################################## */
     /**
@@ -61,7 +61,7 @@ internal class RVS_BTDriver_Base_Interface: NSObject, RVS_BTDriver_InterfaceProt
      
      This can be useful for "rediscovering" devices that we remove from our list (set to `false` for that).
      */
-    var rememberAdvertisedDevices: Bool = true
+    internal var rememberAdvertisedDevices: Bool = true
 
     /* ################################################################## */
     /**

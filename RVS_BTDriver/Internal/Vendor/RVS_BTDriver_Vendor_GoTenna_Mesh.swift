@@ -84,7 +84,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
        - parameter inDeviceRecord: The peripheral and central manager instances for this device.
        - returns: a device instance. Can be nil, if this vendor can't instantiate the device.
        */
-     func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
+     internal func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
             // We check to see if the peripheral is one of ours.
             if  let manufacturerCodeData = deviceRecord.advertisementData[CBAdvertisementDataManufacturerDataKey] as? NSData,
@@ -118,7 +118,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
      - parameter inServiceRecord: The Bluetooth info for the service, the vendor should cast this to its service info. This can be nil. If so, then the method should return nil.
      - returns: a service instance. Can be nil, if the vendor can't instantiate the service.
      */
-    func makeService(_ inServiceRecord: CBService?, forDevice inDeviceRecord: RVS_BTDriver_Device) -> RVS_BTDriver_Service! {
+    internal func makeService(_ inServiceRecord: CBService?, forDevice inDeviceRecord: RVS_BTDriver_Device) -> RVS_BTDriver_Service! {
         if let service = inServiceRecord {
             let ret = RVS_BTDriver_Service_BLE(owner: inDeviceRecord, uuid: service.uuid.uuidString)
             ret.cbService = inServiceRecord
@@ -137,7 +137,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
      
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
-    public func iOwnThisDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) -> Bool {
+    internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) -> Bool {
         // Fairly basic. goTenna Mesh uses a proprietary UUID for a proprietary service.
         for service in inDevice.services where RVS_BLE_GATT_UUID.goTennaProprietary.rawValue == service.uuid {
             // We marke the device as a goTenna Mesh, as well as return true.
@@ -150,6 +150,16 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
         
         return false
     }
+    
+    /* ################################################################## */
+    /**
+     This is called to ask the vendor to test a device for "ownership."
+     
+     This implementation is NOP.
+     
+     - parameter device: The device we're testing for ownership.
+     */
+    internal func testDevice(_ device: RVS_BTDriver_DeviceProtocol) { }
 
     /* ################################################################## */
     /**
