@@ -153,10 +153,16 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     
     /* ################################################################## */
     /**
+     This is the device type. Default is .unknown
+     */
+    public internal(set) var deviceType: RVS_BTDriver_DeviceType = .unknown
+
+    /* ################################################################## */
+    /**
      This is the public flag, determining whether or not the device is connected.
      */
     public var isConnected: Bool = false
-    
+
     /* ################################################################## */
     /**
      This is true, if the device can be connected.

@@ -136,6 +136,28 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
         
         return nil
     }
+    
+    /* ################################################################## */
+    /**
+     This is a test, to see if this vendor is the appropriate one to handle a given device.
+     
+     - parameter inDevice: The device we're testing for ownership. It will have its device type set, if it is one of ours.
+     
+     - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
+     */
+    public func iOwnThisDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) -> Bool {
+        // Fairly basic. goTenna Mesh uses a proprietary UUID for a proprietary service.
+        for service in inDevice.services where RVS_BLE_GATT_UUID.goTennaProprietary.rawValue == service.uuid {
+            // We marke the device as a goTenna Mesh, as well as return true.
+            if  let device = inDevice as? RVS_BTDriver_Device_BLE,
+                .unknown == device.deviceType {
+                device.deviceType = .goTennaMesh
+                return true
+            }
+        }
+        
+        return false
+    }
 
     /* ################################################################## */
     /**

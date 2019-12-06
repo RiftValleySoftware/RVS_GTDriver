@@ -108,7 +108,7 @@ public class RVS_BTDriver: NSObject {
         internal_delegate = inDelegate
         internal_queue = inQueue
         internal_vendors = [
-//            RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self),
+            RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self),
             RVS_BTDriver_Vendor_OBD(driver: self)
         ]
     }
@@ -145,6 +145,13 @@ extension RVS_BTDriver {
                 internal_holding_pen.remove(at: index)
                 _device_list.append(device)
                 
+                // Determine the type of this device.
+                for vendor in internal_vendors {
+                    if vendor.iOwnThisDevice(inDevice) {
+                        break
+                    }
+                }
+
                 // If we have a delegate, we send it a notification that a device was added.
                 delegate?.btDriver(self, newDeviceAdded: device)
                 #if DEBUG

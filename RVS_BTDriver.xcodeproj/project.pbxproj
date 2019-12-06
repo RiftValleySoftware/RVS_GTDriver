@@ -834,8 +834,8 @@
 				D443DEE4234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness */,
 				D42FB9E1236F314C00D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness */,
 				D4DBE177235E0DD600107353 /* RVS_BTDriver_MacOS_Test_Harness */,
-				D4B19BD5235F28A30036EDF5 /* RVS_BTDriver_tvOS_Test_Harness */,
 				D41B6B63239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness */,
+				D4B19BD5235F28A30036EDF5 /* RVS_BTDriver_tvOS_Test_Harness */,
 				D4749B67232A842A0073F7BC /* Products */,
 			);
 			sourceTree = "<group>";

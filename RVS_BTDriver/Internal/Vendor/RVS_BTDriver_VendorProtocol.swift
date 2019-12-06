@@ -68,10 +68,20 @@ internal protocol RVS_BTDriver_VendorProtocol {
      - returns: a service instance. Can be nil, if the vendor can't instantiate the service.
      */
     func makeService(_ inServiceRecord: CBService?, forDevice inDeviceRecord: RVS_BTDriver_Device) -> RVS_BTDriver_Service!
-
+    
     /* ################################################################## */
     /**
      - parameter queue: The DispatchQueue to use for this (can be nil, in which case, the main queue is used).
      */
     func makeInterface(queue: DispatchQueue!)
+    
+    /* ################################################################## */
+    /**
+     This is a test, to see if this vendor is the appropriate one to handle a given device.
+     
+     - parameter device: The device we're testing for ownership.
+     
+     - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
+     */
+    func iOwnThisDevice(_ device: RVS_BTDriver_DeviceProtocol) -> Bool
 }

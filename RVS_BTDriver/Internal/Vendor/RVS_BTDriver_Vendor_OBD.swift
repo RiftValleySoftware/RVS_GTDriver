@@ -115,6 +115,18 @@ class RVS_BTDriver_Vendor_OBD: NSObject, RVS_BTDriver_VendorProtocol {
         
         return nil
     }
+    
+    /* ################################################################## */
+    /**
+     This is a test, to see if this vendor is the appropriate one to handle a given device.
+     
+     - parameter inDevice: The device we're testing for ownership.
+     
+     - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
+     */
+    func iOwnThisDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) -> Bool {
+        return false
+    }
 
     /* ################################################################## */
     /**

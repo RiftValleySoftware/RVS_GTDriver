@@ -23,6 +23,18 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_DeviceType Enum -
+/* ###################################################################################################################################### */
+/**
+ This enum is used to help identify what the device is.
+ */
+public enum RVS_BTDriver_DeviceType: String {
+    case goTennaMesh
+    case genericOBD
+    case unknown
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Protocol -
 /* ###################################################################################################################################### */
 /**
@@ -160,6 +172,12 @@ public protocol RVS_BTDriver_DeviceProtocol: class {
      This is the read-only count of services.
      */
     var count: Int { get }
+    
+    /* ################################################################## */
+    /**
+     This is the device type. Default is .unknown
+     */
+    var deviceType: RVS_BTDriver_DeviceType { get }
 
     /* ################################################################## */
     /**
