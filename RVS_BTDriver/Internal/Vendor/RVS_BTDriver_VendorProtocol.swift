@@ -35,12 +35,6 @@ internal protocol RVS_BTDriver_VendorProtocol {
      A reference to the main driver instance.
      */
     var driver: RVS_BTDriver! { get }
-    
-    /* ################################################################## */
-    /**
-     These are the services that we scan for.
-     */
-    var serviceSignatures: [String] { get }
 
     /* ################################################################## */
     /**

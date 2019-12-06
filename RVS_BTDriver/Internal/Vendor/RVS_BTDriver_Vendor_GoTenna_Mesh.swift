@@ -76,14 +76,6 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
     internal weak var driver: RVS_BTDriver! {
         return internal_driver
     }
-    
-    /* ################################################################## */
-    /**
-     These are the services that we scan for. In our case, it is simply the goTenna proprietary service.
-     */
-    var serviceSignatures: [String] {
-        return [RVS_BLE_GATT_UUID.goTennaProprietary.rawValue]
-    }
 
     /* ################################################################## */
     /**
@@ -172,11 +164,6 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: NSObject, RVS_BTDriver_VendorProtocol {
         interface = RVS_BTDriver_Interface_BLE.makeInterface(queue: inQueue)
         interface.driver = driver   // Who's your daddy?
         interface.rememberAdvertisedDevices = driver.internal_AllowDuplicatesInBLEScan  // This means that if a device is deleted while in scanning mode, and it will be found again.
-        // Scan for our devices. Don't bother adding if we are already there.
-        for serviceSignature in serviceSignatures where !interface.serviceSignatures.contains(serviceSignature) {
-            interface.serviceSignatures.append(serviceSignature)
-        }
-        
         // If we are already on the guest list, then there's no need to add ourselves.
         for vendor in interface.vendors where type(of: vendor) == type(of: self) {
             #if DEBUG

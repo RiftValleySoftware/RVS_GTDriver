@@ -51,14 +51,6 @@ internal protocol RVS_BTDriver_InterfaceProtocol: class {
     
     /* ################################################################## */
     /**
-     This is an Array of String that aggregates any services we scan for. An empty Array means scan for everything.
-     
-     This can be changed before a `isScanning = true` call.
-     */
-    var serviceSignatures: [String] { get set }
-    
-    /* ################################################################## */
-    /**
      This flag tells the driver to maintain a persistent connection (until explicitly disconneted).
      
      Otherwise, connections are made and canceled for each transaction.

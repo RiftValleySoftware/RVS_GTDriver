@@ -164,21 +164,14 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
         set {
             let oldValue = centralManager.isScanning    // We do this, to see if anything actually changed.
             
-            if !(centralManager?.isScanning ?? false), newValue {
-                var serviceUUIDs: [CBUUID]!
-                
-                // We supply any service UUIDs that we have on hand.
-                if !serviceSignatures.isEmpty {
-                    serviceUUIDs = serviceSignatures.compactMap {
-                        CBUUID(string: $0)
-                    }
-                }
-                
+            if  newValue,
+                !(centralManager?.isScanning ?? false) {
                 // We check to see if we are going to be filtering out previous advertised devices (cuts down the noise).
                 let options: [String: Any]! = rememberAdvertisedDevices ? [CBCentralManagerScanOptionAllowDuplicatesKey: 1] : nil
-                
-                centralManager?.scanForPeripherals(withServices: serviceUUIDs, options: options)
-            } else if centralManager?.isScanning ?? false {
+
+                centralManager?.scanForPeripherals(withServices: nil, options: options)
+            } else if   !newValue,
+                        centralManager?.isScanning ?? false {
                 centralManager?.stopScan()
             }
             
