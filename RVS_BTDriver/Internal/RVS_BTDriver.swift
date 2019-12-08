@@ -128,6 +128,28 @@ public class RVS_BTDriver: NSObject {
 extension RVS_BTDriver {
     /* ################################################################## */
     /**
+     This method will find a device in the holding pen, and replace it with a new device.
+     
+     - parameter inDevice: The device object to be replaced.
+     - parameter withThisDevice: The device to be used as a replacement.
+     */
+    internal func replaceDeviceInHoldingPen(_ inDevice: RVS_BTDriver_Device, withThisDevice inReplacementDevice: RVS_BTDriver_Device) {
+        if let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
+            return dev === inDevice
+            }) {
+            #if DEBUG
+                print("The Holding Pen device: \(inDevice) at Index \(index) was replaced by a new device: \(inReplacementDevice).")
+            #endif
+            internal_holding_pen[index] = inReplacementDevice
+        } else {
+            #if DEBUG
+                print("The device provided: \(inDevice) was not found in the holding pen. No replacement was made.")
+            #endif
+        }
+    }
+    
+    /* ################################################################## */
+    /**
      This method will move a device from the holding pen to the main list.
      
      - parameter inDevice: The device object to be moved.
