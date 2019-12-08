@@ -108,6 +108,7 @@ public class RVS_BTDriver: NSObject {
         internal_delegate = inDelegate
         internal_queue = inQueue
         internal_vendors = [
+            RVS_BTDriver_Vendor_GenericBLE(driver: self),
             RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self),
             RVS_BTDriver_Vendor_OBD(driver: self)
         ]
@@ -133,7 +134,7 @@ extension RVS_BTDriver {
      - parameter inDevice: The device object to be replaced.
      - parameter withThisDevice: The device to be used as a replacement.
      */
-    internal func replaceDeviceInHoldingPen(_ inDevice: RVS_BTDriver_Device, withThisDevice inReplacementDevice: RVS_BTDriver_Device) {
+    internal func replaceThisDeviceInTheHoldingPen(_ inDevice: RVS_BTDriver_Device, withThisDevice inReplacementDevice: RVS_BTDriver_Device) {
         if let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
             return dev === inDevice
             }) {
@@ -156,6 +157,7 @@ extension RVS_BTDriver {
      */
     internal func moveDeviceFromHoldingPenToMainList(_ inDevice: RVS_BTDriver_Device) {
         for device in internal_holding_pen where device === inDevice {
+            var workingDevice: RVS_BTDriver_Device! = device  // This allows us to replace the device with a more specialized one.
             if let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
                 return dev === inDevice
                 }) {
@@ -163,8 +165,8 @@ extension RVS_BTDriver {
                 
                 // See if the device still needs testing before it is moved.
                 for vendor in internal_vendors {
-                    vendor.testDevice(device)
-                    if .testing == device.deviceType {
+                    vendor.testDevice(workingDevice)
+                    if .testing == workingDevice.deviceType {
                         #if DEBUG
                             print("Device at Index \(index) of the Holding Pen is undergoing testing, and is not yet ready to move.")
                         #endif
@@ -175,25 +177,40 @@ extension RVS_BTDriver {
                 
                 // If we are still moving the device after the test, we do so now. Otherwise, we go on to the next one.
                 if moveDevice {
-                    #if DEBUG
-                        print("Removing Device at Index \(index) of the Holding Pen, and adding it to the main list at index \(_device_list.count).")
-                    #endif
-                    
-                    internal_holding_pen.remove(at: index)
-                    _device_list.append(device)
-                    
-                    // Determine the type of this device.
+                    // If the device is one that is handled exclusivley
                     for vendor in internal_vendors {
-                        if vendor.iOwnThisDevice(inDevice) {
+                        if vendor.iOwnThisDevice(device) {
+                            if  let device = device as? RVS_BTDriver_Device_BLE {
+                                workingDevice = vendor.makeDevice(device.deviceInfoStruct)
+                                if nil != workingDevice {
+                                    replaceThisDeviceInTheHoldingPen(device, withThisDevice: workingDevice)
+                                } else {
+                                    #if DEBUG
+                                        print("Unable to create specialized device for \(device).")
+                                    #endif
+                                }
+                            }
                             break
                         }
                     }
-
-                    // If we have a delegate, we send it a notification that a device was added.
-                    delegate?.btDriver(self, newDeviceAdded: device)
+                    
                     #if DEBUG
-                        print("The new device: \(String(describing: device))")
+                        print("Removing Device at Index \(index) of the Holding Pen.")
                     #endif
+                    
+                    internal_holding_pen.remove(at: index)
+                    
+                    if nil != workingDevice {
+                        #if DEBUG
+                            print("Adding it to the main list at index \(_device_list.count).")
+                        #endif
+                        _device_list.append(workingDevice)
+                        // If we have a delegate, we send it a notification that a device was added.
+                        delegate?.btDriver(self, newDeviceAdded: workingDevice)
+                        #if DEBUG
+                            print("The new device: \(String(describing: workingDevice))")
+                        #endif
+                    }
                 }
             }
         }

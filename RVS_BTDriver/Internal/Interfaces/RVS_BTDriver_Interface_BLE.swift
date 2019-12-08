@@ -296,15 +296,12 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
         }
 
         // If we made it here, we are a valid device, and ready for inspection.
-        for vendor in vendors {
-            if let device = vendor.makeDevice(DeviceInfo(peripheral: inPeripheral, centralManager: inCentral, advertisementData: inAdvertisementData)) {
-                #if DEBUG
-                    print("\tVendor: \(vendor) has created a device to handle this peripheral: \(inPeripheral).")
-                #endif
-                driver.addDiscoveredDevice(device)
-                device.isConnected = true   // We connect, in order to start service discovery.
-                break
-            }
+        if let device = vendors[0].makeDevice(DeviceInfo(peripheral: inPeripheral, centralManager: inCentral, advertisementData: inAdvertisementData)) {
+            #if DEBUG
+                print("\tNew generic device created to handle this peripheral: \(inPeripheral).")
+            #endif
+            driver.addDiscoveredDevice(device)
+            device.isConnected = true   // We connect, in order to start service discovery.
         }
     }
     
@@ -376,12 +373,22 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
  This is a specialized class for BLE devices (peripherals).
  */
 class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
+    /* ################################################################## */
+    /**
+     This holds the device info we were created with.
+     */
+    private var _deviceInfoStruct: RVS_BTDriver_Interface_BLE.DeviceInfo!
+
     /// The central manager that controls this peripheral.
-    internal var centralManager: CBCentralManager!
+    internal var centralManager: CBCentralManager! {
+        return deviceInfoStruct?.centralManager
+    }
     
     /// The peripheral instance associated with this device.
-    var peripheral: CBPeripheral!
-    
+    internal var peripheral: CBPeripheral! {
+        return deviceInfoStruct?.peripheral
+    }
+
     /// The initial state (unititialized).
     private var _state: RVS_BTDriver_State_Machine_StateEnum = .uninitialized
     
@@ -598,6 +605,20 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
                 print("Discovering all services for the device: \(String(describing: self))")
             #endif
             peripheral.discoverServices(nil)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Accessor for our device info structure. It will be nil, if none assigned yet.
+     */
+    internal var deviceInfoStruct: RVS_BTDriver_Interface_BLE.DeviceInfo! {
+        get {
+            return _deviceInfoStruct
+        }
+        
+        set {
+            _deviceInfoStruct = newValue
         }
     }
 }
