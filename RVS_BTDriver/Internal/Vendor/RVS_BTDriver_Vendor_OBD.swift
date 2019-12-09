@@ -82,6 +82,18 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
             device.deviceType = .testing
         }
     }
+    
+    /* ################################################################## */
+    /**
+     This tests a device to see if it has a pattern of services and properties consistent with being an OBD device.
+     
+     - parameter inDevice: The device we're testing for ownership.
+     
+     - returns: true, if the device appears to be eligible for testing as OBD.
+     */
+    internal func deviceCouldBeOBD(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
+        return false
+    }
 }
 
 /* ###################################################################################################################################### */
