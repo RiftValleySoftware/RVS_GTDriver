@@ -138,10 +138,11 @@ extension RVS_BTDriver {
         if let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
             return dev === inDevice
             }) {
+            inReplacementDevice.internal_service_list = internal_holding_pen[index].internal_service_list   // Make sure that we copy our completed services and properties.
+            internal_holding_pen[index] = inReplacementDevice
             #if DEBUG
                 print("The Holding Pen device: \(inDevice) at Index \(index) was replaced by a new device: \(inReplacementDevice).")
             #endif
-            internal_holding_pen[index] = inReplacementDevice
         } else {
             #if DEBUG
                 print("The device provided: \(inDevice) was not found in the holding pen. No replacement was made.")
