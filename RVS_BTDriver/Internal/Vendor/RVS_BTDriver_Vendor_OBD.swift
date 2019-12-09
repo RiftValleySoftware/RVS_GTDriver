@@ -79,7 +79,9 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
         // We need it to be a BLE device, and that device can't be identified, yet, or under test.
         if  let device = inDevice as? RVS_BTDriver_Device_BLE,
             .unTested == device.deviceType {
-            device.deviceType = .testing
+// TODO: Remove this comment, and delete the following line.
+//            device.deviceType = .testing
+            device.deviceType = .unknown
         }
     }
     
