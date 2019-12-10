@@ -23,32 +23,25 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_Vendor_OBD -
+// MARK: - RVS_BTDriver_Vendor_GoTenna -
 /* ###################################################################################################################################### */
 /**
- A base class for various OBD dongle handlers.
+ A factory class for OBD dongles, based on the MHCP chipset.
  */
-class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
+class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
     /* ###################################################################################################################################### */
-    // MARK: - Enums for Proprietary OBD BLE Service and Characteristic UUIDs -
+    // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
     /**
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
-        /// This is the communication service for VLink/Tonwon BLE devices.
-        case vlinkUserDefinedService                    =   "18F0"
-        /// This is the indicate/notify property for communicating with VLink devices.
-        case vlinkIndicateNotifyProperty                =   "2AF0"
-        /// This is the write-only property for communicating with VLink devices.
-        case vlinkWriteProperty                         =   "2AF1"
-        
-        /// This is the communication service for communicating with LELink BLE devices
-        case leLinkUserDefinedService                   =   "FFE0"
-        /// This is the read/write/notify property of an LELink BLE device
-        case leLinkReadWriteNotifyProperty              =   "FFE1"
-        /// This is the read/write property of an LELink BLE device
-        case leLinkReadWriteProperty                    =   "FFEE"
+        /// This is the read/write service used by MCHP-based chipsets.
+        case mchpUserDefinedService                     =   "49535343-FE7D-4AE5-8FA9-9FAFD205E455"
+        /// This is a read/write property for communicating with a MCHP-based chipset
+        case mchpUserDefinedServiceReadWriteProperty    =   "49535343-6DAA-4D02-ABF6-19569ACA69FE"
+        /// This is a read-only property for communicating with a MCHP-based chipset
+        case mchpUserDefinedServiceReadProperty         =   "49535343-ACA3-481C-91EC-D58E28A60318"
     }
     
     /* ################################################################## */
@@ -65,7 +58,17 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
        - returns: a device instance. Can be nil, if this vendor can't instantiate the device.
        */
      override internal func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
-        precondition(false, "Cannot Call Base Class Method!")
+        if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
+            let ret = RVS_BTDriver_Vendor_OBD_MHCP_Device(vendor: self)
+            
+            ret.deviceInfoStruct = deviceRecord
+            ret.canConnect = 1 == (deviceRecord.advertisementData[CBAdvertisementDataIsConnectable] as? Int ?? 0)
+
+            deviceRecord.peripheral.delegate = ret
+
+            return ret
+        }
+        
         return nil
     }
     
@@ -78,7 +81,13 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
      - parameter inDevice: The device we're testing for ownership.
      */
     override internal func testDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) {
-        precondition(false, "Cannot Call Base Class Method!")
+        // We need it to be a BLE device, and that device can't be identified, yet, or under test.
+        if  let device = inDevice as? RVS_BTDriver_Device_BLE,
+            .unTested == device.deviceType {
+// TODO: Remove this comment, and delete the following line.
+//            device.deviceType = .testing
+            device.deviceType = .unknown
+        }
     }
     
     /* ################################################################## */
@@ -89,8 +98,7 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
      
      - returns: true, if the device appears to be eligible for testing as OBD.
      */
-    internal func deviceCouldBeOBD(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
-        precondition(false, "Cannot Call Base Class Method!")
+    override internal func deviceCouldBeOBD(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
         return false
     }
 }
@@ -101,7 +109,7 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE {
+class RVS_BTDriver_Vendor_OBD_MHCP_Device: RVS_BTDriver_Device_BLE {
     /* ################################################################## */
     /**
      This is a String, containing a unique ID for this peripheral.
