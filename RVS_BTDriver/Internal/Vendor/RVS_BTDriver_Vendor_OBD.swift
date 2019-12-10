@@ -36,7 +36,26 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
-        case userDefinedService =   "FFF0"
+        /// This is the read/write service used by MCHP-based chipsets.
+        case mchpUserDefinedService                     =   "49535343-FE7D-4AE5-8FA9-9FAFD205E455"
+        /// This is a read/write property for communicating with a MCHP-based chipset
+        case mchpUserDefinedServiceReadWriteProperty    =   "49535343-6DAA-4D02-ABF6-19569ACA69FE"
+        /// This is a read-only property for communicating with a MCHP-based chipset
+        case mchpUserDefinedServiceReadProperty         =   "49535343-ACA3-481C-91EC-D58E28A60318"
+        
+        /// This is the communication service for VLink/Tonwon BLE devices.
+        case vlinkUserDefinedService                    =   "18F0"
+        /// This is the indicate/notify property for communicating with VLink devices.
+        case vlinkIndicateNotifyProperty                =   "2AF0"
+        /// This is the write-only property for communicating with VLink devices.
+        case vlinkWriteProperty                         =   "2AF1"
+        
+        /// This is the communication service for communicating with LELink BLE devices
+        case leLinkUserDefinedService                   =   "FFE0"
+        /// This is the read/write/notify property of an LELink BLE device
+        case leLinkReadWriteNotifyProperty              =   "FFE1"
+        /// This is the read/write property of an LELink BLE device
+        case leLinkReadWriteProperty                    =   "FFEE"
     }
     
     /* ################################################################## */
