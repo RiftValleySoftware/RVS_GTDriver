@@ -36,7 +36,7 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
-        /// This is the communication service for VLink/Tonwon BLE devices.
+        /// This is the communication service for FSC-BT826N BLE devices.
         case vlinkUserDefinedService                    =   "18F0"
         /// This is the indicate/notify property for communicating with VLink devices.
         case vlinkIndicateNotifyProperty                =   "2AF0"
@@ -49,6 +49,13 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
         case leLinkReadWriteNotifyProperty              =   "FFE1"
         /// This is the read/write property of an LELink BLE device
         case leLinkReadWriteProperty                    =   "FFEE"
+        
+        /// This is the communication service for the Zentri (Kiwi 60) BLE device
+        case kiwiUserDefinedService                     =   "B2E7D564-C077-404E-9D29-B547F4512DCE"
+        /// This is the write, indicate, notify property for the Kiwi 60 BLE device
+        case kiwiWriteIndicateNotifyProperty            =   "48CBE15E-642D-4555-AC66-576209C50C1E"
+        /// This is the write property for the Kiwi 60 BLE device
+        case kiwiWriteProperty                          =   "DB96492D-CF53-4A43-B896-14CBBF3BF4F3"
     }
     
     /* ################################################################## */
