@@ -138,7 +138,6 @@ extension RVS_BTDriver {
         if let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
             return dev === inDevice
             }) {
-            inReplacementDevice.internal_service_list = internal_holding_pen[index].internal_service_list   // Make sure that we copy our completed services and properties.
             internal_holding_pen[index] = inReplacementDevice
             #if DEBUG
                 print("The Holding Pen device: \(inDevice) at Index \(index) was replaced by a new device: \(inReplacementDevice).")
@@ -158,43 +157,32 @@ extension RVS_BTDriver {
      */
     internal func moveDeviceFromHoldingPenToMainList(_ inDevice: RVS_BTDriver_Device) {
         for device in internal_holding_pen where device === inDevice {
-            var workingDevice: RVS_BTDriver_Device! = device  // This allows us to replace the device with a more specialized one.
-            if let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
+            var workingDevice: RVS_BTDriver_Device!  // This allows us to replace the device with a more specialized one.
+            if  let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
                 return dev === inDevice
                 }) {
-                var moveDevice: Bool = true
-                
-                // See if the device still needs testing before it is moved.
-                for vendor in internal_vendors {
-                    vendor.testDevice(workingDevice)
-                    if .testing == workingDevice.deviceType {
-                        #if DEBUG
-                            print("Device at Index \(index) of the Holding Pen is undergoing testing, and is not yet ready to move.")
-                        #endif
-                        moveDevice = false
-                        break
-                    }
-                }
-                
-                // If we are still moving the device after the test, we do so now. Otherwise, we go on to the next one.
-                if moveDevice {
                     // If the device is one that is handled exclusivley
-                    for vendor in internal_vendors {
-                        if vendor.iOwnThisDevice(device) {
-                            if  let device = device as? RVS_BTDriver_Device_BLE {
-                                workingDevice = vendor.makeDevice(device.deviceInfoStruct)
-                                if nil != workingDevice {
-                                    replaceThisDeviceInTheHoldingPen(device, withThisDevice: workingDevice)
-                                } else {
-                                    #if DEBUG
-                                        print("Unable to create specialized device for \(device).")
-                                    #endif
-                                }
+                    workingDevice = nil
+                    
+                    // We start at 1, because we don't want to check the generic BLE vendor.
+                    for vendorIndex in 1..<internal_vendors.count {
+                        let vendor = internal_vendors[vendorIndex]
+                        if  let device = device as? RVS_BTDriver_Device_BLE,
+                            .unTested == device.deviceType,
+                            let tempWorkingDevice = vendor.makeDevice(device.deviceInfoStruct) as? RVS_BTDriver_Device_BLE {
+                            tempWorkingDevice.internal_service_list = device.internal_service_list   // Make sure that we copy our completed services and properties.
+                            if vendor.iOwnThisDevice(tempWorkingDevice) {
+                                replaceThisDeviceInTheHoldingPen(device, withThisDevice: tempWorkingDevice)
+                                workingDevice = tempWorkingDevice
                             }
                             break
+                        } else {
+                            #if DEBUG
+                                print("Unable to create specialized device for \(device).")
+                            #endif
                         }
                     }
-                    
+                
                     #if DEBUG
                         print("Removing Device at Index \(index) of the Holding Pen.")
                     #endif
@@ -213,9 +201,8 @@ extension RVS_BTDriver {
                         #endif
                     }
                 }
-            }
         }
-
+        
         if internal_holding_pen.isEmpty {
             #if DEBUG
                 print("All Devices Discovered.")

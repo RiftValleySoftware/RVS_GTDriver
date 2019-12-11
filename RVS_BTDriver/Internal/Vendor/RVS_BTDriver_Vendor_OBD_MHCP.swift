@@ -74,31 +74,24 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
     
     /* ################################################################## */
     /**
-     This is called to ask the vendor to test a device for "ownership."
+     This is a test, to see if this vendor is the appropriate one to handle a given device.
      
-     In some cases, the test may be a NOP, but in others, it may require some back-and-forth, before it is resolved.
+     - parameter inDevice: The device we're testing for ownership. It will have its device type set, if it is one of ours.
      
-     - parameter inDevice: The device we're testing for ownership.
+     - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
-    override internal func testDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) {
-        // We need it to be a BLE device, and that device can't be identified, yet, or under test.
-        if  let device = inDevice as? RVS_BTDriver_Device_BLE,
-            .unTested == device.deviceType {
-// TODO: Remove this comment, and delete the following line.
-//            device.deviceType = .testing
-            device.deviceType = .unknown
+    override internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
+        let myService = RVS_BLE_GATT_UUID.mchpUserDefinedService.rawValue
+        for service in inDevice.services where myService == service.uuid {
+            if  let service = service as? RVS_BTDriver_Service_BLE,
+                nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadProperty.rawValue),
+                nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadWriteProperty.rawValue),
+                .unTested == inDevice.deviceType {
+                inDevice.deviceType = .goTennaMesh
+                return true
+            }
         }
-    }
-    
-    /* ################################################################## */
-    /**
-     This tests a device to see if it has a pattern of services and properties consistent with being an OBD device.
-     
-     - parameter inDevice: The device we're testing for ownership.
-     
-     - returns: true, if the device appears to be eligible for testing as OBD.
-     */
-    override internal func deviceCouldBeOBD(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
+        
         return false
     }
 }

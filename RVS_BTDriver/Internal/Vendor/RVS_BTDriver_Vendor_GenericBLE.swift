@@ -28,7 +28,7 @@ import CoreBluetooth
 /**
  A factory class for goTenna Mesh devices
  */
-class RVS_BTDriver_Vendor_GenericBLE: NSObject, RVS_BTDriver_VendorProtocol {
+class RVS_BTDriver_Vendor_GenericBLE: NSObject, RVS_BTDriver_VendorProtocol {    
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
@@ -139,7 +139,7 @@ class RVS_BTDriver_Vendor_GenericBLE: NSObject, RVS_BTDriver_VendorProtocol {
      
      - returns: always false, for this base class.
      */
-    internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) -> Bool {
+    internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
         return false
     }
     
@@ -153,13 +153,6 @@ class RVS_BTDriver_Vendor_GenericBLE: NSObject, RVS_BTDriver_VendorProtocol {
         super.init()
         internal_driver = inDriver
         makeInterface(queue: inDriver.internal_queue)
-    }
-
-    /* ################################################################## */
-    /**
-     Generic is NOP (for now)
-     */
-    func testDevice(_ device: RVS_BTDriver_DeviceProtocol) {
     }
 }
 

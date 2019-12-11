@@ -273,23 +273,23 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
             return
         }
         
-        // Make sure that we don't already have this peripheral in our main list.
-        for device in driver {
-            if  let device = device as? RVS_BTDriver_Device_BLE,
-                device.uuid == inPeripheral.identifier.uuidString {
-                #if DEBUG
-                    print("\tWe already have this peripheral in the main list.")
-                #endif
-                return
-            }
-        }
-        
         // Make sure that we don't already have this peripheral in our holding pen.
         for device in driver.internal_holding_pen {
             if  let device = device as? RVS_BTDriver_Device_BLE,
                 device.uuid == inPeripheral.identifier.uuidString {
                 #if DEBUG
                     print("\tWe already have this peripheral in the holding pen.")
+                #endif
+                return
+            }
+        }
+
+        // Make sure that we don't already have this peripheral in our main list.
+        for device in driver {
+            if  let device = device as? RVS_BTDriver_Device_BLE,
+                device.uuid == inPeripheral.identifier.uuidString {
+                #if DEBUG
+                    print("\tWe already have this peripheral in the main list.")
                 #endif
                 return
             }
@@ -378,19 +378,43 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      This holds the device info we were created with.
      */
     private var _deviceInfoStruct: RVS_BTDriver_Interface_BLE.DeviceInfo!
+    
+    /* ################################################################## */
+    /**
+     The initial state (unititialized).
+     */
+    private var _state: RVS_BTDriver_State_Machine_StateEnum = .uninitialized
 
-    /// The central manager that controls this peripheral.
+    /* ################################################################## */
+    /**
+     The central manager that controls this peripheral.
+     */
     internal var centralManager: CBCentralManager! {
         return deviceInfoStruct?.centralManager
     }
     
-    /// The peripheral instance associated with this device.
+    /* ################################################################## */
+    /**
+     The peripheral instance associated with this device.
+    */
     internal var peripheral: CBPeripheral! {
         return deviceInfoStruct?.peripheral
     }
-
-    /// The initial state (unititialized).
-    private var _state: RVS_BTDriver_State_Machine_StateEnum = .uninitialized
+    
+    /* ################################################################## */
+    /**
+     The UUID comes directly from the peripheral.
+     */
+    override internal var uuid: String! {
+        get {
+            return peripheral?.identifier.uuidString
+        }
+        
+        set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property!")
+        }
+    }
     
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Computed Properties -

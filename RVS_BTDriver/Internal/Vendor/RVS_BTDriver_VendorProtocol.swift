@@ -77,15 +77,5 @@ internal protocol RVS_BTDriver_VendorProtocol {
      
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
-    func iOwnThisDevice(_ device: RVS_BTDriver_DeviceProtocol) -> Bool
-    
-    /* ################################################################## */
-    /**
-     This is called to ask the vendor to test a device for "ownership."
-     
-     In some cases, the test may be a NOP, but in others, it may require some back-and-forth, before it is resolved.
-     
-     - parameter device: The device we're testing for ownership.
-     */
-    func testDevice(_ device: RVS_BTDriver_DeviceProtocol)
+    func iOwnThisDevice(_ device: RVS_BTDriver_Device_BLE) -> Bool
 }

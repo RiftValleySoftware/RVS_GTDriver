@@ -97,31 +97,15 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GenericBLE {
      
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
-    override internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) -> Bool {
+    override internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
         let myService = RVS_BLE_GATT_UUID.goTennaProprietary.rawValue
         // Fairly basic. goTenna Mesh uses a proprietary UUID for a proprietary service.
-        for service in inDevice.services where myService == service.uuid {
-            // We mark the device as a goTenna Mesh, as well as return true.
-            if  let device = inDevice as? RVS_BTDriver_Device_BLE,
-                .unTested == device.deviceType {
-                device.deviceType = .goTennaMesh
-                return true
-            }
+        for service in inDevice.services where myService == service.uuid && .unTested == inDevice.deviceType {
+            inDevice.deviceType = .goTennaMesh
+            return true
         }
         
         return false
-    }
-    
-    /* ################################################################## */
-    /**
-     This is called to ask the vendor to test a device for "ownership."
-     
-     This implementation is NOP.
-     
-     - parameter device: The device we're testing for ownership.
-     */
-    override internal func testDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) {
-        _ = iOwnThisDevice(inDevice)    // This just sets eligible devices to .goTennaMesh
     }
 }
 

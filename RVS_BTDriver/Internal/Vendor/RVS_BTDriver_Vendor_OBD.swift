@@ -75,31 +75,6 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
         precondition(false, "Cannot Call Base Class Method!")
         return nil
     }
-    
-    /* ################################################################## */
-    /**
-     This is called to ask the vendor to test a device for "ownership."
-     
-     In some cases, the test may be a NOP, but in others, it may require some back-and-forth, before it is resolved.
-     
-     - parameter inDevice: The device we're testing for ownership.
-     */
-    override internal func testDevice(_ inDevice: RVS_BTDriver_DeviceProtocol) {
-        precondition(false, "Cannot Call Base Class Method!")
-    }
-    
-    /* ################################################################## */
-    /**
-     This tests a device to see if it has a pattern of services and properties consistent with being an OBD device.
-     
-     - parameter inDevice: The device we're testing for ownership.
-     
-     - returns: true, if the device appears to be eligible for testing as OBD.
-     */
-    internal func deviceCouldBeOBD(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
-        precondition(false, "Cannot Call Base Class Method!")
-        return false
-    }
 }
 
 /* ###################################################################################################################################### */
@@ -109,6 +84,24 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
  This is a specialization of the device for OBD Devices.
  */
 class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE {
+    /* ################################################################## */
+    /**
+     This property is one that the OBD unit uses to send AT commands to the driver.
+     */
+    internal var readProperty: RVS_BTDriver_Property_BLE!
+    
+    /* ################################################################## */
+    /**
+     This property is one that the OBD unit uses to receive AT commands from the driver.
+     */
+    internal var writeProperty: RVS_BTDriver_Property_BLE!
+    
+    /* ################################################################## */
+    /**
+     This property is one that the OBD unit uses to send AT commands to the driver, but as inidicate, not read.
+     */
+    internal var indicateProperty: RVS_BTDriver_Property_BLE!
+    
     /* ################################################################## */
     /**
      This is a String, containing a unique ID for this peripheral.

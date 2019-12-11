@@ -33,10 +33,10 @@ public enum RVS_BTDriver_DeviceType: String {
     case goTennaMesh
     /// A generic OBD device
     case genericOBD
+    /// An OBD device, based on the MHCP chipset.
+    case mhcpOBD
     /// The device is unknown, and untested.
     case unTested
-    /// The device is currently being tested.
-    case testing
     /// The device is unknown.
     case unknown
 }
