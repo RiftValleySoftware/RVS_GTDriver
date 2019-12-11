@@ -174,8 +174,8 @@ extension RVS_BTDriver {
                             if vendor.iOwnThisDevice(tempWorkingDevice) {
                                 replaceThisDeviceInTheHoldingPen(device, withThisDevice: tempWorkingDevice)
                                 workingDevice = tempWorkingDevice
+                                break
                             }
-                            break
                         } else {
                             #if DEBUG
                                 print("Unable to create specialized device for \(device).")

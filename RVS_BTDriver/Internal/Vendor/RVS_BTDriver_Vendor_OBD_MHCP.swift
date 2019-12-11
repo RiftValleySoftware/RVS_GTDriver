@@ -41,7 +41,7 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
         /// This is a read/write property for communicating with a MCHP-based chipset
         case mchpUserDefinedServiceReadWriteProperty    =   "49535343-6DAA-4D02-ABF6-19569ACA69FE"
         /// This is a read-only property for communicating with a MCHP-based chipset
-        case mchpUserDefinedServiceReadProperty         =   "49535343-ACA3-481C-91EC-D58E28A60318"
+        case mchpUserDefinedServiceReadProperty         =   "49535343-ACA3-481C-91EC-D85E28A60318"
     }
     
     /* ################################################################## */
@@ -82,12 +82,11 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
      */
     override internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
         let myService = RVS_BLE_GATT_UUID.mchpUserDefinedService.rawValue
-        for service in inDevice.services where myService == service.uuid {
+        for service in inDevice.services where .unTested == inDevice.deviceType && myService == service.uuid {
             if  let service = service as? RVS_BTDriver_Service_BLE,
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadProperty.rawValue),
-                nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadWriteProperty.rawValue),
-                .unTested == inDevice.deviceType {
-                inDevice.deviceType = .goTennaMesh
+                nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadWriteProperty.rawValue) {
+                inDevice.deviceType = .mhcpOBD
                 return true
             }
         }
