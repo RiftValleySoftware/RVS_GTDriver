@@ -164,20 +164,18 @@ extension RVS_BTDriver {
                 
                 // We start at 1, because we don't want to check the generic BLE vendor.
                 for vendorIndex in 1..<internal_vendors.count {
+                    // Each vendor gets a crack at creating a specialized variant of the device.
                     let vendor = internal_vendors[vendorIndex]
-                    if  let device = device as? RVS_BTDriver_Device_BLE,
-                        .unTested == device.deviceType,
-                        let tempWorkingDevice = vendor.makeDevice(device.deviceInfoStruct) as? RVS_BTDriver_Device_BLE {
+                    // If the vendor successfully creates a variant, we transfer over the services, and replace our holding pen generic instance with the new one.
+                    if  let device = device as? RVS_BTDriver_Device_BLE,    // Has to be a BLE device
+                        .unTested == device.deviceType,                     // Has to be untested (no specific device assigned).
+                        let tempWorkingDevice = vendor.makeDevice(device.deviceInfoStruct) as? RVS_BTDriver_Device_BLE {    // Try creating the specialized instance.
                         tempWorkingDevice.internal_service_list = device.internal_service_list   // Make sure that we copy our completed services and properties.
-                        if vendor.iOwnThisDevice(tempWorkingDevice) {
+                        if vendor.iOwnThisDevice(tempWorkingDevice) {   // This is a final test, and the device type is assigned.
                             replaceThisDeviceInTheHoldingPen(device, withThisDevice: tempWorkingDevice)
                             workingDevice = tempWorkingDevice
                             break
                         }
-                    } else {
-                        #if DEBUG
-                            print("Unable to create specialized device for \(device).")
-                        #endif
                     }
                 }
             
