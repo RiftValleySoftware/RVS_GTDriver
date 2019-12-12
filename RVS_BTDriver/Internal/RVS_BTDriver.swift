@@ -156,54 +156,57 @@ extension RVS_BTDriver {
      - parameter inDevice: The device object to be moved.
      */
     internal func moveDeviceFromHoldingPenToMainList(_ inDevice: RVS_BTDriver_Device) {
-        for device in internal_holding_pen where device === inDevice {
-            var workingDevice: RVS_BTDriver_Device!  // This allows us to replace the device with a more specialized one.
-            if  let index = internal_holding_pen.firstIndex(where: { $0 === inDevice }) {
-                // If the device is one that is handled exclusivley
-                workingDevice = nil
-                
-                // We start at 1, because we don't want to check the generic BLE vendor.
-                for vendorIndex in 1..<internal_vendors.count {
-                    // Each vendor gets a crack at creating a specialized variant of the device.
-                    let vendor = internal_vendors[vendorIndex]
-                    // If the vendor successfully creates a variant, we transfer over the services, and replace our holding pen generic instance with the new one.
-                    if  let device = device as? RVS_BTDriver_Device_BLE,    // Has to be a BLE device
-                        .unTested == device.deviceType,                     // Has to be untested (no specific device assigned).
-                        let tempWorkingDevice = vendor.makeDevice(device.deviceInfoStruct) as? RVS_BTDriver_Device_BLE {    // Try creating the specialized instance.
-                        tempWorkingDevice.internal_service_list = device.internal_service_list   // Make sure that we copy our completed services and properties.
-                        if vendor.iOwnThisDevice(tempWorkingDevice) {   // This is a final test, and the device type is assigned.
-                            replaceThisDeviceInTheHoldingPen(device, withThisDevice: tempWorkingDevice)
-                            workingDevice = tempWorkingDevice
-                            break
+        if var testDevice = inDevice  as? RVS_BTDriver_Device_BLE {
+            for device in internal_holding_pen where device === testDevice {
+                var workingDevice: RVS_BTDriver_Device!  // This allows us to replace the device with a more specialized one.
+                if  let index = internal_holding_pen.firstIndex(where: { $0 === testDevice }) {
+                    // If the device is one that is handled exclusivley
+                    workingDevice = nil
+                    
+                    // We start at 1, because we don't want to check the generic BLE vendor.
+                    for vendorIndex in 1..<internal_vendors.count {
+                        // Each vendor gets a crack at creating a specialized variant of the device.
+                        let vendor = internal_vendors[vendorIndex]
+                        // If the vendor successfully creates a variant, we transfer over the services, and replace our holding pen generic instance with the new one.
+                        if  let device = device as? RVS_BTDriver_Device_BLE,    // Has to be a BLE device
+                            .unTested == device.deviceType,                     // Has to be untested (no specific device assigned).
+                            let tempWorkingDevice = vendor.makeDevice(device.deviceInfoStruct) as? RVS_BTDriver_Device_BLE {    // Try creating the specialized instance.
+                            tempWorkingDevice.internal_service_list = device.internal_service_list   // Make sure that we copy our completed services and properties.
+                            if vendor.iOwnThisDevice(tempWorkingDevice) {   // This is a final test, and the device type is assigned.
+                                replaceThisDeviceInTheHoldingPen(device, withThisDevice: tempWorkingDevice)
+                                workingDevice = tempWorkingDevice
+                                testDevice = tempWorkingDevice
+                                break
+                            }
                         }
                     }
-                }
-            
-                #if DEBUG
-                    print("Removing Device at Index \(index) of the Holding Pen.")
-                #endif
                 
-                internal_holding_pen.remove(at: index)
-                
-                if nil != workingDevice {
                     #if DEBUG
-                        print("Adding the device to the main list at index \(_device_list.count).")
+                        print("Removing Device at Index \(index) of the Holding Pen.")
                     #endif
-                    _device_list.append(workingDevice)
-                    // If we have a delegate, we send it a notification that a device was added.
-                    delegate?.btDriver(self, newDeviceAdded: workingDevice)
-                    #if DEBUG
-                        print("The new device: \(String(describing: workingDevice))")
-                    #endif
+                    
+                    internal_holding_pen.remove(at: index)
+                    
+                    if nil != workingDevice {
+                        #if DEBUG
+                            print("Adding the device to the main list at index \(_device_list.count).")
+                        #endif
+                        _device_list.append(workingDevice)
+                        // If we have a delegate, we send it a notification that a device was added.
+                        delegate?.btDriver(self, newDeviceAdded: workingDevice)
+                        #if DEBUG
+                            print("The new device: \(String(describing: workingDevice))")
+                        #endif
+                    }
                 }
             }
-        }
-        
-        if internal_holding_pen.isEmpty {
-            #if DEBUG
-                print("All Devices Discovered.")
-            #endif
-            reportCompletion()
+            
+            if internal_holding_pen.isEmpty {
+                #if DEBUG
+                    print("All Devices Discovered.")
+                #endif
+                reportCompletion()
+            }
         }
     }
     

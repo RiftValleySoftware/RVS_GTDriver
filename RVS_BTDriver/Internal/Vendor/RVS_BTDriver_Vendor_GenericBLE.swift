@@ -69,6 +69,14 @@ class RVS_BTDriver_Vendor_GenericBLE: NSObject, RVS_BTDriver_VendorProtocol {
     
     /* ################################################################## */
     /**
+     This returns a list of BLE CBUUIDs, which the vendor wants us to filter for.
+     */
+    var searchForTheseServices: [CBUUID] {
+        return []
+    }
+
+    /* ################################################################## */
+    /**
      Factory for creating (or referencing) the appropriate interface instance.
      
      - parameter queue: The DispatchQueue to use for this (can be nil, in which case, the main queue is used).

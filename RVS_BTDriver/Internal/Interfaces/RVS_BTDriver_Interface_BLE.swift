@@ -169,7 +169,19 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
                 // We check to see if we are going to be filtering out previous advertised devices (cuts down the noise).
                 let options: [String: Any]! = rememberAdvertisedDevices ? [CBCentralManagerScanOptionAllowDuplicatesKey: 1] : nil
 
-                centralManager?.scanForPeripherals(withServices: nil, options: options)
+                var services: [CBUUID]!
+                
+                if let vendors = driver?.internal_vendors {
+                    for vendor in vendors where 0 < vendor.searchForTheseServices.count {
+                        if nil == services {
+                            services = vendor.searchForTheseServices
+                        } else {
+                            services += vendor.searchForTheseServices
+                        }
+                    }
+                }
+                
+                centralManager?.scanForPeripherals(withServices: services, options: options)
             } else if   !newValue,
                         centralManager?.isScanning ?? false {
                 centralManager?.stopScan()

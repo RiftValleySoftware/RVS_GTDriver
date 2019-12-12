@@ -35,6 +35,12 @@ internal protocol RVS_BTDriver_VendorProtocol {
      A reference to the main driver instance.
      */
     var driver: RVS_BTDriver! { get }
+    
+    /* ################################################################## */
+    /**
+     This returns a list of BLE CBUUIDs, which the vendor wants us to filter for.
+     */
+    var searchForTheseServices: [CBUUID] { get }
 
     /* ################################################################## */
     /**
