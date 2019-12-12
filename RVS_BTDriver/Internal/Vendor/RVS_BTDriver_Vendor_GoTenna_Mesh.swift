@@ -76,8 +76,6 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GenericBLE {
                     let ret = RVS_BTDriver_Device_GoTenna_Mesh(vendor: self)
                     
                     ret.deviceInfoStruct = deviceRecord
-                    
-                    ret.canConnect = 1 == (deviceRecord.advertisementData[CBAdvertisementDataIsConnectable] as? Int ?? 0)
 
                     deviceRecord.peripheral.delegate = ret
 

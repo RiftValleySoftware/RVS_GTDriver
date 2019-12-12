@@ -103,7 +103,6 @@ class RVS_BTDriver_Vendor_GenericBLE: NSObject, RVS_BTDriver_VendorProtocol {
             let ret = RVS_BTDriver_Device_GenericBLE(vendor: self)
             
             ret.deviceInfoStruct = deviceRecord
-            ret.canConnect = 1 == (deviceRecord.advertisementData[CBAdvertisementDataIsConnectable] as? Int ?? 0)
 
             deviceRecord.peripheral.delegate = ret
 

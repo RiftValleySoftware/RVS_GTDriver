@@ -587,6 +587,23 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
             }
         }
     }
+    
+    /* ################################################################## */
+    /**
+     Connectable indicator.
+     
+     - returns: true, if the peripheral is connectable.
+     */
+    public override var canConnect: Bool {
+        get {
+            return 1 == (deviceInfoStruct.advertisementData[CBAdvertisementDataIsConnectable] as? Int ?? 0)
+        }
+        
+        set {
+            _ = newValue
+            precondition(false, "Cannot Set This Property")
+        }
+    }
 
     /* ################################################################################################################################## */
     // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Methods -

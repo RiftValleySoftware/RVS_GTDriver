@@ -62,7 +62,6 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
             let ret = RVS_BTDriver_Vendor_OBD_MHCP_Device(vendor: self)
             
             ret.deviceInfoStruct = deviceRecord
-            ret.canConnect = 1 == (deviceRecord.advertisementData[CBAdvertisementDataIsConnectable] as? Int ?? 0)
 
             deviceRecord.peripheral.delegate = ret
 
@@ -102,18 +101,4 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
  This is a specialization of the device for OBD Devices.
  */
 class RVS_BTDriver_Vendor_OBD_MHCP_Device: RVS_BTDriver_Device_BLE {
-    /* ################################################################## */
-    /**
-     This is a String, containing a unique ID for this peripheral.
-     */
-    override public var uuid: String! {
-        get {
-            return peripheral.identifier.uuidString
-        }
-        
-        set {
-            _ = newValue
-            precondition(false, "Cannot Set This Property!")
-        }
-    }
 }
