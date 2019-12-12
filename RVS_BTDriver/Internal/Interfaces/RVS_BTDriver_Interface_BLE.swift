@@ -181,6 +181,10 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
                     }
                 }
                 
+                #if DEBUG
+                    print("Presenting these services for scan filtering: \(String(describing: services))")
+                #endif
+
                 centralManager?.scanForPeripherals(withServices: services, options: options)
             } else if   !newValue,
                         centralManager?.isScanning ?? false {

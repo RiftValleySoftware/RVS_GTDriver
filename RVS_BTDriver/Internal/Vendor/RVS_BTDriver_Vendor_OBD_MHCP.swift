@@ -36,6 +36,9 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
+        /// It advertises this service.
+        case advertisedService                          =   "FFF0"
+        
         /// This is the read/write service used by MCHP-based chipsets.
         case mchpUserDefinedService                     =   "49535343-FE7D-4AE5-8FA9-9FAFD205E455"
         /// This is a read/write property for communicating with a MCHP-based chipset
@@ -55,7 +58,7 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
      This returns a list of BLE CBUUIDs, which the vendor wants us to filter for.
      */
     override var searchForTheseServices: [CBUUID] {
-        return [CBUUID(string: RVS_BLE_GATT_UUID.mchpUserDefinedService.rawValue)]
+        return [CBUUID(string: RVS_BLE_GATT_UUID.advertisedService.rawValue)]
     }
 
     /* ################################################################## */
