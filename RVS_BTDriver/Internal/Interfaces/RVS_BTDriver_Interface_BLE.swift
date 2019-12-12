@@ -184,7 +184,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
                 #if DEBUG
                     print("Presenting these services for scan filtering: \(String(describing: services))")
                 #endif
-
+                
                 centralManager?.scanForPeripherals(withServices: services, options: options)
             } else if   !newValue,
                         centralManager?.isScanning ?? false {
@@ -269,6 +269,9 @@ extension RVS_BTDriver_Interface_BLE: CBCentralManagerDelegate {
         #if DEBUG
             print("Peripheral Discovered: \(String(describing: inPeripheral))")
             print("\tAdvertisement Data: \(String(describing: inAdvertisementData))")
+            if let serviceArray = inAdvertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] {
+                print("\tAdvertised Services: \(serviceArray)")
+            }
             print("\tSignal Strength: \(inRSSI)dB")
         #endif
         
