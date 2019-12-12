@@ -37,6 +37,8 @@ public enum RVS_BTDriver_DeviceType: String {
     case mhcpOBD
     /// An OBD device, based on the VLINK chipset.
     case bt826n
+    /// An OBD device, based on the LELink chipset.
+    case leLink
     /// The device is unknown, and untested.
     case unTested
     /// The device is unknown.

@@ -49,12 +49,6 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
     
     /* ################################################################## */
     /**
-     This is the data we need to match against the advertisement data.
-     */
-    private let _manufacturerCode: [UInt8] = [0xfe, 0xff, 0x02]
-    
-    /* ################################################################## */
-    /**
      This returns a list of BLE CBUUIDs, which the vendor wants us to filter for.
      */
     override var searchForTheseServices: [CBUUID] {

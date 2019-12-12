@@ -23,25 +23,33 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_Vendor_OBD -
+// MARK: - RVS_BTDriver_Vendor_GoTenna -
 /* ###################################################################################################################################### */
 /**
- A base class for various OBD dongle handlers.
+ A factory class for OBD dongles, based on the MHCP chipset.
  */
-class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
+class RVS_BTDriver_Vendor_OBD_LELink: RVS_BTDriver_Vendor_OBD {
     /* ###################################################################################################################################### */
-    // MARK: - Enums for Proprietary OBD BLE Service and Characteristic UUIDs -
+    // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
     /**
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
-    internal enum RVS_BLE_GATT_UUID: String {        
-        /// This is the communication service for the Zentri (Kiwi 60) BLE device
-        case kiwiUserDefinedService                     =   "B2E7D564-C077-404E-9D29-B547F4512DCE"
-        /// This is the write, indicate, notify property for the Kiwi 60 BLE device
-        case kiwiWriteIndicateNotifyProperty            =   "48CBE15E-642D-4555-AC66-576209C50C1E"
-        /// This is the write property for the Kiwi 60 BLE device
-        case kiwiWriteProperty                          =   "DB96492D-CF53-4A43-B896-14CBBF3BF4F3"
+    internal enum RVS_BLE_GATT_UUID: String {
+        /// This is the communication service for communicating with LELink BLE devices
+        case leLinkUserDefinedService                   =   "FFE0"
+        /// This is the read/write/notify property of an LELink BLE device
+        case leLinkReadWriteNotifyProperty              =   "FFE1"
+        /// This is the read/write property of an LELink BLE device
+        case leLinkReadWriteProperty                    =   "FFEE"
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns a list of BLE CBUUIDs, which the vendor wants us to filter for.
+     */
+    override var searchForTheseServices: [CBUUID] {
+        return [CBUUID(string: RVS_BLE_GATT_UUID.leLinkUserDefinedService.rawValue)]
     }
 
     /* ################################################################## */
@@ -52,8 +60,39 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
        - returns: a device instance. Can be nil, if this vendor can't instantiate the device.
        */
      override internal func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
-        precondition(false, "Cannot Call Base Class Method!")
+        if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
+            let ret = RVS_BTDriver_Vendor_OBD_LELink_Device(vendor: self)
+            
+            ret.deviceInfoStruct = deviceRecord
+
+            deviceRecord.peripheral.delegate = ret
+
+            return ret
+        }
+        
         return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This is a test, to see if this vendor is the appropriate one to handle a given device.
+     
+     - parameter inDevice: The device we're testing for ownership. It will have its device type set, if it is one of ours.
+     
+     - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
+     */
+    override internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
+        let myService = RVS_BLE_GATT_UUID.leLinkUserDefinedService.rawValue
+        for service in inDevice.services where .unTested == inDevice.deviceType && myService == service.uuid {
+            if  let service = service as? RVS_BTDriver_Service_BLE,
+                nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.leLinkReadWriteNotifyProperty.rawValue),
+                nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.leLinkReadWriteProperty.rawValue) {
+                inDevice.deviceType = .leLink
+                return true
+            }
+        }
+        
+        return false
     }
 }
 
@@ -63,37 +102,5 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE {
-    /* ################################################################## */
-    /**
-     This property is one that the OBD unit uses to send AT commands to the driver.
-     */
-    internal var readProperty: RVS_BTDriver_Property_BLE!
-    
-    /* ################################################################## */
-    /**
-     This property is one that the OBD unit uses to receive AT commands from the driver.
-     */
-    internal var writeProperty: RVS_BTDriver_Property_BLE!
-    
-    /* ################################################################## */
-    /**
-     This property is one that the OBD unit uses to send AT commands to the driver, but as inidicate, not read.
-     */
-    internal var indicateProperty: RVS_BTDriver_Property_BLE!
-    
-    /* ################################################################## */
-    /**
-     This is a String, containing a unique ID for this peripheral.
-     */
-    override public var uuid: String! {
-        get {
-            return peripheral.identifier.uuidString
-        }
-        
-        set {
-            _ = newValue
-            precondition(false, "Cannot Set This Property!")
-        }
-    }
+class RVS_BTDriver_Vendor_OBD_LELink_Device: RVS_BTDriver_Device_BLE {
 }
