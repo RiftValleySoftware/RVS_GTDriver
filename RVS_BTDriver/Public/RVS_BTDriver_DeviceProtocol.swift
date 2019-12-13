@@ -28,7 +28,7 @@ import Foundation
 /**
  This enum is used to help identify what the device is.
  */
-public enum RVS_BTDriver_DeviceType: String {
+public enum RVS_BTDriver_DeviceType {
     /// The goTenna Mesh device
     case goTennaMesh
     /// A generic OBD device
