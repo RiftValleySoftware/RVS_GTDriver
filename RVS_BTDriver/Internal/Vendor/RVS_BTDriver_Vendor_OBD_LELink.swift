@@ -87,7 +87,7 @@ class RVS_BTDriver_Vendor_OBD_LELink: RVS_BTDriver_Vendor_OBD {
             if  let service = service as? RVS_BTDriver_Service_BLE,
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.leLinkReadWriteNotifyProperty.rawValue),
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.leLinkReadWriteProperty.rawValue) {
-                inDevice.deviceType = .leLink
+                inDevice.deviceType = .OBD(type: "leLink")
                 return true
             }
         }

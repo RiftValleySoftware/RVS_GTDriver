@@ -28,17 +28,11 @@ import Foundation
 /**
  This enum is used to help identify what the device is.
  */
-public enum RVS_BTDriver_DeviceType {
+public enum RVS_BTDriver_DeviceType: Equatable {
     /// The goTenna Mesh device
     case goTennaMesh
     /// A generic OBD device
-    case genericOBD
-    /// An OBD device, based on the MHCP chipset.
-    case mhcpOBD
-    /// An OBD device, based on the VLINK chipset.
-    case bt826n
-    /// An OBD device, based on the LELink chipset.
-    case leLink
+    case OBD(type: String)
     /// The device is unknown, and untested.
     case unTested
     /// The device is unknown.
