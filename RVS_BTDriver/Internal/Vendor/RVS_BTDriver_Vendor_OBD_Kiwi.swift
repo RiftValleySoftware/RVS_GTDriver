@@ -36,6 +36,9 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
+        /// The device ID string.
+        case deviceSpecificID                           =   "Kiwi"
+        
         /// This is the service that is advertised.
         case advertisedService                          =   "E47C8027-CCA1-4E3B-981F-BDC47ABEB5B5"
         
@@ -90,7 +93,7 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
             if  let service = service as? RVS_BTDriver_Service_BLE,
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiWriteIndicateNotifyProperty.rawValue),
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiWriteProperty.rawValue) {
-                inDevice.deviceType = .OBD(type: "Kiwi")
+                inDevice.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
                 return true
             }
         }

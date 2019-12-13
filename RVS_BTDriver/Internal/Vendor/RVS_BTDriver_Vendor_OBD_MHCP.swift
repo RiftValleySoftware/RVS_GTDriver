@@ -36,6 +36,9 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
+        /// The device ID string.
+        case deviceSpecificID                           =   "MHCPOBD"
+        
         /// It advertises this service.
         case advertisedService                          =   "FFF0"
         
@@ -90,7 +93,7 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
             if  let service = service as? RVS_BTDriver_Service_BLE,
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadProperty.rawValue),
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadWriteProperty.rawValue) {
-                inDevice.deviceType = .OBD(type: "MHCPOBD")
+                inDevice.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
                 return true
             }
         }

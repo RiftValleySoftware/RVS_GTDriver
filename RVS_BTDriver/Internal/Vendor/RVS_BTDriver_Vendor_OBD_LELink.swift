@@ -36,6 +36,9 @@ class RVS_BTDriver_Vendor_OBD_LELink: RVS_BTDriver_Vendor_OBD {
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
+        /// The device ID string.
+        case deviceSpecificID                           =   "LELink"
+        
         /// This is the communication service for communicating with LELink BLE devices
         case leLinkUserDefinedService                   =   "FFE0"
         /// This is the read/write/notify property of an LELink BLE device
@@ -87,7 +90,7 @@ class RVS_BTDriver_Vendor_OBD_LELink: RVS_BTDriver_Vendor_OBD {
             if  let service = service as? RVS_BTDriver_Service_BLE,
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.leLinkReadWriteNotifyProperty.rawValue),
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.leLinkReadWriteProperty.rawValue) {
-                inDevice.deviceType = .OBD(type: "LELink")
+                inDevice.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
                 return true
             }
         }

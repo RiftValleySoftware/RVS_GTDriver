@@ -36,6 +36,9 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
+        /// The device ID string.
+        case deviceSpecificID                           =   "BT26N"
+        
         /// This is the communication service for FSC-BT826N BLE devices.
         case vlinkUserDefinedService                    =   "18F0"
         /// This is the indicate/notify property for communicating with VLink devices.
@@ -93,7 +96,7 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
             if  let service = service as? RVS_BTDriver_Service_BLE,
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkIndicateNotifyProperty.rawValue),
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkWriteProperty.rawValue) {
-                inDevice.deviceType = .OBD(type: "BT26N")
+                inDevice.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
                 return true
             }
         }

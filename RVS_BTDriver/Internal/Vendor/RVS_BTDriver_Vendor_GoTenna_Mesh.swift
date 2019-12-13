@@ -36,6 +36,9 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GoTenna {
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
     internal enum RVS_BLE_GATT_UUID: String {
+        /// The device ID string.
+        case deviceSpecificID               =   "Mesh"
+        
         // MARK: - Service IDs
         /// This is the basic goTenna proprietary service.
         case goTennaProprietary             =   "1276AAEE-DF5E-11E6-BF01-FE55135034F3"
@@ -101,7 +104,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GoTenna {
         let myService = RVS_BLE_GATT_UUID.goTennaProprietary.rawValue
         // Fairly basic. goTenna Mesh uses a proprietary UUID for a proprietary service.
         for service in inDevice.services where myService == service.uuid && .unTested == inDevice.deviceType {
-            inDevice.deviceType = .goTenna(type: "Mesh")
+            inDevice.deviceType = .goTenna(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
             return true
         }
         
