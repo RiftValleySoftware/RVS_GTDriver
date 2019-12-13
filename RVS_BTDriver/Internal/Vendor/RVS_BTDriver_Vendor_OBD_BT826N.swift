@@ -111,5 +111,5 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Vendor_OBD_BT826N_Device: RVS_BTDriver_Device_BLE {
+class RVS_BTDriver_Vendor_OBD_BT826N_Device: RVS_BTDriver_Device_OBD {
 }

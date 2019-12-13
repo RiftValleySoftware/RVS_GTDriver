@@ -108,5 +108,5 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Vendor_OBD_Kiwi_Device: RVS_BTDriver_Device_BLE {
+class RVS_BTDriver_Vendor_OBD_Kiwi_Device: RVS_BTDriver_Device_OBD {
 }

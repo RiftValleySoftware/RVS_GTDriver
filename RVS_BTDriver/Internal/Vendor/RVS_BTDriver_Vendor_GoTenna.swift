@@ -35,3 +35,12 @@ class RVS_BTDriver_Vendor_GoTenna: RVS_BTDriver_Vendor_GenericBLE {
      */
     internal let internal_manufacturerCode: [UInt8] = [0xfe, 0xff, 0x02]
 }
+
+/* ###################################################################################################################################### */
+// MARK: - goTenna Family Device Specialization -
+/* ###################################################################################################################################### */
+/**
+ This is a specialization of the device for the goTenna devices.
+ */
+class RVS_BTDriver_Device_GoTenna: RVS_BTDriver_Device_BLE {
+}

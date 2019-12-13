@@ -81,4 +81,14 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE {
             precondition(false, "Cannot Set This Property!")
         }
     }
+    
+    /* ################################################################## */
+    /**
+    - parameter inPeripheral: The peripheral that owns this service.
+    - parameter didUpdateValueFor: The characteristic that was updated.
+    - parameter error: Any error that may have occurred. It can be nil.
+    */
+    internal override func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
+        super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
+    }
 }

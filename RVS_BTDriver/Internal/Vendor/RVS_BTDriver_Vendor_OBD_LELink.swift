@@ -105,5 +105,5 @@ class RVS_BTDriver_Vendor_OBD_LELink: RVS_BTDriver_Vendor_OBD {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Vendor_OBD_LELink_Device: RVS_BTDriver_Device_BLE {
+class RVS_BTDriver_Vendor_OBD_LELink_Device: RVS_BTDriver_Device_OBD {
 }

@@ -116,7 +116,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GoTenna {
 // MARK: - goTenna Mesh Device Specialization -
 /* ###################################################################################################################################### */
 /**
- This is a specialization of the device for the goTenna Mesh.
+ This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_Device_BLE {
+class RVS_BTDriver_Device_GoTenna_Mesh: RVS_BTDriver_Device_GoTenna {
 }
