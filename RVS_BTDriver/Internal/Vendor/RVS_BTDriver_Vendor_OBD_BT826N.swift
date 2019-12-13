@@ -93,7 +93,7 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
             if  let service = service as? RVS_BTDriver_Service_BLE,
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkIndicateNotifyProperty.rawValue),
                 nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkWriteProperty.rawValue) {
-                inDevice.deviceType = .OBD(type: "bt826n")
+                inDevice.deviceType = .OBD(type: "BT26N")
                 return true
             }
         }

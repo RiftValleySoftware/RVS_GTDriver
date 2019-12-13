@@ -30,7 +30,7 @@ import Foundation
  */
 public enum RVS_BTDriver_DeviceType: Equatable {
     /// The goTenna Mesh device
-    case goTennaMesh
+    case goTenna(type: String)
     /// A generic OBD device
     case OBD(type: String)
     /// The device is unknown, and untested.

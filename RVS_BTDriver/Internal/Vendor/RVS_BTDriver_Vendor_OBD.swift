@@ -29,21 +29,6 @@ import CoreBluetooth
  A base class for various OBD dongle handlers.
  */
 class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
-    /* ###################################################################################################################################### */
-    // MARK: - Enums for Proprietary OBD BLE Service and Characteristic UUIDs -
-    /* ###################################################################################################################################### */
-    /**
-     These are String-based enums that we use to reference various services and characteristics in our driver.
-     */
-    internal enum RVS_BLE_GATT_UUID: String {        
-        /// This is the communication service for the Zentri (Kiwi 60) BLE device
-        case kiwiUserDefinedService                     =   "B2E7D564-C077-404E-9D29-B547F4512DCE"
-        /// This is the write, indicate, notify property for the Kiwi 60 BLE device
-        case kiwiWriteIndicateNotifyProperty            =   "48CBE15E-642D-4555-AC66-576209C50C1E"
-        /// This is the write property for the Kiwi 60 BLE device
-        case kiwiWriteProperty                          =   "DB96492D-CF53-4A43-B896-14CBBF3BF4F3"
-    }
-
     /* ################################################################## */
     /**
      REQUIRED: Factory method for creating an instance of the vendor device.

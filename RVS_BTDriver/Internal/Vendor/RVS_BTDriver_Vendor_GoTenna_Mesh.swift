@@ -28,7 +28,7 @@ import CoreBluetooth
 /**
  A factory class for goTenna Mesh devices
  */
-class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GenericBLE {
+class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GoTenna {
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
@@ -51,12 +51,6 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GenericBLE {
     
     /* ################################################################## */
     /**
-     This is the data we need to match against the advertisement data.
-     */
-    private let _manufacturerCode: [UInt8] = [0xfe, 0xff, 0x02]
-    
-    /* ################################################################## */
-    /**
      This returns a list of BLE CBUUIDs, which the vendor wants us to filter for.
      */
     override var searchForTheseServices: [CBUUID] {
@@ -74,13 +68,13 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GenericBLE {
         if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
             // We check to see if the peripheral is one of ours.
             if  let manufacturerCodeData = deviceRecord.advertisementData[CBAdvertisementDataManufacturerDataKey] as? NSData,
-                _manufacturerCode.count == manufacturerCodeData.length {
+                internal_manufacturerCode.count == manufacturerCodeData.length {
                 
                 // We read in the manufacturer data, and match it against our own.
-                var uIntArray = [UInt8](repeating: 0, count: _manufacturerCode.count)
-                manufacturerCodeData.getBytes(&uIntArray, length: _manufacturerCode.count)
+                var uIntArray = [UInt8](repeating: 0, count: internal_manufacturerCode.count)
+                manufacturerCodeData.getBytes(&uIntArray, length: internal_manufacturerCode.count)
                 
-                if uIntArray == _manufacturerCode {
+                if uIntArray == internal_manufacturerCode {
                     let ret = RVS_BTDriver_Device_GoTenna_Mesh(vendor: self)
                     
                     ret.deviceInfoStruct = deviceRecord
@@ -107,7 +101,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GenericBLE {
         let myService = RVS_BLE_GATT_UUID.goTennaProprietary.rawValue
         // Fairly basic. goTenna Mesh uses a proprietary UUID for a proprietary service.
         for service in inDevice.services where myService == service.uuid && .unTested == inDevice.deviceType {
-            inDevice.deviceType = .goTennaMesh
+            inDevice.deviceType = .goTenna(type: "Mesh")
             return true
         }
         
