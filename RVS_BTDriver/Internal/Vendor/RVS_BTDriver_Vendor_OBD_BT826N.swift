@@ -91,13 +91,17 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
     override internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
-        let myService = RVS_BLE_GATT_UUID.vlinkUserDefinedService.rawValue
-        for service in inDevice.services where .unTested == inDevice.deviceType && myService == service.uuid {
-            if  let service = service as? RVS_BTDriver_Service_BLE,
-                nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkIndicateNotifyProperty.rawValue),
-                nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkWriteProperty.rawValue) {
-                inDevice.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                return true
+        if let device = inDevice as? RVS_BTDriver_Vendor_OBD_BT826N_Device {
+            let myService = RVS_BLE_GATT_UUID.vlinkUserDefinedService.rawValue
+            for service in device.services where .unTested == device.deviceType && myService == service.uuid {
+                if  let service = service as? RVS_BTDriver_Service_BLE,
+                    let indicateProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkIndicateNotifyProperty.rawValue),
+                    let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkWriteProperty.rawValue) {
+                    device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
+                    device.internal_indicateProperty = indicateProperty
+                    device.internal_writeProperty = writeProperty
+                    return true
+                }
             }
         }
         

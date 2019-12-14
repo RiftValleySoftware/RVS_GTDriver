@@ -53,19 +53,19 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE {
     /**
      This property is one that the OBD unit uses to send AT commands to the driver.
      */
-    internal var readProperty: RVS_BTDriver_Property_BLE!
+    internal var internal_readProperty: RVS_BTDriver_Property_BLE!
     
     /* ################################################################## */
     /**
      This property is one that the OBD unit uses to receive AT commands from the driver.
      */
-    internal var writeProperty: RVS_BTDriver_Property_BLE!
+    internal var internal_writeProperty: RVS_BTDriver_Property_BLE!
     
     /* ################################################################## */
     /**
      This property is one that the OBD unit uses to send AT commands to the driver, but as inidicate, not read.
      */
-    internal var indicateProperty: RVS_BTDriver_Property_BLE!
+    internal var internal_indicateProperty: RVS_BTDriver_Property_BLE!
     
     /* ################################################################## */
     /**
