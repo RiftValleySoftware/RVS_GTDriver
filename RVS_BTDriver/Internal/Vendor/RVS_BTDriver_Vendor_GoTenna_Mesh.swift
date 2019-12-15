@@ -67,7 +67,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GoTenna {
        - parameter inDeviceRecord: The peripheral and central manager instances for this device.
        - returns: a device instance. Can be nil, if this vendor can't instantiate the device.
        */
-     override internal func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
+     internal override func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
             // We check to see if the peripheral is one of ours.
             if  let manufacturerCodeData = deviceRecord.advertisementData[CBAdvertisementDataManufacturerDataKey] as? NSData,
@@ -100,7 +100,7 @@ class RVS_BTDriver_Vendor_GoTenna_Mesh: RVS_BTDriver_Vendor_GoTenna {
      
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
-    override internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
+    internal override func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
         let myService = RVS_BLE_GATT_UUID.goTennaProprietary.rawValue
         // Fairly basic. goTenna Mesh uses a proprietary UUID for a proprietary service.
         for service in inDevice.services where myService == service.uuid && .unTested == inDevice.deviceType {

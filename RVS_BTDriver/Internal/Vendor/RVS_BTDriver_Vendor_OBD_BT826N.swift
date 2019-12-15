@@ -68,7 +68,7 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
        - parameter inDeviceRecord: The peripheral and central manager instances for this device.
        - returns: a device instance. Can be nil, if this vendor can't instantiate the device.
        */
-     override internal func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
+     internal override func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
             let ret = RVS_BTDriver_Vendor_OBD_BT826N_Device(vendor: self)
             
@@ -90,7 +90,7 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
      
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
-    override internal func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
+    internal override func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
         if let device = inDevice as? RVS_BTDriver_Vendor_OBD_BT826N_Device {
             let myService = RVS_BLE_GATT_UUID.vlinkUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {

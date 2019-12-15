@@ -174,7 +174,7 @@ class RVS_BTDriver_Device_GenericBLE: RVS_BTDriver_Device_BLE {
     /**
      This is a String, containing a unique ID for this peripheral.
      */
-    override public var uuid: String! {
+    public override var uuid: String! {
         get {
             return peripheral.identifier.uuidString
         }

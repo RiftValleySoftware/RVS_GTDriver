@@ -96,7 +96,7 @@ class RVS_BTDriver_Test_Harness_Prefs: RVS_PersistentPrefs {
     /**
      An Array of String, containing the keys used to store and retrieve the values from persistent storage.
      */
-    override public var keys: [String] {
+    public override var keys: [String] {
         return [Keys.useDifferentThread.rawValue, Keys.continuousScan.rawValue, Keys.persistentConnections.rawValue]
     }
 }

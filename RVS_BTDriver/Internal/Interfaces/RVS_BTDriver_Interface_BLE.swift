@@ -107,7 +107,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     /**
      If true, then Bluetooth is available (powered on).
      */
-    override internal var isBTAvailable: Bool {
+    internal override var isBTAvailable: Bool {
         if  let centralManager = centralManager,
             .poweredOn == centralManager.state {
             return true
@@ -149,7 +149,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
     /**
      Start or stop the scan for new peripherals.
      */
-    override internal var isScanning: Bool {
+    internal override var isScanning: Bool {
         get {
             #if DEBUG
                 if nil == centralManager {
@@ -424,7 +424,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      The UUID comes directly from the peripheral.
      */
-    override internal var uuid: String! {
+    internal override var uuid: String! {
         get {
             return peripheral?.identifier.uuidString
         }
@@ -456,7 +456,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      A name for the device (may be the model name, may be something else).
      */
-    override public internal(set) var deviceName: String! {
+    public override internal(set) var deviceName: String! {
         get {
             if let name = peripheral?.name {
                 return name
@@ -476,7 +476,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      If the device has a Device Info Service with a model name, it is available here.
      */
-    override public internal(set) var modelName: String! {
+    public override internal(set) var modelName: String! {
         get {
             if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
                 return service.modelName
@@ -496,7 +496,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      If the device has a Device Info Service with a manufacturer name, it is available here.
      */
-    override public internal(set) var manufacturerName: String! {
+    public override internal(set) var manufacturerName: String! {
        get {
            if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
                return service.manufacturerName
@@ -515,7 +515,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      If the device has a Device Info Service with a serial number, it is available here.
      */
-    override public internal(set) var serialNumber: String! {
+    public override internal(set) var serialNumber: String! {
        get {
            if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
                return service.serialNumber
@@ -534,7 +534,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      If the device has a Device Info Service with a hardware revision, it is available here.
      */
-    override public internal(set) var hardwareRevision: String! {
+    public override internal(set) var hardwareRevision: String! {
        get {
            if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
                return service.hardwareRevision
@@ -553,7 +553,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      If the device has a Device Info Service with a firmware revision, it is available here.
      */
-    override public internal(set) var firmwareRevision: String! {
+    public override internal(set) var firmwareRevision: String! {
        get {
            if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
                return service.firmwareRevision
@@ -572,7 +572,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      If the device has a Device Info Service with a software revision, it is available here.
      */
-    override public internal(set) var softwareRevision: String! {
+    public override internal(set) var softwareRevision: String! {
        get {
            if let service = serviceInstanceForCBUUID(RVS_BTDriver_Service_DeviceInfo_BLE.RVS_BLE_GATT_UUID.deviceInfoService.rawValue) as? RVS_BTDriver_Service_DeviceInfo_BLE {
                return service.softwareRevision
@@ -593,7 +593,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      
      - returns: true, if the peripheral is currently connected.
      */
-    override internal var isConnected: Bool {
+    internal override var isConnected: Bool {
         get {
             return .connected == peripheral.state
         }
@@ -631,7 +631,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      Called to initiate a connection.
     */
-    override internal func connect() {
+    internal override func connect() {
         precondition(canConnect, "Device Cannot be Connected!")
         if .disconnected == peripheral.state { // Must be completely disconnected
             #if DEBUG
@@ -645,7 +645,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      Called to close a connection.
     */
-    override internal func disconnect() {
+    internal override func disconnect() {
         if .disconnected != peripheral.state { // This applies everywhere except when explicitly disconnected.
             #if DEBUG
                 print("Disconnecting the device: \(String(describing: self))")
@@ -658,7 +658,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      This one does nothing. It should be overridden.
      */
-    override public func discoverServices() {
+    public override func discoverServices() {
         if .initializationInProgress == _state {
             // We tell the device to discover all services.
             #if DEBUG
@@ -1158,7 +1158,7 @@ class RVS_BTDriver_Service_BLE: RVS_BTDriver_Service {
     /**
      Start a discovery process for all characteristics (properties).
      */
-    override internal func discoverInitialCharacteristics() {
+    internal override func discoverInitialCharacteristics() {
         if let owner = internal_owner as? RVS_BTDriver_Device_BLE {
             owner.peripheral.discoverCharacteristics(nil, for: cbService)
         }
@@ -1304,7 +1304,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      This is called when the property is updated.
      We use this to set the value.
      */
-    override internal func executeUpdate() {
+    internal override func executeUpdate() {
         rawValue = self.cbCharacteristic.value
         #if DEBUG
             print("Property : \(String(describing: self)) added a property: \(String(describing: rawValue)).")
@@ -1316,7 +1316,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /**
      - returns: The user description of the property, including any capabilities.
      */
-    override public var description: String {
+    public override var description: String {
         var desc = super.description
         
         if  let descriptorString = descriptorString,
@@ -1371,7 +1371,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /**
      True, if the characteristic can broadcast its value.
      */
-    override public var canBroadcast: Bool {
+    public override var canBroadcast: Bool {
         get { return cbCharacteristic.properties.contains(.broadcast) }
         set {
            _ = newValue
@@ -1383,7 +1383,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /**
      True, if the characteristic can be read.
      */
-    override public var canRead: Bool {
+    public override var canRead: Bool {
         get { return cbCharacteristic.properties.contains(.read) }
         set {
            _ = newValue
@@ -1395,7 +1395,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /**
      True, if the characteristic can be written, with or without a response.
      */
-    override public var canWrite: Bool {
+    public override var canWrite: Bool {
         get { return canWriteWithResponse || canWriteWithoutResponse }
         set {
            _ = newValue
@@ -1407,7 +1407,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /**
      True, if the characteristic can be written, with a response.
      */
-    override public var canWriteWithResponse: Bool {
+    public override var canWriteWithResponse: Bool {
         get { return cbCharacteristic.properties.contains(.write) }
         set {
            _ = newValue
@@ -1419,7 +1419,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /**
      True, if the characteristic can be written, without a response.
      */
-    override public var canWriteWithoutResponse: Bool {
+    public override var canWriteWithoutResponse: Bool {
         get { return cbCharacteristic.properties.contains(.writeWithoutResponse) }
         set {
            _ = newValue
@@ -1431,7 +1431,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /**
      True, if the characteristic can notify.
      */
-    override public var canNotify: Bool {
+    public override var canNotify: Bool {
         get { return cbCharacteristic.properties.contains(.notify) }
         set {
            _ = newValue
@@ -1443,7 +1443,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /**
      True, if the characteristic can indicate. The driver need sto respond to indications.
      */
-    override public var canIndicate: Bool {
+    public override var canIndicate: Bool {
         get { return cbCharacteristic.properties.contains(.indicate) }
         set {
            _ = newValue
@@ -1455,7 +1455,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /**
      True, if the characteristic can have authenticated signed writes, without a response.
      */
-    override public var canHaveAuthenticatedSignedWrites: Bool {
+    public override var canHaveAuthenticatedSignedWrites: Bool {
         get { return cbCharacteristic.properties.contains(.authenticatedSignedWrites) }
         set {
            _ = newValue
@@ -1467,7 +1467,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /**
      Only trusted devices can subscribe to notifications of this property.
      */
-    override public var isEncryptionRequiredForNotify: Bool {
+    public override var isEncryptionRequiredForNotify: Bool {
         get { return cbCharacteristic.properties.contains(.notifyEncryptionRequired) }
         set {
            _ = newValue
@@ -1479,7 +1479,7 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
     /**
      Only trusted devices can see indications of this property.
      */
-    override public var isEncryptionRequiredForIndication: Bool {
+    public override var isEncryptionRequiredForIndication: Bool {
         get { return cbCharacteristic.properties.contains(.indicateEncryptionRequired) }
         set {
            _ = newValue
@@ -1527,7 +1527,7 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
     /**
      Start a discovery process for basic characteristics (properties).
      */
-    override internal func discoverInitialCharacteristics() {
+    internal override func discoverInitialCharacteristics() {
         if let owner = internal_owner as? RVS_BTDriver_Device_BLE {
             owner.peripheral.discoverCharacteristics(nil, for: cbService)
         }

@@ -36,7 +36,7 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
        - parameter inDeviceRecord: The peripheral and central manager instances for this device.
        - returns: a device instance. Can be nil, if this vendor can't instantiate the device.
        */
-     override internal func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
+     internal override func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         precondition(false, "Cannot Call Base Class Method!")
         return nil
     }
