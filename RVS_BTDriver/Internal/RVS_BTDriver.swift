@@ -327,7 +327,7 @@ extension RVS_BTDriver: RVS_BTDriverCommunicatorTools {
      
      - parameter inInterface: The interface that wants to send an update.
      */
-    func sendInterfaceUpdate(_ inInterface: RVS_BTDriver_InterfaceProtocol) {
+    internal func sendInterfaceUpdate(_ inInterface: RVS_BTDriver_InterfaceProtocol) {
         delegate?.btDriverStatusUpdate(self)
     }
     
@@ -337,7 +337,7 @@ extension RVS_BTDriver: RVS_BTDriverCommunicatorTools {
      
      - parameter inDevice: The device that wants to send an update.
      */
-    func sendDeviceUpdate(_ inDevice: RVS_BTDriver_Device) {
+    internal func sendDeviceUpdate(_ inDevice: RVS_BTDriver_Device) {
         delegate?.btDriverStatusUpdate(self)
     }
 }
