@@ -89,6 +89,12 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE {
     - parameter error: Any error that may have occurred. It can be nil.
     */
     internal override func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
+        #if DEBUG
+            print("OBD Device Callback: peripheral: \(inPeripheral) didUpdateValueFor: \(inCharacteristic).")
+            if let error = inError {
+                print("With Error: \(error)")
+            }
+        #endif
         super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
     }
 }
