@@ -69,21 +69,6 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE {
     
     /* ################################################################## */
     /**
-     This is a String, containing a unique ID for this peripheral.
-     */
-    override public var uuid: String! {
-        get {
-            return peripheral.identifier.uuidString
-        }
-        
-        set {
-            _ = newValue
-            precondition(false, "Cannot Set This Property!")
-        }
-    }
-    
-    /* ################################################################## */
-    /**
     - parameter inPeripheral: The peripheral that owns this service.
     - parameter didUpdateValueFor: The characteristic that was updated.
     - parameter error: Any error that may have occurred. It can be nil.
