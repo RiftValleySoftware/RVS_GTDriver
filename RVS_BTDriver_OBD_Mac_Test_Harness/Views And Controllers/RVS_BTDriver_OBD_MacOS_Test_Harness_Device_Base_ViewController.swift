@@ -54,7 +54,12 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
      This is the device instance associated with this screen.
     */
     var deviceInstance: RVS_BTDriver_Device_OBD!
-    
+}
+
+/* ################################################################################################################################## */
+// MARK: - Base Class Override Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
     /* ################################################################## */
     /**
      Called after the view has loaded and initialized from the storyboard.
@@ -67,14 +72,34 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
         }
         
         deviceInstance?.subscribe(self)
+        sayHelloToMyLeetleFriend()
     }
 }
 
 /* ################################################################################################################################## */
-// MARK: - The Base (Common) View Controller Class for Each Device
+// MARK: - Instance Methods
 /* ################################################################################################################################## */
-/**
- */
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
+    /* ################################################################## */
+    /**
+     Initiate AT commands to the device.
+     */
+    func sayHelloToMyLeetleFriend() {
+        let initialAT = "ATZ\r\n"
+        
+        if let data = initialAT.data(using: .utf8) {
+            #if DEBUG
+                print("Sending Initial ATZ")
+            #endif
+            deviceInstance.internal_writeProperty.canNotify = true
+            deviceInstance.peripheral.writeValue(data, for: deviceInstance.internal_writeProperty.cbCharacteristic, type: .withResponse)
+        }
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - RVS_BTDriver_DeviceSubscriberProtocol Handlers
+/* ################################################################################################################################## */
 extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriver_DeviceSubscriberProtocol {
     /* ################################################################## */
     /**

@@ -1432,11 +1432,19 @@ class RVS_BTDriver_Property_BLE: RVS_BTDriver_Property {
      True, if the characteristic can notify.
      */
     public override var canNotify: Bool {
-        get { return cbCharacteristic.properties.contains(.notify) }
+        get {
+            return cbCharacteristic.properties.contains(.notify)
+        }
+        
         set {
-           _ = newValue
-           precondition(false, "Cannot Set This Property!")
-       }
+            if  let owner = internal_owner as? RVS_BTDriver_Service_BLE,
+                let device = owner.owner as? RVS_BTDriver_Device_BLE {
+                #if DEBUG
+                    print("Setting Notify to \(newValue ? "true" : "false") for \(self).")
+                #endif
+                device.peripheral.setNotifyValue(newValue, for: cbCharacteristic)
+            }
+        }
     }
 
     /* ################################################################## */
