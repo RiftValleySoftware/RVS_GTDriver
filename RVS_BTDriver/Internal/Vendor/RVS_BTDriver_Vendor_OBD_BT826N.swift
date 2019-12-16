@@ -39,12 +39,13 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
         /// The device ID string.
         case deviceSpecificID                           =   "BT26N"
         
+        /// It advertises this property.
+        case advertisedProperty                         =   "18F0"
+        
         /// This is the communication service for FSC-BT826N BLE devices.
-        case vlinkUserDefinedService                    =   "18F0"
-        /// This is the indicate/notify property for communicating with VLink devices.
-        case vlinkIndicateNotifyProperty                =   "2AF0"
-        /// This is the write-only property for communicating with VLink devices.
-        case vlinkWriteProperty                         =   "2AF1"
+        case vlinkUserDefinedService                    =   "E7810A71-73AE-499D-8C15-FAA9AEF0C3F2"
+        /// This is the read/write property for communicating with VLink devices.
+        case vlinkReadWriteProperty                     =   "BEF8D6C9-9C21-4C9E-B632-BD58C1009F9F"
     }
     
     /* ################################################################## */
@@ -58,7 +59,7 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
      This returns a list of BLE CBUUIDs, which the vendor wants us to filter for.
      */
     override var searchForTheseServices: [CBUUID] {
-        return [CBUUID(string: RVS_BLE_GATT_UUID.vlinkUserDefinedService.rawValue)]
+        return [CBUUID(string: RVS_BLE_GATT_UUID.advertisedProperty.rawValue)]
     }
 
     /* ################################################################## */
@@ -95,8 +96,8 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
             let myService = RVS_BLE_GATT_UUID.vlinkUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-                    let indicateProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkIndicateNotifyProperty.rawValue),
-                    let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkWriteProperty.rawValue) {
+                    let indicateProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkReadWriteProperty.rawValue),
+                    let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkReadWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
                     device.internal_indicateProperty = indicateProperty
                     device.internal_writeProperty = writeProperty

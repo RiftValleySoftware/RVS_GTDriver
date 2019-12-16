@@ -114,7 +114,11 @@ class RVS_BTDriver_Service: NSObject, RVS_BTDriver_ServiceProtocol {
      This displays a useful debug display of the service data.
      */
     override var description: String {
-        var ret = "\t\tDevice UUID: \(owner?.uuid ?? "ERROR")\n"
+        var ret = ""
+        
+        if let uuid = owner?.uuid {
+            ret += "\t\tDevice UUID: \(uuid)\n"
+        }
         
         for property in properties {
             ret += "\t\tProperty (\(property.uuid)):\t\(String(describing: property.value))\n"
@@ -298,7 +302,7 @@ extension RVS_BTDriver_Service {
         #if DEBUG
             print("The service is done with its initialization.")
         #endif
-        internal_owner.moveServiceFromHoldingPenToMainList(self)
+        internal_owner?.moveServiceFromHoldingPenToMainList(self)
         notifySubscribersOfStatusUpdate()
     }
 }

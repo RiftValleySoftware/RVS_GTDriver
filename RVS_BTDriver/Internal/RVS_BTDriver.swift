@@ -141,6 +141,7 @@ extension RVS_BTDriver {
         if let index = internal_holding_pen.firstIndex(where: { (dev) -> Bool in
             return dev === inDevice
             }) {
+            _ = internal_holding_pen[index]
             internal_holding_pen[index] = inReplacementDevice
             #if DEBUG
                 print("The Holding Pen device: \(inDevice) at Index \(index) was replaced by a new device: \(inReplacementDevice).")
@@ -175,6 +176,8 @@ extension RVS_BTDriver {
                             .unTested == device.deviceType,                     // Has to be untested (no specific device assigned).
                             let tempWorkingDevice = vendor.makeDevice(device.deviceInfoStruct) as? RVS_BTDriver_Device_BLE {    // Try creating the specialized instance.
                             tempWorkingDevice.internal_service_list = device.internal_service_list   // Make sure that we copy our completed services and properties.
+                            tempWorkingDevice.isConnected = device.isConnected
+                            tempWorkingDevice.internal_owner = self
                             if vendor.iOwnThisDevice(tempWorkingDevice) {   // This is a final test, and the device type is assigned.
                                 replaceThisDeviceInTheHoldingPen(device, withThisDevice: tempWorkingDevice)
                                 workingDevice = tempWorkingDevice

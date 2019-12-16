@@ -21,6 +21,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import Cocoa
+import CoreBluetooth
 
 /* ###################################################################################################################################### */
 // MARK: - Main Application Delegate Class -
@@ -130,7 +131,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate {
         let wasScanning = nil != _driverInstance ? driverInstance.isScanning : false
         let prefs = RVS_BTDriver_Test_Harness_Prefs()
         let queue: DispatchQueue! = prefs.useDifferentThread ? DispatchQueue.global() : nil
-        _driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: prefs.persistentConnections)
+        _driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: true) // prefs.persistentConnections)
         isScanning = wasScanning
         
         #if DEBUG
@@ -188,7 +189,18 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
             #endif
             DispatchQueue.main.async {
                 self.mainViewController?.setUpUI()  // This will let the view show or hide any items that reflect the driver state.
+                if let device = inDevice as? RVS_BTDriver_Device_OBD,
+                    let writeCharacteristic = device.internal_writeProperty?.cbCharacteristic {
+                    let atCommand = "ATZ\r\n"
+                    device.peripheral.setNotifyValue(true, for: writeCharacteristic)
+                    #if DEBUG
+                        print("Sending ATZ Command to the property: \(String(describing: device.internal_writeProperty)).")
+                    #endif
+                    device.peripheral.writeValue(atCommand.data(using: .utf8)!, for: writeCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                }
             }
+        } else {
+            inDevice.isConnected = false
         }
     }
         
