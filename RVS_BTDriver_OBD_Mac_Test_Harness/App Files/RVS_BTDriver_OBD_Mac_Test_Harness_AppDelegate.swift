@@ -182,11 +182,11 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
      - parameter newDeviceAdded: The new device instance.
      */
     func btDriver(_ inDriver: RVS_BTDriver, newDeviceAdded inDevice: RVS_BTDriver_DeviceProtocol) {
-        #if DEBUG
-            print("New Device Added: \(String(describing: inDevice))")
-        #endif
-        DispatchQueue.main.async {
-            if case .OBD(_) = inDevice.deviceType { // We only do this for OBD devices.
+        if case .OBD(_) = inDevice.deviceType { // We only do this for OBD devices.
+            #if DEBUG
+                print("New Device Added: \(String(describing: inDevice))")
+            #endif
+            DispatchQueue.main.async {
                 self.mainViewController?.setUpUI()  // This will let the view show or hide any items that reflect the driver state.
             }
         }
