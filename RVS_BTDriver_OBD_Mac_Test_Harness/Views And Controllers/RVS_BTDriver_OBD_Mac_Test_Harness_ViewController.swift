@@ -71,6 +71,12 @@ class RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: RVS_BTDriver_OBD_MacOS_T
     
     /* ################################################################## */
     /**
+     This contains all the devices we will display.
+     */
+    var deviceList: [RVS_BTDriver_DeviceProtocol] = []
+    
+    /* ################################################################## */
+    /**
      This will hold a selected device, for presentation to the user. It is ephemeral.
      */
     var selectedDevice: RVS_BTDriver_DeviceProtocol!
@@ -113,6 +119,22 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController {
         noBTImageView.isHidden = isBTAvailable
         deviceTableView.isHidden = !isBTAvailable
         scanningCheckbox.isHidden = !isBTAvailable
+        reloadDevices()
+    }
+    
+    /* ################################################################## */
+    /**
+     This scans the driver for OBD devices, loads them, and reloads the table data.
+     */
+    func reloadDevices() {
+        deviceList = []
+        
+        for device in driverInstance {
+            if case .OBD(_) = device.deviceType {
+                deviceList.append(device)
+            }
+        }
+        
         deviceTableView?.reloadData()
     }
 }
@@ -156,8 +178,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: NSTableViewDelegate 
      - returns: A new String, with the device name.
      */
     func tableView(_ inTableView: NSTableView, objectValueFor inTableColumn: NSTableColumn?, row inRow: Int) -> Any? {
-        if  let device = driverInstance?[inRow],
-            let name = device.deviceName {
+        if  let name =  deviceList[inRow].deviceName {
             return name
         }
         
@@ -192,6 +213,6 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: NSTableViewDataSourc
      - returns: A 1-based Int, with 0 being no rows.
      */
     func numberOfRows(in inTableView: NSTableView) -> Int {
-        return driverInstance?.count ?? 0
+        return deviceList.count
     }
 }
