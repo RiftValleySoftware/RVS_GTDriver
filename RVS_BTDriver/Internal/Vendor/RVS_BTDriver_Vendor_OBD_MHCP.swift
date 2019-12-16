@@ -95,8 +95,8 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
                     let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadProperty.rawValue),
                     let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                    device.internal_readProperty = readProperty
-                    device.internal_writeProperty = writeProperty
+                    device.readProperty = readProperty
+                    device.writeProperty = writeProperty
                     return true
                 }
             }

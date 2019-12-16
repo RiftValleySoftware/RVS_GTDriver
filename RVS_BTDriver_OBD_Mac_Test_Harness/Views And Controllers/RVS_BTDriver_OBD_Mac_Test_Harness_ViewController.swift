@@ -125,7 +125,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController {
      */
     override func prepare(for inSegue: NSStoryboardSegue, sender inDevice: Any?) {
         if  let destination = inSegue.destinationController as? RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController,
-            let device = inDevice as? RVS_BTDriver_Device_OBD {
+            let device = inDevice as? RVS_BTDriver_OBD_DeviceProtocol {
             destination.deviceInstance = device
         }
     }

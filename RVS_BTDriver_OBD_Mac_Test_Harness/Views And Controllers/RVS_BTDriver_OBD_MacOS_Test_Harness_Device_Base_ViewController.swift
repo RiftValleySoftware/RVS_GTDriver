@@ -53,7 +53,7 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
     /**
      This is the device instance associated with this screen.
     */
-    var deviceInstance: RVS_BTDriver_Device_OBD!
+    var deviceInstance: RVS_BTDriver_OBD_DeviceProtocol!
 }
 
 /* ################################################################################################################################## */
@@ -87,13 +87,10 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
     func sayHelloToMyLeetleFriend() {
         let initialAT = "ATZ\r\n"
         
-        if let data = initialAT.data(using: .utf8) {
-            #if DEBUG
-                print("Sending Initial ATZ")
-            #endif
-            deviceInstance.internal_writeProperty.canNotify = true
-            deviceInstance.peripheral.writeValue(data, for: deviceInstance.internal_writeProperty.cbCharacteristic, type: .withResponse)
-        }
+        #if DEBUG
+            print("Sending Initial ATZ.")
+        #endif
+        deviceInstance.sendCommandWithResponse(initialAT)
     }
 }
 

@@ -48,25 +48,36 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE {
+class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceProtocol {
     /* ################################################################## */
     /**
-     This property is one that the OBD unit uses to send AT commands to the driver.
+     This property is one that the OBD unit uses to respond to the driver.
      */
-    internal var internal_readProperty: RVS_BTDriver_Property_BLE!
+    public var readProperty: RVS_BTDriver_PropertyProtocol!
     
     /* ################################################################## */
     /**
-     This property is one that the OBD unit uses to receive AT commands from the driver.
+     This property is one that the driver uses to send commands to the OBD unit.
      */
-    internal var internal_writeProperty: RVS_BTDriver_Property_BLE!
-    
+    public var writeProperty: RVS_BTDriver_PropertyProtocol!
+
     /* ################################################################## */
     /**
-     This property is one that the OBD unit uses to send AT commands to the driver, but as inidicate, not read.
+     This menthod will send an AT command to the OBD unit. Responses will arrive in the readProperty.
+     
+     - parameter inCommandString: The Sting for the command.
      */
-    internal var internal_indicateProperty: RVS_BTDriver_Property_BLE!
-    
+    public func sendCommandWithResponse(_ inCommandString: String) {
+        if let data = inCommandString.data(using: .utf8),
+            let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
+            #if DEBUG
+                print("Sending data: \(inCommandString) for: \(writeProperty)")
+            #endif
+            writeProperty.canNotify = true
+            peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
+        }
+    }
+
     /* ################################################################## */
     /**
     - parameter inPeripheral: The peripheral that owns this service.

@@ -96,11 +96,13 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
             let myService = RVS_BLE_GATT_UUID.vlinkUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-                    let indicateProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkReadWriteProperty.rawValue),
-                    let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkReadWriteProperty.rawValue) {
+                    let readWriteProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkReadWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                    device.internal_indicateProperty = indicateProperty
-                    device.internal_writeProperty = writeProperty
+                    device.readProperty = readWriteProperty
+                    device.writeProperty = readWriteProperty
+                    #if DEBUG
+                        print("\(String(describing: device.deviceType)) device, has \(readWriteProperty) as both read and write.")
+                    #endif
                     return true
                 }
             }
