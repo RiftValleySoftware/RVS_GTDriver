@@ -176,6 +176,9 @@ extension RVS_BTDriver {
                             .unTested == device.deviceType,                     // Has to be untested (no specific device assigned).
                             let tempWorkingDevice = vendor.makeDevice(device.deviceInfoStruct) as? RVS_BTDriver_Device_BLE {    // Try creating the specialized instance.
                             tempWorkingDevice.internal_service_list = device.internal_service_list   // Make sure that we copy our completed services and properties.
+                            tempWorkingDevice.internal_service_list.forEach {
+                                $0.internal_owner = tempWorkingDevice
+                            }
                             tempWorkingDevice.isConnected = device.isConnected
                             tempWorkingDevice.internal_owner = self
                             if vendor.iOwnThisDevice(tempWorkingDevice) {   // This is a final test, and the device type is assigned.
