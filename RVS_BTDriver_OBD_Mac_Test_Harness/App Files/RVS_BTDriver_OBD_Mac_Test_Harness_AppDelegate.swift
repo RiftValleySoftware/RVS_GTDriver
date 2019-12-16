@@ -21,7 +21,9 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import Cocoa
-import CoreBluetooth
+#if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
+    import RVS_BTDriver_MacOS
+#endif
 
 /* ###################################################################################################################################### */
 // MARK: - Main Application Delegate Class -
@@ -189,15 +191,6 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
             #endif
             DispatchQueue.main.async {
                 self.mainViewController?.setUpUI()  // This will let the view show or hide any items that reflect the driver state.
-                if let device = inDevice as? RVS_BTDriver_Device_OBD,
-                    let writeCharacteristic = device.internal_writeProperty?.cbCharacteristic {
-                    let atCommand = "ATZ\r\n"
-                    device.peripheral.setNotifyValue(true, for: writeCharacteristic)
-                    #if DEBUG
-                        print("Sending ATZ Command to the property: \(String(describing: device.internal_writeProperty)).")
-                    #endif
-                    device.peripheral.writeValue(atCommand.data(using: .utf8)!, for: writeCharacteristic, type: CBCharacteristicWriteType.withResponse)
-                }
             }
         } else {
             inDevice.isConnected = false

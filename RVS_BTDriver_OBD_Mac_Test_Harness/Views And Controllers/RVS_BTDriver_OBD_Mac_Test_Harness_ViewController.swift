@@ -29,6 +29,15 @@ import Cocoa
  This view controller manages the main device selection screen.
  */
 class RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController {
+    /* ############################################################################################################################## */
+    // MARK: - Static Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is the segue ID for the "show details" transition.
+     */
+    static let showDetailsSegueID = "show-details-segue-id"
+    
     /* ################################################################## */
     /**
      This is KVO
@@ -105,6 +114,21 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController {
         setUpUI()
         RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.appDelegateObject.setUpDriver()   // Once we load, then we ask the app delegate to establish the driver, so we can react (We need to have the view loaded before getting callbacks).
     }
+    
+    /* ################################################################## */
+    /**
+     Called just before we bring in a device instance screen.
+     
+     - parameters:
+        - for: The Segue instance
+        - sender: Data being associated. In this case, it is the device to associate with the screen.
+     */
+    override func prepare(for inSegue: NSStoryboardSegue, sender inDevice: Any?) {
+        if  let destination = inSegue.destinationController as? RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController,
+            let device = inDevice as? RVS_BTDriver_Device_OBD {
+            destination.deviceInstance = device
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -159,6 +183,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: NSTableViewDelegate 
                 print("Row \(inRow) was selected.")
             #endif
             selectedDevice = device
+            performSegue(withIdentifier: Self.showDetailsSegueID, sender: device)
             return true
         }
         
@@ -188,8 +213,6 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: NSTableViewDelegate 
     /* ################################################################## */
     /**
      Called after the selection was set up and approved.
-     
-     We open a modal window, with the device info.
      
      - parameter: Ignored
      */

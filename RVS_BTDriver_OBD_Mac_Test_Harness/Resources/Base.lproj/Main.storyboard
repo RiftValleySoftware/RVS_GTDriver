@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -701,6 +701,31 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
+        <!--DriverOBD MacOS Test Harness Device Base View Controller-->
+        <scene sceneID="5eR-Lc-6KN">
+            <objects>
+                <viewController storyboardIdentifier="device-view-controller" id="Gh0-rL-oWt" customClass="RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController" customModule="RVS_BTDriver_OBD_Mac_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="aM1-Km-AFS">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="i5f-Kv-uoO">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="background-gradient" id="PVZ-C5-Qc2"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="i5f-Kv-uoO" firstAttribute="leading" secondItem="aM1-Km-AFS" secondAttribute="leading" id="1lG-X9-tHi"/>
+                            <constraint firstAttribute="bottom" secondItem="i5f-Kv-uoO" secondAttribute="bottom" id="b3Q-DW-Bjb"/>
+                            <constraint firstAttribute="trailing" secondItem="i5f-Kv-uoO" secondAttribute="trailing" id="hjK-jX-QD5"/>
+                            <constraint firstItem="i5f-Kv-uoO" firstAttribute="top" secondItem="aM1-Km-AFS" secondAttribute="top" id="iWP-mh-3rj"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="4JA-gP-1Ft" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="726" y="727"/>
+        </scene>
         <!--DriverOBD Mac Test Harness View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
@@ -718,6 +743,19 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NoBT" id="dov-X1-XOF"/>
                                 <color key="contentTintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D7D-cg-JYh">
+                                <rect key="frame" x="18" y="346" width="444" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="v3Q-40-FrN"/>
+                                </constraints>
+                                <buttonCell key="cell" type="check" title="SLUG-SCANNING" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="yH8-a9-B87">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.isScanning" id="C4X-ZB-okQ"/>
+                                </connections>
+                            </button>
                             <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvt-of-Y9o">
                                 <rect key="frame" x="20" y="20" width="440" height="320"/>
                                 <clipView key="contentView" focusRingType="none" drawsBackground="NO" id="K4j-x5-ddm">
@@ -733,7 +771,7 @@
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="437" minWidth="40" maxWidth="1000" id="i5h-zA-UkN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -762,19 +800,6 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D7D-cg-JYh">
-                                <rect key="frame" x="18" y="346" width="444" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="14" id="v3Q-40-FrN"/>
-                                </constraints>
-                                <buttonCell key="cell" type="check" title="SLUG-SCANNING" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="yH8-a9-B87">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.isScanning" id="C4X-ZB-okQ"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="MfC-sP-eXx" secondAttribute="bottom" id="0aY-nT-oQZ"/>
@@ -798,6 +823,7 @@
                         <outlet property="deviceTableView" destination="yPo-GP-jGb" id="zbz-RO-gbt"/>
                         <outlet property="noBTImageView" destination="FlJ-VW-SDO" id="1xg-MU-Gnl"/>
                         <outlet property="scanningCheckbox" destination="D7D-cg-JYh" id="6b1-wX-jmD"/>
+                        <segue destination="Gh0-rL-oWt" kind="show" identifier="show-details-segue-id" id="d9N-5J-dP4"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
