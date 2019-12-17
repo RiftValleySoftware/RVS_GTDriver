@@ -92,6 +92,7 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
             let myService = RVS_BLE_GATT_UUID.mchpUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
+                    nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadProperty.rawValue),
                     let readWriteProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
                     device.readProperty = readWriteProperty
