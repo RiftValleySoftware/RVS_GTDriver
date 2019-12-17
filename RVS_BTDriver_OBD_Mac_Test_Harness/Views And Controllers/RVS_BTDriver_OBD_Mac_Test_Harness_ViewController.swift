@@ -183,7 +183,14 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: NSTableViewDelegate 
                 print("Row \(inRow) was selected.")
             #endif
             selectedDevice = device
-            performSegue(withIdentifier: Self.showDetailsSegueID, sender: device)
+            // If the window is already open, we simply select it. Otherwise, we open a new window.
+            if let uuid = device.uuid {
+                if let controller = appDelegateObject.openDeviceControllers[uuid] {
+                    controller.view.window?.makeMain()
+                } else {
+                    performSegue(withIdentifier: Self.showDetailsSegueID, sender: device)
+                }
+            }
             return true
         }
         

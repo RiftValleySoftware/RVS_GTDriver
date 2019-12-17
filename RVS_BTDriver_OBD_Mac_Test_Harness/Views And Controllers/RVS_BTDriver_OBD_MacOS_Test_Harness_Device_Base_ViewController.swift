@@ -74,6 +74,28 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
         deviceInstance?.subscribe(self)
         sayHelloToMyLeetleFriend()
     }
+    
+    /* ################################################################## */
+    /**
+     When we are about to appear, we register with the app delegate object.
+     */
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        if let uuid = deviceInstance?.uuid {
+            appDelegateObject.openDeviceControllers[uuid] = self
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     We remove ourselves when we are about to go away.
+     */
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        if let uuid = deviceInstance?.uuid {
+            appDelegateObject.openDeviceControllers.removeValue(forKey: uuid)
+        }
+    }
 }
 
 /* ################################################################################################################################## */
