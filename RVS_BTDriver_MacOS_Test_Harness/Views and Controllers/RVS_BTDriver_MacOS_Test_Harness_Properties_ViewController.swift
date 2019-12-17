@@ -171,11 +171,6 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
                     let key = property.uuid
                     
                     switch property.value {
-                    case .stringValue(let value):
-                        if let value = value {
-                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: value, read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
-                        }
-                        
                     case .intValue(let value):
                         if let value = value {
                             serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: String(value), read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
@@ -184,6 +179,14 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
                     case .floatValue(let value):
                         if let value = value {
                             serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: String(value), read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
+                        }
+                        
+                    case .stringValue(let value):
+                        if  let value = value,
+                            !value.isEmpty {
+                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: value, read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
+                        } else {
+                            fallthrough
                         }
                         
                     default:
