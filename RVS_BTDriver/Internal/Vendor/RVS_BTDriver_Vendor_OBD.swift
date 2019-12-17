@@ -51,6 +51,12 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
 class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceProtocol {
     /* ################################################################## */
     /**
+     This is a weak reference to the instance delegate.
+     */
+    public weak var delegate: RVS_BTDriver_OBD_DeviceDelegate!
+
+    /* ################################################################## */
+    /**
      This property is one that the OBD unit uses to respond to the driver.
      */
     public var readProperty: RVS_BTDriver_PropertyProtocol!
@@ -91,6 +97,31 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 print("With Error: \(error)")
             }
         #endif
-        super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
+        
+        // Make sure this is for us.
+        if  inPeripheral == peripheral,
+            let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
+            inCharacteristic == readProperty.cbCharacteristic {
+            var dataResponse: Data!
+            
+            switch readProperty.value {
+            case .stringValue(let val):
+                dataResponse = val?.data(using: .utf8)
+            case .intValue(_):
+                ()
+            case .floatValue(_):
+                ()
+            case .boolValue(_):
+                ()
+            case .rawValue(let val):
+                dataResponse = val
+            case .undefinedValue:
+                ()
+            }
+            
+            delegate?.device(self, returnedThisData: dataResponse)
+        } else {    // Otherwise, kick the can down the road.
+            super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
+        }
     }
 }

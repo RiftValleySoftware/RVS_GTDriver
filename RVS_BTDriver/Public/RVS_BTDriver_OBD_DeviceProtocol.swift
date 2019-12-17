@@ -23,11 +23,43 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_DeviceDelegate Protocol -
+/* ###################################################################################################################################### */
+/**
+ This protocol is for delegates for OBD devices.
+ */
+public protocol RVS_BTDriver_OBD_DeviceDelegate: class {
+    /* ################################################################## */
+    /**
+     REQUIRED: Error reporting method.
+     
+     - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func device(_ device: RVS_BTDriver_OBD_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors)
+    
+    /* ################################################################## */
+    /**
+     REQUIRED: This is called when an OBD device responds with data.
+     
+     - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
+     - parameter returnedThisData: The data returned. It may be nil.
+     */
+    func device(_ device: RVS_BTDriver_OBD_DeviceProtocol, returnedThisData: Data?)
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_DeviceProtocol Protocol -
 /* ###################################################################################################################################### */
 /**
  */
 public protocol RVS_BTDriver_OBD_DeviceProtocol: RVS_BTDriver_DeviceProtocol {
+    /* ################################################################## */
+    /**
+     This will be a weak reference to the instance delegate.
+     */
+    var delegate: RVS_BTDriver_OBD_DeviceDelegate! {get set }
+    
     /* ################################################################## */
     /**
      This property is one that the OBD unit uses to respond to the driver.

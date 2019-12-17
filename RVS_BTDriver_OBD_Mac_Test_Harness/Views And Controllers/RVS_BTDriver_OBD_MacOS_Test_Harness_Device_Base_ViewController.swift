@@ -72,6 +72,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
         }
         
         deviceInstance?.subscribe(self)
+        deviceInstance?.delegate = self
         sayHelloToMyLeetleFriend()
     }
     
@@ -147,6 +148,38 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BT
             print("Device Status Changed")
         #endif
         DispatchQueue.main.async {
+        }
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - RVS_BTDriver_OBD_DeviceDelegate Handlers
+/* ################################################################################################################################## */
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriver_OBD_DeviceDelegate {
+    /* ################################################################## */
+    /**
+     REQUIRED: Error reporting method.
+     
+     - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func device(_ device: RVS_BTDriver_OBD_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors) {
+        
+    }
+    
+    /* ################################################################## */
+    /**
+     REQUIRED: This is called when an OBD device responds with data.
+     
+     - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
+     - parameter returnedThisData: The data returned. It may be nil.
+     */
+    func device(_ inDevice: RVS_BTDriver_OBD_DeviceProtocol, returnedThisData inData: Data?) {
+        if let data = inData {
+            #if DEBUG
+                let stringValue = String(data: data, encoding: .utf8) ?? "ERROR!"
+                print("Device Returned This Data: \(stringValue)")
+            #endif
         }
     }
 }
