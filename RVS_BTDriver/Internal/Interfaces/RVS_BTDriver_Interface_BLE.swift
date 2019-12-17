@@ -1050,7 +1050,7 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
     /**
      Called when the peripheral is ready.
      
-     - parameter inPeripheral: The peripheral that owns this service.
+     - parameter inPeripheral: The peripheral for this device.
      - parameter inService: The service with the characteristics that have been discovered.
      - parameter error: Any error that may have occurred. It can be nil.
     */
@@ -1112,7 +1112,7 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
     
     /* ################################################################## */
     /**
-    - parameter inPeripheral: The peripheral that owns this service.
+    - parameter inPeripheral: The peripheral for this device.
     - parameter didUpdateValueFor: The characteristic that was updated.
     - parameter error: Any error that may have occurred. It can be nil.
     */
@@ -1141,6 +1141,17 @@ extension RVS_BTDriver_Device_BLE: CBPeripheralDelegate {
         } else {
             assert(false, "Property Not Found for Characteristic: \(inCharacteristic)!")
         }
+    }
+    
+    /* ################################################################## */
+    /**
+    - parameter inPeripheral: The peripheral for this device.
+    */
+    internal func peripheralDidUpdateName(_ inPeripheral: CBPeripheral) {
+        #if DEBUG
+            print("OBD Device Callback: peripheral: \(inPeripheral) updated its name.")
+        #endif
+        notifySubscribersOfStatusUpdate()
     }
 }
 

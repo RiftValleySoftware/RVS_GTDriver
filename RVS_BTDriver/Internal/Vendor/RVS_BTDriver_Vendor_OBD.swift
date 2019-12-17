@@ -93,6 +93,12 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
     internal override func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
         #if DEBUG
             print("OBD Device Callback: peripheral: \(inPeripheral) didUpdateValueFor: \(inCharacteristic).")
+            print("OBD Device Characteristic Value: \(String(describing: inCharacteristic.value)).")
+            if  let value = inCharacteristic.value,
+                let string = String(data: value, encoding: .utf8) {
+                print("OBD Device Characteristic Value As String: \(string).")
+            }
+            
             if let error = inError {
                 print("With Error: \(error)")
             }
@@ -102,26 +108,25 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
         if  inPeripheral == peripheral,
             let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
             inCharacteristic == readProperty.cbCharacteristic {
-            var dataResponse: Data!
-            
-            switch readProperty.value {
-            case .stringValue(let val):
-                dataResponse = val?.data(using: .utf8)
-            case .intValue(_):
-                ()
-            case .floatValue(_):
-                ()
-            case .boolValue(_):
-                ()
-            case .rawValue(let val):
-                dataResponse = val
-            case .undefinedValue:
-                ()
+            if  let value = inCharacteristic.value,
+                let string = String(data: value, encoding: .utf8) {
+
+                delegate?.device(self, returnedThisData: string.data(using: .utf8))
             }
-            
-            delegate?.device(self, returnedThisData: dataResponse)
         } else {    // Otherwise, kick the can down the road.
             super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
         }
+    }
+    
+    /* ################################################################## */
+    /**
+    - parameter inPeripheral: The peripheral that owns this service.
+    - parameter didUpdateValueFor: The descriptor that was updated.
+    - parameter error: Any error that may have occurred. It can be nil.
+    */
+    internal func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inDescriptor: CBDescriptor, error inError: Error?) {
+        #if DEBUG
+            print("OBD Device Callback: peripheral: \(inPeripheral) didUpdateValueFor: \(inDescriptor).")
+        #endif
     }
 }
