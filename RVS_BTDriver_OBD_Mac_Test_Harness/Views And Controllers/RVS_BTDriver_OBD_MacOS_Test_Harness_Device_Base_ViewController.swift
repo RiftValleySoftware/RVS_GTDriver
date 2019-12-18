@@ -265,6 +265,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BT
                 print("Device Returned This Data: \(stringValue)")
             #endif
             DispatchQueue.main.async {
+                // First time through, we add the command, and give it a carat.
                 if  self.responseTextView?.string.isEmpty ?? true,
                     let initialString = self.enterTextField?.stringValue {
                     stringValue = ">" + initialString + stringValue
