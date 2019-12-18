@@ -735,6 +735,9 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="sendButtonHit:" target="Gh0-rL-oWt" id="hRP-to-BGy"/>
+                                </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w2y-SI-Sqz">
                                 <rect key="frame" x="14" y="203" width="422" height="32"/>
@@ -745,6 +748,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="sendButtonHit:" target="Gh0-rL-oWt" id="Jg4-1L-qKw"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tsk-Fs-F7h">
                                 <rect key="frame" x="18" y="190" width="414" height="16"/>
@@ -817,6 +823,7 @@
                     </connections>
                 </viewController>
                 <customObject id="4JA-gP-1Ft" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="n3u-uI-hgG"/>
             </objects>
             <point key="canvasLocation" x="726" y="727"/>
         </scene>
@@ -865,7 +872,7 @@
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="437" minWidth="40" maxWidth="1000" id="i5h-zA-UkN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>

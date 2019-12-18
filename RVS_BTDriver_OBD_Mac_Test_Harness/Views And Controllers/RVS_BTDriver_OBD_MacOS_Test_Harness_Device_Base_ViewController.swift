@@ -54,11 +54,68 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
      This is the device instance associated with this screen.
     */
     var deviceInstance: RVS_BTDriver_OBD_DeviceProtocol!
+    
+    /* ################################################################## */
+    /**
+     The label for the enter text field.
+    */
     @IBOutlet weak var enterTextLabel: NSTextField!
+    
+    /* ################################################################## */
+    /**
+     The text entry field, where the user types in the command.
+    */
     @IBOutlet weak var enterTextField: NSTextField!
+    
+    /* ################################################################## */
+    /**
+     the button the user presses to send the command.
+    */
     @IBOutlet weak var sendTextButton: NSButton!
+    
+    /* ################################################################## */
+    /**
+     The label for the response display.
+    */
     @IBOutlet weak var responseDisplayLabel: NSTextField!
+
+    /* ################################################################## */
+    /**
+     The text view portion of the scrollable area for the response.
+    */
     @IBOutlet var responseTextView: NSTextView!
+}
+
+/* ################################################################################################################################## */
+// MARK: - IBAction Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
+    /* ################################################################## */
+    /**
+     This will initiate a data send to the device, using whatever is in the command text field.
+     
+     - parameter: ignored.
+     */
+    @IBAction func sendButtonHit(_: Any) {
+        if let sendString = enterTextField?.stringValue {
+            #if DEBUG
+                print("Sending: \(sendString).")
+            #endif
+            self.responseTextView?.string = ""
+            deviceInstance.sendCommandWithResponse(sendString + "\r\n")
+        }
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - Instance Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
+    func setUpUI() {
+        if let modelTitle = deviceInstance?.deviceName {
+            title = modelTitle
+        }
+    }
 }
 
 /* ################################################################################################################################## */
@@ -72,17 +129,14 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let modelTitle = deviceInstance?.deviceName {
-            title = modelTitle
-        }
-        
         enterTextLabel?.stringValue = (enterTextLabel?.stringValue ?? "ERROR").localizedVariant
         responseDisplayLabel?.stringValue = (responseDisplayLabel?.stringValue ?? "ERROR").localizedVariant
         sendTextButton?.title = (sendTextButton?.title ?? "ERROR").localizedVariant
         
         deviceInstance?.subscribe(self)
         deviceInstance?.delegate = self
-        sayHelloToMyLeetleFriend()
+        
+        setUpUI()
     }
     
     /* ################################################################## */
@@ -109,24 +163,6 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
 }
 
 /* ################################################################################################################################## */
-// MARK: - Instance Methods
-/* ################################################################################################################################## */
-extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
-    /* ################################################################## */
-    /**
-     Initiate AT commands to the device.
-     */
-    func sayHelloToMyLeetleFriend() {
-        let initialAT = "ATZ\r\n"
-        
-        #if DEBUG
-            print("Sending Initial ATZ.")
-        #endif
-        deviceInstance.sendCommandWithResponse(initialAT)
-    }
-}
-
-/* ################################################################################################################################## */
 // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Handlers
 /* ################################################################################################################################## */
 extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriver_DeviceSubscriberProtocol {
@@ -143,6 +179,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BT
             print("DEVICE ERROR! \(String(describing: inError))")
         #endif
         DispatchQueue.main.async {
+            RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
         }
     }
     
@@ -157,6 +194,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BT
             print("Device Status Changed")
         #endif
         DispatchQueue.main.async {
+            self.setUpUI()
         }
     }
 }
@@ -172,8 +210,13 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BT
      - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
      - parameter encounteredThisError: The error that was encountered.
      */
-    func device(_ device: RVS_BTDriver_OBD_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors) {
-        
+    func device(_ device: RVS_BTDriver_OBD_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+        #if DEBUG
+            print("ERROR! \(String(describing: inError))")
+        #endif
+        DispatchQueue.main.async {
+            RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+        }
     }
     
     /* ################################################################## */
@@ -184,11 +227,14 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BT
      - parameter returnedThisData: The data returned. It may be nil.
      */
     func device(_ inDevice: RVS_BTDriver_OBD_DeviceProtocol, returnedThisData inData: Data?) {
-        if let data = inData {
+        if  let data = inData,
+            let stringValue = String(data: data, encoding: .utf8) {
             #if DEBUG
-                let stringValue = String(data: data, encoding: .utf8) ?? "ERROR!"
                 print("Device Returned This Data: \(stringValue)")
             #endif
+            DispatchQueue.main.async {
+                self.responseTextView?.string = stringValue
+            }
         }
     }
 }
