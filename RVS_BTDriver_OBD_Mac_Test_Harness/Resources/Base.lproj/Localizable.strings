@@ -79,3 +79,6 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-HEADER-INDICATE"                                      =       "I";
 "SLUG-HEADER-NOTIFY"                                        =       "N";
 "SLUG-HEADER-VALUE"                                         =       "VALUE";
+"SLUG-ENTER-COMMAND"                                        =       "Enter Command to Send:";
+"SLUG-SEND-BUTTON"                                          =       "SEND";
+"SLUG-RESPONSE-LABEL"                                       =       "Response:";

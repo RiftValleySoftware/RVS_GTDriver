@@ -54,6 +54,11 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
      This is the device instance associated with this screen.
     */
     var deviceInstance: RVS_BTDriver_OBD_DeviceProtocol!
+    @IBOutlet weak var enterTextLabel: NSTextField!
+    @IBOutlet weak var enterTextField: NSTextField!
+    @IBOutlet weak var sendTextButton: NSButton!
+    @IBOutlet weak var responseDisplayLabel: NSTextField!
+    @IBOutlet var responseTextView: NSTextView!
 }
 
 /* ################################################################################################################################## */
@@ -70,6 +75,10 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
         if let modelTitle = deviceInstance?.deviceName {
             title = modelTitle
         }
+        
+        enterTextLabel?.stringValue = (enterTextLabel?.stringValue ?? "ERROR").localizedVariant
+        responseDisplayLabel?.stringValue = (responseDisplayLabel?.stringValue ?? "ERROR").localizedVariant
+        sendTextButton?.title = (sendTextButton?.title ?? "ERROR").localizedVariant
         
         deviceInstance?.subscribe(self)
         deviceInstance?.delegate = self
