@@ -87,6 +87,28 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
 }
 
 /* ################################################################################################################################## */
+// MARK: - NSTextFieldDelegate Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: NSTextFieldDelegate {
+    /* ################################################################## */
+    /**
+     Called when text changes in the send text box.
+     
+     - parameter inNotification: The notification object for the text field.
+    */
+    func controlTextDidChange(_ inNotification: Notification) {
+        if  let textField = inNotification.object as? NSTextField,
+            textField == enterTextField {
+            #if DEBUG
+                print("New Text Entered for \(textField.stringValue)")
+            #endif
+            
+            setUpUI()
+        }
+    }
+}
+
+/* ################################################################################################################################## */
 // MARK: - IBAction Methods
 /* ################################################################################################################################## */
 extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
@@ -97,11 +119,13 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
      - parameter: ignored.
      */
     @IBAction func sendButtonHit(_: Any) {
-        if let sendString = enterTextField?.stringValue {
+        if  let sendString = enterTextField?.stringValue,
+            !sendString.isEmpty {
             #if DEBUG
                 print("Sending: \(sendString).")
             #endif
-            self.responseTextView?.string = ""
+            sendTextButton?.isEnabled = false
+            enterTextField?.isEnabled = false
             deviceInstance.sendCommandWithResponse(sendString + "\r\n")
         }
     }
@@ -111,10 +135,17 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
 // MARK: - Instance Methods
 /* ################################################################################################################################## */
 extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
+    /* ################################################################## */
+    /**
+     Sets up the UI elements.
+     */
     func setUpUI() {
         if let modelTitle = deviceInstance?.deviceName {
             title = modelTitle
         }
+        
+        enterTextField?.isEnabled = true
+        sendTextButton?.isEnabled = !(enterTextField?.stringValue.isEmpty ?? true)
     }
 }
 
@@ -135,7 +166,8 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
         
         deviceInstance?.subscribe(self)
         deviceInstance?.delegate = self
-        
+        self.responseTextView?.string = ""
+
         setUpUI()
     }
     
@@ -228,12 +260,20 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BT
      */
     func device(_ inDevice: RVS_BTDriver_OBD_DeviceProtocol, returnedThisData inData: Data?) {
         if  let data = inData,
-            let stringValue = String(data: data, encoding: .utf8) {
+            var stringValue = String(data: data, encoding: .utf8) {
             #if DEBUG
                 print("Device Returned This Data: \(stringValue)")
             #endif
             DispatchQueue.main.async {
-                self.responseTextView?.string = stringValue
+                if  self.responseTextView?.string.isEmpty ?? true,
+                    let initialString = self.enterTextField?.stringValue {
+                    stringValue = ">" + initialString + stringValue
+                }
+                self.responseTextView?.string += stringValue
+                self.responseTextView?.scrollToEndOfDocument(nil)
+                self.setUpUI()
+                self.enterTextField?.stringValue = ""
+                self.enterTextField?.becomeFirstResponder()
             }
         }
     }
