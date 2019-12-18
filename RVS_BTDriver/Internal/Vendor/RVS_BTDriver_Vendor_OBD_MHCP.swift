@@ -47,7 +47,7 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
         /// This is a read/write property for communicating with a MCHP-based chipset
         case mchpUserDefinedServiceReadWriteProperty    =   "49535343-6DAA-4D02-ABF6-19569ACA69FE"
         /// This is a read-only property for communicating with a MCHP-based chipset
-        case mchpUserDefinedServiceReadProperty         =   "49535343-ACA3-481C-91EC-D85E28A60318"
+        case mchpUserDefinedServiceWriteProperty         =   "49535343-ACA3-481C-91EC-D85E28A60318"
     }
     
     /* ################################################################## */
@@ -92,11 +92,11 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
             let myService = RVS_BLE_GATT_UUID.mchpUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-                    nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadProperty.rawValue),
-                    let readWriteProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadWriteProperty.rawValue) {
+                    let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadWriteProperty.rawValue),
+                    nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                    device.readProperty = readWriteProperty
-                    device.writeProperty = readWriteProperty
+                    device.writeProperty = readProperty
+                    device.readProperty = readProperty
                     return true
                 }
             }

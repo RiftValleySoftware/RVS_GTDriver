@@ -105,9 +105,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
         #endif
         
         // Make sure this is for us.
-        if  inPeripheral == peripheral,
-            let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
-            inCharacteristic == readProperty.cbCharacteristic {
+        if  inPeripheral == peripheral {
             if  let value = inCharacteristic.value,
                 let string = String(data: value, encoding: .utf8) {
 
@@ -117,7 +115,31 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
         }
     }
-    
+        
+    /* ################################################################## */
+    /**
+    - parameter inPeripheral: The peripheral that owns this service.
+    - parameter didWriteValueFor: The characteristic that was updated.
+    - parameter error: Any error that may have occurred. It can be nil.
+    */
+    internal func peripheral(_ inPeripheral: CBPeripheral, didWriteValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
+        #if DEBUG
+            print("OBD Device Callback: peripheral: \(inPeripheral) didWriteValueFor: \(inCharacteristic).")
+            print("\treadValue: \(String(describing: readProperty?.value)).")
+            if let rawValue = inCharacteristic.value {
+                print("\treadValueAsString: \(String(describing: String(data: rawValue, encoding: .utf8))).")
+            }
+        #endif
+        
+        if  inPeripheral == peripheral {
+            if  case .stringValue(let string) = readProperty?.value {
+                delegate?.device(self, returnedThisData: string?.data(using: .utf8))
+            }
+        } else {    // Otherwise, kick the can down the road.
+            super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
+        }
+    }
+        
     /* ################################################################## */
     /**
     - parameter inPeripheral: The peripheral that owns this service.
