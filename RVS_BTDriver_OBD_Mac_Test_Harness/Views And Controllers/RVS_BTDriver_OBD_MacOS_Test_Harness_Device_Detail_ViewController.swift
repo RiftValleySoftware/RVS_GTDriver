@@ -26,6 +26,14 @@ import Cocoa
 #endif
 
 /* ################################################################################################################################## */
+/**
+ This is a handy typealias for the tuple we'll use to transmit table data.
+ 
+ if this is a Service separateor (
+ */
+typealias RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple = (key: String, value: String, read: Bool, write: Bool, indicate: Bool, notify: Bool)
+
+/* ################################################################################################################################## */
 // MARK: - The Detail View Controller Class for Each Device
 /* ################################################################################################################################## */
 /**
@@ -48,15 +56,13 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: RVS_BTDr
 
     /* ################################################################## */
     /**
-     The text view portion of the scrollable area for the response.
-    */
-    @IBOutlet var responseTextView: NSTextView!
-    
-    /* ################################################################## */
-    /**
      The cancel button that dismisses the screen.
     */
     @IBOutlet weak var cancelButton: NSButton!
+    
+    @IBOutlet weak var propertyTable: NSTableView!
+    
+    var tableData: [RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple] = []
 }
 
 /* ################################################################################################################################## */
@@ -71,6 +77,73 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController {
         if let modelTitle = deviceInstance?.deviceName {
             title = modelTitle
         }
+        populateTable()
+    }
+    
+    /* ################################################################## */
+    /**
+     Sets up the table data.
+     */
+    func setUpTableData() {
+        tableData = []
+        
+        if let deviceInstance = deviceInstance {
+            for service in deviceInstance.services {
+                let serviceHeader = RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple(key: service.uuid, value: "", read: false, write: false, indicate: false, notify: false)
+                var serviceProperties = [RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple]()
+
+                for property in service.properties {
+                    let key = property.uuid
+                    
+                    switch property.value {
+                    case .intValue(let value):
+                        if let value = value {
+                            serviceProperties.append(RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple(key: key, value: String(value), read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
+                        }
+                        
+                    case .floatValue(let value):
+                        if let value = value {
+                            serviceProperties.append(RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple(key: key, value: String(value), read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
+                        }
+                        
+                    case .stringValue(let value):
+                        if  let value = value,
+                            !value.isEmpty {
+                            serviceProperties.append(RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple(key: key, value: value, read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
+                        } else {
+                            fallthrough
+                        }
+                        
+                    default:
+                        #if DEBUG
+                            print("Unknown Value Type: \(String(describing: property.value))")
+                        #endif
+                        serviceProperties.append(RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple(key: key, value: "UNKNOWN VALUE", read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
+                    }
+                }
+                
+                if 0 < serviceProperties.count {
+                    tableData.append(serviceHeader)
+                    tableData += serviceProperties.sorted(by: { (a, b) -> Bool in
+                        return a.key.lengthOfBytes(using: .utf8) == b.key.lengthOfBytes(using: .utf8) ? a.key < b.key : a.key.lengthOfBytes(using: .utf8) < b.key.lengthOfBytes(using: .utf8)
+                    })
+                }
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Sets up the table.
+     */
+    func populateTable() {
+        propertyTable?.tableColumns.forEach {
+            $0.headerCell.stringValue = $0.headerCell.stringValue.localizedVariant
+            $0.headerCell.font = NSFont.boldSystemFont(ofSize: 10)
+            $0.headerCell.alignment = .center
+        }
+        setUpTableData()
+        propertyTable?.reloadData()
     }
 }
 
@@ -86,5 +159,66 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController {
         super.viewDidLoad()
         cancelButton?.title = (cancelButton?.title ?? "ERROR").localizedVariant
         setUpUI()
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - NSTableViewDelegate Support -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: NSTableViewDelegate {
+    /* ################################################################## */
+    /**
+     Called to supply the view for a row.
+     
+     - parameters:
+        - inTableView: The table instance.
+        - viewFor: The column object.
+        - row: The 0-based index of the row.
+     */
+    func tableView(_ inTableView: NSTableView, viewFor inColumn: NSTableColumn?, row inRow: Int) -> NSView? {
+        if tableData[inRow].value.isEmpty { // If we are a header...
+            let ret = NSTextView()
+            ret.string = tableData[inRow].key
+            ret.backgroundColor = NSColor.black
+            ret.textColor = NSColor.white
+            ret.font = NSFont.boldSystemFont(ofSize: 14)
+            ret.alignment = .center
+            return ret
+        } else {
+            
+        }
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to indicate whether or not the row is a group header (indicated by no value).
+     
+     - parameters:
+        - inTableView: The table instance.
+        - isGroupRow: The 0-based Int index of the row.
+     
+     - returns: True, if this is a group header row.
+     */
+    func tableView(_ inTableView: NSTableView, isGroupRow inRow: Int) -> Bool {
+        return tableData[inRow].value.isEmpty
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - NSTableViewDataSource Support -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: NSTableViewDataSource {
+    /* ################################################################## */
+    /**
+     Called to supply the number of rows in the table.
+     
+     - parameters:
+        - inTableView: The table instance.
+     
+     - returns: A 1-based Int, with 0 being no rows.
+     */
+    func numberOfRows(in inTableView: NSTableView) -> Int {
+        return tableData.count
     }
 }

@@ -890,7 +890,7 @@
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="437" minWidth="40" maxWidth="1000" id="i5h-zA-UkN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -962,7 +962,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="490" height="290"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="background-gradient" id="Wac-Lm-oRr"/>
                             </imageView>
-                            <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztF-A4-GcX">
+                            <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztF-A4-GcX">
                                 <rect key="frame" x="20" y="45" width="450" height="225"/>
                                 <clipView key="contentView" focusRingType="none" drawsBackground="NO" id="dkf-w6-vD3">
                                     <rect key="frame" x="0.0" y="0.0" width="450" height="225"/>
@@ -977,7 +977,7 @@
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="447" minWidth="40" maxWidth="10000" id="ZgI-PP-uan">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1009,15 +1009,19 @@
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <outlet property="dataSource" destination="2gM-zZ-6yn" id="5dA-mH-VjQ"/>
+                                                <outlet property="delegate" destination="2gM-zZ-6yn" id="8zu-kY-FQF"/>
+                                            </connections>
                                         </tableView>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="td7-ao-CDt">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" horizontal="YES" id="td7-ao-CDt">
+                                    <rect key="frame" x="-100" y="-100" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="PPD-vF-2I2">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" horizontal="NO" id="PPD-vF-2I2">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1052,6 +1056,7 @@
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="Eun-Pd-aln" id="ZEo-Dr-UWE"/>
+                        <outlet property="propertyTable" destination="qgP-52-BmA" id="6nP-B9-Spq"/>
                     </connections>
                 </viewController>
                 <customObject id="kJr-1a-qk3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
