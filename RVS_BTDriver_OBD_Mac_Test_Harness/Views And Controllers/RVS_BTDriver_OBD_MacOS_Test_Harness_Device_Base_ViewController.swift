@@ -84,6 +84,12 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
      The text view portion of the scrollable area for the response.
     */
     @IBOutlet var responseTextView: NSTextView!
+    
+    /* ################################################################## */
+    /**
+     This is the button that calls out the details modal screen.
+    */
+    @IBOutlet weak var detailsCalloutButton: NSButton!
 }
 
 /* ################################################################################################################################## */
@@ -163,7 +169,8 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
         enterTextLabel?.stringValue = (enterTextLabel?.stringValue ?? "ERROR").localizedVariant
         responseDisplayLabel?.stringValue = (responseDisplayLabel?.stringValue ?? "ERROR").localizedVariant
         sendTextButton?.title = (sendTextButton?.title ?? "ERROR").localizedVariant
-        
+        detailsCalloutButton?.title = (detailsCalloutButton?.title ?? "ERROR").localizedVariant
+
         deviceInstance?.subscribe(self)
         deviceInstance?.delegate = self
         self.responseTextView?.string = ""
@@ -180,6 +187,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
         if let uuid = deviceInstance?.uuid {
             appDelegateObject.openDeviceControllers[uuid] = self
         }
+        self.enterTextField?.becomeFirstResponder()
     }
     
     /* ################################################################## */
@@ -190,6 +198,20 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
         super.viewWillDisappear()
         if let uuid = deviceInstance?.uuid {
             appDelegateObject.openDeviceControllers.removeValue(forKey: uuid)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called just before we bring in a device details instance screen.
+     
+     - parameters:
+        - for: The Segue instance
+        - sender: Data being associated. In this case, it is the device to associate with the screen.
+     */
+    override func prepare(for inSegue: NSStoryboardSegue, sender inDevice: Any?) {
+        if  let destination = inSegue.destinationController as? RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController {
+            destination.deviceInstance = deviceInstance
         }
     }
 }

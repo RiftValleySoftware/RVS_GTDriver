@@ -85,6 +85,7 @@
 		D424E484236F1838003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D424E47E236F1838003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController.swift */; };
 		D424E486236F1879003D68AA /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4992FB1234FB69800EDA733 /* RVS_String_Extensions.swift */; };
 		D424E48C236F1968003D68AA /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D424E48A236F1968003D68AA /* Interface.storyboard */; };
+		D42A7D1323ABB31D008384FC /* RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A7D1223ABB31D008384FC /* RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController.swift */; };
 		D42FB98B236F1E5F00D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D424E45A236F164D003D68AA /* RVS_BTDriver_WatchOS_Test_Harness.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D42FB993236F225900D0F0A5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D42FB991236F225900D0F0A5 /* Localizable.strings */; };
 		D42FB99B236F2D0100D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D424E47A236F1837003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController.swift */; };
@@ -555,6 +556,7 @@
 		D424E47E236F1838003D68AA /* RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_WatchOS_Test_Harness_Settings_InterfaceController.swift; sourceTree = "<group>"; };
 		D424E48B236F1968003D68AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		D426686F237064080052543D /* README-API.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "README-API.md"; sourceTree = "<group>"; };
+		D42A7D1223ABB31D008384FC /* RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController.swift; sourceTree = "<group>"; };
 		D42FB992236F225900D0F0A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D42FB9AC236F2D0100D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42FB9B9236F2D9000D0F0A5 /* RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -959,6 +961,7 @@
 				D480365D23995107007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift */,
 				D41B6B66239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness_ViewController.swift */,
 				D4C700CA23A7DA6400762126 /* RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController.swift */,
+				D42A7D1223ABB31D008384FC /* RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController.swift */,
 			);
 			path = "Views And Controllers";
 			sourceTree = "<group>";
@@ -1923,6 +1926,7 @@
 				D4AFF94D23A028CC009A2677 /* RVS_BTDriver_Vendor_OBD_ELM327.swift in Sources */,
 				D41B6B83239834DD008F4E7D /* RVS_SequenceProtocol.swift in Sources */,
 				D41B6B7A239834DD008F4E7D /* RVS_BTDriver_Property.swift in Sources */,
+				D42A7D1323ABB31D008384FC /* RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController.swift in Sources */,
 				D41B6B7C239834DD008F4E7D /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */,
 				D41B6B72239834DD008F4E7D /* RVS_BTDriver_Extension.swift in Sources */,
 				D4968BC523A2E4A100B57B45 /* RVS_BTDriver_Vendor_OBD_LELink.swift in Sources */,
