@@ -26,9 +26,9 @@ import CoreBluetooth
 // MARK: - RVS_BTDriver_Vendor_GoTenna -
 /* ###################################################################################################################################### */
 /**
- A factory class for OBD dongles, based on the MHCP chipset.
+ A factory class for OBD dongles, based on the ELM327 chipset.
  */
-class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
@@ -37,7 +37,7 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
      */
     internal enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
-        case deviceSpecificID                           =   "MHCPOBD"
+        case deviceSpecificID                           =   "ELM327OBD"
         
         /// It advertises this service.
         case advertisedService                          =   "FFF0"
