@@ -26,6 +26,45 @@ import Cocoa
 #endif
 
 /* ################################################################################################################################## */
+// MARK: - View Extensions
+/* ################################################################################################################################## */
+/**
+ We extend NSView, to allow us to easily add autolayout items.
+ */
+extension NSView {
+    /* ################################################################## */
+    /**
+     This allows us to add a subview, and set it up with auto-layout constraints to fill the superview.
+     
+     - parameter inSubview: The subview we want to add.
+     - parameter below: Any UIView subclass of an item that is above the item we are inserting.
+     - parameter beside: If this item is being put next to another one, we will set its left anchor to that view's right anchor, and also make them equal widths.
+     - parameter by: An offset between the view above and the one being inserted. This can be supplied, even if there is no view being sent in as "below," or "beside."
+     */
+    func addContainedView(_ inSubView: NSView, below inUpperView: NSView! = nil, beside inLeftView: NSView! = nil, by inConstant: CGFloat = 0) {
+        addSubview(inSubView)
+        inSubView.translatesAutoresizingMaskIntoConstraints = false
+        if let bottomAnchor = inUpperView?.bottomAnchor {
+            bottomAnchor.constraint(equalTo: inSubView.topAnchor, constant: inConstant).isActive = true
+            inSubView.topAnchor.constraint(equalTo: bottomAnchor, constant: inConstant).isActive = true
+        } else {
+            inSubView.topAnchor.constraint(equalTo: self.topAnchor, constant: inConstant).isActive = true
+        }
+        
+        if let leftAnchor = inLeftView?.trailingAnchor {
+            leftAnchor.constraint(equalTo: inSubView.leadingAnchor, constant: inConstant).isActive = true
+            inSubView.leadingAnchor.constraint(equalTo: leftAnchor, constant: inConstant).isActive = true
+            inLeftView?.widthAnchor.constraint(equalTo: inSubView.widthAnchor, multiplier: 1.0, constant: 0).isActive = true
+        } else {
+            inSubView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inConstant).isActive = true
+        }
+        
+        inSubView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
+        inSubView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+    }
+}
+
+/* ################################################################################################################################## */
 /**
  This is a handy typealias for the tuple we'll use to transmit table data.
  
@@ -176,7 +215,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: NSTa
         - row: The 0-based index of the row.
      */
     func tableView(_ inTableView: NSTableView, viewFor inColumn: NSTableColumn?, row inRow: Int) -> NSView? {
-        if tableData[inRow].value.isEmpty { // If we are a header...
+        if tableView(inTableView, isGroupRow: inRow) { // If we are a header...
             let ret = NSTextView()
             ret.string = tableData[inRow].key
             ret.backgroundColor = NSColor.black
@@ -185,9 +224,50 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: NSTa
             ret.alignment = .center
             return ret
         } else {
+            let rowHeight = tableView(inTableView, heightOfRow: inRow)
+            let lineHeight = rowHeight / 3.0
+            let ret = NSView()
+            let backgroundColor = 0 == inRow % 2 ? NSColor.white.withAlphaComponent(0.15) : NSColor.clear
+            let textColor = NSColor.black
             
+            var frameRect = CGRect(x: 0, y: 0, width: inTableView.bounds.size.width, height: lineHeight)
+            
+            frameRect.origin.y += lineHeight * 2
+            
+            let uuidLabel = NSTextView(frame: frameRect)
+            
+            uuidLabel.string = tableData[inRow].key
+            uuidLabel.backgroundColor = backgroundColor
+            uuidLabel.textColor = textColor
+            uuidLabel.font = NSFont.systemFont(ofSize: 14)
+            uuidLabel.alignment = .center
+            
+            ret.addSubview(uuidLabel)
+            
+            frameRect.origin.y -= lineHeight
+            
+            let valueLabel = NSTextView(frame: frameRect)
+            
+            valueLabel.string = tableData[inRow].value
+            valueLabel.backgroundColor = backgroundColor
+            valueLabel.textColor = textColor
+            valueLabel.font = NSFont.systemFont(ofSize: 14)
+            valueLabel.alignment = .center
+            
+            ret.addSubview(valueLabel)
+            
+            frameRect.origin.y -= lineHeight
+            
+            let propertiesLine = NSTextView(frame: frameRect)
+            propertiesLine.string = "TEST"
+            propertiesLine.backgroundColor = backgroundColor
+            propertiesLine.textColor = textColor
+            propertiesLine.font = NSFont.systemFont(ofSize: 14)
+            propertiesLine.alignment = .center
+            ret.addSubview(propertiesLine)
+
+            return ret
         }
-        return nil
     }
     
     /* ################################################################## */
@@ -202,6 +282,24 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: NSTa
      */
     func tableView(_ inTableView: NSTableView, isGroupRow inRow: Int) -> Bool {
         return tableData[inRow].value.isEmpty
+    }
+    
+    /* ################################################################## */
+    /**
+     Returns the height of a given row.
+     
+     - parameters:
+        - inTableView: The table instance.
+        - heightOfRow: The 0-based Int index of the row.
+     
+     - returns: The height, in display units, of the row.
+     */
+    func tableView(_ inTableView: NSTableView, heightOfRow inRow: Int) -> CGFloat {
+        if tableView(inTableView, isGroupRow: inRow) { // If we are a header...
+            return 17
+        } else {
+            return 51
+        }
     }
 }
 
