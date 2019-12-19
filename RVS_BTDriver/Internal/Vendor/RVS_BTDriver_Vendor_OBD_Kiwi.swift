@@ -41,12 +41,15 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
         
         /// This is the service that is advertised.
         case advertisedService                          =   "E47C8027-CCA1-4E3B-981F-BDC47ABEB5B5"
-        
+
+        /// This is the "write-only" property in the advertised service.
+        case kiwiWriteOnlyProperty                      =   "1CCE1EA8-BD34-4813-A00A-C76E028FADCB"
+
         /// This is the communication service for the Zentri (Kiwi 60) BLE device
         case kiwiUserDefinedService                     =   "B2E7D564-C077-404E-9D29-B547F4512DCE"
-        /// This is the write, indicate, notify property for the Kiwi 60 BLE device
+        /// This is the write, indicate, notify property for the Kiwi 60 BLE device's user-defined service
         case kiwiWriteIndicateNotifyProperty            =   "48CBE15E-642D-4555-AC66-576209C50C1E"
-        /// This is the write property for the Kiwi 60 BLE device
+        /// This is the write property for the Kiwi 60 BLE device's user-defined service
         case kiwiWriteProperty                          =   "DB96492D-CF53-4A43-B896-14CBBF3BF4F3"
     }
 

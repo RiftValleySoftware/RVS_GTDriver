@@ -268,7 +268,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BT
                 // First time through, we add the command, and give it a carat.
                 if  self.responseTextView?.string.isEmpty ?? true,
                     let initialString = self.enterTextField?.stringValue {
-                    stringValue = ">" + initialString + stringValue
+                    stringValue = ">" + initialString + "\r\n" + stringValue
                 }
                 self.responseTextView?.string += stringValue
                 self.responseTextView?.scrollToEndOfDocument(nil)

@@ -882,6 +882,42 @@ extension RVS_BTDriver_Device_BLE {
 
         return nil
     }
+    
+    /* ################################################################## */
+    /**
+     This searches the device, and returns a property that "owns" the given characteristic, identified by its UUID (as a String).
+     
+     This method will search only the main (final) list. It will not search the holding pen.
+     
+     - parameter inUUIDString: The CoreBluetooth Characteristic UID (as a String) we are matching.
+     
+     - returns: The Property instance for the UID. Nil, if it can't be matched.
+     */
+    internal func propertyInstanceForCBUUIDInMainList(_ inUUIDString: String) -> RVS_BTDriver_Property_BLE! {
+        #if DEBUG
+            print("Searching for a property instance for this UUID in the main list: \(inUUIDString)\n")
+        #endif
+        
+        for serviceInstance in internal_service_list {
+            if let serviceInstance = serviceInstance as? RVS_BTDriver_Service_BLE {
+                #if DEBUG
+                    print("\tMain List Service: \(serviceInstance.uuid)")
+                #endif
+                if let propertyInstance = serviceInstance.propertyInstanceForCBUUID(inUUIDString) {
+                    #if DEBUG
+                        print("Found Main List Property: \(propertyInstance.uuid)\n")
+                    #endif
+                    return propertyInstance
+                }
+            }
+        }
+        
+        #if DEBUG
+            print("No property for this UUID: \(inUUIDString)\n")
+        #endif
+
+        return nil
+    }
 }
 
 /* ###################################################################################################################################### */
