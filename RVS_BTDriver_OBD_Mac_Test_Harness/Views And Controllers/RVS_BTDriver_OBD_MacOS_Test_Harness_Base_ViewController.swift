@@ -28,7 +28,7 @@ import Cocoa
 /**
  This class provides some common tools for all view controllers.
  */
-class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController,  RVS_BTDriver_DeviceSubscriberProtocol {
+class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController,  RVS_BTDriver_DeviceSubscriberProtocol, RVS_BTDriver_OBD_DeviceDelegate {
     /* ############################################################################################################################## */
     // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Support
     /* ############################################################################################################################## */
@@ -54,7 +54,35 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController,
             RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
         }
     }
+    
+    /* ################################################################## */
+    /**
+     REQUIRED: This is called when an OBD device responds with data. Default does nothing.
+     
+     - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
+     - parameter returnedThisData: The data returned. It may be nil.
+     */
+    func device(_ device: RVS_BTDriver_OBD_DeviceProtocol, returnedThisData: Data?) { }
 
+    /* ############################################################################################################################## */
+    // MARK: - RVS_BTDriver_OBD_DeviceDelegate Support
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     Error reporting method.
+     
+     - parameter inDevice: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func device(_ inDevice: RVS_BTDriver_OBD_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+        #if DEBUG
+            print("ERROR! \(String(describing: inError))")
+        #endif
+        DispatchQueue.main.async {
+            RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+        }
+    }
+    
     /* ############################################################################################################################## */
     // MARK: - Instance Properties
     /* ############################################################################################################################## */

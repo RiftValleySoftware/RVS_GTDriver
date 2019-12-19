@@ -81,6 +81,37 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
      This is the button that calls out the details modal screen.
     */
     @IBOutlet weak var detailsCalloutButton: NSButton!
+    
+    /* ############################################################################################################################## */
+    // MARK: - RVS_BTDriver_OBD_DeviceDelegate Handlers
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     REQUIRED: This is called when an OBD device responds with data.
+     
+     - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
+     - parameter returnedThisData: The data returned. It may be nil.
+     */
+    override func device(_ inDevice: RVS_BTDriver_OBD_DeviceProtocol, returnedThisData inData: Data?) {
+        if  let data = inData,
+            var stringValue = String(data: data, encoding: .utf8) {
+            #if DEBUG
+                print("Device Returned This Data: \(stringValue)")
+            #endif
+            DispatchQueue.main.async {
+                // First time through, we add the command, and give it a carat.
+                if  self.responseTextView?.string.isEmpty ?? true,
+                    let initialString = self.enterTextField?.stringValue {
+                    stringValue = ">" + initialString + "\r\n" + stringValue
+                }
+                self.responseTextView?.string += stringValue
+                self.responseTextView?.scrollToEndOfDocument(nil)
+                self.setUpUI()
+                self.enterTextField?.stringValue = ""
+                self.enterTextField?.becomeFirstResponder()
+            }
+        }
+    }
 }
 
 /* ################################################################################################################################## */
@@ -223,55 +254,6 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
         #endif
         DispatchQueue.main.async {
             self.setUpUI()
-        }
-    }
-}
-
-/* ################################################################################################################################## */
-// MARK: - RVS_BTDriver_OBD_DeviceDelegate Handlers
-/* ################################################################################################################################## */
-extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriver_OBD_DeviceDelegate {
-    /* ################################################################## */
-    /**
-     REQUIRED: Error reporting method.
-     
-     - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
-     - parameter encounteredThisError: The error that was encountered.
-     */
-    func device(_ device: RVS_BTDriver_OBD_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
-        #if DEBUG
-            print("ERROR! \(String(describing: inError))")
-        #endif
-        DispatchQueue.main.async {
-            RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     REQUIRED: This is called when an OBD device responds with data.
-     
-     - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
-     - parameter returnedThisData: The data returned. It may be nil.
-     */
-    func device(_ inDevice: RVS_BTDriver_OBD_DeviceProtocol, returnedThisData inData: Data?) {
-        if  let data = inData,
-            var stringValue = String(data: data, encoding: .utf8) {
-            #if DEBUG
-                print("Device Returned This Data: \(stringValue)")
-            #endif
-            DispatchQueue.main.async {
-                // First time through, we add the command, and give it a carat.
-                if  self.responseTextView?.string.isEmpty ?? true,
-                    let initialString = self.enterTextField?.stringValue {
-                    stringValue = ">" + initialString + "\r\n" + stringValue
-                }
-                self.responseTextView?.string += stringValue
-                self.responseTextView?.scrollToEndOfDocument(nil)
-                self.setUpUI()
-                self.enterTextField?.stringValue = ""
-                self.enterTextField?.becomeFirstResponder()
-            }
         }
     }
 }
