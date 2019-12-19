@@ -42,12 +42,12 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
         /// It advertises this service.
         case advertisedService                          =   "FFF0"
         
-        /// This is the read/write service used by MCHP-based chipsets.
-        case mchpUserDefinedService                     =   "49535343-FE7D-4AE5-8FA9-9FAFD205E455"
-        /// This is a read/write property for communicating with a MCHP-based chipset
-        case mchpUserDefinedServiceReadWriteProperty    =   "49535343-6DAA-4D02-ABF6-19569ACA69FE"
-        /// This is a read-only property for communicating with a MCHP-based chipset
-        case mchpUserDefinedServiceWriteProperty         =   "49535343-ACA3-481C-91EC-D85E28A60318"
+        /// This is the read/write service used by ELM327-based chipsets.
+        case elm327UserDefinedService                   =   "49535343-FE7D-4AE5-8FA9-9FAFD205E455"
+        /// This is a read/write property for communicating with a ELM327-based chipset
+        case elm327UserDefinedServiceReadWriteProperty  =   "49535343-6DAA-4D02-ABF6-19569ACA69FE"
+        /// This is a write-only property for communicating with a ELM327-based chipset
+        case elm327UserDefinedServiceWriteProperty      =   "49535343-ACA3-481C-91EC-D85E28A60318"
     }
     
     /* ################################################################## */
@@ -89,11 +89,11 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
      */
     internal override func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
         if let device = inDevice as? RVS_BTDriver_Vendor_OBD_MHCP_Device {
-            let myService = RVS_BLE_GATT_UUID.mchpUserDefinedService.rawValue
+            let myService = RVS_BLE_GATT_UUID.elm327UserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-                    let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceReadWriteProperty.rawValue),
-                    nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.mchpUserDefinedServiceWriteProperty.rawValue) {
+                    let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.elm327UserDefinedServiceReadWriteProperty.rawValue),
+                    nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.elm327UserDefinedServiceWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
                     device.writeProperty = readProperty
                     device.readProperty = readProperty
