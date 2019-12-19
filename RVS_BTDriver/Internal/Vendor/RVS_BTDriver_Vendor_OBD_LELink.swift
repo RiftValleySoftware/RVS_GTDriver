@@ -89,10 +89,8 @@ class RVS_BTDriver_Vendor_OBD_LELink: RVS_BTDriver_Vendor_OBD {
             let myService = RVS_BLE_GATT_UUID.leLinkUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-                    let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.leLinkReadWriteNotifyProperty.rawValue),
                     let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.leLinkReadWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                    device.readProperty = readProperty
                     device.writeProperty = writeProperty
                     return true
                 }

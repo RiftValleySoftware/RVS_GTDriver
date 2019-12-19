@@ -54,12 +54,6 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
      This is a weak reference to the instance delegate.
      */
     public weak var delegate: RVS_BTDriver_OBD_DeviceDelegate!
-
-    /* ################################################################## */
-    /**
-     This property is one that the OBD unit uses to respond to the driver.
-     */
-    public var readProperty: RVS_BTDriver_PropertyProtocol!
     
     /* ################################################################## */
     /**
@@ -125,16 +119,12 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
     internal func peripheral(_ inPeripheral: CBPeripheral, didWriteValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
         #if DEBUG
             print("OBD Device Callback: peripheral: \(inPeripheral) didWriteValueFor: \(inCharacteristic).")
-            print("\treadValue: \(String(describing: readProperty?.value)).")
             if let rawValue = inCharacteristic.value {
                 print("\treadValueAsString: \(String(describing: String(data: rawValue, encoding: .utf8))).")
             }
         #endif
         
         if  inPeripheral == peripheral {
-            if  case .stringValue(let string) = readProperty?.value {
-                delegate?.device(self, returnedThisData: string?.data(using: .utf8))
-            }
         } else {    // Otherwise, kick the can down the road.
             super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
         }

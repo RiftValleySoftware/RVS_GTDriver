@@ -96,7 +96,6 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
                     nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.elm327UserDefinedServiceWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
                     device.writeProperty = readProperty
-                    device.readProperty = readProperty
                     return true
                 }
             }

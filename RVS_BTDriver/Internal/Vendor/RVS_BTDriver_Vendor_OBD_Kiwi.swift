@@ -95,10 +95,8 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
             let myService = RVS_BLE_GATT_UUID.kiwiUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-//                    let indicateProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiWriteIndicateNotifyProperty.rawValue),
                     let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                    device.readProperty = writeProperty
                     device.writeProperty = writeProperty
                     return true
                 }
