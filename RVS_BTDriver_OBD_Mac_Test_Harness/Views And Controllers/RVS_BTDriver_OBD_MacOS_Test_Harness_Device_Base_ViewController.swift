@@ -87,7 +87,7 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
-     REQUIRED: This is called when an OBD device responds with data.
+     This is called when an OBD device responds with data.
      
      - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
      - parameter returnedThisData: The data returned. It may be nil.
