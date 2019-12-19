@@ -39,15 +39,6 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: RVS_BTDr
      This is the storyboard instantiation ID.
     */
     static let storyboardID = "details-view-controller"
-    
-    /* ############################################################################################################################## */
-    // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Support
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This will be used to hold an automatically-generated UUID for this subscriber.
-     */
-    var _uuid: UUID!
 
     /* ################################################################## */
     /**

@@ -28,7 +28,33 @@ import Cocoa
 /**
  This class provides some common tools for all view controllers.
  */
-class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController {
+class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController,  RVS_BTDriver_DeviceSubscriberProtocol {
+    /* ############################################################################################################################## */
+    // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Support
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This will be used to hold an automatically-generated UUID for this subscriber.
+     */
+    var _uuid: UUID!
+    
+    /* ################################################################## */
+    /**
+     Called if the device encounters an error.
+     
+     - parameters:
+        - inDevice: The device instance that is calling this.
+        - encounteredThisError: The error that is being returned.
+     */
+    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+        #if DEBUG
+            print("DEVICE ERROR! \(String(describing: inError))")
+        #endif
+        DispatchQueue.main.async {
+            RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+        }
+    }
+
     /* ############################################################################################################################## */
     // MARK: - Instance Properties
     /* ############################################################################################################################## */

@@ -39,15 +39,6 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
      This is the storyboard instantiation ID.
     */
     static let storyboardID = "device-view-controller"
-    
-    /* ############################################################################################################################## */
-    // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Support
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This will be used to hold an automatically-generated UUID for this subscriber.
-     */
-    var _uuid: UUID!
 
     /* ################################################################## */
     /**
@@ -219,24 +210,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
 /* ################################################################################################################################## */
 // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Handlers
 /* ################################################################################################################################## */
-extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriver_DeviceSubscriberProtocol {
-    /* ################################################################## */
-    /**
-     Called if the device encounters an error.
-     
-     - parameters:
-        - inDevice: The device instance that is calling this.
-        - encounteredThisError: The error that is being returned.
-     */
-    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
-        #if DEBUG
-            print("DEVICE ERROR! \(String(describing: inError))")
-        #endif
-        DispatchQueue.main.async {
-            RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
-        }
-    }
-    
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
     /* ################################################################## */
     /**
      Called if the device state changes, in some way.
