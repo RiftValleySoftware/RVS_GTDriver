@@ -274,10 +274,11 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: NSTa
      - returns: The height, in display units, of the row.
      */
     func tableView(_ inTableView: NSTableView, heightOfRow inRow: Int) -> CGFloat {
-        if tableView(inTableView, isGroupRow: inRow) { // If we are a header...
-            return 17
+        if  !tableView(inTableView, isGroupRow: inRow),
+            let ret = inTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView.storyboardID), owner: nil) as? RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView {
+            return ret.bounds.size.height
         } else {
-            return 51
+            return inTableView.rowHeight
         }
     }
 }
