@@ -26,25 +26,25 @@ import CoreBluetooth
 // MARK: - RVS_BTDriver_Vendor_GoTenna -
 /* ###################################################################################################################################### */
 /**
- A factory class for OBD dongles, based on the MHCP chipset.
+ A factory class for OBD dongles, based on an anonymous version of the ELM327 chipset.
  */
-class RVS_BTDriver_Vendor_OBD_LELink: RVS_BTDriver_Vendor_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327_ANON_1: RVS_BTDriver_Vendor_OBD_ELM327 {
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
     /**
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
-    internal enum RVS_BLE_GATT_UUID: String {
+    fileprivate enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
-        case deviceSpecificID                           =   "LELink"
+        case deviceSpecificID                           =   "ANON-1"
         
-        /// This is the communication service for communicating with LELink BLE devices
-        case leLinkUserDefinedService                   =   "FFE0"
-        /// This is the read/write/notify property of an LELink BLE device
-        case leLinkReadWriteNotifyProperty              =   "FFE1"
-        /// This is the read/write property of an LELink BLE device
-        case leLinkReadWriteProperty                    =   "FFEE"
+        /// It advertises this service.
+        case advertisedService                          =   "FFE0"
+        /// This is a read/notify property for communicating with an ELM327-based chipset
+        case advertisedServiceReadWriteNotifyProperty   =   "FFE1"
+        /// This is a write-only property for communicating with an ELM327-based chipset
+        case advertisedServiceReadWriteProperty         =   "FFEE"
     }
     
     /* ################################################################## */
@@ -52,7 +52,7 @@ class RVS_BTDriver_Vendor_OBD_LELink: RVS_BTDriver_Vendor_OBD {
      This returns a list of BLE CBUUIDs, which the vendor wants us to filter for.
      */
     override var searchForTheseServices: [CBUUID] {
-        return [CBUUID(string: RVS_BLE_GATT_UUID.leLinkUserDefinedService.rawValue)]
+        return [CBUUID(string: RVS_BLE_GATT_UUID.advertisedService.rawValue)]
     }
 
     /* ################################################################## */
@@ -64,7 +64,7 @@ class RVS_BTDriver_Vendor_OBD_LELink: RVS_BTDriver_Vendor_OBD {
        */
      internal override func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
-            let ret = RVS_BTDriver_Vendor_OBD_LELink_Device(vendor: self)
+            let ret = RVS_BTDriver_Vendor_OBD_ELM327_ANON_1_Device(vendor: self)
             
             ret.deviceInfoStruct = deviceRecord
 
@@ -85,19 +85,29 @@ class RVS_BTDriver_Vendor_OBD_LELink: RVS_BTDriver_Vendor_OBD {
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
     internal override func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
-        if let device = inDevice as? RVS_BTDriver_Vendor_OBD_LELink_Device {
-            let myService = RVS_BLE_GATT_UUID.leLinkUserDefinedService.rawValue
+        if let device = inDevice as? RVS_BTDriver_Vendor_OBD_ELM327_ANON_1_Device {
+            let myService = RVS_BLE_GATT_UUID.advertisedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-                    let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.leLinkReadWriteProperty.rawValue) {
-                    device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                    device.writeProperty = writeProperty
+                    let readWriteNotifyProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.advertisedServiceReadWriteNotifyProperty.rawValue),
+                    nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.advertisedServiceReadWriteProperty.rawValue) {
+                    device.deviceType = .OBD(type: device.description)
+                    device.readProperty = readWriteNotifyProperty
+                    device.writeProperty = readWriteNotifyProperty
                     return true
                 }
             }
         }
         
         return false
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + "-" + RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
     }
 }
 
@@ -107,5 +117,12 @@ class RVS_BTDriver_Vendor_OBD_LELink: RVS_BTDriver_Vendor_OBD {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Vendor_OBD_LELink_Device: RVS_BTDriver_Device_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327_ANON_1_Device: RVS_BTDriver_Device_OBD_ELM327 {
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + "-" + RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
+    }
 }

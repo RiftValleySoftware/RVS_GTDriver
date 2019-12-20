@@ -37,7 +37,7 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
      */
     fileprivate enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
-        case deviceSpecificID                           =   "OBD"
+        case deviceSpecificID   =   "OBD"
     }
     
     /* ################################################################## */
@@ -126,10 +126,8 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
         
         // Make sure this is for us.
         if  inPeripheral == peripheral {
-            if  let value = inCharacteristic.value,
-                let string = String(data: value, encoding: .utf8) {
-
-                delegate?.device(self, returnedThisData: string.data(using: .utf8))
+            if  let value = inCharacteristic.value {
+                delegate?.device(self, returnedThisData: value)
             }
         } else {    // Otherwise, kick the can down the road.
             super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)

@@ -28,7 +28,7 @@ import Cocoa
 /**
  This class provides some common tools for all view controllers.
  */
-class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController,  RVS_BTDriver_DeviceSubscriberProtocol, RVS_BTDriver_OBD_DeviceDelegate {
+class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController, RVS_BTDriver_DeviceSubscriberProtocol, RVS_BTDriver_OBD_DeviceDelegate {
     /* ############################################################################################################################## */
     // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Support
     /* ############################################################################################################################## */

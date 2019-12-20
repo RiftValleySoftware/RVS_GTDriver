@@ -28,14 +28,14 @@ import CoreBluetooth
 /**
  A factory class for OBD dongles, based on the MHCP chipset.
  */
-class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
+class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD_ELM327 {
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary OBD BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
     /**
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
-    internal enum RVS_BLE_GATT_UUID: String {
+    fileprivate enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
         case deviceSpecificID                           =   "Kiwi"
         
@@ -51,8 +51,12 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
         case kiwiWriteIndicateNotifyProperty            =   "48CBE15E-642D-4555-AC66-576209C50C1E"
         /// This is the write property for the Kiwi 60 BLE device's user-defined service
         case kiwiWriteProperty                          =   "DB96492D-CF53-4A43-B896-14CBBF3BF4F3"
+        
+        /// This is the service that is advertised.
+        case readService                                =   "180F"
+        case kiwiReadProperty                           =   "2A19"
     }
-
+    
     /* ################################################################## */
     /**
      This returns a list of BLE CBUUIDs, which the vendor wants us to filter for.
@@ -95,8 +99,9 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
             let myService = RVS_BLE_GATT_UUID.kiwiUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-                    let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiWriteProperty.rawValue) {
+                    let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiWriteIndicateNotifyProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
+                    device.readProperty = writeProperty
                     device.writeProperty = writeProperty
                     return true
                 }
@@ -104,6 +109,14 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
         }
         
         return false
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + "-" + RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
     }
 }
 
@@ -114,4 +127,11 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
  This is a specialization of the device for OBD Devices.
  */
 class RVS_BTDriver_Vendor_OBD_Kiwi_Device: RVS_BTDriver_Device_OBD {
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + "-" + RVS_BTDriver_Vendor_OBD_Kiwi.RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
+    }
 }

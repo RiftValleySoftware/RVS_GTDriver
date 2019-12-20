@@ -112,7 +112,7 @@ public class RVS_BTDriver: NSObject {
             RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self),
             RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK(driver: self),
             RVS_BTDriver_Vendor_OBD_ELM327_VLINK(driver: self),
-            RVS_BTDriver_Vendor_OBD_LELink(driver: self),
+            RVS_BTDriver_Vendor_OBD_ELM327_ANON_1(driver: self),
             RVS_BTDriver_Vendor_OBD_Kiwi(driver: self)
         ]
     }
