@@ -26,9 +26,9 @@ import CoreBluetooth
 // MARK: - RVS_BTDriver_Vendor_GoTenna -
 /* ###################################################################################################################################### */
 /**
- A factory class for OBD dongles, based on the ELM327 chipset.
+ A factory class for OBD dongles, based on the MHCP chipset.
  */
-class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
+class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
@@ -37,29 +37,25 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
      */
     internal enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
-        case deviceSpecificID                           =   "BT26N"
+        case deviceSpecificID                           =   "MHCPOBD"
         
-        /// It advertises this property.
-        case advertisedProperty                         =   "18F0"
+        /// It advertises this service.
+        case advertisedService                          =   "FFF0"
         
-        /// This is the communication service for FSC-BT826N BLE devices.
-        case vlinkUserDefinedService                    =   "E7810A71-73AE-499D-8C15-FAA9AEF0C3F2"
-        /// This is the read/write property for communicating with VLink devices.
-        case vlinkReadWriteProperty                     =   "BEF8D6C9-9C21-4C9E-B632-BD58C1009F9F"
+        /// This is the read/write service used by MHCP-based chipsets.
+        case MHCPUserDefinedService                     =   "49535343-FE7D-4AE5-8FA9-9FAFD205E455"
+        /// This is a read/write property for communicating with a MHCP-based chipset
+        case MHCPUserDefinedServiceReadWriteProperty    =   "49535343-6DAA-4D02-ABF6-19569ACA69FE"
+        /// This is a write-only property for communicating with a MHCP-based chipset
+        case MHCPUserDefinedServiceWriteProperty        =   "49535343-ACA3-481C-91EC-D85E28A60318"
     }
-    
-    /* ################################################################## */
-    /**
-     This is the data we need to match against the advertisement data.
-     */
-    private let _manufacturerCode: [UInt8] = [0xfe, 0xff, 0x02]
     
     /* ################################################################## */
     /**
      This returns a list of BLE CBUUIDs, which the vendor wants us to filter for.
      */
     override var searchForTheseServices: [CBUUID] {
-        return [CBUUID(string: RVS_BLE_GATT_UUID.advertisedProperty.rawValue)]
+        return [CBUUID(string: RVS_BLE_GATT_UUID.advertisedService.rawValue)]
     }
 
     /* ################################################################## */
@@ -71,7 +67,7 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
        */
      internal override func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
-            let ret = RVS_BTDriver_Vendor_OBD_BT826N_Device(vendor: self)
+            let ret = RVS_BTDriver_Vendor_OBD_MHCP_Device(vendor: self)
             
             ret.deviceInfoStruct = deviceRecord
 
@@ -92,16 +88,14 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
     internal override func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
-        if let device = inDevice as? RVS_BTDriver_Vendor_OBD_BT826N_Device {
-            let myService = RVS_BLE_GATT_UUID.vlinkUserDefinedService.rawValue
+        if let device = inDevice as? RVS_BTDriver_Vendor_OBD_MHCP_Device {
+            let myService = RVS_BLE_GATT_UUID.MHCPUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-                    let readWriteProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkReadWriteProperty.rawValue) {
+                    let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.MHCPUserDefinedServiceReadWriteProperty.rawValue),
+                    nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.MHCPUserDefinedServiceWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                    device.writeProperty = readWriteProperty
-                    #if DEBUG
-                        print("\(String(describing: device.deviceType)) device, has \(readWriteProperty) as both read and write.")
-                    #endif
+                    device.writeProperty = readProperty
                     return true
                 }
             }
@@ -117,5 +111,5 @@ class RVS_BTDriver_Vendor_OBD_BT826N: RVS_BTDriver_Vendor_OBD {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Vendor_OBD_BT826N_Device: RVS_BTDriver_Device_OBD {
+class RVS_BTDriver_Vendor_OBD_MHCP_Device: RVS_BTDriver_Device_OBD {
 }

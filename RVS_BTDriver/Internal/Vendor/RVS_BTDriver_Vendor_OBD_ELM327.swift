@@ -26,7 +26,7 @@ import CoreBluetooth
 // MARK: - RVS_BTDriver_Vendor_GoTenna -
 /* ###################################################################################################################################### */
 /**
- A factory class for OBD dongles, based on the ELM327 chipset.
+ A factory class for OBD dongles, based on the MHCP chipset.
  */
 class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
     /* ###################################################################################################################################### */
@@ -37,25 +37,29 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
      */
     internal enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
-        case deviceSpecificID                           =   "ELM327OBD"
+        case deviceSpecificID                           =   "BT26N"
         
-        /// It advertises this service.
-        case advertisedService                          =   "FFF0"
+        /// It advertises this property.
+        case advertisedProperty                         =   "18F0"
         
-        /// This is the read/write service used by ELM327-based chipsets.
-        case elm327UserDefinedService                   =   "49535343-FE7D-4AE5-8FA9-9FAFD205E455"
-        /// This is a read/write property for communicating with a ELM327-based chipset
-        case elm327UserDefinedServiceReadWriteProperty  =   "49535343-6DAA-4D02-ABF6-19569ACA69FE"
-        /// This is a write-only property for communicating with a ELM327-based chipset
-        case elm327UserDefinedServiceWriteProperty      =   "49535343-ACA3-481C-91EC-D85E28A60318"
+        /// This is the communication service for FSC-ELM327 BLE devices.
+        case vlinkUserDefinedService                    =   "E7810A71-73AE-499D-8C15-FAA9AEF0C3F2"
+        /// This is the read/write property for communicating with VLink devices.
+        case vlinkReadWriteProperty                     =   "BEF8D6C9-9C21-4C9E-B632-BD58C1009F9F"
     }
+    
+    /* ################################################################## */
+    /**
+     This is the data we need to match against the advertisement data.
+     */
+    private let _manufacturerCode: [UInt8] = [0xfe, 0xff, 0x02]
     
     /* ################################################################## */
     /**
      This returns a list of BLE CBUUIDs, which the vendor wants us to filter for.
      */
     override var searchForTheseServices: [CBUUID] {
-        return [CBUUID(string: RVS_BLE_GATT_UUID.advertisedService.rawValue)]
+        return [CBUUID(string: RVS_BLE_GATT_UUID.advertisedProperty.rawValue)]
     }
 
     /* ################################################################## */
@@ -67,7 +71,7 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
        */
      internal override func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
-            let ret = RVS_BTDriver_Vendor_OBD_MHCP_Device(vendor: self)
+            let ret = RVS_BTDriver_Vendor_OBD_ELM327_Device(vendor: self)
             
             ret.deviceInfoStruct = deviceRecord
 
@@ -88,14 +92,16 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
     internal override func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
-        if let device = inDevice as? RVS_BTDriver_Vendor_OBD_MHCP_Device {
-            let myService = RVS_BLE_GATT_UUID.elm327UserDefinedService.rawValue
+        if let device = inDevice as? RVS_BTDriver_Vendor_OBD_ELM327_Device {
+            let myService = RVS_BLE_GATT_UUID.vlinkUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-                    let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.elm327UserDefinedServiceReadWriteProperty.rawValue),
-                    nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.elm327UserDefinedServiceWriteProperty.rawValue) {
+                    let readWriteProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkReadWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                    device.writeProperty = readProperty
+                    device.writeProperty = readWriteProperty
+                    #if DEBUG
+                        print("\(String(describing: device.deviceType)) device, has \(readWriteProperty) as both read and write.")
+                    #endif
                     return true
                 }
             }
@@ -111,5 +117,5 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Vendor_OBD_MHCP_Device: RVS_BTDriver_Device_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327_Device: RVS_BTDriver_Device_OBD {
 }

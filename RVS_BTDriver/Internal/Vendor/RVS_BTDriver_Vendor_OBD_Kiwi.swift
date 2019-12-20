@@ -26,7 +26,7 @@ import CoreBluetooth
 // MARK: - RVS_BTDriver_Vendor_GoTenna -
 /* ###################################################################################################################################### */
 /**
- A factory class for OBD dongles, based on the ELM327 chipset.
+ A factory class for OBD dongles, based on the MHCP chipset.
  */
 class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
     /* ###################################################################################################################################### */
