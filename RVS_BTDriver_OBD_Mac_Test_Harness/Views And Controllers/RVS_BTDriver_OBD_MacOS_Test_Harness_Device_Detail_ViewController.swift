@@ -26,42 +26,17 @@ import Cocoa
 #endif
 
 /* ################################################################################################################################## */
-// MARK: - View Extensions
+// MARK: - Table Cell View
 /* ################################################################################################################################## */
 /**
- We extend NSView, to allow us to easily add autolayout items.
+ This view will be used for each table cell.
  */
-extension NSView {
-    /* ################################################################## */
-    /**
-     This allows us to add a subview, and set it up with auto-layout constraints to fill the superview.
-     
-     - parameter inSubview: The subview we want to add.
-     - parameter below: Any UIView subclass of an item that is above the item we are inserting.
-     - parameter beside: If this item is being put next to another one, we will set its left anchor to that view's right anchor, and also make them equal widths.
-     - parameter by: An offset between the view above and the one being inserted. This can be supplied, even if there is no view being sent in as "below," or "beside."
-     */
-    func addContainedView(_ inSubView: NSView, below inUpperView: NSView! = nil, beside inLeftView: NSView! = nil, by inConstant: CGFloat = 0) {
-        addSubview(inSubView)
-        inSubView.translatesAutoresizingMaskIntoConstraints = false
-        if let bottomAnchor = inUpperView?.bottomAnchor {
-            bottomAnchor.constraint(equalTo: inSubView.topAnchor, constant: inConstant).isActive = true
-            inSubView.topAnchor.constraint(equalTo: bottomAnchor, constant: inConstant).isActive = true
-        } else {
-            inSubView.topAnchor.constraint(equalTo: self.topAnchor, constant: inConstant).isActive = true
-        }
-        
-        if let leftAnchor = inLeftView?.trailingAnchor {
-            leftAnchor.constraint(equalTo: inSubView.leadingAnchor, constant: inConstant).isActive = true
-            inSubView.leadingAnchor.constraint(equalTo: leftAnchor, constant: inConstant).isActive = true
-            inLeftView?.widthAnchor.constraint(equalTo: inSubView.widthAnchor, multiplier: 1.0, constant: 0).isActive = true
-        } else {
-            inSubView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inConstant).isActive = true
-        }
-        
-        inSubView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
-        inSubView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-    }
+class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView: NSTableCellView {
+    static let storyboardID = "property-display"
+    
+    @IBOutlet weak var keyLabel: NSTextField!
+    @IBOutlet weak var valueLabel: NSTextField!
+    @IBOutlet weak var propertiesLabel: NSTextField!
 }
 
 /* ################################################################################################################################## */
@@ -224,50 +199,28 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: NSTa
             ret.alignment = .center
             return ret
         } else {
-            let rowHeight = tableView(inTableView, heightOfRow: inRow)
-            let lineHeight = rowHeight / 3.0
-            let ret = NSView()
-            let backgroundColor = 0 == inRow % 2 ? NSColor.white.withAlphaComponent(0.15) : NSColor.clear
-            let textColor = NSColor.black
-            
-            var frameRect = CGRect(x: 0, y: 0, width: inTableView.bounds.size.width, height: lineHeight)
-            
-            frameRect.origin.y += lineHeight * 2
-            
-            let uuidLabel = NSTextView(frame: frameRect)
-            
-            uuidLabel.string = tableData[inRow].key
-            uuidLabel.backgroundColor = backgroundColor
-            uuidLabel.textColor = textColor
-            uuidLabel.font = NSFont.systemFont(ofSize: 14)
-            uuidLabel.alignment = .center
-            
-            ret.addSubview(uuidLabel)
-            
-            frameRect.origin.y -= lineHeight
-            
-            let valueLabel = NSTextView(frame: frameRect)
-            
-            valueLabel.string = tableData[inRow].value
-            valueLabel.backgroundColor = backgroundColor
-            valueLabel.textColor = textColor
-            valueLabel.font = NSFont.systemFont(ofSize: 14)
-            valueLabel.alignment = .center
-            
-            ret.addSubview(valueLabel)
-            
-            frameRect.origin.y -= lineHeight
-            
-            let propertiesLine = NSTextView(frame: frameRect)
-            propertiesLine.string = "TEST"
-            propertiesLine.backgroundColor = backgroundColor
-            propertiesLine.textColor = textColor
-            propertiesLine.font = NSFont.systemFont(ofSize: 14)
-            propertiesLine.alignment = .center
-            ret.addSubview(propertiesLine)
-
-            return ret
+            if let ret = inTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView.storyboardID), owner: nil) as? RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView {
+                ret.keyLabel.stringValue = tableData[inRow].key
+                ret.valueLabel.stringValue = tableData[inRow].value
+                var stringArray = [String]()
+                if tableData[inRow].read {
+                    stringArray.append("SLUG-READ".localizedVariant)
+                }
+                if tableData[inRow].write {
+                    stringArray.append("SLUG-WRITE".localizedVariant)
+                }
+                if tableData[inRow].indicate {
+                    stringArray.append("SLUG-INDICATE".localizedVariant)
+                }
+                if tableData[inRow].notify {
+                    stringArray.append("SLUG-NOTIFY".localizedVariant)
+                }
+                ret.propertiesLabel.stringValue = stringArray.joined(separator: ", ")
+                return ret
+            }
         }
+        
+        return nil
     }
     
     /* ################################################################## */

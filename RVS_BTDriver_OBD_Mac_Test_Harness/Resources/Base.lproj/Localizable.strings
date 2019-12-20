@@ -82,3 +82,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-ENTER-COMMAND"                                        =       "Enter Command to Send:";
 "SLUG-SEND-BUTTON"                                          =       "SEND";
 "SLUG-RESPONSE-LABEL"                                       =       "Response:";
+"SLUG-READ"                                                 =       "Read";
+"SLUG-WRITE"                                                =       "Write";
+"SLUG-INDICATE"                                             =       "Indicate";
+"SLUG-NOTIFY"                                               =       "Notify";
