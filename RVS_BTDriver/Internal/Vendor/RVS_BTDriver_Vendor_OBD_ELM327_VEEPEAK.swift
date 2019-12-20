@@ -28,16 +28,16 @@ import CoreBluetooth
 /**
  A factory class for OBD dongles, based on the VEEPEAK version of the ELM327 chipset.
  */
-class RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK: RVS_BTDriver_Vendor_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK: RVS_BTDriver_Vendor_OBD_ELM327 {
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
     /**
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
-    internal enum RVS_BLE_GATT_UUID: String {
+    fileprivate enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
-        case deviceSpecificID                           =   "ELM327-VEEPEAK"
+        case deviceSpecificID                           =   "VEEPEAK"
         
         /// It advertises this service.
         case advertisedService                          =   "FFF0"
@@ -96,8 +96,10 @@ class RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK: RVS_BTDriver_Vendor_OBD {
             let myService = RVS_BLE_GATT_UUID.advertisedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
+                    let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.MHCPAdvertisedServiceReadNotifyProperty.rawValue),
                     let writeNotifyProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.MHCPAdvertisedServiceWriteProperty.rawValue) {
-                    device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
+                    device.deviceType = .OBD(type: device.description)
+                    device.readProperty = readProperty
                     device.writeProperty = writeNotifyProperty
                     return true
                 }
@@ -105,6 +107,14 @@ class RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK: RVS_BTDriver_Vendor_OBD {
         }
         
         return false
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + "-" + RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
     }
 }
 
@@ -114,23 +124,12 @@ class RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK: RVS_BTDriver_Vendor_OBD {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK_Device: RVS_BTDriver_Device_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK_Device: RVS_BTDriver_Device_OBD_ELM327 {
     /* ################################################################## */
     /**
-     This menthod will send an AT command to the OBD unit. Responses will arrive in the readProperty.
-     
-     - parameter inCommandString: The Sting for the command.
+     This returns an easy-to-display description string
      */
-    public override func sendCommandWithResponse(_ inCommandString: String) {
-        if let data = inCommandString.data(using: .utf8),
-            let myService = serviceInstanceForCBUUID(RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.RVS_BLE_GATT_UUID.advertisedService.rawValue),
-            let writeProperty = myService.propertyInstanceForCBUUID(RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.RVS_BLE_GATT_UUID.MHCPAdvertisedServiceWriteProperty.rawValue),
-            let readProperty = myService.propertyInstanceForCBUUID(RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.RVS_BLE_GATT_UUID.MHCPAdvertisedServiceReadNotifyProperty.rawValue) {
-            readProperty.canNotify = true
-            #if DEBUG
-                print("Sending data: \(inCommandString) for: \(writeProperty)")
-            #endif
-            peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
-        }
+    public override var description: String {
+        return super.description + "-" + RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
     }
 }

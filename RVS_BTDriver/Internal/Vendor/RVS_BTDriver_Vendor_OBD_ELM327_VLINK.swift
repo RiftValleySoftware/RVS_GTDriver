@@ -28,16 +28,16 @@ import CoreBluetooth
 /**
  A factory class for OBD dongles, based on the VLINK version of the ELM327 chipset.
  */
-class RVS_BTDriver_Vendor_OBD_ELM327_VLINK: RVS_BTDriver_Vendor_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327_VLINK: RVS_BTDriver_Vendor_OBD_ELM327 {
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
     /**
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
-    internal enum RVS_BLE_GATT_UUID: String {
+    fileprivate enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
-        case deviceSpecificID                           =   "ELM327-VLINK"
+        case deviceSpecificID                           =   "VLINK"
         
         /// It advertises this property.
         case advertisedProperty                         =   "18F0"
@@ -97,7 +97,8 @@ class RVS_BTDriver_Vendor_OBD_ELM327_VLINK: RVS_BTDriver_Vendor_OBD {
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
                     let readWriteProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.vlinkReadWriteProperty.rawValue) {
-                    device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
+                    device.deviceType = .OBD(type: device.description)
+                    device.readProperty = readWriteProperty
                     device.writeProperty = readWriteProperty
                     #if DEBUG
                         print("\(String(describing: device.deviceType)) device, has \(readWriteProperty) as both read and write.")
@@ -109,6 +110,14 @@ class RVS_BTDriver_Vendor_OBD_ELM327_VLINK: RVS_BTDriver_Vendor_OBD {
         
         return false
     }
+    
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -117,5 +126,12 @@ class RVS_BTDriver_Vendor_OBD_ELM327_VLINK: RVS_BTDriver_Vendor_OBD {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Vendor_OBD_ELM327_VLINK_Device: RVS_BTDriver_Device_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327_VLINK_Device: RVS_BTDriver_Device_OBD_ELM327 {
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + "-" + RVS_BTDriver_Vendor_OBD_ELM327_VLINK.RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
+    }
 }

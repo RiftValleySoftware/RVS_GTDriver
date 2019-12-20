@@ -29,6 +29,17 @@ import CoreBluetooth
  A base class for various OBD dongle handlers.
  */
 class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
+    /* ###################################################################################################################################### */
+    // MARK: - Enums for Proprietary OBD BLE Service and Characteristic UUIDs -
+    /* ###################################################################################################################################### */
+    /**
+     These are String-based enums that we use to reference various services and characteristics in our driver.
+     */
+    fileprivate enum RVS_BLE_GATT_UUID: String {
+        /// The device ID string.
+        case deviceSpecificID                           =   "OBD"
+    }
+    
     /* ################################################################## */
     /**
      REQUIRED: Factory method for creating an instance of the vendor device.
@@ -39,6 +50,14 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
      internal override func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         precondition(false, "Cannot Call Base Class Method!")
         return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + "-" + RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
     }
 }
 
@@ -57,6 +76,12 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
     
     /* ################################################################## */
     /**
+     This property is one that the driver uses to receive responses from the OBD unit.
+     */
+    public var readProperty: RVS_BTDriver_PropertyProtocol!
+    
+    /* ################################################################## */
+    /**
      This property is one that the driver uses to send commands to the OBD unit.
      */
     public var writeProperty: RVS_BTDriver_PropertyProtocol!
@@ -69,8 +94,9 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
      */
     public func sendCommandWithResponse(_ inCommandString: String) {
         if let data = inCommandString.data(using: .utf8),
+            let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
             let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
-            writeProperty.canNotify = true
+            readProperty.canNotify = true
             #if DEBUG
                 print("Sending data: \(inCommandString) for: \(writeProperty)")
             #endif
@@ -120,5 +146,13 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
         #if DEBUG
             print("OBD Device Callback: peripheral: \(inPeripheral) didUpdateValueFor (Descriptor): \(inDescriptor)")
         #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + "-" + RVS_BTDriver_Vendor_OBD.RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
     }
 }

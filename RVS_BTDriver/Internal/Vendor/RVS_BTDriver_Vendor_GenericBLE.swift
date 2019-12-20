@@ -30,15 +30,16 @@ import CoreBluetooth
  */
 class RVS_BTDriver_Vendor_GenericBLE: NSObject, RVS_BTDriver_VendorProtocol {    
     /* ###################################################################################################################################### */
-    // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
+    // MARK: - Enums for Proprietary BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
     /**
      These are String-based enums that we use to reference various services and characteristics in our driver.
      */
-    internal enum RVS_BLE_GATT_UUID: String {
-        case userDefinedService =   "FFF0"
+    fileprivate enum RVS_BLE_GATT_UUID: String {
+        /// The device ID string.
+        case deviceSpecificID                           =   "BLE"
     }
-    
+
     /* ################################################################## */
     /**
      This is the data we need to match against the advertisement data.
@@ -161,6 +162,14 @@ class RVS_BTDriver_Vendor_GenericBLE: NSObject, RVS_BTDriver_VendorProtocol {
         internal_driver = inDriver
         makeInterface(queue: inDriver.internal_queue)
     }
+    
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + "-" + RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -183,5 +192,13 @@ class RVS_BTDriver_Device_GenericBLE: RVS_BTDriver_Device_BLE {
             _ = newValue
             precondition(false, "Cannot Set This Property!")
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + "-" + RVS_BTDriver_Vendor_GenericBLE.RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
     }
 }
