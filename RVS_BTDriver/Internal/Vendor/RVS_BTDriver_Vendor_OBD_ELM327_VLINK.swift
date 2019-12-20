@@ -26,9 +26,9 @@ import CoreBluetooth
 // MARK: - RVS_BTDriver_Vendor_GoTenna -
 /* ###################################################################################################################################### */
 /**
- A factory class for OBD dongles, based on the MHCP chipset.
+ A factory class for OBD dongles, based on the VLINK version of the ELM327 chipset.
  */
-class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327_VLINK: RVS_BTDriver_Vendor_OBD {
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
@@ -37,7 +37,7 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
      */
     internal enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
-        case deviceSpecificID                           =   "BT26N"
+        case deviceSpecificID                           =   "ELM327-VLINK"
         
         /// It advertises this property.
         case advertisedProperty                         =   "18F0"
@@ -71,7 +71,7 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
        */
      internal override func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
-            let ret = RVS_BTDriver_Vendor_OBD_ELM327_Device(vendor: self)
+            let ret = RVS_BTDriver_Vendor_OBD_ELM327_VLINK_Device(vendor: self)
             
             ret.deviceInfoStruct = deviceRecord
 
@@ -92,7 +92,7 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
     internal override func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
-        if let device = inDevice as? RVS_BTDriver_Vendor_OBD_ELM327_Device {
+        if let device = inDevice as? RVS_BTDriver_Vendor_OBD_ELM327_VLINK_Device {
             let myService = RVS_BLE_GATT_UUID.vlinkUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
@@ -117,5 +117,5 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Vendor_OBD_ELM327_Device: RVS_BTDriver_Device_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327_VLINK_Device: RVS_BTDriver_Device_OBD {
 }

@@ -26,9 +26,9 @@ import CoreBluetooth
 // MARK: - RVS_BTDriver_Vendor_GoTenna -
 /* ###################################################################################################################################### */
 /**
- A factory class for OBD dongles, based on the MHCP chipset.
+ A factory class for OBD dongles, based on the VEEPEAK version of the ELM327 chipset.
  */
-class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK: RVS_BTDriver_Vendor_OBD {
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary goTenna BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
@@ -37,17 +37,21 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
      */
     internal enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
-        case deviceSpecificID                           =   "MHCPOBD"
+        case deviceSpecificID                           =   "ELM327-VEEPEAK"
         
         /// It advertises this service.
         case advertisedService                          =   "FFF0"
-        
+        /// This is a read/notify property for communicating with a MHCP-based chipset
+        case MHCPAdvertisedServiceReadNotifyProperty    =   "FFF1"
+        /// This is a write-only property for communicating with a MHCP-based chipset
+        case MHCPAdvertisedServiceWriteProperty         =   "FFF2"
+
         /// This is the read/write service used by MHCP-based chipsets.
         case MHCPUserDefinedService                     =   "49535343-FE7D-4AE5-8FA9-9FAFD205E455"
         /// This is a read/write property for communicating with a MHCP-based chipset
         case MHCPUserDefinedServiceReadWriteProperty    =   "49535343-6DAA-4D02-ABF6-19569ACA69FE"
         /// This is a write-only property for communicating with a MHCP-based chipset
-        case MHCPUserDefinedServiceWriteProperty        =   "49535343-ACA3-481C-91EC-D85E28A60318"
+        case MHCPUserDefinedServiceWriteNotifyProperty  =   "49535343-ACA3-481C-91EC-D85E28A60318"
     }
     
     /* ################################################################## */
@@ -67,7 +71,7 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
        */
      internal override func makeDevice(_ inDeviceRecord: Any?) -> RVS_BTDriver_Device! {
         if  let deviceRecord = inDeviceRecord as? RVS_BTDriver_Interface_BLE.DeviceInfo {
-            let ret = RVS_BTDriver_Vendor_OBD_MHCP_Device(vendor: self)
+            let ret = RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK_Device(vendor: self)
             
             ret.deviceInfoStruct = deviceRecord
 
@@ -88,14 +92,13 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
      - returns: true, if this vendor "owns" this device (is the vendor that should handle it).
      */
     internal override func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
-        if let device = inDevice as? RVS_BTDriver_Vendor_OBD_MHCP_Device {
-            let myService = RVS_BLE_GATT_UUID.MHCPUserDefinedService.rawValue
+        if let device = inDevice as? RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK_Device {
+            let myService = RVS_BLE_GATT_UUID.advertisedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-                    let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.MHCPUserDefinedServiceReadWriteProperty.rawValue),
-                    nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.MHCPUserDefinedServiceWriteProperty.rawValue) {
+                    let writeNotifyProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.MHCPAdvertisedServiceWriteProperty.rawValue) {
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                    device.writeProperty = readProperty
+                    device.writeProperty = writeNotifyProperty
                     return true
                 }
             }
@@ -111,5 +114,23 @@ class RVS_BTDriver_Vendor_OBD_MHCP: RVS_BTDriver_Vendor_OBD {
 /**
  This is a specialization of the device for OBD Devices.
  */
-class RVS_BTDriver_Vendor_OBD_MHCP_Device: RVS_BTDriver_Device_OBD {
+class RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK_Device: RVS_BTDriver_Device_OBD {
+    /* ################################################################## */
+    /**
+     This menthod will send an AT command to the OBD unit. Responses will arrive in the readProperty.
+     
+     - parameter inCommandString: The Sting for the command.
+     */
+    public override func sendCommandWithResponse(_ inCommandString: String) {
+        if let data = inCommandString.data(using: .utf8),
+            let myService = serviceInstanceForCBUUID(RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.RVS_BLE_GATT_UUID.advertisedService.rawValue),
+            let writeProperty = myService.propertyInstanceForCBUUID(RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.RVS_BLE_GATT_UUID.MHCPAdvertisedServiceWriteProperty.rawValue),
+            let readProperty = myService.propertyInstanceForCBUUID(RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.RVS_BLE_GATT_UUID.MHCPAdvertisedServiceReadNotifyProperty.rawValue) {
+            readProperty.canNotify = true
+            #if DEBUG
+                print("Sending data: \(inCommandString) for: \(writeProperty)")
+            #endif
+            peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
+        }
+    }
 }

@@ -70,10 +70,10 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
     public func sendCommandWithResponse(_ inCommandString: String) {
         if let data = inCommandString.data(using: .utf8),
             let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
+            writeProperty.canNotify = true
             #if DEBUG
                 print("Sending data: \(inCommandString) for: \(writeProperty)")
             #endif
-            writeProperty.canNotify = true
             peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
         }
     }
@@ -108,18 +108,6 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
         } else {    // Otherwise, kick the can down the road.
             super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
         }
-    }
-        
-    /* ################################################################## */
-    /**
-    - parameter inPeripheral: The peripheral that owns this service.
-    - parameter didWriteValueFor: The characteristic that was updated.
-    - parameter error: Any error that may have occurred. It can be nil.
-    */
-    internal func peripheral(_ inPeripheral: CBPeripheral, didWriteValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
-        #if DEBUG
-            print("OBD Device Callback: peripheral: \(inPeripheral) didWriteValueFor: \(inCharacteristic)")
-        #endif
     }
         
     /* ################################################################## */

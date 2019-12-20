@@ -110,8 +110,8 @@ public class RVS_BTDriver: NSObject {
         internal_vendors = [
             RVS_BTDriver_Vendor_GenericBLE(driver: self),
             RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self),
-            RVS_BTDriver_Vendor_OBD_MHCP(driver: self),
-            RVS_BTDriver_Vendor_OBD_ELM327(driver: self),
+            RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK(driver: self),
+            RVS_BTDriver_Vendor_OBD_ELM327_VLINK(driver: self),
             RVS_BTDriver_Vendor_OBD_LELink(driver: self),
             RVS_BTDriver_Vendor_OBD_Kiwi(driver: self)
         ]
