@@ -973,7 +973,6 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <tableViewGridLines key="gridStyleMask" dashed="YES"/>
                                             <color key="gridColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="400" minWidth="40" maxWidth="10000" id="ZgI-PP-uan">
@@ -990,17 +989,17 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="property-display" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="DRJ-8b-Ccl" customClass="RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView" customModule="RVS_BTDriver_OBD_Mac_Test_Harness__Direct_" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="400" height="51"/>
+                                                            <rect key="frame" x="1" y="1" width="400" height="51"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Fp-M9-jHb">
-                                                                    <rect key="frame" x="18" y="34" width="364" height="17"/>
+                                                                    <rect key="frame" x="20" y="34" width="360" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="0Ic-2C-Qht"/>
                                                                     </constraints>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="eCm-t8-API">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" drawsBackground="YES" id="eCm-t8-API">
                                                                         <font key="font" usesAppearanceFont="YES"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" red="1" green="0.97192197729999996" blue="0.33470388369999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ss0-Fb-GFO">

@@ -218,7 +218,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: NSTa
     func tableView(_ inTableView: NSTableView, viewFor inColumn: NSTableColumn?, row inRow: Int) -> NSView? {
         if tableView(inTableView, isGroupRow: inRow) { // If we are a header...
             let ret = NSTextView()
-            ret.string = tableData[inRow].key
+            ret.string = tableData[inRow].key.localizedVariant
             ret.backgroundColor = NSColor.black
             ret.textColor = NSColor.white
             ret.font = NSFont.boldSystemFont(ofSize: 14)
@@ -226,7 +226,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: NSTa
             return ret
         } else {
             if let ret = inTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView.storyboardID), owner: nil) as? RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView {
-                ret.keyLabel.stringValue = tableData[inRow].key
+                ret.keyLabel.stringValue = tableData[inRow].key.localizedVariant
                 ret.valueLabel.stringValue = tableData[inRow].value
                 var stringArray = [String]()
                 if tableData[inRow].read {
