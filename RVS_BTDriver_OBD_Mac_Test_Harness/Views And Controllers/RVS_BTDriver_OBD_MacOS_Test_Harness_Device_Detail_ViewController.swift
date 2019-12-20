@@ -32,10 +32,28 @@ import Cocoa
  This view will be used for each table cell.
  */
 class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView: NSTableCellView {
+    /* ################################################################## */
+    /**
+     The instantiation ID
+    */
     static let storyboardID = "property-display"
     
+    /* ################################################################## */
+    /**
+     The UUID
+    */
     @IBOutlet weak var keyLabel: NSTextField!
+
+    /* ################################################################## */
+    /**
+     The value
+    */
     @IBOutlet weak var valueLabel: NSTextField!
+    
+    /* ################################################################## */
+    /**
+     The properties of the characteristic
+    */
     @IBOutlet weak var propertiesLabel: NSTextField!
 }
 
@@ -74,8 +92,16 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: RVS_BTDr
     */
     @IBOutlet weak var cancelButton: NSButton!
     
+    /* ################################################################## */
+    /**
+     The table that displays the property state.
+    */
     @IBOutlet weak var propertyTable: NSTableView!
     
+    /* ################################################################## */
+    /**
+     This is the data that is to be displayed by the table.
+    */
     var tableData: [RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple] = []
 }
 
