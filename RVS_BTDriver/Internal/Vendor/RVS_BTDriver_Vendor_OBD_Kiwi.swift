@@ -96,13 +96,21 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
      */
     internal override func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
         if let device = inDevice as? RVS_BTDriver_Vendor_OBD_Kiwi_Device {
-            let myService = RVS_BLE_GATT_UUID.kiwiUserDefinedService.rawValue
+            var myService = RVS_BLE_GATT_UUID.kiwiUserDefinedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
                     let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiWriteIndicateNotifyProperty.rawValue) {
-                    device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                    device.readProperty = writeProperty
                     device.writeProperty = writeProperty
+                    break
+                }
+            }
+            
+            myService = RVS_BLE_GATT_UUID.readService.rawValue
+            for service in device.services where .unTested == device.deviceType && myService == service.uuid {
+                if  let service = service as? RVS_BTDriver_Service_BLE,
+                    let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiReadProperty.rawValue) {
+                    device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
+                    device.readProperty = readProperty
                     return true
                 }
             }
@@ -133,5 +141,22 @@ class RVS_BTDriver_Vendor_OBD_Kiwi_Device: RVS_BTDriver_Device_OBD {
      */
     public override var description: String {
         return super.description + "-" + RVS_BTDriver_Vendor_OBD_Kiwi.RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
+    }
+    
+    /* ################################################################## */
+    /**
+     This menthod will send an AT command to the OBD unit. Responses will arrive in the readProperty.
+     
+     - parameter inCommandString: The Sting for the command.
+     */
+    public override func sendCommandWithResponse(_ inCommandString: String) {
+        if let data = inCommandString.data(using: .utf8),
+            let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
+            writeProperty.canNotify = true
+            #if DEBUG
+                print("Sending data: \(inCommandString) for: \(writeProperty)")
+            #endif
+            peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
+        }
     }
 }
