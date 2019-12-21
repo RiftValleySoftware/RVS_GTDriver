@@ -37,7 +37,7 @@ class RVS_BTDriver_Vendor_GenericBLE: NSObject, RVS_BTDriver_VendorProtocol {
      */
     fileprivate enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
-        case deviceSpecificID                           =   "BLE"
+        case deviceSpecificID   =   "BLE"
     }
 
     /* ################################################################## */
@@ -179,21 +179,6 @@ class RVS_BTDriver_Vendor_GenericBLE: NSObject, RVS_BTDriver_VendorProtocol {
  This is a specialization of the device for Generic BLE Devices.
  */
 class RVS_BTDriver_Device_GenericBLE: RVS_BTDriver_Device_BLE {
-    /* ################################################################## */
-    /**
-     This is a String, containing a unique ID for this peripheral.
-     */
-    public override var uuid: String! {
-        get {
-            return peripheral.identifier.uuidString
-        }
-        
-        set {
-            _ = newValue
-            precondition(false, "Cannot Set This Property!")
-        }
-    }
-    
     /* ################################################################## */
     /**
      This returns an easy-to-display description string
