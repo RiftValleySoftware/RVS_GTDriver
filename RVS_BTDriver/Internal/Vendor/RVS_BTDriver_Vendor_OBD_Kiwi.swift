@@ -45,16 +45,17 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD_ELM327 {
         /// This is the "write-only" property in the advertised service.
         case kiwiWriteOnlyProperty                      =   "1CCE1EA8-BD34-4813-A00A-C76E028FADCB"
 
-        /// This is the communication service for the Zentri (Kiwi 60) BLE device
+        /// This is the communication service for the Kiwi Updater BLE device
         case kiwiUserDefinedService                     =   "B2E7D564-C077-404E-9D29-B547F4512DCE"
         /// This is the write, indicate, notify property for the Kiwi 60 BLE device's user-defined service
         case kiwiWriteIndicateNotifyProperty            =   "48CBE15E-642D-4555-AC66-576209C50C1E"
         /// This is the write property for the Kiwi 60 BLE device's user-defined service
         case kiwiWriteProperty                          =   "DB96492D-CF53-4A43-B896-14CBBF3BF4F3"
         
-        /// This is the service that is advertised.
-        case readService                                =   "180F"
-        case kiwiReadProperty                           =   "2A19"
+        /// This a service for battery level.
+        case batteryService                             =   "180F"
+        /// This is a read-only property.
+        case batteryLevelProperty                       =   "2A19"
     }
     
     /* ################################################################## */
@@ -96,21 +97,13 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD_ELM327 {
      */
     internal override func iOwnThisDevice(_ inDevice: RVS_BTDriver_Device_BLE) -> Bool {
         if let device = inDevice as? RVS_BTDriver_Vendor_OBD_Kiwi_Device {
-            var myService = RVS_BLE_GATT_UUID.kiwiUserDefinedService.rawValue
+            let myService = RVS_BLE_GATT_UUID.advertisedService.rawValue
             for service in device.services where .unTested == device.deviceType && myService == service.uuid {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
-                    let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiWriteIndicateNotifyProperty.rawValue) {
+                    let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiWriteOnlyProperty.rawValue) {
                     device.writeProperty = writeProperty
-                    break
-                }
-            }
-            
-            myService = RVS_BLE_GATT_UUID.readService.rawValue
-            for service in device.services where .unTested == device.deviceType && myService == service.uuid {
-                if  let service = service as? RVS_BTDriver_Service_BLE,
-                    let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiReadProperty.rawValue) {
+                    device.readProperty = writeProperty
                     device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
-                    device.readProperty = readProperty
                     return true
                 }
             }
@@ -152,11 +145,34 @@ class RVS_BTDriver_Vendor_OBD_Kiwi_Device: RVS_BTDriver_Device_OBD {
     public override func sendCommandWithResponse(_ inCommandString: String) {
         if let data = inCommandString.data(using: .utf8),
             let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
-            writeProperty.canNotify = true
             #if DEBUG
                 print("Sending data: \(inCommandString) for: \(writeProperty)")
             #endif
             peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
         }
+    }
+            
+        /* ################################################################## */
+        /**
+        - parameter inPeripheral: The peripheral that owns this service.
+        - parameter didUpdateValueFor: The descriptor that was updated.
+        - parameter error: Any error that may have occurred. It can be nil.
+        */
+        internal func peripheral(_ inPeripheral: CBPeripheral, didWriteValueFor inDescriptor: CBDescriptor, error inError: Error?) {
+            #if DEBUG
+                print("OBD Device Callback: peripheral: \(inPeripheral) didWriteValueFor (Descriptor): \(inDescriptor)")
+            #endif
+        }
+        
+    /* ################################################################## */
+    /**
+    - parameter inPeripheral: The peripheral that owns this service.
+    - parameter didUpdateValueFor: The descriptor that was updated.
+    - parameter error: Any error that may have occurred. It can be nil.
+    */
+    internal func peripheral(_ inPeripheral: CBPeripheral, didWriteValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
+        #if DEBUG
+            print("OBD Device Callback: peripheral: \(inPeripheral) didWriteValueFor (Characteristic): \(inCharacteristic)")
+        #endif
     }
 }

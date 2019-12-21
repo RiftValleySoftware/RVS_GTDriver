@@ -73,6 +73,8 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "2A29"                                                      =       "Manufacturer";
 "2A2A"                                                      =       "IEEE Regulatory";
 "2A50"                                                      =       "PNP ID Set";
+"180F"                                                      =       "Battery Level Service";
+"2A19"                                                      =       "Battery Level";
 "E7810A71-73AE-499D-8C15-FAA9AEF0C3F2"                      =       "ELM327 Serial Service";
 "BEF8D6C9-9C21-4C9E-B632-BD58C1009F9F"                      =       "ELM327 Write";
 "SLUG-HEADER-UUID"                                          =       "UUID";

@@ -989,14 +989,14 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="property-display" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="DRJ-8b-Ccl" customClass="RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView" customModule="RVS_BTDriver_OBD_Mac_Test_Harness__Direct_" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="400" height="51"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="400" height="51"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Fp-M9-jHb">
                                                                     <rect key="frame" x="20" y="34" width="360" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="0Ic-2C-Qht"/>
                                                                     </constraints>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" drawsBackground="YES" id="eCm-t8-API">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" alignment="center" title="Label" drawsBackground="YES" id="eCm-t8-API">
                                                                         <font key="font" usesAppearanceFont="YES"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" red="1" green="0.97192197729999996" blue="0.33470388369999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -1007,7 +1007,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="aKG-OS-H6o"/>
                                                                     </constraints>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="EzF-tl-vQa">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" alignment="center" title="Label" id="EzF-tl-vQa">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1018,7 +1018,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="Xa0-kF-sQR"/>
                                                                     </constraints>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="ulc-Rk-5SK">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" alignment="center" title="Label" id="ulc-Rk-5SK">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
