@@ -28,7 +28,7 @@ import CoreBluetooth
 /**
  A factory class for OBD dongles, based on the MHCP chipset.
  */
-class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD_ELM327 {
+class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD {
     /* ###################################################################################################################################### */
     // MARK: - Enums for Proprietary OBD BLE Service and Characteristic UUIDs -
     /* ###################################################################################################################################### */
