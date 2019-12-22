@@ -58,6 +58,12 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
 class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
     /* ################################################################## */
     /**
+     This is the command that we send to retrieve the version.
+     */
+    internal static let initialQueryCommand = "ATZ\r\n"
+    
+    /* ################################################################## */
+    /**
      This returns an easy-to-display description string
      */
     public override var description: String {
@@ -69,6 +75,15 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
      This will hold the ELM327 version string.
      */
     public var elm327Version: String = ""
+    
+    /* ################################################################## */
+    /**
+     This method should be called after all setup has been done, so that subclasses can do what needs doing.
+     We use it to send an initial "ATZ" command.
+     */
+    internal override func initialSetup() {
+        self.sendCommandWithResponse(Self.initialQueryCommand)
+    }
 
     /* ################################################################## */
     /**
@@ -102,11 +117,12 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
                         print("The ELM327 Version is \(substring)")
                     #endif
                     elm327Version = substring
+                } else {
+                    #if DEBUG
+                        print("Send straight to the delegate.")
+                    #endif
+                    delegate?.device(self, returnedThisData: value)
                 }
-                #if DEBUG
-                    print("Send straight to the delegate.")
-                #endif
-                delegate?.device(self, returnedThisData: value)
             }
         } else {    // Otherwise, kick the can down the road.
             super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)

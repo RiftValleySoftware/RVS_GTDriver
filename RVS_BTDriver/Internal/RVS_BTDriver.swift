@@ -206,6 +206,7 @@ extension RVS_BTDriver {
                         #if DEBUG
                             print("The new device: \(String(describing: workingDevice))")
                         #endif
+                        workingDevice.initialSetup()
                     }
                 }
             }
