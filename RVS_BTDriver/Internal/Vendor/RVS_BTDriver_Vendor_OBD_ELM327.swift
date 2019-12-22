@@ -69,14 +69,6 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
      This will hold the ELM327 version string.
      */
     public var elm327Version: String = ""
-    
-    /* ################################################################## */
-    /**
-     This method should be called after all setup has been done, so that subclasses can do what needs doing.
-     We use it to send an initial "ATZ" command.
-     */
-    internal override func initialSetup() {
-    }
 
     /* ################################################################## */
     /**
