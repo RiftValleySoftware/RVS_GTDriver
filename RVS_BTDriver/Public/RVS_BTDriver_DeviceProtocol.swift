@@ -32,7 +32,7 @@ public enum RVS_BTDriver_DeviceType: Equatable {
     /// The goTenna Mesh device
     case goTenna(type: String)
     /// A generic OBD device
-    case OBD(type: String)
+    case OBD(type: RVS_BTDriver_Vendor_OBD_Types)
     /// The device is unknown, and untested.
     case unTested
     /// The device is unknown.

@@ -91,7 +91,7 @@ class RVS_BTDriver_Vendor_OBD_ELM327_ANON_1: RVS_BTDriver_Vendor_OBD_ELM327 {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
                     let readWriteNotifyProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.advertisedServiceReadWriteNotifyProperty.rawValue),
                     nil != service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.advertisedServiceReadWriteProperty.rawValue) {
-                    device.deviceType = .OBD(type: device.description)
+                    device.deviceType = .OBD(type: .elm327(model: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue))
                     device.readProperty = readWriteNotifyProperty
                     device.writeProperty = readWriteNotifyProperty
                     return true

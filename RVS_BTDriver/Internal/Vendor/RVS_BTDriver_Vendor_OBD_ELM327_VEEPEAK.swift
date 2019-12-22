@@ -98,7 +98,7 @@ class RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK: RVS_BTDriver_Vendor_OBD_ELM327 {
                 if  let service = service as? RVS_BTDriver_Service_BLE,
                     let readProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.MHCPAdvertisedServiceReadNotifyProperty.rawValue),
                     let writeNotifyProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.MHCPAdvertisedServiceWriteProperty.rawValue) {
-                    device.deviceType = .OBD(type: device.description)
+                    device.deviceType = .OBD(type: .elm327(model: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue))
                     device.readProperty = readProperty
                     device.writeProperty = writeNotifyProperty
                     return true

@@ -223,6 +223,23 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     public func discoverServices() {
         precondition(false, "Cannot Call the Base Instance!")
     }
+    
+    /* ################################################################## */
+    /**
+     Called to report that our holding pen is empty.
+     We declare this here, so it can be overridden.
+     */
+    internal func reportCompletion() {
+        #if DEBUG
+            print("The device is done with its initialization.")
+        #endif
+        
+        internal_owner.moveDeviceFromHoldingPenToMainList(self)
+        if !internal_owner.internal_stayConnected {
+            disconnect()
+        }
+        notifySubscribersOfStatusUpdate()
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -377,22 +394,6 @@ extension RVS_BTDriver_Device {
         #if DEBUG
             assert(itWasRemoved, "The service was not found!")
         #endif
-    }
-    
-    /* ################################################################## */
-    /**
-     Called to report that our holding pen is empty.
-     */
-    internal func reportCompletion() {
-        #if DEBUG
-            print("The device is done with its initialization.")
-        #endif
-        
-        internal_owner.moveDeviceFromHoldingPenToMainList(self)
-        if !internal_owner.internal_stayConnected {
-            disconnect()
-        }
-        notifySubscribersOfStatusUpdate()
     }
 }
 

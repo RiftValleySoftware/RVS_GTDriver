@@ -21,6 +21,18 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import CoreBluetooth
+/* ###################################################################################################################################### */
+// MARK: - Enums for Proprietary OBD BLE Service and Characteristic UUIDs -
+/* ###################################################################################################################################### */
+/**
+ This is a wrapper for further exploration of the OBD type.
+ */
+public enum RVS_BTDriver_Vendor_OBD_Types: Equatable {
+    /// The adapter uses the [ELM327 chipset](https://en.wikipedia.org/wiki/ELM327)
+    case elm327(model: String)
+    /// The adapter is not a known type.
+    case unknown
+}
 
 /* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_Vendor_OBD -
@@ -98,12 +110,12 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
             readProperty.canNotify = true
             #if DEBUG
-                print("Sending data: \(inCommandString) for: \(writeProperty)")
+                print("Sending data: \(inCommandString) for: \(writeProperty), and expecting a response.")
             #endif
             peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
         }
     }
-
+    
     /* ################################################################## */
     /**
     - parameter inPeripheral: The peripheral that owns this service.

@@ -61,4 +61,15 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
     public override var description: String {
         return super.description + "-" + RVS_BTDriver_Vendor_OBD_ELM327.RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
     }
+    
+    /* ################################################################## */
+    /**
+     This is called when all the services have been loaded, and it's time to validate the version number.
+     We will call the device, asking it for the simple response to "ATZ," and use that to register the ELM version.
+     Once we get that back, we know that we are a valid ELM327 device, and we can ask the superclass to add us to the driver.
+     Otherwise, we mark ourselves as "unknown."
+     */
+    internal override func reportCompletion() {
+        super.reportCompletion()
+    }
 }

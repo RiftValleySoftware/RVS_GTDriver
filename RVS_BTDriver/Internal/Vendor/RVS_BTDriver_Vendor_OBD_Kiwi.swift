@@ -103,7 +103,7 @@ class RVS_BTDriver_Vendor_OBD_Kiwi: RVS_BTDriver_Vendor_OBD_ELM327 {
                     let writeProperty = service.propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.kiwiWriteOnlyProperty.rawValue) {
                     device.writeProperty = writeProperty
                     device.readProperty = writeProperty
-                    device.deviceType = .OBD(type: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue)
+                    device.deviceType = .OBD(type: .unknown)
                     return true
                 }
             }
