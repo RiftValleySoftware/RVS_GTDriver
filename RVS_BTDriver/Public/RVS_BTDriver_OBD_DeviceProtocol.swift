@@ -62,10 +62,16 @@ public protocol RVS_BTDriver_OBD_DeviceProtocol: RVS_BTDriver_DeviceProtocol {
     
     /* ################################################################## */
     /**
+     This property is one that the OBD unit uses to return responses to the driver.
+     */
+    var readProperty: RVS_BTDriver_PropertyProtocol! { get }
+    
+    /* ################################################################## */
+    /**
      This property is one that the driver uses to send commands to the OBD unit.
      */
     var writeProperty: RVS_BTDriver_PropertyProtocol! { get }
-    
+
     /* ################################################################## */
     /**
      This menthod will send an AT command to the OBD unit. Responses will arrive in the readProperty.
@@ -73,4 +79,17 @@ public protocol RVS_BTDriver_OBD_DeviceProtocol: RVS_BTDriver_DeviceProtocol {
      - parameter commandString: The Sting for the command.
      */
     func sendCommandWithResponse(_ commandString: String)
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_ELM327_DeviceProtocol Protocol -
+/* ###################################################################################################################################### */
+/**
+ */
+public protocol RVS_BTDriver_OBD_ELM327_DeviceProtocol: RVS_BTDriver_OBD_DeviceProtocol {
+    /* ################################################################## */
+    /**
+     This returns the ELM327 chipset version for the device.
+     */
+    var elm327Version: String { get }
 }

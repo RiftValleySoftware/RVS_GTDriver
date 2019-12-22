@@ -168,7 +168,10 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
      Sets up the UI elements.
      */
     func setUpUI() {
-        if let modelTitle = deviceInstance?.deviceName {
+        if var modelTitle = deviceInstance?.deviceName {
+            if let device = deviceInstance as? RVS_BTDriver_OBD_ELM327_DeviceProtocol {
+                modelTitle += " (ELM327 v\(device.elm327Version))"
+            }
             title = modelTitle
         }
         

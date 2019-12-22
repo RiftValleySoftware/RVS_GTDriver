@@ -55,7 +55,7 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
 /**
  This is a specialization of the device for OBD ELM327 Devices.
  */
-class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
+class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD, RVS_BTDriver_OBD_ELM327_DeviceProtocol {
     /* ################################################################## */
     /**
      This is the command that we send to retrieve the version.
@@ -83,8 +83,15 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
      */
     internal override func initialSetup() {
         self.sendCommandWithResponse(Self.initialQueryCommand)
+        super.initialSetup()
     }
 
+    /* ################################################################## */
+    /**
+     This is a NOP, because we fetch the ELM version before closing the books.
+     */
+    internal override func reportCompletion() { }
+    
     /* ################################################################## */
     /**
     - parameter inPeripheral: The peripheral that owns this service.
@@ -117,6 +124,7 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
                         print("The ELM327 Version is \(substring)")
                     #endif
                     elm327Version = substring
+                    super.reportCompletion()    // Now, we are ready to end the chapter.
                 } else {
                     #if DEBUG
                         print("Send straight to the delegate.")
