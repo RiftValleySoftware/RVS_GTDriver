@@ -115,7 +115,7 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD, RVS_BTDriver_OBD_
         // Make sure this is for us.
         if  inPeripheral == peripheral {
             if  let value = inCharacteristic.value {
-                if  elm327Version.isEmpty {
+                if  elm327Version.isEmpty { // If we have not set up the version yet, we can't finish the initialization.
                     if let trimmedResponse = String(data: value, encoding: .utf8)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])) {
                         if 9 < trimmedResponse.count {  // We need to have at least nine characters in the response.
                             let indexOfSubstring = trimmedResponse.index(trimmedResponse.startIndex, offsetBy: 8)

@@ -85,6 +85,7 @@ public protocol RVS_BTDriver_OBD_DeviceProtocol: RVS_BTDriver_DeviceProtocol {
 // MARK: - RVS_BTDriver_OBD_ELM327_DeviceProtocol Protocol -
 /* ###################################################################################################################################### */
 /**
+ This is a specialization for the common ELM327 chipset.
  */
 public protocol RVS_BTDriver_OBD_ELM327_DeviceProtocol: RVS_BTDriver_OBD_DeviceProtocol {
     /* ################################################################## */
