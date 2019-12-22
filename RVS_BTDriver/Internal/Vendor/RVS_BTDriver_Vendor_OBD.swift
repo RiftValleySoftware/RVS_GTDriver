@@ -21,6 +21,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 import CoreBluetooth
+
 /* ###################################################################################################################################### */
 // MARK: - Enums for Proprietary OBD BLE Service and Characteristic UUIDs -
 /* ###################################################################################################################################### */

@@ -20,6 +20,8 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
+import CoreBluetooth
+
 /* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_Vendor_OBD_ELM327 -
 /* ###################################################################################################################################### */
@@ -35,7 +37,7 @@ class RVS_BTDriver_Vendor_OBD_ELM327: RVS_BTDriver_Vendor_OBD {
      */
     fileprivate enum RVS_BLE_GATT_UUID: String {
         /// The device ID string.
-        case deviceSpecificID                           =   "ELM327"
+        case deviceSpecificID   =   "ELM327"
     }
     
     /* ################################################################## */
@@ -64,12 +66,58 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
     
     /* ################################################################## */
     /**
-     This is called when all the services have been loaded, and it's time to validate the version number.
-     We will call the device, asking it for the simple response to "ATZ," and use that to register the ELM version.
-     Once we get that back, we know that we are a valid ELM327 device, and we can ask the superclass to add us to the driver.
-     Otherwise, we mark ourselves as "unknown."
+     This will hold the ELM327 version string.
      */
-    internal override func reportCompletion() {
-        super.reportCompletion()
+    public var elm327Version: String = ""
+    
+    /* ################################################################## */
+    /**
+     This method should be called after all setup has been done, so that subclasses can do what needs doing.
+     We use it to send an initial "ATZ" command.
+     */
+    internal override func initialSetup() {
+    }
+
+    /* ################################################################## */
+    /**
+    - parameter inPeripheral: The peripheral that owns this service.
+    - parameter didUpdateValueFor: The characteristic that was updated.
+    - parameter error: Any error that may have occurred. It can be nil.
+    */
+    internal override func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inCharacteristic: CBCharacteristic, error inError: Error?) {
+        #if DEBUG
+            print("OBD ELM327 Device Callback: peripheral: \(inPeripheral) didUpdateValueFor (Characteristic): \(inCharacteristic).")
+            print("OBD ELM327 Device Characteristic Value: \(String(describing: inCharacteristic.value))")
+            if  let value = inCharacteristic.value,
+                let string = String(data: value, encoding: .utf8) {
+                print("OBD ELM327 Device Characteristic Value As String: \(string)")
+            }
+            
+            if let error = inError {
+                print("With Error: \(error)")
+            }
+        #endif
+        
+        // Make sure this is for us.
+        if  inPeripheral == peripheral {
+            if  let value = inCharacteristic.value {
+                if  elm327Version.isEmpty,
+                    let trimmedResponse = String(data: value, encoding: .utf8)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])),
+                    8 < trimmedResponse.count {
+                    let indexOfSubstring = trimmedResponse.index(trimmedResponse.startIndex, offsetBy: 8)
+                    let substring = String(trimmedResponse[indexOfSubstring...])
+                    #if DEBUG
+                        print("The ELM327 Version is \(substring)")
+                    #endif
+                    elm327Version = substring
+                }
+                #if DEBUG
+                    print("Send straight to the delegate.")
+                #endif
+                delegate?.device(self, returnedThisData: value)
+            }
+        } else {    // Otherwise, kick the can down the road.
+            super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
+        }
     }
 }

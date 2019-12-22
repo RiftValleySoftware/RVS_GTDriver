@@ -206,6 +206,7 @@ extension RVS_BTDriver {
                         #if DEBUG
                             print("The new device: \(String(describing: workingDevice))")
                         #endif
+                        workingDevice.initialSetup()
                     }
                 }
             }
@@ -281,6 +282,28 @@ extension RVS_BTDriver {
         #endif
         // Send a simple status update to the delegate.
         delegate?.btDriverStatusUpdate(self)
+    }
+    
+    /* ################################################################## */
+    /**
+     See if the given device is still in the holding pen.
+     
+     - parameter: The device we're looking to see if it is in the Array.
+     - returns: True, if the device is still in the holding pen.
+     */
+    internal func deviceIsInHoldingPen(_ inDevice: RVS_BTDriver_Device) -> Bool {
+        return internal_holding_pen.contains(inDevice)
+    }
+    
+    /* ################################################################## */
+    /**
+     See if the given device is done with initialization, and is in the main list.
+     
+     - parameter: The device we're looking to see if it is in the Array.
+     - returns: True, if the device is in the main list.
+     */
+    internal func deviceIsInMainList(_ inDevice: RVS_BTDriver_Device) -> Bool {
+        return _device_list.contains(inDevice)
     }
 }
 

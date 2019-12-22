@@ -240,6 +240,13 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
         }
         notifySubscribersOfStatusUpdate()
     }
+    
+    /* ################################################################## */
+    /**
+     This method should be called after all setup has been done, so that subclasses can do what needs doing.
+     This base method does nothing.
+     */
+    internal func initialSetup() { }
 }
 
 /* ###################################################################################################################################### */

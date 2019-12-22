@@ -100,9 +100,6 @@ class RVS_BTDriver_Vendor_OBD_ELM327_VLINK: RVS_BTDriver_Vendor_OBD_ELM327 {
                     device.deviceType = .OBD(type: .elm327(model: RVS_BLE_GATT_UUID.deviceSpecificID.rawValue))
                     device.readProperty = readWriteProperty
                     device.writeProperty = readWriteProperty
-                    #if DEBUG
-                        print("\(String(describing: device.deviceType)) device, has \(readWriteProperty) as both read and write.")
-                    #endif
                     return true
                 }
             }
