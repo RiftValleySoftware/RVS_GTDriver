@@ -116,15 +116,24 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD, RVS_BTDriver_OBD_
         if  inPeripheral == peripheral {
             if  let value = inCharacteristic.value {
                 if  elm327Version.isEmpty,
-                    let trimmedResponse = String(data: value, encoding: .utf8)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])),
-                    8 < trimmedResponse.count {
-                    let indexOfSubstring = trimmedResponse.index(trimmedResponse.startIndex, offsetBy: 8)
-                    let substring = String(trimmedResponse[indexOfSubstring...])
-                    #if DEBUG
-                        print("The ELM327 Version is \(substring)")
-                    #endif
-                    elm327Version = substring
-                    super.reportCompletion()    // Now, we are ready to end the chapter.
+                    let trimmedResponse = String(data: value, encoding: .utf8)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])) {
+                    if 9 < trimmedResponse.count {  // We need to have at least nine characters in the response.
+                        let indexOfSubstring = trimmedResponse.index(trimmedResponse.startIndex, offsetBy: 8)
+                        let substring = String(trimmedResponse[indexOfSubstring...])
+                        #if DEBUG
+                            print("The ELM327 Version is \(substring)")
+                        #endif
+                        elm327Version = substring
+                        super.reportCompletion()    // Now, we are ready to end the chapter.
+                    } else {    // Anything else is an error.
+                        deviceType = .unknown
+                        if let index = owner?.internal_holding_pen.firstIndex(of: self) {
+                            #if DEBUG
+                                print("Removing Unqualified Device From Holding Pen, at Index \(index).")
+                            #endif
+                            owner?.internal_holding_pen.remove(at: index)
+                        }
+                    }
                 } else {
                     #if DEBUG
                         print("Send straight to the delegate.")

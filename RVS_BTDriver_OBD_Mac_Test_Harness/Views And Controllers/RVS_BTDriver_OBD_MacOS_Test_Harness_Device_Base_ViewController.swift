@@ -29,6 +29,7 @@ import Cocoa
 // MARK: - The Base (Common) View Controller Class for Each Device
 /* ################################################################################################################################## */
 /**
+ This controls a screen that allows a direct command/response with each device, and also allows a "details" screen to appear, listing the device state.
  */
 class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController {
     /* ############################################################################################################################## */
