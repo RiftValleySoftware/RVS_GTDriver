@@ -2615,7 +2615,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Framework-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
-				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness;
+				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness_Framework_WatchKit_Extension;
 				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/Standalone WatchKit App/Meta/Framework-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-WatchOS-Test-Harness-Framework.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2633,7 +2633,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Framework-AppIcon";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
-				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness;
+				IBSC_MODULE = RVS_BTDriver_WatchOS_Test_Harness_Framework_WatchKit_Extension;
 				INFOPLIST_FILE = "RVS_BTDriver_WatchOS_Test_Harness/Standalone WatchKit App/Meta/Framework-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-BTDriver-WatchOS-Test-Harness-Framework.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";

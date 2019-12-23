@@ -9,7 +9,7 @@
         <!--MAIN SCREEN-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="MAIN" title="MAIN SCREEN" backgroundImage="background-gradient" fullBounds="YES" id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness_Direct_WatchKit_Extension">
+                <controller identifier="MAIN" title="MAIN SCREEN" backgroundImage="background-gradient" fullBounds="YES" id="AgC-eL-Hgc" customClass="RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController" customModule="RVS_BTDriver_WatchOS_Test_Harness_Direct_WatchKit_App" customModuleProvider="target">
                     <items>
                         <switch width="1" alignment="left" title="Scanning" id="baO-lj-kZ8">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

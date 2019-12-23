@@ -20,6 +20,10 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>The App Needs to Access Bluetooth Devices</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>The App Needs to Access Bluetooth Devices</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
