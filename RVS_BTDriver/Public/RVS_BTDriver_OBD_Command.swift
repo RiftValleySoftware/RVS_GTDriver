@@ -32,9 +32,14 @@ import Foundation
 /* ###################################################################################################################################### */
 /**
  This enum is used to define OBD Commands As Strings.
- This applies to the "General" group of commands.
  */
 public enum RVS_BTDriver_OBD_Command_String_General: String {
+    /* ################################################################################################################################## */
+    // MARK: - General -
+    /* ################################################################################################################################## */
+    /**
+    This applies to the "General" group of commands.
+    */
     case getDeviceDescription               =   "@1"
     case getDeviceIdentifier                =   "@2"
     case setDeviceIdentifier                =   "@3 %s"
@@ -54,16 +59,13 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     case storeData                          =   "SD"
     case warmStart                          =   "WS"
     case resetAll                           =   "Z"
-}
 
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_String_OBD Enum -
-/* ###################################################################################################################################### */
-/**
- This enum is used to define OBD Commands As Strings.
- This applies to the "OBD" group of commands.
- */
-public enum RVS_BTDriver_OBD_Command_String_OBD: String {
+    /* ################################################################################################################################## */
+    // MARK: - OBD -
+    /* ################################################################################################################################## */
+    /**
+     This applies to the "OBD" group of commands.
+     */
     case useLongMessages                    =   "AL"
     case useShortMessages                   =   "NL"
     case autoReceive                        =   "AR"
@@ -95,16 +97,13 @@ public enum RVS_BTDriver_OBD_Command_String_OBD: String {
     case setTesterAddress                   =   "TA %s"
     case tryProtocol                        =   "TP %s"
     case tryAutoProtocol                    =   "TP A"
-}
-
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_String_CAN Enum -
-/* ###################################################################################################################################### */
-/**
- This enum is used to define OBD Commands As Strings.
- This applies to the "CAN" group of commands.
- */
-public enum RVS_BTDriver_OBD_Command_String_CAN: String {
+    
+    /* ################################################################################################################################## */
+    // MARK: - CAN -
+    /* ################################################################################################################################## */
+    /**
+     This applies to the "CAN" group of commands.
+     */
     case turnCANAutoFormattingOn            =   "CAF1"
     case turnCANAutoFormattingOff           =   "CAF0"
     case setCANExtendedAddressing           =   "CEA %s"
@@ -123,28 +122,22 @@ public enum RVS_BTDriver_OBD_Command_String_CAN: String {
     case rtrMessage                         =   "RTR"
     case turnVariableDLCOn                  =   "V1"
     case turnVariableDLCOff                 =   "V0"
-}
 
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_String_Volts Enum -
-/* ###################################################################################################################################### */
-/**
- This enum is used to define OBD Commands As Strings.
- This applies to the "Volts" group of commands.
- */
-public enum RVS_BTDriver_OBD_Command_String_Volts: String {
+    /* ################################################################################################################################## */
+    // MARK: - CAN -
+    /* ################################################################################################################################## */
+    /**
+     This applies to the "Volts" group of commands.
+     */
     case setCalibratingVoltage              =   "CV %s"
     case resetCalibratingVoltage            =   "CV 0000"
-}
 
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_String_J1939 Enum -
-/* ###################################################################################################################################### */
-/**
- This enum is used to define OBD Commands As Strings.
- This applies to the "J1939" group of commands.
- */
-public enum RVS_BTDriver_OBD_Command_String_J1939: String {
+    /* ################################################################################################################################## */
+    // MARK: - J1939 -
+    /* ################################################################################################################################## */
+    /**
+     This applies to the "J1939" group of commands.
+     */
     case monitorForDM1Messages              =   "DM1"
     case useElmDataFormat                   =   "JE"
     case useSAEDataFormat                   =   "JS"
@@ -153,31 +146,25 @@ public enum RVS_BTDriver_OBD_Command_String_J1939: String {
     case use1XTimerMultiplier               =   "JTM1"
     case use5XTimerMultiplier               =   "JTM5"
     case setPGNMonitor                      =   "MP %s"
-}
 
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_String_J1850 Enum -
-/* ###################################################################################################################################### */
-/**
- This enum is used to define OBD Commands As Strings.
- This applies to the "J1850" group of commands.
- */
-public enum RVS_BTDriver_OBD_Command_String_J1850: String {
+    /* ################################################################################################################################## */
+    // MARK: - J1850 -
+    /* ################################################################################################################################## */
+    /**
+     This applies to the "J1850" group of commands.
+     */
     case setIFRValueFromHeader              =   "IFR H"
     case setIFRValueFromSource              =   "IFR S"
     case turnIFRsOn                         =   "IFR2"
     case useIFRsAuto                        =   "IFR1"
     case turnIFRsOff                        =   "IFR0"
-}
 
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_String_ISO Enum -
-/* ###################################################################################################################################### */
-/**
- This enum is used to define OBD Commands As Strings.
- This applies to the "ISO" group of commands.
- */
-public enum RVS_BTDriver_OBD_Command_String_ISO: String {
+    /* ################################################################################################################################## */
+    // MARK: - ISO -
+    /* ################################################################################################################################## */
+    /**
+     This applies to the "ISO" group of commands.
+     */
     case isoBaudRate10400                   =   "IB 10"
     case isoBaudRate4800                    =   "IB 48"
     case isoBaudRate9600                    =   "IB 96"
@@ -188,16 +175,13 @@ public enum RVS_BTDriver_OBD_Command_String_ISO: String {
     case performSlowInitiation              =   "SI"
     case setWakeupIntervalMultiplerBy20ms   =   "SW %s"
     case setWakeupMessage                   =   "WM %s"
-}
 
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_String_PPs Enum -
-/* ###################################################################################################################################### */
-/**
- This enum is used to define OBD Commands As Strings.
- This applies to the "PPs" group of commands.
- */
-public enum RVS_BTDriver_OBD_Command_String_PPs: String {
+    /* ################################################################################################################################## */
+    // MARK: - PPs -
+    /* ################################################################################################################################## */
+    /**
+     This applies to the "PPs" group of commands.
+     */
     case turnAllPPsProgParametersOn         =   "PP FF ON"
     case turnAllPPsProgParametersOff        =   "PP FF OFF"
     case setPPsProgParameterOn              =   "PP %s ON"
