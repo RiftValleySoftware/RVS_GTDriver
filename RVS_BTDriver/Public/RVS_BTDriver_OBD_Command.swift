@@ -107,7 +107,7 @@ public enum RVS_BTDriver_OBD_Command_String_OBD: String {
 public enum RVS_BTDriver_OBD_Command_String_CAN: String {
     case turnCANAutoFormattingOn            =   "CAF1"
     case turnCANAutoFormattingOff           =   "CAF0"
-    case setCANExtendedAddressing           =   "CEA "
+    case setCANExtendedAddressing           =   "CEA %s"
     case turnOffCANExtendedAddressing       =   "CEA"
     case setIDFilter                        =   "CF %s"
     case turnCANFlowControlOn               =   "CFC1"
@@ -133,7 +133,7 @@ public enum RVS_BTDriver_OBD_Command_String_CAN: String {
  This applies to the "Volts" group of commands.
  */
 public enum RVS_BTDriver_OBD_Command_String_Volts: String {
-    case setCalibratingVoltage              =   "CV "
+    case setCalibratingVoltage              =   "CV %s"
     case resetCalibratingVoltage            =   "CV 0000"
 }
 
@@ -181,7 +181,7 @@ public enum RVS_BTDriver_OBD_Command_String_ISO: String {
     case isoBaudRate10400                   =   "IB 10"
     case isoBaudRate4800                    =   "IB 48"
     case isoBaudRate9600                    =   "IB 96"
-    case setISOInitAddress                  =   "IIA "
+    case setISOInitAddress                  =   "IIA %s"
     case displayKeywords                    =   "KW"
     case turnKeywordCheckingOn              =   "KW1"
     case turnKeywordCheckingOff             =   "KW0"
