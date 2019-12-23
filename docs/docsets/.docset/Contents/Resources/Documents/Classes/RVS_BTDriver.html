@@ -65,18 +65,16 @@
             <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_DeviceType.html">RVS_BTDriver_DeviceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_String_General.html">RVS_BTDriver_OBD_Command_String_General</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_PropertyProtocol_Type_Enum.html">RVS_BTDriver_PropertyProtocol_Type_Enum</a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
-            <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/RVS_BTDriver_Device.html">RVS_BTDriver_Device</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/RVS_BTDriver_Service.html">RVS_BTDriver_Service</a>
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_Vendor_OBD_Types.html">RVS_BTDriver_Vendor_OBD_Types</a>
               </li>
             </ul>
           </li>
@@ -91,6 +89,15 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_DeviceSubscriberProtocol.html">RVS_BTDriver_DeviceSubscriberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DeviceDelegate.html">RVS_BTDriver_OBD_DeviceDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DeviceProtocol.html">RVS_BTDriver_OBD_DeviceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_ELM327_DeviceProtocol.html">RVS_BTDriver_OBD_ELM327_DeviceProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_PropertyProtocol.html">RVS_BTDriver_PropertyProtocol</a>
@@ -114,19 +121,20 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>RVS_BTDriver</h1>
               <div class="declaration">
                 <div class="language">
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RVS_BTDriver</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a></span></code></pre>
 
                 </div>
               </div>
-            <p>This is the main driver class. It is the <q>manager</q> for all the bluetooth-connected devices, which are accessible as <code><a href="../Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a></code>-conformant instances.</p>
+            <p>This is the main driver class. It is the &ldquo;manager&rdquo; for all the bluetooth-connected devices, which are accessible as <code><a href="../Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a></code>-conformant instances.</p>
 
 <p>The <code>RVS_BTDriver</code> instance can be treated like a <a href="https://developer.apple.com/documentation/swift/sequence">Sequence</a>, with an iterator, higher-order functions and subscripting.</p>
 
-<p>Just remember that it aggregates a protocol, not a class/struct, so you see a <q>mask</q> over a different class that is known internally.</p>
+<p>Just remember that it aggregates a protocol, not a class/struct, so you see a &ldquo;mask&rdquo; over a different class that is known internally.</p>
 
           </div>
         </section>
@@ -137,9 +145,11 @@
               <div class="task-name-container">
                 <a name="/RVS_BTDriver%20Sequence%20Support"></a>
                 <a name="//apple_ref/swift/Section/RVS_BTDriver Sequence Support" class="dashAnchor"></a>
-                <a href="#/RVS_BTDriver%20Sequence%20Support">
-                  <h3 class="section-name">RVS_BTDriver Sequence Support</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/RVS_BTDriver%20Sequence%20Support"></a>
+                  <h3 class="section-name"><p>RVS_BTDriver Sequence Support</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -202,9 +212,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Error%20Enum"></a>
                 <a name="//apple_ref/swift/Section/Public Error Enum" class="dashAnchor"></a>
-                <a href="#/Public%20Error%20Enum">
-                  <h3 class="section-name">Public Error Enum</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Error%20Enum"></a>
+                  <h3 class="section-name"><p>Public Error Enum</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -241,9 +253,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Subscript"></a>
                 <a name="//apple_ref/swift/Section/Public Subscript" class="dashAnchor"></a>
-                <a href="#/Public%20Subscript">
-                  <h3 class="section-name">Public Subscript</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Subscript"></a>
+                  <h3 class="section-name"><p>Public Subscript</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -259,7 +273,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Simple <q>String Key</q> subscript, so we can treat the array as a dictionary.</p>
+                        <p>Simple &ldquo;String Key&rdquo; subscript, so we can treat the array as a dictionary.</p>
 
                       </div>
                       <div class="declaration">
@@ -300,11 +314,13 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Public%20Calculated%20Properties"></a>
-                <a name="//apple_ref/swift/Section/Public Calculated Properties" class="dashAnchor"></a>
-                <a href="#/Public%20Calculated%20Properties">
-                  <h3 class="section-name">Public Calculated Properties</h3>
-                </a>
+                <a name="/Public%20Computed%20Properties"></a>
+                <a name="//apple_ref/swift/Section/Public Computed Properties" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Computed%20Properties"></a>
+                  <h3 class="section-name"><p>Public Computed Properties</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -404,9 +420,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Instance%20Methods"></a>
                 <a name="//apple_ref/swift/Section/Public Instance Methods" class="dashAnchor"></a>
-                <a href="#/Public%20Instance%20Methods">
-                  <h3 class="section-name">Public Instance Methods</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Instance%20Methods"></a>
+                  <h3 class="section-name"><p>Public Instance Methods</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -515,9 +533,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Initializer"></a>
                 <a name="//apple_ref/swift/Section/Public Initializer" class="dashAnchor"></a>
-                <a href="#/Public%20Initializer">
-                  <h3 class="section-name">Public Initializer</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Initializer"></a>
+                  <h3 class="section-name"><p>Public Initializer</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -580,7 +600,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>This is a flag that specifies that the scanner can be continuously running, and <q>re-finding</q> duplicate devices.
+                                  <p>This is a flag that specifies that the scanner can be continuously running, and &ldquo;re-finding&rdquo; duplicate devices.
                                    If true, it could adversely affect battery life. Default is false.</p>
                                 </div>
                               </td>
@@ -611,9 +631,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Description"></a>
                 <a name="//apple_ref/swift/Section/Public Description" class="dashAnchor"></a>
-                <a href="#/Public%20Description">
-                  <h3 class="section-name">Public Description</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Description"></a>
+                  <h3 class="section-name"><p>Public Description</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -653,7 +675,7 @@
     </div>
     <section class="footer">
       <p>© 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a> under <a class="link" href="https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/LICENSE" target="_blank" rel="external">open source license</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

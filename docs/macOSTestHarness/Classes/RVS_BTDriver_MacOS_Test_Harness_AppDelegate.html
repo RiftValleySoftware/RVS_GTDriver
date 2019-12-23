@@ -115,18 +115,19 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>RVS_BTDriver_MacOS_Test_Harness_AppDelegate</h1>
               <div class="declaration">
                 <div class="language">
                   <pre class="highlight swift"><code><span class="kd">@NSApplicationMain</span>
 <span class="kd">class</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_AppDelegate</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NSApplicationDelegate</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_AppDelegate</span><span class="p">:</span> <span class="kt">RVS_BTDriverDelegate</span></code></pre>
 
                 </div>
               </div>
             <p>This class is the main application delegate.</p>
 
-<p>It is also the <q>owner</q> of the driver instance, and acts as the delegate for the driver.</p>
+<p>It is also the &ldquo;owner&rdquo; of the driver instance, and acts as the delegate for the driver.</p>
 
           </div>
         </section>
@@ -166,11 +167,13 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Internal%20Class%20Calculated%20Properties"></a>
-                <a name="//apple_ref/swift/Section/Internal Class Calculated Properties" class="dashAnchor"></a>
-                <a href="#/Internal%20Class%20Calculated%20Properties">
-                  <h3 class="section-name">Internal Class Calculated Properties</h3>
-                </a>
+                <a name="/Internal%20Class%20Computed%20Properties"></a>
+                <a name="//apple_ref/swift/Section/Internal Class Computed Properties" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Internal%20Class%20Computed%20Properties"></a>
+                  <h3 class="section-name"><p>Internal Class Computed Properties</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -211,9 +214,11 @@
               <div class="task-name-container">
                 <a name="/Internal%20Instance%20Properties"></a>
                 <a name="//apple_ref/swift/Section/Internal Instance Properties" class="dashAnchor"></a>
-                <a href="#/Internal%20Instance%20Properties">
-                  <h3 class="section-name">Internal Instance Properties</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Internal%20Instance%20Properties"></a>
+                  <h3 class="section-name"><p>Internal Instance Properties</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -276,11 +281,13 @@ We initialize the singleton, here.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Internal%20Instance%20Calculated%20Properties"></a>
-                <a name="//apple_ref/swift/Section/Internal Instance Calculated Properties" class="dashAnchor"></a>
-                <a href="#/Internal%20Instance%20Calculated%20Properties">
-                  <h3 class="section-name">Internal Instance Calculated Properties</h3>
-                </a>
+                <a name="/Internal%20Instance%20Computed%20Properties"></a>
+                <a name="//apple_ref/swift/Section/Internal Instance Computed Properties" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Internal%20Instance%20Computed%20Properties"></a>
+                  <h3 class="section-name"><p>Internal Instance Computed Properties</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -347,9 +354,11 @@ Otherwise, it is ignored.</p>
               <div class="task-name-container">
                 <a name="/Instance%20Methods"></a>
                 <a name="//apple_ref/swift/Section/Instance Methods" class="dashAnchor"></a>
-                <a href="#/Instance%20Methods">
-                  <h3 class="section-name">Instance Methods</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Instance%20Methods"></a>
+                  <h3 class="section-name"><p>Instance Methods</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -445,9 +454,11 @@ Otherwise, it is ignored.</p>
               <div class="task-name-container">
                 <a name="/RVS_BTDriverDelegate%20Methods"></a>
                 <a name="//apple_ref/swift/Section/RVS_BTDriverDelegate Methods" class="dashAnchor"></a>
-                <a href="#/RVS_BTDriverDelegate%20Methods">
-                  <h3 class="section-name">RVS_BTDriverDelegate Methods</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/RVS_BTDriverDelegate%20Methods"></a>
+                  <h3 class="section-name"><p>RVS_BTDriverDelegate Methods</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -581,7 +592,7 @@ Otherwise, it is ignored.</p>
                       <div class="abstract">
                         <p>Called to indicate that the driver&rsquo;s status should be checked.</p>
 
-<p>It may be called frequently, and there may not be any changes. This is mereley a <q>make you aware of the POSSIBILITY of a change</q> call.</p>
+<p>It may be called frequently, and there may not be any changes. This is mereley a &ldquo;make you aware of the POSSIBILITY of a change&rdquo; call.</p>
 
 <p>This is optional, and is NOT guaranteed to be called in the main thread.</p>
 
@@ -685,7 +696,7 @@ Otherwise, it is ignored.</p>
     </div>
     <section class="footer">
       <p>© 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a> under <a class="link" href="https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/LICENSE" target="_blank" rel="external">open source license</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

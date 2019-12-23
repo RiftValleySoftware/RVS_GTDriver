@@ -64,18 +64,16 @@
             <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RVS_BTDriver_DeviceType.html">RVS_BTDriver_DeviceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RVS_BTDriver_OBD_Command_String_General.html">RVS_BTDriver_OBD_Command_String_General</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/RVS_BTDriver_PropertyProtocol_Type_Enum.html">RVS_BTDriver_PropertyProtocol_Type_Enum</a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
-            <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/RVS_BTDriver_Device.html">RVS_BTDriver_Device</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/RVS_BTDriver_Service.html">RVS_BTDriver_Service</a>
+                <a class="nav-group-task-link" href="Enums/RVS_BTDriver_Vendor_OBD_Types.html">RVS_BTDriver_Vendor_OBD_Types</a>
               </li>
             </ul>
           </li>
@@ -90,6 +88,15 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_DeviceSubscriberProtocol.html">RVS_BTDriver_DeviceSubscriberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_OBD_DeviceDelegate.html">RVS_BTDriver_OBD_DeviceDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_OBD_DeviceProtocol.html">RVS_BTDriver_OBD_DeviceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_OBD_ELM327_DeviceProtocol.html">RVS_BTDriver_OBD_ELM327_DeviceProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_PropertyProtocol.html">RVS_BTDriver_PropertyProtocol</a>
@@ -113,7 +120,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             
             <p><img src="./icon.png" alt="Icon"></p>
 <h1 id='rvs_btdriver-public-api-documentation' class='heading'>RVS_BTDriver PUBLIC API DOCUMENTATION</h1>
@@ -142,12 +149,12 @@
 <p><img src="./img/SystemBlock.png" alt="Overall Image">
 This is where the driver project fits in our system.</p>
 
-<p>The driver is a low-level transport abstraction layer. It is Bluetooth-specific, but is designed to abstract between <a href="https://en.wikipedia.org/wiki/Bluetooth_Low_Energy">Bluetooth LE</a> and Bluetooth BR/EDR (<q>Classic</q>); presenting a common object model of data and interactions with Bluetooth devices.</p>
+<p>The driver is a low-level transport abstraction layer. It is Bluetooth-specific, but is designed to abstract between <a href="https://en.wikipedia.org/wiki/Bluetooth_Low_Energy">Bluetooth LE</a> and Bluetooth BR/EDR (&ldquo;Classic&rdquo;); presenting a common object model of data and interactions with Bluetooth devices.</p>
 <h2 id='simple-api' class='heading'>SIMPLE API</h2>
 
 <p>The job of the driver is to <em>abstract</em> the general Bluetooth structure, and present a set of <a href="https://docs.swift.org/swift-book/LanguageGuide/Protocols.html">Swift Protocols</a>, in a hierarchical arrangement.</p>
 
-<p>The user of the API will instantiate an instance of <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code>, which will, in turn, present collections of <q>devices</q> (<code><a href="Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a></code>), which will contain <q>Services</q> (<code><a href="Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a></code>), which will aggregate <q>properties</q> (<code><a href="Protocols/RVS_BTDriver_PropertyProtocol.html">RVS_BTDriver_PropertyProtocol</a></code>).</p>
+<p>The user of the API will instantiate an instance of <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code>, which will, in turn, present collections of &ldquo;devices&rdquo; (<code><a href="Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a></code>), which will contain &ldquo;Services&rdquo; (<code><a href="Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a></code>), which will aggregate &ldquo;properties&rdquo; (<code><a href="Protocols/RVS_BTDriver_PropertyProtocol.html">RVS_BTDriver_PropertyProtocol</a></code>).</p>
 <h2 id='example-mental-model-of-the-driver' class='heading'>EXAMPLE MENTAL MODEL OF THE DRIVER</h2>
 
 <p><img src="./img/MentalModel.png" alt="Block Diagram">
@@ -167,7 +174,7 @@ The device can be subscripted, but not iterated.</p>
 <p>Each Service instance will have an Array of <code><a href="Protocols/RVS_BTDriver_PropertyProtocol.html">RVS_BTDriver_PropertyProtocol</a></code> protocol-confomant instances, representing the states and control points for services.
 The service can be subscripted, but not iterated.</p>
 
-<p>Once you instantiate the <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code> instance, it will discover and list the devices, which will, in turn, discover and list services, which will discover and list properties (the equivalent of Bluetooth <q>characteristics</q>).</p>
+<p>Once you instantiate the <code><a href="Classes/RVS_BTDriver.html">RVS_BTDriver</a></code> instance, it will discover and list the devices, which will, in turn, discover and list services, which will discover and list properties (the equivalent of Bluetooth &ldquo;characteristics&rdquo;).</p>
 
 <p>Once a device has been added to the driver Array, it can be considered to have completed the discovery process entirely, and is ready for use.</p>
 <h2 id='requirements' class='heading'>REQUIREMENTS</h2>
@@ -193,7 +200,7 @@ The service can be subscripted, but not iterated.</p>
 <ul>
 <li><code>delegate</code>: The delegate to be used with this instance. It cannot be nil, and is a weak reference.</li>
 <li><code>queue</code>: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).</li>
-<li><code>allowDuplicatesInBLEScan</code>: This is a flag that specifies that the scanner can be continuously running, and <q>re-finding</q> duplicate devices.  If true, it could adversely affect battery life. Default is false.</li>
+<li><code>allowDuplicatesInBLEScan</code>: This is a flag that specifies that the scanner can be continuously running, and &ldquo;re-finding&rdquo; duplicate devices.  If true, it could adversely affect battery life. Default is false.</li>
 <li><code>stayConnected</code>:  This is set to true, if you want all your device connections to be persistent. That is, once connected, they must be explicitly disconencted by the user. Otherwise, each device will be connected only while interacting. This is optional. Default is false.</li>
 </ul>
 <h2 id='delegation' class='heading'>DELEGATION</h2>
@@ -219,12 +226,12 @@ The service can be subscripted, but not iterated.</p>
 <li><code>connectionAttemptFailed(error: Error?)</code> This is returned if we cannot connect to the device. The associated value is any error that occurred.</li>
 <li><code>connectionAttemptFailedNoDevice</code> This is returned if we connected, but no device was available. This should never happen.</li>
 <li><code>disconnectionAttemptFailed(error: Error?)</code> This is returned if we cannot disconnect from the device. The associated value is any error that occurred.</li>
-<li><code>unknownDisconnectionError</code> This is a <q>catchall</q> error for a disconnection issue.</li>
-<li><code>unknownPeripheralDiscoveryError(error: Error?)</code> This is a <q>catchall</q> error for peripheral discovery. The associated value is any error that occurred.</li>
+<li><code>unknownDisconnectionError</code> This is a &ldquo;catchall&rdquo; error for a disconnection issue.</li>
+<li><code>unknownPeripheralDiscoveryError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error for peripheral discovery. The associated value is any error that occurred.</li>
 <li><code>characteristicValueMissing</code> This means that we did not get a characteristic value.</li>
-<li><code>unknownCharacteristicsDiscoveryError(error: Error?)</code> This is a <q>catchall</q> error for characteristics discovery. The associated value is any error that occurred.</li>
-<li><code>unknownCharacteristicsReadValueError(error: Error?)</code> This is a <q>catchall</q> error for characteristics value read. The associated value is any error that occurred.</li>
-<li><code>unknownError(error: Error?)</code> This is a <q>catchall</q> error. The associated value is any error that occurred.</li>
+<li><code>unknownCharacteristicsDiscoveryError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error for characteristics discovery. The associated value is any error that occurred.</li>
+<li><code>unknownCharacteristicsReadValueError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error for characteristics value read. The associated value is any error that occurred.</li>
+<li><code>unknownError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error. The associated value is any error that occurred.</li>
 </ul></li>
 </ul>
 
@@ -259,7 +266,7 @@ The service can be subscripted, but not iterated.</p>
 
 <p>This is called if the scanning state of the driver changes.</p>
 
-<p>It may be called frequently, and there may not be any changes. This is mereley a <q>make you aware of the POSSIBILITY of a change</q> call.</p>
+<p>It may be called frequently, and there may not be any changes. This is mereley a &ldquo;make you aware of the POSSIBILITY of a change&rdquo; call.</p>
 <pre class="highlight plaintext"><code>func btDriverScanningChanged(_ driver: RVS_BTDriver, isScanning: Bool)
 </code></pre>
 
@@ -307,12 +314,12 @@ You subscribe to devices, using the <code><a href="Protocols/RVS_BTDriver_Device
 <li><code>connectionAttemptFailed(error: Error?)</code> This is returned if we cannot connect to the device. The associated value is any error that occurred.</li>
 <li><code>connectionAttemptFailedNoDevice</code> This is returned if we connected, but no device was available. This should never happen.</li>
 <li><code>disconnectionAttemptFailed(error: Error?)</code> This is returned if we cannot disconnect from the device. The associated value is any error that occurred.</li>
-<li><code>unknownDisconnectionError</code> This is a <q>catchall</q> error for a disconnection issue.</li>
-<li><code>unknownPeripheralDiscoveryError(error: Error?)</code> This is a <q>catchall</q> error for peripheral discovery. The associated value is any error that occurred.</li>
+<li><code>unknownDisconnectionError</code> This is a &ldquo;catchall&rdquo; error for a disconnection issue.</li>
+<li><code>unknownPeripheralDiscoveryError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error for peripheral discovery. The associated value is any error that occurred.</li>
 <li><code>characteristicValueMissing</code> This means that we did not get a characteristic value.</li>
-<li><code>unknownCharacteristicsDiscoveryError(error: Error?)</code> This is a <q>catchall</q> error for characteristics discovery. The associated value is any error that occurred.</li>
-<li><code>unknownCharacteristicsReadValueError(error: Error?)</code> This is a <q>catchall</q> error for characteristics value read. The associated value is any error that occurred.</li>
-<li><code>unknownError(error: Error?)</code> This is a <q>catchall</q> error. The associated value is any error that occurred.</li>
+<li><code>unknownCharacteristicsDiscoveryError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error for characteristics discovery. The associated value is any error that occurred.</li>
+<li><code>unknownCharacteristicsReadValueError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error for characteristics value read. The associated value is any error that occurred.</li>
+<li><code>unknownError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error. The associated value is any error that occurred.</li>
 </ul></li>
 </ul>
 
@@ -331,7 +338,7 @@ You subscribe to devices, using the <code><a href="Protocols/RVS_BTDriver_Device
 
 <p>This is called to indicate that the device&rsquo;s status should be checked.</p>
 
-<p>It may be called frequently, and there may not be any changes. This is mereley a <q>make you aware of the POSSIBILITY of a change</q> call.</p>
+<p>It may be called frequently, and there may not be any changes. This is mereley a &ldquo;make you aware of the POSSIBILITY of a change&rdquo; call.</p>
 <pre class="highlight plaintext"><code>func deviceStatusUpdate(_ device: RVS_BTDriver_DeviceProtocol)
 </code></pre>
 
@@ -371,12 +378,12 @@ You subscribe to services, using the <code><a href="Protocols/RVS_BTDriver_Servi
 <li><code>connectionAttemptFailed(error: Error?)</code> This is returned if we cannot connect to the device. The associated value is any error that occurred.</li>
 <li><code>connectionAttemptFailedNoDevice</code> This is returned if we connected, but no device was available. This should never happen.</li>
 <li><code>disconnectionAttemptFailed(error: Error?)</code> This is returned if we cannot disconnect from the device. The associated value is any error that occurred.</li>
-<li><code>unknownDisconnectionError</code> This is a <q>catchall</q> error for a disconnection issue.</li>
-<li><code>unknownPeripheralDiscoveryError(error: Error?)</code> This is a <q>catchall</q> error for peripheral discovery. The associated value is any error that occurred.</li>
+<li><code>unknownDisconnectionError</code> This is a &ldquo;catchall&rdquo; error for a disconnection issue.</li>
+<li><code>unknownPeripheralDiscoveryError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error for peripheral discovery. The associated value is any error that occurred.</li>
 <li><code>characteristicValueMissing</code> This means that we did not get a characteristic value.</li>
-<li><code>unknownCharacteristicsDiscoveryError(error: Error?)</code> This is a <q>catchall</q> error for characteristics discovery. The associated value is any error that occurred.</li>
-<li><code>unknownCharacteristicsReadValueError(error: Error?)</code> This is a <q>catchall</q> error for characteristics value read. The associated value is any error that occurred.</li>
-<li><code>unknownError(error: Error?)</code> This is a <q>catchall</q> error. The associated value is any error that occurred.</li>
+<li><code>unknownCharacteristicsDiscoveryError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error for characteristics discovery. The associated value is any error that occurred.</li>
+<li><code>unknownCharacteristicsReadValueError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error for characteristics value read. The associated value is any error that occurred.</li>
+<li><code>unknownError(error: Error?)</code> This is a &ldquo;catchall&rdquo; error. The associated value is any error that occurred.</li>
 </ul></li>
 </ul>
 
@@ -393,7 +400,7 @@ You subscribe to services, using the <code><a href="Protocols/RVS_BTDriver_Servi
 
 <p>This is called to indicate that the services&rsquo;s status should be checked.</p>
 
-<p>It may be called frequently, and there may not be any changes. This is mereley a <q>make you aware of the POSSIBILITY of a change</q> call.</p>
+<p>It may be called frequently, and there may not be any changes. This is mereley a &ldquo;make you aware of the POSSIBILITY of a change&rdquo; call.</p>
 <pre class="highlight plaintext"><code>func serviceStatusUpdate(_ service: RVS_BTDriver_ServiceProtocol)
 </code></pre>
 
@@ -403,7 +410,7 @@ You subscribe to services, using the <code><a href="Protocols/RVS_BTDriver_Servi
 <li><code>service</code>: The <code><a href="Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a></code> instance that called this.</li>
 </ul>
 
-<p>This is called to indicate that the state of a property <q>owned</q> by the service has changed state.</p>
+<p>This is called to indicate that the state of a property &ldquo;owned&rdquo; by the service has changed state.</p>
 <pre class="highlight plaintext"><code>func propertyStatusUpdate(_ service: RVS_BTDriver_ServiceProtocol, property: RVS_BTDriver_PropertyProtocol)
 </code></pre>
 
@@ -420,13 +427,13 @@ You subscribe to services, using the <code><a href="Protocols/RVS_BTDriver_Servi
 <p><a href="https://opensource.org/licenses/MIT">MIT License</a></p>
 
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
-files (the <q>Software</q>), to deal in the Software without restriction, including without limitation the rights to use, copy,
+files (the &ldquo;Software&rdquo;), to deal in the Software without restriction, including without limitation the rights to use, copy,
 modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
 Software is furnished to do so, subject to the following conditions:</p>
 
 <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 
-<p>THE SOFTWARE IS PROVIDED <q>AS IS</q>, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+<p>THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
 CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
@@ -439,7 +446,7 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
     </div>
     <section class="footer">
       <p>© 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a> under <a class="link" href="https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/LICENSE" target="_blank" rel="external">open source license</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

@@ -115,7 +115,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>Classes</h1>
             <p>The following classes are available globally.</p>
 
@@ -128,9 +128,11 @@
               <div class="task-name-container">
                 <a name="/Main%20Preferences%20Base%20Class"></a>
                 <a name="//apple_ref/swift/Section/Main Preferences Base Class" class="dashAnchor"></a>
-                <a href="#/Main%20Preferences%20Base%20Class">
-                  <h3 class="section-name">Main Preferences Base Class</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Main%20Preferences%20Base%20Class"></a>
+                  <h3 class="section-name"><p>Main Preferences Base Class</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -146,12 +148,12 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This class is designed to act as an <q>abstract</q> base class, providing a simple <code>Dictionary</code> datastore that is stored in the <a href="https://developer.apple.com/documentation/foundation/userdefaults"><code>UserDefaults</code></a> in the Application Bundle. It is designed to be reliable, and extremely simple to use.
+                        <p>This class is designed to act as an &ldquo;abstract&rdquo; base class, providing a simple <code>Dictionary</code> datastore that is stored in the <a href="https://developer.apple.com/documentation/foundation/userdefaults"><code>UserDefaults</code></a> in the Application Bundle. It is designed to be reliable, and extremely simple to use.
 The stored <code>Dictionary</code> would be a String-keyed Dictionary of <code>Any</code> (flexible types). It s up to subclasses to specialize the typeless data.
 THIS IS NOT EFFICIENT OR ROBUST!
-It is meant as a simple <q>bucket</q> for things like application preferences. It is not an industrial data storage solution. You have been warned.
+It is meant as a simple &ldquo;bucket&rdquo; for things like application preferences. It is not an industrial data storage solution. You have been warned.
 Subclasses could declare their accessors as <a href="https://developer.apple.com/documentation/swift/cocoa_design_patterns/using_key-value_observing_in_swift"><code>KVO</code></a>-style, thus, providing a direct way to influence persistent state.
-You can also directly observe the .values property. It will change when ANY pref is changed (so might not be suitable for <q>pick and choose</q> observation).</p>
+You can also directly observe the .values property. It will change when ANY pref is changed (so might not be suitable for &ldquo;pick and choose&rdquo; observation).</p>
 
                         <a href="Classes/RVS_PersistentPrefs.html" class="slightly-smaller">See more</a>
                       </div>
@@ -172,9 +174,11 @@ You can also directly observe the .values property. It will change when ANY pref
               <div class="task-name-container">
                 <a name="/The%20Main%20Application%20Delegate%20Class"></a>
                 <a name="//apple_ref/swift/Section/The Main Application Delegate Class" class="dashAnchor"></a>
-                <a href="#/The%20Main%20Application%20Delegate%20Class">
-                  <h3 class="section-name">The Main Application Delegate Class</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/The%20Main%20Application%20Delegate%20Class"></a>
+                  <h3 class="section-name"><p>The Main Application Delegate Class</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -192,7 +196,7 @@ You can also directly observe the .values property. It will change when ANY pref
                       <div class="abstract">
                         <p>This class is the main application delegate.</p>
 
-<p>It is also the <q>owner</q> of the driver instance, and acts as the delegate for the driver.</p>
+<p>It is also the &ldquo;owner&rdquo; of the driver instance, and acts as the delegate for the driver.</p>
 
                         <a href="Classes/RVS_BTDriver_MacOS_Test_Harness_AppDelegate.html" class="slightly-smaller">See more</a>
                       </div>
@@ -202,6 +206,7 @@ You can also directly observe the .values property. It will change when ANY pref
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@NSApplicationMain</span>
 <span class="kd">class</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_AppDelegate</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NSApplicationDelegate</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_AppDelegate</span><span class="p">:</span> <span class="kt">RVS_BTDriverDelegate</span></code></pre>
 
                         </div>
                       </div>
@@ -214,9 +219,11 @@ You can also directly observe the .values property. It will change when ANY pref
               <div class="task-name-container">
                 <a name="/The%20Settings%20Screen%20View%20Controller%20Class"></a>
                 <a name="//apple_ref/swift/Section/The Settings Screen View Controller Class" class="dashAnchor"></a>
-                <a href="#/The%20Settings%20Screen%20View%20Controller%20Class">
-                  <h3 class="section-name">The Settings Screen View Controller Class</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/The%20Settings%20Screen%20View%20Controller%20Class"></a>
+                  <h3 class="section-name"><p>The Settings Screen View Controller Class</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -253,9 +260,11 @@ You can also directly observe the .values property. It will change when ANY pref
               <div class="task-name-container">
                 <a name="/The%20Base%20(Common)%20View%20Controller%20Class"></a>
                 <a name="//apple_ref/swift/Section/The Base (Common) View Controller Class" class="dashAnchor"></a>
-                <a href="#/The%20Base%20(Common)%20View%20Controller%20Class">
-                  <h3 class="section-name">The Base (Common) View Controller Class</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/The%20Base%20(Common)%20View%20Controller%20Class"></a>
+                  <h3 class="section-name"><p>The Base (Common) View Controller Class</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -292,9 +301,11 @@ You can also directly observe the .values property. It will change when ANY pref
               <div class="task-name-container">
                 <a name="/Basic%20Window%20Controller%20Class"></a>
                 <a name="//apple_ref/swift/Section/Basic Window Controller Class" class="dashAnchor"></a>
-                <a href="#/Basic%20Window%20Controller%20Class">
-                  <h3 class="section-name">Basic Window Controller Class</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Basic%20Window%20Controller%20Class"></a>
+                  <h3 class="section-name"><p>Basic Window Controller Class</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -331,9 +342,11 @@ You can also directly observe the .values property. It will change when ANY pref
               <div class="task-name-container">
                 <a name="/The%20Device%20Screen%20View%20Controller%20Class"></a>
                 <a name="//apple_ref/swift/Section/The Device Screen View Controller Class" class="dashAnchor"></a>
-                <a href="#/The%20Device%20Screen%20View%20Controller%20Class">
-                  <h3 class="section-name">The Device Screen View Controller Class</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/The%20Device%20Screen%20View%20Controller%20Class"></a>
+                  <h3 class="section-name"><p>The Device Screen View Controller Class</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -358,6 +371,8 @@ You can also directly observe the .values property. It will change when ANY pref
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_Device_ViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_MacOS_Test_Harness_Base_ViewController.html">RVS_BTDriver_MacOS_Test_Harness_Base_ViewController</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_Device_ViewController</span><span class="p">:</span> <span class="kt">NSTableViewDataSource</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_Device_ViewController</span><span class="p">:</span> <span class="kt">RVS_BTDriver_DeviceSubscriberProtocol</span></code></pre>
 
                         </div>
                       </div>
@@ -370,9 +385,11 @@ You can also directly observe the .values property. It will change when ANY pref
               <div class="task-name-container">
                 <a name="/The%20Main%20Screen%20View%20Controller%20Class"></a>
                 <a name="//apple_ref/swift/Section/The Main Screen View Controller Class" class="dashAnchor"></a>
-                <a href="#/The%20Main%20Screen%20View%20Controller%20Class">
-                  <h3 class="section-name">The Main Screen View Controller Class</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/The%20Main%20Screen%20View%20Controller%20Class"></a>
+                  <h3 class="section-name"><p>The Main Screen View Controller Class</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -397,6 +414,7 @@ You can also directly observe the .values property. It will change when ANY pref
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_Main_ViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_MacOS_Test_Harness_Base_ViewController.html">RVS_BTDriver_MacOS_Test_Harness_Base_ViewController</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_Main_ViewController</span><span class="p">:</span> <span class="kt">NSTableViewDelegate</span><span class="p">,</span> <span class="kt">NSTableViewDataSource</span></code></pre>
 
                         </div>
                       </div>
@@ -409,9 +427,11 @@ You can also directly observe the .values property. It will change when ANY pref
               <div class="task-name-container">
                 <a name="/The%20Device%20Screen%20View%20Controller%20Class2"></a>
                 <a name="//apple_ref/swift/Section/The Device Screen View Controller Class" class="dashAnchor"></a>
-                <a href="#/The%20Device%20Screen%20View%20Controller%20Class2">
-                  <h3 class="section-name">The Device Screen View Controller Class</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/The%20Device%20Screen%20View%20Controller%20Class2"></a>
+                  <h3 class="section-name"><p>The Device Screen View Controller Class</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -436,6 +456,10 @@ You can also directly observe the .values property. It will change when ANY pref
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_MacOS_Test_Harness_Base_ViewController.html">RVS_BTDriver_MacOS_Test_Harness_Base_ViewController</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController</span><span class="p">:</span> <span class="kt">NSTableViewDataSource</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController</span><span class="p">:</span> <span class="kt">NSTableViewDelegate</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController</span><span class="p">:</span> <span class="kt">RVS_BTDriver_DeviceSubscriberProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController</span><span class="p">:</span> <span class="kt">RVS_BTDriver_ServiceSubscriberProtocol</span></code></pre>
 
                         </div>
                       </div>
@@ -448,9 +472,11 @@ You can also directly observe the .values property. It will change when ANY pref
               <div class="task-name-container">
                 <a name="/The%20Settings%20Screen%20View%20Controller%20Class2"></a>
                 <a name="//apple_ref/swift/Section/The Settings Screen View Controller Class" class="dashAnchor"></a>
-                <a href="#/The%20Settings%20Screen%20View%20Controller%20Class2">
-                  <h3 class="section-name">The Settings Screen View Controller Class</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/The%20Settings%20Screen%20View%20Controller%20Class2"></a>
+                  <h3 class="section-name"><p>The Settings Screen View Controller Class</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -487,9 +513,11 @@ You can also directly observe the .values property. It will change when ANY pref
               <div class="task-name-container">
                 <a name="/The%20Preferences%20Specialization%20Class"></a>
                 <a name="//apple_ref/swift/Section/The Preferences Specialization Class" class="dashAnchor"></a>
-                <a href="#/The%20Preferences%20Specialization%20Class">
-                  <h3 class="section-name">The Preferences Specialization Class</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/The%20Preferences%20Specialization%20Class"></a>
+                  <h3 class="section-name"><p>The Preferences Specialization Class</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -529,7 +557,7 @@ You can also directly observe the .values property. It will change when ANY pref
     </div>
     <section class="footer">
       <p>© 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a> under <a class="link" href="https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/LICENSE" target="_blank" rel="external">open source license</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
