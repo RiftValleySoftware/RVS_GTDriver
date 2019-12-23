@@ -22,6 +22,11 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 
 import Foundation
 
+/**
+ These are ATXXX commands for the EML327 chipset.
+ These should all be preceded by "AT".
+ */
+
 /* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Command_String_General Enum -
 /* ###################################################################################################################################### */
@@ -32,9 +37,9 @@ import Foundation
 public enum RVS_BTDriver_OBD_Command_String_General: String {
     case getDeviceDescription               =   "@1"
     case getDeviceIdentifier                =   "@2"
-    case setDeviceIdentifier                =   "@3 "
-    case setBaudRateDivisor                 =   "BRD "
-    case setBaudRateHandshakeTimeout        =   "BRT "
+    case setDeviceIdentifier                =   "@3 %s"
+    case setBaudRateDivisor                 =   "BRD %s"
+    case setBaudRateHandshakeTimeout        =   "BRT %s"
     case restoreToDefaults                  =   "D"
     case turnEchoOn                         =   "E1"
     case turnEchoOff                        =   "E0"
@@ -72,23 +77,23 @@ public enum RVS_BTDriver_OBD_Command_String_OBD: String {
     case turnHeadersOn                      =   "H1"
     case turnHeadersOff                     =   "H0"
     case monitorAll                         =   "MA"
-    case setMonitorForReceiver              =   "MR "
-    case setMonitorForTransmitter           =   "MT "
-    case setProtocol                        =   "SP "
+    case setMonitorForReceiver              =   "MR %s"
+    case setMonitorForTransmitter           =   "MT %s"
+    case setProtocol                        =   "SP %s"
     case setAutoProtocol                    =   "SP A"
     case useAutoProtocol                    =   "SP 00"
     case closeProtocol                      =   "PC"
     case turnResponsesOn                    =   "R1"
     case turnResponsesOff                   =   "R0"
-    case setReceiveAddress                  =   "RA "
-    case setReceiveAddress2                 =   "SR "
+    case setReceiveAddress                  =   "RA %s"
+    case setReceiveAddress2                 =   "SR %s"
     case turnPrintSpacesOn                  =   "S1"
     case turnPrintSpacesOff                 =   "S0"
-    case setHeader                          =   "SH "
+    case setHeader                          =   "SH %s"
     case useStandardSearchOrder             =   "SS"
-    case setTimeOutBy4MillisecondIntervals  =   "ST "
-    case setTesterAddress                   =   "TA "
-    case tryProtocol                        =   "TP "
+    case setTimeOutBy4MillisecondIntervals  =   "ST %s"
+    case setTesterAddress                   =   "TA %s"
+    case tryProtocol                        =   "TP %s"
     case tryAutoProtocol                    =   "TP A"
 }
 
@@ -104,17 +109,17 @@ public enum RVS_BTDriver_OBD_Command_String_CAN: String {
     case turnCANAutoFormattingOff           =   "CAF0"
     case setCANExtendedAddressing           =   "CEA "
     case turnOffCANExtendedAddressing       =   "CEA"
-    case setIDFilter                        =   "CF "
+    case setIDFilter                        =   "CF %s"
     case turnCANFlowControlOn               =   "CFC1"
     case turnCANFlowControlOff              =   "CFC0"
     case turnCANSilentModeOn                =   "CSM1"
     case turnCANSilentModeOff               =   "CSM0"
     case turnDLCDisplayOn                   =   "D0"
     case turnDLCDisplayOff                  =   "D1"
-    case setFlowControlData                 =   "FC SD "
-    case setFlowControlHeader               =   "FC SH "
-    case setFlowControlMode                 =   "FC SM "
-    case setProtocolBOptionsAndBaudRate     =   "PB "
+    case setFlowControlData                 =   "FC SD %s"
+    case setFlowControlHeader               =   "FC SH %s"
+    case setFlowControlMode                 =   "FC SM %s"
+    case setProtocolBOptionsAndBaudRate     =   "PB %s"
     case rtrMessage                         =   "RTR"
     case turnVariableDLCOn                  =   "V1"
     case turnVariableDLCOff                 =   "V0"
@@ -147,7 +152,7 @@ public enum RVS_BTDriver_OBD_Command_String_J1939: String {
     case turnJ1939HeaderFormattingOff       =   "JHF0"
     case use1XTimerMultiplier               =   "JTM1"
     case use5XTimerMultiplier               =   "JTM5"
-    case setPGNMonitor                      =   "MP "
+    case setPGNMonitor                      =   "MP %s"
 }
 
 /* ###################################################################################################################################### */
@@ -181,6 +186,22 @@ public enum RVS_BTDriver_OBD_Command_String_ISO: String {
     case turnKeywordCheckingOn              =   "KW1"
     case turnKeywordCheckingOff             =   "KW0"
     case performSlowInitiation              =   "SI"
-    case setWakeupIntervalMultiplerBy20ms   =   "SW "
-    case setWakeupMessage                   =   "WM "
+    case setWakeupIntervalMultiplerBy20ms   =   "SW %s"
+    case setWakeupMessage                   =   "WM %s"
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_String_PPs Enum -
+/* ###################################################################################################################################### */
+/**
+ This enum is used to define OBD Commands As Strings.
+ This applies to the "PPs" group of commands.
+ */
+public enum RVS_BTDriver_OBD_Command_String_PPs: String {
+    case turnAllPPsProgParametersOn         =   "PP FF ON"
+    case turnAllPPsProgParametersOff        =   "PP FF OFF"
+    case setPPsProgParameterOn              =   "PP %s ON"
+    case setPPsProgParameterOff             =   "PP %s OFF"
+    case setPPsProgParameterValue           =   "PP %s SV %s"
+    case ppSummary                          =   "PPS"
 }
