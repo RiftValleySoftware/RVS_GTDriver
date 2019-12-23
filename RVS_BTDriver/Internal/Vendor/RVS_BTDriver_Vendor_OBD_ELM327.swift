@@ -64,6 +64,12 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD, RVS_BTDriver_OBD_
     
     /* ################################################################## */
     /**
+     This is the minimum supported ELM version.
+     */
+    internal static let minimumELMVersion: Float = 1.5
+    
+    /* ################################################################## */
+    /**
      This returns an easy-to-display description string
      */
     public override var description: String {
@@ -120,28 +126,30 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD, RVS_BTDriver_OBD_
                         if 9 < trimmedResponse.count {  // We need to have at least nine characters in the response.
                             let indexOfSubstring = trimmedResponse.index(trimmedResponse.startIndex, offsetBy: 8)
                             let substring = String(trimmedResponse[indexOfSubstring...])
-                            #if DEBUG
-                                print("The ELM327 Version is \(substring)")
-                            #endif
-                            elm327Version = substring
-                            super.reportCompletion()    // Now, we are ready to end the chapter.
-                        } else {    // Anything else is an error.
-                            deviceType = .unknown
-                            if let index = owner?.internal_holding_pen.firstIndex(of: self) {
+                            if  let value = Float(substring),
+                            Self.minimumELMVersion <= value {
                                 #if DEBUG
-                                    print("Removing Unqualified Device From Holding Pen, at Index \(index).")
+                                    print("The ELM327 Version is \(substring)")
                                 #endif
-                                owner?.internal_holding_pen.remove(at: index)
+                                elm327Version = substring
+                                super.reportCompletion()    // Now, we are ready to end the chapter.
+                            } else {    // If we aren't up to the task, we nuke the device.
+                                #if DEBUG
+                                    print("The ELM327 Version of \(substring) is too low. It needs to be at least \(Self.minimumELMVersion).")
+                                #endif
+                                owner?.removeThisDevice(self)
                             }
+                        } else {    // Anything else is an error.
+                            #if DEBUG
+                                print("The ELM327 Version string of \"\(trimmedResponse)\" is not valid.")
+                            #endif
+                            owner?.removeThisDevice(self)
                         }
                     } else {    // Bad data response means we nuke the device.
-                        deviceType = .unknown
-                        if let index = owner?.internal_holding_pen.firstIndex(of: self) {
-                            #if DEBUG
-                                print("Removing Unqualified Device From Holding Pen, at Index \(index).")
-                            #endif
-                            owner?.internal_holding_pen.remove(at: index)
-                        }
+                        #if DEBUG
+                            print("The ELM327 Version string is nil.")
+                        #endif
+                        owner?.removeThisDevice(self)
                     }
                 } else {
                     #if DEBUG
