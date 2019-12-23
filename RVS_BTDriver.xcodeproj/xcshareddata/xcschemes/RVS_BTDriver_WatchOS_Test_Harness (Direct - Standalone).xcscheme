@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D42FB9AE236F2D9000D0F0A5"
                BuildableName = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App.app"
-               BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App"
+               BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness_Direct_WatchKit_App"
                ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -62,7 +62,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D42FB9AE236F2D9000D0F0A5"
             BuildableName = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App.app"
-            BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App"
+            BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness_Direct_WatchKit_App"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
@@ -81,7 +81,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D42FB9AE236F2D9000D0F0A5"
             BuildableName = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App.app"
-            BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App"
+            BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness_Direct_WatchKit_App"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
@@ -90,7 +90,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D42FB9AE236F2D9000D0F0A5"
             BuildableName = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App.app"
-            BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness_Direct WatchKit App"
+            BlueprintName = "RVS_BTDriver_WatchOS_Test_Harness_Direct_WatchKit_App"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
