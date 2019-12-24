@@ -128,6 +128,11 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController {
         tableData = []
         
         if let deviceInstance = deviceInstance {
+            if let deviceName = deviceInstance.deviceName {
+                let key = String(format: "SLUG-DEVICE-NAME-FORMAT".localizedVariant, deviceName)
+                tableData.append(RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple(key: key, value: "", read: false, write: false, indicate: false, notify: false))
+            }
+            
             for service in deviceInstance.services {
                 let serviceHeader = RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple(key: service.uuid, value: "", read: false, write: false, indicate: false, notify: false)
                 var serviceProperties = [RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple]()
@@ -227,6 +232,22 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: NSTa
         } else {
             if let ret = inTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView.storyboardID), owner: nil) as? RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView {
                 ret.keyLabel.stringValue = tableData[inRow].key.localizedVariant
+                var leadingBlank = false
+                if tableData[inRow].key == deviceInstance?.readProperty?.uuid ?? "" {
+                    if !leadingBlank {
+                        ret.keyLabel.stringValue += " "
+                        leadingBlank = true
+                    }
+                    ret.keyLabel.stringValue += "SLUG-READ-PROPERTY".localizedVariant
+                }
+                
+                if tableData[inRow].key == deviceInstance?.writeProperty?.uuid ?? "" {
+                    if !leadingBlank {
+                        ret.keyLabel.stringValue += " "
+                    }
+                    ret.keyLabel.stringValue += "SLUG-WRITE-PROPERTY".localizedVariant
+                }
+                
                 ret.valueLabel.stringValue = tableData[inRow].value
                 var stringArray = [String]()
                 if tableData[inRow].read {

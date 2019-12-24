@@ -44,7 +44,7 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     /// Return the device ID (no parameters)
     case getDeviceIdentifier                =   "AT@2"
     /// Set the device ID (Character String -Up to 12 ASCII Characters)
-    case setDeviceIdentifier                =   "AT@3 %s"
+    case setDeviceIdentifier                =   "AT@3 %@"
     /// Set the Baud Rate Divisor (Up to 2 hex digits)
     case setBaudRateDivisor                 =   "ATBRD %02x"
     /// Set the Baud Rate Rate Handshake Timeout (Up to 2 hex digits)
