@@ -46,9 +46,9 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     /// Set the device ID (Character String -Up to 12 ASCII Characters)
     case setDeviceIdentifier                =   "AT@3 %s"
     /// Set the Baud Rate Divisor (Up to 2 hex digits)
-    case setBaudRateDivisor                 =   "ATBRD %2x"
+    case setBaudRateDivisor                 =   "ATBRD %02x"
     /// Set the Baud Rate Rate Handshake Timeout (Up to 2 hex digits)
-    case setBaudRateHandshakeTimeout        =   "ATBRT %2x"
+    case setBaudRateHandshakeTimeout        =   "ATBRT %02x"
     /// Restore the OBD Device to Defaults (no parameters)
     case restoreToDefaults                  =   "ATD"
     /// Turn echo on (no parameters)
@@ -72,7 +72,7 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     /// Return Stored Data In Memory (no parameters)
     case fetchStoredData                    =   "ATRD"
     /// Store 1 Byte of Data in Memory (Up to 2 Hex Digits)
-    case storeData                          =   "ATSD %2x"
+    case storeData                          =   "ATSD %02x"
     /// Perform a "Warm Start" (no parameters)
     case warmStart                          =   "ATWS"
     /// Reset All (no parameters)
@@ -111,17 +111,17 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     /// Monitor All (no parameters)
     case monitorAll                         =   "ATMA"
     /// Set the Monitor for Receiver (Up to 2 Hex Digits)
-    case setMonitorForReceiver              =   "ATMR %2x"
+    case setMonitorForReceiver              =   "ATMR %02x"
     /// Set the Monitor for Transmitter (Up to 2 Hex Digits)
-    case setMonitorForTransmitter           =   "ATMT %2x"
+    case setMonitorForTransmitter           =   "ATMT %02x"
     /// Set the Protocol (1 Hex Digit)
-    case setProtocol                        =   "ATSP %1x"
+    case setProtocol                        =   "ATSP %01x"
     /// Set Protocol (Alternate -Try -1 Hex Digit)
-    case setProtocol2                       =   "ATTP %x"
+    case setProtocol2                       =   "ATTP %01x"
     /// Set Auto Protocol (1 hex Digit)
-    case setAutoProtocol                    =   "ATSP A%1x"
+    case setAutoProtocol                    =   "ATSP A%01x"
     /// Set Auto Protocol (Alternate -Try -1 Hex Digit)
-    case setAutoProtocol2                   =   "ATTP A%1x"
+    case setAutoProtocol2                   =   "ATTP A%01x"
     /// Use Auto Protocol (no parameters)
     case useAutoProtocol                    =   "ATSP 00"
     /// Close the Protocol (no parameters)
@@ -131,23 +131,23 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     /// Turn Responses Off (no parameters)
     case turnResponsesOff                   =   "ATR0"
     /// Set the Receive Address (Up to 2 Hex Digits)
-    case setReceiveAddress                  =   "ATRA %2x"
+    case setReceiveAddress                  =   "ATRA %02x"
     /// Set the Receive Address (Alternate Command -Up to 2 Hex Digits)
-    case setReceiveAddress2                 =   "ATSR %2x"
+    case setReceiveAddress2                 =   "ATSR %02x"
     /// Turn On Print Spaces (no parameters)
     case turnPrintSpacesOn                  =   "ATS1"
     /// Turn Off Print Spaces (no parameters)
     case turnPrintSpacesOff                 =   "ATS0"
-    /// Set Header (Up to 3 Hex Digits)
-    case setHeader1                         =   "ATSH %3x"
+    /// Set Header (1 Hex Digit, and 2 Hex Digits)
+    case setHeader1                         =   "ATSH %01x%02x"
     /// Set Header (3 Groups of 2 Hex Digits)
-    case setHeader2                         =   "ATSH %2x %2x %2x"
+    case setHeader2                         =   "ATSH %02x %02x %02x"
     /// Set Standard (J1978) Search Order (no parameters)
     case useStandardSearchOrder             =   "ATSS"
     /// Set Tester Address (Up to 2 Hex Digits)
-    case setTesterAddress                   =   "ATTA %2x"
+    case setTesterAddress                   =   "ATTA %02x"
     /// Set Timeout to Multiples of 4ms (Up to 2 Hex Digits)
-    case setTimeOutBy4MillisecondIntervals  =   "ATST %2x"
+    case setTimeOutBy4MillisecondIntervals  =   "ATST %02x"
     
     /* ################################################################################################################################## */
     // MARK: - CAN -
@@ -160,13 +160,13 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     /// Turn CAN Auto-Formatting Off (no parameters)
     case turnCANAutoFormattingOff           =   "ATCAF0"
     /// Turn on CAN Extended Addressing, and Set it to the Given Value (Up to 2 Hex Digits)
-    case setCANExtendedAddressing           =   "ATCEA %2x"
+    case setCANExtendedAddressing           =   "ATCEA %02x"
     /// Turn CAN Extended Addressing Off (no parameters)
     case turnOffCANExtendedAddressing       =   "ATCEA"
     /// Set the ID Filter (3 Hex Digits -1, and 2)
-    case setIDFilter1                       =   "ATCF %1x2x"
+    case setIDFilter1                       =   "ATCF %01x%02x"
     /// Set the ID Filter (4 Groups of 2 Hex Digits)
-    case setIDFilter2                       =   "ATCF %2x %2x %2x %2x"
+    case setIDFilter2                       =   "ATCF %02x %02x %02x %02x"
     /// Turn CAN Flow Control On (no parameters)
     case turnCANFlowControlOn               =   "ATCFC1"
     /// Turn CAN Flow Control Off (no parameters)
@@ -180,13 +180,13 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     /// Turn DLC Display Off (no parameters)
     case turnDLCDisplayOff                  =   "ATD1"
     /// Set the CAN Flow Control Data (Up to 5 Hex Bytes -10 Digits)
-    case setFlowControlData                 =   "ATFC SD %10x"
+    case setFlowControlData                 =   "ATFC SD %010x"
     /// Set the CAN Flow Control Header (4 Groups of 2 Hex Digits)
-    case setFlowControlHeader               =   "ATFC SH %2x %2x %2x %2x"
+    case setFlowControlHeader               =   "ATFC SH %02x %02x %02x %02x"
     /// Set the CAN Flow Control Mode (1 Hex Digit)
-    case setFlowControlMode                 =   "ATFC SM %1x"
+    case setFlowControlMode                 =   "ATFC SM %01x"
     /// Set the Protocol B Options and Baud Rate (2 Groups of 2 Hex Digits)
-    case setProtocolBOptionsAndBaudRate     =   "ATPB %2x %2x"
+    case setProtocolBOptionsAndBaudRate     =   "ATPB %02x %02x"
     /// Send an RTR Message (no parameters)
     case rtrMessage                         =   "ATRTR"
     /// Turn the Variable DLC On (no parameters)
@@ -226,11 +226,11 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     /// Use the 5X Timer Multiplier (no parameters)
     case use5XTimerMultiplier               =   "ATJTM5"
     /// Set the PGN Monitor (Up to 4 Hex Digits)
-    case setPGNMonitor1                     =   "ATMP %4x"
+    case setPGNMonitor1                     =   "ATMP %04x"
     /// Set the PGN Monitor (Up to six Hex Digits)
-    case setPGNMonitor2                     =   "ATMP %6x"
+    case setPGNMonitor2                     =   "ATMP %06x"
     /// Set the PGN Monitor (Up to 4 Hex Digits, and 1 Hex Digit)
-    case setPGNMonitorGetMessages           =   "ATMP %4x %1x"
+    case setPGNMonitorGetMessages           =   "ATMP %04x %01x"
 
     /* ################################################################################################################################## */
     // MARK: - J1850 -
@@ -262,7 +262,7 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     /// Try to Set Baud Rate to 9600 (no parameters)
     case isoBaudRate9600                    =   "ATIB 96"
     /// Set the ISO Initial Address (Up to 2 Hex Digits)
-    case setISOInitAddress                  =   "ATIIA %2x"
+    case setISOInitAddress                  =   "ATIIA %02x"
     /// Display Keywords (no parameters)
     case displayKeywords                    =   "ATKW"
     /// Turn Keyword Checking On (no parameters)
@@ -272,9 +272,9 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     /// Perform a Slow Initiation (no parameters)
     case performSlowInitiation              =   "ATSI"
     /// Set the Wakeup Interval to Multiple of 4ms (Up to 2 Hex Digits)
-    case setWakeupIntervalMultiplerBy20ms   =   "ATSW %2x"
+    case setWakeupIntervalMultiplerBy20ms   =   "ATSW %02x"
     /// Set the Wakeup Message (Up to 6 Bytes -12 Hex Digits)
-    case setWakeupMessage                   =   "ATWM %12x"
+    case setWakeupMessage                   =   "ATWM %012x"
 
     /* ################################################################################################################################## */
     // MARK: - PPs -
@@ -287,11 +287,11 @@ public enum RVS_BTDriver_OBD_Command_String_General: String {
     /// Turn Off All Program Parameters (no parameters)
     case turnAllPPsProgParametersOff        =   "ATPP FF OFF"
     /// Turn On the Given Program Parameter (Up to 2 Hex Digits)
-    case setPPsProgParameterOn              =   "ATPP %2x ON"
+    case setPPsProgParameterOn              =   "ATPP %02x ON"
     /// Turn On the Given Program Parameter (Up to 2 Hex Digits)
-    case setPPsProgParameterOff             =   "ATPP %2x OFF"
+    case setPPsProgParameterOff             =   "ATPP %02x OFF"
     /// Set the Given Program Parameter to the Given Value (2 Sets of 2 Hex Digits)
-    case setPPsProgParameterValue           =   "ATPP %2x SV %2x"
+    case setPPsProgParameterValue           =   "ATPP %02x SV %02x"
     /// Return a PPs Summary (no parameters)
     case ppSummary                          =   "ATPPS"
 }
