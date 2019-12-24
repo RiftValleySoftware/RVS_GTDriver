@@ -64,6 +64,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "deviceInfoHardwareRevision"                                =       "Hardware Revision";
 "deviceInfoFirmwareRevision"                                =       "Firmware Revision";
 "180A"                                                      =       "Device Information Service";
+"180F"                                                      =       "Battery Level Service";
 "2A23"                                                      =       "System ID";
 "2A24"                                                      =       "Model Name";
 "2A25"                                                      =       "Serial Number";
@@ -73,7 +74,6 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "2A29"                                                      =       "Manufacturer";
 "2A2A"                                                      =       "IEEE Regulatory";
 "2A50"                                                      =       "PNP ID Set";
-"180F"                                                      =       "Battery Level Service";
 "2A19"                                                      =       "Battery Level";
 "SLUG-HEADER-UUID"                                          =       "UUID";
 "SLUG-HEADER-READ"                                          =       "R";
