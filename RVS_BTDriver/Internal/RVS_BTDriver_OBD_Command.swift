@@ -116,11 +116,11 @@ internal enum RVS_BTDriver_OBD_Command_String_General: String {
     case setMonitorForTransmitter           =   "ATMT %02x"
     /// Set the Protocol (1 Hex Digit)
     case setProtocol                        =   "ATSP %01x"
-    /// Set Protocol (Alternate -Try -1 Hex Digit)
+    /// Set Protocol (Alternate Try -1 Hex Digit)
     case setProtocol2                       =   "ATTP %01x"
     /// Set Auto Protocol (1 hex Digit)
     case setAutoProtocol                    =   "ATSP A%01x"
-    /// Set Auto Protocol (Alternate -Try -1 Hex Digit)
+    /// Set Auto Protocol (Alternate Try -1 Hex Digit)
     case setAutoProtocol2                   =   "ATTP A%01x"
     /// Use Auto Protocol (no parameters)
     case useAutoProtocol                    =   "ATSP 00"
@@ -239,9 +239,9 @@ internal enum RVS_BTDriver_OBD_Command_String_General: String {
      This applies to the "J1850" group of commands.
      */
     /// The IFR Value Should be Set From the Header (no parameters)
-    case setIFRValueFromHeader              =   "ATIFR H"
+    case getIFRValueFromHeader              =   "ATIFR H"
     /// The IFR Value Should be Set From the Source (no parameters)
-    case setIFRValueFromSource              =   "ATIFR S"
+    case getIFRValueFromSource              =   "ATIFR S"
     /// Turn IFRs On (no parameters)
     case turnIFRsOn                         =   "ATIFR2"
     /// Turn On IFRs, and Set to Auto (no parameters)
