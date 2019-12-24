@@ -97,7 +97,7 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
      We use it to send an initial "ATZ" command.
      */
     internal override func initialSetup() {
-        self.sendCommandWithResponse(Self.initialQueryCommand)
+        sendCommandWithResponse(Self.initialQueryCommand)
         super.initialSetup()
     }
 
