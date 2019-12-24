@@ -32,7 +32,7 @@ import Foundation
 /**
  This enum is used to define OBD Commands As Strings.
  */
-public enum RVS_BTDriver_OBD_Command_String_General: String {
+internal enum RVS_BTDriver_OBD_Command_String_General: String {
     /* ################################################################################################################################## */
     // MARK: - General -
     /* ################################################################################################################################## */

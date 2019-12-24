@@ -80,17 +80,3 @@ public protocol RVS_BTDriver_OBD_DeviceProtocol: RVS_BTDriver_DeviceProtocol {
      */
     func sendCommandWithResponse(_ commandString: String)
 }
-
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_ELM327_DeviceProtocol Protocol -
-/* ###################################################################################################################################### */
-/**
- This is a specialization for the common ELM327 chipset.
- */
-public protocol RVS_BTDriver_OBD_ELM327_DeviceProtocol: RVS_BTDriver_OBD_DeviceProtocol {
-    /* ################################################################## */
-    /**
-     This returns the ELM327 chipset version for the device.
-     */
-    var elm327Version: String { get }
-}
