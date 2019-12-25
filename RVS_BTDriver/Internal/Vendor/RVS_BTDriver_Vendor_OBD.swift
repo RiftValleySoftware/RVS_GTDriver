@@ -110,12 +110,15 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
             let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
             readProperty.canNotify = true
-            #if DEBUG
-                print("Sending data: \(inCommandString) for: \(writeProperty), and expecting a response.")
-            #endif
             if writeProperty.canWriteWithResponse {
+                #if DEBUG
+                    print("Sending data: \(inCommandString) for: \(writeProperty), and expecting a response.")
+                #endif
                 peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
             } else {
+                #if DEBUG
+                    print("Sending data: \(inCommandString) for: \(writeProperty), and not expecting a response.")
+                #endif
                 peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withoutResponse)
             }
         }
