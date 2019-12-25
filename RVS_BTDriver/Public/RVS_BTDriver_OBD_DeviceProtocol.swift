@@ -78,5 +78,5 @@ public protocol RVS_BTDriver_OBD_DeviceProtocol: RVS_BTDriver_DeviceProtocol {
      
      - parameter commandString: The Sting for the command.
      */
-    func sendCommandWithResponse(_ commandString: String)
+    func sendCommand(_ commandString: String)
 }

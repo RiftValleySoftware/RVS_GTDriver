@@ -101,11 +101,11 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
 
     /* ################################################################## */
     /**
-     This menthod will send an AT command to the OBD unit. Responses will arrive in the readProperty.
+     This menthod will send a command to the OBD unit.
      
      - parameter inCommandString: The Sting for the command.
      */
-    public func sendCommandWithResponse(_ inCommandString: String) {
+    public func sendCommand(_ inCommandString: String) {
         if let data = inCommandString.data(using: .utf8),
             let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
             let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
@@ -113,7 +113,11 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             #if DEBUG
                 print("Sending data: \(inCommandString) for: \(writeProperty), and expecting a response.")
             #endif
-            peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
+            if writeProperty.canWriteWithResponse {
+                peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
+            } else {
+                peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withoutResponse)
+            }
         }
     }
     

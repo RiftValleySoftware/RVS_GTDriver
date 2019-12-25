@@ -103,7 +103,7 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
      We use it to send an initial "ATZ" command.
      */
     internal override func initialSetup() {
-        sendCommandWithResponse(Self.initialQueryCommand)
+        sendCommand(Self.initialQueryCommand)
         super.initialSetup()
     }
 
@@ -215,7 +215,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Return the device description
     */
     func getDeviceDescription() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.getDeviceDescription.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.getDeviceDescription.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -223,7 +223,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Return the device ID
     */
     func getDeviceIdentifier() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.getDeviceIdentifier.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.getDeviceIdentifier.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -261,7 +261,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Restore the OBD Device to Defaults
     */
     func restoreToDefaults() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.restoreToDefaults.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.restoreToDefaults.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -269,7 +269,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn echo on
     */
     func turnEchoOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnEchoOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnEchoOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -277,7 +277,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Echo Off
     */
     func turnEchoOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnEchoOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnEchoOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -285,7 +285,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Flush All Events
     */
     func flushAllEvents() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.flushAllEvents.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.flushAllEvents.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -293,7 +293,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Return the unit ID
     */
     func getID() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.getID.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.getID.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -301,7 +301,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn on Linefeeds
     */
     func turnLinefeedsOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnLinefeedsOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnLinefeedsOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -309,7 +309,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Off Linefeeds
     */
     func turnLinefeedsOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnLinefeedsOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnLinefeedsOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -317,7 +317,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn On Low Power Mode
     */
     func turnLowPowerModeOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnLowPowerModeOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnLowPowerModeOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -325,7 +325,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn On Memory
     */
     func turnMemoryOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnMemoryOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnMemoryOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -333,7 +333,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Off Memory
     */
     func turnMemoryOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnMemoryOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnMemoryOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -341,7 +341,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Return Stored Data In Memory
     */
     func fetchStoredData() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.fetchStoredData.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.fetchStoredData.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -359,7 +359,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Perform a "Warm Start"
     */
     func warmStart() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.warmStart.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.warmStart.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -367,7 +367,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Reset All
     */
     func resetAll() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.resetAll.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.resetAll.rawValue + Self.crlf)
     }
 
     /* ################################################################################################################################## */
@@ -382,7 +382,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Use Long (>7 Byte) Messages
     */
     func useLongMessages() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.useLongMessages.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.useLongMessages.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -390,7 +390,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Use Short (<= 7 Byte) Messages
     */
     func useShortMessages() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.useShortMessages.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.useShortMessages.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -398,7 +398,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Enable Automatic Receive
     */
     func autoReceive() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.autoReceive.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.autoReceive.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -406,7 +406,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Enable Adaptive Timing Auto Mode 1
     */
     func useAdaptiveTimingMode1() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.useAdaptiveTimingMode1.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.useAdaptiveTimingMode1.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -414,7 +414,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Enable Adaptive Timing Auto Mode 1
     */
     func useAdaptiveTimingMode2() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.useAdaptiveTimingMode2.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.useAdaptiveTimingMode2.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -422,7 +422,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Adaptive Timing Off
     */
     func turnAdaptiveTimingOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnAdaptiveTimingOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnAdaptiveTimingOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -430,7 +430,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Return a Buffer Dump
     */
     func bufferDump() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.bufferDump.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.bufferDump.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -438,7 +438,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Bypass the Initialization Sequence
     */
     func bypassInitialization() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.bypassInitialization.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.bypassInitialization.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -446,7 +446,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Describe the Current Protocol
     */
     func describeCurrentProtocol() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.describeCurrentProtocol.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.describeCurrentProtocol.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -454,7 +454,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Describe the Current Protocol as a Number
     */
     func describeProtocolByNumber() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.describeProtocolByNumber.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.describeProtocolByNumber.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -462,7 +462,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Headers On
     */
     func turnHeadersOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnHeadersOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnHeadersOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -470,7 +470,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Headers Off
     */
     func turnHeadersOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnHeadersOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnHeadersOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -478,7 +478,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Monitor All
     */
     func monitorAll() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.monitorAll.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.monitorAll.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -546,7 +546,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Use Auto Protocol
     */
     func useAutoProtocol() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.useAutoProtocol.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.useAutoProtocol.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -554,7 +554,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Close the Protocol
     */
     func closeProtocol() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.closeProtocol.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.closeProtocol.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -562,7 +562,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Responses On
     */
     func turnResponsesOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnResponsesOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnResponsesOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -570,7 +570,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Responses Off
     */
     func turnResponsesOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnResponsesOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnResponsesOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -598,7 +598,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn On Print Spaces
     */
     func turnPrintSpacesOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnPrintSpacesOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnPrintSpacesOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -606,7 +606,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Off Print Spaces
     */
     func turnPrintSpacesOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnPrintSpacesOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnPrintSpacesOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -637,7 +637,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Set Standard (J1978) Search Order
     */
     func useStandardSearchOrder() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.useStandardSearchOrder.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.useStandardSearchOrder.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -672,7 +672,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn CAN Auto-Formatting On
     */
     func turnCANAutoFormattingOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnCANAutoFormattingOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnCANAutoFormattingOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -680,7 +680,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn CAN Auto-Formatting Off
     */
     func turnCANAutoFormattingOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnCANAutoFormattingOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnCANAutoFormattingOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -698,7 +698,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn CAN Extended Addressing Off
     */
     func turnOffCANExtendedAddressing() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnOffCANExtendedAddressing.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnOffCANExtendedAddressing.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -730,7 +730,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn CAN Flow Control On
     */
     func turnCANFlowControlOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnCANFlowControlOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnCANFlowControlOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -738,7 +738,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn CAN Flow Control Off
     */
     func turnCANFlowControlOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnCANFlowControlOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnCANFlowControlOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -746,7 +746,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn CAN Silent Mode On
     */
     func turnCANSilentModeOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnCANSilentModeOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnCANSilentModeOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -754,7 +754,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn CAN Silent Mode Off
     */
     func turnCANSilentModeOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnCANSilentModeOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnCANSilentModeOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -762,7 +762,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn DLC Display On
     */
     func turnDLCDisplayOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnDLCDisplayOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnDLCDisplayOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -770,7 +770,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn DLC Display Off
     */
     func turnDLCDisplayOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnDLCDisplayOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnDLCDisplayOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -822,7 +822,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Send an RTR Message
     */
     func rtrMessage() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.rtrMessage.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.rtrMessage.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -830,7 +830,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn the Variable DLC On
     */
     func turnVariableDLCOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnVariableDLCOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnVariableDLCOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -838,7 +838,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn the Variable DLC Off
     */
     func turnVariableDLCOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnVariableDLCOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnVariableDLCOff.rawValue + Self.crlf)
     }
 
     /* ################################################################################################################################## */
@@ -863,7 +863,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Reset the Calibration Voltage
     */
     func resetCalibratingVoltage() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.resetCalibratingVoltage.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.resetCalibratingVoltage.rawValue + Self.crlf)
     }
 
     /* ################################################################################################################################## */
@@ -878,7 +878,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Monitor for DM1 Messages
     */
     func monitorForDM1Messages() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.monitorForDM1Messages.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.monitorForDM1Messages.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -886,7 +886,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Use ELM Data Format
     */
     func useElmDataFormat() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.useElmDataFormat.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.useElmDataFormat.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -894,7 +894,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Use SAE Data Format
     */
     func useSAEDataFormat() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.useSAEDataFormat.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.useSAEDataFormat.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -902,7 +902,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Header Formatting On
     */
     func turnJ1939HeaderFormattingOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnJ1939HeaderFormattingOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnJ1939HeaderFormattingOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -910,7 +910,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Header Formatting Off
     */
     func turnJ1939HeaderFormattingOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnJ1939HeaderFormattingOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnJ1939HeaderFormattingOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -918,7 +918,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Use the 1X Timer Multiplier
     */
     func use1XTimerMultiplier() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.use1XTimerMultiplier.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.use1XTimerMultiplier.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -926,7 +926,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Use the 5X Timer Multiplier
     */
     func use5XTimerMultiplier() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.use5XTimerMultiplier.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.use5XTimerMultiplier.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -962,7 +962,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      The IFR Value Should be Set From the Header
     */
     func getIFRValueFromHeader() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.getIFRValueFromHeader.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.getIFRValueFromHeader.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -970,7 +970,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      The IFR Value Should be Set From the Source
     */
     func getIFRValueFromSource() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.getIFRValueFromSource.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.getIFRValueFromSource.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -978,7 +978,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn IFRs On
     */
     func turnIFRsOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnIFRsOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnIFRsOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -986,7 +986,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn On IFRs, and Set to Auto
     */
     func useIFRsAuto() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.useIFRsAuto.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.useIFRsAuto.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -994,7 +994,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn IFRs Off
     */
     func turnIFRsOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnIFRsOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnIFRsOff.rawValue + Self.crlf)
     }
 
     /* ################################################################################################################################## */
@@ -1009,7 +1009,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Try to Set Baud Rate to 10400
     */
     func isoBaudRate10400() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.isoBaudRate10400.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.isoBaudRate10400.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1017,7 +1017,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Try to Set Baud Rate to 4800
     */
     func isoBaudRate4800() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.isoBaudRate4800.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.isoBaudRate4800.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1025,7 +1025,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Try to Set Baud Rate to 9600
     */
     func isoBaudRate9600() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.isoBaudRate9600.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.isoBaudRate9600.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1043,7 +1043,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Display Keywords
     */
     func displayKeywords() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.displayKeywords.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.displayKeywords.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1051,7 +1051,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Keyword Checking On
     */
     func turnKeywordCheckingOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnKeywordCheckingOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnKeywordCheckingOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1059,7 +1059,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Keyword Checking Off
     */
     func turnKeywordCheckingOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnKeywordCheckingOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnKeywordCheckingOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1067,7 +1067,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Perform a Slow Initiation
     */
     func performSlowInitiation() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.performSlowInitiation.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.performSlowInitiation.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1102,7 +1102,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn On All Program Parameters
     */
     func turnAllPPsProgParametersOn() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnAllPPsProgParametersOn.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnAllPPsProgParametersOn.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1110,7 +1110,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Turn Off All Program Parameters
     */
     func turnAllPPsProgParametersOff() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.turnAllPPsProgParametersOff.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.turnAllPPsProgParametersOff.rawValue + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1149,6 +1149,6 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      Return a PPs Summary
     */
     func ppSummary() {
-        sendCommandWithResponse(RVS_BTDriver_OBD_Command_String.ppSummary.rawValue + Self.crlf)
+        sendCommand(RVS_BTDriver_OBD_Command_String.ppSummary.rawValue + Self.crlf)
     }
 }

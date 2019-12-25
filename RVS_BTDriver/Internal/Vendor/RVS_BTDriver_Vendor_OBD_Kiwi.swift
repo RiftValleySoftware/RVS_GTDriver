@@ -135,34 +135,18 @@ class RVS_BTDriver_Vendor_OBD_Kiwi_Device: RVS_BTDriver_Device_OBD {
     public override var description: String {
         return super.description + "-" + RVS_BTDriver_Vendor_OBD_Kiwi.RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
     }
-    
+            
     /* ################################################################## */
     /**
-     This menthod will send an AT command to the OBD unit. Responses will arrive in the readProperty.
-     
-     - parameter inCommandString: The Sting for the command.
-     */
-    public override func sendCommandWithResponse(_ inCommandString: String) {
-        if let data = inCommandString.data(using: .utf8),
-            let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
-            #if DEBUG
-                print("Sending data: \(inCommandString) for: \(writeProperty)")
-            #endif
-            peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
-        }
+    - parameter inPeripheral: The peripheral that owns this service.
+    - parameter didUpdateValueFor: The descriptor that was updated.
+    - parameter error: Any error that may have occurred. It can be nil.
+    */
+    internal func peripheral(_ inPeripheral: CBPeripheral, didWriteValueFor inDescriptor: CBDescriptor, error inError: Error?) {
+        #if DEBUG
+            print("OBD Device Callback: peripheral: \(inPeripheral) didWriteValueFor (Descriptor): \(inDescriptor)")
+        #endif
     }
-            
-        /* ################################################################## */
-        /**
-        - parameter inPeripheral: The peripheral that owns this service.
-        - parameter didUpdateValueFor: The descriptor that was updated.
-        - parameter error: Any error that may have occurred. It can be nil.
-        */
-        internal func peripheral(_ inPeripheral: CBPeripheral, didWriteValueFor inDescriptor: CBDescriptor, error inError: Error?) {
-            #if DEBUG
-                print("OBD Device Callback: peripheral: \(inPeripheral) didWriteValueFor (Descriptor): \(inDescriptor)")
-            #endif
-        }
         
     /* ################################################################## */
     /**
