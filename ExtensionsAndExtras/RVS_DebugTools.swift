@@ -23,32 +23,19 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation   // Required for the ProcessInfo stuff.
 
 /* ###################################################################################################################################### */
-// MARK: - Debug Tools Protocol -
+// MARK: - Debug Tools Class -
 /* ###################################################################################################################################### */
 /**
- This protocol is a "junk drawer" of vrious debug/testing tools.
+ This class is a "junk drawer" of vrious debug/testing tools.
  */
-internal protocol RVS_DebugTools {
+internal class RVS_DebugTools {
     /* ################################################################## */
     /**
      This is used to see whether or not we are running under unit tests. It is optional, and isn't really supposed to be replaced.
      
      - returns: True, if we are currently in a unit test.
      */
-    var isRunningUnitTests: Bool { get }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Make Things Optional -
-/* ###################################################################################################################################### */
-extension RVS_DebugTools {
-    /* ################################################################## */
-    /**
-     This is used to see whether or not we are running under unit tests.
-     
-     - returns: True, if we are currently in a unit test.
-     */
-    internal var isRunningUnitTests: Bool {
+    internal static var isRunningUnitTests: Bool {
         return nil != NSClassFromString("XCTest")
     }
 }

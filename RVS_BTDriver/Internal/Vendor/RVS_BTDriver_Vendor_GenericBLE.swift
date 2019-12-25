@@ -155,10 +155,11 @@ class RVS_BTDriver_Vendor_GenericBLE: NSObject, RVS_BTDriver_VendorProtocol {
     /**
      The default initializer.
      
-     - parameter driver: The `RVS_BTDriver` instance that "owns" this instance.
+     - parameter driver: The `RVS_BTDriver` instance that "owns" this instance. It can be nil (for testing purposes only)
      */
-    internal init(driver inDriver: RVS_BTDriver) {
+    internal init(driver inDriver: RVS_BTDriver!) {
         super.init()
+        precondition((nil != inDriver || RVS_DebugTools.isRunningUnitTests), "The driver cannot be nil!")
         internal_driver = inDriver
         makeInterface(queue: inDriver.internal_queue)
     }

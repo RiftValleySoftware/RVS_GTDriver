@@ -28,4 +28,24 @@ import XCTest
 /**
  */
 class RVS_BTDriver_MacOS_Test_OBD: XCTestCase {
+    /* ################################################################## */
+    /**
+     */
+    var obdInstance: RVS_BTDriver_Device_OBD!
+    
+    /* ################################################################## */
+    /**
+     */
+    override func setUp() {
+        super.setUp()
+        obdInstance = RVS_BTDriver_Device_OBD(vendor: nil)
+        obdInstance.commandReceiveFunc = receiveCommandFromTarget
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func receiveCommandFromTarget(_ inCommandSendString: String) {
+        print("Command Send String Received: \"\(inCommandSendString)\".")
+    }
 }

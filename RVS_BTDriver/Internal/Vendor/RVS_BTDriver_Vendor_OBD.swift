@@ -23,25 +23,6 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
-// MARK: - OBD-Specific Debug Tools Protocol -
-/* ###################################################################################################################################### */
-/**
- */
-internal protocol RVS_BTDriver_OBD_DebugTools: RVS_DebugTools {
-    /* ################################################################## */
-    /**
-     This is a property that is set to a callback for a mock
-     */
-    var commandCallback: ((_ command: String) -> Void)! { get set }
-
-    /* ################################################################## */
-    /**
-     This is called to simulate sending a command, in a mock.
-     */
-    func sendCommand(_ command: String)
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Enums for Proprietary OBD BLE Service and Characteristic UUIDs -
 /* ###################################################################################################################################### */
 /**
@@ -102,6 +83,12 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
 class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceProtocol {
     /* ################################################################## */
     /**
+     This is a property that is set to a command receive for a mock
+     */
+    var commandReceiveFunc: ((_ command: String) -> Void)!
+
+    /* ################################################################## */
+    /**
      This is a weak reference to the instance delegate.
      */
     public weak var delegate: RVS_BTDriver_OBD_DeviceDelegate!
@@ -129,18 +116,34 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
             let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
             readProperty.canNotify = true
-            if writeProperty.canWriteWithResponse {
-                #if DEBUG
-                    print("Sending data: \(inCommandString) for: \(writeProperty), and expecting a response.")
-                #endif
-                peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
+            // If we are in a unit test, then we intercept the commands, and run them through the unit tests.
+            if  RVS_DebugTools.isRunningUnitTests,
+                nil != commandReceiveFunc {
+                commandReceiveFunc(inCommandString)
             } else {
-                #if DEBUG
-                    print("Sending data: \(inCommandString) for: \(writeProperty), and not expecting a response.")
-                #endif
-                peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withoutResponse)
+                if writeProperty.canWriteWithResponse {
+                    #if DEBUG
+                        print("Sending data: \(inCommandString) for: \(writeProperty), and expecting a response.")
+                    #endif
+                    peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
+                } else {
+                    #if DEBUG
+                        print("Sending data: \(inCommandString) for: \(writeProperty), and not expecting a response.")
+                    #endif
+                    peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withoutResponse)
+                }
             }
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to send the data to the delegate.
+     
+     - parameter inData: The data received.
+     */
+    internal func receiveCommandData(_ inData: Data) {
+        delegate?.device(self, returnedThisData: inData)
     }
     
     /* ################################################################## */
@@ -167,7 +170,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             
         if  inPeripheral == peripheral, // Make sure this is for us.
             let value = inCharacteristic.value {    // If we didn't get a value, then we don't send anything to the delegate.
-            delegate?.device(self, returnedThisData: value)
+            receiveCommandData(value)
         } else {    // Otherwise, kick the can down the road.
             super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
         }

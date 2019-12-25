@@ -89,9 +89,10 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     /**
      The device initializer
      
-     - parameter vendor: The vendor factory for the device.
+     - parameter vendor: The vendor factory for the device. It can be nil (for testing purposes only).
      */
-    internal init(vendor inVendor: RVS_BTDriver_VendorProtocol) {
+    internal init(vendor inVendor: RVS_BTDriver_VendorProtocol!) {
+        precondition((nil != inVendor || RVS_DebugTools.isRunningUnitTests), "The vendor cannot be nil!")
         vendor = inVendor
     }
     
