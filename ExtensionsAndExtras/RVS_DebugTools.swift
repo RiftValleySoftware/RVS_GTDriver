@@ -20,16 +20,35 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation   // Required for the NS stuff.
+import Foundation   // Required for the ProcessInfo stuff.
 
 /* ###################################################################################################################################### */
-// MARK: - Global-Scope Test Utility Computed Properties -
+// MARK: - Debug Tools Protocol -
 /* ###################################################################################################################################### */
-/* ################################################################## */
 /**
- This returns true, if the executable is running under XCTest
+ This protocol is a "junk drawer" of vrious debug/testing tools.
  */
-var g_RVS_GlobalQueryAreWeRunningUnderXCTest: Bool {
-    // All we do, is see if it's possible to instantiate an instance of XCTest. If so, that means we are under test. No need to look at bundles, or use environment variables or execution arguments.
-    return nil != NSClassFromString("XCTest")
+internal protocol RVS_DebugTools {
+    /* ################################################################## */
+    /**
+     This is used to see whether or not we are running under unit tests. It is optional, and isn't really supposed to be replaced.
+     
+     - returns: True, if we are currently in a unit test.
+     */
+    var isRunningUnitTests: Bool { get }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Make Things Optional -
+/* ###################################################################################################################################### */
+extension RVS_DebugTools {
+    /* ################################################################## */
+    /**
+     This is used to see whether or not we are running under unit tests.
+     
+     - returns: True, if we are currently in a unit test.
+     */
+    internal var isRunningUnitTests: Bool {
+        return nil != NSClassFromString("XCTest")
+    }
 }

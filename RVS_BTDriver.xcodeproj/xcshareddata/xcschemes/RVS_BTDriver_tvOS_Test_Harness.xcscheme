@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D4B19BFF235F2B1E0036EDF5"
+               BlueprintIdentifier = "D41AC89F23B3CF21000B578E"
                BuildableName = "RVS_BTDriver_tvOS_Test_Harness.app"
                BlueprintName = "RVS_BTDriver_tvOS_Test_Harness"
                ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
@@ -44,7 +44,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D4B19BFF235F2B1E0036EDF5"
+            BlueprintIdentifier = "D41AC89F23B3CF21000B578E"
             BuildableName = "RVS_BTDriver_tvOS_Test_Harness.app"
             BlueprintName = "RVS_BTDriver_tvOS_Test_Harness"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
@@ -61,7 +61,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D4B19BFF235F2B1E0036EDF5"
+            BlueprintIdentifier = "D41AC89F23B3CF21000B578E"
             BuildableName = "RVS_BTDriver_tvOS_Test_Harness.app"
             BlueprintName = "RVS_BTDriver_tvOS_Test_Harness"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
