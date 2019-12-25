@@ -5,14 +5,14 @@
   },
   "images" : [
     {
-      "filename" : "Logo.png",
+      "filename" : "LogoFramework.png",
       "idiom" : "tv",
       "scale" : "1x"
     },
     {
       "scale" : "2x",
       "idiom" : "tv",
-      "filename" : "Logo@2x.png"
+      "filename" : "LogoFramework@2x.png"
     }
   ]
 }

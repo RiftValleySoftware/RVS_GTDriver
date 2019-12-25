@@ -258,6 +258,8 @@
 		D49F4F6623A2A37E0098668D /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC51A234BBB8E006D0A53 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift */; };
 		D49F4F6723A2A37E0098668D /* RVS_BTDriver_Vendor_OBD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4879A2C238E91C7008977D9 /* RVS_BTDriver_Vendor_OBD.swift */; };
 		D49F4F6823A2A37E0098668D /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AFF94423A028CB009A2677 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift */; };
+		D4A0943023B3D3590074D6F8 /* RVS_BTDriver_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4FB614D235F26E400C3FECD /* RVS_BTDriver_tvOS.framework */; };
+		D4A0943123B3D3590074D6F8 /* RVS_BTDriver_tvOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4FB614D235F26E400C3FECD /* RVS_BTDriver_tvOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4AFF94523A028CC009A2677 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AFF94423A028CB009A2677 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift */; };
 		D4AFF94623A028CC009A2677 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AFF94423A028CB009A2677 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift */; };
 		D4AFF94723A028CC009A2677 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AFF94423A028CB009A2677 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift */; };
@@ -460,6 +462,13 @@
 			remoteGlobalIDString = D4DBE1A4235E0E0A00107353;
 			remoteInfo = RVS_BTDriver_MacOS;
 		};
+		D4A0943223B3D3590074D6F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4749B5D232A842A0073F7BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4FB614C235F26E400C3FECD;
+			remoteInfo = RVS_BTDriver_tvOS;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -536,6 +545,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D481A174235E27AD004DF47E /* RVS_BTDriver_MacOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4A0943423B3D3590074D6F8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D4A0943123B3D3590074D6F8 /* RVS_BTDriver_tvOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -671,6 +691,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4A0943023B3D3590074D6F8 /* RVS_BTDriver_tvOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,6 +955,7 @@
 				D41B6B63239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness */,
 				D4B19BD5235F28A30036EDF5 /* RVS_BTDriver_tvOS_Test_Harness */,
 				D4749B67232A842A0073F7BC /* Products */,
+				D4A0942F23B3D3590074D6F8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -980,6 +1002,13 @@
 				D42A7D1223ABB31D008384FC /* RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController.swift */,
 			);
 			path = "Views And Controllers";
+			sourceTree = "<group>";
+		};
+		D4A0942F23B3D3590074D6F8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D4B19BD5235F28A30036EDF5 /* RVS_BTDriver_tvOS_Test_Harness */ = {
@@ -1193,10 +1222,12 @@
 				D41AC89C23B3CF21000B578E /* Sources */,
 				D41AC89D23B3CF21000B578E /* Frameworks */,
 				D41AC89E23B3CF21000B578E /* Resources */,
+				D4A0943423B3D3590074D6F8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D4A0943323B3D3590074D6F8 /* PBXTargetDependency */,
 			);
 			name = RVS_BTDriver_tvOS_Test_Harness;
 			productName = "RVS_BTDriver_tvOS_Test_Harness (Framework)";
@@ -2381,6 +2412,11 @@
 			target = D4DBE1A4235E0E0A00107353 /* RVS_BTDriver_MacOS */;
 			targetProxy = D481A175235E27AD004DF47E /* PBXContainerItemProxy */;
 		};
+		D4A0943323B3D3590074D6F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4FB614C235F26E400C3FECD /* RVS_BTDriver_tvOS */;
+			targetProxy = D4A0943223B3D3590074D6F8 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -3129,7 +3165,7 @@
 		D4B19BE3235F28A40036EDF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3154,7 +3190,7 @@
 		D4B19BE4235F28A40036EDF5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				GCC_PREPROCESSOR_DEFINITIONS = "DIRECT=1";
