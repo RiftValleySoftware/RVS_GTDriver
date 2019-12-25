@@ -23,6 +23,25 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
+// MARK: - OBD-Specific Debug Tools Protocol -
+/* ###################################################################################################################################### */
+/**
+ */
+internal protocol RVS_BTDriver_OBD_DebugTools: RVS_DebugTools {
+    /* ################################################################## */
+    /**
+     This is a property that is set to a callback for a mock
+     */
+    var commandCallback: ((_ command: String) -> Void)! { get set }
+
+    /* ################################################################## */
+    /**
+     This is called to simulate sending a command, in a mock.
+     */
+    func sendCommand(_ command: String)
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Enums for Proprietary OBD BLE Service and Characteristic UUIDs -
 /* ###################################################################################################################################### */
 /**
@@ -137,33 +156,21 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             if  let value = inCharacteristic.value,
                 let string = String(data: value, encoding: .utf8) {
                 print("OBD Device Characteristic Value As String: \(string)")
+            } else {
+                print("OBD Device Characteristic Value Cannot Be Expressed As A String.")
             }
             
             if let error = inError {
                 print("With Error: \(error)")
             }
         #endif
-        
-        // Make sure this is for us.
-        if  inPeripheral == peripheral {
-            if  let value = inCharacteristic.value {
-                delegate?.device(self, returnedThisData: value)
-            }
+            
+        if  inPeripheral == peripheral, // Make sure this is for us.
+            let value = inCharacteristic.value {    // If we didn't get a value, then we don't send anything to the delegate.
+            delegate?.device(self, returnedThisData: value)
         } else {    // Otherwise, kick the can down the road.
             super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
         }
-    }
-        
-    /* ################################################################## */
-    /**
-    - parameter inPeripheral: The peripheral that owns this service.
-    - parameter didUpdateValueFor: The descriptor that was updated.
-    - parameter error: Any error that may have occurred. It can be nil.
-    */
-    internal func peripheral(_ inPeripheral: CBPeripheral, didUpdateValueFor inDescriptor: CBDescriptor, error inError: Error?) {
-        #if DEBUG
-            print("OBD Device Callback: peripheral: \(inPeripheral) didUpdateValueFor (Descriptor): \(inDescriptor)")
-        #endif
     }
     
     /* ################################################################## */

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D4DBE1A4235E0E0A00107353"
-               BuildableName = "RVS_BTDriver_MacOS.framework"
-               BlueprintName = "RVS_BTDriver_MacOS"
+               BlueprintIdentifier = "D41B6B61239834BF008F4E7D"
+               BuildableName = "RVS_BTDriver_OBD_Mac_Test_Harness (Direct).app"
+               BlueprintName = "RVS_BTDriver_OBD_Mac_Test_Harness (Direct)"
                ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,6 +50,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D41B6B61239834BF008F4E7D"
+            BuildableName = "RVS_BTDriver_OBD_Mac_Test_Harness (Direct).app"
+            BlueprintName = "RVS_BTDriver_OBD_Mac_Test_Harness (Direct)"
+            ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -57,15 +67,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D4DBE1A4235E0E0A00107353"
-            BuildableName = "RVS_BTDriver_MacOS.framework"
-            BlueprintName = "RVS_BTDriver_MacOS"
+            BlueprintIdentifier = "D41B6B61239834BF008F4E7D"
+            BuildableName = "RVS_BTDriver_OBD_Mac_Test_Harness (Direct).app"
+            BlueprintName = "RVS_BTDriver_OBD_Mac_Test_Harness (Direct)"
             ReferencedContainer = "container:RVS_BTDriver.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
