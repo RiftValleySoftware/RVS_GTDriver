@@ -87,15 +87,15 @@ class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject, NSApplicationDelega
      */
     @objc dynamic var isScanning: Bool {
         get {
-            return type(of: self).appDelegateObject.driverInstance?.isScanning ?? false
+            return Self.appDelegateObject.driverInstance?.isScanning ?? false
         }
         
         set {
             if  newValue,
-                let driverInstance = type(of: self).appDelegateObject.driverInstance,
+                let driverInstance = Self.appDelegateObject.driverInstance,
                 !driverInstance.isScanning {
                 driverInstance.startScanning()
-            } else if let driverInstance = type(of: self).appDelegateObject.driverInstance {
+            } else if let driverInstance = Self.appDelegateObject.driverInstance {
                 driverInstance.stopScanning()
             }
         }
@@ -106,7 +106,7 @@ class RVS_BTDriver_MacOS_Test_Harness_AppDelegate: NSObject, NSApplicationDelega
      Returns true, if bluetooth is available. READ-ONLY
      */
     @objc dynamic var isBTAvailable: Bool {
-        return type(of: self).appDelegateObject.driverInstance?.isBTAvailable ?? false
+        return Self.appDelegateObject.driverInstance?.isBTAvailable ?? false
     }
 }
 
@@ -164,7 +164,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
             print("ERROR! \(String(describing: inError))")
         #endif
         DispatchQueue.main.async {
-            type(of: self).displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+            Self.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
         }
     }
     

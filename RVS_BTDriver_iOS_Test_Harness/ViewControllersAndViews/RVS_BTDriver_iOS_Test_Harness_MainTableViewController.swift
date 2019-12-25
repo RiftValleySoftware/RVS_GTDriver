@@ -121,7 +121,7 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
      - parameter inSwitch: The switch instance.
      */
     @IBAction func scanModeSwitchChanged(_ inSwitch: UISegmentedControl) {
-        if type(of: self).segmentedSwitchIsOnIndex == inSwitch.selectedSegmentIndex {
+        if Self.segmentedSwitchIsOnIndex == inSwitch.selectedSegmentIndex {
             mainNavController?.driverInstance?.startScanning()
         } else {
             mainNavController?.driverInstance?.stopScanning()
@@ -390,15 +390,15 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
         if let driverInstance = mainNavController?.driverInstance {
             if driverInstance.isScanning {
                 isScanning = true
-                scanModeSegmentedSwitch.selectedSegmentIndex = type(of: self).segmentedSwitchIsOnIndex
+                scanModeSegmentedSwitch.selectedSegmentIndex = Self.segmentedSwitchIsOnIndex
             } else {
-                scanModeSegmentedSwitch.selectedSegmentIndex = type(of: self).segmentedSwitchIsOffIndex
+                scanModeSegmentedSwitch.selectedSegmentIndex = Self.segmentedSwitchIsOffIndex
             }
         } else {
             #if DEBUG
                 print("The driver instance is nil.")
             #endif
-            scanModeSegmentedSwitch.selectedSegmentIndex = type(of: self).segmentedSwitchIsOffIndex
+            scanModeSegmentedSwitch.selectedSegmentIndex = Self.segmentedSwitchIsOffIndex
         }
         
         #if DEBUG
@@ -407,14 +407,14 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController {
 
         // iOS 13 uses a different property to affect the tint color.
         if #available(iOS 13.0, *) {
-            scanModeSegmentedSwitch.selectedSegmentTintColor = isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+            scanModeSegmentedSwitch.selectedSegmentTintColor = isScanning ? Self.greenSelectedColor : Self.redSelectedColor
             // White text.
-            scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: isScanning ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor], for: .normal)
+            scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: isScanning ? Self.redSelectedColor : Self.greenSelectedColor], for: .normal)
             scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         } else {
-            let textColor = isScanning ? type(of: self).redSelectedColor : type(of: self).greenSelectedColor
+            let textColor = isScanning ? Self.redSelectedColor : Self.greenSelectedColor
             scanModeSegmentedSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
-            scanModeSegmentedSwitch.tintColor = isScanning ? type(of: self).greenSelectedColor : type(of: self).redSelectedColor
+            scanModeSegmentedSwitch.tintColor = isScanning ? Self.greenSelectedColor : Self.redSelectedColor
         }
         devicesTableView?.reloadData()
     }

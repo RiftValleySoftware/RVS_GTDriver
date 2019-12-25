@@ -208,7 +208,7 @@ internal class RVS_BTDriver_Interface_BLE: RVS_BTDriver_Base_Interface {
      - returns: An instance of the interface for this type of device. Can be nil, if `makeInterface(:)` has not yet been called.
      */
     internal var interface: RVS_BTDriver_InterfaceProtocol! {
-        return type(of: self).internal_interface
+        return Self.internal_interface
     }
 }
 
