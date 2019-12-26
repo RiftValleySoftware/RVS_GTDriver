@@ -1102,7 +1102,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      - parameter index: Parameter index 0-255
     */
     func setPPsProgParameterOnFor(_ index: UInt8) {
-        
+        sendCommand(String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterOn.rawValue, index) + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1112,18 +1112,18 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      - parameter index: Parameter index 0-255
     */
     func setPPsProgParameterOffFor(_ index: UInt8) {
-        
+        sendCommand(String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterOff.rawValue, index) + Self.crlf)
     }
 
     /* ################################################################## */
     /**
      Set the Given Program Parameter to the Given Value
      
-     - parameter value: 0-255
+     - parameter inValue: 0-255
      - parameter for: Parameter index 0-255
     */
-    func setPPsProgParameterValue(_ value: UInt8, for: UInt8) {
-        
+    func setPPsProgParameterValue(_ inValue: UInt8, for inIndex: UInt8) {
+        sendCommand(String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterValue.rawValue, inValue, inIndex) + Self.crlf)
     }
 
     /* ################################################################## */
