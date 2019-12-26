@@ -29,6 +29,18 @@ import XCTest
  These are individual tests for the OBD ELM327 commands.
  */
 class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
+    /* ################################################################## */
+    /**
+     We create a simple OBD device, and clear the last command string.
+     We also tell the OBD device to send commands our way, as opposed to a device.
+     */
+    override func setUp() {
+        super.setUp()
+        obdInstance = RVS_BTDriver_Device_OBD_ELM327(vendor: nil)
+        obdInstance?.commandReceiveFunc = self.receiveCommandFromTarget
+        lastReceivedCommand = ""
+    }
+
     /* ################################################################################################################################## */
     // MARK: - General -
     /* ################################################################################################################################## */
@@ -37,15 +49,15 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Return the device description
     */
 	func test_getDeviceDescription() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.getDeviceDescription()
     }
-
+    
     /* ################################################################## */
     /**
      Return the device ID
     */
 	func test_getDeviceIdentifier() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.getDeviceIdentifier()		
     }
 
     /* ################################################################## */
@@ -83,7 +95,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Restore the OBD Device to Defaults
     */
 	func test_restoreToDefaults() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.restoreToDefaults()		
     }
 
     /* ################################################################## */
@@ -91,7 +103,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn echo on
     */
 	func test_turnEchoOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnEchoOn()		
     }
 
     /* ################################################################## */
@@ -99,7 +111,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Echo Off
     */
 	func test_turnEchoOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnEchoOff()		
     }
 
     /* ################################################################## */
@@ -107,7 +119,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Flush All Events
     */
 	func test_flushAllEvents() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.flushAllEvents()		
     }
 
     /* ################################################################## */
@@ -115,7 +127,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Return the unit ID
     */
 	func test_getID() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.getID()		
     }
 
     /* ################################################################## */
@@ -123,7 +135,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn on Linefeeds
     */
 	func test_turnLinefeedsOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnLinefeedsOn()		
     }
 
     /* ################################################################## */
@@ -131,7 +143,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Off Linefeeds
     */
 	func test_turnLinefeedsOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnLinefeedsOff()		
     }
 
     /* ################################################################## */
@@ -139,7 +151,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn On Low Power Mode
     */
 	func test_turnLowPowerModeOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnLowPowerModeOn()		
     }
 
     /* ################################################################## */
@@ -147,7 +159,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn On Memory
     */
 	func test_turnMemoryOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnMemoryOn()		
     }
 
     /* ################################################################## */
@@ -155,7 +167,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Off Memory
     */
 	func test_turnMemoryOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnMemoryOff()		
     }
 
     /* ################################################################## */
@@ -163,7 +175,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Return Stored Data In Memory
     */
 	func test_fetchStoredData() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.fetchStoredData()		
     }
 
     /* ################################################################## */
@@ -181,7 +193,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Perform a "Warm Start"
     */
 	func test_warmStart() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.warmStart()		
     }
 
     /* ################################################################## */
@@ -189,7 +201,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Reset All
     */
 	func test_resetAll() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.resetAll()		
     }
 
     /* ################################################################################################################################## */
@@ -200,7 +212,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Use Long (>7 Byte) Messages
     */
 	func test_useLongMessages() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useLongMessages()		
     }
 
     /* ################################################################## */
@@ -208,7 +220,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Use Short (<= 7 Byte) Messages
     */
 	func test_useShortMessages() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useShortMessages()		
     }
 
     /* ################################################################## */
@@ -216,7 +228,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Enable Automatic Receive
     */
 	func test_autoReceive() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.autoReceive()		
     }
 
     /* ################################################################## */
@@ -224,7 +236,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Enable Adaptive Timing Auto Mode 1
     */
 	func test_useAdaptiveTimingMode1() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useAdaptiveTimingMode1()		
     }
 
     /* ################################################################## */
@@ -232,7 +244,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Enable Adaptive Timing Auto Mode 1
     */
 	func test_useAdaptiveTimingMode2() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useAdaptiveTimingMode2()		
     }
 
     /* ################################################################## */
@@ -240,7 +252,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Adaptive Timing Off
     */
 	func test_turnAdaptiveTimingOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnAdaptiveTimingOff()		
     }
 
     /* ################################################################## */
@@ -248,7 +260,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Return a Buffer Dump
     */
 	func test_bufferDump() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.bufferDump()		
     }
 
     /* ################################################################## */
@@ -256,7 +268,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Bypass the Initialization Sequence
     */
 	func test_bypassInitialization() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.bypassInitialization()		
     }
 
     /* ################################################################## */
@@ -264,7 +276,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Describe the Current Protocol
     */
 	func test_describeCurrentProtocol() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.describeCurrentProtocol()		
     }
 
     /* ################################################################## */
@@ -272,7 +284,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Describe the Current Protocol as a Number
     */
 	func test_describeProtocolByNumber() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.describeProtocolByNumber()		
     }
 
     /* ################################################################## */
@@ -280,7 +292,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Headers On
     */
 	func test_turnHeadersOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnHeadersOn()		
     }
 
     /* ################################################################## */
@@ -288,7 +300,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Headers Off
     */
 	func test_turnHeadersOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnHeadersOff()		
     }
 
     /* ################################################################## */
@@ -296,7 +308,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Monitor All
     */
 	func test_monitorAll() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.monitorAll()		
     }
 
     /* ################################################################## */
@@ -364,7 +376,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Use Auto Protocol
     */
 	func test_useAutoProtocol() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useAutoProtocol()		
     }
 
     /* ################################################################## */
@@ -372,7 +384,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Close the Protocol
     */
 	func test_closeProtocol() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.closeProtocol()		
     }
 
     /* ################################################################## */
@@ -380,7 +392,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Responses On
     */
 	func test_turnResponsesOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnResponsesOn()		
     }
 
     /* ################################################################## */
@@ -388,7 +400,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Responses Off
     */
 	func test_turnResponsesOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnResponsesOff()		
     }
 
     /* ################################################################## */
@@ -416,7 +428,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn On Print Spaces
     */
 	func test_turnPrintSpacesOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnPrintSpacesOn()		
     }
 
     /* ################################################################## */
@@ -424,7 +436,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Off Print Spaces
     */
 	func test_turnPrintSpacesOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnPrintSpacesOff()		
     }
 
     /* ################################################################## */
@@ -455,7 +467,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Set Standard (J1978) Search Order
     */
 	func test_useStandardSearchOrder() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useStandardSearchOrder()		
     }
 
     /* ################################################################## */
@@ -486,7 +498,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn CAN Auto-Formatting On
     */
 	func test_turnCANAutoFormattingOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANAutoFormattingOn()		
     }
 
     /* ################################################################## */
@@ -494,7 +506,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn CAN Auto-Formatting Off
     */
 	func test_turnCANAutoFormattingOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANAutoFormattingOff()		
     }
 
     /* ################################################################## */
@@ -512,7 +524,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn CAN Extended Addressing Off
     */
 	func test_turnOffCANExtendedAddressing() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnOffCANExtendedAddressing()		
     }
 
     /* ################################################################## */
@@ -544,7 +556,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn CAN Flow Control On
     */
 	func test_turnCANFlowControlOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANFlowControlOn()		
     }
 
     /* ################################################################## */
@@ -552,7 +564,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn CAN Flow Control Off
     */
 	func test_turnCANFlowControlOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANFlowControlOff()		
     }
 
     /* ################################################################## */
@@ -560,7 +572,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn CAN Silent Mode On
     */
 	func test_turnCANSilentModeOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANSilentModeOn()		
     }
 
     /* ################################################################## */
@@ -568,7 +580,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn CAN Silent Mode Off
     */
 	func test_turnCANSilentModeOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANSilentModeOff()		
     }
 
     /* ################################################################## */
@@ -576,7 +588,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn DLC Display On
     */
 	func test_turnDLCDisplayOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnDLCDisplayOn()		
     }
 
     /* ################################################################## */
@@ -584,7 +596,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn DLC Display Off
     */
 	func test_turnDLCDisplayOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnDLCDisplayOff()		
     }
 
     /* ################################################################## */
@@ -636,7 +648,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Send an RTR Message
     */
 	func test_rtrMessage() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.rtrMessage()		
     }
 
     /* ################################################################## */
@@ -644,7 +656,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn the Variable DLC On
     */
 	func test_turnVariableDLCOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnVariableDLCOn()		
     }
 
     /* ################################################################## */
@@ -652,7 +664,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn the Variable DLC Off
     */
 	func test_turnVariableDLCOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnVariableDLCOff()		
     }
 
     /* ################################################################################################################################## */
@@ -673,7 +685,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Reset the Calibration Voltage
     */
 	func test_resetCalibratingVoltage() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.resetCalibratingVoltage()		
     }
 
     /* ################################################################################################################################## */
@@ -684,7 +696,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Monitor for DM1 Messages
     */
 	func test_monitorForDM1Messages() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.monitorForDM1Messages()		
     }
 
     /* ################################################################## */
@@ -692,7 +704,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Use ELM Data Format
     */
 	func test_useElmDataFormat() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useElmDataFormat()		
     }
 
     /* ################################################################## */
@@ -700,7 +712,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Use SAE Data Format
     */
 	func test_useSAEDataFormat() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useSAEDataFormat()		
     }
 
     /* ################################################################## */
@@ -708,7 +720,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Header Formatting On
     */
 	func test_turnJ1939HeaderFormattingOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnJ1939HeaderFormattingOn()		
     }
 
     /* ################################################################## */
@@ -716,7 +728,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Header Formatting Off
     */
 	func test_turnJ1939HeaderFormattingOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnJ1939HeaderFormattingOff()		
     }
 
     /* ################################################################## */
@@ -724,7 +736,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Use the 1X Timer Multiplier
     */
 	func test_use1XTimerMultiplier() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.use1XTimerMultiplier()		
     }
 
     /* ################################################################## */
@@ -732,7 +744,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Use the 5X Timer Multiplier
     */
 	func test_use5XTimerMultiplier() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.use5XTimerMultiplier()		
     }
 
     /* ################################################################## */
@@ -764,7 +776,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      The IFR Value Should be Set From the Header
     */
 	func test_getIFRValueFromHeader() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.getIFRValueFromHeader()		
     }
 
     /* ################################################################## */
@@ -772,7 +784,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      The IFR Value Should be Set From the Source
     */
 	func test_getIFRValueFromSource() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.getIFRValueFromSource()		
     }
 
     /* ################################################################## */
@@ -780,7 +792,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn IFRs On
     */
 	func test_turnIFRsOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnIFRsOn()		
     }
 
     /* ################################################################## */
@@ -788,7 +800,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn On IFRs, and Set to Auto
     */
 	func test_useIFRsAuto() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useIFRsAuto()		
     }
 
     /* ################################################################## */
@@ -796,7 +808,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn IFRs Off
     */
 	func test_turnIFRsOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnIFRsOff()		
     }
 
     /* ################################################################################################################################## */
@@ -807,7 +819,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Try to Set Baud Rate to 10400
     */
 	func test_isoBaudRate10400() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.isoBaudRate10400()		
     }
 
     /* ################################################################## */
@@ -815,7 +827,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Try to Set Baud Rate to 4800
     */
 	func test_isoBaudRate4800() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.isoBaudRate4800()		
     }
 
     /* ################################################################## */
@@ -823,7 +835,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Try to Set Baud Rate to 9600
     */
 	func test_isoBaudRate9600() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.isoBaudRate9600()		
     }
 
     /* ################################################################## */
@@ -841,7 +853,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Display Keywords
     */
 	func test_displayKeywords() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.displayKeywords()		
     }
 
     /* ################################################################## */
@@ -849,7 +861,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Keyword Checking On
     */
 	func test_turnKeywordCheckingOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnKeywordCheckingOn()		
     }
 
     /* ################################################################## */
@@ -857,7 +869,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Keyword Checking Off
     */
 	func test_turnKeywordCheckingOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnKeywordCheckingOff()		
     }
 
     /* ################################################################## */
@@ -865,7 +877,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Perform a Slow Initiation
     */
 	func test_performSlowInitiation() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.performSlowInitiation()		
     }
 
     /* ################################################################## */
@@ -896,7 +908,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn On All Program Parameters
     */
 	func test_turnAllPPsProgParametersOn() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnAllPPsProgParametersOn()		
     }
 
     /* ################################################################## */
@@ -904,7 +916,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Turn Off All Program Parameters
     */
 	func test_turnAllPPsProgParametersOff() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnAllPPsProgParametersOff()		
     }
 
     /* ################################################################## */
@@ -943,6 +955,6 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Return a PPs Summary
     */
 	func test_ppSummary() {
-		
+		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.ppSummary()		
     }
 }

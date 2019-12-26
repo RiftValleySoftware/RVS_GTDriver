@@ -406,6 +406,12 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
 
     /* ################################################################## */
     /**
+     This is a property that is set to a command receive for a mock.
+     */
+    var commandReceiveFunc: ((_ command: String) -> Void)!
+
+    /* ################################################################## */
+    /**
      The central manager that controls this peripheral.
      */
     internal var centralManager: CBCentralManager! {

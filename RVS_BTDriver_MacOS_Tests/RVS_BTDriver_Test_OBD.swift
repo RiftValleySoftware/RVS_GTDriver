@@ -30,22 +30,24 @@ import XCTest
 class RVS_BTDriver_Test_OBD: XCTestCase {
     /* ################################################################## */
     /**
+     This is our OBD ELM327 device instance. We create a simple instance each time.
      */
     var obdInstance: RVS_BTDriver_Device_OBD!
     
     /* ################################################################## */
     /**
+     This holds the last received command.
      */
-    override func setUp() {
-        super.setUp()
-        obdInstance = RVS_BTDriver_Device_OBD(vendor: nil)
-        obdInstance.commandReceiveFunc = receiveCommandFromTarget
-    }
+    var lastReceivedCommand: String = ""
     
     /* ################################################################## */
     /**
+     Simply receives the outgoing command, and stores it in our property.
+     
+     - parameter inCommandSendString: The command being sent.
      */
     func receiveCommandFromTarget(_ inCommandSendString: String) {
         print("Command Send String Received: \"\(inCommandSendString)\".")
+        lastReceivedCommand = inCommandSendString
     }
 }

@@ -83,12 +83,6 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
 class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceProtocol {
     /* ################################################################## */
     /**
-     This is a property that is set to a command receive for a mock
-     */
-    var commandReceiveFunc: ((_ command: String) -> Void)!
-
-    /* ################################################################## */
-    /**
      This is a weak reference to the instance delegate.
      */
     public weak var delegate: RVS_BTDriver_OBD_DeviceDelegate!
@@ -112,15 +106,13 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
      - parameter inCommandString: The Sting for the command.
      */
     public func sendCommand(_ inCommandString: String) {
-        if let data = inCommandString.data(using: .utf8),
-            let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
-            let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
-            readProperty.canNotify = true
-            // If we are in a unit test, then we intercept the commands, and run them through the unit tests.
-            if  RVS_DebugTools.isRunningUnitTests,
-                nil != commandReceiveFunc {
+        if let data = inCommandString.data(using: .utf8) {
+            if  nil != commandReceiveFunc {
                 commandReceiveFunc(inCommandString)
-            } else {
+            } else if   let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
+                    let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
+                readProperty.canNotify = true
+                // If we are in a unit test, then we intercept the commands, and run them through the unit tests.
                 if writeProperty.canWriteWithResponse {
                     #if DEBUG
                         print("Sending data: \(inCommandString) for: \(writeProperty), and expecting a response.")
