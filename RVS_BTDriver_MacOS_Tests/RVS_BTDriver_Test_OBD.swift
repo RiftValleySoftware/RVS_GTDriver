@@ -48,6 +48,13 @@ class RVS_BTDriver_Test_OBD: XCTestCase {
      */
     func receiveCommandFromTarget(_ inCommandSendString: String) {
         print("Command Send String Received: \"\(inCommandSendString)\".")
+        var hexString = [String]()
+        for char in inCommandSendString {
+            for ch in char.utf8 {
+                hexString.append(String(format: "%02x", ch))
+            }
+        }
+        print("Command Send String Received (\(hexString.joined(separator: " ").uppercased())).")
         lastReceivedCommand = inCommandSendString
     }
 }
