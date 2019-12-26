@@ -78,6 +78,9 @@
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_iOS_Test_Harness_SettingsViewController.html">RVS_BTDriver_iOS_Test_Harness_SettingsViewController</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_DebugTools.html">RVS_DebugTools</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_PersistentPrefs.html">RVS_PersistentPrefs</a>
               </li>
               <li class="nav-group-task">
@@ -90,6 +93,17 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/StringProtocol.html">StringProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriverCommunicatorTools.html">RVS_BTDriverCommunicatorTools</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
               </li>
             </ul>
           </li>
@@ -180,6 +194,66 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:Sy29RVS_BTDriver_iOS_Test_HarnessE8hexDump8SaySSGvp"></a>
+                    <a name="//apple_ref/swift/Property/hexDump8" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy29RVS_BTDriver_iOS_Test_HarnessE8hexDump8SaySSGvp">hexDump8</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">hexDump8</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The String, converted into an Array of hex strings (leading 0s, 1 8-bit character per element).</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy29RVS_BTDriver_iOS_Test_HarnessE9hexDump16SaySSGvp"></a>
+                    <a name="//apple_ref/swift/Property/hexDump16" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy29RVS_BTDriver_iOS_Test_HarnessE9hexDump16SaySSGvp">hexDump16</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">hexDump16</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The String, converted into an Array of hex strings (leading 0s, 1 16-bit character per element).</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:Sy29RVS_BTDriver_iOS_Test_HarnessE15firstUppercasedSSvp"></a>
                     <a name="//apple_ref/swift/Property/firstUppercased" class="dashAnchor"></a>
                     <a class="token" href="#/s:Sy29RVS_BTDriver_iOS_Test_HarnessE15firstUppercasedSSvp">firstUppercased</a>
@@ -257,7 +331,7 @@ From here: <a href="https://stackoverflow.com/a/28288340/879365">https://stackov
                       <div class="abstract">
                         <p>The opposite of the above</p>
 
-<p>This extension function cleans up a URI string.</p>
+<p>This extension function takes a URI-encoded String, and decodes it into a regular String.</p>
 
                       </div>
                       <div class="declaration">
@@ -270,7 +344,7 @@ From here: <a href="https://stackoverflow.com/a/28288340/879365">https://stackov
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>a string, cleaned for URI.</p>
+                        <p>a string, restored from URI encoding.</p>
                       </div>
                     </section>
                   </div>

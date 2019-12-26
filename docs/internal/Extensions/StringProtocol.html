@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>StringProtocol Extension Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Extension/StringProtocol" class="dashAnchor"></a>
+
+    <a title="StringProtocol Extension Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          RVS_BTDriver Public Internal Code Doumentation
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html"> Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      StringProtocol Extension Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver.html">RVS_BTDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Base_Interface.html">RVS_BTDriver_Base_Interface</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device.html">RVS_BTDriver_Device</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_BLE.html">RVS_BTDriver_Device_BLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_GenericBLE.html">RVS_BTDriver_Device_GenericBLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes.html#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna">RVS_BTDriver_Device_GoTenna</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes.html#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna_Mesh">RVS_BTDriver_Device_GoTenna_Mesh</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_OBD.html">RVS_BTDriver_Device_OBD</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_OBD_ELM327.html">RVS_BTDriver_Device_OBD_ELM327</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BLE.html">RVS_BTDriver_Interface_BLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BLE/DeviceInfoStruct.html">– DeviceInfoStruct</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Property.html">RVS_BTDriver_Property</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Property_BLE.html">RVS_BTDriver_Property_BLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Service.html">RVS_BTDriver_Service</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Service_BLE.html">RVS_BTDriver_Service_BLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Service_DeviceInfo_BLE.html">RVS_BTDriver_Service_DeviceInfo_BLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Service_DeviceInfo_BLE/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GenericBLE.html">RVS_BTDriver_Vendor_GenericBLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GenericBLE/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna.html">RVS_BTDriver_Vendor_GoTenna</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna_Mesh.html">RVS_BTDriver_Vendor_GoTenna_Mesh</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna_Mesh/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD.html">RVS_BTDriver_Vendor_OBD</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327.html">RVS_BTDriver_Vendor_OBD_ELM327</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.html">RVS_BTDriver_Vendor_OBD_ELM327_ANON_1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_ANON_1/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_ANON_1_Device.html">RVS_BTDriver_Vendor_OBD_ELM327_ANON_1_Device</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.html">RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK_Device.html">RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK_Device</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VLINK.html">RVS_BTDriver_Vendor_OBD_ELM327_VLINK</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VLINK/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VLINK_Device.html">RVS_BTDriver_Vendor_OBD_ELM327_VLINK_Device</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_Kiwi.html">RVS_BTDriver_Vendor_OBD_Kiwi</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_Kiwi/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_Kiwi_Device.html">RVS_BTDriver_Vendor_OBD_Kiwi_Device</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_DebugTools.html">RVS_DebugTools</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_PersistentPrefs.html">RVS_PersistentPrefs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_PersistentPrefs/PrefsError.html">– PrefsError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_DeviceType.html">RVS_BTDriver_DeviceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_String.html">RVS_BTDriver_OBD_Command_String</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_PropertyProtocol_Type_Enum.html">RVS_BTDriver_PropertyProtocol_Type_Enum</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_State_Machine_StateEnum.html">RVS_BTDriver_State_Machine_StateEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_Vendor_OBD_Types.html">RVS_BTDriver_Vendor_OBD_Types</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/StringProtocol.html">StringProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriverCommunicatorTools.html">RVS_BTDriverCommunicatorTools</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriverDelegate.html">RVS_BTDriverDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_DeviceSubscriberProtocol.html">RVS_BTDriver_DeviceSubscriberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_InterfaceProtocol.html">RVS_BTDriver_InterfaceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DeviceDelegate.html">RVS_BTDriver_OBD_DeviceDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DeviceProtocol.html">RVS_BTDriver_OBD_DeviceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_ELM327_DeviceProtocol.html">RVS_BTDriver_OBD_ELM327_DeviceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_PropertyProtocol.html">RVS_BTDriver_PropertyProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_ServiceSubscriberProtocol.html">RVS_BTDriver_ServiceSubscriberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_State_Machine.html">RVS_BTDriver_State_Machine</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_SubscriberProtocol.html">RVS_BTDriver_SubscriberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_VendorProtocol.html">RVS_BTDriver_VendorProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>StringProtocol</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">StringProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">StringProtocol</span> <span class="k">where</span> <span class="kt">Index</span> <span class="o">==</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Index</span></code></pre>
+
+                </div>
+              </div>
+            <p>These are a variety of cool String extensions that add some great extra cheese on the pizza.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE16localizedVariantSSvp"></a>
+                    <a name="//apple_ref/swift/Property/localizedVariant" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE16localizedVariantSSvp">localizedVariant</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">localizedVariant</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the localized string (main bundle) for this string.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE3md5SSvp"></a>
+                    <a name="//apple_ref/swift/Property/md5" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE3md5SSvp">md5</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>From here: <a href="https://stackoverflow.com/q/24123518/879365">https://stackoverflow.com/q/24123518/879365</a>, but modified from here: <a href="https://stackoverflow.com/a/55639723/879365">https://stackoverflow.com/a/55639723/879365</a></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">md5</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>an MD5 hash of the String</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE8hexDump8SaySSGvp"></a>
+                    <a name="//apple_ref/swift/Property/hexDump8" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE8hexDump8SaySSGvp">hexDump8</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">hexDump8</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The String, converted into an Array of hex strings (leading 0s, 1 8-bit character per element).</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE9hexDump16SaySSGvp"></a>
+                    <a name="//apple_ref/swift/Property/hexDump16" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE9hexDump16SaySSGvp">hexDump16</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">hexDump16</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The String, converted into an Array of hex strings (leading 0s, 1 16-bit character per element).</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE15firstUppercasedSSvp"></a>
+                    <a name="//apple_ref/swift/Property/firstUppercased" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE15firstUppercasedSSvp">firstUppercased</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This extension lets us uppercase only the first letter of the string (used for weekdays).
+From here: <a href="https://stackoverflow.com/a/28288340/879365">https://stackoverflow.com/a/28288340/879365</a></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">firstUppercased</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The string, with only the first letter uppercased.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE16urlEncodedStringSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/urlEncodedString" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE16urlEncodedStringSSSgvp">urlEncodedString</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The following computed property comes from this: <a href="http://stackoverflow.com/a/27736118/879365">http://stackoverflow.com/a/27736118/879365</a></p>
+
+<p>This extension function cleans up a URI string.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">urlEncodedString</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>a string, cleaned for URI.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE16urlDecodedStringSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/urlDecodedString" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE16urlDecodedStringSSSgvp">urlDecodedString</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The opposite of the above</p>
+
+<p>This extension function takes a URI-encoded String, and decodes it into a regular String.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">urlDecodedString</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>a string, restored from URI encoding.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60Index%60%20==%20%60String.Index%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Index` == `String.Index`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60Index%60%20==%20%60String.Index%60"></a>
+                  <h3 class="section-name"><p>Available where <code>Index</code> == <code>String.Index</code></p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE5index2of7optionsSS5IndexVSgx_So22NSStringCompareOptionsVtF"></a>
+                    <a name="//apple_ref/swift/Method/index(of:options:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE5index2of7optionsSS5IndexVSgx_So22NSStringCompareOptionsVtF">index(of:options:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This allows us to find the first index of a substring.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">index</span><span class="p">(</span><span class="n">of</span> <span class="nv">inString</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="n">options</span> <span class="nv">inOptions</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">CompareOptions</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kt">Index</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>of</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The substring we&rsquo;re looking for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>options</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The String options for the search.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The index of the first occurrence. Nil, if does not occur.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE8endIndex2of7optionsSS0F0VSgx_So22NSStringCompareOptionsVtF"></a>
+                    <a name="//apple_ref/swift/Method/endIndex(of:options:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE8endIndex2of7optionsSS0F0VSgx_So22NSStringCompareOptionsVtF">endIndex(of:options:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This allows us to find the last index of a substring.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">endIndex</span><span class="p">(</span><span class="n">of</span> <span class="nv">inString</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="n">options</span> <span class="nv">inOptions</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">CompareOptions</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kt">Index</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>of</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The substring we&rsquo;re looking for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>options</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The String options for the search.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The index of the last occurrence. Nil, if does not occur.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE7indexes2of7optionsSaySS5IndexVGx_So22NSStringCompareOptionsVtF"></a>
+                    <a name="//apple_ref/swift/Method/indexes(of:options:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE7indexes2of7optionsSaySS5IndexVGx_So22NSStringCompareOptionsVtF">indexes(of:options:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns an Array of indexes that map all the occurrences of a given substring.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">indexes</span><span class="p">(</span><span class="n">of</span> <span class="nv">inString</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="n">options</span> <span class="nv">inOptions</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">CompareOptions</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Index</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>of</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The substring we&rsquo;re looking for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>options</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The String options for the search.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>an Array, containing the indexes of each occurrence. Empty Array, if does not occur.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE6ranges2of7optionsSaySnySS5IndexVGGx_So22NSStringCompareOptionsVtF"></a>
+                    <a name="//apple_ref/swift/Method/ranges(of:options:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE6ranges2of7optionsSaySnySS5IndexVGGx_So22NSStringCompareOptionsVtF">ranges(of:options:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns an Array of Index Ranges that map all the occurrences of a given substring.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">ranges</span><span class="p">(</span><span class="n">of</span> <span class="nv">inString</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="n">options</span> <span class="nv">inOptions</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">CompareOptions</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Index</span><span class="o">&gt;</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>of</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The substring we&rsquo;re looking for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>options</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The String options for the search.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>an Array, containing the Ranges that map each occurrence. Empty Array, if does not occur.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>© 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a> under <a class="link" href="https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/LICENSE" target="_blank" rel="external">open source license</a>.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

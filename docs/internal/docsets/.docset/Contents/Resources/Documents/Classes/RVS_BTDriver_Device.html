@@ -170,6 +170,15 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_Kiwi_Device.html">RVS_BTDriver_Vendor_OBD_Kiwi_Device</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_DebugTools.html">RVS_DebugTools</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_PersistentPrefs.html">RVS_PersistentPrefs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_PersistentPrefs/PrefsError.html">– PrefsError</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -189,6 +198,14 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_Vendor_OBD_Types.html">RVS_BTDriver_Vendor_OBD_Types</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/StringProtocol.html">StringProtocol</a>
               </li>
             </ul>
           </li>
@@ -236,9 +253,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_VendorProtocol.html">RVS_BTDriver_VendorProtocol</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/RVS_DebugTools.html">RVS_DebugTools</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
@@ -511,9 +525,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B7_DeviceC6vendorAcA0a1_B15_VendorProtocol_p_tcfc"></a>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B7_DeviceC6vendorAcA0a1_B15_VendorProtocol_pSg_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(vendor:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B7_DeviceC6vendorAcA0a1_B15_VendorProtocol_p_tcfc">init(vendor:)</a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B7_DeviceC6vendorAcA0a1_B15_VendorProtocol_pSg_tcfc">init(vendor:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -528,7 +542,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="nf">init</span><span class="p">(</span><span class="n"><a href="../Classes/RVS_BTDriver_Device.html#/s:18RVS_BTDriver_MacOS0a1_B7_DeviceC6vendorAA0a1_B15_VendorProtocol_pSgvp">vendor</a></span> <span class="nv">inVendor</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_VendorProtocol.html">RVS_BTDriver_VendorProtocol</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="nf">init</span><span class="p">(</span><span class="n"><a href="../Classes/RVS_BTDriver_Device.html#/s:18RVS_BTDriver_MacOS0a1_B7_DeviceC6vendorAA0a1_B15_VendorProtocol_pSgvp">vendor</a></span> <span class="nv">inVendor</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_VendorProtocol.html">RVS_BTDriver_VendorProtocol</a></span><span class="o">!</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -544,7 +558,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The vendor factory for the device.</p>
+                                  <p>The vendor factory for the device. It can be nil (for testing purposes only).</p>
                                 </div>
                               </td>
                             </tr>

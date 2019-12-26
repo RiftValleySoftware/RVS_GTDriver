@@ -170,6 +170,15 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/RVS_BTDriver_Vendor_OBD_Kiwi_Device.html">RVS_BTDriver_Vendor_OBD_Kiwi_Device</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RVS_DebugTools.html">RVS_DebugTools</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RVS_PersistentPrefs.html">RVS_PersistentPrefs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RVS_PersistentPrefs/PrefsError.html">– PrefsError</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -189,6 +198,14 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/RVS_BTDriver_Vendor_OBD_Types.html">RVS_BTDriver_Vendor_OBD_Types</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/StringProtocol.html">StringProtocol</a>
               </li>
             </ul>
           </li>
@@ -238,9 +255,6 @@
                 <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_VendorProtocol.html">RVS_BTDriver_VendorProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/RVS_DebugTools.html">RVS_DebugTools</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
               </li>
             </ul>
@@ -259,6 +273,93 @@
 
         <section class="section">
           <div class="section-content">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Main%20Preferences%20Base%20Class"></a>
+                <a name="//apple_ref/swift/Section/Main Preferences Base Class" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Main%20Preferences%20Base%20Class"></a>
+                  <h3 class="section-name"><p>Main Preferences Base Class</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_PersistentPrefs"></a>
+                    <a name="//apple_ref/swift/Class/RVS_PersistentPrefs" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_PersistentPrefs">RVS_PersistentPrefs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This class is designed to act as an &ldquo;abstract&rdquo; base class, providing a simple <code>Dictionary</code> datastore that is stored in the <a href="https://developer.apple.com/documentation/foundation/userdefaults"><code>UserDefaults</code></a> in the Application Bundle. It is designed to be reliable, and extremely simple to use.
+The stored <code>Dictionary</code> would be a String-keyed Dictionary of <code>Any</code> (flexible types). It s up to subclasses to specialize the typeless data.
+THIS IS NOT EFFICIENT OR ROBUST!
+It is meant as a simple &ldquo;bucket&rdquo; for things like application preferences. It is not an industrial data storage solution. You have been warned.
+Subclasses could declare their accessors as <a href="https://developer.apple.com/documentation/swift/cocoa_design_patterns/using_key-value_observing_in_swift"><code>KVO</code></a>-style, thus, providing a direct way to influence persistent state.
+You can also directly observe the .values property. It will change when ANY pref is changed (so might not be suitable for &ldquo;pick and choose&rdquo; observation).</p>
+
+                        <a href="Classes/RVS_PersistentPrefs.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RVS_PersistentPrefs</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Debug%20Tools%20Class"></a>
+                <a name="//apple_ref/swift/Section/Debug Tools Class" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Debug%20Tools%20Class"></a>
+                  <h3 class="section-name"><p>Debug Tools Class</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0A11_DebugToolsC"></a>
+                    <a name="//apple_ref/swift/Class/RVS_DebugTools" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0A11_DebugToolsC">RVS_DebugTools</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This class is a &ldquo;junk drawer&rdquo; of vrious debug/testing tools.</p>
+
+                        <a href="Classes/RVS_DebugTools.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">class</span> <span class="kt">RVS_DebugTools</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
             <div class="task-group">
               <div class="task-name-container">
                 <a name="/RVS_BTDriver_Base_Interface"></a>
