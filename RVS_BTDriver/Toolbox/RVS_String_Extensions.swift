@@ -138,9 +138,9 @@ public extension StringProtocol {
     /**
      The opposite of the above
      
-     This extension function cleans up a URI string.
+     This extension function takes a URI-encoded String, and decodes it into a regular String.
      
-     - returns: a string, cleaned for URI.
+     - returns: a string, restored from URI encoding.
      */
     var urlDecodedString: String? {
         if let ret = self.removingPercentEncoding {
