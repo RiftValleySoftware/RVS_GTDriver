@@ -461,6 +461,7 @@
 		D4ECE4FB23B42346003CFB10 /* RVS_DebugTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41AC89023B3CE02000B578E /* RVS_DebugTools.swift */; };
 		D4ECE4FC23B42346003CFB10 /* RVS_BTDriverCommunicatorTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC502234BB88A006D0A53 /* RVS_BTDriverCommunicatorTools.swift */; };
 		D4ECE4FD23B42346003CFB10 /* RVS_SequenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FEC503234BB88A006D0A53 /* RVS_SequenceProtocol.swift */; };
+		D4ECE4FF23B43443003CFB10 /* RVS_BTDriver_Test_OBD_ELM327.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ECE4FE23B43443003CFB10 /* RVS_BTDriver_Test_OBD_ELM327.swift */; };
 		D4F987DA239D6DB50098F4A1 /* RVS_BTDriver_Vendor_GenericBLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F987D5239D6DB50098F4A1 /* RVS_BTDriver_Vendor_GenericBLE.swift */; };
 		D4F987DB239D6DB50098F4A1 /* RVS_BTDriver_Vendor_GenericBLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F987D5239D6DB50098F4A1 /* RVS_BTDriver_Vendor_GenericBLE.swift */; };
 		D4F987DD239D6DB50098F4A1 /* RVS_BTDriver_Vendor_GenericBLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F987D5239D6DB50098F4A1 /* RVS_BTDriver_Vendor_GenericBLE.swift */; };
@@ -733,6 +734,7 @@
 		D4ECE3F623B4214A003CFB10 /* RVS_BTDriver_MacOS_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RVS_BTDriver_MacOS_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ECE3F823B4214A003CFB10 /* RVS_BTDriver_Test_OBD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_Test_OBD.swift; sourceTree = "<group>"; };
 		D4ECE3FA23B4214A003CFB10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4ECE4FE23B43443003CFB10 /* RVS_BTDriver_Test_OBD_ELM327.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_Test_OBD_ELM327.swift; sourceTree = "<group>"; };
 		D4F987D5239D6DB50098F4A1 /* RVS_BTDriver_Vendor_GenericBLE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_Vendor_GenericBLE.swift; sourceTree = "<group>"; };
 		D4FB614D235F26E400C3FECD /* RVS_BTDriver_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RVS_BTDriver_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4FB6169235F276C00C3FECD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = RVS_BTDriver_tvOS/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -1186,6 +1188,7 @@
 			isa = PBXGroup;
 			children = (
 				D4ECE3F823B4214A003CFB10 /* RVS_BTDriver_Test_OBD.swift */,
+				D4ECE4FE23B43443003CFB10 /* RVS_BTDriver_Test_OBD_ELM327.swift */,
 				D4ECE3FA23B4214A003CFB10 /* Info.plist */,
 			);
 			path = RVS_BTDriver_MacOS_Tests;
@@ -2464,6 +2467,7 @@
 				D4ECE40923B422A6003CFB10 /* RVS_BTDriver_PropertyProtocol.swift in Sources */,
 				D4ECE41E23B422A6003CFB10 /* RVS_BTDriver_Interface_BLE.swift in Sources */,
 				D4ECE41D23B422A6003CFB10 /* RVS_BTDriver_Base_Interface.swift in Sources */,
+				D4ECE4FF23B43443003CFB10 /* RVS_BTDriver_Test_OBD_ELM327.swift in Sources */,
 				D4ECE40823B422A6003CFB10 /* RVS_BTDriver_ServiceProtocol.swift in Sources */,
 				D4ECE40E23B422A6003CFB10 /* RVS_BTDriver_State_Machine.swift in Sources */,
 				D4ECE41923B422A6003CFB10 /* RVS_BTDriver_Vendor_OBD_ELM327_VLINK.swift in Sources */,
