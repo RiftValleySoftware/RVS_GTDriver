@@ -869,8 +869,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      
      - parameter value: Calibrating voltage.
     */
-	func test_setCalibratingVoltage(_ value: Float) {
+	func test_setCalibratingVoltage() {
+        let strider = stride(from: 0, to: 99, by: 1.0123456789)
         
+        for value in strider {
+            (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setCalibratingVoltage(Float(value))
+            XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setCalibratingVoltage.rawValue, value) + "\r\n")
+        }
     }
 
     /* ################################################################## */
@@ -951,22 +956,27 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     /* ################################################################## */
     /**
      Set the PGN Monitor
-     
-     - parameter value: 0-4096
     */
-	func test_setPGNMonitor(_ value: UInt64) {
-        
+	func test_setPGNMonitor() {
+        for value in 0..<4096 {
+            (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPGNMonitor(UInt64(value))
+            XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPGNMonitor1.rawValue, UInt64(value)) + "\r\n")
+        }
     }
 
     /* ################################################################## */
     /**
-     Set the PGN Monitor
-     
-     - parameter value: 0-4096
-     - parameter messages: 0-7 (the number of messages to receive)
+     Set the PGN Monitor (and get messages)
     */
-	func test_setPGNMonitorGetMessages(_ value: UInt64, _ messages: UInt8) {
+	func test_setPGNMonitorGetMessages() {
+        let strider = stride(from: 0, to: 4095, by: 64)
         
+        for getMessages in 0..<8 {
+            for value in strider {
+                (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPGNMonitorGetMessages(UInt64(value), UInt8(getMessages))
+                XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPGNMonitor2.rawValue, UInt64(value), getMessages) + "\r\n")
+            }
+        }
     }
 
     /* ################################################################################################################################## */
@@ -1050,11 +1060,16 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     /* ################################################################## */
     /**
      Set the ISO Initial Address
-     
-     - parameter address: 0-255
     */
-	func test_setISOInitAddress(_ address: UInt8) {
-        
+	func test_setISOInitAddress() {
+        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setISOInitAddress(0)
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setISOInitAddress.rawValue, 0) + "\r\n")
+        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setISOInitAddress(127)
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setISOInitAddress.rawValue, 127) + "\r\n")
+        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setISOInitAddress(128)
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setISOInitAddress.rawValue, 128) + "\r\n")
+        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setISOInitAddress(255)
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setISOInitAddress.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -1096,21 +1111,39 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     /* ################################################################## */
     /**
      Set the Wakeup Interval to Multiple of 4ms
-     
-     - parameter multiplier: 0-255
     */
-	func test_setWakeupIntervalMultiplerBy20ms(_ multiplier: UInt8) {
-        
+	func test_setWakeupIntervalMultiplerBy20ms() {
+        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setWakeupIntervalMultiplerBy20ms(0)
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setWakeupIntervalMultiplerBy20ms.rawValue, 0) + "\r\n")
+        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setWakeupIntervalMultiplerBy20ms(127)
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setWakeupIntervalMultiplerBy20ms.rawValue, 127) + "\r\n")
+        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setWakeupIntervalMultiplerBy20ms(128)
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setWakeupIntervalMultiplerBy20ms.rawValue, 128) + "\r\n")
+        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setWakeupIntervalMultiplerBy20ms(255)
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setWakeupIntervalMultiplerBy20ms.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
     /**
      Set the Wakeup Message
-     
-     - parameter message: Up to 6 0-255
     */
-	func test_setWakeupMessage(_ message: [UInt8]) {
+	func test_setWakeupMessage() {
+        let strider = stride(from: 0, to: 255, by: 64)
         
+        for value1 in strider {
+            for value2 in strider {
+                for value3 in strider {
+                    for value4 in strider {
+                        for value5 in strider {
+                            for value6 in strider {
+                                (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setWakeupMessage([UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4), UInt8(value5), UInt8(value6)])
+                                XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setWakeupMessage.rawValue, UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4), UInt8(value5), UInt8(value6)) + "\r\n")
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /* ################################################################################################################################## */

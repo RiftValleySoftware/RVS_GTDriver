@@ -846,7 +846,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      - parameter value: Calibrating voltage.
     */
     func setCalibratingVoltage(_ value: Float) {
-        
+        sendCommand(String(format: RVS_BTDriver_OBD_Command_String.setCalibratingVoltage.rawValue, value) + "\r\n")
     }
 
     /* ################################################################## */
@@ -923,7 +923,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      - parameter value: 0-4096
     */
     func setPGNMonitor(_ value: UInt64) {
-        
+        sendCommand(String(format: RVS_BTDriver_OBD_Command_String.setPGNMonitor1.rawValue, value) + "\r\n")
     }
 
     /* ################################################################## */
@@ -934,7 +934,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      - parameter messages: 0-7 (the number of messages to receive)
     */
     func setPGNMonitorGetMessages(_ value: UInt64, _ messages: UInt8) {
-        
+        sendCommand(String(format: RVS_BTDriver_OBD_Command_String.setPGNMonitor2.rawValue, value, messages) + "\r\n")
     }
 
     /* ################################################################################################################################## */
@@ -1014,7 +1014,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      - parameter address: 0-255
     */
     func setISOInitAddress(_ address: UInt8) {
-        
+        sendCommand(String(format: RVS_BTDriver_OBD_Command_String.setISOInitAddress.rawValue, address) + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1056,7 +1056,7 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      - parameter multiplier: 0-255
     */
     func setWakeupIntervalMultiplerBy20ms(_ multiplier: UInt8) {
-        
+        sendCommand(String(format: RVS_BTDriver_OBD_Command_String.setWakeupIntervalMultiplerBy20ms.rawValue, multiplier) + Self.crlf)
     }
 
     /* ################################################################## */
@@ -1065,8 +1065,15 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      
      - parameter message: Up to 6 0-255
     */
-    func setWakeupMessage(_ message: [UInt8]) {
+    func setWakeupMessage(_ inMessage: [UInt8]) {
+        var values: [UInt8] = [0, 0, 0, 0, 0, 0]
+        precondition(0 < values.count, "Must have at least one value")
         
+        for index in 0..<6 where index < inMessage.count {
+            values[index] = inMessage[index]
+        }
+        
+        sendCommand(String(format: RVS_BTDriver_OBD_Command_String.setWakeupMessage.rawValue, values[0], values[1], values[2], values[3], values[4], values[5]) + Self.crlf)
     }
 
     /* ################################################################################################################################## */
