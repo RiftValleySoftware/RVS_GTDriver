@@ -229,7 +229,12 @@ extension RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_OBD_ELM327_DeviceProtocol
      - parameter id: A String, with up to 12 ASCII characters.
     */
     func setDeviceIdentifier(_ id: String) {
-        sendCommand(String(format: RVS_BTDriver_OBD_Command_String.setDeviceIdentifier.rawValue, id) + Self.crlf)
+        var dumpVal: String = id
+        if 12 < id.count {
+            let endIndex = id.index(id.startIndex, offsetBy: 11)
+            dumpVal = String(id[id.startIndex...endIndex])
+        }
+        sendCommand(String(format: RVS_BTDriver_OBD_Command_String.setDeviceIdentifier.rawValue, dumpVal) + Self.crlf)
     }
 
     /* ################################################################## */

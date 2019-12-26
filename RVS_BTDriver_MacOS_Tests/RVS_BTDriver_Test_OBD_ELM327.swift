@@ -69,14 +69,21 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
      Set the device ID
     */
 	func test_setDeviceIdentifier() {
-        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setDeviceIdentifier("0")
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setDeviceIdentifier.rawValue, "0") + "\r\n")
-        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setDeviceIdentifier("TEST")
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setDeviceIdentifier.rawValue, "TEST") + "\r\n")
-        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setDeviceIdentifier("0123456789ABC")
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setDeviceIdentifier.rawValue, "0123456789ABC") + "\r\n")
-        (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setDeviceIdentifier("Ó≈√›Á¥ˆÆ»ŒÔÒ")
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setDeviceIdentifier.rawValue, "Ó≈√›Á¥ˆÆ»ŒÔÒ") + "\r\n")
+        let testValues: [String] = ["0", "TEST", "0123456789AB", "Ó¢√›Á©π–™ªº", "Fore Skor and seben yerz agow"]
+        
+        for id in testValues {
+            (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setDeviceIdentifier(id)
+            var testVal: String = id
+            if 12 < id.count {
+                let endIndex = id.index(id.startIndex, offsetBy: 11)
+                testVal = String(id[id.startIndex...endIndex])
+            }
+            
+            testVal = (String(format: RVS_BTDriver_OBD_Command_String.setDeviceIdentifier.rawValue, testVal) + "\r\n").hexDump8.joined()
+            let compString = lastReceivedCommand.hexDump8.joined()
+            
+            XCTAssertEqual(testVal, compString)
+        }
     }
 
     /* ################################################################## */

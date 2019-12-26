@@ -77,6 +77,36 @@ public extension StringProtocol {
     
     /* ################################################################## */
     /**
+     - returns: The String, converted into an Array of hex strings (leading 0s, 1 8-bit character per element).
+     */
+    var hexDump8: [String] {
+        var hexString = [String]()
+        for char in self {
+            for ch in char.utf8 {
+                hexString.append(String(format: "%02x", ch))
+            }
+        }
+        
+        return hexString
+    }
+    
+    /* ################################################################## */
+    /**
+     - returns: The String, converted into an Array of hex strings (leading 0s, 1 16-bit character per element).
+     */
+    var hexDump16: [String] {
+        var hexString = [String]()
+        for char in self {
+            for ch in char.utf16 {
+                hexString.append(String(format: "%04x", ch))
+            }
+        }
+        
+        return hexString
+    }
+
+    /* ################################################################## */
+    /**
      This extension lets us uppercase only the first letter of the string (used for weekdays).
      From here: https://stackoverflow.com/a/28288340/879365
      
