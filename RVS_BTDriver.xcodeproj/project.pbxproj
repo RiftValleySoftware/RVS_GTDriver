@@ -115,6 +115,7 @@
 		D4524BA9234D40BA00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4524BA7234D40BA00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_NavigationController.swift */; };
 		D453E0B12371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453E0B02371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift */; };
 		D453E0B22371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453E0B02371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift */; };
+		D45D635B23B5747B004B55CF /* RVS_BTDriver_OBD_Mac_Test_Harness_ELM327Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45D635A23B5747B004B55CF /* RVS_BTDriver_OBD_Mac_Test_Harness_ELM327Commands.swift */; };
 		D45EF34323B545560075BF1E /* RVS_DebugTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41AC89023B3CE02000B578E /* RVS_DebugTools.swift */; };
 		D45EF34423B546910075BF1E /* RVS_DebugTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41AC89023B3CE02000B578E /* RVS_DebugTools.swift */; };
 		D45EF34523B546920075BF1E /* RVS_DebugTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41AC89023B3CE02000B578E /* RVS_DebugTools.swift */; };
@@ -686,6 +687,7 @@
 		D4524B9E234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVS_BTDriver_iOS_Test_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4524BA7234D40BA00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_NavigationController.swift; sourceTree = "<group>"; };
 		D453E0B02371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift; sourceTree = "<group>"; };
+		D45D635A23B5747B004B55CF /* RVS_BTDriver_OBD_Mac_Test_Harness_ELM327Commands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_OBD_Mac_Test_Harness_ELM327Commands.swift; sourceTree = "<group>"; };
 		D46A7AE023B2477100CB2DAB /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift; sourceTree = "<group>"; };
 		D4798FEC23AFFD4C00FDBAB9 /* RVS_BTDriver_OBD_Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_OBD_Command.swift; sourceTree = "<group>"; };
 		D480365D23995107007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift; sourceTree = "<group>"; };
@@ -1068,6 +1070,7 @@
 			isa = PBXGroup;
 			children = (
 				D41B6B64239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.swift */,
+				D45D635A23B5747B004B55CF /* RVS_BTDriver_OBD_Mac_Test_Harness_ELM327Commands.swift */,
 			);
 			path = "App Files";
 			sourceTree = "<group>";
@@ -2122,6 +2125,7 @@
 				D41B6B7D239834DD008F4E7D /* RVS_BTDriver_Vendor_OBD.swift in Sources */,
 				D41B6B80239834DD008F4E7D /* RVS_BTDriver_Interface_BLE.swift in Sources */,
 				D41B6B75239834DD008F4E7D /* RVS_BTDriver_PropertyProtocol.swift in Sources */,
+				D45D635B23B5747B004B55CF /* RVS_BTDriver_OBD_Mac_Test_Harness_ELM327Commands.swift in Sources */,
 				D41B6B74239834DD008F4E7D /* RVS_BTDriver_ServiceProtocol.swift in Sources */,
 				D402EB0323A3E67200DFE5EB /* RVS_BTDriver_Vendor_OBD_Kiwi.swift in Sources */,
 				D41B6B81239834DD008F4E7D /* RVS_BTDriverCommunicatorTools.swift in Sources */,
