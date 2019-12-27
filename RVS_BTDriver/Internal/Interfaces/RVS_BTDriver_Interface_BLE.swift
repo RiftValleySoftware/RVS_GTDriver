@@ -1600,7 +1600,7 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
      */
     public var modelName: String! {
         if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.modelNumberString.rawValue)?.rawValue {
-            return String(data: propertyValue, encoding: .utf8)
+            return String(data: propertyValue, encoding: .ascii)
         }
         return nil
     }
@@ -1611,7 +1611,7 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
      */
     public var manufacturerName: String! {
        if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.manufacturerNameString.rawValue)?.rawValue {
-           return String(data: propertyValue, encoding: .utf8)
+           return String(data: propertyValue, encoding: .ascii)
        }
        
        return nil
@@ -1623,7 +1623,7 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
      */
     public var serialNumber: String! {
        if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.serialNumberString.rawValue)?.rawValue {
-           return String(data: propertyValue, encoding: .utf8)
+           return String(data: propertyValue, encoding: .ascii)
        }
        
        return nil
@@ -1635,7 +1635,7 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
      */
     public var hardwareRevision: String! {
        if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.hardwareRevisionString.rawValue)?.rawValue {
-           return String(data: propertyValue, encoding: .utf8)
+           return String(data: propertyValue, encoding: .ascii)
        }
        
        return nil
@@ -1647,7 +1647,7 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
      */
     public var firmwareRevision: String! {
         if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.firmwareRevisionString.rawValue)?.rawValue {
-            return String(data: propertyValue, encoding: .utf8)
+            return String(data: propertyValue, encoding: .ascii)
         }
         
         return nil
@@ -1659,7 +1659,7 @@ class RVS_BTDriver_Service_DeviceInfo_BLE: RVS_BTDriver_Service_BLE {
      */
     public var softwareRevision: String! {
         if let propertyValue = propertyInstanceForCBUUID(RVS_BLE_GATT_UUID.softwareRevisionString.rawValue)?.rawValue {
-            return String(data: propertyValue, encoding: .utf8)
+            return String(data: propertyValue, encoding: .ascii)
         }
         
         return nil

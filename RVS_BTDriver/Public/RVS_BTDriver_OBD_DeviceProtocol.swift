@@ -102,7 +102,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         }
         
         if  let responseData = responseData,
-            let stringResponse = String(data: responseData, encoding: .utf8) {
+            let stringResponse = String(data: responseData, encoding: .ascii) {
             ret += "\n\tResponse: \"\(stringResponse)\""
         }
         

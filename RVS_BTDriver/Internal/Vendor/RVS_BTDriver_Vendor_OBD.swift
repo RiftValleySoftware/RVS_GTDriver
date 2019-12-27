@@ -130,7 +130,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 currentTransaction = transactionQueue.dequeue()
             } else if  let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
                 let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE,
-                let data = commandString.data(using: .utf8) {
+                let data = commandString.data(using: .ascii) {
                 readProperty.canNotify = true
                 if writeProperty.canWriteWithResponse {
                     #if DEBUG
@@ -186,7 +186,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             // All OBD responses end with a less-than sign, so we wait for that before wrapping up.
             if  let currTrans = currentTransaction,
                 let stringValueData = currTrans.responseData,
-                let stringValue = String(data: stringValueData, encoding: .utf8),
+                let stringValue = String(data: stringValueData, encoding: .ascii),
                 ">" == stringValue.last {
                 #if DEBUG
                 print("Sending \"\(currTrans.description)\" up to the delegate.")
@@ -235,7 +235,7 @@ extension RVS_BTDriver_Device_OBD {
             print("OBD Device Callback: peripheral: \(inPeripheral) didUpdateValueFor (Characteristic): \(inCharacteristic).")
             print("OBD Device Characteristic Value: \(String(describing: inCharacteristic.value))")
             if  let value = inCharacteristic.value,
-                let string = String(data: value, encoding: .utf8) {
+                let string = String(data: value, encoding: .ascii) {
                 print("OBD Device Characteristic Value As String: \(string)")
             } else {
                 print("OBD Device Characteristic Value Cannot Be Expressed As A String.")

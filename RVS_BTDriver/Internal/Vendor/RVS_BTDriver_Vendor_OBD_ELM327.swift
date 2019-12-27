@@ -136,9 +136,10 @@ extension RVS_BTDriver_Device_OBD_ELM327 {
         #if DEBUG
             print("OBD ELM327 Device Callback: peripheral: \(inPeripheral) didUpdateValueFor (Characteristic): \(inCharacteristic).")
             print("OBD ELM327 Device Characteristic Value: \(String(describing: inCharacteristic.value))")
-            if  let value = inCharacteristic.value,
-                let string = String(data: value, encoding: .utf8) {
-                print("OBD ELM327 Device Characteristic Value As String: \(string)")
+            if let stringData = inCharacteristic.value {
+                if let str = String(data: stringData, encoding: .ascii) {
+                    print("OBD ELM327 Device Characteristic Value As String: \(str)")
+                }
             }
             
             if let error = inError {
@@ -151,7 +152,7 @@ extension RVS_BTDriver_Device_OBD_ELM327 {
             inPeripheral == peripheral {
             if  let value = inCharacteristic.value {
                 if  elm327Version.isEmpty { // If we have not set up the version yet, we can't finish the initialization.
-                    if let trimmedResponse = String(data: value, encoding: .utf8)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])) {
+                    if let trimmedResponse = String(data: value, encoding: .ascii)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])) {
                         if 9 < trimmedResponse.count {  // We need to have at least nine characters in the response.
                             let indexOfSubstring = trimmedResponse.index(trimmedResponse.startIndex, offsetBy: 8)
                             let substring = String(trimmedResponse[indexOfSubstring...])
