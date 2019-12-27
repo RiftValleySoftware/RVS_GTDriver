@@ -113,8 +113,8 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
     
     /* ################################################################## */
     /**
-     This menthod will send a command to the OBD unit.
-     This variant of the method will fectch any command in the _currentTransaction property.
+     This method will send a command to the OBD unit.
+     This variant of the method will fectch any command in the _currentTransaction property. If none, then nothing happens.
      */
     internal func sendCommand() {
         if  let commandString = _currentTransaction.completeCommand {   // Get the command string.
@@ -143,17 +143,17 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
 
     /* ################################################################## */
     /**
-     This menthod will send a command to the OBD unit.
+     This method will send a command to the OBD unit.
      
-     - parameter inCommandString: The Sting for the command.
-     - parameter rawCommand: The command string, without data or the appended CRLF.
+     - parameter inCommandString: The String for the command.
+     - parameter rawCommand: The command String, without data or the appended CRLF.
      */
     public func sendCommand(_ inCommandString: String, rawCommand inRawCommand: String) {
         #if DEBUG
             print("Storing transaction")
         #endif
         _transactionQueue.enqueue(RVS_BTDriver_OBD_Device_TransactionStruct(device: self, rawCommand: inRawCommand, completeCommand: inCommandString))
-        if nil == _currentTransaction,
+        if  nil == _currentTransaction,
             let currentTransaction = _transactionQueue.dequeue() {
             _currentTransaction = currentTransaction
             #if DEBUG
@@ -170,9 +170,28 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
      - parameter inData: The data received.
      */
     internal func receiveCommandData(_ inData: Data) {
-        delegate?.device(self, returnedThisData: inData)
+        _currentTransaction?.responseData = inData
+        #if DEBUG
+            print("Sending \"\(String(describing: _currentTransaction))\" up to the delegate.")
+        #endif
+        delegate?.deviceUpdatedTransaction(_currentTransaction)
+        _currentTransaction = _transactionQueue.dequeue()
+        sendCommand()   // See if there's another one waiting for us.
     }
     
+    /* ################################################################## */
+    /**
+     This returns an easy-to-display description string
+     */
+    public override var description: String {
+        return super.description + "-" + RVS_BTDriver_Vendor_OBD.RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Device Delegate Handler -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_Device_OBD {
     /* ################################################################## */
     /**
     - parameter inPeripheral: The peripheral that owns this service.
@@ -189,7 +208,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             } else {
                 print("OBD Device Characteristic Value Cannot Be Expressed As A String.")
             }
-            
+        
             if let error = inError {
                 print("With Error: \(error)")
             }
@@ -200,14 +219,8 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             receiveCommandData(value)
         } else {    // Otherwise, kick the can down the road.
             super.peripheral(inPeripheral, didUpdateValueFor: inCharacteristic, error: inError)
+            _currentTransaction = _transactionQueue.dequeue()
+            sendCommand()   // See if there's another one waiting for us.
         }
-    }
-    
-    /* ################################################################## */
-    /**
-     This returns an easy-to-display description string
-     */
-    public override var description: String {
-        return super.description + "-" + RVS_BTDriver_Vendor_OBD.RVS_BLE_GATT_UUID.deviceSpecificID.rawValue
     }
 }

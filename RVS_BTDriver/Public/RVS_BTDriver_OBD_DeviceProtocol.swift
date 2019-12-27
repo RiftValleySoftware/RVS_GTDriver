@@ -101,12 +101,11 @@ public protocol RVS_BTDriver_OBD_DeviceDelegate: class {
     
     /* ################################################################## */
     /**
-     REQUIRED: This is called when an OBD device responds with data.
+     REQUIRED: This is called when an OBD device updates its transaction.
      
-     - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
-     - parameter returnedThisData: The data returned. It may be nil.
+     - parameter updatedTransaction: The transaction that was updated. It may be nil.
      */
-    func device(_ device: RVS_BTDriver_OBD_DeviceProtocol, returnedThisData: Data?)
+    func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct!)
 }
 
 /* ###################################################################################################################################### */
@@ -135,10 +134,10 @@ public protocol RVS_BTDriver_OBD_DeviceProtocol: RVS_BTDriver_DeviceProtocol {
 
     /* ################################################################## */
     /**
-     This menthod will send an AT command to the OBD unit. Responses will arrive in the readProperty.
+     This method will send an AT command to the OBD unit. Responses will arrive in the readProperty.
      
-     - parameter commandString: The Sting for the command.
-     - parameter rawCommand: The command string, without data or the appended CRLF.
+     - parameter commandString: The String for the command.
+     - parameter rawCommand: The command String, without data or the appended CRLF.
      */
     func sendCommand(_ commandString: String, rawCommand: String)
 }

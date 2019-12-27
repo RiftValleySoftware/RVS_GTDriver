@@ -180,14 +180,8 @@ extension RVS_BTDriver_Device_OBD_ELM327 {
                         #endif
                         owner?.removeThisDevice(self)
                     }
-                // The response will always be a String, and we should trim the crust off it before we make our sandwich.
-                } else if let trimmedResponse = String(data: value, encoding: .utf8)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])) {
-                    #if DEBUG
-                        print("Sending \"\(trimmedResponse)\" up to the delegate.")
-                    #endif
-                    delegate?.device(self, returnedThisData: trimmedResponse.data(using: .utf8))
                 } else {
-                    reportThisError(RVS_BTDriver.Errors.unknownCharacteristicsReadValueError(error: nil))
+                    receiveCommandData(value)
                 }
             }
         } else {    // Otherwise, kick the can down the road.

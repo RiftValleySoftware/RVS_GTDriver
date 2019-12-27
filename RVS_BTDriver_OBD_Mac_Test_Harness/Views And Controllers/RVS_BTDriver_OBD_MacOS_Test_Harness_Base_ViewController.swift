@@ -57,12 +57,11 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController,
     
     /* ################################################################## */
     /**
-     REQUIRED: This is called when an OBD device responds with data. Default does nothing.
+     This is called when an OBD device updates its transaction.
      
-     - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
-     - parameter returnedThisData: The data returned. It may be nil.
+     - parameter updatedTransaction: The transaction that was updated. It may be nil.
      */
-    func device(_ device: RVS_BTDriver_OBD_DeviceProtocol, returnedThisData: Data?) { }
+    func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct!) { }
 
     /* ############################################################################################################################## */
     // MARK: - RVS_BTDriver_OBD_DeviceDelegate Support

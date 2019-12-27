@@ -88,13 +88,12 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
-     This is called when an OBD device responds with data.
+     This is called when an OBD device updates its transaction.
      
-     - parameter device: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
-     - parameter returnedThisData: The data returned. It may be nil.
+     - parameter updatedTransaction: The transaction that was updated. It may be nil.
      */
-    override func device(_ inDevice: RVS_BTDriver_OBD_DeviceProtocol, returnedThisData inData: Data?) {
-        if  let data = inData,
+    override func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct!) {
+        if  let data = updatedTransaction?.responseData,
             var stringValue = String(data: data, encoding: .utf8) {
             #if DEBUG
                 print("Device Returned This Data: \(stringValue)")
