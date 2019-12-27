@@ -137,6 +137,7 @@ public protocol RVS_BTDriver_OBD_DeviceProtocol: RVS_BTDriver_DeviceProtocol {
      This menthod will send an AT command to the OBD unit. Responses will arrive in the readProperty.
      
      - parameter commandString: The Sting for the command.
+     - parameter rawCommand: The command string, without data or the appended CRLF.
      */
-    func sendCommand(_ commandString: String)
+    func sendCommand(_ commandString: String, rawCommand: String)
 }

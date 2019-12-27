@@ -83,6 +83,18 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
 class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceProtocol {
     /* ################################################################## */
     /**
+     This contains the current transaction. It may be nil, for no transaction.
+     */
+    private var _currentTransaction: RVS_BTDriver_OBD_Device_TransactionStruct!
+    
+    /* ################################################################## */
+    /**
+     This contains the staged transactions in a queue.
+     */
+    private var _transactionQueue = RVS_FIFOQueue<RVS_BTDriver_OBD_Device_TransactionStruct>()
+
+    /* ################################################################## */
+    /**
      This is a weak reference to the instance delegate.
      */
     public weak var delegate: RVS_BTDriver_OBD_DeviceDelegate!
@@ -98,33 +110,55 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
      This property is one that the driver uses to send commands to the OBD unit.
      */
     public var writeProperty: RVS_BTDriver_PropertyProtocol!
+    
+    /* ################################################################## */
+    /**
+     This menthod will send a command to the OBD unit.
+     */
+    internal func sendCommand() {
+        if  let commandString = _currentTransaction.completeCommand {
+            if  nil != commandReceiveFunc { // In case of test, we simply send it straight to the tester.
+                commandReceiveFunc(commandString)
+                _currentTransaction = nil
+            } else if  let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
+                let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE,
+                let data = commandString.data(using: .utf8) {
+                readProperty.canNotify = true
+                // If we are in a unit test, then we intercept the commands, and run them through the unit tests.
+                if writeProperty.canWriteWithResponse {
+                    #if DEBUG
+                        print("Sending data: \(commandString) for: \(writeProperty), and expecting a response.")
+                    #endif
+                    peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
+                } else {
+                    #if DEBUG
+                        print("Sending data: \(commandString) for: \(writeProperty), and not expecting a response.")
+                    #endif
+                    peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withoutResponse)
+                }
+            }
+        }
+    }
 
     /* ################################################################## */
     /**
      This menthod will send a command to the OBD unit.
      
      - parameter inCommandString: The Sting for the command.
+     - parameter rawCommand: The command string, without data or the appended CRLF.
      */
-    public func sendCommand(_ inCommandString: String) {
-        if let data = inCommandString.data(using: .utf8) {
-            if  nil != commandReceiveFunc {
-                commandReceiveFunc(inCommandString)
-            } else if   let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
-                    let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE {
-                readProperty.canNotify = true
-                // If we are in a unit test, then we intercept the commands, and run them through the unit tests.
-                if writeProperty.canWriteWithResponse {
-                    #if DEBUG
-                        print("Sending data: \(inCommandString) for: \(writeProperty), and expecting a response.")
-                    #endif
-                    peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withResponse)
-                } else {
-                    #if DEBUG
-                        print("Sending data: \(inCommandString) for: \(writeProperty), and not expecting a response.")
-                    #endif
-                    peripheral.writeValue(data, for: writeProperty.cbCharacteristic, type: .withoutResponse)
-                }
-            }
+    public func sendCommand(_ inCommandString: String, rawCommand inRawCommand: String) {
+        #if DEBUG
+            print("Storing transaction")
+        #endif
+        _transactionQueue.enqueue(RVS_BTDriver_OBD_Device_TransactionStruct(device: self, rawCommand: inRawCommand))
+        if nil == _currentTransaction,
+            let currentTransaction = _transactionQueue.dequeue() {
+            _currentTransaction = currentTransaction
+            #if DEBUG
+                print("Sending transaction")
+            #endif
+            sendCommand()
         }
     }
     

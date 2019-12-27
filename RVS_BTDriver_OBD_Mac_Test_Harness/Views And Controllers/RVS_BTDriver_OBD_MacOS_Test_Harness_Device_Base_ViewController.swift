@@ -155,7 +155,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
             #endif
             sendTextButton?.isEnabled = false
             enterTextField?.isEnabled = false
-            deviceInstance.sendCommand(sendString + "\r\n")
+            deviceInstance.sendCommand(sendString + "\r\n", rawCommand: sendString)
         }
     }
 }
