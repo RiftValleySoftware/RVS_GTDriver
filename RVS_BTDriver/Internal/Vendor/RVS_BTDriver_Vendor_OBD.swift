@@ -121,7 +121,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             precondition(nil == _currentTransaction.responseData, "The response data is not nil!")// Make sure that we have not yet gotten a response
             if  nil != commandReceiveFunc { // In case of test, we simply send it straight to the tester.
                 commandReceiveFunc(commandString)
-                _currentTransaction = nil
+                _currentTransaction = _transactionQueue.dequeue()
             } else if  let readProperty = readProperty as? RVS_BTDriver_Property_BLE,
                 let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE,
                 let data = commandString.data(using: .utf8) {

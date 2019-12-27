@@ -78,6 +78,9 @@ public struct RVS_FIFOQueue<Element>: OLEB_Queue {
      - Complexity: O(1).
      */
     mutating public func enqueue(_ inNewElement: Element) {
+        #if DEBUG
+            print("Enqueuing: \(String(describing: inNewElement))")
+        #endif
         _rightQueue.append(inNewElement)
     }
     
@@ -88,6 +91,9 @@ public struct RVS_FIFOQueue<Element>: OLEB_Queue {
      - Complexity: O(m).
      */
     mutating public func enqueue(_ inNewElements: [Element]) {
+        #if DEBUG
+            print("Enqueuing: \(String(describing: inNewElements))")
+        #endif
         _rightQueue.append(contentsOf: inNewElements)
     }
 
@@ -108,6 +114,9 @@ public struct RVS_FIFOQueue<Element>: OLEB_Queue {
             _leftQueue = _rightQueue.reversed()
             _rightQueue.removeAll()
         }
+        #if DEBUG
+            print("Dequeuing: \(String(describing: _leftQueue.last))")
+        #endif
         return _leftQueue.popLast() // Since we are popping off the top, the cost is negligible.
     }
     
@@ -118,6 +127,9 @@ public struct RVS_FIFOQueue<Element>: OLEB_Queue {
      - Complexity: O(1).
      */
     mutating public func removeAll() {
+        #if DEBUG
+            print("Clearing the Decks. Removing \(count) items.")
+        #endif
         _leftQueue.removeAll()
         _rightQueue.removeAll()
     }
@@ -146,20 +158,12 @@ extension RVS_FIFOQueue: ExpressibleByArrayLiteral {
 extension RVS_FIFOQueue: MutableCollection {
     /* ################################################################## */
     /**
-     - returns: True, if the queue is empty, false, otherwise.
-     */
-    public var isEmpty: Bool {
-        return startIndex == endIndex
-    }
-    
-    /* ################################################################## */
-    /**
      - returns: 0. The start is always 0.
      */
     public var startIndex: Int {
         return 0
     }
-    
+
     /* ################################################################## */
     /**
      - returns: The length of both internal queues, combined.
