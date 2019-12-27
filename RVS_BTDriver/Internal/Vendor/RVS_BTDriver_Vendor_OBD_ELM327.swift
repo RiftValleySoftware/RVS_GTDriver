@@ -161,23 +161,27 @@ extension RVS_BTDriver_Device_OBD_ELM327 {
                                     print("The ELM327 Version is \(substring)")
                                 #endif
                                 elm327Version = substring
+                                currentTransaction = nil
                                 super.reportCompletion()    // Now, we are ready to end the chapter.
                             } else {    // If we aren't up to the task, we nuke the device.
                                 #if DEBUG
                                     print("The ELM327 Version of \(substring) is too low. It needs to be at least \(Self.minimumELMVersion).")
                                 #endif
+                                cancelTransactions()
                                 owner?.removeThisDevice(self)
                             }
                         } else {    // Anything else is an error.
                             #if DEBUG
                                 print("The ELM327 Version string of \"\(trimmedResponse)\" is not valid.")
                             #endif
+                            cancelTransactions()
                             owner?.removeThisDevice(self)
                         }
                     } else {    // Bad data response means we nuke the device.
                         #if DEBUG
                             print("The ELM327 Version string is nil.")
                         #endif
+                        cancelTransactions()
                         owner?.removeThisDevice(self)
                     }
                 } else {

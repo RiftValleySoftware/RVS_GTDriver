@@ -81,6 +81,37 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         responseData = inResponseData
         error = inError
     }
+    
+    /* ################################################################## */
+    /**
+     Readable text description.
+     */
+    var description: String {
+        var ret = "Transaction:"
+        
+        if let device = device {
+            ret += "\n\tDevice: \(String(describing: device))"
+        }
+        
+        if let rawCommand = rawCommand {
+            ret += "\n\tRaw Command: \"\(rawCommand)\""
+        }
+        
+        if let completeCommand = completeCommand {
+            ret += "\n\tComplete Command: \"\(completeCommand)\""
+        }
+        
+        if  let responseData = responseData,
+            let stringResponse = String(data: responseData, encoding: .utf8) {
+            ret += "\n\tResponse: \"\(stringResponse)\""
+        }
+        
+        if let error = error {
+            ret += "\n\tError: \(String(describing: error))"
+        }
+        
+        return ret + "\n"
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -103,9 +134,9 @@ public protocol RVS_BTDriver_OBD_DeviceDelegate: class {
     /**
      REQUIRED: This is called when an OBD device updates its transaction.
      
-     - parameter updatedTransaction: The transaction that was updated. It may be nil.
+     - parameter updatedTransaction: The transaction that was updated.
      */
-    func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct!)
+    func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct)
 }
 
 /* ###################################################################################################################################### */
@@ -134,10 +165,16 @@ public protocol RVS_BTDriver_OBD_DeviceProtocol: RVS_BTDriver_DeviceProtocol {
 
     /* ################################################################## */
     /**
-     This method will send an AT command to the OBD unit. Responses will arrive in the readProperty.
+     REQUIRED: This method will send an AT command to the OBD unit. Responses will arrive in the readProperty.
      
      - parameter commandString: The String for the command.
      - parameter rawCommand: The command String, without data or the appended CRLF.
      */
     func sendCommand(_ commandString: String, rawCommand: String)
+    
+    /* ################################################################## */
+    /**
+     REQUIRED: This cancels all I/O, and flushes the transaction queue.
+     */
+    func cancelTransactions()
 }

@@ -92,8 +92,8 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
      
      - parameter updatedTransaction: The transaction that was updated. It may be nil.
      */
-    override func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct!) {
-        if  let data = updatedTransaction?.responseData,
+    override func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct) {
+        if  let data = updatedTransaction.responseData,
             var stringValue = String(data: data, encoding: .utf8) {
             #if DEBUG
                 print("Device Returned This Data: \(stringValue)")

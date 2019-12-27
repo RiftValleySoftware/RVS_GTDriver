@@ -61,7 +61,7 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController,
      
      - parameter updatedTransaction: The transaction that was updated. It may be nil.
      */
-    func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct!) { }
+    func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct) { }
 
     /* ############################################################################################################################## */
     // MARK: - RVS_BTDriver_OBD_DeviceDelegate Support
