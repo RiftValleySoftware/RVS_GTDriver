@@ -20,22 +20,33 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-import Foundation   // Required for the ProcessInfo stuff.
+import UIKit
+#if !DIRECT // We declare the DIRECT preprocessor macro in the target settings.
+    import RVS_BTDriver_iOS
+#endif
 
 /* ###################################################################################################################################### */
-// MARK: - Debug Tools Class -
+// MARK: - Detail View Controller Class -
 /* ###################################################################################################################################### */
 /**
- This class is a "junk drawer" of vrious debug/testing tools.
  */
-internal class RVS_DebugTools {
+class RVS_BTDriver_iOS_Test_Harness_DetailViewController: RVS_BTDriver_iOS_Test_Harness_Base_ViewController {
+    /// The device for which this is a detailed view.
+    var device: RVS_BTDriver_DeviceProtocol!
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Internal Base Class Override Instance Methods -
+/* ###################################################################################################################################### */
+extension RVS_BTDriver_iOS_Test_Harness_DetailViewController {
     /* ################################################################## */
     /**
-     This is used to see whether or not we are running under unit tests. It is optional, and isn't really supposed to be replaced.
-     
-     - returns: True, if we are currently in a unit test.
+     Called after the view has completely loaded.
      */
-    internal static var isRunningUnitTests: Bool {
-        return nil != NSClassFromString("XCTest")
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let deviceName = device.modelName {
+            navigationItem.title = deviceName.localizedVariant
+        }
     }
 }

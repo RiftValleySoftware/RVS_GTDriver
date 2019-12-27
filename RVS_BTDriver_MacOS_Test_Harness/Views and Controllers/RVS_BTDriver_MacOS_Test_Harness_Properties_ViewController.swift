@@ -28,10 +28,8 @@ import Cocoa
 /* ################################################################################################################################## */
 /**
  This is a handy typealias for the tuple we'll use to transmit table data.
- 
- if this is a Service separateor (
  */
-typealias RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple = (key: String, value: String, read: Bool, write: Bool, indicate: Bool, notify: Bool)
+typealias RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple = (key: String, value: String)
 
 /* ################################################################################################################################## */
 // MARK: - The Device Screen View Controller Class
@@ -50,53 +48,20 @@ class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_Ma
     static let storyboardID = "properties-inspector-controller"
     
     /* ############################################################################################################################## */
-    // MARK: - RVS_BTDriver_ServiceSubscriberProtocol Support
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This will be used to hold an automatically-generated UUID for this subscriber.
-     */
-    var _uuid: UUID!
-    
-    /* ############################################################################################################################## */
     // MARK: - Instance Constants
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      Key for the "Key" column.
      */
-    let keyColumnID = NSUserInterfaceItemIdentifier("data-key")
+    let keyColumnID = "data-key"
     
-    /* ################################################################## */
-    /**
-     Key for the "Can Read" column.
-     */
-    let readColumnID = NSUserInterfaceItemIdentifier("data-read")
-    
-    /* ################################################################## */
-    /**
-     Key for the "Can Write" column.
-     */
-    let writeColumnID = NSUserInterfaceItemIdentifier("data-write")
-    
-    /* ################################################################## */
-    /**
-     Key for the "Can Indicate" column.
-     */
-    let indicateColumnID = NSUserInterfaceItemIdentifier("data-indicate")
-    
-    /* ################################################################## */
-    /**
-     Key for the "Can Notify" column.
-     */
-    let notifyColumnID = NSUserInterfaceItemIdentifier("data-notify")
-
     /* ################################################################## */
     /**
      Key for the "Value" column.
      */
-    let valueColumnID = NSUserInterfaceItemIdentifier("data-value")
-
+    let valueColumnID = "data-value"
+    
     /* ################################################################## */
     /**
      The "OK" button was hit by the user in the delete confirm.
@@ -108,9 +73,9 @@ class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_Ma
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
-     The device instance, associated with this screen.
+     The service instance, associated with this screen.
      */
-    var deviceInstance: RVS_BTDriver_DeviceProtocol!
+    var serviceInstance: RVS_BTDriver_ServiceProtocol!
 
     /* ################################################################## */
     /**
@@ -118,11 +83,38 @@ class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_Ma
      
      The reason that this is an Array of tuples, is so we can enforce order without using a stupid key-sorting closure.
      */
-    var tableData = [RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple]()
+    var tableData = [RVS_BTDriver_MacOS_Test_Harness_Device_ViewController_TableDataTuple]()
+
+    /* ############################################################################################################################## */
+    // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is a UUID, that identifies this screen for subscriber puproses.
+     */
+    var uuid: UUID!
     
     /* ############################################################################################################################## */
     // MARK: - Instance IBOutlets
     /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     The Connect/Disconnect button.
+     */
+    @IBOutlet weak var connectDisconnectButton: NSButton!
+
+    /* ################################################################## */
+    /**
+     The Delete button.
+     */
+    @IBOutlet weak var deleteButton: NSButton!
+    
+    /* ################################################################## */
+    /**
+     The Delete button text display cell.
+     */
+    @IBOutlet weak var deleteButtonCell: NSButtonCell!
+    
     /* ################################################################## */
     /**
      The Table, Displaying the Properties.
@@ -134,13 +126,14 @@ class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_Ma
      Make sure that we clean up after ourselves.
      */
     deinit {
-        if let deviceInstance = deviceInstance {
-            deviceInstance.unsubscribe(self)
-            deviceInstance.services.forEach {
-                $0.unsubscribe(self)
-            }
-        }
+        serviceInstance?.unsubscribe(self)
     }
+}
+
+/* ################################################################################################################################## */
+// MARK: - IBAction Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
 }
 
 /* ################################################################################################################################## */
@@ -161,49 +154,16 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
      */
     func setUpTableData() {
         tableData = []
-        
-        if let deviceInstance = deviceInstance {
-            for service in deviceInstance.services {
-                let serviceHeader = RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: service.uuid, value: "", read: false, write: false, indicate: false, notify: false)
-                var serviceProperties = [RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple]()
-
-                for property in service.properties {
-                    let key = property.uuid
-                    
-                    switch property.value {
-                    case .intValue(let value):
-                        if let value = value {
-                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: String(value), read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
-                        }
-                        
-                    case .floatValue(let value):
-                        if let value = value {
-                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: String(value), read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
-                        }
-                        
-                    case .stringValue(let value):
-                        if  let value = value,
-                            !value.isEmpty {
-                            serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: value, read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
-                        } else {
-                            fallthrough
-                        }
-                        
-                    default:
-                        #if DEBUG
-                            print("Unknown Value Type: \(String(describing: property.value))")
-                        #endif
-                        serviceProperties.append(RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController_TableDataTuple(key: key, value: "UNKNOWN VALUE", read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
-                    }
-                }
-                
-                if 0 < serviceProperties.count {
-                    tableData.append(serviceHeader)
-                    tableData += serviceProperties.sorted(by: { (a, b) -> Bool in
-                        return a.key.lengthOfBytes(using: .utf8) == b.key.lengthOfBytes(using: .utf8) ? a.key < b.key : a.key.lengthOfBytes(using: .utf8) < b.key.lengthOfBytes(using: .utf8)
-                    })
-                }
-            }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to remove the device from the driver.
+     */
+    func deleteMyself() {
+        DispatchQueue.main.async {
+            self.appDelegateObject.mainDisplayScreen.reloadTable()
+            self.dismiss(nil)
         }
     }
     
@@ -212,13 +172,35 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
      Sets up the table.
      */
     func populateTable() {
-        propertyTable?.tableColumns.forEach {
-            $0.headerCell.stringValue = $0.headerCell.stringValue.localizedVariant
-            $0.headerCell.font = NSFont.boldSystemFont(ofSize: 10)
-            $0.headerCell.alignment = .center
-        }
         setUpTableData()
         propertyTable?.reloadData()
+    }
+    
+    /* ################################################################## */
+    /**
+     This displays a simple alert, with an OK button.
+     */
+    func displayDeleteConfirmAlert() {
+        if let window = view.window {
+            let alert = NSAlert()
+            alert.messageText = "SLUG-DELETE-CONFIRM-HEADER".localizedVariant
+            alert.informativeText = "SLUG-DELETE-CONFIRM-TEXT".localizedVariant
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: "SLUG-OK-BUTTON-TEXT".localizedVariant)
+            alert.addButton(withTitle: "SLUG-CANCEL-BUTTON-TEXT".localizedVariant)
+            alert.beginSheetModal(for: window) { [weak self] (_ inModalResponse: NSApplication.ModalResponse) in
+                if self?.modalResponseOK == inModalResponse.rawValue {
+                    #if DEBUG
+                        print("The User Chose to Delete.")
+                    #endif
+                    self?.deleteMyself()
+                } else {
+                    #if DEBUG
+                        print("Deletion will not Occur (\(inModalResponse)).")
+                    #endif
+                }
+            }
+        }
     }
 }
 
@@ -232,12 +214,6 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let modelTitle = deviceInstance?.deviceName {
-            title = modelTitle
-        }
-        deviceInstance?.subscribe(self)
-        propertyTable?.floatsGroupRows = true
-        populateTable()
     }
 }
 
@@ -257,136 +233,42 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableView
     func numberOfRows(in inTableView: NSTableView) -> Int {
         return tableData.count
     }
-}
 
-/* ################################################################################################################################## */
-// MARK: - NSTableViewDelegate Methods
-/* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: NSTableViewDelegate {
     /* ################################################################## */
     /**
-     Called to indicate whether or not the row is a group header (indicated by no value).
-     
-     - parameters:
-        - inTableView: The table instance.
-        - isGroupRow: The 0-based Int index of the row.
-     
-     - returns: True, if this is a group header row.
-     */
-    func tableView(_ inTableView: NSTableView, isGroupRow inRow: Int) -> Bool {
-        return tableData[inRow].value.isEmpty
-    }
-    
-    /* ################################################################## */
-    /**
-     Called to provide a view to use for the cell.
+     This is called to supply the string display for one row that corresponds to a device.
      
      - parameters:
         - inTableView: The table instance.
         - viewFor: Container object for the column that holds the row.
         - row: 0-based Int, with the index of the row, within the column.
      
-     - returns: A new view object, with the value, therein.
+     - returns: A new Text View, with the device model name.
      */
-    func tableView(_ inTableView: NSTableView, viewFor inTableColumn: NSTableColumn?, row inRow: Int) -> NSView? {
-        // If we have a column, then we are a regular, two-part row.
-        if  let column = inTableColumn,
-            let cell = inTableView.makeView(withIdentifier: column.identifier, owner: nil) as? NSTableCellView {
-            cell.textField?.isEditable = false
-            cell.textField?.drawsBackground = true
-            cell.textField?.textColor = NSColor.black
-            cell.textField?.backgroundColor = (0 == inRow % 2) ? NSColor.clear : NSColor(red: 1, green: 1, blue: 1, alpha: 0.25)
-            cell.textField?.font = NSFont.boldSystemFont(ofSize: 10)
-            switch inTableColumn?.identifier {
-            case keyColumnID:
-                cell.textField?.stringValue = tableData[inRow].key.localizedVariant
-                cell.textField?.alignment = .right
-            case readColumnID:
-                cell.textField?.stringValue = tableData[inRow].read ? "√" : ""
-                cell.textField?.alignment = .center
-            case writeColumnID:
-                cell.textField?.stringValue = tableData[inRow].write ? "√" : ""
-                cell.textField?.alignment = .center
-            case indicateColumnID:
-                cell.textField?.stringValue = tableData[inRow].indicate ? "√" : ""
-                cell.textField?.alignment = .center
-            case notifyColumnID:
-                cell.textField?.stringValue = tableData[inRow].notify ? "√" : ""
-                cell.textField?.alignment = .center
-            default:
-                cell.textField?.stringValue = tableData[inRow].value.localizedVariant
-                cell.textField?.font = NSFont.systemFont(ofSize: 10)
-            }
-            return cell
-        } else {    // Otherwise, we are a one-part header.
-            let groupHeader = NSTextView()
-            groupHeader.isEditable = false
-            groupHeader.font = NSFont.boldSystemFont(ofSize: 12)
-            groupHeader.alignment = .center
-            groupHeader.string = tableData[inRow].key.localizedVariant
-            groupHeader.drawsBackground = true
-            groupHeader.backgroundColor = NSColor.black
-            groupHeader.textColor = NSColor.white
-            return groupHeader
+    func tableView(_ inTableView: NSTableView, objectValueFor inTableColumn: NSTableColumn?, row inRow: Int) -> Any? {
+        switch inTableColumn?.identifier.rawValue {
+        case keyColumnID:
+            return tableData[inRow].key
+        default:
+            return tableData[inRow].value
         }
     }
 }
 
 /* ################################################################################################################################## */
-// MARK: - NSTableViewDelegate Methods
-/* ################################################################################################################################## */
-extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_DeviceSubscriberProtocol {
-    /* ################################################################## */
-    /**
-     Called if the device encounters an error.
-     
-     - parameters:
-        - inDevice: The device instance that is calling this.
-        - encounteredThisError: The error that is being returned.
-     */
-    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
-        #if DEBUG
-            print("DEVICE ERROR! \(String(describing: inError))")
-        #endif
-        DispatchQueue.main.async {
-            RVS_BTDriver_MacOS_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     Called if the device state changes, in some way.
-     
-     - parameter inDevice: The device instance that is calling this.
-     */
-    func deviceStatusUpdate(_ inDevice: RVS_BTDriver_DeviceProtocol) {
-        #if DEBUG
-            print("Device Status Changed")
-        #endif
-        DispatchQueue.main.async {
-            self.setUpUI()
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     Called When a service is added to the main list.
-     
-     - parameter inDevice: The `RVS_BTDriver_DeviceProtocol` instance that has the service.
-     - parameter serviceAdded: The `RVS_BTDriver_ServiceProtocol` service that was added.
-     */
-    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, serviceAdded inService: RVS_BTDriver_ServiceProtocol) {
-        #if DEBUG
-            print("Service: \(String(describing: inService)) Added to Device")
-        #endif
-        inService.subscribe(self)
-    }
-}
-
-/* ################################################################################################################################## */
-// MARK: - NSTableViewDelegate Methods
+// MARK: - RVS_BTDriver_ServiceSubscriberProtocol Methods
 /* ################################################################################################################################## */
 extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_ServiceSubscriberProtocol {
+    /* ################################################################## */
+    /**
+     Called if the service adds a new property.
+     
+     - inService: The service instance that is calling this.
+     - propertyAdded: The property that was added.
+     */
+    func service(_ inService: RVS_BTDriver_ServiceProtocol, propertyAdded inProperty: RVS_BTDriver_PropertyProtocol) {
+    }
+    
     /* ################################################################## */
     /**
      Called if the service encounters an error.
@@ -406,27 +288,11 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDrive
     
     /* ################################################################## */
     /**
-     Called if a property is added to the service.
+     Called if the service state changes, in some way.
      
-     - parameter inService: The service instance that is calling this.
-     - parameter propertyAdded: The property that was added to the service.
+     - inService: The service instance that is calling this.
      */
-    func service(_ inService: RVS_BTDriver_ServiceProtocol, propertyAdded inProperty: RVS_BTDriver_PropertyProtocol) {
-        #if DEBUG
-            print("Property: \(String(describing: inProperty)) Added to Service")
-        #endif
-        DispatchQueue.main.async {
-            self.setUpUI()
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     Called if the device state changes, in some way.
-     
-     - parameter inService: The service instance that is calling this.
-     */
-    func serviceStatusUpdate(_ inService: RVS_BTDriver_ServiceProtocol) {
+    func serviceStatusUpdate(_ inDevice: RVS_BTDriver_ServiceProtocol) {
         #if DEBUG
             print("Service Status Changed")
         #endif
