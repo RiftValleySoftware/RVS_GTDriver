@@ -199,7 +199,7 @@ extension RVS_FIFOQueue: MutableCollection {
         set {
             precondition((0..<endIndex).contains(inPosition), "Index out of bounds")
             if inPosition < _leftQueue.endIndex {
-                _leftQueue[_leftQueue.count - inPosition - 1] = newValue
+                return _leftQueue[_leftQueue.count - inPosition - 1] = newValue
             } else {
                 return _rightQueue[inPosition - _leftQueue.count] = newValue
             }
