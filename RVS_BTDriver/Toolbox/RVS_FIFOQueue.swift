@@ -181,27 +181,27 @@ extension RVS_FIFOQueue: MutableCollection {
     
     /* ################################################################## */
     /**
-     - parameter position: The position of the element we are working on.
+     - parameter inPosition: The position of the element we are working on.
      
      - returns: The element we are subscripting.
      */
-    public subscript(position: Int) -> Element {
+    public subscript(_ inPosition: Int) -> Element {
         get {
-            precondition((0..<endIndex).contains(position), "Index out of bounds")
+            precondition((0..<endIndex).contains(inPosition), "Index out of bounds")
             // See which queue the element is in.
-            if position < _leftQueue.endIndex {
-                return _leftQueue[_leftQueue.count - position - 1]
+            if inPosition < _leftQueue.endIndex {
+                return _leftQueue[_leftQueue.count - inPosition - 1]
             } else {
-                return _rightQueue[position - _leftQueue.count]
+                return _rightQueue[inPosition - _leftQueue.count]
             }
         }
         
         set {
-            precondition((0..<endIndex).contains(position), "Index out of bounds")
-            if position < _leftQueue.endIndex {
-                _leftQueue[_leftQueue.count - position - 1] = newValue
+            precondition((0..<endIndex).contains(inPosition), "Index out of bounds")
+            if inPosition < _leftQueue.endIndex {
+                _leftQueue[_leftQueue.count - inPosition - 1] = newValue
             } else {
-                return _rightQueue[position - _leftQueue.count] = newValue
+                return _rightQueue[inPosition - _leftQueue.count] = newValue
             }
         }
     }
