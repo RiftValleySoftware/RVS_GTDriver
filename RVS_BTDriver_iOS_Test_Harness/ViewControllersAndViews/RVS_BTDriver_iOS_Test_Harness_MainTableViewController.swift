@@ -108,6 +108,12 @@ class RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_iOS_Te
      The scanning/not scanning switch.
      */
     @IBOutlet weak var scanModeSegmentedSwitch: UISegmentedControl!
+    
+    /* ################################################################## */
+    /**
+     This is required for the subscriber support.
+     */
+    var _uuid: UUID!
 }
 
 /* ###################################################################################################################################### */
@@ -141,7 +147,7 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriverDel
      - parameter inDriver: The driver instance making the callback.
      - parameter encounteredThisError: The error that was encountered.
      */
-    func btDriver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
+    public func btDriver(_ inDriver: RVS_BTDriver, encounteredThisError inError: RVS_BTDriver.Errors) {
         reportError(inError)
     }
 }
@@ -157,7 +163,7 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_De
      - parameter inDevice: The device instance making the callback.
      - parameter serviceAdded: The new service that was added to the device.
      */
-    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, serviceAdded inService: RVS_BTDriver_ServiceProtocol) {
+    public func device(_ inDevice: RVS_BTDriver_DeviceProtocol, serviceAdded inService: RVS_BTDriver_ServiceProtocol) {
     }
     
     /* ################################################################## */
@@ -166,7 +172,7 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_De
      
      - parameter inDevice: The device instance making the callback.
      */
-    func deviceStatusUpdate(_ inDevice: RVS_BTDriver_DeviceProtocol) {
+    public func deviceStatusUpdate(_ inDevice: RVS_BTDriver_DeviceProtocol) {
     }
     
     /* ################################################################## */
@@ -176,7 +182,7 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_De
      - parameter inDevice: The device instance making the callback.
      - parameter encounteredThisError: The error that was encountered.
      */
-    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+    public func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
         reportError(inError)
     }
 }

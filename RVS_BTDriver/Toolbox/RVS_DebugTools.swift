@@ -35,7 +35,7 @@ public class RVS_DebugTools {
      
      - returns: True, if we are currently in a unit test.
      */
-    internal static var isRunningUnitTests: Bool {
+    static var isRunningUnitTests: Bool {
         return nil != NSClassFromString("XCTest")
     }
 }

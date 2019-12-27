@@ -23,6 +23,66 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Device_TransactionStruct Struct -
+/* ###################################################################################################################################### */
+/**
+ This struct will contain a transaction for an OBD device.
+ OBD transactions are atomic and single-threaded. There can only be one going to a device at a time.
+ */
+public struct RVS_BTDriver_OBD_Device_TransactionStruct {
+    /* ################################################################## */
+    /**
+     This is the OBD device instance, running the transaction.
+     */
+    let device: RVS_BTDriver_OBD_DeviceProtocol!
+    
+    /* ################################################################## */
+    /**
+     This is the raw String value of the command being sent (it may be a format string).
+     */
+    let rawCommand: String!
+
+    /* ################################################################## */
+    /**
+     This is the command, filled out (it may be the same as the rawCommand, but a format will have values substituted).
+     */
+    var completeCommand: String!
+    
+    /* ################################################################## */
+    /**
+     This is any data that was returned from the OBD adapter.
+     */
+    var responseData: Data!
+    
+    /* ################################################################## */
+    /**
+     Any error that may have occurred.
+     */
+    var error: RVS_BTDriver.Errors!
+    
+    /* ################################################################## */
+    /**
+     Initializer, with most fields optional.
+     
+     - parameters:
+        - device: Required. The device that is running the transaction. It can be nil for testing purposes, but should not be nil, otherwise.
+        - rawCommand: Required. This is the raw String value of the command being sent (it may be a format string).
+        - completeCommand: Optional. This is the command, filled out (it may be the same as the rawCommand, but a format will have values substituted).
+        - responseData: Optional. This is any data that was returned from the OBD adapter.
+        - error: Optional. Any error that may have occurred.
+     */
+    init(device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String, completeCommand inCompleteCommand: String! = nil, responseData inResponseData: Data! = nil, error inError: RVS_BTDriver.Errors! = nil) {
+        precondition((nil != inDevice) || RVS_DebugTools.isRunningUnitTests, "The device cannot be nil!")
+        precondition(!inRawCommand.isEmpty, "The command cannot be empty.")
+        device = inDevice
+        rawCommand = inRawCommand
+        completeCommand = inCompleteCommand
+        responseData = inResponseData
+        error = inError
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_DeviceDelegate Protocol -
 /* ###################################################################################################################################### */
 /**
