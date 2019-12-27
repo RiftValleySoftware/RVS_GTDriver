@@ -32,7 +32,7 @@ import Foundation
 
  A type that can efficiently "enqueue" and "dequeue" elements. It works on one element at a time. You cannot dequeue groups of elements.
  */
-protocol OLEB_Queue {
+public protocol OLEB_Queue {
     /* ################################################################## */
     /**
      Defines the type for the Elements
@@ -64,7 +64,7 @@ protocol OLEB_Queue {
 /**
  An efficient variable-size FIFO queue of elements of type "Element."
  */
-struct RVS_FIFOQueue<Element>: OLEB_Queue {
+public struct RVS_FIFOQueue<Element>: OLEB_Queue {
     /// This is the "delivery" queue. Elements are removed, one by one, from the top of this queue.
     /// When the queue is empty, and a request is made for an element, it first asks for the reveresed contents of the right queue, which is then emptied.
     private var _leftQueue: [Element] = []
@@ -77,7 +77,7 @@ struct RVS_FIFOQueue<Element>: OLEB_Queue {
      - parameter inNewElement: The Element to be enqueued (placed on the end of the list).
      - Complexity: O(1).
      */
-    mutating func enqueue(_ inNewElement: Element) {
+    mutating public func enqueue(_ inNewElement: Element) {
         _rightQueue.append(inNewElement)
     }
     
@@ -87,7 +87,7 @@ struct RVS_FIFOQueue<Element>: OLEB_Queue {
      - parameter inNewElements: The Elements to be enqueued (placed on the end of the list). They are appened in the order presented.
      - Complexity: O(m).
      */
-    mutating func enqueue(_ inNewElements: [Element]) {
+    mutating public func enqueue(_ inNewElements: [Element]) {
         _rightQueue.append(contentsOf: inNewElements)
     }
 
@@ -103,12 +103,23 @@ struct RVS_FIFOQueue<Element>: OLEB_Queue {
      When the left queue is empty, we dump the entire right (staging) queue into it, as reversed.
      The idea is to keep all the operations on the tops of the queues. That prevents massive memory movements every time we access the bottom.
      */
-    mutating func dequeue() -> Element? {
+    mutating public func dequeue() -> Element? {
         if _leftQueue.isEmpty { // If we are empty, then we simply dump the right queue into the left queue, all at once, as reversed.
             _leftQueue = _rightQueue.reversed()
             _rightQueue.removeAll()
         }
         return _leftQueue.popLast() // Since we are popping off the top, the cost is negligible.
+    }
+    
+    /* ################################################################## */
+    /**
+     Deletes all data in the queue.
+     
+     - Complexity: O(1).
+     */
+    mutating public func removeAll() {
+        _leftQueue.removeAll()
+        _rightQueue.removeAll()
     }
 }
 
