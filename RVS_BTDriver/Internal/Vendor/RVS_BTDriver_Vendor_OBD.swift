@@ -114,9 +114,11 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
     /* ################################################################## */
     /**
      This menthod will send a command to the OBD unit.
+     This variant of the method will fectch any command in the _currentTransaction property.
      */
     internal func sendCommand() {
-        if  let commandString = _currentTransaction.completeCommand {
+        if  let commandString = _currentTransaction.completeCommand {   // Get the command string.
+            precondition(nil == _currentTransaction.responseData, "The response data is not nil!")// Make sure that we have not yet gotten a response
             if  nil != commandReceiveFunc { // In case of test, we simply send it straight to the tester.
                 commandReceiveFunc(commandString)
                 _currentTransaction = nil
@@ -124,7 +126,6 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE,
                 let data = commandString.data(using: .utf8) {
                 readProperty.canNotify = true
-                // If we are in a unit test, then we intercept the commands, and run them through the unit tests.
                 if writeProperty.canWriteWithResponse {
                     #if DEBUG
                         print("Sending data: \(commandString) for: \(writeProperty), and expecting a response.")
@@ -151,7 +152,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
         #if DEBUG
             print("Storing transaction")
         #endif
-        _transactionQueue.enqueue(RVS_BTDriver_OBD_Device_TransactionStruct(device: self, rawCommand: inRawCommand))
+        _transactionQueue.enqueue(RVS_BTDriver_OBD_Device_TransactionStruct(device: self, rawCommand: inRawCommand, completeCommand: inCommandString))
         if nil == _currentTransaction,
             let currentTransaction = _transactionQueue.dequeue() {
             _currentTransaction = currentTransaction
