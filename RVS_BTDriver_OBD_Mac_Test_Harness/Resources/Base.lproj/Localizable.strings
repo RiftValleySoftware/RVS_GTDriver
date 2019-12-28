@@ -20,74 +20,233 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
-"SLUG-OK-BUTTON-TEXT"                                       =       "OK";
-"SLUG-CANCEL-BUTTON-TEXT"                                   =       "CANCEL";
-"SLUG-NOT-SCANNING"                                         =       "NOT SCANNING";
-"SLUG-SCANNING"                                             =       "SCANNING";
-"SLUG-PLACEHOLDER-TEXT"                                     =       "goTenna Device";
-"SLUG-ERROR-HEADER"                                         =       "ERROR!";
-"RVS_BLEDriver.Error.bluetoothNotAvailable"                 =       "Bluetooth Not Available";
-"RVS_BLEDriver.Error.connectionAttemptFailed"               =       "Device connection failed";
-"RVS_BLEDriver.Error.connectionAttemptFailedNoDevice"       =       "Device connection failed";
-"RVS_BLEDriver.Error.disconnectionAttemptFailed"            =       "Unknown Driver Error";
-"RVS_BLEDriver.Error.unknownDisconnectionError"             =       "Unknown Driver Error";
-"RVS_BLEDriver.Error.unknownPeripheralDiscoveryError"       =       "Unknown Driver Error";
-"RVS_BLEDriver.Error.characteristicValueMissing"            =       "Unknown Driver Error";
-"RVS_BLEDriver.Error.unknownCharacteristicsDiscoveryError"  =       "Unknown Driver Error";
-"RVS_BLEDriver.Error.unknownCharacteristicsReadValueError"  =       "Unknown Driver Error";
-"RVS_BLEDriver.Error.unknownError"                          =       "Unknown Driver Error";
-"SLUG-EMPTY-DEVICE-NAME"                                    =       "No Device Name";
-"SLUG-MANUFACTURERNAME-LABEL-PREFIX"                        =       "Manufacturer Name:";
-"SLUG-MODELNAME-LABEL-PREFIX"                               =       "Model Name:";
-"SLUG-HARDWAREREVISION-LABEL-PREFIX"                        =       "Hardware Revision:";
-"SLUG-FIRMWAREREVISION-LABEL-PREFIX"                        =       "Firmware Revision:";
-"SLUG-ID-LABEL-PREFIX"                                      =       "ID:";
-"SLUG-SETTINGS"                                             =       "Settings";
-"SLUG-INFO"                                                 =       "MORE INFO";
-"SLUG-DELETE-CONFIRM-HEADER"                                =       "ARE YOU SURE?";
-"SLUG-DELETE-CONFIRM-TEXT"                                  =       "If you press \"OK\", this device will be deleted from the list.";
-"SLUG-DELETE"                                               =       "DELETE";
-"SLUG-DETAILS-BUTTON"                                       =       "DETAILS";
-"SLUG-CONNECTED"                                            =       "CONNECTED";
-"SLUG-NOT-CONNECTED"                                        =       "NOT CONNECTED";
-"SLUG-CONNECT"                                              =       "CONNECT";
-"SLUG-DISCONNECT"                                           =       "DISCONNECT";
-"SLUG-MAIN"                                                 =       "Main Screen";
-"SLUG-DIFFERENT-QUEUE"                                      =       "Use Different Thread";
-"SLUG-FULL-SCAN"                                            =       "Rescan After Delete";
-"SLUG-PERSISTENT-CONNECTIONS"                               =       "Stay Connected to Devices";
-"SLUG-ABOUT-TITLE"                                          =       "About the Mac Test Harness App";
-"deviceInfoDeviceID"                                        =       "Device ID";
-"deviceInfoService"                                         =       "Device Information Service";
-"deviceInfoManufacturerName"                                =       "Manufacturer Name";
-"deviceInfoModelName"                                       =       "Model Name";
-"deviceInfoHardwareRevision"                                =       "Hardware Revision";
-"deviceInfoFirmwareRevision"                                =       "Firmware Revision";
-"180A"                                                      =       "Device Information Service";
-"180F"                                                      =       "Battery Level Service";
-"2A23"                                                      =       "System ID";
-"2A24"                                                      =       "Model Name";
-"2A25"                                                      =       "Serial Number";
-"2A26"                                                      =       "Firmware Revision";
-"2A27"                                                      =       "Hardware Revision";
-"2A28"                                                      =       "Software Revision";
-"2A29"                                                      =       "Manufacturer";
-"2A2A"                                                      =       "IEEE Regulatory";
-"2A50"                                                      =       "PNP ID Set";
-"2A19"                                                      =       "Battery Level";
-"SLUG-HEADER-UUID"                                          =       "UUID";
-"SLUG-HEADER-READ"                                          =       "R";
-"SLUG-HEADER-WRITE"                                         =       "W";
-"SLUG-HEADER-INDICATE"                                      =       "I";
-"SLUG-HEADER-NOTIFY"                                        =       "N";
-"SLUG-HEADER-VALUE"                                         =       "VALUE";
-"SLUG-ENTER-COMMAND"                                        =       "Enter Command to Send:";
-"SLUG-SEND-BUTTON"                                          =       "SEND";
-"SLUG-RESPONSE-LABEL"                                       =       "Response:";
-"SLUG-READ"                                                 =       "Read";
-"SLUG-WRITE"                                                =       "Write";
-"SLUG-INDICATE"                                             =       "Indicate";
-"SLUG-NOTIFY"                                               =       "Notify";
-"SLUG-WRITE-PROPERTY"                                       =       "(W)";
-"SLUG-READ-PROPERTY"                                        =       "(R)";
-"SLUG-DEVICE-NAME-FORMAT"                                   =       "Device Name: %@";
+"SLUG-OK-BUTTON-TEXT"                                       =	"OK";
+"SLUG-CANCEL-BUTTON-TEXT"                                   =	"CANCEL";
+"SLUG-NOT-SCANNING"                                         =	"NOT SCANNING";
+"SLUG-SCANNING"                                             =	"SCANNING";
+"SLUG-PLACEHOLDER-TEXT"                                     =	"goTenna Device";
+"SLUG-ERROR-HEADER"                                         =	"ERROR!";
+"RVS_BLEDriver.Error.bluetoothNotAvailable"                 =	"Bluetooth Not Available";
+"RVS_BLEDriver.Error.connectionAttemptFailed"               =	"Device connection failed";
+"RVS_BLEDriver.Error.connectionAttemptFailedNoDevice"       =	"Device connection failed";
+"RVS_BLEDriver.Error.disconnectionAttemptFailed"            =	"Unknown Driver Error";
+"RVS_BLEDriver.Error.unknownDisconnectionError"             =	"Unknown Driver Error";
+"RVS_BLEDriver.Error.unknownPeripheralDiscoveryError"       =	"Unknown Driver Error";
+"RVS_BLEDriver.Error.characteristicValueMissing"            =	"Unknown Driver Error";
+"RVS_BLEDriver.Error.unknownCharacteristicsDiscoveryError"  =	"Unknown Driver Error";
+"RVS_BLEDriver.Error.unknownCharacteristicsReadValueError"  =	"Unknown Driver Error";
+"RVS_BLEDriver.Error.unknownError"                          =	"Unknown Driver Error";
+"SLUG-EMPTY-DEVICE-NAME"                                    =	"No Device Name";
+"SLUG-MANUFACTURERNAME-LABEL-PREFIX"                        =	"Manufacturer Name:";
+"SLUG-MODELNAME-LABEL-PREFIX"                               =	"Model Name:";
+"SLUG-HARDWAREREVISION-LABEL-PREFIX"                        =	"Hardware Revision:";
+"SLUG-FIRMWAREREVISION-LABEL-PREFIX"                        =	"Firmware Revision:";
+"SLUG-ID-LABEL-PREFIX"                                      =	"ID:";
+"SLUG-SETTINGS"                                             =	"Settings";
+"SLUG-INFO"                                                 =	"MORE INFO";
+"SLUG-DELETE-CONFIRM-HEADER"                                =	"ARE YOU SURE?";
+"SLUG-DELETE-CONFIRM-TEXT"                                  =	"If you press \"OK\", this device will be deleted from the list.";
+"SLUG-DELETE"                                               =	"DELETE";
+"SLUG-DETAILS-BUTTON"                                       =	"DETAILS";
+"SLUG-CONNECTED"                                            =	"CONNECTED";
+"SLUG-NOT-CONNECTED"                                        =	"NOT CONNECTED";
+"SLUG-CONNECT"                                              =	"CONNECT";
+"SLUG-DISCONNECT"                                           =	"DISCONNECT";
+"SLUG-MAIN"                                                 =	"Main Screen";
+"SLUG-DIFFERENT-QUEUE"                                      =	"Use Different Thread";
+"SLUG-FULL-SCAN"                                            =	"Rescan After Delete";
+"SLUG-PERSISTENT-CONNECTIONS"                               =	"Stay Connected to Devices";
+"SLUG-ABOUT-TITLE"                                          =	"About the Mac Test Harness App";
+"deviceInfoDeviceID"                                        =	"Device ID";
+"deviceInfoService"                                         =	"Device Information Service";
+"deviceInfoManufacturerName"                                =	"Manufacturer Name";
+"deviceInfoModelName"                                       =	"Model Name";
+"deviceInfoHardwareRevision"                                =	"Hardware Revision";
+"deviceInfoFirmwareRevision"                                =	"Firmware Revision";
+"180A"                                                      =	"Device Information Service";
+"180F"                                                      =	"Battery Level Service";
+"2A23"                                                      =	"System ID";
+"2A24"                                                      =	"Model Name";
+"2A25"                                                      =	"Serial Number";
+"2A26"                                                      =	"Firmware Revision";
+"2A27"                                                      =	"Hardware Revision";
+"2A28"                                                      =	"Software Revision";
+"2A29"                                                      =	"Manufacturer";
+"2A2A"                                                      =	"IEEE Regulatory";
+"2A50"                                                      =	"PNP ID Set";
+"2A19"                                                      =	"Battery Level";
+"SLUG-HEADER-UUID"                                          =	"UUID";
+"SLUG-HEADER-READ"                                          =	"R";
+"SLUG-HEADER-WRITE"                                         =	"W";
+"SLUG-HEADER-INDICATE"                                      =	"I";
+"SLUG-HEADER-NOTIFY"                                        =	"N";
+"SLUG-HEADER-VALUE"                                         =	"VALUE";
+"SLUG-ENTER-COMMAND"                                        =	"Enter Command to Send:";
+"SLUG-SEND-BUTTON"                                          =	"SEND";
+"SLUG-RESPONSE-LABEL"                                       =	"Response:";
+"SLUG-READ"                                                 =	"Read";
+"SLUG-WRITE"                                                =	"Write";
+"SLUG-INDICATE"                                             =	"Indicate";
+"SLUG-NOTIFY"                                               =	"Notify";
+"SLUG-WRITE-PROPERTY"                                       =	"(W)";
+"SLUG-READ-PROPERTY"                                        =	"(R)";
+"SLUG-DEVICE-NAME-FORMAT"                                   =	"Device Name: %@";
+
+/* ################################################################################################################################## */
+// MARK    =    - General -
+/* ################################################################################################################################## */
+/**
+This applies to the "General" group of commands.
+*/
+"SLUG-getDeviceDescription"                                 =    "Return the device description (no parameters)";
+"SLUG-getDeviceIdentifier"                                  =    "Return the device ID (no parameters)";
+"SLUG-setDeviceIdentifier"                                  =    "Set the device ID (Character String -Up to 12 ASCII Characters)";
+"SLUG-setBaudRateDivisor"                                   =    "Set the Baud Rate Divisor (Up to 2 hex digits)";
+"SLUG-setBaudRateHandshakeTimeout"                          =    "Set the Baud Rate Rate Handshake Timeout (Up to 2 hex digits)";
+"SLUG-restoreToDefaults"                                    =    "Restore the OBD Device to Defaults (no parameters)";
+"SLUG-turnEchoOn"                                           =    "Turn echo on (no parameters)";
+"SLUG-turnEchoOff"                                          =    "Turn Echo Off (no parameters)";
+"SLUG-flushAllEvents"                                       =    "Flush All Events (no parameters)";
+"SLUG-getID"                                                =    "Return the unit ID (no parameters)";
+"SLUG-turnLinefeedsOn"                                      =    "Turn on Linefeeds (no parameters)";
+"SLUG-turnLinefeedsOff"                                     =    "Turn Off Linefeeds (no parameters)";
+"SLUG-turnLowPowerModeOn"                                   =    "Turn On Low Power Mode (no parameters)";
+"SLUG-turnMemoryOn"                                         =    "Turn On Memory (no parameters)";
+"SLUG-turnMemoryOff"                                        =    "Turn Off Memory (no parameters)";
+"SLUG-fetchStoredData"                                      =    "Return Stored Data In Memory (no parameters)";
+"SLUG-storeData"                                            =    "Store 1 Byte of Data in Memory (Up to 2 Hex Digits)";
+"SLUG-warmStart"                                            =    "Perform a \"Warm Start\" (no parameters)";
+"SLUG-resetAll"                                             =    "Reset All (no parameters)";
+
+/* ################################################################################################################################## */
+// MARK    =    - OBD -
+/* ################################################################################################################################## */
+/**
+ This applies to the "OBD" group of commands.
+ */
+"SLUG-useLongMessages"                                      =    "Use Long (>7 Byte) Messages (no parameters)";
+"SLUG-useShortMessages"                                     =    "Use Short <= 7Bytes) Messages (no parameters)";
+"SLUG-autoReceive"                                          =    "Enable Automatic Receive (no parameters)";
+"SLUG-useAdaptiveTimingMode1"                               =    "Enable Adaptive Timing Auto Mode 1 (no parameters)";
+"SLUG-useAdaptiveTimingMode2"                               =    "Enable Adaptive Timing Auto Mode 1 (no parameters)";
+"SLUG-turnAdaptiveTimingOff"                                =    "Turn Adaptive Timing Off (no parameters)";
+"SLUG-bufferDump"                                           =    "Return a Buffer Dump (no parameters)";
+"SLUG-bypassInitialization"                                 =    "Bypass the Initialization Sequence (no parameters)";
+"SLUG-describeCurrentProtocol"                              =    "Describe the Current Protocol (no parameters)";
+"SLUG-describeProtocolByNumber"                             =    "Describe the Current Protocol as a Number (no parameters)";
+"SLUG-turnHeadersOn"                                        =    "Turn Headers On (no parameters)";
+"SLUG-turnHeadersOff"                                       =    "Turn Headers Off (no parameters)";
+"SLUG-monitorAll"                                           =    "Monitor All (no parameters)";
+"SLUG-setMonitorForReceiver"                                =    "Set the Monitor for Receiver (Up to 2 Hex Digits)";
+"SLUG-setMonitorForTransmitter"                             =    "Set the Monitor for Transmitter (Up to 2 Hex Digits)";
+"SLUG-setProtocol"                                          =    "Set the Protocol (1 Hex Digit)";
+"SLUG-setProtocol2"                                         =    "Set Protocol (Alternate Try -1 Hex Digit)";
+"SLUG-setAutoProtocol"                                      =    "Set Auto Protocol (1 hex Digit)";
+"SLUG-setAutoProtocol2"                                     =    "Set Auto Protocol (Alternate Try -1 Hex Digit)";
+"SLUG-useAutoProtocol"                                      =    "Use Auto Protocol (no parameters)";
+"SLUG-closeProtocol"                                        =    "Close the Protocol (no parameters)";
+"SLUG-turnResponsesOn"                                      =    "Turn Responses On (no parameters)";
+"SLUG-turnResponsesOff"                                     =    "Turn Responses Off (no parameters)";
+"SLUG-setReceiveAddress"                                    =    "Set the Receive Address (Up to 2 Hex Digits)";
+"SLUG-setReceiveAddress2"                                   =    "Set the Receive Address (Alternate Command -Up to 2 Hex Digits)";
+"SLUG-turnPrintSpacesOn"                                    =    "Turn On Print Spaces (no parameters)";
+"SLUG-turnPrintSpacesOff"                                   =    "Turn Off Print Spaces (no parameters)";
+"SLUG-setHeader1"                                           =    "Set Header (1 Hex Digit, and 2 Hex Digits)";
+"SLUG-setHeader2"                                           =    "Set Header (3 Groups of 2 Hex Digits)";
+"SLUG-useStandardSearchOrder"                               =    "Set Standard (J1978) Search Order (no parameters)";
+"SLUG-setTesterAddress"                                     =    "Set Tester Address (Up to 2 Hex Digits)";
+"SLUG-setTimeOutBy4MillisecondIntervals"                    =    "Set Timeout to Multiples of 4ms (Up to 2 Hex Digits)";
+
+/* ################################################################################################################################## */
+// MARK    =    - CAN -
+/* ################################################################################################################################## */
+/**
+ This applies to the "CAN" group of commands.
+ */
+"SLUG-turnCANAutoFormattingOn"                              =    "Turn CAN Auto-Formatting On (no parameters)";
+"SLUG-turnCANAutoFormattingOff"                             =    "Turn CAN Auto-Formatting Off (no parameters)";
+"SLUG-setCANExtendedAddressing"                             =    "Turn on CAN Extended Addressing, and Set it to the Given Value (Up to 2 Hex Digits)";
+"SLUG-turnOffCANExtendedAddressing"                         =    "Turn CAN Extended Addressing Off (no parameters)";
+"SLUG-setIDFilter1"                                         =    "Set the ID Filter (3 Hex Digits -1, and 2)";
+"SLUG-setIDFilter2"                                         =    "Set the ID Filter (4 Groups of 2 Hex Digits)";
+"SLUG-turnCANFlowControlOn"                                 =    "Turn CAN Flow Control On (no parameters)";
+"SLUG-turnCANFlowControlOff"                                =    "Turn CAN Flow Control Off (no parameters)";
+"SLUG-turnCANSilentModeOn"                                  =    "Turn CAN Silent Mode On (no parameters)";
+"SLUG-turnCANSilentModeOff"                                 =    "Turn CAN Silent Mode Off (no parameters)";
+"SLUG-turnDLCDisplayOn"                                     =    "Turn DLC Display On (no parameters)";
+"SLUG-turnDLCDisplayOff"                                    =    "Turn DLC Display Off (no parameters)";
+"SLUG-setFlowControlData"                                   =    "Set the CAN Flow Control Data (Up to 5 Hex Bytes -10 Digits)";
+"SLUG-setFlowControlHeader"                                 =    "Set the CAN Flow Control Header (4 Groups of 2 Hex Digits)";
+"SLUG-setFlowControlMode"                                   =    "Set the CAN Flow Control Mode (1 Hex Digit)";
+"SLUG-setProtocolBOptionsAndBaudRate"                       =    "Set the Protocol B Options and Baud Rate (2 Groups of 2 Hex Digits)";
+"SLUG-rtrMessage"                                           =    "Send an RTR Message (no parameters)";
+"SLUG-turnVariableDLCOn"                                    =    "Turn the Variable DLC On (no parameters)";
+"SLUG-turnVariableDLCOff"                                   =    "Turn the Variable DLC Off (no parameters)";
+
+/* ################################################################################################################################## */
+// MARK    =    - Volts -
+/* ################################################################################################################################## */
+/**
+ This applies to the "Volts" group of commands.
+ */
+"SLUG-setCalibratingVoltage"                                =    "Set the Calibration Volts (Fixed Decimal -2 Places)";
+"SLUG-resetCalibratingVoltage"                              =    "Reset the Calibration Voltage (no parameters)";
+
+/* ################################################################################################################################## */
+// MARK    =    - J1939 -
+/* ################################################################################################################################## */
+/**
+ This applies to the "J1939" group of commands.
+ */
+"SLUG-monitorForDM1Messages"                                =    "Monitor for DM1 Messages (no parameters)";
+"SLUG-useElmDataFormat"                                     =    "Use ELM Data Format (no parameters)";
+"SLUG-useSAEDataFormat"                                     =    "Use SAE Data Format (no parameters)";
+"SLUG-turnJ1939HeaderFormattingOn"                          =    "Turn Header Formatting On (no parameters)";
+"SLUG-turnJ1939HeaderFormattingOff"                         =    "Turn Header Formatting Off (no parameters)";
+"SLUG-use1XTimerMultiplier"                                 =    "Use the 1X Timer Multiplier (no parameters)";
+"SLUG-use5XTimerMultiplier"                                 =    "Use the 5X Timer Multiplier (no parameters)";
+"SLUG-setPGNMonitor1"                                       =    "Set the PGN Monitor (Up to 4 Hex Digits)";
+"SLUG-setPGNMonitor2"                                       =    "Set the PGN Monitor (Up to six Hex Digits)";
+"SLUG-setPGNMonitorGetMessages"                             =    "Set the PGN Monitor (Up to 4 Hex Digits, and 1 Hex Digit)";
+
+/* ################################################################################################################################## */
+// MARK    =    - J1850 -
+/* ################################################################################################################################## */
+/**
+ This applies to the "J1850" group of commands.
+ */
+"SLUG-getIFRValueFromHeader"                                =    "The IFR Value Should be Set From the Header (no parameters)";
+"SLUG-getIFRValueFromSource"                                =    "The IFR Value Should be Set From the Source (no parameters)";
+"SLUG-turnIFRsOn"                                           =    "Turn IFRs On (no parameters)";
+"SLUG-useIFRsAuto"                                          =    "Turn On IFRs, and Set to Auto (no parameters)";
+"SLUG-turnIFRsOff"                                          =    "Turn IFRs Off (no parameters)";
+
+/* ################################################################################################################################## */
+// MARK    =    - ISO -
+/* ################################################################################################################################## */
+/**
+ This applies to the "ISO" group of commands.
+ */
+"SLUG-isoBaudRate10400"                                     =    "Try to Set Baud Rate to 10400 (no parameters)";
+"SLUG-isoBaudRate4800"                                      =    "Try to Set Baud Rate to 4800 (no parameters)";
+"SLUG-isoBaudRate9600"                                      =    "Try to Set Baud Rate to 9600 (no parameters)";
+"SLUG-setISOInitAddress"                                    =    "Set the ISO Initial Address (Up to 2 Hex Digits)";
+"SLUG-displayKeywords"                                      =    "Display Keywords (no parameters)";
+"SLUG-turnKeywordCheckingOn"                                =    "Turn Keyword Checking On (no parameters)";
+"SLUG-turnKeywordCheckingOff"                               =    "Turn Keyword Checking Off (no parameters)";
+"SLUG-performSlowInitiation"                                =    "Perform a Slow Initiation (no parameters)";
+"SLUG-setWakeupIntervalMultiplerBy20ms"                     =    "Set the Wakeup Interval to Multiple of 4ms (Up to 2 Hex Digits)";
+"SLUG-setWakeupMessage"                                     =    "Set the Wakeup Message (Up to 6 Bytes -12 Hex Digits)";
+
+/* ################################################################################################################################## */
+// MARK    =    - PPs -
+/* ################################################################################################################################## */
+/**
+ This applies to the "PPs" group of commands.
+ */
+"SLUG-turnAllPPsProgParametersOn"                           =    "Turn On All Program Parameters (no parameters)";
+"SLUG-turnAllPPsProgParametersOff"                          =    "Turn Off All Program Parameters (no parameters)";
+"SLUG-setPPsProgParameterOn"                                =    "Turn On the Given Program Parameter (Up to 2 Hex Digits)";
+"SLUG-setPPsProgParameterOff"                               =    "Turn On the Given Program Parameter (Up to 2 Hex Digits)";
+"SLUG-setPPsProgParameterValue"                             =    "Set the Given Program Parameter to the Given Value (2 Sets of 2 Hex Digits)";
+"SLUG-ppSummary"                                            =    "Return a PPs Summary (no parameters)";
