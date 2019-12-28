@@ -60,6 +60,9 @@
                 <a class="nav-group-task-link" href="Classes/RVS_BTDriver/Errors.html">– Errors</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RVS_DebugTools.html">RVS_DebugTools</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/RVS_PersistentPrefs.html">RVS_PersistentPrefs</a>
               </li>
               <li class="nav-group-task">
@@ -93,6 +96,9 @@
             <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/OLEB_Queue.html">OLEB_Queue</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RVS_BTDriverDelegate.html">RVS_BTDriverDelegate</a>
               </li>
               <li class="nav-group-task">
@@ -124,6 +130,17 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV">RVS_BTDriver_OBD_Device_TransactionStruct</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RVS_FIFOQueue.html">RVS_FIFOQueue</a>
               </li>
             </ul>
           </li>
@@ -528,6 +545,51 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriver_ServiceProtocol</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Queue%20Protocol"></a>
+                <a name="//apple_ref/swift/Section/Queue Protocol" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Queue%20Protocol"></a>
+                  <h3 class="section-name"><p>Queue Protocol</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS10OLEB_QueueP"></a>
+                    <a name="//apple_ref/swift/Protocol/OLEB_Queue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS10OLEB_QueueP">OLEB_Queue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This was taken straight from the objc.io book &ldquo;Advanced Swift.&rdquo; It&rsquo;s so damn useful, that I have it made into a standard tool.</p>
+
+<p>The original design was done by Ole Begemann and Chris Eidhoff. I have modified it slightly; but not much.</p>
+
+<p>A type that can efficiently &ldquo;enqueue&rdquo; and &ldquo;dequeue&rdquo; elements. It works on one element at a time. You cannot dequeue groups of elements.</p>
+
+                        <a href="Protocols/OLEB_Queue.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">OLEB_Queue</span></code></pre>
 
                         </div>
                       </div>

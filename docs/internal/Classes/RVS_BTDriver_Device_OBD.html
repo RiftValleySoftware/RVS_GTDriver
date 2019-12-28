@@ -213,6 +213,9 @@
             <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/OLEB_Queue.html">OLEB_Queue</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriverCommunicatorTools.html">RVS_BTDriverCommunicatorTools</a>
               </li>
               <li class="nav-group-task">
@@ -259,6 +262,17 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html">RVS_BTDriver_OBD_Device_TransactionStruct</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_FIFOQueue.html">RVS_FIFOQueue</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -274,6 +288,12 @@
               </div>
             <p>This is a specialization of the device for OBD Devices.</p>
 
+<p>OBD devices handle communications in a single-threaded manner, so we use a queue to hold transactions. As a transaction completes, the next one is
+sent out.</p>
+
+<p>This allows us to match responses with commands, so we keep the transactions in a struct that is sent to the delegate, so the delegate gets to
+have access to the sent command, as well as the response.</p>
+
           </div>
         </section>
 
@@ -281,6 +301,60 @@
           <div class="section-content">
             <div class="task-group">
               <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC16transactionQueueAA0A10_FIFOQueueVyAA0a1_b1_f1_E18_TransactionStructVGvp"></a>
+                    <a name="//apple_ref/swift/Property/transactionQueue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC16transactionQueueAA0A10_FIFOQueueVyAA0a1_b1_f1_E18_TransactionStructVGvp">transactionQueue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This contains the staged transactions in a queue.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">transactionQueue</span><span class="p">:</span> <span class="kt"><a href="../Structs/RVS_FIFOQueue.html">RVS_FIFOQueue</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html">RVS_BTDriver_OBD_Device_TransactionStruct</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC18currentTransactionAA0a1_b1_f1_e1_H6StructVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/currentTransaction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC18currentTransactionAA0a1_b1_f1_e1_H6StructVSgvp">currentTransaction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This contains the current transaction. It may be nil, for no transaction.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">currentTransaction</span><span class="p">:</span> <span class="kt"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html">RVS_BTDriver_OBD_Device_TransactionStruct</a></span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -365,9 +439,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC11sendCommandyySSF"></a>
-                    <a name="//apple_ref/swift/Method/sendCommand(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC11sendCommandyySSF">sendCommand(_:)</a>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC11sendCommandyyF"></a>
+                    <a name="//apple_ref/swift/Method/sendCommand()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC11sendCommandyyF">sendCommand()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -375,14 +449,42 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This menthod will send a command to the OBD unit.</p>
+                        <p>This method will send a command to the OBD unit.
+This variant of the method will fectch any command in the _currentTransaction property. If none, then nothing happens.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sendCommand</span><span class="p">(</span><span class="n">_</span> <span class="nv">inCommandString</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">func</span> <span class="nf">sendCommand</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC11sendCommand_03rawH0ySS_SStF"></a>
+                    <a name="//apple_ref/swift/Method/sendCommand(_:rawCommand:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC11sendCommand_03rawH0ySS_SStF">sendCommand(_:rawCommand:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This method will send a command to the OBD unit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sendCommand</span><span class="p">(</span><span class="n">_</span> <span class="nv">inCommandString</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">rawCommand</span> <span class="nv">inRawCommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -398,7 +500,19 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The Sting for the command.</p>
+                                  <p>The String for the command.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rawCommand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The command String, without data or the appended CRLF.</p>
                                 </div>
                               </td>
                             </tr>
@@ -457,9 +571,77 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_OBD(im)peripheral:didUpdateValueForCharacteristic:error:"></a>
+                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_OBD(py)description"></a>
+                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_OBD(py)description">description</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns an easy-to-display description string</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC18cancelTransactionsyyF"></a>
+                    <a name="//apple_ref/swift/Method/cancelTransactions()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B11_Device_OBDC18cancelTransactionsyyF">cancelTransactions()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This cancels all I/O, and flushes the transaction queue.
+You may get a response from the last transaction, but it will not be sent to the delegate.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cancelTransactions</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Device%20Delegate%20Handler"></a>
+                <a name="//apple_ref/swift/Section/Device Delegate Handler" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Device%20Delegate%20Handler"></a>
+                  <h3 class="section-name"><p>Device Delegate Handler</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_OBD(im)peripheral:didUpdateValueForCharacteristic:error:"></a>
                     <a name="//apple_ref/swift/Method/peripheral(_:didUpdateValueFor:error:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_OBD(im)peripheral:didUpdateValueForCharacteristic:error:">peripheral(_:didUpdateValueFor:error:)</a>
+                    <a class="token" href="#/c:@CM@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_OBD(im)peripheral:didUpdateValueForCharacteristic:error:">peripheral(_:didUpdateValueFor:error:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -519,33 +701,6 @@
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_OBD(py)description"></a>
-                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_OBD(py)description">description</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This returns an easy-to-display description string</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
                       </div>
                     </section>
                   </div>
