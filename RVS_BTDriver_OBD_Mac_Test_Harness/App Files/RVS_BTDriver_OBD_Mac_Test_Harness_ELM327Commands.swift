@@ -26,53 +26,33 @@ import Foundation
 // MARK: - RVS_BTDriver_OBD_Commands Enum -
 /* ###################################################################################################################################### */
 /**
- This enum is used to define OBD Commands As Strings.
  */
-internal enum RVS_BTDriver_OBD_Commands: String {
+let commandDictionary: [String: String] = [
     /* ################################################################################################################################## */
     // MARK: - General -
     /* ################################################################################################################################## */
     /**
     This applies to the "General" group of commands.
     */
-    /// Return the device description (no parameters)
-    case getDeviceDescription
-    /// Return the device ID (no parameters)
-    case getDeviceIdentifier
-    /// Set the device ID (Character String -Up to 12 ASCII Characters)
-    case setDeviceIdentifier
-    /// Set the Baud Rate Divisor (Up to 2 hex digits)
-    case setBaudRateDivisor
-    /// Set the Baud Rate Rate Handshake Timeout (Up to 2 hex digits)
-    case setBaudRateHandshakeTimeout
-    /// Restore the OBD Device to Defaults (no parameters)
-    case restoreToDefaults
-    /// Turn echo on (no parameters)
-    case turnEchoOn
-    /// Turn Echo Off (no parameters)
-    case turnEchoOff
-    /// Flush All Events (no parameters)
-    case flushAllEvents
-    /// Return the unit ID (no parameters)
-    case getID
-    /// Turn on Linefeeds (no parameters)
-    case turnLinefeedsOn
-    /// Turn Off Linefeeds (no parameters)
-    case turnLinefeedsOff
-    /// Turn On Low Power Mode (no parameters)
-    case turnLowPowerModeOn
-    /// Turn On Memory (no parameters)
-    case turnMemoryOn
-    /// Turn Off Memory (no parameters)
-    case turnMemoryOff
-    /// Return Stored Data In Memory (no parameters)
-    case fetchStoredData
-    /// Store 1 Byte of Data in Memory (Up to 2 Hex Digits)
-    case storeData
-    /// Perform a "Warm Start" (no parameters)
-    case warmStart
-    /// Reset All (no parameters)
-    case resetAll
+	"getDeviceDescription": "Return the device description (no parameters)",
+	"getDeviceIdentifier": "Return the device ID (no parameters)",
+	"setDeviceIdentifier": "Set the device ID (Character String -Up to 12 ASCII Characters)",
+	"setBaudRateDivisor": "Set the Baud Rate Divisor (Up to 2 hex digits)",
+	"setBaudRateHandshakeTimeout": "Set the Baud Rate Rate Handshake Timeout (Up to 2 hex digits)",
+	"restoreToDefaults": "Restore the OBD Device to Defaults (no parameters)",
+	"turnEchoOn": "Turn echo on (no parameters)",
+	"turnEchoOff": "Turn Echo Off (no parameters)",
+	"flushAllEvents": "Flush All Events (no parameters)",
+	"getID": "Return the unit ID (no parameters)",
+	"turnLinefeedsOn": "Turn on Linefeeds (no parameters)",
+	"turnLinefeedsOff": "Turn Off Linefeeds (no parameters)",
+	"turnLowPowerModeOn": "Turn On Low Power Mode (no parameters)",
+	"turnMemoryOn": "Turn On Memory (no parameters)",
+	"turnMemoryOff": "Turn Off Memory (no parameters)",
+	"fetchStoredData": "Return Stored Data In Memory (no parameters)",
+	"storeData": "Store 1 Byte of Data in Memory (Up to 2 Hex Digits)",
+	"warmStart": "Perform a \"Warm Start\" (no parameters)",
+	"resetAll": "Reset All (no parameters)",
 
     /* ################################################################################################################################## */
     // MARK: - OBD -
@@ -80,70 +60,38 @@ internal enum RVS_BTDriver_OBD_Commands: String {
     /**
      This applies to the "OBD" group of commands.
      */
-    /// Use Long (>7 Byte) Messages (no parameters)
-    case useLongMessages
-    /// Use Short <= 7Bytes) Messages (no parameters)
-    case useShortMessages
-    /// Enable Automatic Receive (no parameters)
-    case autoReceive
-    /// Enable Adaptive Timing Auto Mode 1 (no parameters)
-    case useAdaptiveTimingMode1
-    /// Enable Adaptive Timing Auto Mode 1 (no parameters)
-    case useAdaptiveTimingMode2
-    /// Turn Adaptive Timing Off (no parameters)
-    case turnAdaptiveTimingOff
-    /// Return a Buffer Dump (no parameters)
-    case bufferDump
-    /// Bypass the Initialization Sequence (no parameters)
-    case bypassInitialization
-    /// Describe the Current Protocol (no parameters)
-    case describeCurrentProtocol
-    /// Describe the Current Protocol as a Number (no parameters)
-    case describeProtocolByNumber
-    /// Turn Headers On (no parameters)
-    case turnHeadersOn
-    /// Turn Headers Off (no parameters)
-    case turnHeadersOff
-    /// Monitor All (no parameters)
-    case monitorAll
-    /// Set the Monitor for Receiver (Up to 2 Hex Digits)
-    case setMonitorForReceiver
-    /// Set the Monitor for Transmitter (Up to 2 Hex Digits)
-    case setMonitorForTransmitter
-    /// Set the Protocol (1 Hex Digit)
-    case setProtocol
-    /// Set Protocol (Alternate Try -1 Hex Digit)
-    case setProtocol2
-    /// Set Auto Protocol (1 hex Digit)
-    case setAutoProtocol
-    /// Set Auto Protocol (Alternate Try -1 Hex Digit)
-    case setAutoProtocol2
-    /// Use Auto Protocol (no parameters)
-    case useAutoProtocol
-    /// Close the Protocol (no parameters)
-    case closeProtocol
-    /// Turn Responses On (no parameters)
-    case turnResponsesOn
-    /// Turn Responses Off (no parameters)
-    case turnResponsesOff
-    /// Set the Receive Address (Up to 2 Hex Digits)
-    case setReceiveAddress
-    /// Set the Receive Address (Alternate Command -Up to 2 Hex Digits)
-    case setReceiveAddress2
-    /// Turn On Print Spaces (no parameters)
-    case turnPrintSpacesOn
-    /// Turn Off Print Spaces (no parameters)
-    case turnPrintSpacesOff
-    /// Set Header (1 Hex Digit, and 2 Hex Digits)
-    case setHeader1
-    /// Set Header (3 Groups of 2 Hex Digits)
-    case setHeader2
-    /// Set Standard (J1978) Search Order (no parameters)
-    case useStandardSearchOrder
-    /// Set Tester Address (Up to 2 Hex Digits)
-    case setTesterAddress
-    /// Set Timeout to Multiples of 4ms (Up to 2 Hex Digits)
-    case setTimeOutBy4MillisecondIntervals
+	"useLongMessages": "Use Long (>7 Byte) Messages (no parameters)",
+	"useShortMessages": "Use Short <= 7Bytes) Messages (no parameters)",
+	"autoReceive": "Enable Automatic Receive (no parameters)",
+	"useAdaptiveTimingMode1": "Enable Adaptive Timing Auto Mode 1 (no parameters)",
+	"useAdaptiveTimingMode2": "Enable Adaptive Timing Auto Mode 1 (no parameters)",
+	"turnAdaptiveTimingOff": "Turn Adaptive Timing Off (no parameters)",
+	"bufferDump": "Return a Buffer Dump (no parameters)",
+	"bypassInitialization": "Bypass the Initialization Sequence (no parameters)",
+	"describeCurrentProtocol": "Describe the Current Protocol (no parameters)",
+	"describeProtocolByNumber": "Describe the Current Protocol as a Number (no parameters)",
+	"turnHeadersOn": "Turn Headers On (no parameters)",
+	"turnHeadersOff": "Turn Headers Off (no parameters)",
+	"monitorAll": "Monitor All (no parameters)",
+	"setMonitorForReceiver": "Set the Monitor for Receiver (Up to 2 Hex Digits)",
+	"setMonitorForTransmitter": "Set the Monitor for Transmitter (Up to 2 Hex Digits)",
+	"setProtocol": "Set the Protocol (1 Hex Digit)",
+	"setProtocol2": "Set Protocol (Alternate Try -1 Hex Digit)",
+	"setAutoProtocol": "Set Auto Protocol (1 hex Digit)",
+	"setAutoProtocol2": "Set Auto Protocol (Alternate Try -1 Hex Digit)",
+	"useAutoProtocol": "Use Auto Protocol (no parameters)",
+	"closeProtocol": "Close the Protocol (no parameters)",
+	"turnResponsesOn": "Turn Responses On (no parameters)",
+	"turnResponsesOff": "Turn Responses Off (no parameters)",
+	"setReceiveAddress": "Set the Receive Address (Up to 2 Hex Digits)",
+	"setReceiveAddress2": "Set the Receive Address (Alternate Command -Up to 2 Hex Digits)",
+	"turnPrintSpacesOn": "Turn On Print Spaces (no parameters)",
+	"turnPrintSpacesOff": "Turn Off Print Spaces (no parameters)",
+	"setHeader1": "Set Header (1 Hex Digit, and 2 Hex Digits)",
+	"setHeader2": "Set Header (3 Groups of 2 Hex Digits)",
+	"useStandardSearchOrder": "Set Standard (J1978) Search Order (no parameters)",
+	"setTesterAddress": "Set Tester Address (Up to 2 Hex Digits)",
+	"setTimeOutBy4MillisecondIntervals": "Set Timeout to Multiples of 4ms (Up to 2 Hex Digits)",
     
     /* ################################################################################################################################## */
     // MARK: - CAN -
@@ -151,44 +99,25 @@ internal enum RVS_BTDriver_OBD_Commands: String {
     /**
      This applies to the "CAN" group of commands.
      */
-    /// Turn CAN Auto-Formatting On (no parameters)
-    case turnCANAutoFormattingOn
-    /// Turn CAN Auto-Formatting Off (no parameters)
-    case turnCANAutoFormattingOff
-    /// Turn on CAN Extended Addressing, and Set it to the Given Value (Up to 2 Hex Digits)
-    case setCANExtendedAddressing
-    /// Turn CAN Extended Addressing Off (no parameters)
-    case turnOffCANExtendedAddressing
-    /// Set the ID Filter (3 Hex Digits -1, and 2)
-    case setIDFilter1
-    /// Set the ID Filter (4 Groups of 2 Hex Digits)
-    case setIDFilter2
-    /// Turn CAN Flow Control On (no parameters)
-    case turnCANFlowControlOn
-    /// Turn CAN Flow Control Off (no parameters)
-    case turnCANFlowControlOff
-    /// Turn CAN Silent Mode On (no parameters)
-    case turnCANSilentModeOn
-    /// Turn CAN Silent Mode Off (no parameters)
-    case turnCANSilentModeOff
-    /// Turn DLC Display On (no parameters)
-    case turnDLCDisplayOn
-    /// Turn DLC Display Off (no parameters)
-    case turnDLCDisplayOff
-    /// Set the CAN Flow Control Data (Up to 5 Hex Bytes -10 Digits)
-    case setFlowControlData
-    /// Set the CAN Flow Control Header (4 Groups of 2 Hex Digits)
-    case setFlowControlHeader
-    /// Set the CAN Flow Control Mode (1 Hex Digit)
-    case setFlowControlMode
-    /// Set the Protocol B Options and Baud Rate (2 Groups of 2 Hex Digits)
-    case setProtocolBOptionsAndBaudRate
-    /// Send an RTR Message (no parameters)
-    case rtrMessage
-    /// Turn the Variable DLC On (no parameters)
-    case turnVariableDLCOn
-    /// Turn the Variable DLC Off (no parameters)
-    case turnVariableDLCOff
+	"turnCANAutoFormattingOn": "Turn CAN Auto-Formatting On (no parameters)",
+	"turnCANAutoFormattingOff": "Turn CAN Auto-Formatting Off (no parameters)",
+	"setCANExtendedAddressing": "Turn on CAN Extended Addressing, and Set it to the Given Value (Up to 2 Hex Digits)",
+	"turnOffCANExtendedAddressing": "Turn CAN Extended Addressing Off (no parameters)",
+	"setIDFilter1": "Set the ID Filter (3 Hex Digits -1, and 2)",
+	"setIDFilter2": "Set the ID Filter (4 Groups of 2 Hex Digits)",
+	"turnCANFlowControlOn": "Turn CAN Flow Control On (no parameters)",
+	"turnCANFlowControlOff": "Turn CAN Flow Control Off (no parameters)",
+	"turnCANSilentModeOn": "Turn CAN Silent Mode On (no parameters)",
+	"turnCANSilentModeOff": "Turn CAN Silent Mode Off (no parameters)",
+	"turnDLCDisplayOn": "Turn DLC Display On (no parameters)",
+	"turnDLCDisplayOff": "Turn DLC Display Off (no parameters)",
+	"setFlowControlData": "Set the CAN Flow Control Data (Up to 5 Hex Bytes -10 Digits)",
+	"setFlowControlHeader": "Set the CAN Flow Control Header (4 Groups of 2 Hex Digits)",
+	"setFlowControlMode": "Set the CAN Flow Control Mode (1 Hex Digit)",
+	"setProtocolBOptionsAndBaudRate": "Set the Protocol B Options and Baud Rate (2 Groups of 2 Hex Digits)",
+	"rtrMessage": "Send an RTR Message (no parameters)",
+	"turnVariableDLCOn": "Turn the Variable DLC On (no parameters)",
+	"turnVariableDLCOff": "Turn the Variable DLC Off (no parameters)",
 
     /* ################################################################################################################################## */
     // MARK: - Volts -
@@ -196,10 +125,8 @@ internal enum RVS_BTDriver_OBD_Commands: String {
     /**
      This applies to the "Volts" group of commands.
      */
-    /// Set the Calibration Volts (Fixed Decimal -2 Places)
-    case setCalibratingVoltage
-    /// Reset the Calibration Voltage (no parameters)
-    case resetCalibratingVoltage
+	"setCalibratingVoltage": "Set the Calibration Volts (Fixed Decimal -2 Places)",
+	"resetCalibratingVoltage": "Reset the Calibration Voltage (no parameters)",
 
     /* ################################################################################################################################## */
     // MARK: - J1939 -
@@ -207,26 +134,16 @@ internal enum RVS_BTDriver_OBD_Commands: String {
     /**
      This applies to the "J1939" group of commands.
      */
-    /// Monitor for DM1 Messages (no parameters)
-    case monitorForDM1Messages
-    /// Use ELM Data Format (no parameters)
-    case useElmDataFormat
-    /// Use SAE Data Format (no parameters)
-    case useSAEDataFormat
-    /// Turn Header Formatting On (no parameters)
-    case turnJ1939HeaderFormattingOn
-    /// Turn Header Formatting Off (no parameters)
-    case turnJ1939HeaderFormattingOff
-    /// Use the 1X Timer Multiplier (no parameters)
-    case use1XTimerMultiplier
-    /// Use the 5X Timer Multiplier (no parameters)
-    case use5XTimerMultiplier
-    /// Set the PGN Monitor (Up to 4 Hex Digits)
-    case setPGNMonitor1
-    /// Set the PGN Monitor (Up to six Hex Digits)
-    case setPGNMonitor2
-    /// Set the PGN Monitor (Up to 4 Hex Digits, and 1 Hex Digit)
-    case setPGNMonitorGetMessages
+	"monitorForDM1Messages": "Monitor for DM1 Messages (no parameters)",
+	"useElmDataFormat": "Use ELM Data Format (no parameters)",
+	"useSAEDataFormat": "Use SAE Data Format (no parameters)",
+	"turnJ1939HeaderFormattingOn": "Turn Header Formatting On (no parameters)",
+	"turnJ1939HeaderFormattingOff": "Turn Header Formatting Off (no parameters)",
+	"use1XTimerMultiplier": "Use the 1X Timer Multiplier (no parameters)",
+	"use5XTimerMultiplier": "Use the 5X Timer Multiplier (no parameters)",
+	"setPGNMonitor1": "Set the PGN Monitor (Up to 4 Hex Digits)",
+	"setPGNMonitor2": "Set the PGN Monitor (Up to six Hex Digits)",
+	"setPGNMonitorGetMessages": "Set the PGN Monitor (Up to 4 Hex Digits, and 1 Hex Digit)",
 
     /* ################################################################################################################################## */
     // MARK: - J1850 -
@@ -234,16 +151,11 @@ internal enum RVS_BTDriver_OBD_Commands: String {
     /**
      This applies to the "J1850" group of commands.
      */
-    /// The IFR Value Should be Set From the Header (no parameters)
-    case getIFRValueFromHeader
-    /// The IFR Value Should be Set From the Source (no parameters)
-    case getIFRValueFromSource
-    /// Turn IFRs On (no parameters)
-    case turnIFRsOn
-    /// Turn On IFRs, and Set to Auto (no parameters)
-    case useIFRsAuto
-    /// Turn IFRs Off (no parameters)
-    case turnIFRsOff
+	"getIFRValueFromHeader": "The IFR Value Should be Set From the Header (no parameters)",
+	"getIFRValueFromSource": "The IFR Value Should be Set From the Source (no parameters)",
+	"turnIFRsOn": "Turn IFRs On (no parameters)",
+	"useIFRsAuto": "Turn On IFRs, and Set to Auto (no parameters)",
+	"turnIFRsOff": "Turn IFRs Off (no parameters)",
 
     /* ################################################################################################################################## */
     // MARK: - ISO -
@@ -251,26 +163,16 @@ internal enum RVS_BTDriver_OBD_Commands: String {
     /**
      This applies to the "ISO" group of commands.
      */
-    /// Try to Set Baud Rate to 10400 (no parameters)
-    case isoBaudRate10400
-    /// Try to Set Baud Rate to 4800 (no parameters)
-    case isoBaudRate4800
-    /// Try to Set Baud Rate to 9600 (no parameters)
-    case isoBaudRate9600
-    /// Set the ISO Initial Address (Up to 2 Hex Digits)
-    case setISOInitAddress
-    /// Display Keywords (no parameters)
-    case displayKeywords
-    /// Turn Keyword Checking On (no parameters)
-    case turnKeywordCheckingOn
-    /// Turn Keyword Checking Off (no parameters)
-    case turnKeywordCheckingOff
-    /// Perform a Slow Initiation (no parameters)
-    case performSlowInitiation
-    /// Set the Wakeup Interval to Multiple of 4ms (Up to 2 Hex Digits)
-    case setWakeupIntervalMultiplerBy20ms
-    /// Set the Wakeup Message (Up to 6 Bytes -12 Hex Digits)
-    case setWakeupMessage
+	"isoBaudRate10400": "Try to Set Baud Rate to 10400 (no parameters)",
+	"isoBaudRate4800": "Try to Set Baud Rate to 4800 (no parameters)",
+	"isoBaudRate9600": "Try to Set Baud Rate to 9600 (no parameters)",
+	"setISOInitAddress": "Set the ISO Initial Address (Up to 2 Hex Digits)",
+	"displayKeywords": "Display Keywords (no parameters)",
+	"turnKeywordCheckingOn": "Turn Keyword Checking On (no parameters)",
+	"turnKeywordCheckingOff": "Turn Keyword Checking Off (no parameters)",
+	"performSlowInitiation": "Perform a Slow Initiation (no parameters)",
+	"setWakeupIntervalMultiplerBy20ms": "Set the Wakeup Interval to Multiple of 4ms (Up to 2 Hex Digits)",
+	"setWakeupMessage": "Set the Wakeup Message (Up to 6 Bytes -12 Hex Digits)",
 
     /* ################################################################################################################################## */
     // MARK: - PPs -
@@ -278,16 +180,10 @@ internal enum RVS_BTDriver_OBD_Commands: String {
     /**
      This applies to the "PPs" group of commands.
      */
-    /// Turn On All Program Parameters (no parameters)
-    case turnAllPPsProgParametersOn
-    /// Turn Off All Program Parameters (no parameters)
-    case turnAllPPsProgParametersOff
-    /// Turn On the Given Program Parameter (Up to 2 Hex Digits)
-    case setPPsProgParameterOn
-    /// Turn On the Given Program Parameter (Up to 2 Hex Digits)
-    case setPPsProgParameterOff
-    /// Set the Given Program Parameter to the Given Value (2 Sets of 2 Hex Digits)
-    case setPPsProgParameterValue
-    /// Return a PPs Summary (no parameters)
-    case ppSummary
-}
+	"turnAllPPsProgParametersOn": "Turn On All Program Parameters (no parameters)",
+	"turnAllPPsProgParametersOff": "Turn Off All Program Parameters (no parameters)",
+	"setPPsProgParameterOn": "Turn On the Given Program Parameter (Up to 2 Hex Digits)",
+	"setPPsProgParameterOff": "Turn On the Given Program Parameter (Up to 2 Hex Digits)",
+	"setPPsProgParameterValue": "Set the Given Program Parameter to the Given Value (2 Sets of 2 Hex Digits)",
+	"ppSummary": "Return a PPs Summary (no parameters)"
+	]
