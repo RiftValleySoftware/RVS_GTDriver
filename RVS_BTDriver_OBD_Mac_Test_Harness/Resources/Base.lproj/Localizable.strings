@@ -90,7 +90,8 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-NOTIFY"                                               =	"Notify";
 "SLUG-WRITE-PROPERTY"                                       =	"(W)";
 "SLUG-READ-PROPERTY"                                        =	"(R)";
-"SLUG-DEVICE-NAME-FORMAT"                                   =	"Device Name: %@";
+"SLUG-DEVICE-NAME-FORMAT"                                   =    "Device Name: %@";
+"SLUG-COMMANDS"                                             =    "COMMANDS";
 
 /* ################################################################################################################################## */
 // MARK    =    - General -

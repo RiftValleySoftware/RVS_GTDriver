@@ -73,9 +73,15 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_OB
     
     /* ################################################################## */
     /**
-     This is the button that calls out the details modal screen.
+     This is the button that calls out the details modal sheet.
     */
     @IBOutlet weak var detailsCalloutButton: NSButton!
+
+    /* ################################################################## */
+    /**
+     This is the button that calls out the commands modal sheet.
+    */
+    @IBOutlet weak var commandsButton: NSButton!
     
     /* ############################################################################################################################## */
     // MARK: - RVS_BTDriver_OBD_DeviceDelegate Handlers
@@ -189,6 +195,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController {
         responseDisplayLabel?.stringValue = (responseDisplayLabel?.stringValue ?? "ERROR").localizedVariant
         sendTextButton?.title = (sendTextButton?.title ?? "ERROR").localizedVariant
         detailsCalloutButton?.title = (detailsCalloutButton?.title ?? "ERROR").localizedVariant
+        commandsButton?.title = (commandsButton?.title ?? "ERROR").localizedVariant
 
         deviceInstance?.subscribe(self)
         deviceInstance?.delegate = self
@@ -229,7 +236,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController {
         - sender: Data being associated. In this case, it is the device to associate with the screen.
      */
     override func prepare(for inSegue: NSStoryboardSegue, sender inDevice: Any?) {
-        if  let destination = inSegue.destinationController as? RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController {
+        if  let destination = inSegue.destinationController as? RVS_BTDriver_OBD_MacOS_Test_Harness_Base_Device_ViewController {
             destination.deviceInstance = deviceInstance
         }
     }
