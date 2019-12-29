@@ -61,9 +61,38 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
     /* ################################################################## */
     /**
     */
+    @IBOutlet weak var commandPopupMenu: NSPopUpButton!
+    
+    /* ################################################################## */
+    /**
+    */
+    @IBOutlet weak var responseTextLabel: NSTextField!
+    
+    /* ################################################################## */
+    /**
+    */
+    @IBOutlet weak var responseTextView: NSScrollView!
+    
+    /* ################################################################## */
+    /**
+    */
+    @IBAction func commandMenuSelected(_ inButton: NSPopUpButton) {
+        let keys = commandDictionary.keys.sorted()
+        if let selectedItem = commandDictionary[keys[inButton.indexOfSelectedItem]] {
+            #if DEBUG
+                print("Selected: \(String(describing: selectedItem))")
+            #endif
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         cancelButton?.title = (cancelButton?.title ?? "ERROR").localizedVariant
+        responseTextLabel?.stringValue = (responseTextLabel?.stringValue ?? "ERROR").localizedVariant
+        
         // We need to cast to the ELM327-specific protocol.
         if let deviceInstance = deviceInstance as? RVS_BTDriver_OBD_ELM327_DeviceProtocol {
             commandDictionary = [
@@ -226,6 +255,8 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
             //    "setPPsProgParameterValue": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPPsProgParameterValue, description: "SLUG-setPPsProgParameterValue"),
                 "ppSummary": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.ppSummary, description: "Return a PPs Summary (no parameters)")
                 ]
+            
+            commandPopupMenu?.addItems(withTitles: commandDictionary.keys.sorted())
         }
     }
 }
