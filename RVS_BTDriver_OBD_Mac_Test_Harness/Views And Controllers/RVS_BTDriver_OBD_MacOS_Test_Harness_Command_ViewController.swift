@@ -31,7 +31,7 @@ import Cocoa
 /* ########################################################################################################################################## */
 /**
  */
-typealias RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple = (method: ()?, description: String)
+typealias RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple = (method: (() -> Void)?, description: String)
 
 /* ################################################################################################################################## */
 // MARK: - This Allows Us to Send Fixed Commands (For Testing) -
@@ -73,25 +73,25 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
                 /**
                 This applies to the "General" group of commands.
                 */
-                "getDeviceDescription": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.getDeviceDescription(), description: "SLUG-getDeviceDescription"),
-                "getDeviceIdentifier": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.getDeviceIdentifier(), description: "SLUG-getDeviceIdentifier"),
-            //    "setDeviceIdentifier": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setDeviceIdentifier(), description: "SLUG-setDeviceIdentifier"),
-            //    "setBaudRateDivisor": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setBaudRateDivisor(), description: "SLUG-setBaudRateDivisor"),
-            //    "setBaudRateHandshakeTimeout": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setBaudRateHandshakeTimeout(), description: "SLUG-setBaudRateHandshakeTimeout"),
-                "restoreToDefaults": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.restoreToDefaults(), description: "SLUG-restoreToDefaults"),
-                "turnEchoOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnEchoOn(), description: "SLUG-turnEchoOn"),
-                "turnEchoOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnEchoOff(), description: "SLUG-turnEchoOff"),
-                "flushAllEvents": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.flushAllEvents(), description: "SLUG-flushAllEvents"),
-                "getID": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.getID(), description: "SLUG-getID"),
-                "turnLinefeedsOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnLinefeedsOn(), description: "SLUG-turnLinefeedsOn"),
-                "turnLinefeedsOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnLinefeedsOff(), description: "SLUG-turnLinefeedsOff"),
-                "turnLowPowerModeOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnLowPowerModeOn(), description: "SLUG-turnLowPowerModeOn"),
-                "turnMemoryOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnMemoryOn(), description: "SLUG-turnMemoryOn"),
-                "turnMemoryOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnMemoryOff(), description: "SLUG-turnMemoryOff"),
-                "fetchStoredData": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.fetchStoredData(), description: "SLUG-fetchStoredData"),
-            //    "storeData": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.storeData(), description: "SLUG-storeData"),
-                "warmStart": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.warmStart(), description: "SLUG-warmStart"),
-                "resetAll": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.resetAll(), description: "SLUG-resetAll"),
+                "getDeviceDescription": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.getDeviceDescription, description: "SLUG-getDeviceDescription"),
+                "getDeviceIdentifier": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.getDeviceIdentifier, description: "SLUG-getDeviceIdentifier"),
+            //    "setDeviceIdentifier": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setDeviceIdentifier, description: "SLUG-setDeviceIdentifier"),
+            //    "setBaudRateDivisor": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setBaudRateDivisor, description: "SLUG-setBaudRateDivisor"),
+            //    "setBaudRateHandshakeTimeout": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setBaudRateHandshakeTimeout, description: "SLUG-setBaudRateHandshakeTimeout"),
+                "restoreToDefaults": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.restoreToDefaults, description: "SLUG-restoreToDefaults"),
+                "turnEchoOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnEchoOn, description: "SLUG-turnEchoOn"),
+                "turnEchoOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnEchoOff, description: "SLUG-turnEchoOff"),
+                "flushAllEvents": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.flushAllEvents, description: "SLUG-flushAllEvents"),
+                "getID": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.getID, description: "SLUG-getID"),
+                "turnLinefeedsOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnLinefeedsOn, description: "SLUG-turnLinefeedsOn"),
+                "turnLinefeedsOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnLinefeedsOff, description: "SLUG-turnLinefeedsOff"),
+                "turnLowPowerModeOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnLowPowerModeOn, description: "SLUG-turnLowPowerModeOn"),
+                "turnMemoryOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnMemoryOn, description: "SLUG-turnMemoryOn"),
+                "turnMemoryOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnMemoryOff, description: "SLUG-turnMemoryOff"),
+                "fetchStoredData": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.fetchStoredData, description: "SLUG-fetchStoredData"),
+            //    "storeData": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.storeData, description: "SLUG-storeData"),
+                "warmStart": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.warmStart, description: "SLUG-warmStart"),
+                "resetAll": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.resetAll, description: "SLUG-resetAll"),
 
                 /* ################################################################################################################################## */
                 // MARK: - OBD -
@@ -99,38 +99,38 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
                 /**
                  This applies to the "OBD" group of commands.
                  */
-                "useLongMessages": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useLongMessages(), description: "SLUG-useLongMessages"),
-                "useShortMessages": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useShortMessages(), description: "SLUG-useShortMessages"),
-                "autoReceive": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.autoReceive(), description: "SLUG-autoReceive"),
-                "useAdaptiveTimingMode1": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useAdaptiveTimingMode1(), description: "SLUG-useAdaptiveTimingMode1"),
-                "useAdaptiveTimingMode2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useAdaptiveTimingMode2(), description: "SLUG-useAdaptiveTimingMode2"),
-                "turnAdaptiveTimingOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnAdaptiveTimingOff(), description: "SLUG-turnAdaptiveTimingOff"),
-                "bufferDump": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.bufferDump(), description: "SLUG-bufferDump"),
-                "bypassInitialization": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.bypassInitialization(), description: "SLUG-bypassInitialization"),
-                "describeCurrentProtocol": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.describeCurrentProtocol(), description: "SLUG-describeCurrentProtocol"),
-                "describeProtocolByNumber": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.describeProtocolByNumber(), description: "SLUG-describeProtocolByNumber"),
-                "turnHeadersOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnHeadersOn(), description: "SLUG-turnHeadersOn"),
-                "turnHeadersOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnHeadersOff(), description: "SLUG-turnHeadersOff"),
-                "monitorAll": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.monitorAll(), description: "SLUG-monitorAll"),
-            //    "setMonitorForReceiver": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setMonitorForReceiver(), description: "SLUG-setMonitorForReceiver"),
-            //    "setMonitorForTransmitter": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setMonitorForTransmitter(), description: "SLUG-setMonitorForTransmitter"),
-            //    "setProtocol": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setProtocol(), description: "SLUG-setProtocol"),
-            //    "setProtocol2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setProtocol2(), description: "SLUG-setProtocol2"),
-            //    "setAutoProtocol": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setAutoProtocol(), description: "SLUG-setAutoProtocol"),
-            //    "setAutoProtocol2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setAutoProtocol2(), description: "SLUG-setAutoProtocol2"),
-                "useAutoProtocol": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useAutoProtocol(), description: "SLUG-useAutoProtocol"),
-                "closeProtocol": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.closeProtocol(), description: "SLUG-closeProtocol"),
-                "turnResponsesOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnResponsesOn(), description: "SLUG-turnResponsesOn"),
-                "turnResponsesOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnResponsesOff(), description: "SLUG-turnResponsesOff"),
-            //    "setReceiveAddress": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setReceiveAddress(), description: "SLUG-setReceiveAddress"),
-            //    "setReceiveAddress2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setReceiveAddress2(), description: "SLUG-setReceiveAddress2"),
-                "turnPrintSpacesOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnPrintSpacesOn(), description: "SLUG-turnPrintSpacesOn"),
-                "turnPrintSpacesOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnPrintSpacesOff(), description: "SLUG-turnPrintSpacesOff"),
-            //    "setHeader1": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setHeader1(), description: "SLUG-setHeader1"),
-            //    "setHeader2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setHeader2(), description: "SLUG-setHeader2"),
-                "useStandardSearchOrder": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useStandardSearchOrder(), description: "SLUG-useStandardSearchOrder"),
-            //    "setTesterAddress": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setTesterAddress(), description: "SLUG-setTesterAddress"),
-            //    "setTimeOutBy4MillisecondIntervals": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setTimeOutBy4MillisecondIntervals(), description: "SLUG-setTimeOutBy4MillisecondIntervals"),
+                "useLongMessages": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useLongMessages, description: "SLUG-useLongMessages"),
+                "useShortMessages": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useShortMessages, description: "SLUG-useShortMessages"),
+                "autoReceive": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.autoReceive, description: "SLUG-autoReceive"),
+                "useAdaptiveTimingMode1": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useAdaptiveTimingMode1, description: "SLUG-useAdaptiveTimingMode1"),
+                "useAdaptiveTimingMode2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useAdaptiveTimingMode2, description: "SLUG-useAdaptiveTimingMode2"),
+                "turnAdaptiveTimingOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnAdaptiveTimingOff, description: "SLUG-turnAdaptiveTimingOff"),
+                "bufferDump": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.bufferDump, description: "SLUG-bufferDump"),
+                "bypassInitialization": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.bypassInitialization, description: "SLUG-bypassInitialization"),
+                "describeCurrentProtocol": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.describeCurrentProtocol, description: "SLUG-describeCurrentProtocol"),
+                "describeProtocolByNumber": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.describeProtocolByNumber, description: "SLUG-describeProtocolByNumber"),
+                "turnHeadersOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnHeadersOn, description: "SLUG-turnHeadersOn"),
+                "turnHeadersOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnHeadersOff, description: "SLUG-turnHeadersOff"),
+                "monitorAll": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.monitorAll, description: "SLUG-monitorAll"),
+            //    "setMonitorForReceiver": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setMonitorForReceiver, description: "SLUG-setMonitorForReceiver"),
+            //    "setMonitorForTransmitter": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setMonitorForTransmitter, description: "SLUG-setMonitorForTransmitter"),
+            //    "setProtocol": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setProtocol, description: "SLUG-setProtocol"),
+            //    "setProtocol2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setProtocol2, description: "SLUG-setProtocol2"),
+            //    "setAutoProtocol": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setAutoProtocol, description: "SLUG-setAutoProtocol"),
+            //    "setAutoProtocol2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setAutoProtocol2, description: "SLUG-setAutoProtocol2"),
+                "useAutoProtocol": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useAutoProtocol, description: "SLUG-useAutoProtocol"),
+                "closeProtocol": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.closeProtocol, description: "SLUG-closeProtocol"),
+                "turnResponsesOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnResponsesOn, description: "SLUG-turnResponsesOn"),
+                "turnResponsesOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnResponsesOff, description: "SLUG-turnResponsesOff"),
+            //    "setReceiveAddress": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setReceiveAddress, description: "SLUG-setReceiveAddress"),
+            //    "setReceiveAddress2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setReceiveAddress2, description: "SLUG-setReceiveAddress2"),
+                "turnPrintSpacesOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnPrintSpacesOn, description: "SLUG-turnPrintSpacesOn"),
+                "turnPrintSpacesOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnPrintSpacesOff, description: "SLUG-turnPrintSpacesOff"),
+            //    "setHeader1": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setHeader1, description: "SLUG-setHeader1"),
+            //    "setHeader2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setHeader2, description: "SLUG-setHeader2"),
+                "useStandardSearchOrder": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useStandardSearchOrder, description: "SLUG-useStandardSearchOrder"),
+            //    "setTesterAddress": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setTesterAddress, description: "SLUG-setTesterAddress"),
+            //    "setTimeOutBy4MillisecondIntervals": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setTimeOutBy4MillisecondIntervals, description: "SLUG-setTimeOutBy4MillisecondIntervals"),
                 
                 /* ################################################################################################################################## */
                 // MARK: - CAN -
@@ -138,25 +138,25 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
                 /**
                  This applies to the "CAN" group of commands.
                  */
-                "turnCANAutoFormattingOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANAutoFormattingOn(), description: "SLUG-turnCANAutoFormattingOn"),
-                "turnCANAutoFormattingOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANAutoFormattingOff(), description: "SLUG-turnCANAutoFormattingOff"),
-            //    "setCANExtendedAddressing": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setCANExtendedAddressing(), description: "SLUG-setCANExtendedAddressing"),
-                "turnOffCANExtendedAddressing": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnOffCANExtendedAddressing(), description: "SLUG-turnOffCANExtendedAddressing"),
-            //    "setIDFilter1": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setIDFilter1(), description: "SLUG-setIDFilter1"),
-            //    "setIDFilter2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setIDFilter2(), description: "SLUG-setIDFilter2"),
-                "turnCANFlowControlOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANFlowControlOn(), description: "SLUG-turnCANFlowControlOn"),
-                "turnCANFlowControlOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANFlowControlOff(), description: "SLUG-turnCANFlowControlOff"),
-                "turnCANSilentModeOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANSilentModeOn(), description: "SLUG-turnCANSilentModeOn"),
-                "turnCANSilentModeOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANSilentModeOff(), description: "SLUG-turnCANSilentModeOff"),
-                "turnDLCDisplayOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnDLCDisplayOn(), description: "SLUG-turnDLCDisplayOn"),
-                "turnDLCDisplayOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnDLCDisplayOff(), description: "SLUG-turnDLCDisplayOff"),
-            //    "setFlowControlData": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setFlowControlData(), description: "SLUG-setFlowControlData"),
-            //    "setFlowControlHeader": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setFlowControlHeader(), description: "SLUG-setFlowControlHeader"),
-            //    "setFlowControlMode": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setFlowControlMode(), description: "SLUG-setFlowControlMode"),
-            //    "setProtocolBOptionsAndBaudRate": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setProtocolBOptionsAndBaudRate(), description: "SLUG-setProtocolBOptionsAndBaudRate"),
-                "rtrMessage": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.rtrMessage(), description: "SLUG-rtrMessage"),
-                "turnVariableDLCOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnVariableDLCOn(), description: "SLUG-turnVariableDLCOn"),
-                "turnVariableDLCOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnVariableDLCOff(), description: "SLUG-turnVariableDLCOff"),
+                "turnCANAutoFormattingOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANAutoFormattingOn, description: "SLUG-turnCANAutoFormattingOn"),
+                "turnCANAutoFormattingOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANAutoFormattingOff, description: "SLUG-turnCANAutoFormattingOff"),
+            //    "setCANExtendedAddressing": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setCANExtendedAddressing, description: "SLUG-setCANExtendedAddressing"),
+                "turnOffCANExtendedAddressing": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnOffCANExtendedAddressing, description: "SLUG-turnOffCANExtendedAddressing"),
+            //    "setIDFilter1": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setIDFilter1, description: "SLUG-setIDFilter1"),
+            //    "setIDFilter2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setIDFilter2, description: "SLUG-setIDFilter2"),
+                "turnCANFlowControlOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANFlowControlOn, description: "SLUG-turnCANFlowControlOn"),
+                "turnCANFlowControlOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANFlowControlOff, description: "SLUG-turnCANFlowControlOff"),
+                "turnCANSilentModeOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANSilentModeOn, description: "SLUG-turnCANSilentModeOn"),
+                "turnCANSilentModeOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnCANSilentModeOff, description: "SLUG-turnCANSilentModeOff"),
+                "turnDLCDisplayOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnDLCDisplayOn, description: "SLUG-turnDLCDisplayOn"),
+                "turnDLCDisplayOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnDLCDisplayOff, description: "SLUG-turnDLCDisplayOff"),
+            //    "setFlowControlData": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setFlowControlData, description: "SLUG-setFlowControlData"),
+            //    "setFlowControlHeader": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setFlowControlHeader, description: "SLUG-setFlowControlHeader"),
+            //    "setFlowControlMode": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setFlowControlMode, description: "SLUG-setFlowControlMode"),
+            //    "setProtocolBOptionsAndBaudRate": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setProtocolBOptionsAndBaudRate, description: "SLUG-setProtocolBOptionsAndBaudRate"),
+                "rtrMessage": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.rtrMessage, description: "SLUG-rtrMessage"),
+                "turnVariableDLCOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnVariableDLCOn, description: "SLUG-turnVariableDLCOn"),
+                "turnVariableDLCOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnVariableDLCOff, description: "SLUG-turnVariableDLCOff"),
 
                 /* ################################################################################################################################## */
                 // MARK: - Volts -
@@ -164,8 +164,8 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
                 /**
                  This applies to the "Volts" group of commands.
                  */
-            //    "setCalibratingVoltage": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setCalibratingVoltage(), description: "SLUG-setCalibratingVoltage"),
-                "resetCalibratingVoltage": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.resetCalibratingVoltage(), description: "SLUG-resetCalibratingVoltage"),
+            //    "setCalibratingVoltage": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setCalibratingVoltage, description: "SLUG-setCalibratingVoltage"),
+                "resetCalibratingVoltage": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.resetCalibratingVoltage, description: "SLUG-resetCalibratingVoltage"),
 
                 /* ################################################################################################################################## */
                 // MARK: - J1939 -
@@ -173,16 +173,16 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
                 /**
                  This applies to the "J1939" group of commands.
                  */
-                "monitorForDM1Messages": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.monitorForDM1Messages(), description: "SLUG-monitorForDM1Messages"),
-                "useElmDataFormat": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useElmDataFormat(), description: "SLUG-useElmDataFormat"),
-                "useSAEDataFormat": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useSAEDataFormat(), description: "SLUG-useSAEDataFormat"),
-                "turnJ1939HeaderFormattingOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnJ1939HeaderFormattingOn(), description: "SLUG-turnJ1939HeaderFormattingOn"),
-                "turnJ1939HeaderFormattingOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnJ1939HeaderFormattingOff(), description: "SLUG-turnJ1939HeaderFormattingOff"),
-                "use1XTimerMultiplier": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.use1XTimerMultiplier(), description: "SLUG-use1XTimerMultiplier"),
-                "use5XTimerMultiplier": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.use5XTimerMultiplier(), description: "SLUG-use5XTimerMultiplier"),
-            //    "setPGNMonitor1": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPGNMonitor1(), description: "SLUG-setPGNMonitor1"),
-            //    "setPGNMonitor2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPGNMonitor2(), description: "SLUG-setPGNMonitor2"),
-            //    "setPGNMonitorGetMessages": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPGNMonitorGetMessages(), description: "SLUG-setPGNMonitorGetMessages"),
+                "monitorForDM1Messages": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.monitorForDM1Messages, description: "SLUG-monitorForDM1Messages"),
+                "useElmDataFormat": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useElmDataFormat, description: "SLUG-useElmDataFormat"),
+                "useSAEDataFormat": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useSAEDataFormat, description: "SLUG-useSAEDataFormat"),
+                "turnJ1939HeaderFormattingOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnJ1939HeaderFormattingOn, description: "SLUG-turnJ1939HeaderFormattingOn"),
+                "turnJ1939HeaderFormattingOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnJ1939HeaderFormattingOff, description: "SLUG-turnJ1939HeaderFormattingOff"),
+                "use1XTimerMultiplier": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.use1XTimerMultiplier, description: "SLUG-use1XTimerMultiplier"),
+                "use5XTimerMultiplier": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.use5XTimerMultiplier, description: "SLUG-use5XTimerMultiplier"),
+            //    "setPGNMonitor1": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPGNMonitor1, description: "SLUG-setPGNMonitor1"),
+            //    "setPGNMonitor2": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPGNMonitor2, description: "SLUG-setPGNMonitor2"),
+            //    "setPGNMonitorGetMessages": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPGNMonitorGetMessages, description: "SLUG-setPGNMonitorGetMessages"),
 
                 /* ################################################################################################################################## */
                 // MARK: - J1850 -
@@ -190,11 +190,11 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
                 /**
                  This applies to the "J1850" group of commands.
                  */
-                "getIFRValueFromHeader": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.getIFRValueFromHeader(), description: "SLUG-getIFRValueFromHeader"),
-                "getIFRValueFromSource": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.getIFRValueFromSource(), description: "SLUG-getIFRValueFromSource"),
-                "turnIFRsOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnIFRsOn(), description: "SLUG-turnIFRsOn"),
-                "useIFRsAuto": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useIFRsAuto(), description: "SLUG-useIFRsAuto"),
-                "turnIFRsOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnIFRsOff(), description: "SLUG-turnIFRsOff"),
+                "getIFRValueFromHeader": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.getIFRValueFromHeader, description: "SLUG-getIFRValueFromHeader"),
+                "getIFRValueFromSource": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.getIFRValueFromSource, description: "SLUG-getIFRValueFromSource"),
+                "turnIFRsOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnIFRsOn, description: "SLUG-turnIFRsOn"),
+                "useIFRsAuto": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.useIFRsAuto, description: "SLUG-useIFRsAuto"),
+                "turnIFRsOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnIFRsOff, description: "SLUG-turnIFRsOff"),
 
                 /* ################################################################################################################################## */
                 // MARK: - ISO -
@@ -202,16 +202,16 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
                 /**
                  This applies to the "ISO" group of commands.
                  */
-                "isoBaudRate10400": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.isoBaudRate10400(), description: "SLUG-isoBaudRate10400"),
-                "isoBaudRate4800": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.isoBaudRate4800(), description: "SLUG-isoBaudRate4800"),
-                "isoBaudRate9600": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.isoBaudRate9600(), description: "SLUG-isoBaudRate9600"),
-            //    "setISOInitAddress": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setISOInitAddress(), description: "SLUG-setISOInitAddress"),
-                "displayKeywords": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.displayKeywords(), description: "SLUG-displayKeywords"),
-                "turnKeywordCheckingOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnKeywordCheckingOn(), description: "SLUG-turnKeywordCheckingOn"),
-                "turnKeywordCheckingOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnKeywordCheckingOff(), description: "SLUG-turnKeywordCheckingOff"),
-                "performSlowInitiation": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.performSlowInitiation(), description: "SLUG-performSlowInitiation"),
-            //    "setWakeupIntervalMultiplerBy20ms": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setWakeupIntervalMultiplerBy20ms(), description: "SLUG-setWakeupIntervalMultiplerBy20ms"),
-            //    "setWakeupMessage": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setWakeupMessage(), description: "SLUG-setWakeupMessage"),
+                "isoBaudRate10400": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.isoBaudRate10400, description: "SLUG-isoBaudRate10400"),
+                "isoBaudRate4800": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.isoBaudRate4800, description: "SLUG-isoBaudRate4800"),
+                "isoBaudRate9600": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.isoBaudRate9600, description: "SLUG-isoBaudRate9600"),
+            //    "setISOInitAddress": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setISOInitAddress, description: "SLUG-setISOInitAddress"),
+                "displayKeywords": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.displayKeywords, description: "SLUG-displayKeywords"),
+                "turnKeywordCheckingOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnKeywordCheckingOn, description: "SLUG-turnKeywordCheckingOn"),
+                "turnKeywordCheckingOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnKeywordCheckingOff, description: "SLUG-turnKeywordCheckingOff"),
+                "performSlowInitiation": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.performSlowInitiation, description: "SLUG-performSlowInitiation"),
+            //    "setWakeupIntervalMultiplerBy20ms": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setWakeupIntervalMultiplerBy20ms, description: "SLUG-setWakeupIntervalMultiplerBy20ms"),
+            //    "setWakeupMessage": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setWakeupMessage, description: "SLUG-setWakeupMessage"),
 
                 /* ################################################################################################################################## */
                 // MARK: - PPs -
@@ -219,12 +219,12 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
                 /**
                  This applies to the "PPs" group of commands.
                  */
-                "turnAllPPsProgParametersOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnAllPPsProgParametersOn(), description: "SLUG-turnAllPPsProgParametersOn"),
-                "turnAllPPsProgParametersOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnAllPPsProgParametersOff(), description: "SLUG-turnAllPPsProgParametersOff"),
-            //    "setPPsProgParameterOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPPsProgParameterOn(), description: "SLUG-setPPsProgParameterOn"),
-            //    "setPPsProgParameterOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPPsProgParameterOff(), description: "SLUG-setPPsProgParameterOff"),
-            //    "setPPsProgParameterValue": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPPsProgParameterValue(), description: "SLUG-setPPsProgParameterValue"),
-                "ppSummary": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.ppSummary(), description: "Return a PPs Summary (no parameters)")
+                "turnAllPPsProgParametersOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnAllPPsProgParametersOn, description: "SLUG-turnAllPPsProgParametersOn"),
+                "turnAllPPsProgParametersOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.turnAllPPsProgParametersOff, description: "SLUG-turnAllPPsProgParametersOff"),
+            //    "setPPsProgParameterOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPPsProgParameterOn, description: "SLUG-setPPsProgParameterOn"),
+            //    "setPPsProgParameterOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPPsProgParameterOff, description: "SLUG-setPPsProgParameterOff"),
+            //    "setPPsProgParameterValue": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPPsProgParameterValue, description: "SLUG-setPPsProgParameterValue"),
+                "ppSummary": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.ppSummary, description: "Return a PPs Summary (no parameters)")
                 ]
         }
     }
