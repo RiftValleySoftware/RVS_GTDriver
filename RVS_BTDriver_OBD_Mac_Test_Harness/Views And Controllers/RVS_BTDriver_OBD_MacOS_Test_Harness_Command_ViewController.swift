@@ -52,6 +52,8 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
     /**
     */
     var commandDictionary: [String: RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple] = [:]
+    
+    var oldDelegate: RVS_BTDriver_OBD_DeviceDelegate!
 
     /* ################################################################## */
     /**
@@ -71,17 +73,23 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
     /* ################################################################## */
     /**
     */
-    @IBOutlet weak var responseTextView: NSScrollView!
+    @IBOutlet var responseTextView: NSTextView!
     
     /* ################################################################## */
     /**
     */
     @IBAction func commandMenuSelected(_ inButton: NSPopUpButton) {
-        let keys = commandDictionary.keys.sorted()
-        if let selectedItem = commandDictionary[keys[inButton.indexOfSelectedItem]] {
-            #if DEBUG
-                print("Selected: \(String(describing: selectedItem))")
-            #endif
+        if 0 < inButton.indexOfSelectedItem {
+            let keys = commandDictionary.keys.sorted()
+            if let selectedItem = commandDictionary[keys[inButton.indexOfSelectedItem - 1]] {
+                #if DEBUG
+                    print("Selected: \(String(describing: selectedItem))")
+                #endif
+                responseTextView?.string = ""
+                if let method = selectedItem.method {
+                    method()
+                }
+            }
         }
     }
     
@@ -253,10 +261,100 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
             //    "setPPsProgParameterOn": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPPsProgParameterOn, description: "SLUG-setPPsProgParameterOn"),
             //    "setPPsProgParameterOff": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPPsProgParameterOff, description: "SLUG-setPPsProgParameterOff"),
             //    "setPPsProgParameterValue": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.setPPsProgParameterValue, description: "SLUG-setPPsProgParameterValue"),
-                "ppSummary": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.ppSummary, description: "Return a PPs Summary (no parameters)")
+                "ppSummary": RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple(method: deviceInstance.ppSummary, description: "SLUG-ppSummary")
                 ]
             
-            commandPopupMenu?.addItems(withTitles: commandDictionary.keys.sorted())
+            let keys = commandDictionary.keys.sorted()
+            let popupItems: [String] = ["SLUG-AnyValue".localizedVariant] + keys.compactMap {
+                if let value = commandDictionary[$0] {
+                    return value.description.localizedVariant
+                }
+                
+                return nil
+            }
+            
+            commandPopupMenu?.addItems(withTitles: popupItems)
+            commandPopupMenu?.selectItem(at: 0)
+        }
+    }
+    
+    /* ############################################################################################################################## */
+    // MARK: - RVS_BTDriver_OBD_DeviceDelegate Handlers
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is called when an OBD device updates its transaction.
+     
+     - parameter updatedTransaction: The transaction that was updated. It may be nil.
+     */
+    override func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct) {
+        if  let data = updatedTransaction.responseData,
+            let stringValue = String(data: data, encoding: .ascii) {
+            #if DEBUG
+                print("Device Returned This Data: \(stringValue)")
+            #endif
+            DispatchQueue.main.async {
+                self.responseTextView?.string = stringValue
+                self.responseTextView?.scrollToEndOfDocument(nil)
+                self.setUpUI()
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        oldDelegate = deviceInstance?.delegate
+        deviceInstance?.delegate = self
+        deviceInstance?.subscribe(self)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        deviceInstance?.unsubscribe(self)
+        deviceInstance?.delegate = oldDelegate
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - Instance Methods
+/* ################################################################################################################################## */
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController {
+    /* ################################################################## */
+    /**
+     Sets up the UI elements.
+     */
+    func setUpUI() {
+        if var modelTitle = deviceInstance?.deviceName {
+            if let device = deviceInstance as? RVS_BTDriver_OBD_ELM327_DeviceProtocol {
+                modelTitle += " (ELM327 v\(device.elm327Version))"
+            }
+            title = modelTitle
+        }
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - RVS_BTDriver_DeviceSubscriberProtocol Handlers
+/* ################################################################################################################################## */
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController {
+    /* ################################################################## */
+    /**
+     Called if the device state changes, in some way.
+     
+     - parameter inDevice: The device instance that is calling this.
+     */
+    func deviceStatusUpdate(_ inDevice: RVS_BTDriver_DeviceProtocol) {
+        #if DEBUG
+            print("Device Status Changed")
+        #endif
+        DispatchQueue.main.async {
+            self.setUpUI()
         }
     }
 }
