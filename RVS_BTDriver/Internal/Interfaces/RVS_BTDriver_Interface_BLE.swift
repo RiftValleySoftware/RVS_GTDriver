@@ -641,7 +641,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
         precondition(canConnect, "Device Cannot be Connected!")
         if .disconnected == peripheral.state { // Must be completely disconnected
             #if DEBUG
-                print("Connecting the device: \(String(describing: self))")
+                print("Connecting the BLE device: \(String(describing: self))")
             #endif
             centralManager.connect(peripheral, options: nil)
         }
@@ -654,7 +654,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     internal override func disconnect() {
         if .disconnected != peripheral.state { // This applies everywhere except when explicitly disconnected.
             #if DEBUG
-                print("Disconnecting the device: \(String(describing: self))")
+                print("Disconnecting the BLE device: \(String(describing: self))")
             #endif
             centralManager.cancelPeripheralConnection(peripheral)
         }

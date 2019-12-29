@@ -251,7 +251,6 @@ extension RVS_BTDriver {
                 #if DEBUG
                     print("Removing Device at Index \(index) of the Holding Pen.")
                 #endif
-                inDevice.disconnect()   // Make sure we disconnect, first.
                 internal_holding_pen.remove(at: index)
                 return
             }
@@ -266,7 +265,6 @@ extension RVS_BTDriver {
                 #if DEBUG
                     print("Removing Device at Index \(index) of the Main List.")
                 #endif
-                inDevice.disconnect()   // Make sure we disconnect, first.
                 _device_list.remove(at: index)
             }
         }

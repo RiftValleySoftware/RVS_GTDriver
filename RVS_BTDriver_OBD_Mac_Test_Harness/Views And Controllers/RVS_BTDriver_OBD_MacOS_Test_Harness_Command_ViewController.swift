@@ -308,7 +308,6 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
         super.viewWillAppear()
         oldDelegate = deviceInstance?.delegate
         deviceInstance?.delegate = self
-        deviceInstance?.subscribe(self)
     }
     
     /* ################################################################## */
@@ -316,7 +315,6 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
      */
     override func viewWillDisappear() {
         super.viewWillDisappear()
-        deviceInstance?.unsubscribe(self)
         deviceInstance?.delegate = oldDelegate
     }
 }
@@ -335,26 +333,6 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController {
                 modelTitle += " (ELM327 v\(device.elm327Version))"
             }
             title = modelTitle
-        }
-    }
-}
-
-/* ################################################################################################################################## */
-// MARK: - RVS_BTDriver_DeviceSubscriberProtocol Handlers
-/* ################################################################################################################################## */
-extension RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController {
-    /* ################################################################## */
-    /**
-     Called if the device state changes, in some way.
-     
-     - parameter inDevice: The device instance that is calling this.
-     */
-    func deviceStatusUpdate(_ inDevice: RVS_BTDriver_DeviceProtocol) {
-        #if DEBUG
-            print("Device Status Changed")
-        #endif
-        DispatchQueue.main.async {
-            self.setUpUI()
         }
     }
 }
