@@ -50,7 +50,7 @@ class RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: NSObject {
      We use this to hold a list of all the open device viewers.
      The hash is the UUID of the device, and the value is the view controller that applies to that device.
      */
-    var openDeviceControllers: [String: RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController] = [:]
+    var openDeviceControllers: [String: RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController] = [:]
 
     /* ############################################################################################################################## */
     // MARK: - Internal Class Computed Properties

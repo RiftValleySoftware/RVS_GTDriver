@@ -124,7 +124,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController {
         - sender: Data being associated. In this case, it is the device to associate with the screen.
      */
     override func prepare(for inSegue: NSStoryboardSegue, sender inDevice: Any?) {
-        if  let destination = inSegue.destinationController as? RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController,
+        if  let destination = inSegue.destinationController as? RVS_BTDriver_OBD_MacOS_Test_Harness_Base_Device_ViewController,
             let device = inDevice as? RVS_BTDriver_OBD_DeviceProtocol {
             destination.deviceInstance = device
         }

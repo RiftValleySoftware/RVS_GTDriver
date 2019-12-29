@@ -70,7 +70,7 @@ typealias RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_Table
 /* ################################################################################################################################## */
 /**
  */
-class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController {
+class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: RVS_BTDriver_OBD_MacOS_Test_Harness_Base_Device_ViewController {
     /* ############################################################################################################################## */
     // MARK: - Static Properties
     /* ############################################################################################################################## */
@@ -79,12 +79,6 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController: RVS_BTDr
      This is the storyboard instantiation ID.
     */
     static let storyboardID = "details-view-controller"
-
-    /* ################################################################## */
-    /**
-     This is the device instance associated with this screen.
-    */
-    var deviceInstance: RVS_BTDriver_OBD_DeviceProtocol!
 
     /* ################################################################## */
     /**

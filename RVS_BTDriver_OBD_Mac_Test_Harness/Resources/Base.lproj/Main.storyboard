@@ -702,10 +702,10 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--DriverOBD MacOS Test Harness Device Base View Controller-->
+        <!--DriverOBD MacOS Test Harness Device View Controller-->
         <scene sceneID="5eR-Lc-6KN">
             <objects>
-                <viewController storyboardIdentifier="device-view-controller" id="Gh0-rL-oWt" customClass="RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController" customModule="RVS_BTDriver_OBD_Mac_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="device-view-controller" id="Gh0-rL-oWt" customClass="RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController" customModule="RVS_BTDriver_OBD_Mac_Test_Harness__Direct_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="aM1-Km-AFS">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="382"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -890,7 +890,7 @@
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="437" minWidth="40" maxWidth="1000" id="i5h-zA-UkN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="message" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -977,7 +977,7 @@
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="400" minWidth="40" maxWidth="10000" id="ZgI-PP-uan">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="message" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>

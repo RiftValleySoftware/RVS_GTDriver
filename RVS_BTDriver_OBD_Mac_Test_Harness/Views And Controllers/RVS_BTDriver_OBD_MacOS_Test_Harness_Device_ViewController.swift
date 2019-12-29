@@ -31,7 +31,7 @@ import Cocoa
 /**
  This controls a screen that allows a direct command/response with each device, and also allows a "details" screen to appear, listing the device state.
  */
-class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController {
+class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_OBD_MacOS_Test_Harness_Base_Device_ViewController {
     /* ############################################################################################################################## */
     // MARK: - Static Properties
     /* ############################################################################################################################## */
@@ -41,12 +41,6 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
     */
     static let storyboardID = "device-view-controller"
 
-    /* ################################################################## */
-    /**
-     This is the device instance associated with this screen.
-    */
-    var deviceInstance: RVS_BTDriver_OBD_DeviceProtocol!
-    
     /* ################################################################## */
     /**
      The label for the enter text field.
@@ -117,7 +111,7 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: RVS_BTDriv
 /* ################################################################################################################################## */
 // MARK: - NSTextFieldDelegate Methods
 /* ################################################################################################################################## */
-extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: NSTextFieldDelegate {
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController: NSTextFieldDelegate {
     /* ################################################################## */
     /**
      Called when text changes in the send text box.
@@ -139,7 +133,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController: NSText
 /* ################################################################################################################################## */
 // MARK: - IBAction Methods
 /* ################################################################################################################################## */
-extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController {
     /* ################################################################## */
     /**
      This will initiate a data send to the device, using whatever is in the command text field.
@@ -162,7 +156,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
 /* ################################################################################################################################## */
 // MARK: - Instance Methods
 /* ################################################################################################################################## */
-extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController {
     /* ################################################################## */
     /**
      Sets up the UI elements.
@@ -183,7 +177,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
 /* ################################################################################################################################## */
 // MARK: - Base Class Override Methods
 /* ################################################################################################################################## */
-extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController {
     /* ################################################################## */
     /**
      Called after the view has loaded and initialized from the storyboard.
@@ -244,7 +238,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
 /* ################################################################################################################################## */
 // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Handlers
 /* ################################################################################################################################## */
-extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Base_ViewController {
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController {
     /* ################################################################## */
     /**
      Called if the device state changes, in some way.
