@@ -169,6 +169,7 @@ extension RVS_BTDriver_Device_OBD_ELM327 {
                                     print("The ELM327 Version of \(substring) is too low. It needs to be at least \(Self.minimumELMVersion).")
                                 #endif
                                 cancelTransactions()
+                                disconnect()
                                 owner?.removeThisDevice(self)
                             }
                         } else {    // Anything else is an error.
@@ -176,6 +177,7 @@ extension RVS_BTDriver_Device_OBD_ELM327 {
                                 print("The ELM327 Version string of \"\(trimmedResponse)\" is not valid.")
                             #endif
                             cancelTransactions()
+                            disconnect()
                             owner?.removeThisDevice(self)
                         }
                     } else {    // Bad data response means we nuke the device.
@@ -183,6 +185,7 @@ extension RVS_BTDriver_Device_OBD_ELM327 {
                             print("The ELM327 Version string is nil.")
                         #endif
                         cancelTransactions()
+                        disconnect()
                         owner?.removeThisDevice(self)
                     }
                 } else {
