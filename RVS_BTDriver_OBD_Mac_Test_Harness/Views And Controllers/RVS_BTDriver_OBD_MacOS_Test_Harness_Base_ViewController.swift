@@ -40,20 +40,12 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController,
     
     /* ################################################################## */
     /**
-     Called if the device encounters an error.
+     Error reporting method.
      
-     - parameters:
-        - inDevice: The device instance that is calling this.
-        - encounteredThisError: The error that is being returned.
+     - parameter inDevice: The `RVS_BTDriver_DeviceProtocol` instance that has the service.
+     - parameter encounteredThisError: The error that was encountered.
      */
-    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
-        #if DEBUG
-            print("DEVICE ERROR! \(String(describing: inError))")
-        #endif
-        DispatchQueue.main.async {
-            RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
-        }
-    }
+    public func subscribedDevice(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) { }
     
     /* ################################################################## */
     /**
@@ -61,7 +53,7 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController,
      
      - parameter updatedTransaction: The transaction that was updated. It may be nil.
      */
-    func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct) { }
+    public func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct) { }
 
     /* ############################################################################################################################## */
     // MARK: - RVS_BTDriver_OBD_DeviceDelegate Support
@@ -73,7 +65,7 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController: NSViewController,
      - parameter inDevice: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
      - parameter encounteredThisError: The error that was encountered.
      */
-    func device(_ inDevice: RVS_BTDriver_OBD_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+    public func device(_ inDevice: RVS_BTDriver_OBD_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
         #if DEBUG
             print("ERROR! \(String(describing: inError))")
         #endif

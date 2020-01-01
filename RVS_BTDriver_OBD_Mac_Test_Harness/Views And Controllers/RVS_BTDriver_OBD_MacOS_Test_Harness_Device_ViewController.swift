@@ -112,6 +112,29 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_OB
             }
         }
     }
+    
+    /* ############################################################################################################################## */
+    // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Handlers
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     Error reporting method.
+     
+     Since the driver will handle displaying the error, all we do, is clean up the UX.
+     
+     - parameter inDevice: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    override func subscribedDevice(_ device: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+        #if DEBUG
+            print("ERROR! \(String(describing: inError))")
+        #endif
+        DispatchQueue.main.async {
+            self.enterTextField?.stringValue = ""
+            self.setUpUI()
+            self.enterTextField?.becomeFirstResponder()
+        }
+    }
 }
 
 /* ################################################################################################################################## */
@@ -213,6 +236,8 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController {
         if let uuid = deviceInstance?.uuid {
             appDelegateObject.openDeviceControllers[uuid] = self
         }
+        
+        deviceInstance?.subscribe(self)
         self.enterTextField?.becomeFirstResponder()
     }
     
@@ -225,6 +250,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController {
         if let uuid = deviceInstance?.uuid {
             appDelegateObject.openDeviceControllers.removeValue(forKey: uuid)
         }
+        deviceInstance?.unsubscribe(self)
     }
     
     /* ################################################################## */

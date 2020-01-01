@@ -156,11 +156,13 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate {
      - parameter message: A String, containing whatever messge is to be displayed below the header.
      */
     class func displayAlert(header inHeader: String, message inMessage: String = "") {
-        let alert = NSAlert()
-        alert.messageText = inHeader.localizedVariant
-        alert.informativeText = inMessage.localizedVariant
-        alert.addButton(withTitle: "SLUG-OK-BUTTON-TEXT".localizedVariant)
-        alert.runModal()
+        DispatchQueue.main.async {
+            let alert = NSAlert()
+            alert.messageText = inHeader.localizedVariant
+            alert.informativeText = inMessage.localizedVariant
+            alert.addButton(withTitle: "SLUG-OK-BUTTON-TEXT".localizedVariant)
+            alert.runModal()
+        }
     }
 }
 
@@ -179,9 +181,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: RVS_BTDriverDelegate {
         #if DEBUG
             print("ERROR! \(String(describing: inError))")
         #endif
-        DispatchQueue.main.async {
-            Self.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
-        }
+        Self.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
     }
     
     /* ################################################################## */

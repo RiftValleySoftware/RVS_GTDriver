@@ -56,6 +56,12 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
     
     /* ################################################################## */
     /**
+     This is the response, "cleaned," and converted to a String (if possible).
+     */
+    var responseDataAsString: String!
+
+    /* ################################################################## */
+    /**
      Any error that may have occurred.
      */
     var error: RVS_BTDriver.Errors!
@@ -69,9 +75,10 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         - rawCommand: Required. This is the raw String value of the command being sent (it may be a format string).
         - completeCommand: Required. This is the command, filled out (it may be the same as the rawCommand, but a format will have values substituted).
         - responseData: Optional. This is any data that was returned from the OBD adapter.
+        - responseDataAsString: Optional. If the command can be represented as a String, that is set here.
         - error: Optional. Any error that may have occurred.
      */
-    init(device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String, completeCommand inCompleteCommand: String, responseData inResponseData: Data! = nil, error inError: RVS_BTDriver.Errors! = nil) {
+    init(device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String, completeCommand inCompleteCommand: String, responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil) {
         precondition((nil != inDevice) || RVS_DebugTools.isRunningUnitTests, "The device cannot be nil!")
         precondition(!inRawCommand.isEmpty, "The raw command cannot be empty.")
         precondition(!inCompleteCommand.isEmpty, "The complete command cannot be empty.")
@@ -79,6 +86,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         rawCommand = inRawCommand
         completeCommand = inCompleteCommand
         responseData = inResponseData
+        responseDataAsString = inResponseDataAsString
         error = inError
     }
     
@@ -104,6 +112,10 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         if  let responseData = responseData,
             let stringResponse = String(data: responseData, encoding: .ascii) {
             ret += "\n\tResponse: \"\(stringResponse)\""
+        }
+        
+        if  let responseDataAsString = responseDataAsString {
+            ret += "\n\tResponse As A String: \"\(responseDataAsString)\""
         }
         
         if let error = error {

@@ -156,7 +156,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController {
         for device in driverInstance {
             if case .OBD(_) = device.deviceType {
                 #if DEBUG
-                print("Appending \(String(describing: device)) as an OBD device at index \(deviceList.count).")
+                print("Appending \(String(describing: subscribedDevice)) as an OBD device at index \(deviceList.count).")
                 #endif
                 deviceList.append(device)
             }

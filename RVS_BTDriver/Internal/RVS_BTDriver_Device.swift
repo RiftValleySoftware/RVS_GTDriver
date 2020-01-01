@@ -200,7 +200,7 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
      */
     internal func notifySubscribersOfNewService(_ inService: RVS_BTDriver_Service) {
         internal_subscribers.forEach {
-            $0.device(self, serviceAdded: inService)
+            $0.subscribedDevice(self, serviceAdded: inService)
         }
     }
 
@@ -211,7 +211,7 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
      */
     internal func notifySubscribersOfStatusUpdate() {
         internal_subscribers.forEach {
-            $0.deviceStatusUpdate(self)
+            $0.subscribedDeviceStatusUpdate(self)
         }
     }
     
@@ -420,9 +420,8 @@ extension RVS_BTDriver_Device: RVS_BTDriverCommunicatorTools {
      */
     public func reportThisError(_ inError: RVS_BTDriver.Errors) {
         internal_subscribers.forEach {
-            $0.device(self, encounteredThisError: inError)
+            $0.subscribedDevice(self, encounteredThisError: inError)
         }
-        
         internal_owner?.reportThisError(inError)
     }
 }

@@ -50,10 +50,10 @@ public protocol RVS_BTDriver_DeviceSubscriberProtocol: RVS_BTDriver_SubscriberPr
     /**
      REQUIRED: Error reporting method.
      
-     - parameter device: The `RVS_BTDriver_DeviceProtocol` instance that encountered the error.
+     - parameter device: The `RVS_BTDriver_DeviceProtocol` instance that has the service.
      - parameter encounteredThisError: The error that was encountered.
      */
-    func device(_ device: RVS_BTDriver_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors)
+    func subscribedDevice(_ device: RVS_BTDriver_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors)
     
     /* ################################################################## */
     /**
@@ -62,7 +62,7 @@ public protocol RVS_BTDriver_DeviceSubscriberProtocol: RVS_BTDriver_SubscriberPr
      - parameter device: The `RVS_BTDriver_DeviceProtocol` instance that has the service.
      - parameter serviceAdded: The `RVS_BTDriver_ServiceProtocol` service that was added.
      */
-    func device(_ device: RVS_BTDriver_DeviceProtocol, serviceAdded: RVS_BTDriver_ServiceProtocol)
+    func subscribedDevice(_ device: RVS_BTDriver_DeviceProtocol, serviceAdded: RVS_BTDriver_ServiceProtocol)
     
     /* ################################################################## */
     /**
@@ -74,7 +74,7 @@ public protocol RVS_BTDriver_DeviceSubscriberProtocol: RVS_BTDriver_SubscriberPr
      
      - parameter device: The `RVS_BTDriver_DeviceProtocol` instance calling this.
      */
-    func deviceStatusUpdate(_ device: RVS_BTDriver_DeviceProtocol)
+    func subscribedDeviceStatusUpdate(_ device: RVS_BTDriver_DeviceProtocol)
 }
 
 /* ###################################################################################################################################### */
@@ -85,13 +85,13 @@ extension RVS_BTDriver_DeviceSubscriberProtocol {
     /**
      Default does nothing.
      */
-    public func device(_ device: RVS_BTDriver_DeviceProtocol, serviceAdded: RVS_BTDriver_ServiceProtocol) { }
+    public func subscribedDevice(_ device: RVS_BTDriver_DeviceProtocol, serviceAdded: RVS_BTDriver_ServiceProtocol) { }
     
     /* ################################################################## */
     /**
      Default does nothing.
      */
-    public func deviceStatusUpdate(_ device: RVS_BTDriver_DeviceProtocol) { }
+    public func subscribedDeviceStatusUpdate(_ device: RVS_BTDriver_DeviceProtocol) { }
 }
 
 /* ###################################################################################################################################### */

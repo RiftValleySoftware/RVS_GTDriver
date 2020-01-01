@@ -185,9 +185,9 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
     internal func receiveCommandData(_ inData: Data) {
         if nil != currentTransaction {
             if nil == currentTransaction.responseData {
-                currentTransaction.responseData = inData
+                currentTransaction?.responseData = inData
             } else {
-                currentTransaction.responseData += inData
+                currentTransaction?.responseData += inData
             }
             
             // All OBD responses end with a less-than sign, so we wait for that before wrapping up.
@@ -196,9 +196,12 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 let stringValue = String(data: stringValueData, encoding: .ascii),
                 ">" == stringValue.last {
                 cancelTimeout()
+                currentTransaction.responseDataAsString = stringValue.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"]))
+                
                 #if DEBUG
                     print("Sending \"\(currTrans.description)\" up to the delegate.")
                 #endif
+                
                 delegate?.deviceUpdatedTransaction(currentTransaction)
                 currentTransaction = transactionQueue.dequeue()
                 sendCommand()   // See if there's another one waiting for us.
@@ -226,6 +229,23 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
         cancelTimeout()
         transactionQueue.removeAll()
         currentTransaction = nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the timer timeout handler. When called, it will send an error to the delegate.
+     
+     This should be overridden, so that subclasses can provide meaninful data.
+     
+     - parameter inTimer: The timer object calling this.
+     */
+    override internal func timeoutHandler(_ inTimer: Timer) {
+        #if DEBUG
+            print("OBD Timeout!")
+        #endif
+        let transaction = currentTransaction    // Saved, because we are about to nuke all the transactions.
+        cancelTransactions()
+        reportThisError(RVS_BTDriver.Errors.commandTimeout(commandData: transaction))
     }
 }
 

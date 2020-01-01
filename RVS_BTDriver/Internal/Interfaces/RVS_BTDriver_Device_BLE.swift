@@ -105,7 +105,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     /**
      This is the timer timeout handler. When called, it will send an error to the delegate.
      
-     This shoul be overridden, so that subclasses can provide meaninful data.
+     This should be overridden, so that subclasses can provide meaninful data.
      
      - parameter inTimer: The timer object calling this.
      */

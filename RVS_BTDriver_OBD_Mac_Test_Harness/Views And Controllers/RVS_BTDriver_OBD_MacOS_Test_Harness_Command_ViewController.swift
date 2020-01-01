@@ -317,6 +317,22 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
         super.viewWillDisappear()
         deviceInstance?.delegate = oldDelegate
     }
+    
+    /* ################################################################## */
+    /**
+     Error reporting method.
+     
+     - parameter inDevice: The `RVS_BTDriver_OBD_DeviceProtocol` instance that encountered the error.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    override func device(_ inDevice: RVS_BTDriver_OBD_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+        #if DEBUG
+            print("ERROR! \(String(describing: inError))")
+        #endif
+        DispatchQueue.main.async {
+            RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.displayAlert(header: "SLUG-ERROR-HEADER", message: inError.localizedDescription)
+        }
+    }
 }
 
 /* ################################################################################################################################## */
