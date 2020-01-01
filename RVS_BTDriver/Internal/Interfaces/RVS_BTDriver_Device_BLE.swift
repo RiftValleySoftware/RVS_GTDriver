@@ -46,7 +46,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      This is a property that is set to a command receive for a mock.
      */
     var commandReceiveFunc: ((_ command: String) -> Void)!
-
+    
     /* ################################################################## */
     /**
      The central manager that controls this peripheral.
@@ -79,14 +79,47 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     }
     
     /* ################################################################################################################################## */
-    // MARK: - RVS_BTDriver_BLE_Device Internal Base Class Override Computed Properties -
+    // MARK: - Timeout Handling -
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     If the device has a Device Info service, we access the service instance here.
+     This is a property that is set to a countdown timer when a timeout period begins. It should be canceled and niled, when not in use.
      */
-    var deviceInfoService: RVS_BTDriver_Service_DeviceInfo_BLE! {
-        return nil
+    internal var timeoutTimer: Timer? = nil
+
+    /* ################################################################## */
+    /**
+     This is the timer timeout handler. When called, it will send an error to the delegate.
+     
+     This shoul be overridden, so that subclasses can provide meaninful data.
+     
+     - parameter inTimer: The timer object calling this.
+     */
+    @objc internal func timeoutHandler(_ inTimer: Timer) {
+        cancelTimeout()
+        reportThisError(RVS_BTDriver.Errors.commandTimeout(commandData: nil))
+    }
+    
+    /* ################################################################## */
+    /**
+     Begin the timeout ticker.
+     
+     - parameter inTimeoutInSeconds: A Double-precision floating-point number, containing the number of seconds to wait.
+     */
+    internal func startTimeout(_ inTimeoutInSeconds: TimeInterval) {
+        timeoutTimer = Timer.scheduledTimer(withTimeInterval: inTimeoutInSeconds, repeats: false, block: timeoutHandler)
+    }
+    
+    /* ################################################################## */
+    /**
+     This stops the timeout ticker, and clears the decks.
+     */
+    internal func cancelTimeout() {
+        if  let timer = timeoutTimer,
+            timer.isValid {
+            timer.invalidate()
+        }
+        timeoutTimer = nil
     }
 
     /* ################################################################################################################################## */

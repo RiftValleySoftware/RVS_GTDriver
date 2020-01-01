@@ -203,6 +203,13 @@ extension RVS_BTDriver {
         
         /* ################################################################## */
         /**
+         This means that there was a timeout.
+         The associated value is any relevant data for that command (typeless).
+         */
+        case commandTimeout(commandData: Any?)
+
+        /* ################################################################## */
+        /**
          This is a "catchall" error for characteristics discovery
          The associated value is any error that occurred.
          */
@@ -252,6 +259,9 @@ extension RVS_BTDriver {
 
             case .characteristicValueMissing:
                 caseString = "characteristicValueMissing"
+                
+            case .commandTimeout:
+                caseString = "commandTimeout"
 
             case .unknownCharacteristicsDiscoveryError:
                 caseString = "unknownCharacteristicsDiscoveryError"
