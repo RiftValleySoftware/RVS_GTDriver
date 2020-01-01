@@ -65,6 +65,20 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     
     /* ################################################################## */
     /**
+     Accessor for our device info structure. It will be nil, if none assigned yet.
+     */
+    public var deviceInfoStruct: RVS_BTDriver_Interface_BLE.DeviceInfo! {
+        get {
+            return _deviceInfoStruct
+        }
+        
+        set {
+            _deviceInfoStruct = newValue
+        }
+    }
+
+    /* ################################################################## */
+    /**
      The UUID comes directly from the peripheral.
      */
     internal override var uuid: String! {
@@ -96,6 +110,9 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      - parameter inTimer: The timer object calling this.
      */
     @objc internal func timeoutHandler(_ inTimer: Timer) {
+        #if DEBUG
+            print("Timeout!")
+        #endif
         cancelTimeout()
         reportThisError(RVS_BTDriver.Errors.commandTimeout(commandData: nil))
     }
@@ -107,6 +124,10 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      - parameter inTimeoutInSeconds: A Double-precision floating-point number, containing the number of seconds to wait.
      */
     internal func startTimeout(_ inTimeoutInSeconds: TimeInterval) {
+        #if DEBUG
+            print("Starting a timeout of \(inTimeoutInSeconds) seconds.")
+        #endif
+        
         timeoutTimer = Timer.scheduledTimer(withTimeInterval: inTimeoutInSeconds, repeats: false, block: timeoutHandler)
     }
     
@@ -115,6 +136,10 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      This stops the timeout ticker, and clears the decks.
      */
     internal func cancelTimeout() {
+        #if DEBUG
+            print("Canceling the timeout.")
+        #endif
+        
         if  let timer = timeoutTimer,
             timer.isValid {
             timer.invalidate()
@@ -341,20 +366,6 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
                 print("Discovering all services for the device: \(String(describing: self))")
             #endif
             peripheral.discoverServices(nil)
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     Accessor for our device info structure. It will be nil, if none assigned yet.
-     */
-    internal var deviceInfoStruct: RVS_BTDriver_Interface_BLE.DeviceInfo! {
-        get {
-            return _deviceInfoStruct
-        }
-        
-        set {
-            _deviceInfoStruct = newValue
         }
     }
 }

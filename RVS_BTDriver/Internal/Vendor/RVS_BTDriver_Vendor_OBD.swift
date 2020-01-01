@@ -89,6 +89,12 @@ class RVS_BTDriver_Vendor_OBD: RVS_BTDriver_Vendor_GenericBLE {
 class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceProtocol {
     /* ################################################################## */
     /**
+     This is how many seconds we wait for a command to finish.
+     */
+    static internal let timeoutInterval: TimeInterval = 5.0
+    
+    /* ################################################################## */
+    /**
      This contains the staged transactions in a queue.
      */
     internal var transactionQueue = RVS_FIFOQueue<RVS_BTDriver_OBD_Device_TransactionStruct>()
@@ -132,6 +138,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 let writeProperty = writeProperty as? RVS_BTDriver_Property_BLE,
                 let data = commandString.data(using: .ascii) {
                 readProperty.canNotify = true
+                startTimeout(Self.timeoutInterval)
                 if writeProperty.canWriteWithResponse {
                     #if DEBUG
                         print("Sending data: \(commandString) for: \(writeProperty), and expecting a response.")
@@ -188,8 +195,9 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 let stringValueData = currTrans.responseData,
                 let stringValue = String(data: stringValueData, encoding: .ascii),
                 ">" == stringValue.last {
+                cancelTimeout()
                 #if DEBUG
-                print("Sending \"\(currTrans.description)\" up to the delegate.")
+                    print("Sending \"\(currTrans.description)\" up to the delegate.")
                 #endif
                 delegate?.deviceUpdatedTransaction(currentTransaction)
                 currentTransaction = transactionQueue.dequeue()
@@ -215,6 +223,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
         #if DEBUG
             print("Canceling All Transactions.")
         #endif
+        cancelTimeout()
         transactionQueue.removeAll()
         currentTransaction = nil
     }
@@ -246,6 +255,7 @@ extension RVS_BTDriver_Device_OBD {
             }
         #endif
             
+        cancelTimeout()
         if  inPeripheral == peripheral, // Make sure this is for us.
             let value = inCharacteristic.value {    // If we didn't get a value, then we don't send anything to the delegate.
             receiveCommandData(value)
