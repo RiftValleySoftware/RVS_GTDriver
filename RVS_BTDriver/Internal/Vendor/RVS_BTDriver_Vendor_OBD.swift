@@ -196,13 +196,26 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 let stringValue = String(data: stringValueData, encoding: .ascii),
                 ">" == stringValue.last {
                 cancelTimeout()
-                currentTransaction.responseDataAsString = stringValue.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"]))
+                
+                if let cleanedString = parseOBDData(stringValueData) {
+                    #if DEBUG
+                        print("Adding \"\(cleanedString)\" to the transaction.")
+                    #endif
+                    
+                    currentTransaction.responseDataAsString = cleanedString
+                } else {
+                    #if DEBUG
+                        print("Unable to produce a cleaned string.")
+                    #endif
+                }
                 
                 #if DEBUG
                     print("Sending \"\(currTrans.description)\" up to the delegate.")
                 #endif
                 
                 delegate?.deviceUpdatedTransaction(currentTransaction)
+                
+                // Get the next transaction.
                 currentTransaction = transactionQueue.dequeue()
                 sendCommand()   // See if there's another one waiting for us.
             }
@@ -246,6 +259,21 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
         let transaction = currentTransaction    // Saved, because we are about to nuke all the transactions.
         cancelTransactions()
         reportThisError(RVS_BTDriver.Errors.commandTimeout(commandData: transaction))
+    }
+    
+    /* ################################################################## */
+    /**
+     This method is designed to be overridden. The base class does nothing more than a simple String extraction.
+     
+     - parameter inData: The response data to "clean."
+     
+     - returns: A String, or nil, if the data could not be "cleaned." It may be an empty String, in which case, the "cleaning" was successful, but no meaningful data was returned.
+    */
+    internal func parseOBDData(_ inData: Data) -> String! {
+        if let trimmedResponse = String(data: inData, encoding: .ascii)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])) {
+            return trimmedResponse
+        }
+        return nil
     }
 }
 

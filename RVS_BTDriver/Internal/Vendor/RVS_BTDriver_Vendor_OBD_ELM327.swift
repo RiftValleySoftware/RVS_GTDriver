@@ -117,6 +117,44 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
      This needs to be done here, because we are overriding a non-objC method.
      */
     internal override func reportCompletion() { }
+    
+    /* ################################################################## */
+    /**
+     - parameter inData: The response data to "clean."
+     
+     - returns: A String, or nil, if the data could not be "cleaned." It may be an empty String, in which case, the "cleaning" was successful, but no meaningful data was returned.
+    */
+    internal override func parseOBDData(_ inData: Data) -> String! {
+        if var trimmedResponse = super.parseOBDData(inData) {
+            #if DEBUG
+                print("Trimming \"\(trimmedResponse)\".")
+            #endif
+            
+            let searching_start = trimmedResponse.index(of: "SEARCHING...")
+            let noDataStart = trimmedResponse.index(of: "NO DATA")
+            // First, if we get "NO DATA," then that means  we have...no data. Return an empty String.
+            if nil != noDataStart {
+                #if DEBUG
+                    print("No Data. We're Done.")
+                #endif
+                return ""
+            }
+            
+            // See if we need to remove a "SEARCHING..." placeholder.
+            if let searching_start = searching_start {
+                trimmedResponse.removeSubrange(searching_start..<(trimmedResponse.index(searching_start, offsetBy: 13)))
+            }
+            
+            trimmedResponse = trimmedResponse.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"]))
+
+            #if DEBUG
+                print("Cleaned Response: \"\(trimmedResponse)\".")
+            #endif
+
+            return trimmedResponse
+        }
+        return nil
+    }
 }
 
 /* ###################################################################################################################################### */
