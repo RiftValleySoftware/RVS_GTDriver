@@ -210,7 +210,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 }
                 
                 #if DEBUG
-                    print("Sending \"\(currTrans.description)\" up to the delegate.")
+                    print("Sending \"\(currentTransaction.description)\" up to the delegate.")
                 #endif
                 
                 delegate?.deviceUpdatedTransaction(currentTransaction)
