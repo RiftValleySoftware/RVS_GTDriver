@@ -91,7 +91,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
     /**
      This is how many seconds we wait for a command to finish.
      */
-    static internal let timeoutInterval: TimeInterval = 5.0
+    static internal let timeoutInterval: TimeInterval = 10.0
     
     /* ################################################################## */
     /**
