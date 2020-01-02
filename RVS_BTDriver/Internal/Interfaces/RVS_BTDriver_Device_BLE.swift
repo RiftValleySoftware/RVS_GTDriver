@@ -133,6 +133,26 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     
     /* ################################################################## */
     /**
+     This stops the curret timeout, and restarts it.
+     */
+    internal func restartTimeout() {
+        if  let timer = timeoutTimer,
+            timer.isValid {
+            let timeoutValue = timer.timeInterval
+            #if DEBUG
+                print("Restarting the timeout for \(timeoutValue) seconds.")
+            #endif
+            timer.invalidate()
+            startTimeout(timeoutValue)
+        } else {
+            #if DEBUG
+                print("No timer to restart.")
+            #endif
+        }
+    }
+
+    /* ################################################################## */
+    /**
      This stops the timeout ticker, and clears the decks.
      */
     internal func cancelTimeout() {
