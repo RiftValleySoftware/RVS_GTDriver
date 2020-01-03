@@ -127,38 +127,37 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
      - returns: A String, or nil, if the data could not be "cleaned." It may be an empty String, in which case, the "cleaning" was successful, but no meaningful data was returned.
     */
     internal override func parseOBDData(_ inData: Data) -> String! {
-        if var trimmedResponse = super.parseOBDData(inData) {
+        if let trimmedResponse = super.parseOBDData(inData) {
             #if DEBUG
                 print("Trimming \"\(trimmedResponse)\".")
             #endif
-            
-            let searching_start = trimmedResponse.index(of: "SEARCHING...")
-            let noDataStart = trimmedResponse.index(of: "NO DATA")
-            // First, if we get "NO DATA," then that means  we have...no data. Return an empty String.
-            if nil != noDataStart {
+            if let trimmedResponse2 = parseOBDPacket(trimmedResponse.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"]))) {
                 #if DEBUG
-                    print("No Data. We're Done.")
+                    print("Cleaned Response: \"\(trimmedResponse2)\".")
                 #endif
-                return ""
-            }
-            
-            // See if we need to remove a "SEARCHING..." placeholder.
-            if let searching_start = searching_start {
-                trimmedResponse.removeSubrange(searching_start..<(trimmedResponse.index(searching_start, offsetBy: 13)))
-            }
-            
-            trimmedResponse = trimmedResponse.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"]))
-            
-            if  let lastCR = trimmedResponse.lastIndex(of: "\r") {
-                trimmedResponse = String(trimmedResponse[trimmedResponse.index(after: lastCR)...])
-            }
-            
-            #if DEBUG
-                print("Cleaned Response: \"\(trimmedResponse)\".")
-            #endif
 
-            return trimmedResponse
+                return trimmedResponse2
+            }
         }
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    internal func parseOBDPacket(_ inPacketString: String) -> String! {
+        #if DEBUG
+            print("Parsing: \"\(inPacketString)\".")
+        #endif
+        
+        let stringComponents = inPacketString.split(separator: "\r").compactMap { $0.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"])) }
+        
+        if 0 < stringComponents.count {
+            #if DEBUG
+                print("Split Components: \"\(stringComponents)\".")
+            #endif
+        }
+        
         return nil
     }
 }
