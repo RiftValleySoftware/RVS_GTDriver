@@ -120,6 +120,8 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
     
     /* ################################################################## */
     /**
+     This "cleans" a response of the echoed command, any "SEARCHING..." placeholders, linefeeds, and "NO DATA" indicators.
+     
      - parameter inData: The response data to "clean."
      
      - returns: A String, or nil, if the data could not be "cleaned." It may be an empty String, in which case, the "cleaning" was successful, but no meaningful data was returned.
@@ -146,7 +148,11 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
             }
             
             trimmedResponse = trimmedResponse.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"]))
-
+            
+            if  let lastCR = trimmedResponse.lastIndex(of: "\r") {
+                trimmedResponse = String(trimmedResponse[trimmedResponse.index(after: lastCR)...])
+            }
+            
             #if DEBUG
                 print("Cleaned Response: \"\(trimmedResponse)\".")
             #endif
