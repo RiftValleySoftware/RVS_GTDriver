@@ -90,10 +90,10 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_OB
     /**
      This is called when an OBD device updates its transaction.
      
-     - parameter updatedTransaction: The transaction that was updated. It may be nil.
+     - parameter inTransaction: The transaction that was updated. It may be nil.
      */
-    override func deviceUpdatedTransaction(_ updatedTransaction: RVS_BTDriver_OBD_Device_TransactionStruct) {
-        if  let data = updatedTransaction.responseData,
+    override func deviceUpdatedTransaction(_ inTransaction: RVS_BTDriver_OBD_Device_TransactionStruct) {
+        if  let data = inTransaction.responseData,
             var stringValue = String(data: data, encoding: .ascii) {
             #if DEBUG
                 print("Device Returned This Data: \(stringValue)")
@@ -105,6 +105,13 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_OB
                     stringValue = ">" + initialString + "\r\n" + stringValue
                 }
                 self.responseTextView?.string += stringValue
+                
+                if  let cleanedValue = inTransaction.responseDataAsString,
+                    !cleanedValue.isEmpty {
+                    self.responseTextView?.string += "\r\n\r\n" + "SLUG-CleanedValue".localizedVariant
+                    self.responseTextView?.string += cleanedValue
+                    self.responseTextView?.string += "\r\n\r\n"
+                }
                 self.responseTextView?.scrollToEndOfDocument(nil)
                 self.setUpUI()
                 self.enterTextField?.stringValue = ""

@@ -93,6 +93,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-DEVICE-NAME-FORMAT"                                   =   "Device Name: %@";
 "SLUG-COMMANDS"                                             =   "COMMANDS";
 "SLUG-AnyValue"                                             =   "Select A Command";
+"SLUG-CleanedValue"                                         =   "Value Only: ";
 
 /* ################################################################################################################################## */
 // MARK    =    - General -
