@@ -313,6 +313,28 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
             peripheral.discoverServices(nil)
         }
     }
+    
+    /* ################################################################## */
+    /**
+     Called if there was a connection, after initializing.
+     */
+    internal func connectedPostInit() {
+        #if DEBUG
+            print("CONNECTED (BLE Post-Init)")
+        #endif
+        notifySubscribersOfStatusUpdate()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called if there was a disconnection, after initializing.
+     */
+    internal func disconnectedPostInit() {
+        #if DEBUG
+            print("DISCONNECTED (BLE Post-Init)")
+        #endif
+        notifySubscribersOfStatusUpdate()
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -602,28 +624,6 @@ extension RVS_BTDriver_Device_BLE: RVS_BTDriver_State_Machine {
      Abort initialization.
      */
     internal func abortInit() {
-    }
-    
-    /* ################################################################## */
-    /**
-     Called if there was a connection, after initializing.
-     */
-    internal func connectedPostInit() {
-        #if DEBUG
-            print("CONNECTED (BLE Post-Init)")
-        #endif
-        notifySubscribersOfStatusUpdate()
-    }
-    
-    /* ################################################################## */
-    /**
-     Called if there was a disconnection, after initializing.
-     */
-    internal func disconnectedPostInit() {
-        #if DEBUG
-            print("DISCONNECTED (BLE Post-Init)")
-        #endif
-        notifySubscribersOfStatusUpdate()
     }
 }
 

@@ -110,7 +110,7 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_OB
                     !cleanedValue.isEmpty {
                     self.responseTextView?.string += "\r\n\r\n" + "SLUG-CleanedValue".localizedVariant
                     self.responseTextView?.string += cleanedValue
-                    self.responseTextView?.string += "\r\n\r\n"
+                    self.responseTextView?.string += "\r\n\r\n>"
                 }
                 self.responseTextView?.scrollToEndOfDocument(nil)
                 self.setUpUI()

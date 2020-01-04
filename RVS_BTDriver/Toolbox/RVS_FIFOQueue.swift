@@ -41,10 +41,16 @@ public protocol OLEB_Queue {
     
     /* ################################################################## */
     /**
+     This will push the single element into the 0th (first) place.
+     */
+    mutating func cutTheLine(_ : Element)
+    
+    /* ################################################################## */
+    /**
      Adds a new Element to the end (back) of the queue
      */
     mutating func enqueue(_ : Element)
-    
+
     /* ################################################################## */
     /**
      Adds a new Array of Element to the end (back) of the queue
@@ -71,6 +77,19 @@ public struct RVS_FIFOQueue<Element>: OLEB_Queue {
     /// This is the "staging queue." We add elements, one by one, to the top of this queue.
     private var _rightQueue: [Element] = []
     
+    /* ################################################################## */
+    /**
+     This will push the single element into the 0th (first) place.
+     - parameter inNewElement: The Element to be enqueued (placed on the front of the list).
+     */
+    mutating public func cutTheLine(_ inNewElement: Element) {
+        #if DEBUG
+            print("Adding to the front of the queue: \(String(describing: inNewElement))")
+        #endif
+        
+        _leftQueue.insert(inNewElement, at: 0)
+    }
+
     /* ################################################################## */
     /**
      Add an Element to the end of the queue.

@@ -28,9 +28,51 @@ import Foundation
 /**
  This struct acts as an OBD response parser, accepting a near-complete transaction, parsing the response, then storing the complete transaction.
  */
-struct RVS_BTDriver_Vendor_OBD_Parser {
-    let transaction: RVS_BTDriver_OBD_Device_TransactionStruct!
+internal struct RVS_BTDriver_Vendor_OBD_Parser {
+    /* ################################################################## */
+    /**
+     Searching placeholder always begins with this
+     */
+    static internal let searchingString = "SEARCHING"
     
+    /* ################################################################## */
+    /**
+     If the command returns no data, this will be the string.
+     */
+    static internal let noDataString = "NO DATA"
+    
+    /* ################################################################## */
+    /**
+     The first two characters in an AT response (echoing the command).
+     */
+    static internal let atHeader = "AT"
+
+    internal let transaction: RVS_BTDriver_OBD_Device_TransactionStruct!
+    
+    /* ################################################################## */
+    /**
+     This static function will parse a response string from an AT command.
+     
+     - parameter inResponseString: The transaction response.
+     
+     - returns: A String, containing the transaction response. Nil, if the packet could not be parsed.
+     */
+    internal static func parseATResponse(_ inResponseStrings: [String]) -> String! {
+        return inResponseStrings.joined(separator: "\r")
+    }
+    
+    /* ################################################################## */
+    /**
+     This static function will parse a response string from an OBD command.
+     
+     - parameter inResponseString: The transaction response.
+     
+     - returns: A String, containing the transaction response. Nil, if the packet could not be parsed.
+     */
+    internal static func parseOBDResponse(_ inResponseStrings: [String]) -> String! {
+        return inResponseStrings.joined(separator: "\r")
+    }
+
     /* ################################################################## */
     /**
      This static function will parse the transaction response, and return it to be added to the transaction.
@@ -47,13 +89,33 @@ struct RVS_BTDriver_Vendor_OBD_Parser {
         var stringComponents = inPacketData.split(separator: "\r").compactMap { $0.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"])) }
         
         if 1 < stringComponents.count {
-            stringComponents.removeFirst()  // Get rid of the echoed command.
-            
             #if DEBUG
                 print("Split Components: \"\(stringComponents)\".")
             #endif
             
-            return stringComponents.joined(separator: "\r")
+            // Get rid of the echoed command. Keep it, for examination.
+            let commandEcho = stringComponents.removeFirst()
+            
+            // If we have a "SEARCHING...", we get rid of that, too.
+            if stringComponents[0].starts(with: searchingString) {
+                stringComponents.removeFirst()
+            }
+            
+            // Get rid of any empty lines.
+            let stringComponents = stringComponents.filter { !$0.isEmpty }
+            
+            if 0 < stringComponents.count {
+                // See if we need to treat it as an AT command response.
+                if commandEcho.starts(with: atHeader) {
+                    return parseATResponse(stringComponents)
+                } else if Self.noDataString == stringComponents[0] {
+                    #if DEBUG
+                        print("NO DATA")
+                    #endif
+                } else {    // If neither of the above, we
+                    return parseOBDResponse(stringComponents)
+                }
+            }
         }
         
         return nil
@@ -79,11 +141,10 @@ struct RVS_BTDriver_Vendor_OBD_Parser {
                 #endif
 
                 transaction = RVS_BTDriver_OBD_Device_TransactionStruct(device: inTransaction.device, rawCommand: inTransaction.rawCommand, completeCommand: inTransaction.completeCommand, responseData: inTransaction.responseData, responseDataAsString: trimmedResponse2, error: nil)
-            } else {
-                transaction = nil
+                return
             }
-        } else {
-            transaction = nil
         }
+        
+        transaction = inTransaction
     }
 }

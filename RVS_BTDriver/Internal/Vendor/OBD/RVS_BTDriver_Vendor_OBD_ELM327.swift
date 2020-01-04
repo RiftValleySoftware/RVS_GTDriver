@@ -162,9 +162,11 @@ extension RVS_BTDriver_Device_OBD_ELM327 {
                         if 9 < trimmedResponse.count {  // We need to have at least nine characters in the response.
                             cancelTimeout()
                             let indexOfSubstring = trimmedResponse.index(trimmedResponse.startIndex, offsetBy: 8)
-                            let substring = String(trimmedResponse[indexOfSubstring...])
-                            if  let value = Float(substring),
-                            Self.minimumELMVersion <= value {
+                            // We make double-sure the string is trimmed. OBD devices can be messy; especially the cheap ones.
+                            let substring = String(trimmedResponse[indexOfSubstring...]).trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"]))
+                            if  !substring.isEmpty,
+                                let value = Float(substring),
+                                Self.minimumELMVersion <= value {
                                 #if DEBUG
                                     print("The ELM327 Version is \(substring)")
                                 #endif

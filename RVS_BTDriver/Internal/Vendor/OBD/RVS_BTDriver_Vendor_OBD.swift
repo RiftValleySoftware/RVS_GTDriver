@@ -166,13 +166,20 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
             print("Storing transaction")
         #endif
         transactionQueue.enqueue(RVS_BTDriver_OBD_Device_TransactionStruct(device: self, rawCommand: inRawCommand, completeCommand: inCommandString))
-        if  nil == currentTransaction,
+        if  isConnected,
+            nil == currentTransaction,
             let currentTransaction = transactionQueue.dequeue() {
             self.currentTransaction = currentTransaction
             #if DEBUG
                 print("Sending transaction: \(currentTransaction)")
             #endif
             sendCommand()
+        } else if !isConnected {
+            #if DEBUG
+                print("Peripheral was disconnected. Reconnecting.")
+            #endif
+            currentTransaction = nil
+            isConnected = true
         }
     }
     
@@ -199,7 +206,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 
                 let parser = RVS_BTDriver_Vendor_OBD_Parser(transaction: currTrans)
 
-                if let cleanedString = parser.transaction.parsedData {
+                if let cleanedString = parser.transaction?.parsedData {
                     #if DEBUG
                         print("Adding \"\(cleanedString)\" to the transaction.")
                     #endif
@@ -261,6 +268,50 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
         let transaction = currentTransaction    // Saved, because we are about to nuke all the transactions.
         cancelTransactions()
         reportThisError(RVS_BTDriver.Errors.commandTimeout(commandData: transaction))
+    }
+    
+    /* ################################################################## */
+    /**
+     Called if there was a disconnection, after initializing.
+     We use this to cancel any open timeout, and re-queue any incomplete transaction.
+     */
+    internal override func disconnectedPostInit() {
+        #if DEBUG
+            print("DISCCONNECTED (OBD Post-Init)")
+        #endif
+        
+        cancelTimeout()
+        
+        // If we are in a transaction now, we shove it back into the queue, as we'll try it again.
+        if let deferredTransaction = currentTransaction {
+            currentTransaction = nil
+            transactionQueue.cutTheLine(deferredTransaction)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called if there was a connection, after initializing.
+     If we had a command in the queue, we retry it.
+     */
+    internal override func connectedPostInit() {
+        #if DEBUG
+            print("CONNECTED (OBD Post-Init)")
+        #endif
+        
+        // If we are not currently sending something, but we have something in the pipeline, then send that.
+        if  nil == currentTransaction,
+            let deferredTransaction = transactionQueue.dequeue() {
+            currentTransaction = deferredTransaction
+        }
+        
+        // See if we are sending something.
+        if let deferredTransaction = transactionQueue.dequeue() {
+            #if DEBUG
+                print("Sending deferred transaction: \(deferredTransaction)")
+            #endif
+            sendCommand()
+        }
     }
 }
 
