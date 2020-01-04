@@ -58,7 +58,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
     /**
      This is the response, "cleaned," and converted to a String (if possible).
      */
-    public var responseDataAsString: String!
+    public var parsedData: String!
 
     /* ################################################################## */
     /**
@@ -86,7 +86,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         rawCommand = inRawCommand
         completeCommand = inCompleteCommand
         responseData = inResponseData
-        responseDataAsString = inResponseDataAsString
+        parsedData = inResponseDataAsString
         error = inError
     }
     
@@ -114,7 +114,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
             ret += "\n\tResponse: \"\(stringResponse)\""
         }
         
-        if  let responseDataAsString = responseDataAsString {
+        if  let responseDataAsString = parsedData {
             ret += "\n\tResponse As A String: \"\(responseDataAsString)\""
         }
         

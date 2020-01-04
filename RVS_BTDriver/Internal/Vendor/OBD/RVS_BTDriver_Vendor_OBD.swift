@@ -197,12 +197,14 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 ">" == stringValue.last {
                 cancelTimeout()
                 
-                if let cleanedString = parseOBDData(stringValueData) {
+                let parser = RVS_BTDriver_Vendor_OBD_Parser(transaction: currTrans)
+
+                if let cleanedString = parser.transaction.parsedData {
                     #if DEBUG
                         print("Adding \"\(cleanedString)\" to the transaction.")
                     #endif
                     
-                    currentTransaction.responseDataAsString = cleanedString
+                    currentTransaction.parsedData = cleanedString
                 } else {
                     #if DEBUG
                         print("Unable to produce a cleaned string.")
@@ -259,33 +261,6 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
         let transaction = currentTransaction    // Saved, because we are about to nuke all the transactions.
         cancelTransactions()
         reportThisError(RVS_BTDriver.Errors.commandTimeout(commandData: transaction))
-    }
-    
-    /* ################################################################## */
-    /**
-     This method will parse the OBD response, and return a String, parsed and prepared.
-     
-     - parameter inData: The response data to "clean."
-     
-     - returns: A String, or nil, if the data could not be "cleaned." It may be an empty String, in which case, the "cleaning" was successful, but no meaningful data was returned.
-    */
-    internal func parseOBDData(_ inData: Data) -> String! {
-        if let trimmedResponse = String(data: inData, encoding: .ascii)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])) {
-            #if DEBUG
-                print("Trimming \"\(trimmedResponse)\".")
-            #endif
-            
-            let parser = RVS_BTDriver_Vendor_OBD_Parser()
-            
-            if let trimmedResponse2 = parser.parseOBDPacket(trimmedResponse.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"]))) {
-                #if DEBUG
-                    print("Cleaned Response: \"\(trimmedResponse2)\".")
-                #endif
-
-                return trimmedResponse2
-            }
-        }
-        return nil
     }
 }
 

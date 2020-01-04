@@ -3,6 +3,8 @@ RVS_BTDriver MACOS TEST HARNESS PROJECT DOCUMENTATION
 =
 This is a test harness for the `RVS_BTDriver` library, but it has also been specifically designed to be useful to those that would like to have samples of implementation.
 
+This version of the test harness has been specifically designed for the [OBD](https://en.wikipedia.org/wiki/On-board_diagnostics) implementation of the driver.
+
 It has been designed as a fully-qualified MacOS application, complete with localization, release-quality user experience, error management and structure.
 
 LICENSE

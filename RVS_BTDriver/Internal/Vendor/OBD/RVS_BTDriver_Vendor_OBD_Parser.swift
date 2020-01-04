@@ -26,17 +26,25 @@ import Foundation
 // MARK: - RVS_BTDriver_Vendor_OBD_Parser -
 /* ###################################################################################################################################### */
 /**
+ This struct acts as an OBD response parser, accepting a near-complete transaction, parsing the response, then storing the complete transaction.
  */
-class RVS_BTDriver_Vendor_OBD_Parser {
+struct RVS_BTDriver_Vendor_OBD_Parser {
+    let transaction: RVS_BTDriver_OBD_Device_TransactionStruct!
+    
     /* ################################################################## */
     /**
+     This static function will parse the transaction response, and return it to be added to the transaction.
+     
+     - parameter inPacketData: The transaction response.
+     
+     - returns: A String, containing the transaction response. Nil, if the packet could not be parsed.
      */
-    internal func parseOBDPacket(_ inPacketString: String) -> String! {
+    internal static func parseOBDPacket(_ inPacketData: String) -> String! {
         #if DEBUG
-            print("Parsing: \"\(inPacketString)\".")
+            print("Parsing: \"\(inPacketData)\".")
         #endif
         
-        let stringComponents = inPacketString.split(separator: "\r").compactMap { $0.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"])) }
+        let stringComponents = inPacketData.split(separator: "\r").compactMap { $0.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"])) }
         
         if 0 < stringComponents.count {
             #if DEBUG
@@ -45,5 +53,33 @@ class RVS_BTDriver_Vendor_OBD_Parser {
         }
         
         return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     The initializer actually does the parsing.
+     
+     Upon instantiation, the transaction property woill contain the parsed and complete transaction.
+     
+     - parameter transaction: The transaction to be parsed.
+     */
+    internal init(transaction inTransaction: RVS_BTDriver_OBD_Device_TransactionStruct) {
+        if let trimmedResponse = String(data: inTransaction.responseData, encoding: .ascii)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])) {
+            #if DEBUG
+                print("Trimming \"\(trimmedResponse)\".")
+            #endif
+            
+            if let trimmedResponse2 = Self.parseOBDPacket(trimmedResponse.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"]))) {
+                #if DEBUG
+                    print("Cleaned Response: \"\(trimmedResponse2)\".")
+                #endif
+
+                transaction = RVS_BTDriver_OBD_Device_TransactionStruct(device: inTransaction.device, rawCommand: inTransaction.rawCommand, completeCommand: inTransaction.completeCommand, responseData: inTransaction.responseData, responseDataAsString: trimmedResponse2, error: nil)
+            } else {
+                transaction = nil
+            }
+        } else {
+            transaction = nil
+        }
     }
 }

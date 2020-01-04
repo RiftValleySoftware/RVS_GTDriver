@@ -17,6 +17,7 @@ The four test harness projects, supplied with the driver, are designed to provid
 - [The WatchOS Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/watchOSTestHarness) *([GitHub Repo Directory](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_WatchOS_Test_Harness))*
 - [The iOS/iPadOS Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/iOSTestHarness) *([GitHub Repo Directory](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_iOS_Test_Harness))*
 - The TVOS Test Harness Project *([GitHub Repo Directory](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness))*
+- [The MacOS OBD-Specific Test Harness Project](https://riftvalleysoftware.github.io/RVS_GTDriver/macOSOBDTestHarness) *([GitHub Repo Directory](https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_OBD_Mac_Test_Harness))*
 
 WHERE THIS DRIVER FITS
 =
