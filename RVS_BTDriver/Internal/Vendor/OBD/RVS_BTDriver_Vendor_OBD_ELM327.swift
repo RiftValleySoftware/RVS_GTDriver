@@ -163,6 +163,7 @@ extension RVS_BTDriver_Device_OBD_ELM327 {
                             cancelTimeout()
                             let indexOfSubstring = trimmedResponse.index(trimmedResponse.startIndex, offsetBy: 8)
                             // We make double-sure the string is trimmed. OBD devices can be messy; especially the cheap ones.
+                            // We will handle this response completely manually. We expect it to be "whole."
                             let substring = String(trimmedResponse[indexOfSubstring...]).trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"]))
                             if  !substring.isEmpty,
                                 let value = Float(substring),
