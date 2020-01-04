@@ -123,49 +123,6 @@ class RVS_BTDriver_Device_OBD_ELM327: RVS_BTDriver_Device_OBD {
      This needs to be done here, because we are overriding a non-objC method.
      */
     internal override func reportCompletion() { }
-    
-    /* ################################################################## */
-    /**
-     This "cleans" a response of the echoed command, any "SEARCHING..." placeholders, linefeeds, and "NO DATA" indicators.
-     
-     - parameter inData: The response data to "clean."
-     
-     - returns: A String, or nil, if the data could not be "cleaned." It may be an empty String, in which case, the "cleaning" was successful, but no meaningful data was returned.
-    */
-    internal override func parseOBDData(_ inData: Data) -> String! {
-        if let trimmedResponse = super.parseOBDData(inData) {
-            #if DEBUG
-                print("Trimming \"\(trimmedResponse)\".")
-            #endif
-            if let trimmedResponse2 = parseOBDPacket(trimmedResponse.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"]))) {
-                #if DEBUG
-                    print("Cleaned Response: \"\(trimmedResponse2)\".")
-                #endif
-
-                return trimmedResponse2
-            }
-        }
-        return nil
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    internal func parseOBDPacket(_ inPacketString: String) -> String! {
-        #if DEBUG
-            print("Parsing: \"\(inPacketString)\".")
-        #endif
-        
-        let stringComponents = inPacketString.split(separator: "\r").compactMap { $0.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"])) }
-        
-        if 0 < stringComponents.count {
-            #if DEBUG
-                print("Split Components: \"\(stringComponents)\".")
-            #endif
-        }
-        
-        return nil
-    }
 }
 
 /* ###################################################################################################################################### */

@@ -263,7 +263,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
     
     /* ################################################################## */
     /**
-     This method is designed to be overridden. The base class does nothing more than a simple String extraction.
+     This method will parse the OBD response, and return a String, parsed and prepared.
      
      - parameter inData: The response data to "clean."
      
@@ -271,7 +271,19 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
     */
     internal func parseOBDData(_ inData: Data) -> String! {
         if let trimmedResponse = String(data: inData, encoding: .ascii)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])) {
-            return trimmedResponse
+            #if DEBUG
+                print("Trimming \"\(trimmedResponse)\".")
+            #endif
+            
+            let parser = RVS_BTDriver_Vendor_OBD_Parser()
+            
+            if let trimmedResponse2 = parser.parseOBDPacket(trimmedResponse.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"]))) {
+                #if DEBUG
+                    print("Cleaned Response: \"\(trimmedResponse2)\".")
+                #endif
+
+                return trimmedResponse2
+            }
         }
         return nil
     }
