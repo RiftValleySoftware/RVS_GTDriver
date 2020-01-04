@@ -171,13 +171,10 @@
                 <a class="nav-group-task-link" href="Classes/RVS_BTDriver_Vendor_OBD_Kiwi_Device.html">RVS_BTDriver_Vendor_OBD_Kiwi_Device</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RVS_BTDriver_Vendor_OBD_Parser.html">RVS_BTDriver_Vendor_OBD_Parser</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/RVS_DebugTools.html">RVS_DebugTools</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RVS_PersistentPrefs.html">RVS_PersistentPrefs</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RVS_PersistentPrefs/PrefsError.html">– PrefsError</a>
               </li>
             </ul>
           </li>
@@ -289,52 +286,6 @@
           <div class="section-content">
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Main%20Preferences%20Base%20Class"></a>
-                <a name="//apple_ref/swift/Section/Main Preferences Base Class" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Main%20Preferences%20Base%20Class"></a>
-                  <h3 class="section-name"><p>Main Preferences Base Class</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_PersistentPrefs"></a>
-                    <a name="//apple_ref/swift/Class/RVS_PersistentPrefs" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_PersistentPrefs">RVS_PersistentPrefs</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This class is designed to act as an &ldquo;abstract&rdquo; base class, providing a simple <code>Dictionary</code> datastore that is stored in the <a href="https://developer.apple.com/documentation/foundation/userdefaults"><code>UserDefaults</code></a> in the Application Bundle. It is designed to be reliable, and extremely simple to use.
-The stored <code>Dictionary</code> would be a String-keyed Dictionary of <code>Any</code> (flexible types). It s up to subclasses to specialize the typeless data.
-THIS IS NOT EFFICIENT OR ROBUST!
-It is meant as a simple &ldquo;bucket&rdquo; for things like application preferences. It is not an industrial data storage solution. You have been warned.
-Subclasses could declare their accessors as <a href="https://developer.apple.com/documentation/swift/cocoa_design_patterns/using_key-value_observing_in_swift"><code>KVO</code></a>-style, thus, providing a direct way to influence persistent state.
-You can also directly observe the .values property. It will change when ANY pref is changed (so might not be suitable for &ldquo;pick and choose&rdquo; observation).</p>
-
-                        <a href="Classes/RVS_PersistentPrefs.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RVS_PersistentPrefs</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
                 <a name="/RVS_BTDriver_Base_Interface"></a>
                 <a name="//apple_ref/swift/Section/RVS_BTDriver_Base_Interface" class="dashAnchor"></a>
                 <div class="section-name-container">
@@ -366,48 +317,6 @@ You can also directly observe the .values property. It will change when ANY pref
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">class</span> <span class="kt">RVS_BTDriver_Base_Interface</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt"><a href="Protocols/RVS_BTDriver_InterfaceProtocol.html">RVS_BTDriver_InterfaceProtocol</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/RVS_BTDriver_Base_Interface_BLE"></a>
-                <a name="//apple_ref/swift/Section/RVS_BTDriver_Base_Interface_BLE" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_Base_Interface_BLE"></a>
-                  <h3 class="section-name"><p>RVS_BTDriver_Base_Interface_BLE</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Interface_BLE"></a>
-                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Interface_BLE" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Interface_BLE">RVS_BTDriver_Interface_BLE</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This is an interface for Bluetooth Low Energy (BLE), using CoreBluetooth.</p>
-
-                        <a href="Classes/RVS_BTDriver_Interface_BLE.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">class</span> <span class="kt">RVS_BTDriver_Interface_BLE</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Base_Interface.html">RVS_BTDriver_Base_Interface</a></span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_Interface_BLE</span><span class="p">:</span> <span class="kt">CBCentralManagerDelegate</span></code></pre>
 
                         </div>
                       </div>
@@ -461,11 +370,11 @@ You can also directly observe the .values property. It will change when ANY pref
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Specialization%20of%20the%20Generic%20Service%20for%20BLE"></a>
-                <a name="//apple_ref/swift/Section/Specialization of the Generic Service for BLE" class="dashAnchor"></a>
+                <a name="/RVS_BTDriver_Base_Interface_BLE"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_Base_Interface_BLE" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/Specialization%20of%20the%20Generic%20Service%20for%20BLE"></a>
-                  <h3 class="section-name"><p>Specialization of the Generic Service for BLE</p>
+                  <a class="section-name-link" href="#/RVS_BTDriver_Base_Interface_BLE"></a>
+                  <h3 class="section-name"><p>RVS_BTDriver_Base_Interface_BLE</p>
 </h3>
                 </div>
               </div>
@@ -473,9 +382,9 @@ You can also directly observe the .values property. It will change when ANY pref
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Service_BLE"></a>
-                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Service_BLE" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Service_BLE">RVS_BTDriver_Service_BLE</a>
+                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Interface_BLE"></a>
+                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Interface_BLE" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Interface_BLE">RVS_BTDriver_Interface_BLE</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -483,15 +392,16 @@ You can also directly observe the .values property. It will change when ANY pref
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This implements a way for the driver to track our initialization progress.</p>
+                        <p>This is an interface for Bluetooth Low Energy (BLE), using CoreBluetooth.</p>
 
-                        <a href="Classes/RVS_BTDriver_Service_BLE.html" class="slightly-smaller">See more</a>
+                        <a href="Classes/RVS_BTDriver_Interface_BLE.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Service_BLE</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Service.html">RVS_BTDriver_Service</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">class</span> <span class="kt">RVS_BTDriver_Interface_BLE</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Base_Interface.html">RVS_BTDriver_Base_Interface</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RVS_BTDriver_Interface_BLE</span><span class="p">:</span> <span class="kt">CBCentralManagerDelegate</span></code></pre>
 
                         </div>
                       </div>
@@ -574,6 +484,47 @@ You can also directly observe the .values property. It will change when ANY pref
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Service_DeviceInfo_BLE</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Service_BLE.html">RVS_BTDriver_Service_BLE</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Specialization%20of%20the%20Generic%20Service%20for%20BLE"></a>
+                <a name="//apple_ref/swift/Section/Specialization of the Generic Service for BLE" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Specialization%20of%20the%20Generic%20Service%20for%20BLE"></a>
+                  <h3 class="section-name"><p>Specialization of the Generic Service for BLE</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Service_BLE"></a>
+                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Service_BLE" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Service_BLE">RVS_BTDriver_Service_BLE</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This implements a way for the driver to track our initialization progress.</p>
+
+                        <a href="Classes/RVS_BTDriver_Service_BLE.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Service_BLE</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Service.html">RVS_BTDriver_Service</a></span></code></pre>
 
                         </div>
                       </div>
@@ -759,250 +710,6 @@ You can also directly observe the .values property. It will change when ANY pref
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/RVS_BTDriver_Vendor_GoTenna"></a>
-                <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna"></a>
-                  <h3 class="section-name"><p>RVS_BTDriver_Vendor_GoTenna</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GenericBLE"></a>
-                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Vendor_GenericBLE" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GenericBLE">RVS_BTDriver_Vendor_GenericBLE</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A factory class for goTenna Mesh devices</p>
-
-                        <a href="Classes/RVS_BTDriver_Vendor_GenericBLE.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Vendor_GenericBLE</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt"><a href="Protocols/RVS_BTDriver_VendorProtocol.html">RVS_BTDriver_VendorProtocol</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/OBD%20Device%20Specialization"></a>
-                <a name="//apple_ref/swift/Section/OBD Device Specialization" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/OBD%20Device%20Specialization"></a>
-                  <h3 class="section-name"><p>OBD Device Specialization</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GenericBLE"></a>
-                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Device_GenericBLE" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GenericBLE">RVS_BTDriver_Device_GenericBLE</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This is a specialization of the device for Generic BLE Devices.</p>
-
-                        <a href="Classes/RVS_BTDriver_Device_GenericBLE.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Device_GenericBLE</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Device_BLE.html">RVS_BTDriver_Device_BLE</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/RVS_BTDriver_Vendor_GoTenna2"></a>
-                <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna2"></a>
-                  <h3 class="section-name"><p>RVS_BTDriver_Vendor_GoTenna</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GoTenna"></a>
-                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GoTenna">RVS_BTDriver_Vendor_GoTenna</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A factory class for goTenna Mesh devices</p>
-
-                        <a href="Classes/RVS_BTDriver_Vendor_GoTenna.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Vendor_GoTenna</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Vendor_GenericBLE.html">RVS_BTDriver_Vendor_GenericBLE</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/goTenna%20Family%20Device%20Specialization"></a>
-                <a name="//apple_ref/swift/Section/goTenna Family Device Specialization" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/goTenna%20Family%20Device%20Specialization"></a>
-                  <h3 class="section-name"><p>goTenna Family Device Specialization</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna"></a>
-                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Device_GoTenna" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna">RVS_BTDriver_Device_GoTenna</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This is a specialization of the device for the goTenna devices.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Device_GoTenna</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Device_BLE.html">RVS_BTDriver_Device_BLE</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/RVS_BTDriver_Vendor_GoTenna3"></a>
-                <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna3"></a>
-                  <h3 class="section-name"><p>RVS_BTDriver_Vendor_GoTenna</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GoTenna_Mesh"></a>
-                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Vendor_GoTenna_Mesh" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GoTenna_Mesh">RVS_BTDriver_Vendor_GoTenna_Mesh</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A factory class for goTenna Mesh devices</p>
-
-                        <a href="Classes/RVS_BTDriver_Vendor_GoTenna_Mesh.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Vendor_GoTenna_Mesh</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Vendor_GoTenna.html">RVS_BTDriver_Vendor_GoTenna</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/goTenna%20Mesh%20Device%20Specialization"></a>
-                <a name="//apple_ref/swift/Section/goTenna Mesh Device Specialization" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/goTenna%20Mesh%20Device%20Specialization"></a>
-                  <h3 class="section-name"><p>goTenna Mesh Device Specialization</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna_Mesh"></a>
-                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Device_GoTenna_Mesh" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna_Mesh">RVS_BTDriver_Device_GoTenna_Mesh</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This is a specialization of the device for OBD Devices.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Device_GoTenna_Mesh</span> <span class="p">:</span> <span class="kt"><a href="Classes.html#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna">RVS_BTDriver_Device_GoTenna</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
                 <a name="/RVS_BTDriver_Vendor_OBD"></a>
                 <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_OBD" class="dashAnchor"></a>
                 <div class="section-name-container">
@@ -1044,10 +751,10 @@ You can also directly observe the .values property. It will change when ANY pref
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/OBD%20Device%20Specialization2"></a>
+                <a name="/OBD%20Device%20Specialization"></a>
                 <a name="//apple_ref/swift/Section/OBD Device Specialization" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/OBD%20Device%20Specialization2"></a>
+                  <a class="section-name-link" href="#/OBD%20Device%20Specialization"></a>
                   <h3 class="section-name"><p>OBD Device Specialization</p>
 </h3>
                 </div>
@@ -1174,10 +881,10 @@ have access to the sent command, as well as the response.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/RVS_BTDriver_Vendor_GoTenna4"></a>
+                <a name="/RVS_BTDriver_Vendor_GoTenna"></a>
                 <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna4"></a>
+                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna"></a>
                   <h3 class="section-name"><p>RVS_BTDriver_Vendor_GoTenna</p>
 </h3>
                 </div>
@@ -1215,10 +922,10 @@ have access to the sent command, as well as the response.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/OBD%20Device%20Specialization3"></a>
+                <a name="/OBD%20Device%20Specialization2"></a>
                 <a name="//apple_ref/swift/Section/OBD Device Specialization" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/OBD%20Device%20Specialization3"></a>
+                  <a class="section-name-link" href="#/OBD%20Device%20Specialization2"></a>
                   <h3 class="section-name"><p>OBD Device Specialization</p>
 </h3>
                 </div>
@@ -1256,10 +963,10 @@ have access to the sent command, as well as the response.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/RVS_BTDriver_Vendor_GoTenna5"></a>
+                <a name="/RVS_BTDriver_Vendor_GoTenna2"></a>
                 <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna5"></a>
+                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna2"></a>
                   <h3 class="section-name"><p>RVS_BTDriver_Vendor_GoTenna</p>
 </h3>
                 </div>
@@ -1297,10 +1004,10 @@ have access to the sent command, as well as the response.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/OBD%20Device%20Specialization4"></a>
+                <a name="/OBD%20Device%20Specialization3"></a>
                 <a name="//apple_ref/swift/Section/OBD Device Specialization" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/OBD%20Device%20Specialization4"></a>
+                  <a class="section-name-link" href="#/OBD%20Device%20Specialization3"></a>
                   <h3 class="section-name"><p>OBD Device Specialization</p>
 </h3>
                 </div>
@@ -1338,10 +1045,10 @@ have access to the sent command, as well as the response.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/RVS_BTDriver_Vendor_GoTenna6"></a>
+                <a name="/RVS_BTDriver_Vendor_GoTenna3"></a>
                 <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna6"></a>
+                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna3"></a>
                   <h3 class="section-name"><p>RVS_BTDriver_Vendor_GoTenna</p>
 </h3>
                 </div>
@@ -1379,10 +1086,10 @@ have access to the sent command, as well as the response.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/OBD%20Device%20Specialization5"></a>
+                <a name="/OBD%20Device%20Specialization4"></a>
                 <a name="//apple_ref/swift/Section/OBD Device Specialization" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/OBD%20Device%20Specialization5"></a>
+                  <a class="section-name-link" href="#/OBD%20Device%20Specialization4"></a>
                   <h3 class="section-name"><p>OBD Device Specialization</p>
 </h3>
                 </div>
@@ -1420,10 +1127,10 @@ have access to the sent command, as well as the response.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/RVS_BTDriver_Vendor_GoTenna7"></a>
+                <a name="/RVS_BTDriver_Vendor_GoTenna4"></a>
                 <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna7"></a>
+                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna4"></a>
                   <h3 class="section-name"><p>RVS_BTDriver_Vendor_GoTenna</p>
 </h3>
                 </div>
@@ -1461,10 +1168,10 @@ have access to the sent command, as well as the response.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/OBD%20Device%20Specialization6"></a>
+                <a name="/OBD%20Device%20Specialization5"></a>
                 <a name="//apple_ref/swift/Section/OBD Device Specialization" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/OBD%20Device%20Specialization6"></a>
+                  <a class="section-name-link" href="#/OBD%20Device%20Specialization5"></a>
                   <h3 class="section-name"><p>OBD Device Specialization</p>
 </h3>
                 </div>
@@ -1492,6 +1199,290 @@ have access to the sent command, as well as the response.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Vendor_OBD_Kiwi_Device</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Device_OBD.html">RVS_BTDriver_Device_OBD</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/RVS_BTDriver_Vendor_OBD_Parser"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_OBD_Parser" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_OBD_Parser"></a>
+                  <h3 class="section-name"><p>RVS_BTDriver_Vendor_OBD_Parser</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B18_Vendor_OBD_ParserC"></a>
+                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Vendor_OBD_Parser" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B18_Vendor_OBD_ParserC">RVS_BTDriver_Vendor_OBD_Parser</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="Classes/RVS_BTDriver_Vendor_OBD_Parser.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Vendor_OBD_Parser</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/RVS_BTDriver_Vendor_GoTenna5"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna5"></a>
+                  <h3 class="section-name"><p>RVS_BTDriver_Vendor_GoTenna</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GenericBLE"></a>
+                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Vendor_GenericBLE" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GenericBLE">RVS_BTDriver_Vendor_GenericBLE</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A factory class for goTenna Mesh devices</p>
+
+                        <a href="Classes/RVS_BTDriver_Vendor_GenericBLE.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Vendor_GenericBLE</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt"><a href="Protocols/RVS_BTDriver_VendorProtocol.html">RVS_BTDriver_VendorProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/OBD%20Device%20Specialization6"></a>
+                <a name="//apple_ref/swift/Section/OBD Device Specialization" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/OBD%20Device%20Specialization6"></a>
+                  <h3 class="section-name"><p>OBD Device Specialization</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GenericBLE"></a>
+                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Device_GenericBLE" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GenericBLE">RVS_BTDriver_Device_GenericBLE</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a specialization of the device for Generic BLE Devices.</p>
+
+                        <a href="Classes/RVS_BTDriver_Device_GenericBLE.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Device_GenericBLE</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Device_BLE.html">RVS_BTDriver_Device_BLE</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/RVS_BTDriver_Vendor_GoTenna6"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna6"></a>
+                  <h3 class="section-name"><p>RVS_BTDriver_Vendor_GoTenna</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GoTenna"></a>
+                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GoTenna">RVS_BTDriver_Vendor_GoTenna</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A factory class for goTenna Mesh devices</p>
+
+                        <a href="Classes/RVS_BTDriver_Vendor_GoTenna.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Vendor_GoTenna</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Vendor_GenericBLE.html">RVS_BTDriver_Vendor_GenericBLE</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/goTenna%20Family%20Device%20Specialization"></a>
+                <a name="//apple_ref/swift/Section/goTenna Family Device Specialization" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/goTenna%20Family%20Device%20Specialization"></a>
+                  <h3 class="section-name"><p>goTenna Family Device Specialization</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna"></a>
+                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Device_GoTenna" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna">RVS_BTDriver_Device_GoTenna</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a specialization of the device for the goTenna devices.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Device_GoTenna</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Device_BLE.html">RVS_BTDriver_Device_BLE</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/RVS_BTDriver_Vendor_GoTenna7"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_Vendor_GoTenna" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/RVS_BTDriver_Vendor_GoTenna7"></a>
+                  <h3 class="section-name"><p>RVS_BTDriver_Vendor_GoTenna</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GoTenna_Mesh"></a>
+                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Vendor_GoTenna_Mesh" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Vendor_GoTenna_Mesh">RVS_BTDriver_Vendor_GoTenna_Mesh</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A factory class for goTenna Mesh devices</p>
+
+                        <a href="Classes/RVS_BTDriver_Vendor_GoTenna_Mesh.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Vendor_GoTenna_Mesh</span> <span class="p">:</span> <span class="kt"><a href="Classes/RVS_BTDriver_Vendor_GoTenna.html">RVS_BTDriver_Vendor_GoTenna</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/goTenna%20Mesh%20Device%20Specialization"></a>
+                <a name="//apple_ref/swift/Section/goTenna Mesh Device Specialization" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/goTenna%20Mesh%20Device%20Specialization"></a>
+                  <h3 class="section-name"><p>goTenna Mesh Device Specialization</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna_Mesh"></a>
+                    <a name="//apple_ref/swift/Class/RVS_BTDriver_Device_GoTenna_Mesh" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna_Mesh">RVS_BTDriver_Device_GoTenna_Mesh</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a specialization of the device for OBD Devices.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RVS_BTDriver_Device_GoTenna_Mesh</span> <span class="p">:</span> <span class="kt"><a href="Classes.html#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna">RVS_BTDriver_Device_GoTenna</a></span></code></pre>
 
                         </div>
                       </div>

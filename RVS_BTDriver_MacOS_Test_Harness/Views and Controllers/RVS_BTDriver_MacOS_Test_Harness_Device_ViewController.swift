@@ -346,6 +346,9 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: NSTableViewData
 // MARK: - RVS_BTDriver_DeviceSubscriberProtocol Methods
 /* ################################################################################################################################## */
 extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_DeviceSubscriberProtocol {
+    public func subscribedDevice(_ device: RVS_BTDriver_DeviceProtocol, encounteredThisError: RVS_BTDriver.Errors) {
+    }
+    
     /* ################################################################## */
     /**
      Called if the device encounters an error.
@@ -354,7 +357,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_De
         - inDevice: The device instance that is calling this.
         - encounteredThisError: The error that is being returned.
      */
-    func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+    public func device(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
         #if DEBUG
             print("DEVICE ERROR! \(String(describing: inError))")
         #endif
@@ -369,7 +372,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_De
      
      - parameter inDevice: The device instance that is calling this.
      */
-    func deviceStatusUpdate(_ inDevice: RVS_BTDriver_DeviceProtocol) {
+    public func deviceStatusUpdate(_ inDevice: RVS_BTDriver_DeviceProtocol) {
         #if DEBUG
             print("Device Status Changed")
         #endif

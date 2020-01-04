@@ -33,8 +33,17 @@ jazzy   --readme ./README-MacOS-Harness.md \
         --output docs/macOSTestHarness \
         --build-tool-arguments -scheme,RVS_BTDriver_MacOS_Test_Harness \
         --min_acl private
-cp img/TestHarnessIcon.png docs/macOSTestHarness/icon.png
 cp img/* docs/macOSTestHarness/img
+
+echo "Creating OBD MacOS Test Harness Docs"
+
+jazzy   --readme ./README-MacOS-OBD-Harness.md \
+        --github_url https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_OBD_Mac_Test_Harness \
+        --title RVS_BTDriver\ MacOS\ OBD\ Test\ Harness\ Project\ Code\ Doumentation \
+        --output docs/macOSOBDTestHarness \
+        --build-tool-arguments -scheme,RVS_BTDriver_OBD_Mac_Test_Harness \
+        --min_acl private
+cp img/* docs/macOSOBDTestHarness/img
 
 echo "Creating iOS Test Harness Docs"
 

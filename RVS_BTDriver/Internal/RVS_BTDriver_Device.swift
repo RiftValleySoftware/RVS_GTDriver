@@ -47,7 +47,7 @@ class RVS_BTDriver_Device: NSObject, RVS_BTDriver_DeviceProtocol {
     /**
      This is a property that is set to a countdown timer when a timeout period begins. It should be canceled and niled, when not in use.
      */
-    internal var timeoutTimer: Timer? = nil
+    internal var timeoutTimer: Timer?
 
     /* ################################################################## */
     /**

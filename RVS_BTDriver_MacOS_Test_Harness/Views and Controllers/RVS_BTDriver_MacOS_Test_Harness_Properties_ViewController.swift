@@ -73,6 +73,12 @@ class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_Ma
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
+     The device instance, associated with this screen.
+     */
+    var deviceInstance: RVS_BTDriver_DeviceProtocol!
+    
+    /* ################################################################## */
+    /**
      The service instance, associated with this screen.
      */
     var serviceInstance: RVS_BTDriver_ServiceProtocol!
@@ -92,7 +98,7 @@ class RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDriver_Ma
     /**
      This is a UUID, that identifies this screen for subscriber puproses.
      */
-    var uuid: UUID!
+    var _uuid: UUID!
     
     /* ############################################################################################################################## */
     // MARK: - Instance IBOutlets
@@ -266,7 +272,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDrive
      - inService: The service instance that is calling this.
      - propertyAdded: The property that was added.
      */
-    func service(_ inService: RVS_BTDriver_ServiceProtocol, propertyAdded inProperty: RVS_BTDriver_PropertyProtocol) {
+    public func service(_ inService: RVS_BTDriver_ServiceProtocol, propertyAdded inProperty: RVS_BTDriver_PropertyProtocol) {
     }
     
     /* ################################################################## */
@@ -277,7 +283,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDrive
         - inService: The service instance that is calling this.
         - encounteredThisError: The error that is being returned.
      */
-    func service(_ inService: RVS_BTDriver_ServiceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+    public func service(_ inService: RVS_BTDriver_ServiceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
         #if DEBUG
             print("SERVICE ERROR! \(String(describing: inError))")
         #endif
@@ -292,7 +298,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController: RVS_BTDrive
      
      - inService: The service instance that is calling this.
      */
-    func serviceStatusUpdate(_ inDevice: RVS_BTDriver_ServiceProtocol) {
+    public func serviceStatusUpdate(_ inDevice: RVS_BTDriver_ServiceProtocol) {
         #if DEBUG
             print("Service Status Changed")
         #endif

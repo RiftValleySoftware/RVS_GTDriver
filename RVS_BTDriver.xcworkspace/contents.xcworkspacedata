@@ -17,6 +17,9 @@
          location = "group:README-MacOS-Harness.md">
       </FileRef>
       <FileRef
+         location = "group:README-MacOS-OBD-Harness.md">
+      </FileRef>
+      <FileRef
          location = "group:README-WatchOS-Harness.md">
       </FileRef>
       <FileRef

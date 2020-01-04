@@ -34,37 +34,37 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
     /**
      This is the OBD device instance, running the transaction.
      */
-    let device: RVS_BTDriver_OBD_DeviceProtocol!
+    public let device: RVS_BTDriver_OBD_DeviceProtocol!
     
     /* ################################################################## */
     /**
      This is the raw String value of the command being sent (it may be a format string).
      */
-    let rawCommand: String!
+    public let rawCommand: String!
 
     /* ################################################################## */
     /**
      This is the command, filled out (it may be the same as the rawCommand, but a format will have values substituted).
      */
-    var completeCommand: String!
+    public var completeCommand: String!
     
     /* ################################################################## */
     /**
      This is any data that was returned from the OBD adapter.
      */
-    var responseData: Data!
+    public var responseData: Data!
     
     /* ################################################################## */
     /**
      This is the response, "cleaned," and converted to a String (if possible).
      */
-    var responseDataAsString: String!
+    public var responseDataAsString: String!
 
     /* ################################################################## */
     /**
      Any error that may have occurred.
      */
-    var error: RVS_BTDriver.Errors!
+    public var error: RVS_BTDriver.Errors!
     
     /* ################################################################## */
     /**
@@ -78,7 +78,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         - responseDataAsString: Optional. If the command can be represented as a String, that is set here.
         - error: Optional. Any error that may have occurred.
      */
-    init(device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String, completeCommand inCompleteCommand: String, responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil) {
+    public init(device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String, completeCommand inCompleteCommand: String, responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil) {
         precondition((nil != inDevice) || RVS_DebugTools.isRunningUnitTests, "The device cannot be nil!")
         precondition(!inRawCommand.isEmpty, "The raw command cannot be empty.")
         precondition(!inCompleteCommand.isEmpty, "The complete command cannot be empty.")
@@ -94,7 +94,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
     /**
      Readable text description.
      */
-    var description: String {
+    public var description: String {
         var ret = "Transaction:"
         
         if let device = device {
