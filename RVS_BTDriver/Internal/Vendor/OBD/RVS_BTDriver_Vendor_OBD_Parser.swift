@@ -44,12 +44,16 @@ struct RVS_BTDriver_Vendor_OBD_Parser {
             print("Parsing: \"\(inPacketData)\".")
         #endif
         
-        let stringComponents = inPacketData.split(separator: "\r").compactMap { $0.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"])) }
+        var stringComponents = inPacketData.split(separator: "\r").compactMap { $0.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"])) }
         
-        if 0 < stringComponents.count {
+        if 1 < stringComponents.count {
+            stringComponents.removeFirst()  // Get rid of the echoed command.
+            
             #if DEBUG
                 print("Split Components: \"\(stringComponents)\".")
             #endif
+            
+            return stringComponents.joined(separator: "\r")
         }
         
         return nil

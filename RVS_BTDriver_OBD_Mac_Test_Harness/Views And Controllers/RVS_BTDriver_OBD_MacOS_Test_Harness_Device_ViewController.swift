@@ -106,7 +106,7 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController: RVS_BTDriver_OB
                 }
                 self.responseTextView?.string += stringValue
                 
-                if  let cleanedValue = inTransaction.responseDataAsString,
+                if  let cleanedValue = inTransaction.parsedData,
                     !cleanedValue.isEmpty {
                     self.responseTextView?.string += "\r\n\r\n" + "SLUG-CleanedValue".localizedVariant
                     self.responseTextView?.string += cleanedValue
