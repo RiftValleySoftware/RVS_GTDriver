@@ -58,6 +58,9 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
      - returns: A String, containing the transaction response. Nil, if the packet could not be parsed.
      */
     internal static func parseATResponse(_ inResponseStrings: [String]) -> String! {
+        #if DEBUG
+            print("Parsing AT Response: \"\(inResponseStrings)\".")
+        #endif
         return inResponseStrings.joined(separator: "\r")
     }
     
@@ -70,6 +73,9 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
      - returns: A String, containing the transaction response. Nil, if the packet could not be parsed.
      */
     internal static func parseOBDResponse(_ inResponseStrings: [String]) -> String! {
+        #if DEBUG
+            print("Parsing OBD Response: \"\(inResponseStrings)\".")
+        #endif
         return inResponseStrings.joined(separator: "\r")
     }
 
