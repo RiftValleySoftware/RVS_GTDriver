@@ -223,7 +223,7 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 #endif
                 
                 delegate?.deviceUpdatedTransaction(currentTransaction)
-                
+
                 // Get the next transaction.
                 currentTransaction = transactionQueue.dequeue()
                 sendCommand()   // See if there's another one waiting for us.

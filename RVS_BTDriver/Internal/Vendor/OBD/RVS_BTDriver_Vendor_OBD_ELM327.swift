@@ -171,7 +171,7 @@ extension RVS_BTDriver_Device_OBD_ELM327 {
                                 #if DEBUG
                                     print("The ELM327 Version is \(substring)")
                                 #endif
-                                elm327Version = substring
+                                elm327Version = String(value)
                                 currentTransaction = nil
                                 turnEchoOn()    // Make sure that echo is turned on. This means that we will delete the first line of each command received. If we turn it off, it will mess us up.
                             } else {    // If we aren't up to the task, we nuke the device.
@@ -199,9 +199,11 @@ extension RVS_BTDriver_Device_OBD_ELM327 {
                         owner?.removeThisDevice(self)
                     }
                 } else if !echoTurnedOn {   // We don't bother parsing the response. We know it's "OK."
-                    cancelTimeout()
+                    #if DEBUG
+                        print("Echo Is On.")
+                    #endif
+                    cancelTransactions()    // Make sure we start off clean.
                     echoTurnedOn = true
-                    currentTransaction = nil
                     super.reportCompletion()    // Now, we are ready to end the chapter.
                 } else {
                     receiveCommandData(value)
