@@ -149,6 +149,42 @@ public extension StringProtocol {
             return ""
         }
     }
+    
+    /* ################################################################## */
+    /**
+     - returns: The String, assumed to be hex numbers (two characters, 0-F, separated by non-hex characters, or not separated); converted to an ASCII string (no spaces).
+                Nil, if the string failed to yeild a UTF8 value.
+                This requires two characters (0-9a-fA-F), side-by-side for each character. They may or may not be separated.
+     */
+    var hex2UTF8: String! {
+        var ret: String!
+
+        if  let cast = self as? String {
+            let asString = cast.uppercased()
+            if let regex = try? NSRegularExpression(pattern: #"[0-9A-Z]{2}"#, options: []) {
+                let nsRange = NSRange(asString.startIndex..<asString.endIndex, in: asString)
+                regex.enumerateMatches(in: asString, options: [], range: nsRange) { (match, _, _) in
+                    guard let match = match else {
+                        return
+                    }
+                    
+                    for rangeIndex in 0..<match.numberOfRanges {
+                        if  let substrRange = Range(match.range(at: rangeIndex), in: asString),
+                            let asInt = Int(asString[substrRange], radix: 16),
+                            let scalar = UnicodeScalar(asInt) {
+                            if nil == ret {
+                                ret = String(scalar)
+                            } else {
+                                ret += String(scalar)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return ret
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -168,7 +204,7 @@ public extension StringProtocol where Index == String.Index {
     func index(of inString: Self, options inOptions: String.CompareOptions = []) -> Index? {
         return range(of: inString, options: inOptions)?.lowerBound
     }
-    
+
     /* ################################################################## */
     /**
      This allows us to find the last index of a substring.

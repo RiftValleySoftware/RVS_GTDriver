@@ -76,7 +76,14 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
         #if DEBUG
             print("Parsing OBD Response: \"\(inResponseStrings)\".")
         #endif
-        return inResponseStrings.joined(separator: "\r")
+        
+        let ret = inResponseStrings.joined(separator: "\r")
+        
+        #if DEBUG
+            print("AS ASCII: \"\(ret.hex2ASCII)\".")
+        #endif
+        
+        return ret
     }
 
     /* ################################################################## */
