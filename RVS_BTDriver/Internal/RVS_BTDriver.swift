@@ -94,6 +94,7 @@ public class RVS_BTDriver: NSObject {
      The main internal initializer.
      
      - parameter inDelegate: The delegate to be used with this instance. It cannot be nil, and is a weak reference.
+     - parameter vendors: This is an Array of vendor enums, and is used to determine which vendors will be loaded.
      - parameter queue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
      - parameter allowDuplicatesInBLEScan:  This is a flag that specifies that the scanner can be continuously running, and "re-finding" duplicate devices.
                                             If true, it could adversely affect battery life. Default is false.
@@ -101,20 +102,25 @@ public class RVS_BTDriver: NSObject {
                                 Otherwise, each device will be connected only while interacting.
                                 This is optional. Default is false.
      */
-    internal init(_ inDelegate: RVS_BTDriverDelegate, queue inQueue: DispatchQueue? = nil, allowDuplicatesInBLEScan inAllowDuplicatesInBLEScan: Bool = false, stayConnected inStayConnected: Bool = false) {
+    internal init(_ inDelegate: RVS_BTDriverDelegate, vendors inVendors: [RVS_BTDriver_VendorTypes] = [], queue inQueue: DispatchQueue? = nil, allowDuplicatesInBLEScan inAllowDuplicatesInBLEScan: Bool = false, stayConnected inStayConnected: Bool = false) {
         super.init()
         internal_AllowDuplicatesInBLEScan = inAllowDuplicatesInBLEScan
         internal_stayConnected = inStayConnected
         internal_delegate = inDelegate
         internal_queue = inQueue
-        internal_vendors = [
-            RVS_BTDriver_Vendor_GenericBLE(driver: self),
-            RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self),
-            RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK(driver: self),
-            RVS_BTDriver_Vendor_OBD_ELM327_VLINK(driver: self),
-            RVS_BTDriver_Vendor_OBD_ELM327_ANON_1(driver: self),
-            RVS_BTDriver_Vendor_OBD_Kiwi(driver: self)
-        ]
+        internal_vendors = []
+        
+        if inVendors.isEmpty || inVendors.contains(.goTenna) {
+            internal_vendors.append(RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self))
+        }
+        
+        if inVendors.isEmpty || inVendors.contains(.OBD) {
+            internal_vendors.append(RVS_BTDriver_Vendor_GenericBLE(driver: self))
+            internal_vendors.append(RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK(driver: self))
+            internal_vendors.append(RVS_BTDriver_Vendor_OBD_ELM327_VLINK(driver: self))
+            internal_vendors.append(RVS_BTDriver_Vendor_OBD_ELM327_ANON_1(driver: self))
+            internal_vendors.append(RVS_BTDriver_Vendor_OBD_Kiwi(driver: self))
+        }
     }
 
     /* ################################################################## */

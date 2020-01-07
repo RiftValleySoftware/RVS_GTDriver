@@ -140,7 +140,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate {
         let wasScanning = nil != _driverInstance ? driverInstance.isScanning : false
         let prefs = RVS_BTDriver_Test_Harness_Prefs()
         let queue: DispatchQueue! = prefs.useDifferentThread ? DispatchQueue.global() : nil
-        _driverInstance = RVS_BTDriver(delegate: self, queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: true) // prefs.persistentConnections)
+        _driverInstance = RVS_BTDriver(delegate: self, vendors: [.OBD], queue: queue, allowDuplicatesInBLEScan: prefs.continuousScan, stayConnected: true) // prefs.persistentConnections)
         isScanning = wasScanning
         
         #if DEBUG

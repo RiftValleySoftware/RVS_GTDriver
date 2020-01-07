@@ -23,6 +23,19 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
+// MARK: - Public Driver Enums -
+/* ###################################################################################################################################### */
+/**
+ This enum is used to select which vendors to include.
+ */
+public enum RVS_BTDriver_VendorTypes: Equatable {
+    /// This is for goTenna devices.
+    case goTenna
+    /// This is for any OBD device.
+    case OBD
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_SubscriberProtocol Protocol -
 /* ###################################################################################################################################### */
 /**
@@ -407,6 +420,7 @@ extension RVS_BTDriver {
      The main initializer.
      
      - parameter delegate: The delegate to be used with this instance. It cannot be nil, and is a weak reference.
+     - parameter vendors: This is an Array of vendor enums, and is used to determine which vendors will be loaded.
      - parameter queue: This is a desired queue for the CB manager to operate from. It is optional, and default is nil (main queue).
      - parameter allowDuplicatesInBLEScan:  This is a flag that specifies that the scanner can be continuously running, and "re-finding" duplicate devices.
                                             If true, it could adversely affect battery life. Default is false.
@@ -414,8 +428,8 @@ extension RVS_BTDriver {
                                 Otherwise, each device will be connected only while interacting.
                                 This is optional. Default is false.
      */
-    public convenience init(delegate inDelegate: RVS_BTDriverDelegate, queue inQueue: DispatchQueue? = nil, allowDuplicatesInBLEScan inAllowDuplicatesInBLEScan: Bool = false, stayConnected inStayConnected: Bool = false) {
-        self.init(inDelegate, queue: inQueue, allowDuplicatesInBLEScan: inAllowDuplicatesInBLEScan, stayConnected: inStayConnected)
+    public convenience init(delegate inDelegate: RVS_BTDriverDelegate, vendors inVendors: [RVS_BTDriver_VendorTypes] = [], queue inQueue: DispatchQueue? = nil, allowDuplicatesInBLEScan inAllowDuplicatesInBLEScan: Bool = false, stayConnected inStayConnected: Bool = false) {
+        self.init(inDelegate, vendors: inVendors, queue: inQueue, allowDuplicatesInBLEScan: inAllowDuplicatesInBLEScan, stayConnected: inStayConnected)
     }
 }
 
