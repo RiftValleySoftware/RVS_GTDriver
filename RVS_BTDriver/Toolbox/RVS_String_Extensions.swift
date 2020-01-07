@@ -152,6 +152,10 @@ public extension StringProtocol {
     
     /* ################################################################## */
     /**
+     A fairly blunt-instrument hex digit pair-to-ASCII character converter. It isn't particularly intelligent.
+     
+     For example: "0x30313233" or "30 31 32 33" or "#30-31-32-33-H" or "30The 3132Quick Brown Fox Jumps Over the Lazy Doge33" all turn into "0123".
+     
      - returns: The String, assumed to be hex numbers (two characters, 0-F, separated by non-hex characters, or not separated); converted to an ASCII string (no spaces).
                 Nil, if the string failed to yeild a UTF8 value.
                 This requires two characters (0-9a-fA-F), side-by-side for each character. They may or may not be separated.
