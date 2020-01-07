@@ -163,24 +163,22 @@ public extension StringProtocol {
     var hex2UTF8: String! {
         var ret: String!
 
-        if  let cast = self as? String {
-            let asString = cast.uppercased()
-            if let regex = try? NSRegularExpression(pattern: #"[0-9A-Z]{2}"#, options: []) {
-                let nsRange = NSRange(asString.startIndex..<asString.endIndex, in: asString)
+        if  let cast = self as? String {        // We need to be a regular String for this, as we'll be using NS stuff, and need the toll-free bridging.
+            let asString = cast.uppercased()    // Force all text to be uppercased. Makes the regex simpler.
+            if let regex = try? NSRegularExpression(pattern: #"[0-9A-Z]{2}"#, options: []) {    // Look for groups of 2 hex digits.
+                let nsRange = NSRange(asString.startIndex..<asString.endIndex, in: asString)    // The search range will be the entire String.
+                // We walk through the found matches (if any)
                 regex.enumerateMatches(in: asString, options: [], range: nsRange) { (match, _, _) in
                     guard let match = match else {
-                        return
+                        return  // We doan' need no STEENKIN' MATCHES!
                     }
                     
+                    // If we got here, we have at least one match (group of 2 digits). Walk through them by extracting the range (in the main String) of each match.
                     for rangeIndex in 0..<match.numberOfRanges {
-                        if  let substrRange = Range(match.range(at: rangeIndex), in: asString),
-                            let asInt = Int(asString[substrRange], radix: 16),
-                            let scalar = UnicodeScalar(asInt) {
-                            if nil == ret {
-                                ret = String(scalar)
-                            } else {
-                                ret += String(scalar)
-                            }
+                        if  let substrRange = Range(match.range(at: rangeIndex), in: asString), // Get a Range, describing the portion of the main string, in a Range relevant to the main String.
+                            let asInt = Int(asString[substrRange], radix: 16),  // Convert that to a standard numerical Int.
+                            let scalar = UnicodeScalar(asInt) { // Convert that back to a UTF8 character.
+                            ret = nil == ret ? String(scalar) : ret + String(scalar)
                         }
                     }
                 }

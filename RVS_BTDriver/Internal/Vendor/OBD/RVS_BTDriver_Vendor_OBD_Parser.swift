@@ -80,7 +80,7 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
         let ret = inResponseStrings.joined(separator: "\r")
         
         #if DEBUG
-            print("AS ASCII: \"\(ret.hex2ASCII)\".")
+            print("AS ASCII: \"\(String(describing: ret.hex2UTF8))\".")
         #endif
         
         return ret
