@@ -73,7 +73,7 @@ internal enum RVS_BTDriver_OBD_Command_Service_04_PIDs: String, CaseIterable {
  These are for test results that include non-CAN oxygen sensor test reults.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_05_PIDs: String, CaseIterable {
-    case returnMonitorIDs           = "0500"
+    case returnMonitorIDs           = "050100"
     case set_01_Bank_01_Sensor_01   = "050101"
     case set_01_Bank_01_Sensor_02   = "050102"
     case set_01_Bank_01_Sensor_03   = "050103"
@@ -115,7 +115,39 @@ internal enum RVS_BTDriver_OBD_Command_Service_05_PIDs: String, CaseIterable {
  These are for test results that include CAN oxygen sensor tests.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_06_PIDs: String, CaseIterable {
-    case nop = "0600"
+    case returnMonitorIDs           = "060100"
+    case set_01_Bank_01_Sensor_01   = "060101"
+    case set_01_Bank_01_Sensor_02   = "060102"
+    case set_01_Bank_01_Sensor_03   = "060103"
+    case set_01_Bank_01_Sensor_04   = "060104"
+    case set_01_Bank_02_Sensor_01   = "060105"
+    case set_01_Bank_02_Sensor_02   = "060106"
+    case set_01_Bank_02_Sensor_03   = "060107"
+    case set_01_Bank_02_Sensor_04   = "060108"
+    case set_01_Bank_03_Sensor_01   = "060109"
+    case set_01_Bank_03_Sensor_02   = "06010A"
+    case set_01_Bank_03_Sensor_03   = "06010B"
+    case set_01_Bank_03_Sensor_04   = "06010C"
+    case set_01_Bank_04_Sensor_01   = "06010D"
+    case set_01_Bank_04_Sensor_02   = "06010E"
+    case set_01_Bank_04_Sensor_03   = "06010F"
+    case set_01_Bank_04_Sensor_04   = "060110"
+    case set_02_Bank_01_Sensor_01   = "060201"
+    case set_02_Bank_01_Sensor_02   = "060202"
+    case set_02_Bank_01_Sensor_03   = "060203"
+    case set_02_Bank_01_Sensor_04   = "060204"
+    case set_02_Bank_02_Sensor_01   = "060205"
+    case set_02_Bank_02_Sensor_02   = "060206"
+    case set_02_Bank_02_Sensor_03   = "060207"
+    case set_02_Bank_02_Sensor_04   = "060208"
+    case set_02_Bank_03_Sensor_01   = "060209"
+    case set_02_Bank_03_Sensor_02   = "06020A"
+    case set_02_Bank_03_Sensor_03   = "06020B"
+    case set_02_Bank_03_Sensor_04   = "06020C"
+    case set_02_Bank_04_Sensor_01   = "06020D"
+    case set_02_Bank_04_Sensor_02   = "06020E"
+    case set_02_Bank_04_Sensor_03   = "06020F"
+    case set_02_Bank_04_Sensor_04   = "060210"
 }
 
 /* ###################################################################################################################################### */
@@ -187,7 +219,7 @@ internal enum RVS_BTDriver_OBD_Command_Services {
     /// Get Test Results (and non-CAN Oxygen Sensor Results)
     case service_05_TestResultsOxygenNonCAN(pid: RVS_BTDriver_OBD_Command_Service_05_PIDs)
     /// Get Test Results (and CAN Oxygen Sensor Results)
-    case service_06_TestResultsCAN(pid: RVS_BTDriver_OBD_Command_Service_06_PIDs)
+    case service_06_TestResultsOxygenCAN(pid: RVS_BTDriver_OBD_Command_Service_06_PIDs)
     /// Show Pending Diagnostic Codes
     case service_07_ShowPendingDiagnosticCodes(pid: RVS_BTDriver_OBD_Command_Service_07_PIDs)
     /// Control On-Board Components
