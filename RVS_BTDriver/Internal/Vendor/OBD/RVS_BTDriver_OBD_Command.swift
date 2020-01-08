@@ -229,3 +229,48 @@ internal enum RVS_BTDriver_OBD_Command_Services {
     /// Permanent Diagnostic Trouble Codes
     case service_0A_PermanentDTCs(pid: RVS_BTDriver_OBD_Command_Service_0A_PIDs)
 }
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask -
+/* ###################################################################################################################################### */
+/**
+ This is an option set that will decode the response to the 0100 PID.
+ */
+internal struct RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask: OptionSet {
+    typealias RawValue = UInt32
+    
+    let rawValue: RawValue
+    
+    static let pid01 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: 1 << 31)  // Yeah, this could be 0x8000, but this makes the bit position more clear.
+    static let pid02 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid01.rawValue >> 1)
+    static let pid03 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid02.rawValue >> 1)
+    static let pid04 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid03.rawValue >> 1)
+    static let pid05 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid04.rawValue >> 1)
+    static let pid06 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid05.rawValue >> 1)
+    static let pid07 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid06.rawValue >> 1)
+    static let pid08 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid07.rawValue >> 1)
+    static let pid09 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid08.rawValue >> 1)
+    static let pid0A = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid09.rawValue >> 1)
+    static let pid0B = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid0A.rawValue >> 1)
+    static let pid0C = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid0B.rawValue >> 1)
+    static let pid0D = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid0C.rawValue >> 1)
+    static let pid0E = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid0D.rawValue >> 1)
+    static let pid0F = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid0E.rawValue >> 1)
+    static let pid10 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid0F.rawValue >> 1)
+    static let pid11 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid10.rawValue >> 1)
+    static let pid12 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid11.rawValue >> 1)
+    static let pid13 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid12.rawValue >> 1)
+    static let pid14 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid13.rawValue >> 1)
+    static let pid15 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid14.rawValue >> 1)
+    static let pid16 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid15.rawValue >> 1)
+    static let pid17 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid16.rawValue >> 1)
+    static let pid18 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid17.rawValue >> 1)
+    static let pid19 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid18.rawValue >> 1)
+    static let pid1A = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid19.rawValue >> 1)
+    static let pid1B = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid1A.rawValue >> 1)
+    static let pid1C = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid1B.rawValue >> 1)
+    static let pid1D = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid1C.rawValue >> 1)
+    static let pid1E = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid1D.rawValue >> 1)
+    static let pid1F = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid1E.rawValue >> 1)
+    static let pid20 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid1F.rawValue >> 1)
+}
