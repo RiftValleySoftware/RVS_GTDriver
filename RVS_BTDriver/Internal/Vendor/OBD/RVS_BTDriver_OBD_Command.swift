@@ -30,6 +30,7 @@ import Foundation
 // MARK: - RVS_BTDriver_OBD_Command_Service_01_PIDs Enum -
 /* ###################################################################################################################################### */
 /**
+ These PIDs show the current state of the vehicle.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_01_PIDs: String, CaseIterable {
     case returnSupportedPIDs    = "0100"
@@ -39,6 +40,7 @@ internal enum RVS_BTDriver_OBD_Command_Service_01_PIDs: String, CaseIterable {
 // MARK: - RVS_BTDriver_OBD_Command_Service_02_PIDs Enum -
 /* ###################################################################################################################################### */
 /**
+ This is the same as the first set of PIDs, except with freeze-frame data.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_02_PIDs: String, CaseIterable {
     case returnSupportedPIDs    = "0200"
@@ -48,6 +50,7 @@ internal enum RVS_BTDriver_OBD_Command_Service_02_PIDs: String, CaseIterable {
 // MARK: - RVS_BTDriver_OBD_Command_Service_03_PIDs Enum -
 /* ###################################################################################################################################### */
 /**
+ These PIDs ask to return stored trouble codes.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_03_PIDs: String, CaseIterable {
     case returnStoredCodes    = "0300"
@@ -57,6 +60,7 @@ internal enum RVS_BTDriver_OBD_Command_Service_03_PIDs: String, CaseIterable {
 // MARK: - RVS_BTDriver_OBD_Command_Service_04_PIDs Enum -
 /* ###################################################################################################################################### */
 /**
+ This is a "one-shot" PID to clear test results, and reset the "check engine" light.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_04_PIDs: String, CaseIterable {
     case clearStoredCodes    = "0400"
@@ -66,6 +70,7 @@ internal enum RVS_BTDriver_OBD_Command_Service_04_PIDs: String, CaseIterable {
 // MARK: - RVS_BTDriver_OBD_Command_Service_05_PIDs Enum -
 /* ###################################################################################################################################### */
 /**
+ These are for test results that include non-CAN oxygen sensor test reults.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_05_PIDs: String, CaseIterable {
     case returnMonitorIDs           = "0500"
@@ -107,6 +112,7 @@ internal enum RVS_BTDriver_OBD_Command_Service_05_PIDs: String, CaseIterable {
 // MARK: - RVS_BTDriver_OBD_Command_Service_06_PIDs Enum -
 /* ###################################################################################################################################### */
 /**
+ These are for test results that include CAN oxygen sensor tests.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_06_PIDs: String, CaseIterable {
     case nop = "0600"
@@ -116,24 +122,27 @@ internal enum RVS_BTDriver_OBD_Command_Service_06_PIDs: String, CaseIterable {
 // MARK: - RVS_BTDriver_OBD_Command_Service_07_PIDs Enum -
 /* ###################################################################################################################################### */
 /**
+ These PIDs are for pending diagnostic codes.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_07_PIDs: String, CaseIterable {
-    case nop = "0600"
+    case nop = "06700"
 }
 
 /* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Command_Service_08_PIDs Enum -
 /* ###################################################################################################################################### */
 /**
+ These PIDs are for On-Board Component control.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_08_PIDs: String, CaseIterable {
-    case nop = "0600"
+    case nop = "0800"
 }
 
 /* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Command_Service_09_PIDs Enum -
 /* ###################################################################################################################################### */
 /**
+ These are Vehicle information PIDs
  */
 internal enum RVS_BTDriver_OBD_Command_Service_09_PIDs: String, CaseIterable {
     case returnSupportedPIDs                = "0900"
@@ -154,6 +163,7 @@ internal enum RVS_BTDriver_OBD_Command_Service_09_PIDs: String, CaseIterable {
 // MARK: - RVS_BTDriver_OBD_Command_Service_0A_PIDs Enum -
 /* ###################################################################################################################################### */
 /**
+ These are permanent disgnostic test PIDs
  */
 internal enum RVS_BTDriver_OBD_Command_Service_0A_PIDs: String, CaseIterable {
     case nop = "0A00"
@@ -163,6 +173,7 @@ internal enum RVS_BTDriver_OBD_Command_Service_0A_PIDs: String, CaseIterable {
 // MARK: - RVS_BTDriver_OBD_Command_Services Enum -
 /* ###################################################################################################################################### */
 /**
+ These are the "wrapper" enum cases for the various OBD PIds.
  */
 internal enum RVS_BTDriver_OBD_Command_Services {
     /// Show current data
