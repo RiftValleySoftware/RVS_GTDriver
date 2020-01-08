@@ -241,7 +241,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask: Option
     
     let rawValue: RawValue
     
-    static let pid01 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: 1 << 31)  // Yeah, this could be 0x8000, but this makes the bit position more clear.
+    static let pid01 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: 1 << 31)  // Yeah, this could be 0x80000000, but this makes the bit position more clear.
     static let pid02 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid01.rawValue >> 1)
     static let pid03 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid02.rawValue >> 1)
     static let pid04 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid03.rawValue >> 1)
@@ -273,4 +273,68 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask: Option
     static let pid1E = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid1D.rawValue >> 1)
     static let pid1F = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid1E.rawValue >> 1)
     static let pid20 = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: pid1F.rawValue >> 1)
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask -
+/* ###################################################################################################################################### */
+/**
+ This is an option set that will decode the response to the 0101 PID.
+ */
+internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: OptionSet {
+    typealias RawValue = UInt32
+    
+    let rawValue: RawValue
+    
+    /// ABCD A = 0xFF000000, B = 0x00FF0000, C = 0x0000FF00, D = 0x000000FF
+    
+    /// A
+    static let mil = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                                 0x80000000)
+    static let dtcCount = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                            0x7F000000)
+    
+    /// B
+    static let reserved = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                            0x00800000)
+    static let compression = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                         0x00080000)
+    static let componentsAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                 0x00004000)
+    static let componentsIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                0x00040000)
+    static let fuelSystemAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                 0x00002000)
+    static let fuelSystemIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                0x00020000)
+    static let misfireAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                    0x00001000)
+    static let misfireIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                   0x00010000)
+    
+    /// C-D (Spark)
+    static let spark_egrSystemAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:            0x00008000)
+    static let spark_egrSystemIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:           0x00000080)
+    static let spark_oxygenSensorHeaterAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:   0x00004000)
+    static let spark_oxygenSensorHeaterIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:  0x00000040)
+    static let spark_oxygenSensorAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:         0x00002000)
+    static let spark_oxygenSensorIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:        0x00000020)
+    static let spark_acRefrigerantAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:        0x00001000)
+    static let spark_acRefrigerantIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:       0x00000010)
+    static let spark_sasAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                  0x00000800)
+    static let spark_sasIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:                 0x00000008)
+    static let spark_evaporativeSystemAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:    0x00000400)
+    static let spark_evaporativeSystemIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:   0x00000004)
+    static let spark_heatedCatalystAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:       0x00000200)
+    static let spark_heatedCatalystIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:      0x00000002)
+    static let spark_catalystAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:             0x00000100)
+    static let spark_catalystIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:            0x00000001)
+    
+    /// C-D (Diesel)
+    static let diesel_egrSystemAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:           0x00008000)
+    static let diesel_egrSystemIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:          0x00000080)
+    static let diesel_pmFilterMonitoringAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:  0x00004000)
+    static let diesel_pmFilterMonitoringIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue: 0x00000040)
+    static let diesel_exhaustSensorAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:       0x00002000)
+    static let diesel_exhaustSensorIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:      0x00000020)
+    static let diesel_reserved01Available = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:          0x00001000)
+    static let diesel_eserved01Incomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:          0x00000010)
+    static let diesel_boostPressureAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:       0x00000800)
+    static let diesel_boostPressureIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:      0x00000008)
+    static let diesel_reserved02Available = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:          0x00000400)
+    static let diesel_reserved02Incomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:         0x00000004)
+    static let diesel_noxSCRAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:              0x00000200)
+    static let diesel_noxSCRIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:             0x00000002)
+    static let diesel_nmhcCatalystAvailable = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:        0x00000100)
+    static let diesel_nmhcCatalystIncomplete = RVS_BTDriver_OBD_Command_Service_01_SupportedPIDsBitMask(rawValue:       0x00000001)
 }
