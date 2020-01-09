@@ -43,7 +43,7 @@ class RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate: NSObject {
     /**
      This is the main viewcontroller.
      */
-    var mainViewController: RVS_BTDriver_OBD_Mac_Test_Harness_ViewController!
+    var mainViewController: RVS_BTDriver_OBD_MacOS_Test_Harness_ViewController!
     
     /* ################################################################## */
     /**

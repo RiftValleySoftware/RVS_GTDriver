@@ -47,6 +47,7 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
      */
     static internal let atHeader = "AT"
 
+    /// This will hold the transaction we are parsing.
     internal let transaction: RVS_BTDriver_OBD_Device_TransactionStruct!
     
     /* ################################################################## */

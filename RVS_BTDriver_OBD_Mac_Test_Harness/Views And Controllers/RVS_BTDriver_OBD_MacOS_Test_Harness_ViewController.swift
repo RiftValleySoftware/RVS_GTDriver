@@ -31,7 +31,7 @@ import Cocoa
 /**
  This view controller manages the main device selection screen.
  */
-class RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController {
+class RVS_BTDriver_OBD_MacOS_Test_Harness_ViewController: RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController {
     /* ############################################################################################################################## */
     // MARK: - Static Properties
     /* ############################################################################################################################## */
@@ -105,7 +105,7 @@ class RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: RVS_BTDriver_OBD_MacOS_T
 /* ###################################################################################################################################### */
 // MARK: - Superclass Overrides -
 /* ###################################################################################################################################### */
-extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController {
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_ViewController {
     /* ################################################################## */
     /**
      Called when the view has completed loading.
@@ -137,7 +137,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController {
 /* ###################################################################################################################################### */
 // MARK: - Instance Methods -
 /* ###################################################################################################################################### */
-extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController {
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_ViewController {
     /* ################################################################## */
     /**
      This just sets up the UI to match the current driver state.
@@ -172,7 +172,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController {
 /* ###################################################################################################################################### */
 // MARK: - NSTableViewDelegate Support -
 /* ###################################################################################################################################### */
-extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: NSTableViewDelegate {
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_ViewController: NSTableViewDelegate {
     /* ################################################################## */
     /**
      This is called when a row is selected. We match the device to the row, set that in the semaphore, and approve the selection.
@@ -238,7 +238,7 @@ extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: NSTableViewDelegate 
 /* ###################################################################################################################################### */
 // MARK: - NSTableViewDataSource Support -
 /* ###################################################################################################################################### */
-extension RVS_BTDriver_OBD_Mac_Test_Harness_ViewController: NSTableViewDataSource {
+extension RVS_BTDriver_OBD_MacOS_Test_Harness_ViewController: NSTableViewDataSource {
     /* ################################################################## */
     /**
      Called to supply the number of rows in the table.

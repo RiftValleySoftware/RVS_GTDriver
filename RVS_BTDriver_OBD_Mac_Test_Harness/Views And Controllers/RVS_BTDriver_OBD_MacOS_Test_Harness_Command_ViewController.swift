@@ -52,8 +52,6 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
     /**
     */
     var commandDictionary: [String: RVS_BTDriver_OBD_ELM327_CommandDictionary_Tuple] = [:]
-    
-    var oldDelegate: RVS_BTDriver_OBD_DeviceDelegate!
 
     /* ################################################################## */
     /**
@@ -299,23 +297,6 @@ class RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController: RVS_BTDriver_O
                 self.setUpUI()
             }
         }
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    override func viewWillAppear() {
-        super.viewWillAppear()
-        oldDelegate = deviceInstance?.delegate
-        deviceInstance?.delegate = self
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    override func viewWillDisappear() {
-        super.viewWillDisappear()
-        deviceInstance?.delegate = oldDelegate
     }
     
     /* ################################################################## */
