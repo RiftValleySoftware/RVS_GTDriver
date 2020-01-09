@@ -157,6 +157,7 @@ public extension StringProtocol {
     var binaryOnly: String {
         let hexDigits = CharacterSet(charactersIn: "01")
         return String(self).filter {
+            // The higher-order function stuff will convert each character into an aggregate integer, which then becomes a Unicode scalar. Very primitive, but shouldn't be a problem for us, as we only need a very limited ASCII set.
             if let cha = UnicodeScalar($0.unicodeScalars.map { $0.value }.reduce(0, +)) {
                 return hexDigits.contains(cha)
             }
@@ -172,6 +173,7 @@ public extension StringProtocol {
     var octalOnly: String {
         let hexDigits = CharacterSet(charactersIn: "01234567")
         return String(self).filter {
+            // The higher-order function stuff will convert each character into an aggregate integer, which then becomes a Unicode scalar. Very primitive, but shouldn't be a problem for us, as we only need a very limited ASCII set.
             if let cha = UnicodeScalar($0.unicodeScalars.map { $0.value }.reduce(0, +)) {
                 return hexDigits.contains(cha)
             }
@@ -187,6 +189,7 @@ public extension StringProtocol {
     var decimalOnly: String {
         let hexDigits = CharacterSet(charactersIn: "0123456789")
         return String(self).filter {
+            // The higher-order function stuff will convert each character into an aggregate integer, which then becomes a Unicode scalar. Very primitive, but shouldn't be a problem for us, as we only need a very limited ASCII set.
             if let cha = UnicodeScalar($0.unicodeScalars.map { $0.value }.reduce(0, +)) {
                 return hexDigits.contains(cha)
             }
@@ -201,7 +204,9 @@ public extension StringProtocol {
      */
     var hexOnly: String {
         let hexDigits = CharacterSet(charactersIn: "0123456789ABCDEF")
+        // The uppercased() will convert us to a String. No need for a cast.
         return self.uppercased().filter {
+            // The higher-order function stuff will convert each character into an aggregate integer, which then becomes a Unicode scalar. Very primitive, but shouldn't be a problem for us, as we only need a very limited ASCII set.
             if let cha = UnicodeScalar($0.unicodeScalars.map { $0.value }.reduce(0, +)) {
                 return hexDigits.contains(cha)
             }
