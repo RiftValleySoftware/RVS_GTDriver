@@ -152,6 +152,66 @@ public extension StringProtocol {
     
     /* ################################################################## */
     /**
+     This simply strips out all non-binary characters in the string, leaving only valid binary digits.
+     */
+    var binaryOnly: String {
+        let hexDigits = CharacterSet(charactersIn: "01")
+        return String(self).filter {
+            if let cha = UnicodeScalar($0.unicodeScalars.map { $0.value }.reduce(0, +)) {
+                return hexDigits.contains(cha)
+            }
+            
+            return false
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     This simply strips out all non-octal characters in the string, leaving only valid octal digits.
+     */
+    var octalOnly: String {
+        let hexDigits = CharacterSet(charactersIn: "01234567")
+        return String(self).filter {
+            if let cha = UnicodeScalar($0.unicodeScalars.map { $0.value }.reduce(0, +)) {
+                return hexDigits.contains(cha)
+            }
+            
+            return false
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     This simply strips out all non-decimal characters in the string, leaving only valid decimal digits.
+     */
+    var decimalOnly: String {
+        let hexDigits = CharacterSet(charactersIn: "0123456789")
+        return String(self).filter {
+            if let cha = UnicodeScalar($0.unicodeScalars.map { $0.value }.reduce(0, +)) {
+                return hexDigits.contains(cha)
+            }
+            
+            return false
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     This simply strips out all non-hex characters in the string, leaving only valid, uppercased (forced) hex digits.
+     */
+    var hexOnly: String {
+        let hexDigits = CharacterSet(charactersIn: "0123456789ABCDEF")
+        return self.uppercased().filter {
+            if let cha = UnicodeScalar($0.unicodeScalars.map { $0.value }.reduce(0, +)) {
+                return hexDigits.contains(cha)
+            }
+            
+            return false
+        }
+    }
+
+    /* ################################################################## */
+    /**
      A fairly blunt-instrument hex digit pair-to-ASCII character converter. It isn't particularly intelligent.
      
      For example: "0x30313233" or "30 31 32 33" or "#30-31-32-33-H" or "30The 3132Quick Brown Fox Jumps Over the Lazy Doge33" all turn into "0123".
@@ -162,24 +222,22 @@ public extension StringProtocol {
      */
     var hex2UTF8: String! {
         var ret: String!
-
-        if  let cast = self as? String {        // We need to be a regular String for this, as we'll be using NS stuff, and need the toll-free bridging.
-            let asString = cast.uppercased()    // Force all text to be uppercased. Makes the regex simpler.
-            if let regex = try? NSRegularExpression(pattern: #"[0-9A-Z]{2}"#, options: []) {    // Look for groups of 2 hex digits.
-                let nsRange = NSRange(asString.startIndex..<asString.endIndex, in: asString)    // The search range will be the entire String.
-                // We walk through the found matches (if any)
-                regex.enumerateMatches(in: asString, options: [], range: nsRange) { (match, _, _) in
-                    guard let match = match else {
-                        return  // We doan' need no STEENKIN' MATCHES!
-                    }
-                    
-                    // If we got here, we have at least one match (group of 2 digits). Walk through them by extracting the range (in the main String) of each match.
-                    for rangeIndex in 0..<match.numberOfRanges {
-                        if  let substrRange = Range(match.range(at: rangeIndex), in: asString), // Get a Range, describing the portion of the main string, in a Range relevant to the main String.
-                            let asInt = Int(asString[substrRange], radix: 16),  // Convert that to a standard numerical Int.
-                            let scalar = UnicodeScalar(asInt) { // Convert that back to a UTF8 character.
-                            ret = nil == ret ? String(scalar) : ret + String(scalar)
-                        }
+        
+        let asString = self.hexOnly     // Force all text to be uppercased and strip out non-hex characters. Makes the regex simpler.
+        if let regex = try? NSRegularExpression(pattern: #"[0-9A-Z]{2}"#, options: []) {    // Look for groups of 2 hex digits.
+            let nsRange = NSRange(asString.startIndex..<asString.endIndex, in: asString)    // The search range will be the entire String.
+            // We walk through the found matches (if any)
+            regex.enumerateMatches(in: asString, options: [], range: nsRange) { (match, _, _) in
+                guard let match = match else {
+                    return  // We doan' need no STEENKIN' MATCHES!
+                }
+                
+                // If we got here, we have at least one match (group of 2 digits). Walk through them by extracting the range (in the main String) of each match.
+                for rangeIndex in 0..<match.numberOfRanges {
+                    if  let substrRange = Range(match.range(at: rangeIndex), in: asString), // Get a Range, describing the portion of the main string, in a Range relevant to the main String.
+                        let asInt = Int(asString[substrRange], radix: 16),  // Convert that to a standard numerical Int.
+                        let scalar = UnicodeScalar(asInt) { // Convert that back to a UTF8 character.
+                        ret = nil == ret ? String(scalar) : ret + String(scalar)
                     }
                 }
             }

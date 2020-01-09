@@ -21,11 +21,11 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet Protocol -
+// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol -
 /* ###################################################################################################################################### */
 /**
  */
-internal protocol RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet: OptionSet {
+internal protocol RVS_BTDriver_OBD_Command_Service_CommandHandler {
     /* ################################################################## */
     /**
      This returns an Array of Strings, reflecting which PIDs will return data to be decoded by this mask set.
@@ -34,12 +34,20 @@ internal protocol RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet
 }
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet Protocol -
+/* ###################################################################################################################################### */
+/**
+ */
+internal protocol RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet: RVS_BTDriver_OBD_Command_Service_CommandHandler, OptionSet {
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask -
 /* ###################################################################################################################################### */
 /**
  This is an option set that will decode the response to the 0100 PID.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask: RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet {
+internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask: RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet {
     /// Required for the OptionSet protocol.
     typealias RawValue = UInt32
     
@@ -127,7 +135,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask: RVS
 /**
  This is an option set that will decode the response to the 0101/0141 PID.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet {
+internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet {
     /// Required for the OptionSet protocol.
     typealias RawValue = UInt32
     
@@ -229,4 +237,51 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BT
     static let noxSCRAvailable = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:                 0x00000200)
     /// NOx/SCR Monitor test still in progress
     static let noxSCRIncomplete = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:                0x00000002)
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask -
+/* ###################################################################################################################################### */
+/**
+ */
+internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_BTDriver_OBD_Command_Service_CommandHandler {
+    let header: UInt8
+    var data: [UInt16]
+    
+    /* ################################################################## */
+    /**
+     This will be used by the second PID of service 01 and 41.
+     */
+    static var pidCommands: [String] {
+        return [RVS_BTDriver_OBD_Command_Service_01_PIDs.egt_Bank_01.rawValue,
+                RVS_BTDriver_OBD_Command_Service_01_PIDs.egt_Bank_02.rawValue]
+    }
+
+    // MARK: ABCDEFGHI A = 0xFF0000000000000000, B = 0x00FF00000000000000, C = 0x0000FF000000000000, D = 0x000000FF0000000000, E = 0x00000000FF00000000, F = 0x0000000000FF000000, G = 0x000000000000FF0000, H = 0x00000000000000FF00, I = 0x0000000000000000FF
+    
+    // MARK: A
+    /// Reserved.
+    static let reserved = 0xF0
+    /// Bank 1, Sensor 4 is supported.
+    static let egtBank01Sensor04 = 0x08
+    /// Bank 1, Sensor 3 is supported.
+    static let egtBank01Sensor03 = 0x04
+    /// Bank 1, Sensor 2 is supported.
+    static let egtBank01Sensor02 = 0x02
+    /// Bank 1, Sensor 1 is supported.
+    static let egtBank01Sensor01 = 0x01
+
+    /* ################################################################## */
+    /**
+     This will read in the data (which needs to be in the form of a 9-byte Array of UInt8), and save the header (a UInt8 bitmask), and the data (4 UInt16).
+     
+     - parameter contents: The contents, as a 9-byte Array of UInt8.
+     */
+    init(contents inContents: [UInt8]) {
+        var contents = inContents
+        header = contents.removeFirst()
+        data = UnsafePointer(contents).withMemoryRebound(to: [UInt16].self, capacity: 4) {
+            $0.pointee
+        }
+    }
 }

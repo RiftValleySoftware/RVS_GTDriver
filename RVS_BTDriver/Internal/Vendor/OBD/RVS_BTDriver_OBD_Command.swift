@@ -37,6 +37,10 @@ internal enum RVS_BTDriver_OBD_Command_Service_01_PIDs: String, CaseIterable {
     case returnMonitorStatus            = "0101"
     /// This returns a set of flags, for the monitor satus for this cycle drive.
     case returnMonitorStatusThisCycle   = "0141"
+    /// This returns a set of values for Bank One of the exaust gas temperature (EGT).
+    case egt_Bank_01                    = "0178"
+    /// This returns a set of values for Bank Two of the exaust gas temperature (EGT).
+    case egt_Bank_02                    = "0179"
 }
 
 /* ###################################################################################################################################### */
