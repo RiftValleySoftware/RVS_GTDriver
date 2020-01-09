@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Struct/RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask" class="dashAnchor"></a>
+
+    <a title="RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask Structure Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          RVS_BTDriver Public Internal Code Doumentation
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html"> Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask Structure Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver.html">RVS_BTDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Base_Interface.html">RVS_BTDriver_Base_Interface</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device.html">RVS_BTDriver_Device</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_BLE.html">RVS_BTDriver_Device_BLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_GenericBLE.html">RVS_BTDriver_Device_GenericBLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes.html#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna">RVS_BTDriver_Device_GoTenna</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes.html#/c:@M@RVS_BTDriver_MacOS@objc(cs)RVS_BTDriver_Device_GoTenna_Mesh">RVS_BTDriver_Device_GoTenna_Mesh</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_OBD.html">RVS_BTDriver_Device_OBD</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Device_OBD_ELM327.html">RVS_BTDriver_Device_OBD_ELM327</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BLE.html">RVS_BTDriver_Interface_BLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Interface_BLE/DeviceInfoStruct.html">– DeviceInfoStruct</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Property.html">RVS_BTDriver_Property</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Property_BLE.html">RVS_BTDriver_Property_BLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Service.html">RVS_BTDriver_Service</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Service_BLE.html">RVS_BTDriver_Service_BLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Service_DeviceInfo_BLE.html">RVS_BTDriver_Service_DeviceInfo_BLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Service_DeviceInfo_BLE/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GenericBLE.html">RVS_BTDriver_Vendor_GenericBLE</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GenericBLE/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna.html">RVS_BTDriver_Vendor_GoTenna</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna_Mesh.html">RVS_BTDriver_Vendor_GoTenna_Mesh</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_GoTenna_Mesh/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD.html">RVS_BTDriver_Vendor_OBD</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327.html">RVS_BTDriver_Vendor_OBD_ELM327</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.html">RVS_BTDriver_Vendor_OBD_ELM327_ANON_1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_ANON_1/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_ANON_1_Device.html">RVS_BTDriver_Vendor_OBD_ELM327_ANON_1_Device</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.html">RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK_Device.html">RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK_Device</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VLINK.html">RVS_BTDriver_Vendor_OBD_ELM327_VLINK</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VLINK/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_ELM327_VLINK_Device.html">RVS_BTDriver_Vendor_OBD_ELM327_VLINK_Device</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_Kiwi.html">RVS_BTDriver_Vendor_OBD_Kiwi</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_Kiwi/RVS_BLE_GATT_UUID.html">– RVS_BLE_GATT_UUID</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_BTDriver_Vendor_OBD_Kiwi_Device.html">RVS_BTDriver_Vendor_OBD_Kiwi_Device</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_DebugTools.html">RVS_DebugTools</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_DeviceType.html">RVS_BTDriver_DeviceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_Service_01_PIDs.html">RVS_BTDriver_OBD_Command_Service_01_PIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_Service_02_PIDs.html">RVS_BTDriver_OBD_Command_Service_02_PIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_Service_03_PIDs.html">RVS_BTDriver_OBD_Command_Service_03_PIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_Service_04_PIDs.html">RVS_BTDriver_OBD_Command_Service_04_PIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_Service_05_PIDs.html">RVS_BTDriver_OBD_Command_Service_05_PIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_Service_06_PIDs.html">RVS_BTDriver_OBD_Command_Service_06_PIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_Service_07_PIDs.html">RVS_BTDriver_OBD_Command_Service_07_PIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_Service_08_PIDs.html">RVS_BTDriver_OBD_Command_Service_08_PIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_Service_09_PIDs.html">RVS_BTDriver_OBD_Command_Service_09_PIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_Service_0A_PIDs.html">RVS_BTDriver_OBD_Command_Service_0A_PIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_Command_Services.html">RVS_BTDriver_OBD_Command_Services</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_OBD_ELM327_AT_Command.html">RVS_BTDriver_OBD_ELM327_AT_Command</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_PropertyProtocol_Type_Enum.html">RVS_BTDriver_PropertyProtocol_Type_Enum</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_State_Machine_StateEnum.html">RVS_BTDriver_State_Machine_StateEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_VendorTypes.html">RVS_BTDriver_VendorTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RVS_BTDriver_Vendor_OBD_Types.html">RVS_BTDriver_Vendor_OBD_Types</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/StringProtocol.html">StringProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/OLEB_Queue.html">OLEB_Queue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriverCommunicatorTools.html">RVS_BTDriverCommunicatorTools</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriverDelegate.html">RVS_BTDriverDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_DeviceSubscriberProtocol.html">RVS_BTDriver_DeviceSubscriberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_InterfaceProtocol.html">RVS_BTDriver_InterfaceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet.html">RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DeviceDelegate.html">RVS_BTDriver_OBD_DeviceDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DeviceProtocol.html">RVS_BTDriver_OBD_DeviceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_ELM327_DeviceProtocol.html">RVS_BTDriver_OBD_ELM327_DeviceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_PropertyProtocol.html">RVS_BTDriver_PropertyProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_ServiceProtocol.html">RVS_BTDriver_ServiceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_ServiceSubscriberProtocol.html">RVS_BTDriver_ServiceSubscriberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_State_Machine.html">RVS_BTDriver_State_Machine</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_SubscriberProtocol.html">RVS_BTDriver_SubscriberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_VendorProtocol.html">RVS_BTDriver_VendorProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask.html">RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.html">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html">RVS_BTDriver_OBD_Device_TransactionStruct</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_Vendor_OBD_Parser.html">RVS_BTDriver_Vendor_OBD_Parser</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_FIFOQueue.html">RVS_FIFOQueue</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">struct</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet.html">RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>This is an option set that will decode the response to the 0101 PID.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV8RawValuea"></a>
+                    <a name="//apple_ref/swift/Alias/RawValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV8RawValuea">RawValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Required for the OptionSet protocol.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">RawValue</span> <span class="o">=</span> <span class="kt">UInt32</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV8rawValues6UInt32Vvp"></a>
+                    <a name="//apple_ref/swift/Property/rawValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV8rawValues6UInt32Vvp">rawValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Required for the OptionSet protocol.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">rawValue</span><span class="p">:</span> <span class="kt"><a href="../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.html#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV8RawValuea">RawValue</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV11pidCommandsSaySSGvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/pidCommands" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV11pidCommandsSaySSGvpZ">pidCommands</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This will be used by the second PID of service 01.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">pidCommands</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/A"></a>
+                <a name="//apple_ref/swift/Section/A" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/A"></a>
+                  <h3 class="section-name"><p>A</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV3milACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/mil" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV3milACvpZ">mil</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CE/MIL on</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">mil</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV8dtcCountACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/dtcCount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV8dtcCountACvpZ">dtcCount</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Number of Emissions-related DTCs</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">dtcCount</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/B"></a>
+                <a name="//apple_ref/swift/Section/B" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/B"></a>
+                  <h3 class="section-name"><p>B</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV8reservedACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/reserved" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV8reservedACvpZ">reserved</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reserved</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">reserved</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV6dieselACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/diesel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV6dieselACvpZ">diesel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is on, if the motor is compression (diesel).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">diesel</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV19componentsAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/componentsAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV19componentsAvailableACvpZ">componentsAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Components system test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">componentsAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV20componentsIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/componentsIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV20componentsIncompleteACvpZ">componentsIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Components system test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">componentsIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV19fuelSystemAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/fuelSystemAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV19fuelSystemAvailableACvpZ">fuelSystemAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fuel system test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">fuelSystemAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV20fuelSystemIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/fuelSystemIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV20fuelSystemIncompleteACvpZ">fuelSystemIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fuel system test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">fuelSystemIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV16misfireAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/misfireAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV16misfireAvailableACvpZ">misfireAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Misfire test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">misfireAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV17misfireIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/misfireIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV17misfireIncompleteACvpZ">misfireIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Misfire test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">misfireIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV18egrSystemAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/egrSystemAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV18egrSystemAvailableACvpZ">egrSystemAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>EGR System test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">egrSystemAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV19egrSystemIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/egrSystemIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV19egrSystemIncompleteACvpZ">egrSystemIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>EGR System test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">egrSystemIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV17catalystAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/catalystAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV17catalystAvailableACvpZ">catalystAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Catalyst test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">catalystAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV18catalystIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/catalystIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV18catalystIncompleteACvpZ">catalystIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Catalyst test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">catalystIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/C-D%20(Spark)%20Only%20valid%20if%20.diesel%20is%20off"></a>
+                <a name="//apple_ref/swift/Section/C-D (Spark) Only valid if .diesel is off" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/C-D%20(Spark)%20Only%20valid%20if%20.diesel%20is%20off"></a>
+                  <h3 class="section-name"><p>C-D (Spark) Only valid if .diesel is off</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV27oxygenSensorHeaterAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/oxygenSensorHeaterAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV27oxygenSensorHeaterAvailableACvpZ">oxygenSensorHeaterAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Oxygen sensor heater test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">oxygenSensorHeaterAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV28oxygenSensorHeaterIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/oxygenSensorHeaterIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV28oxygenSensorHeaterIncompleteACvpZ">oxygenSensorHeaterIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Oxygen sensor heater test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">oxygenSensorHeaterIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV21oxygenSensorAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/oxygenSensorAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV21oxygenSensorAvailableACvpZ">oxygenSensorAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Oxygen sensor test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">oxygenSensorAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV22oxygenSensorIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/oxygenSensorIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV22oxygenSensorIncompleteACvpZ">oxygenSensorIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Oxygen sensor test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">oxygenSensorIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV22acRefrigerantAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/acRefrigerantAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV22acRefrigerantAvailableACvpZ">acRefrigerantAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A/C refrigerant test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">acRefrigerantAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV23acRefrigerantIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/acRefrigerantIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV23acRefrigerantIncompleteACvpZ">acRefrigerantIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A/C refrigerant test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">acRefrigerantIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV12sasAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/sasAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV12sasAvailableACvpZ">sasAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Secondary air system test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">sasAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV13sasIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/sasIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV13sasIncompleteACvpZ">sasIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Secondary air system test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">sasIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV26evaporativeSystemAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/evaporativeSystemAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV26evaporativeSystemAvailableACvpZ">evaporativeSystemAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Evaporative system test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">evaporativeSystemAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV27evaporativeSystemIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/evaporativeSystemIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV27evaporativeSystemIncompleteACvpZ">evaporativeSystemIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Evaporative system test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">evaporativeSystemIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV23heatedCatalystAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/heatedCatalystAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV23heatedCatalystAvailableACvpZ">heatedCatalystAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Heated catalyst test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">heatedCatalystAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV24heatedCatalystIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/heatedCatalystIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV24heatedCatalystIncompleteACvpZ">heatedCatalystIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Heated catalyst test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">heatedCatalystIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/C-D%20(Diesel)%20Only%20valid%20if%20.diesel%20is%20on"></a>
+                <a name="//apple_ref/swift/Section/C-D (Diesel) Only valid if .diesel is on" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/C-D%20(Diesel)%20Only%20valid%20if%20.diesel%20is%20on"></a>
+                  <h3 class="section-name"><p>C-D (Diesel) Only valid if .diesel is on</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV27pmFilterMonitoringAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/pmFilterMonitoringAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV27pmFilterMonitoringAvailableACvpZ">pmFilterMonitoringAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>PM filter monitoring test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">pmFilterMonitoringAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV28pmFilterMonitoringIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/pmFilterMonitoringIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV28pmFilterMonitoringIncompleteACvpZ">pmFilterMonitoringIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>PM filter monitoring test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">pmFilterMonitoringIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV22exhaustSensorAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/exhaustSensorAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV22exhaustSensorAvailableACvpZ">exhaustSensorAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Exhaust gas test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">exhaustSensorAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV23exhaustSensorIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/exhaustSensorIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV23exhaustSensorIncompleteACvpZ">exhaustSensorIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Exhaust gas test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">exhaustSensorIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV19reserved01AvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/reserved01Available" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV19reserved01AvailableACvpZ">reserved01Available</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reserved</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">reserved01Available</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV20reserved01IncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/reserved01Incomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV20reserved01IncompleteACvpZ">reserved01Incomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reserved</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">reserved01Incomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV22boostPressureAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/boostPressureAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV22boostPressureAvailableACvpZ">boostPressureAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Boost pressure test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">boostPressureAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV23boostPressureIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/boostPressureIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV23boostPressureIncompleteACvpZ">boostPressureIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Boost pressure test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">boostPressureIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV19reserved02AvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/reserved02Available" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV19reserved02AvailableACvpZ">reserved02Available</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reserved</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">reserved02Available</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV20reserved02IncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/reserved02Incomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV20reserved02IncompleteACvpZ">reserved02Incomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reserved</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">reserved02Incomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV15noxSCRAvailableACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/noxSCRAvailable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV15noxSCRAvailableACvpZ">noxSCRAvailable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>NOx/SCR Monitor test available</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">noxSCRAvailable</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV16noxSCRIncompleteACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/noxSCRIncomplete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B44_OBD_Command_Service_01_MonitorStatusBitMaskV16noxSCRIncompleteACvpZ">noxSCRIncomplete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>NOx/SCR Monitor test still in progress</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">noxSCRIncomplete</span><span class="p">:</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>© 2019 <a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">The Great Rift Valley Software Company</a> under <a class="link" href="https://github.com/RiftValleySoftware/RVS_GTDriver/blob/master/LICENSE" target="_blank" rel="external">open source license</a>.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
