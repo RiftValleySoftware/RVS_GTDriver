@@ -32,9 +32,11 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
  */
 internal enum RVS_BTDriver_OBD_Command_Service_01_PIDs: String, CaseIterable {
     /// This returns a bitmask of supported PIDs (see the `RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask` type to understand these).
-    case returnSupportedPIDs    = "0100"
+    case returnSupportedPIDs            = "0100"
     /// This returns a set of flags, denoting the monitor status, since the DTCs were last cleared (see the `RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask` type to understand these).
-    case returnMonitorStatus    = "0101"
+    case returnMonitorStatus            = "0101"
+    /// This returns a set of flags, for the monitor satus for this cycle drive.
+    case returnMonitorStatusThisCycle   = "0141"
 }
 
 /* ###################################################################################################################################### */

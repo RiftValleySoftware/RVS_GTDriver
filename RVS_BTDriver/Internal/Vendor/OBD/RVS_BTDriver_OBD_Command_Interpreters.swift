@@ -125,7 +125,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask: RVS
 // MARK: - RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask -
 /* ###################################################################################################################################### */
 /**
- This is an option set that will decode the response to the 0101 PID.
+ This is an option set that will decode the response to the 0101/0141 PID.
  */
 internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet {
     /// Required for the OptionSet protocol.
@@ -136,10 +136,11 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BT
     
     /* ################################################################## */
     /**
-     This will be used by the second PID of service 01.
+     This will be used by the second PID of service 01 and 41.
      */
     static var pidCommands: [String] {
-        return [RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatus.rawValue]
+        return [RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatus.rawValue,
+                RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatusThisCycle.rawValue]
     }
 
     // MARK: ABCD A = 0xFF000000, B = 0x00FF0000, C = 0x0000FF00, D = 0x000000FF
