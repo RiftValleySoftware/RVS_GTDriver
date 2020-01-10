@@ -23,6 +23,8 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation   // Required for the NS stuff.
 
 /* ###################################################################################################################################### */
+// MARK: - StringProtocol Extension -
+/* ###################################################################################################################################### */
 /**
  These are a variety of cool String extensions that add some great extra cheese on the pizza.
  */
@@ -254,6 +256,8 @@ public extension StringProtocol {
     }
 }
 
+/* ###################################################################################################################################### */
+// MARK: - StringProtocol Extension For Strings -
 /* ###################################################################################################################################### */
 /**
  This extension will allow searching and indexing substrings. It comes straight from here: https://stackoverflow.com/a/32306142/879365

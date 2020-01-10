@@ -24,8 +24,9 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 // MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol -
 /* ###################################################################################################################################### */
 /**
+ This is the base protocol for command interpreters. It defines an Array of String, which is used to match the interpreter with the PID it is applied to.
  */
-internal protocol RVS_BTDriver_OBD_Command_Service_CommandHandler {
+internal protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     /* ################################################################## */
     /**
      This returns an Array of Strings, reflecting which PIDs will return data to be decoded by this mask set.
@@ -37,8 +38,9 @@ internal protocol RVS_BTDriver_OBD_Command_Service_CommandHandler {
 // MARK: - RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet Protocol -
 /* ###################################################################################################################################### */
 /**
+ This adds the OptionSet protocol to the interpreter, for bitmasks.
  */
-internal protocol RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet: RVS_BTDriver_OBD_Command_Service_CommandHandler, OptionSet {
+internal protocol RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet: RVS_BTDriver_OBD_Command_Service_Command_Interpreter, OptionSet {
 }
 
 /* ###################################################################################################################################### */
@@ -144,7 +146,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BT
     
     /* ################################################################## */
     /**
-     This will be used by the second PID of service 01 and 41.
+     This will be used by the 01 and 41 PIDs of service 01.
      */
     static var pidCommands: [String] {
         return [RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatus.rawValue,
@@ -240,48 +242,72 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BT
 }
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask -
+// MARK: - RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature -
 /* ###################################################################################################################################### */
 /**
+ This is a special struct that is used to decode the exhaust gas temperature sensor data.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_BTDriver_OBD_Command_Service_CommandHandler {
-    let header: UInt8
-    var data: [UInt16]
+internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+    // MARK: ABCDE A = 0xFF0000000000000000, B = 0x00FFFF000000000000, C =  0x000000FFFF00000000, D = 0x0000000000FFFF0000, E = 0x00000000000000FFFF
+
+    /// This struct will act as a bitmask to decode the flag byte.
+    struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader: OptionSet {
+        /// Required for the OptionSet protocol.
+        typealias RawValue = UInt8
+        
+        /// Required for the OptionSet protocol.
+        let rawValue: RawValue
+
+        /// Reserved.
+        static let reserved = 0xF0
+        /// Bank 1, Sensor 4 is supported.
+        static let egtBank01Sensor04 = 0x08
+        /// Bank 1, Sensor 3 is supported.
+        static let egtBank01Sensor03 = 0x04
+        /// Bank 1, Sensor 2 is supported.
+        static let egtBank01Sensor02 = 0x02
+        /// Bank 1, Sensor 1 is supported.
+        static let egtBank01Sensor01 = 0x01
+    }
+    
+    /// This is the header, and it will be a bitmask, denoting which of the following 16-bit numbers represent a test result.
+    let header: RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader
+    /// This is an Array of 16-bit numbers, representing test results.
+    let data: [UInt16]
     
     /* ################################################################## */
     /**
-     This will be used by the second PID of service 01 and 41.
+     This will be used by these PIDs of service 01 and 02.
      */
     static var pidCommands: [String] {
         return [RVS_BTDriver_OBD_Command_Service_01_PIDs.egt_Bank_01.rawValue,
                 RVS_BTDriver_OBD_Command_Service_01_PIDs.egt_Bank_02.rawValue]
     }
 
-    // MARK: ABCDEFGHI A = 0xFF0000000000000000, B = 0x00FF00000000000000, C = 0x0000FF000000000000, D = 0x000000FF0000000000, E = 0x00000000FF00000000, F = 0x0000000000FF000000, G = 0x000000000000FF0000, H = 0x00000000000000FF00, I = 0x0000000000000000FF
-    
-    // MARK: A
-    /// Reserved.
-    static let reserved = 0xF0
-    /// Bank 1, Sensor 4 is supported.
-    static let egtBank01Sensor04 = 0x08
-    /// Bank 1, Sensor 3 is supported.
-    static let egtBank01Sensor03 = 0x04
-    /// Bank 1, Sensor 2 is supported.
-    static let egtBank01Sensor02 = 0x02
-    /// Bank 1, Sensor 1 is supported.
-    static let egtBank01Sensor01 = 0x01
-
     /* ################################################################## */
     /**
-     This will read in the data (which needs to be in the form of a 9-byte Array of UInt8), and save the header (a UInt8 bitmask), and the data (4 UInt16).
+     This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).
      
-     - parameter contents: The contents, as a 9-byte Array of UInt8.
+     - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
      */
-    init(contents inContents: [UInt8]) {
-        var contents = inContents
-        header = contents.removeFirst()
-        data = UnsafePointer(contents).withMemoryRebound(to: [UInt16].self, capacity: 4) {
-            $0.pointee
+    init(contents inContents: String) {
+        var split = inContents.split(separator: " ")
+        if 2 < split.count {
+            if let head = UInt8(split.removeFirst(), radix: 16) {
+                var contents: [UInt16] = []
+                for i in stride(from: 0, to: split.count, by: 2) {
+                    if let value = UInt16(String(split[i] + split[i+1]), radix: 16) {
+                        contents.append(value)
+                    }
+                }
+                
+                header = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader(rawValue: head)
+                data  = contents
+                return
+            }
         }
+        
+        header = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader(rawValue: 0)
+        data = []
     }
 }
