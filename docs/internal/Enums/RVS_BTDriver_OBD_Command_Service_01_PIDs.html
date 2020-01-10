@@ -261,7 +261,10 @@
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_InterfaceProtocol.html">RVS_BTDriver_InterfaceProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet.html">RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMaskOptionSet</a>
+                <a class="nav-group-task-link" href="../Protocols.html#/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F16BitMaskOptionSetP">RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DeviceDelegate.html">RVS_BTDriver_OBD_DeviceDelegate</a>
@@ -300,6 +303,12 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask.html">RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature.html">RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader.html">– RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.html">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</a>
@@ -385,6 +394,87 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="k">case</span> <span class="n">returnMonitorStatus</span> <span class="o">=</span> <span class="s">"0101"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B28_OBD_Command_Service_01_PIDsO28returnMonitorStatusThisCycleyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/returnMonitorStatusThisCycle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B28_OBD_Command_Service_01_PIDsO28returnMonitorStatusThisCycleyA2CmF">returnMonitorStatusThisCycle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns a set of flags, for the monitor satus for this cycle drive.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">returnMonitorStatusThisCycle</span> <span class="o">=</span> <span class="s">"0141"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B28_OBD_Command_Service_01_PIDsO11egt_Bank_01yA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/egt_Bank_01" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B28_OBD_Command_Service_01_PIDsO11egt_Bank_01yA2CmF">egt_Bank_01</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns a set of values for Bank One of the exaust gas temperature (EGT).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">egt_Bank_01</span> <span class="o">=</span> <span class="s">"0178"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B28_OBD_Command_Service_01_PIDsO11egt_Bank_02yA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/egt_Bank_02" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B28_OBD_Command_Service_01_PIDsO11egt_Bank_02yA2CmF">egt_Bank_02</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns a set of values for Bank Two of the exaust gas temperature (EGT).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">egt_Bank_02</span> <span class="o">=</span> <span class="s">"0179"</span></code></pre>
 
                         </div>
                       </div>
