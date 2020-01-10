@@ -479,23 +479,23 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
     private let _data: [UInt16]
     
     /// - returns: True, if Sensor 4 has tests.
-    var isSensor04Supported: Bool { return _header.isSensor04Supported }
+    var isSensor04DataAvailable: Bool { return _header.isSensor04Supported }
     
     /// - returns: True, if Sensor 3 has tests.
-    var isSensor03Supported: Bool { return _header.isSensor03Supported }
+    var isSensor03DataAvailable: Bool { return _header.isSensor03Supported }
     
     /// - returns: True, if Sensor 2 has tests.
-    var isSensor02Supported: Bool { return _header.isSensor02Supported }
+    var isSensor02DataAvailable: Bool { return _header.isSensor02Supported }
     
     /// - returns: True, if Sensor 1 has tests.
-    var isSensor01Supported: Bool { return _header.isSensor01Supported }
+    var isSensor01DataAvailable: Bool { return _header.isSensor01Supported }
 
     /* ################################################################## */
     /**
      - returns: The sensor test data for sensor 4.
      */
     var sensor04: UInt16 {
-        if isSensor04Supported && 0 < _data.count {
+        if isSensor04DataAvailable && 0 < _data.count {
             return _data[0]
         }
         return 0
@@ -506,7 +506,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
      - returns: The sensor test data for sensor 3.
      */
     var sensor03: UInt16 {
-        if isSensor03Supported && 1 < _data.count {
+        if isSensor03DataAvailable && 1 < _data.count {
             return _data[1]
         }
         return 0
@@ -517,7 +517,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
      - returns: The sensor test data for sensor 2.
      */
     var sensor02: UInt16 {
-        if isSensor02Supported && 2 < _data.count {
+        if isSensor02DataAvailable && 2 < _data.count {
             return _data[2]
         }
         return 0
@@ -528,7 +528,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
      - returns: The sensor test data for sensor 1.
      */
     var sensor01: UInt16 {
-        if isSensor01Supported && 2 < _data.count {
+        if isSensor01DataAvailable && 2 < _data.count {
             return _data[3]
         }
         return 0
