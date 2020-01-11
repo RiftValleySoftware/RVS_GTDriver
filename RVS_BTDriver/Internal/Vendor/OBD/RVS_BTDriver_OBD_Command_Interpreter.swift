@@ -21,159 +21,6 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask -
-/* ###################################################################################################################################### */
-/**
- This is an option set that will decode the response to the 0100 PID.
- */
-internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask: OptionSet {
-    /// Required for the OptionSet protocol.
-    typealias RawValue = UInt32
-    
-    /// Required for the OptionSet protocol.
-    let rawValue: RawValue
-    
-    /* ################################################################## */
-    /**
-     This will be used for the first PID of Service 01 and 02.
-     */
-    static var pidCommands: [String] {
-        return [RVS_BTDriver_OBD_Command_Service_01_PIDs.returnSupportedPIDs.rawValue,
-                RVS_BTDriver_OBD_Command_Service_02_PIDs.returnSupportedPIDs.rawValue]
-    }
-    
-    /// PID [01|02]01
-    static let pid01 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x80000000)
-    /// PID [01|02]02
-    static let pid02 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x40000000)
-    /// PID [01|02]03
-    static let pid03 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x20000000)
-    /// PID [01|02]04
-    static let pid04 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x10000000)
-    /// PID [01|02]05
-    static let pid05 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x08000000)
-    /// PID [01|02]06
-    static let pid06 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x04000000)
-    /// PID [01|02]07
-    static let pid07 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x02000000)
-    /// PID [01|02]08
-    static let pid08 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x01000000)
-    /// PID [01|02]09
-    static let pid09 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00800000)
-    /// PID [01|02]0A
-    static let pid0A = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00400000)
-    /// PID [01|02]0B
-    static let pid0B = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00200000)
-    /// PID [01|02]0C
-    static let pid0C = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00100000)
-    /// PID [01|02]0D
-    static let pid0D = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00080000)
-    /// PID [01|02]0E
-    static let pid0E = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00040000)
-    /// PID [01|02]0F
-    static let pid0F = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00020000)
-    /// PID [01|02]10
-    static let pid10 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00010000)
-    /// PID [01|02]11
-    static let pid11 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00008000)
-    /// PID [01|02]12
-    static let pid12 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00004000)
-    /// PID [01|02]13
-    static let pid13 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00002000)
-    /// PID [01|02]14
-    static let pid14 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00001000)
-    /// PID [01|02]15
-    static let pid15 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000800)
-    /// PID [01|02]16
-    static let pid16 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000400)
-    /// PID [01|02]17
-    static let pid17 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000200)
-    /// PID [01|02]18
-    static let pid18 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000100)
-    /// PID [01|02]19
-    static let pid19 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000080)
-    /// PID [01|02]1A
-    static let pid1A = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000040)
-    /// PID [01|02]1B
-    static let pid1B = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000020)
-    /// PID [01|02]1C
-    static let pid1C = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000010)
-    /// PID [01|02]1D
-    static let pid1D = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000008)
-    /// PID [01|02]1E
-    static let pid1E = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000004)
-    /// PID [01|02]1F
-    static let pid1F = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000002)
-    /// PID [01|02]20
-    static let pid20 = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0x00000001)
-
-    /// PID [01|02]01
-    var supportsPID01: Bool { return 0 != rawValue & Self.pid01.rawValue }
-    /// PID [01|02]02
-    var supportsPID02: Bool { return 0 != rawValue & Self.pid02.rawValue }
-    /// PID [01|02]03
-    var supportsPID03: Bool { return 0 != rawValue & Self.pid03.rawValue }
-    /// PID [01|02]04
-    var supportsPID04: Bool { return 0 != rawValue & Self.pid04.rawValue }
-    /// PID [01|02]05
-    var supportsPID05: Bool { return 0 != rawValue & Self.pid05.rawValue }
-    /// PID [01|02]06
-    var supportsPID06: Bool { return 0 != rawValue & Self.pid06.rawValue }
-    /// PID [01|02]07
-    var supportsPID07: Bool { return 0 != rawValue & Self.pid07.rawValue }
-    /// PID [01|02]08
-    var supportsPID08: Bool { return 0 != rawValue & Self.pid08.rawValue }
-    /// PID [01|02]09
-    var supportsPID09: Bool { return 0 != rawValue & Self.pid09.rawValue }
-    /// PID [01|02]0A
-    var supportsPID0A: Bool { return 0 != rawValue & Self.pid0A.rawValue }
-    /// PID [01|02]0B
-    var supportsPID0B: Bool { return 0 != rawValue & Self.pid0B.rawValue }
-    /// PID [01|02]0C
-    var supportsPID0C: Bool { return 0 != rawValue & Self.pid0C.rawValue }
-    /// PID [01|02]0D
-    var supportsPID0D: Bool { return 0 != rawValue & Self.pid0D.rawValue }
-    /// PID [01|02]0E
-    var supportsPID0E: Bool { return 0 != rawValue & Self.pid0E.rawValue }
-    /// PID [01|02]0F
-    var supportsPID0F: Bool { return 0 != rawValue & Self.pid0F.rawValue }
-    /// PID [01|02]10
-    var supportsPID10: Bool { return 0 != rawValue & Self.pid10.rawValue }
-    /// PID [01|02]11
-    var supportsPID11: Bool { return 0 != rawValue & Self.pid11.rawValue }
-    /// PID [01|02]12
-    var supportsPID12: Bool { return 0 != rawValue & Self.pid12.rawValue }
-    /// PID [01|02]13
-    var supportsPID13: Bool { return 0 != rawValue & Self.pid13.rawValue }
-    /// PID [01|02]14
-    var supportsPID14: Bool { return 0 != rawValue & Self.pid14.rawValue }
-    /// PID [01|02]15
-    var supportsPID15: Bool { return 0 != rawValue & Self.pid15.rawValue }
-    /// PID [01|02]16
-    var supportsPID16: Bool { return 0 != rawValue & Self.pid16.rawValue }
-    /// PID [01|02]17
-    var supportsPID17: Bool { return 0 != rawValue & Self.pid17.rawValue }
-    /// PID [01|02]18
-    var supportsPID18: Bool { return 0 != rawValue & Self.pid18.rawValue }
-    /// PID [01|02]19
-    var supportsPID19: Bool { return 0 != rawValue & Self.pid19.rawValue }
-    /// PID [01|02]1A
-    var supportsPID1A: Bool { return 0 != rawValue & Self.pid1A.rawValue }
-    /// PID [01|02]1B
-    var supportsPID1B: Bool { return 0 != rawValue & Self.pid1B.rawValue }
-    /// PID [01|02]1C
-    var supportsPID1C: Bool { return 0 != rawValue & Self.pid1C.rawValue }
-    /// PID [01|02]1D
-    var supportsPID1D: Bool { return 0 != rawValue & Self.pid1D.rawValue }
-    /// PID [01|02]1E
-    var supportsPID1E: Bool { return 0 != rawValue & Self.pid1E.rawValue }
-    /// PID [01|02]1F
-    var supportsPID1F: Bool { return 0 != rawValue & Self.pid1F.rawValue }
-    /// PID [01|02]20
-    var supportsPID20: Bool { return 0 != rawValue & Self.pid20.rawValue }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask -
 /* ###################################################################################################################################### */
 /**
@@ -423,7 +270,7 @@ internal protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
  */
 internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     /// This is the interpreted value, assigned to an OptionSet.
-    private let _value: RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask
+    private let _value: UInt32
     /// This will contain the service (either 1 or 2) to which this interpreter applies.
     var service: Int = 0
     
@@ -435,71 +282,27 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter:
         return [RVS_BTDriver_OBD_Command_Service_01_PIDs.returnSupportedPIDs.rawValue,
                 RVS_BTDriver_OBD_Command_Service_02_PIDs.returnSupportedPIDs.rawValue]
     }
-
-    /// PID [01|02]01
-    var supportsPID01: Bool { return _value.supportsPID01 }
-    /// PID [01|02]02
-    var supportsPID02: Bool { return _value.supportsPID02 }
-    /// PID [01|02]03
-    var supportsPID03: Bool { return _value.supportsPID03 }
-    /// PID [01|02]04
-    var supportsPID04: Bool { return _value.supportsPID04 }
-    /// PID [01|02]05
-    var supportsPID05: Bool { return _value.supportsPID05 }
-    /// PID [01|02]06
-    var supportsPID06: Bool { return _value.supportsPID06 }
-    /// PID [01|02]07
-    var supportsPID07: Bool { return _value.supportsPID07 }
-    /// PID [01|02]08
-    var supportsPID08: Bool { return _value.supportsPID08 }
-    /// PID [01|02]09
-    var supportsPID09: Bool { return _value.supportsPID09 }
-    /// PID [01|02]0A
-    var supportsPID0A: Bool { return _value.supportsPID0A }
-    /// PID [01|02]0B
-    var supportsPID0B: Bool { return _value.supportsPID0B }
-    /// PID [01|02]0C
-    var supportsPID0C: Bool { return _value.supportsPID0C }
-    /// PID [01|02]0D
-    var supportsPID0D: Bool { return _value.supportsPID0D }
-    /// PID [01|02]0E
-    var supportsPID0E: Bool { return _value.supportsPID0E }
-    /// PID [01|02]0F
-    var supportsPID0F: Bool { return _value.supportsPID0F }
-    /// PID [01|02]10
-    var supportsPID10: Bool { return _value.supportsPID10 }
-    /// PID [01|02]11
-    var supportsPID11: Bool { return _value.supportsPID11 }
-    /// PID [01|02]12
-    var supportsPID12: Bool { return _value.supportsPID12 }
-    /// PID [01|02]13
-    var supportsPID13: Bool { return _value.supportsPID13 }
-    /// PID [01|02]14
-    var supportsPID14: Bool { return _value.supportsPID14 }
-    /// PID [01|02]15
-    var supportsPID15: Bool { return _value.supportsPID15 }
-    /// PID [01|02]16
-    var supportsPID16: Bool { return _value.supportsPID16 }
-    /// PID [01|02]17
-    var supportsPID17: Bool { return _value.supportsPID17 }
-    /// PID [01|02]18
-    var supportsPID18: Bool { return _value.supportsPID18 }
-    /// PID [01|02]19
-    var supportsPID19: Bool { return _value.supportsPID19 }
-    /// PID [01|02]1A
-    var supportsPID1A: Bool { return _value.supportsPID1A }
-    /// PID [01|02]1B
-    var supportsPID1B: Bool { return _value.supportsPID1B }
-    /// PID [01|02]1C
-    var supportsPID1C: Bool { return _value.supportsPID1C }
-    /// PID [01|02]1D
-    var supportsPID1D: Bool { return _value.supportsPID1D }
-    /// PID [01|02]1E
-    var supportsPID1E: Bool { return _value.supportsPID1E }
-    /// PID [01|02]1F
-    var supportsPID1F: Bool { return _value.supportsPID1F }
-    /// PID [01|02]20
-    var supportsPID20: Bool { return _value.supportsPID20 }
+    
+    /* ################################################################## */
+    /**
+     This returns an Array of String, containing the PIDs that are supported.
+     */
+    var supportedPIDs: [String] {
+        var ret: [String] = []
+        
+        var mask:UInt32 = 0x80000000
+        
+        for bit in 0..<32 {
+            if 0 != mask & _value {
+                let build = String(format: "%0x%0x", service, bit)
+                ret.append(build)
+            }
+            
+            mask = mask >> 1
+        }
+        
+        return ret
+    }
     
     /* ################################################################## */
     /**
@@ -512,11 +315,11 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter:
         if  1 == inService || 2 == inService,   // Must be one of these. No other values allowed.
             let derivedValue = UInt32(inContents.hexOnly, radix: 16) {
             service = inService
-            _value = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: derivedValue)
+            _value = derivedValue
             return
         }
         
-        _value = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0)
+        _value = 0
     }
 }
 
