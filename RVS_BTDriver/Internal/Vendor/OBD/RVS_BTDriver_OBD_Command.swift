@@ -533,4 +533,3 @@ struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader: Opti
     /// - returns: True, if Sensor 1 has tests.
     var isSensor01Supported: Bool { return 0 != rawValue & Self.egtsensor01 }
 }
-

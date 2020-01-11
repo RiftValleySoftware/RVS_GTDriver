@@ -241,7 +241,7 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      */
     internal override var isConnected: Bool {
         get {
-            return .connected == peripheral.state
+            return RVS_DebugTools.isRunningUnitTests ? true : .connected == peripheral.state
         }
         
         set {

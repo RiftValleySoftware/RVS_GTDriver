@@ -52,3 +52,31 @@ class RVS_BTDriver_Test_OBD: XCTestCase {
         lastReceivedCommand = inCommandSendString
     }
 }
+
+/* ###################################################################################################################################### */
+// MARK: - Testing Standard OBD PID Interpreters -
+/* ###################################################################################################################################### */
+/**
+ These tests will instantiate the interpreters, and will test them to make sure that they are properly interpreting the response strings.
+ */
+class RVS_BTDriver_Test_OBD_PIDs: XCTestCase {
+    /* ################################################################## */
+    /**
+     This is a simple test of the "PIDs Supported" PID that is the 00 PID for service 01 and 02.
+     */
+    func testPID_0100_0200() {
+        func checkInterpreter(_ inInterpreter: RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter) {
+            let pidsSupported = inInterpreter.supportedPIDs
+            
+            var index = 1
+            for pid in pidsSupported {
+                let match = String(format: "%02X%02X", inInterpreter.service, index)
+                index += 1
+                XCTAssertEqual(match, pid)
+            }
+        }
+        
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "FF FF FF FF", service: 1))
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "FF FF FF FF", service: 2))
+    }
+}

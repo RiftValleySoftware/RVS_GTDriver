@@ -52,7 +52,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_getDeviceDescription() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.getDeviceDescription()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.getDeviceDescription.rawValue + "\r\n")
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.getDeviceDescription.rawValue + "\r\n")
     }
     
     /* ################################################################## */
@@ -61,7 +61,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_getDeviceIdentifier() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.getDeviceIdentifier()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.getDeviceIdentifier.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.getDeviceIdentifier.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -79,7 +79,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
                 testVal = String(id[id.startIndex...endIndex])
             }
             
-            testVal = (String(format: RVS_BTDriver_OBD_Command_String.setDeviceIdentifier.rawValue, testVal) + "\r\n").hexDump8.joined()
+            testVal = (String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setDeviceIdentifier.rawValue, testVal) + "\r\n").hexDump8.joined()
             let compString = lastReceivedCommand.hexDump8.joined()
             
             XCTAssertEqual(testVal, compString)
@@ -92,13 +92,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setBaudRateDivisor() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setBaudRateDivisor(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setBaudRateDivisor.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setBaudRateDivisor.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setBaudRateDivisor(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setBaudRateDivisor.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setBaudRateDivisor.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setBaudRateDivisor(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setBaudRateDivisor.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setBaudRateDivisor.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setBaudRateDivisor(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setBaudRateDivisor.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setBaudRateDivisor.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -107,13 +107,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setBaudRateHandshakeTimeout() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setBaudRateHandshakeTimeout(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setBaudRateHandshakeTimeout.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setBaudRateHandshakeTimeout.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setBaudRateHandshakeTimeout(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setBaudRateHandshakeTimeout.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setBaudRateHandshakeTimeout.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setBaudRateHandshakeTimeout(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setBaudRateHandshakeTimeout.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setBaudRateHandshakeTimeout.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setBaudRateHandshakeTimeout(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setBaudRateHandshakeTimeout.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setBaudRateHandshakeTimeout.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -122,7 +122,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_restoreToDefaults() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.restoreToDefaults()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.restoreToDefaults.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.restoreToDefaults.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -131,7 +131,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnEchoOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnEchoOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnEchoOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnEchoOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -140,7 +140,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnEchoOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnEchoOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnEchoOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnEchoOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -149,7 +149,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_flushAllEvents() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.flushAllEvents()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.flushAllEvents.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.flushAllEvents.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -158,7 +158,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_getID() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.getID()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.getID.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.getID.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -167,7 +167,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnLinefeedsOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnLinefeedsOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnLinefeedsOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnLinefeedsOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -176,7 +176,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnLinefeedsOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnLinefeedsOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnLinefeedsOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnLinefeedsOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -185,7 +185,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnLowPowerModeOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnLowPowerModeOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnLowPowerModeOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnLowPowerModeOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -194,7 +194,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnMemoryOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnMemoryOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnMemoryOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnMemoryOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -203,7 +203,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnMemoryOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnMemoryOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnMemoryOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnMemoryOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -212,7 +212,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_fetchStoredData() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.fetchStoredData()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.fetchStoredData.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.fetchStoredData.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -221,13 +221,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_storeData() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.storeData(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.storeData.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.storeData.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.storeData(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.storeData.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.storeData.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.storeData(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.storeData.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.storeData.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.storeData(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.storeData.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.storeData.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -236,7 +236,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_warmStart() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.warmStart()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.warmStart.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.warmStart.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -245,7 +245,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_resetAll() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.resetAll()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.resetAll.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.resetAll.rawValue + "\r\n")
     }
 
     /* ################################################################################################################################## */
@@ -257,7 +257,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_useLongMessages() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useLongMessages()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.useLongMessages.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.useLongMessages.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -266,7 +266,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_useShortMessages() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useShortMessages()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.useShortMessages.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.useShortMessages.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -275,7 +275,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_autoReceive() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.autoReceive()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.autoReceive.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.autoReceive.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -284,7 +284,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_useAdaptiveTimingMode1() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useAdaptiveTimingMode1()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.useAdaptiveTimingMode1.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.useAdaptiveTimingMode1.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -293,7 +293,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_useAdaptiveTimingMode2() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useAdaptiveTimingMode2()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.useAdaptiveTimingMode2.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.useAdaptiveTimingMode2.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -302,7 +302,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnAdaptiveTimingOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnAdaptiveTimingOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnAdaptiveTimingOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnAdaptiveTimingOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -311,7 +311,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_bufferDump() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.bufferDump()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.bufferDump.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.bufferDump.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -320,7 +320,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_bypassInitialization() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.bypassInitialization()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.bypassInitialization.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.bypassInitialization.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -329,7 +329,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_describeCurrentProtocol() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.describeCurrentProtocol()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.describeCurrentProtocol.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.describeCurrentProtocol.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -338,7 +338,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_describeProtocolByNumber() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.describeProtocolByNumber()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.describeProtocolByNumber.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.describeProtocolByNumber.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -347,7 +347,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnHeadersOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnHeadersOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnHeadersOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnHeadersOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -356,7 +356,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnHeadersOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnHeadersOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnHeadersOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnHeadersOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -365,7 +365,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_monitorAll() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.monitorAll()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.monitorAll.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.monitorAll.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -374,13 +374,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setMonitorForReceiver() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setMonitorForReceiver(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setMonitorForReceiver.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setMonitorForReceiver.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setMonitorForReceiver(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setMonitorForReceiver.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setMonitorForReceiver.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setMonitorForReceiver(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setMonitorForReceiver.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setMonitorForReceiver.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setMonitorForReceiver(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setMonitorForReceiver.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setMonitorForReceiver.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -389,13 +389,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setMonitorForTransmitter() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setMonitorForTransmitter(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setMonitorForTransmitter.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setMonitorForTransmitter.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setMonitorForTransmitter(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setMonitorForTransmitter.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setMonitorForTransmitter.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setMonitorForTransmitter(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setMonitorForTransmitter.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setMonitorForTransmitter.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setMonitorForTransmitter(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setMonitorForTransmitter.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setMonitorForTransmitter.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -404,11 +404,11 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setProtocol() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setProtocol(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setProtocol.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setProtocol.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setProtocol(3)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setProtocol.rawValue, 3) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setProtocol.rawValue, 3) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setProtocol(7)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setProtocol.rawValue, 7) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setProtocol.rawValue, 7) + "\r\n")
     }
 
     /* ################################################################## */
@@ -417,11 +417,11 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setProtocol2() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setProtocol2(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setProtocol2.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setProtocol2.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setProtocol2(3)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setProtocol2.rawValue, 3) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setProtocol2.rawValue, 3) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setProtocol2(7)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setProtocol2.rawValue, 7) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setProtocol2.rawValue, 7) + "\r\n")
     }
 
     /* ################################################################## */
@@ -430,11 +430,11 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setAutoProtocol() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setAutoProtocol(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setAutoProtocol.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setAutoProtocol.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setAutoProtocol(3)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setAutoProtocol.rawValue, 3) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setAutoProtocol.rawValue, 3) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setAutoProtocol(7)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setAutoProtocol.rawValue, 7) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setAutoProtocol.rawValue, 7) + "\r\n")
     }
 
     /* ################################################################## */
@@ -443,11 +443,11 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setAutoProtocol2() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setAutoProtocol2(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setAutoProtocol2.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setAutoProtocol2.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setAutoProtocol2(3)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setAutoProtocol2.rawValue, 3) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setAutoProtocol2.rawValue, 3) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setAutoProtocol2(7)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setAutoProtocol2.rawValue, 7) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setAutoProtocol2.rawValue, 7) + "\r\n")
     }
 
     /* ################################################################## */
@@ -456,7 +456,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_useAutoProtocol() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useAutoProtocol()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.useAutoProtocol.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.useAutoProtocol.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -465,7 +465,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_closeProtocol() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.closeProtocol()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.closeProtocol.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.closeProtocol.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -474,7 +474,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnResponsesOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnResponsesOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnResponsesOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnResponsesOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -483,7 +483,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnResponsesOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnResponsesOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnResponsesOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnResponsesOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -492,13 +492,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setReceiveAddress() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setReceiveAddress(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setReceiveAddress.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setReceiveAddress.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setReceiveAddress(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setReceiveAddress.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setReceiveAddress.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setReceiveAddress(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setReceiveAddress.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setReceiveAddress.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setReceiveAddress(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setReceiveAddress.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setReceiveAddress.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -507,13 +507,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setReceiveAddress2() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setReceiveAddress2(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setReceiveAddress2.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setReceiveAddress2.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setReceiveAddress2(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setReceiveAddress2.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setReceiveAddress2.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setReceiveAddress2(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setReceiveAddress2.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setReceiveAddress2.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setReceiveAddress2(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setReceiveAddress2.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setReceiveAddress2.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -522,7 +522,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnPrintSpacesOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnPrintSpacesOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnPrintSpacesOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnPrintSpacesOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -531,7 +531,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnPrintSpacesOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnPrintSpacesOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnPrintSpacesOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnPrintSpacesOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -540,31 +540,31 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setHeader() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(0, 0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 0, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 0, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(0, 127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 0, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 0, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(0, 128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 0, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 0, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(0, 255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 0, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 0, 255) + "\r\n")
         
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(3, 0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 3, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 3, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(3, 127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 3, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 3, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(3, 128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 3, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 3, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(3, 255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 3, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 3, 255) + "\r\n")
         
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(7, 0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 7, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 7, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(7, 127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 7, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 7, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(7, 128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 7, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 7, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(7, 255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader1.rawValue, 7, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader1.rawValue, 7, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -578,7 +578,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
             for value2 in strider {
                 for value3 in strider {
                     (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setHeader(UInt8(value1), UInt8(value2), UInt8(value3))
-                    XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setHeader2.rawValue, UInt8(value1), UInt8(value2), UInt8(value3)) + "\r\n")
+                    XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setHeader2.rawValue, UInt8(value1), UInt8(value2), UInt8(value3)) + "\r\n")
                 }
             }
         }
@@ -590,7 +590,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_useStandardSearchOrder() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useStandardSearchOrder()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.useStandardSearchOrder.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.useStandardSearchOrder.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -599,13 +599,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setTesterAddress() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setTesterAddress(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setTesterAddress.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setTesterAddress.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setTesterAddress(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setTesterAddress.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setTesterAddress.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setTesterAddress(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setTesterAddress.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setTesterAddress.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setTesterAddress(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setTesterAddress.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setTesterAddress.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -614,13 +614,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setTimeOutBy4MillisecondIntervals() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setTimeOutBy4MillisecondIntervals(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setTimeOutBy4MillisecondIntervals.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setTimeOutBy4MillisecondIntervals.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setTimeOutBy4MillisecondIntervals(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setTimeOutBy4MillisecondIntervals.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setTimeOutBy4MillisecondIntervals.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setTimeOutBy4MillisecondIntervals(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setTimeOutBy4MillisecondIntervals.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setTimeOutBy4MillisecondIntervals.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setTimeOutBy4MillisecondIntervals(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setTimeOutBy4MillisecondIntervals.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setTimeOutBy4MillisecondIntervals.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################################################################################## */
@@ -632,7 +632,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnCANAutoFormattingOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANAutoFormattingOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnCANAutoFormattingOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnCANAutoFormattingOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -641,7 +641,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnCANAutoFormattingOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANAutoFormattingOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnCANAutoFormattingOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnCANAutoFormattingOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -650,13 +650,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setCANExtendedAddressing() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setCANExtendedAddressing(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setCANExtendedAddressing.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setCANExtendedAddressing.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setCANExtendedAddressing(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setCANExtendedAddressing.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setCANExtendedAddressing.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setCANExtendedAddressing(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setCANExtendedAddressing.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setCANExtendedAddressing.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setCANExtendedAddressing(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setCANExtendedAddressing.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setCANExtendedAddressing.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -665,7 +665,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnOffCANExtendedAddressing() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnOffCANExtendedAddressing()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnOffCANExtendedAddressing.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnOffCANExtendedAddressing.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -674,31 +674,31 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setIDFilter() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(0, 0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 0, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 0, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(0, 127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 0, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 0, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(0, 128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 0, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 0, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(0, 255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 0, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 0, 255) + "\r\n")
         
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(3, 0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 3, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 3, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(3, 127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 3, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 3, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(3, 128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 3, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 3, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(3, 255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 3, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 3, 255) + "\r\n")
         
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(7, 0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 7, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 7, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(7, 127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 7, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 7, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(7, 128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 7, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 7, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(7, 255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter1.rawValue, 7, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter1.rawValue, 7, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -713,7 +713,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
                 for value3 in strider {
                     for value4 in strider {
                         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setIDFilter(UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4))
-                        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setIDFilter2.rawValue, UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4)) + "\r\n")
+                        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setIDFilter2.rawValue, UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4)) + "\r\n")
                     }
                 }
             }
@@ -726,7 +726,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnCANFlowControlOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANFlowControlOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnCANFlowControlOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnCANFlowControlOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -735,7 +735,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnCANFlowControlOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANFlowControlOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnCANFlowControlOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnCANFlowControlOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -744,7 +744,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnCANSilentModeOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANSilentModeOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnCANSilentModeOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnCANSilentModeOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -753,7 +753,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnCANSilentModeOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnCANSilentModeOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnCANSilentModeOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnCANSilentModeOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -762,7 +762,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnDLCDisplayOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnDLCDisplayOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnDLCDisplayOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnDLCDisplayOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -771,7 +771,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnDLCDisplayOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnDLCDisplayOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnDLCDisplayOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnDLCDisplayOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -787,7 +787,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
                     for value4 in strider {
                         for value5 in strider {
                             (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setFlowControlData([UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4), UInt8(value5)])
-                            XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setFlowControlData.rawValue, UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4), UInt8(value5)) + "\r\n")
+                            XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setFlowControlData.rawValue, UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4), UInt8(value5)) + "\r\n")
                         }
                     }
                 }
@@ -807,7 +807,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
                 for value3 in strider {
                     for value4 in strider {
                         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setFlowControlHeader(UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4))
-                        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setFlowControlHeader.rawValue, UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4)) + "\r\n")
+                        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setFlowControlHeader.rawValue, UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4)) + "\r\n")
                     }
                 }
             }
@@ -820,11 +820,11 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setFlowControlMode() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setFlowControlMode(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setFlowControlMode.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setFlowControlMode.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setFlowControlMode(3)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setFlowControlMode.rawValue, 3) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setFlowControlMode.rawValue, 3) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setFlowControlMode(7)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setFlowControlMode.rawValue, 7) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setFlowControlMode.rawValue, 7) + "\r\n")
     }
 
     /* ################################################################## */
@@ -837,7 +837,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
         for value1 in strider {
             for value2 in strider {
                 (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setProtocolBOptionsAndBaudRate(UInt8(value1), UInt8(value2))
-                XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setProtocolBOptionsAndBaudRate.rawValue, UInt8(value1), UInt8(value2)) + "\r\n")
+                XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setProtocolBOptionsAndBaudRate.rawValue, UInt8(value1), UInt8(value2)) + "\r\n")
             }
         }
     }
@@ -848,7 +848,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_rtrMessage() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.rtrMessage()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.rtrMessage.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.rtrMessage.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -857,7 +857,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnVariableDLCOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnVariableDLCOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnVariableDLCOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnVariableDLCOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -866,7 +866,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnVariableDLCOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnVariableDLCOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnVariableDLCOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnVariableDLCOff.rawValue + "\r\n")
     }
 
     /* ################################################################################################################################## */
@@ -883,7 +883,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
         
         for value in strider {
             (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setCalibratingVoltage(Float(value))
-            XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setCalibratingVoltage.rawValue, value) + "\r\n")
+            XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setCalibratingVoltage.rawValue, value) + "\r\n")
         }
     }
 
@@ -893,7 +893,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_resetCalibratingVoltage() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.resetCalibratingVoltage()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.resetCalibratingVoltage.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.resetCalibratingVoltage.rawValue + "\r\n")
     }
 
     /* ################################################################################################################################## */
@@ -905,7 +905,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_monitorForDM1Messages() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.monitorForDM1Messages()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.monitorForDM1Messages.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.monitorForDM1Messages.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -914,7 +914,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_useElmDataFormat() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useElmDataFormat()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.useElmDataFormat.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.useElmDataFormat.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -923,7 +923,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_useSAEDataFormat() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useSAEDataFormat()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.useSAEDataFormat.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.useSAEDataFormat.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -932,7 +932,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnJ1939HeaderFormattingOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnJ1939HeaderFormattingOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnJ1939HeaderFormattingOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnJ1939HeaderFormattingOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -941,7 +941,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnJ1939HeaderFormattingOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnJ1939HeaderFormattingOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnJ1939HeaderFormattingOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnJ1939HeaderFormattingOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -950,7 +950,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_use1XTimerMultiplier() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.use1XTimerMultiplier()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.use1XTimerMultiplier.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.use1XTimerMultiplier.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -959,7 +959,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_use5XTimerMultiplier() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.use5XTimerMultiplier()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.use5XTimerMultiplier.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.use5XTimerMultiplier.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -969,7 +969,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
 	func test_setPGNMonitor() {
         for value in 0..<4096 {
             (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPGNMonitor(UInt64(value))
-            XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPGNMonitor1.rawValue, UInt64(value)) + "\r\n")
+            XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setPGNMonitor1.rawValue, UInt64(value)) + "\r\n")
         }
     }
 
@@ -983,7 +983,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
         for getMessages in 0..<8 {
             for value in strider {
                 (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPGNMonitorGetMessages(UInt64(value), UInt8(getMessages))
-                XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPGNMonitor2.rawValue, UInt64(value), getMessages) + "\r\n")
+                XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setPGNMonitor2.rawValue, UInt64(value), getMessages) + "\r\n")
             }
         }
     }
@@ -997,7 +997,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_getIFRValueFromHeader() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.getIFRValueFromHeader()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.getIFRValueFromHeader.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.getIFRValueFromHeader.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1006,7 +1006,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_getIFRValueFromSource() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.getIFRValueFromSource()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.getIFRValueFromSource.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.getIFRValueFromSource.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1015,7 +1015,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnIFRsOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnIFRsOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnIFRsOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnIFRsOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1024,7 +1024,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_useIFRsAuto() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.useIFRsAuto()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.useIFRsAuto.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.useIFRsAuto.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1033,7 +1033,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnIFRsOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnIFRsOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnIFRsOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnIFRsOff.rawValue + "\r\n")
     }
 
     /* ################################################################################################################################## */
@@ -1045,7 +1045,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_isoBaudRate10400() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.isoBaudRate10400()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.isoBaudRate10400.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.isoBaudRate10400.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1054,7 +1054,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_isoBaudRate4800() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.isoBaudRate4800()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.isoBaudRate4800.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.isoBaudRate4800.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1063,7 +1063,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_isoBaudRate9600() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.isoBaudRate9600()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.isoBaudRate9600.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.isoBaudRate9600.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1072,13 +1072,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setISOInitAddress() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setISOInitAddress(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setISOInitAddress.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setISOInitAddress.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setISOInitAddress(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setISOInitAddress.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setISOInitAddress.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setISOInitAddress(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setISOInitAddress.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setISOInitAddress.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setISOInitAddress(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setISOInitAddress.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setISOInitAddress.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -1087,7 +1087,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_displayKeywords() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.displayKeywords()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.displayKeywords.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.displayKeywords.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1096,7 +1096,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnKeywordCheckingOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnKeywordCheckingOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnKeywordCheckingOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnKeywordCheckingOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1105,7 +1105,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnKeywordCheckingOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnKeywordCheckingOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnKeywordCheckingOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnKeywordCheckingOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1114,7 +1114,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_performSlowInitiation() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.performSlowInitiation()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.performSlowInitiation.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.performSlowInitiation.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1123,13 +1123,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setWakeupIntervalMultiplerBy20ms() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setWakeupIntervalMultiplerBy20ms(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setWakeupIntervalMultiplerBy20ms.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setWakeupIntervalMultiplerBy20ms.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setWakeupIntervalMultiplerBy20ms(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setWakeupIntervalMultiplerBy20ms.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setWakeupIntervalMultiplerBy20ms.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setWakeupIntervalMultiplerBy20ms(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setWakeupIntervalMultiplerBy20ms.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setWakeupIntervalMultiplerBy20ms.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setWakeupIntervalMultiplerBy20ms(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setWakeupIntervalMultiplerBy20ms.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setWakeupIntervalMultiplerBy20ms.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -1146,7 +1146,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
                         for value5 in strider {
                             for value6 in strider {
                                 (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setWakeupMessage([UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4), UInt8(value5), UInt8(value6)])
-                                XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setWakeupMessage.rawValue, UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4), UInt8(value5), UInt8(value6)) + "\r\n")
+                                XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setWakeupMessage.rawValue, UInt8(value1), UInt8(value2), UInt8(value3), UInt8(value4), UInt8(value5), UInt8(value6)) + "\r\n")
                             }
                         }
                     }
@@ -1164,7 +1164,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnAllPPsProgParametersOn() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnAllPPsProgParametersOn()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnAllPPsProgParametersOn.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnAllPPsProgParametersOn.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1173,7 +1173,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_turnAllPPsProgParametersOff() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.turnAllPPsProgParametersOff()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.turnAllPPsProgParametersOff.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.turnAllPPsProgParametersOff.rawValue + "\r\n")
     }
 
     /* ################################################################## */
@@ -1182,13 +1182,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setPPsProgParameterOnFor() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPPsProgParameterOnFor(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterOn.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setPPsProgParameterOn.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPPsProgParameterOnFor(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterOn.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setPPsProgParameterOn.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPPsProgParameterOnFor(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterOn.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setPPsProgParameterOn.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPPsProgParameterOnFor(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterOn.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setPPsProgParameterOn.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -1197,13 +1197,13 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_setPPsProgParameterOffFor() {
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPPsProgParameterOffFor(0)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterOff.rawValue, 0) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setPPsProgParameterOff.rawValue, 0) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPPsProgParameterOffFor(127)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterOff.rawValue, 127) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setPPsProgParameterOff.rawValue, 127) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPPsProgParameterOffFor(128)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterOff.rawValue, 128) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setPPsProgParameterOff.rawValue, 128) + "\r\n")
         (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPPsProgParameterOffFor(255)
-        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterOff.rawValue, 255) + "\r\n")
+        XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setPPsProgParameterOff.rawValue, 255) + "\r\n")
     }
 
     /* ################################################################## */
@@ -1216,7 +1216,7 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
         for value in strider {
             for index in strider {
                 (obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.setPPsProgParameterValue(UInt8(value), for: UInt8(index))
-                XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_Command_String.setPPsProgParameterValue.rawValue, UInt8(value), UInt8(index)) + "\r\n")
+                XCTAssertEqual(lastReceivedCommand, String(format: RVS_BTDriver_OBD_ELM327_AT_Command.setPPsProgParameterValue.rawValue, UInt8(value), UInt8(index)) + "\r\n")
             }
         }
     }
@@ -1227,6 +1227,6 @@ class RVS_BTDriver_Test_OBD_ELM327: RVS_BTDriver_Test_OBD {
     */
 	func test_ppSummary() {
 		(obdInstance as? RVS_BTDriver_Device_OBD_ELM327)?.ppSummary()
-		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_Command_String.ppSummary.rawValue + "\r\n")		
+		XCTAssertEqual(lastReceivedCommand, RVS_BTDriver_OBD_ELM327_AT_Command.ppSummary.rawValue + "\r\n")		
     }
 }
