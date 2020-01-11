@@ -21,35 +21,12 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol -
-/* ###################################################################################################################################### */
-/**
- This is the base protocol for command interpreters. It defines an Array of String, which is used to match the interpreter with the PID it is applied to.
- */
-internal protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
-    /* ################################################################## */
-    /**
-     This returns an Array of Strings, reflecting which PIDs will return data to be decoded by this mask set.
-     */
-    static var pidCommands: [String] { get }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet Protocol -
-/* ###################################################################################################################################### */
-/**
- This adds the OptionSet protocol to the interpreter, for bitmasks.
- */
-internal protocol RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet: RVS_BTDriver_OBD_Command_Service_Command_Interpreter, OptionSet {
-}
-
-/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask -
 /* ###################################################################################################################################### */
 /**
  This is an option set that will decode the response to the 0100 PID.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask: RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet {
+internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask: OptionSet {
     /// Required for the OptionSet protocol.
     typealias RawValue = UInt32
     
@@ -202,21 +179,12 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask: RVS
 /**
  This is an option set that will decode the response to the 0101/0141 PID.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet {
+internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: OptionSet {
     /// Required for the OptionSet protocol.
     typealias RawValue = UInt32
     
     /// Required for the OptionSet protocol.
     let rawValue: RawValue
-    
-    /* ################################################################## */
-    /**
-     This will be used by the 01 and 41 PIDs of service 01.
-     */
-    static var pidCommands: [String] {
-        return [RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatus.rawValue,
-                RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatusThisCycle.rawValue]
-    }
 
     // MARK: ABCD A = 0xFF000000, B = 0x00FF0000, C = 0x0000FF00, D = 0x000000FF
     
@@ -309,9 +277,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BT
     /// CE/MIL on
     var isMILOn: Bool { return 0 != rawValue & Self.mil.rawValue }
     /// Number of Emissions-related DTCs
-    var count: Int {
-        return Int(rawValue & Self.dtcCount.rawValue >> 24)
-    }
+    var count: Int { return Int(rawValue & Self.dtcCount.rawValue >> 24) }
     
     // MARK: B
     /// This is on, if the motor is compression (diesel).
@@ -338,7 +304,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BT
     /// Catalyst test still in progress
     var catalystIncomplete: Bool { return 0 != rawValue & Self.catalystIncomplete.rawValue }
 
-    // MARK: C-D (Spark) Only valid if .diesel is off
+    // MARK: C-D (Spark) Only valid if .isDiesel is off
     /// Oxygen sensor heater test available
     var oxygenSensorHeaterAvailable: Bool { return !isDiesel && 0 != rawValue & Self.oxygenSensorHeaterAvailable.rawValue }
     /// Oxygen sensor heater test still in progress
@@ -364,7 +330,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BT
     /// Heated catalyst test still in progress
     var heatedCatalystIncomplete: Bool { return !isDiesel && 0 != rawValue & Self.heatedCatalystIncomplete.rawValue }
     
-    // MARK: C-D (Diesel) Only valid if .diesel is on
+    // MARK: C-D (Diesel) Only valid if .isDiesel is on
     /// PM filter monitoring test available
     var pmFilterMonitoringAvailable: Bool { return isDiesel && 0 != rawValue & Self.pmFilterMonitoringAvailable.rawValue }
     /// PM filter monitoring test still in progress
@@ -381,41 +347,6 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: RVS_BT
     var noxSCRAvailable: Bool { return isDiesel && 0 != rawValue & Self.noxSCRAvailable.rawValue }
     /// NOx/SCR Monitor test still in progress
     var noxSCRIncomplete: Bool { return isDiesel && 0 != rawValue & Self.noxSCRIncomplete.rawValue }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter -
-/* ###################################################################################################################################### */
-/**
- This is an option set that will decode the response to the 0101/0141 PID.
- */
-internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
-    /// This contains the value of the response.
-    let value: UInt32
-    
-    /* ################################################################## */
-    /**
-     This will be used by these PIDs of service 01 and 02.
-     */
-    static var pidCommands: [String] {
-        return [RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatus.rawValue,
-                RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatusThisCycle.rawValue]
-    }
-    
-    /* ################################################################## */
-    /**
-     This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).
-     
-     - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
-     */
-    init(contents inContents: String) {
-        if let derivedValue = UInt32(inContents.hexOnly, radix: 16) {
-            value = derivedValue
-            return
-        }
-        
-        value = 0
-    }
 }
 
 /* ###################################################################################################################################### */
@@ -456,6 +387,243 @@ struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader: Opti
 }
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol -
+/* ###################################################################################################################################### */
+/**
+ This is the base protocol for command interpreters. It defines an Array of String, which is used to match the interpreter with the PID it is applied to.
+ */
+internal protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+    /* ################################################################## */
+    /**
+     This returns an Array of Strings, reflecting which PIDs will return data to be decoded by this mask set.
+     */
+    static var pidCommands: [String] { get }
+    
+    /* ################################################################## */
+    /**
+     This return an Int, with the service being handled by this interpreter.
+     */
+    var service: Int { get }
+    
+    /* ################################################################## */
+    /**
+     This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).
+     
+     - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
+     - parameter service: The service to which this interpreter applies.
+     */
+    init(contents inContents: String, service inService: Int)
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask -
+/* ###################################################################################################################################### */
+/**
+ This is an option set that will decode the response to the 0100 PID.
+ */
+internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+    /// This is the interpreted value, assigned to an OptionSet.
+    private let _value: RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask
+    /// This will contain the service (either 1 or 2) to which this interpreter applies.
+    var service: Int = 0
+    
+    /* ################################################################## */
+    /**
+     This will be used for the first PID of Service 01 and 02.
+     */
+    static var pidCommands: [String] {
+        return [RVS_BTDriver_OBD_Command_Service_01_PIDs.returnSupportedPIDs.rawValue,
+                RVS_BTDriver_OBD_Command_Service_02_PIDs.returnSupportedPIDs.rawValue]
+    }
+
+    /// PID [01|02]01
+    var supportsPID01: Bool { return _value.supportsPID01 }
+    /// PID [01|02]02
+    var supportsPID02: Bool { return _value.supportsPID02 }
+    /// PID [01|02]03
+    var supportsPID03: Bool { return _value.supportsPID03 }
+    /// PID [01|02]04
+    var supportsPID04: Bool { return _value.supportsPID04 }
+    /// PID [01|02]05
+    var supportsPID05: Bool { return _value.supportsPID05 }
+    /// PID [01|02]06
+    var supportsPID06: Bool { return _value.supportsPID06 }
+    /// PID [01|02]07
+    var supportsPID07: Bool { return _value.supportsPID07 }
+    /// PID [01|02]08
+    var supportsPID08: Bool { return _value.supportsPID08 }
+    /// PID [01|02]09
+    var supportsPID09: Bool { return _value.supportsPID09 }
+    /// PID [01|02]0A
+    var supportsPID0A: Bool { return _value.supportsPID0A }
+    /// PID [01|02]0B
+    var supportsPID0B: Bool { return _value.supportsPID0B }
+    /// PID [01|02]0C
+    var supportsPID0C: Bool { return _value.supportsPID0C }
+    /// PID [01|02]0D
+    var supportsPID0D: Bool { return _value.supportsPID0D }
+    /// PID [01|02]0E
+    var supportsPID0E: Bool { return _value.supportsPID0E }
+    /// PID [01|02]0F
+    var supportsPID0F: Bool { return _value.supportsPID0F }
+    /// PID [01|02]10
+    var supportsPID10: Bool { return _value.supportsPID10 }
+    /// PID [01|02]11
+    var supportsPID11: Bool { return _value.supportsPID11 }
+    /// PID [01|02]12
+    var supportsPID12: Bool { return _value.supportsPID12 }
+    /// PID [01|02]13
+    var supportsPID13: Bool { return _value.supportsPID13 }
+    /// PID [01|02]14
+    var supportsPID14: Bool { return _value.supportsPID14 }
+    /// PID [01|02]15
+    var supportsPID15: Bool { return _value.supportsPID15 }
+    /// PID [01|02]16
+    var supportsPID16: Bool { return _value.supportsPID16 }
+    /// PID [01|02]17
+    var supportsPID17: Bool { return _value.supportsPID17 }
+    /// PID [01|02]18
+    var supportsPID18: Bool { return _value.supportsPID18 }
+    /// PID [01|02]19
+    var supportsPID19: Bool { return _value.supportsPID19 }
+    /// PID [01|02]1A
+    var supportsPID1A: Bool { return _value.supportsPID1A }
+    /// PID [01|02]1B
+    var supportsPID1B: Bool { return _value.supportsPID1B }
+    /// PID [01|02]1C
+    var supportsPID1C: Bool { return _value.supportsPID1C }
+    /// PID [01|02]1D
+    var supportsPID1D: Bool { return _value.supportsPID1D }
+    /// PID [01|02]1E
+    var supportsPID1E: Bool { return _value.supportsPID1E }
+    /// PID [01|02]1F
+    var supportsPID1F: Bool { return _value.supportsPID1F }
+    /// PID [01|02]20
+    var supportsPID20: Bool { return _value.supportsPID20 }
+    
+    /* ################################################################## */
+    /**
+     This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).
+     
+     - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
+     - parameter service: The service (either 1 or 2), to which this interpreter applies.
+     */
+    init(contents inContents: String, service inService: Int) {
+        if  1 == inService || 2 == inService,   // Must be one of these. No other values allowed.
+            let derivedValue = UInt32(inContents.hexOnly, radix: 16) {
+            service = inService
+            _value = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: derivedValue)
+            return
+        }
+        
+        _value = RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask(rawValue: 0)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter -
+/* ###################################################################################################################################### */
+/**
+ This is an option set that will decode the response to the 0101/0141 PID.
+ */
+internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+    /// This contains the value of the response.
+    private let _value: RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask
+    /// This will contain the service (either 1 or 2) to which this interpreter applies.
+    var service: Int = 0
+
+    /* ################################################################## */
+    /**
+     This will be used by these PIDs of service 01.
+     */
+    static var pidCommands: [String] {
+        return [RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatus.rawValue,
+                RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatusThisCycle.rawValue]
+    }
+    
+    /* ################################################################## */
+    /**
+     This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).
+     
+     - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
+     - parameter service: The service (either 1 or 2), to which this interpreter applies.
+     */
+    init(contents inContents: String, service inService: Int) {
+        if  1 == inService || 2 == inService,   // Must be one of these. No other values allowed.
+            let derivedValue = UInt32(inContents.hexOnly, radix: 16) {
+            _value = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue: derivedValue)
+            return
+        }
+        
+        _value = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue: 0)
+    }
+    
+    /// This is on, if the motor is compression (diesel).
+    var isDiesel: Bool { return _value.isDiesel }
+    
+    /// Components system test available
+    var componentsAvailable: Bool { return _value.componentsAvailable }
+    /// Components system test still in progress
+    var componentsIncomplete: Bool { return _value.componentsIncomplete }
+    /// Fuel system test available
+    var fuelSystemAvailable: Bool { return _value.fuelSystemAvailable }
+    /// Fuel system test still in progress
+    var fuelSystemIncomplete: Bool { return _value.fuelSystemIncomplete }
+    /// Misfire test available
+    var misfireAvailable: Bool { return _value.misfireAvailable }
+    /// Misfire test still in progress
+    var misfireIncomplete: Bool { return _value.misfireIncomplete }
+    /// EGR System test available
+    var egrSystemAvailable: Bool { return _value.egrSystemAvailable }
+    /// EGR System test still in progress
+    var egrSystemIncomplete: Bool { return _value.egrSystemIncomplete }
+    /// Catalyst test available
+    var catalystAvailable: Bool { return _value.catalystAvailable }
+    /// Catalyst test still in progress
+    var catalystIncomplete: Bool { return _value.catalystIncomplete }
+    /// Oxygen sensor heater test available
+    var oxygenSensorHeaterAvailable: Bool { return _value.oxygenSensorHeaterAvailable }
+    /// Oxygen sensor heater test still in progress
+    var oxygenSensorHeaterIncomplete: Bool { return _value.oxygenSensorHeaterIncomplete }
+    /// Oxygen sensor test available
+    var oxygenSensorAvailable: Bool { return _value.oxygenSensorAvailable }
+    /// Oxygen sensor test still in progress
+    var oxygenSensorIncomplete: Bool { return _value.oxygenSensorIncomplete }
+    /// A/C refrigerant test available
+    var acRefrigerantAvailable: Bool { return _value.acRefrigerantAvailable }
+    /// A/C refrigerant test still in progress
+    var acRefrigerantIncomplete: Bool { return _value.acRefrigerantIncomplete }
+    /// Secondary air system test available
+    var sasAvailable: Bool { return _value.sasAvailable }
+    /// Secondary air system test still in progress
+    var sasIncomplete: Bool { return _value.sasIncomplete }
+    /// Evaporative system test available
+    var evaporativeSystemAvailable: Bool { return _value.evaporativeSystemAvailable }
+    /// Evaporative system test still in progress
+    var evaporativeSystemIncomplete: Bool { return _value.evaporativeSystemIncomplete }
+    /// Heated catalyst test available
+    var heatedCatalystAvailable: Bool { return _value.heatedCatalystAvailable }
+    /// Heated catalyst test still in progress
+    var heatedCatalystIncomplete: Bool { return _value.heatedCatalystIncomplete }
+    /// PM filter monitoring test available
+    var pmFilterMonitoringAvailable: Bool { return _value.pmFilterMonitoringAvailable }
+    /// PM filter monitoring test still in progress
+    var pmFilterMonitoringIncomplete: Bool { return _value.pmFilterMonitoringIncomplete }
+    /// Exhaust gas test available
+    var exhaustSensorAvailable: Bool { return _value.exhaustSensorAvailable }
+    /// Exhaust gas test still in progress
+    var exhaustSensorIncomplete: Bool { return _value.exhaustSensorIncomplete }
+    /// Boost pressure test available
+    var boostPressureAvailable: Bool { return _value.boostPressureAvailable }
+    /// Boost pressure test still in progress
+    var boostPressureIncomplete: Bool { return _value.boostPressureIncomplete }
+    /// NOx/SCR Monitor test available
+    var noxSCRAvailable: Bool { return _value.noxSCRAvailable }
+    /// NOx/SCR Monitor test still in progress
+    var noxSCRIncomplete: Bool { return _value.noxSCRIncomplete }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature -
 /* ###################################################################################################################################### */
 /**
@@ -470,6 +638,8 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
         return [RVS_BTDriver_OBD_Command_Service_01_PIDs.egt_Bank_01.rawValue,
                 RVS_BTDriver_OBD_Command_Service_01_PIDs.egt_Bank_02.rawValue]
     }
+    
+    var service: Int = 0
     
     // MARK: ABCDE A = 0xFF0000000000000000, B = 0x00FFFF000000000000, C =  0x000000FFFF00000000, D = 0x0000000000FFFF0000, E = 0x00000000000000FFFF
     
@@ -538,9 +708,10 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
     /**
      This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).
      
-     - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
-     */
-    init(contents inContents: String) {
+      - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
+      - parameter service: The service (either 1 or 2), to which this interpreter applies.
+      */
+     init(contents inContents: String, service inService: Int) {
         var split = inContents.split(separator: " ")
         if 2 < split.count {
             if let head = UInt8(split.removeFirst(), radix: 16) {
