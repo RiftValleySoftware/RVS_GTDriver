@@ -235,12 +235,12 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
             .egr(_value.egrSystemAvailable ? .complete : _value.egrSystemIncomplete ? .inProgress : .unknown),
             .catalyst(_value.catalystAvailable ? .complete : _value.catalystIncomplete ? .inProgress : .unknown),
             // Spark engine
-            .oxygenSensorHeater(_value.oxygenSensorHeaterAvailable ? .complete : _value.oxygenSensorHeaterIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
-            .oxygenSensor(_value.oxygenSensorAvailable ? .complete : _value.oxygenSensorIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
-            .acRefrigerant(_value.acRefrigerantAvailable ? .complete : _value.acRefrigerantIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
-            .sas(_value.sasAvailable ? .complete : _value.sasIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
-            .evaporativeSystem(_value.evaporativeSystemAvailable ? .complete : _value.evaporativeSystemIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
-            .heatedCatalyst(_value.heatedCatalystAvailable ? .complete : _value.heatedCatalystIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
+            .oxygenSensorHeater(_value.oxygenSensorHeaterAvailable ? .complete : _value.oxygenSensorHeaterIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
+            .oxygenSensor(_value.oxygenSensorAvailable ? .complete : _value.oxygenSensorIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
+            .acRefrigerant(_value.acRefrigerantAvailable ? .complete : _value.acRefrigerantIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
+            .sas(_value.sasAvailable ? .complete : _value.sasIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
+            .evaporativeSystem(_value.evaporativeSystemAvailable ? .complete : _value.evaporativeSystemIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
+            .heatedCatalyst(_value.heatedCatalystAvailable ? .complete : _value.heatedCatalystIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
             // Compression (diesel) engine
             .pmFilterMonitoring(_value.pmFilterMonitoringAvailable ? .complete : _value.pmFilterMonitoringIncomplete ? .inProgress : isDiesel ? .unknown : .unsupported),
             .exhaustSensor(_value.exhaustSensorAvailable ? .complete : _value.exhaustSensorIncomplete ? .inProgress : isDiesel ? .unknown : .unsupported),
