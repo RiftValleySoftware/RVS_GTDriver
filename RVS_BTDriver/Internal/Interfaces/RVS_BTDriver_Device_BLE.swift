@@ -241,14 +241,17 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
      */
     internal override var isConnected: Bool {
         get {
+            // If we are running unit tests, then we assume that we're connected.
             return RVS_DebugTools.isRunningUnitTests ? true : .connected == peripheral.state
         }
         
         set {
-            if newValue {
-                connect()
-            } else {
-                disconnect()
+            if !RVS_DebugTools.isRunningUnitTests { // We do nothing, if we are running unit tests.
+                if newValue {
+                    connect()
+                } else {
+                    disconnect()
+                }
             }
         }
     }

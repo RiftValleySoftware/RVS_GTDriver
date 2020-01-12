@@ -59,15 +59,18 @@ class RVS_BTDriver_Test_OBD: XCTestCase {
 /**
  These tests will instantiate the interpreters, and will test them to make sure that they are properly interpreting the response strings.
  */
-class RVS_BTDriver_Test_OBD_PIDs: XCTestCase {
+class RVS_BTDriver_TestPID_0100_0200: XCTestCase {
     /* ################################################################## */
     /**
      This is a simple test of the "PIDs Supported" PID that is the 00 PID for service 01 and 02.
+     This test will run the full gamut.
      */
-    func testPID_0100_0200() {
+    func test_Full() {
         func checkInterpreter(_ inInterpreter: RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter) {
             let pidsSupported = inInterpreter.supportedPIDs
             
+            XCTAssertEqual(32, pidsSupported.count)
+
             var index = 1
             for pid in pidsSupported {
                 let match = String(format: "%02X%02X", inInterpreter.service, index)
@@ -77,6 +80,86 @@ class RVS_BTDriver_Test_OBD_PIDs: XCTestCase {
         }
         
         checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "FF FF FF FF", service: 1))
-        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "FF FF FF FF", service: 2))
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "FFFFFFFF", service: 2))
+    }
+    
+    /* ################################################################## */
+    /**
+     This test is like the above, but for every other PID.
+     */
+    func test_By2() {
+        func checkInterpreter(_ inInterpreter: RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter) {
+            let pidsSupported = inInterpreter.supportedPIDs
+            
+            XCTAssertEqual(16, pidsSupported.count)
+            
+            var index = 1
+            for pid in pidsSupported {
+                let match = String(format: "%02X%02X", inInterpreter.service, index)
+                index += 2
+                XCTAssertEqual(match, pid)
+            }
+        }
+        
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "AA AA AA AA", service: 1))
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "AAAA AA AA", service: 2))
+    }
+    
+    /* ################################################################## */
+    /**
+     This test is like the above, but for every other PID (In the other direction).
+     */
+    func test_By2_TheOtherWay() {
+        func checkInterpreter(_ inInterpreter: RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter) {
+            let pidsSupported = inInterpreter.supportedPIDs
+            
+            XCTAssertEqual(16, pidsSupported.count)
+
+            var index = 2
+            for pid in pidsSupported {
+                let match = String(format: "%02X%02X", inInterpreter.service, index)
+                index += 2
+                XCTAssertEqual(match, pid)
+            }
+        }
+        
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "55555555", service: 1))
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "5 5 55 55     5    5", service: 2))
+    }
+    
+    /* ################################################################## */
+    /**
+     This test looks at just one PID (the first one).
+     */
+    func test_JustTheOne() {
+        func checkInterpreter(_ inInterpreter: RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter) {
+            let pidsSupported = inInterpreter.supportedPIDs
+            
+            XCTAssertEqual(1, pidsSupported.count)
+
+            let match = String(format: "%02X%02X", inInterpreter.service, 1)
+            XCTAssertEqual(match, pidsSupported[0])
+        }
+        
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "8 00 0000 0", service: 1))
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "80 00 00 00", service: 2))
+    }
+    
+    /* ################################################################## */
+    /**
+     This test looks at just one PID (the last one).
+     */
+    func test_JustTheOtherOne() {
+        func checkInterpreter(_ inInterpreter: RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter) {
+            let pidsSupported = inInterpreter.supportedPIDs
+            
+            XCTAssertEqual(1, pidsSupported.count)
+
+            let match = String(format: "%02X%02X", inInterpreter.service, 32)
+            XCTAssertEqual(match, pidsSupported[0])
+        }
+        
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "1", service: 1))
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "00000001", service: 2))
     }
 }

@@ -80,7 +80,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter:
         var mask:UInt32 = 0x80000000
         
         // The bits are inverse proportional to the PID they each represent.
-        for pid in 1..<32 {
+        for pid in 1..<33 {
             if 0 != mask & _value {
                 let build = String(format: "%02X%02X", service, pid)
                 ret.append(build)
