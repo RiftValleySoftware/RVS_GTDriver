@@ -79,3 +79,4 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-HEADER-INDICATE"                                      =       "I";
 "SLUG-HEADER-NOTIFY"                                        =       "N";
 "SLUG-HEADER-VALUE"                                         =       "VALUE";
+"SLUG-DEVICE-NAME-FORMAT"                                   =       "Device Name: %@";

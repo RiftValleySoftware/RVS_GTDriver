@@ -298,7 +298,7 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_ViewController {
         - sender: Any data to be associated with the calle (ignored).
      */
     override func prepare(for segue: NSStoryboardSegue, sender inSender: Any?) {
-        if let destination = segue.destinationController as? RVS_BTDriver_MacOS_Test_Harness_Properties_ViewController {
+        if let destination = segue.destinationController as? RVS_BTDriver_MacOS_Test_Harness_Device_Detail_ViewController {
             destination.deviceInstance = deviceInstance
         }
     }
