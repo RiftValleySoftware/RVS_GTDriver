@@ -125,6 +125,66 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
 
     /* ################################################################## */
     /**
+     These are flags that indicate the status of various tests.
+     */
+    enum TestStatus {
+        /// This means that the test is not valid for this engine.
+        case unsupported
+        /// This means that the test is valid, but neither of its flags are set.
+        case unknown
+        /// This means that the incomplete flag is set for this test.
+        case inProgress
+        /// This means that the complete flag is set for this test.
+        case complete
+    }
+    
+    /* ################################################################## */
+    /**
+     These are the various tests that are available.
+     */
+    enum TestCategories {
+        // MARK: All Types of Engines
+        
+        /// Various Components of the System
+        case components(TestStatus)
+        /// The Fuel System.
+        case fuelSystem(TestStatus)
+        /// Engine Misfires
+        case misfire(TestStatus)
+        /// EGR (and/or VVT for Diesel)
+        case egr(TestStatus)
+        /// Catalyst system (NMHC Catalyst, for Diesel)
+        case catalyst(TestStatus)
+
+        // MARK: Standard Spark Engines
+        
+        /// Oxygen Sensor Heater
+        case oxygenSensorHeater(TestStatus)
+        /// Oxygen Sensor
+        case oxygenSensor(TestStatus)
+        /// Air-Conditioning Refrigerant
+        case acRefrigerant(TestStatus)
+        /// Secondary Air System (SAS)
+        case sas(TestStatus)
+        /// Evaporative System
+        case evaporativeSystem(TestStatus)
+        /// Heated Catalyst
+        case heatedCatalyst(TestStatus)
+        
+        // MARK: Diesel Engines
+        
+        /// PM Filter Monitoring
+        case pmFilterMonitoring(TestStatus)
+        /// Exhaust Gas Sensor
+        case exhaustSensor(TestStatus)
+        /// Boost Pressure
+        case boostPressure(TestStatus)
+        /// NOx/SCR Monitor
+        case noxSCR(TestStatus)
+    }
+    
+    /* ################################################################## */
+    /**
      This will be used by these PIDs of service 01.
      */
     static var pidCommands: [String] {
@@ -149,69 +209,45 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
         _value = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue: 0)
     }
     
-    /// This is on, if the motor is compression (diesel).
+    /* ################################################################## */
+    /**
+     This is on, if the motor is compression (diesel).
+     */
     var isDiesel: Bool { return _value.isDiesel }
     
-    /// Components system test available
-    var componentsAvailable: Bool { return _value.componentsAvailable }
-    /// Components system test still in progress
-    var componentsIncomplete: Bool { return _value.componentsIncomplete }
-    /// Fuel system test available
-    var fuelSystemAvailable: Bool { return _value.fuelSystemAvailable }
-    /// Fuel system test still in progress
-    var fuelSystemIncomplete: Bool { return _value.fuelSystemIncomplete }
-    /// Misfire test available
-    var misfireAvailable: Bool { return _value.misfireAvailable }
-    /// Misfire test still in progress
-    var misfireIncomplete: Bool { return _value.misfireIncomplete }
-    /// EGR System test available
-    var egrSystemAvailable: Bool { return _value.egrSystemAvailable }
-    /// EGR System test still in progress
-    var egrSystemIncomplete: Bool { return _value.egrSystemIncomplete }
-    /// Catalyst test available
-    var catalystAvailable: Bool { return _value.catalystAvailable }
-    /// Catalyst test still in progress
-    var catalystIncomplete: Bool { return _value.catalystIncomplete }
-    /// Oxygen sensor heater test available
-    var oxygenSensorHeaterAvailable: Bool { return _value.oxygenSensorHeaterAvailable }
-    /// Oxygen sensor heater test still in progress
-    var oxygenSensorHeaterIncomplete: Bool { return _value.oxygenSensorHeaterIncomplete }
-    /// Oxygen sensor test available
-    var oxygenSensorAvailable: Bool { return _value.oxygenSensorAvailable }
-    /// Oxygen sensor test still in progress
-    var oxygenSensorIncomplete: Bool { return _value.oxygenSensorIncomplete }
-    /// A/C refrigerant test available
-    var acRefrigerantAvailable: Bool { return _value.acRefrigerantAvailable }
-    /// A/C refrigerant test still in progress
-    var acRefrigerantIncomplete: Bool { return _value.acRefrigerantIncomplete }
-    /// Secondary air system test available
-    var sasAvailable: Bool { return _value.sasAvailable }
-    /// Secondary air system test still in progress
-    var sasIncomplete: Bool { return _value.sasIncomplete }
-    /// Evaporative system test available
-    var evaporativeSystemAvailable: Bool { return _value.evaporativeSystemAvailable }
-    /// Evaporative system test still in progress
-    var evaporativeSystemIncomplete: Bool { return _value.evaporativeSystemIncomplete }
-    /// Heated catalyst test available
-    var heatedCatalystAvailable: Bool { return _value.heatedCatalystAvailable }
-    /// Heated catalyst test still in progress
-    var heatedCatalystIncomplete: Bool { return _value.heatedCatalystIncomplete }
-    /// PM filter monitoring test available
-    var pmFilterMonitoringAvailable: Bool { return _value.pmFilterMonitoringAvailable }
-    /// PM filter monitoring test still in progress
-    var pmFilterMonitoringIncomplete: Bool { return _value.pmFilterMonitoringIncomplete }
-    /// Exhaust gas test available
-    var exhaustSensorAvailable: Bool { return _value.exhaustSensorAvailable }
-    /// Exhaust gas test still in progress
-    var exhaustSensorIncomplete: Bool { return _value.exhaustSensorIncomplete }
-    /// Boost pressure test available
-    var boostPressureAvailable: Bool { return _value.boostPressureAvailable }
-    /// Boost pressure test still in progress
-    var boostPressureIncomplete: Bool { return _value.boostPressureIncomplete }
-    /// NOx/SCR Monitor test available
-    var noxSCRAvailable: Bool { return _value.noxSCRAvailable }
-    /// NOx/SCR Monitor test still in progress
-    var noxSCRIncomplete: Bool { return _value.noxSCRIncomplete }
+    /* ################################################################## */
+    /**
+     This is on, if the motor is spark.
+     */
+    var isSpark: Bool { return !isDiesel }
+
+    /* ################################################################## */
+    /**
+     This returns an Array of enums, containing the status of various tests.
+     If they are not supported (like diesel-specific tests in a standard engine), then .unsupported is flagged.
+     */
+    var testAvailability: [TestCategories] {
+        return [
+            // All types of engine (no check for diesel)
+            .components(_value.componentsAvailable ? .complete : _value.componentsIncomplete ? .inProgress :.unknown),
+            .fuelSystem(_value.fuelSystemAvailable ? .complete : _value.fuelSystemIncomplete ? .inProgress : .unknown),
+            .misfire(_value.misfireAvailable ? .complete : _value.misfireIncomplete ? .inProgress : .unknown),
+            .egr(_value.egrSystemAvailable ? .complete : _value.egrSystemIncomplete ? .inProgress : .unknown),
+            .catalyst(_value.catalystAvailable ? .complete : _value.catalystIncomplete ? .inProgress : .unknown),
+            // Spark engine
+            .oxygenSensorHeater(_value.oxygenSensorHeaterAvailable ? .complete : _value.oxygenSensorHeaterIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
+            .oxygenSensor(_value.oxygenSensorAvailable ? .complete : _value.oxygenSensorIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
+            .acRefrigerant(_value.acRefrigerantAvailable ? .complete : _value.acRefrigerantIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
+            .sas(_value.sasAvailable ? .complete : _value.sasIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
+            .evaporativeSystem(_value.evaporativeSystemAvailable ? .complete : _value.evaporativeSystemIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
+            .heatedCatalyst(_value.heatedCatalystAvailable ? .complete : _value.heatedCatalystIncomplete ? .inProgress : isDiesel ? .unsupported : .unknown),
+            // Compression (diesel) engine
+            .pmFilterMonitoring(_value.pmFilterMonitoringAvailable ? .complete : _value.pmFilterMonitoringIncomplete ? .inProgress : isDiesel ? .unknown : .unsupported),
+            .exhaustSensor(_value.exhaustSensorAvailable ? .complete : _value.exhaustSensorIncomplete ? .inProgress : isDiesel ? .unknown : .unsupported),
+            .boostPressure(_value.boostPressureAvailable ? .complete : _value.boostPressureIncomplete ? .inProgress : isDiesel ? .unknown : .unsupported),
+            .noxSCR(_value.noxSCRAvailable ? .complete : _value.noxSCRIncomplete ? .inProgress : isDiesel ? .unknown : .unsupported)
+        ]
+    }
 }
 
 /* ###################################################################################################################################### */
