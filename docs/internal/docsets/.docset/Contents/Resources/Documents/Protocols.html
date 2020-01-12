@@ -261,9 +261,6 @@
                 <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_InterfaceProtocol.html">RVS_BTDriver_InterfaceProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols.html#/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F16BitMaskOptionSetP">RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a>
               </li>
               <li class="nav-group-task">
@@ -302,16 +299,25 @@
             <a class="nav-group-name-link" href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask.html">RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask</a>
+                <a class="nav-group-task-link" href="Structs/RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter.html">RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature.html">RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader.html">– RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader</a>
+                <a class="nav-group-task-link" href="Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader.html">RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.html">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter.html">RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter/TestStatus.html">– TestStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter/TestCategories.html">– TestCategories</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html">RVS_BTDriver_OBD_Device_TransactionStruct</a>
@@ -453,46 +459,6 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet%20Protocol"></a>
-                <a name="//apple_ref/swift/Section/RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet Protocol" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet%20Protocol"></a>
-                  <h3 class="section-name"><p>RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet Protocol</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F16BitMaskOptionSetP"></a>
-                    <a name="//apple_ref/swift/Protocol/RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F16BitMaskOptionSetP">RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This adds the OptionSet protocol to the interpreter, for bitmasks.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a></span><span class="p">,</span> <span class="kt">OptionSet</span></code></pre>
 
                         </div>
                       </div>

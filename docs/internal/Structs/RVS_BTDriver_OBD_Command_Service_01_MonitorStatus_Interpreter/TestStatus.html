@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader Structure Reference</title>
+    <title>TestStatus Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Struct/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Enum/TestStatus" class="dashAnchor"></a>
 
-    <a title="RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader Structure Reference"></a>
+    <a title="TestStatus Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../../index.html"> Reference</a>
       <img class="carat" src="../../img/carat.png" />
-      RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader Structure Reference
+      TestStatus Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -261,9 +261,6 @@
                 <a class="nav-group-task-link" href="../../Protocols/RVS_BTDriver_InterfaceProtocol.html">RVS_BTDriver_InterfaceProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../../Protocols.html#/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F16BitMaskOptionSetP">RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a>
               </li>
               <li class="nav-group-task">
@@ -302,16 +299,25 @@
             <a class="nav-group-name-link" href="../../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../../Structs/RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask.html">RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask</a>
+                <a class="nav-group-task-link" href="../../Structs/RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter.html">RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../../Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature.html">RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../../Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader.html">– RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader</a>
+                <a class="nav-group-task-link" href="../../Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader.html">RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.html">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter.html">RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter/TestStatus.html">– TestStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter/TestCategories.html">– TestCategories</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html">RVS_BTDriver_OBD_Device_TransactionStruct</a>
@@ -330,14 +336,14 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader</h1>
+            <h1>TestStatus</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader</span> <span class="p">:</span> <span class="kt">OptionSet</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">TestStatus</span></code></pre>
 
                 </div>
               </div>
-            <p>This struct will act as a bitmask to decode the flag byte.</p>
+            <p>These are flags that indicate the status of various tests.</p>
 
           </div>
         </section>
@@ -349,9 +355,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV8RawValuea"></a>
-                    <a name="//apple_ref/swift/Alias/RawValue" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV8RawValuea">RawValue</a>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV04TestI0O11unsupportedyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/unsupported" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV04TestI0O11unsupportedyA2EmF">unsupported</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -359,14 +365,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Required for the OptionSet protocol.</p>
+                        <p>This means that the test is not valid for this engine.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">RawValue</span> <span class="o">=</span> <span class="kt">UInt8</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unsupported</span></code></pre>
 
                         </div>
                       </div>
@@ -376,9 +382,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV8rawValues5UInt8Vvp"></a>
-                    <a name="//apple_ref/swift/Property/rawValue" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV8rawValues5UInt8Vvp">rawValue</a>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV04TestI0O7unknownyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/unknown" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV04TestI0O7unknownyA2EmF">unknown</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -386,14 +392,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Required for the OptionSet protocol.</p>
+                        <p>This means that the test is valid, but neither of its flags are set.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">rawValue</span><span class="p">:</span> <span class="kt"><a href="../../Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader.html#/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV8RawValuea">RawValue</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unknown</span></code></pre>
 
                         </div>
                       </div>
@@ -403,9 +409,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV8reservedSivpZ"></a>
-                    <a name="//apple_ref/swift/Variable/reserved" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV8reservedSivpZ">reserved</a>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV04TestI0O10inProgressyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/inProgress" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV04TestI0O10inProgressyA2EmF">inProgress</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -413,14 +419,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Reserved.</p>
+                        <p>This means that the incomplete flag is set for this test.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">reserved</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">inProgress</span></code></pre>
 
                         </div>
                       </div>
@@ -430,9 +436,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV17egtBank01Sensor04SivpZ"></a>
-                    <a name="//apple_ref/swift/Variable/egtBank01Sensor04" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV17egtBank01Sensor04SivpZ">egtBank01Sensor04</a>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV04TestI0O8completeyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/complete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV04TestI0O8completeyA2EmF">complete</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -440,95 +446,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Bank 1, Sensor 4 is supported.</p>
+                        <p>This means that the complete flag is set for this test.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">egtBank01Sensor04</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV17egtBank01Sensor03SivpZ"></a>
-                    <a name="//apple_ref/swift/Variable/egtBank01Sensor03" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV17egtBank01Sensor03SivpZ">egtBank01Sensor03</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Bank 1, Sensor 3 is supported.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">egtBank01Sensor03</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV17egtBank01Sensor02SivpZ"></a>
-                    <a name="//apple_ref/swift/Variable/egtBank01Sensor02" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV17egtBank01Sensor02SivpZ">egtBank01Sensor02</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Bank 1, Sensor 2 is supported.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">egtBank01Sensor02</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV17egtBank01Sensor01SivpZ"></a>
-                    <a name="//apple_ref/swift/Variable/egtBank01Sensor01" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B45_OBD_Command_Service_01_ExhaustGasTemperatureV0a1_b1_e1_f1_g4_01_hiJ10_EGTHeaderV17egtBank01Sensor01SivpZ">egtBank01Sensor01</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Bank 1, Sensor 1 is supported.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">egtBank01Sensor01</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">complete</span></code></pre>
 
                         </div>
                       </div>

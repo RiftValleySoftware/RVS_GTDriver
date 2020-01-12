@@ -261,9 +261,6 @@
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_InterfaceProtocol.html">RVS_BTDriver_InterfaceProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols.html#/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F16BitMaskOptionSetP">RVS_BTDriver_OBD_Command_Service_CommandBitMaskOptionSet</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a>
               </li>
               <li class="nav-group-task">
@@ -302,16 +299,25 @@
             <a class="nav-group-name-link" href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask.html">RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask</a>
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter.html">RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature.html">RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader.html">– RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader</a>
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader.html">RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.html">RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter.html">RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter/TestStatus.html">– TestStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter/TestCategories.html">– TestCategories</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html">RVS_BTDriver_OBD_Device_TransactionStruct</a>
@@ -369,6 +375,91 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">pidCommands</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F12_InterpreterP7serviceSivp"></a>
+                    <a name="//apple_ref/swift/Property/service" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F12_InterpreterP7serviceSivp">service</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This return an Int, with the service being handled by this interpreter.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">service</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F12_InterpreterP8contents7servicexSS_Sitcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(contents:service:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F12_InterpreterP8contents7servicexSS_Sitcfc">init(contents:service:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">contents</span> <span class="nv">inContents</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n"><a href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html#/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F12_InterpreterP7serviceSivp">service</a></span> <span class="nv">inService</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contents</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The contents, as a String of 2-character hex numbers, space-separated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>service</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The service to which this interpreter applies.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
