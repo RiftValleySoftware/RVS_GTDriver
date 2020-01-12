@@ -158,6 +158,17 @@ extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriverDel
 extension RVS_BTDriver_iOS_Test_Harness_MainTableViewController: RVS_BTDriver_DeviceSubscriberProtocol {
     /* ################################################################## */
     /**
+     Called when the device encounters an error.
+     
+     - parameter inDevice: The device instance making the callback.
+     - parameter encounteredThisError: The error that was encountered.
+     */
+    func subscribedDevice(_ inDevice: RVS_BTDriver_DeviceProtocol, encounteredThisError inError: RVS_BTDriver.Errors) {
+        reportError(inError)
+    }
+    
+    /* ################################################################## */
+    /**
      Called when a new service is added to the device instance.
      
      - parameter inDevice: The device instance making the callback.

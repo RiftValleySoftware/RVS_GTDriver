@@ -110,12 +110,13 @@ public class RVS_BTDriver: NSObject {
         internal_queue = inQueue
         internal_vendors = []
         
+        internal_vendors.append(RVS_BTDriver_Vendor_GenericBLE(driver: self))
+
         if inVendors.isEmpty || inVendors.contains(.goTenna) {
             internal_vendors.append(RVS_BTDriver_Vendor_GoTenna_Mesh(driver: self))
         }
         
         if inVendors.isEmpty || inVendors.contains(.OBD) {
-            internal_vendors.append(RVS_BTDriver_Vendor_GenericBLE(driver: self))
             internal_vendors.append(RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK(driver: self))
             internal_vendors.append(RVS_BTDriver_Vendor_OBD_ELM327_VLINK(driver: self))
             internal_vendors.append(RVS_BTDriver_Vendor_OBD_ELM327_ANON_1(driver: self))
