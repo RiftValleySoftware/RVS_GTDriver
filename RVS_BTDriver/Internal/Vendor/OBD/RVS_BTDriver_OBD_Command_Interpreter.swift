@@ -142,7 +142,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
     /**
      These are the various tests that are available.
      */
-    enum TestCategories {
+    enum TestCategories: Hashable {
         // MARK: All Types of Engines
         
         /// Various Components of the System
@@ -223,10 +223,10 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
 
     /* ################################################################## */
     /**
-     This returns an Array of enums, containing the status of various tests.
+     This returns a Set of enums, containing the status of various tests. Each test has an associated value, containing its status.
      If they are not supported (like diesel-specific tests in a standard engine), then .unsupported is flagged.
      */
-    var testAvailability: [TestCategories] {
+    var testAvailability: Set<TestCategories> {
         return [
             // All types of engine (no check for diesel)
             .components(_value.componentsAvailable ? .complete : _value.componentsIncomplete ? .inProgress :.unknown),
