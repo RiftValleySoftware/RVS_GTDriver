@@ -455,7 +455,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">TestCategories</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">TestCategories</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
 
                         </div>
                       </div>
@@ -604,9 +604,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV16testAvailabilitySayAC14TestCategoriesOGvp"></a>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV16testAvailabilityShyAC14TestCategoriesOGvp"></a>
                     <a name="//apple_ref/swift/Property/testAvailability" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV16testAvailabilitySayAC14TestCategoriesOGvp">testAvailability</a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B49_OBD_Command_Service_01_MonitorStatus_InterpreterV16testAvailabilityShyAC14TestCategoriesOGvp">testAvailability</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -614,7 +614,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This returns an Array of enums, containing the status of various tests.
+                        <p>This returns a Set of enums, containing the status of various tests. Each test has an associated value, containing its status.
 If they are not supported (like diesel-specific tests in a standard engine), then .unsupported is flagged.</p>
 
                       </div>
@@ -622,7 +622,7 @@ If they are not supported (like diesel-specific tests in a standard engine), the
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">testAvailability</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter/TestCategories.html">TestCategories</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">testAvailability</span><span class="p">:</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter/TestCategories.html">TestCategories</a></span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>

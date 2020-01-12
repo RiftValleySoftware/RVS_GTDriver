@@ -77,7 +77,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter:
     var supportedPIDs: [String] {
         var ret: [String] = []
         
-        var mask:UInt32 = 0x80000000
+        var mask: UInt32 = 0x80000000
         
         // The bits are inverse proportional to the PID they each represent.
         for pid in 1..<33 {
