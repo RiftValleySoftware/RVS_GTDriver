@@ -192,6 +192,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
         let value: UInt32 = 0x0B000000 | coveredDTCsMask.rawValue
         let valueString = String(format: "%08x", value)
         var simulation: String = ""
+        // This splits the string into pairs, like we get from the device.
         for index in stride(from: 0, to: valueString.count, by: 4) {
             let startIndex1 = valueString.index(valueString.startIndex, offsetBy: index)
             let endIndex1 = valueString.index(startIndex1, offsetBy: 2)
@@ -205,7 +206,6 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
         }
         
         let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 01)
-        print(String(describing: testTarget))
         let testCount  = testTarget.count
         let supportedTests = testTarget.testsComplete
         XCTAssertEqual(supportedTests.count, testCount)
@@ -223,7 +223,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
                  .sas(let status),
                  .evaporativeSystem(let status),
                  .heatedCatalyst(let status):
-                XCTAssertEqual(.complete, status)
+                XCTAssertEqual(.complete, status, "Illegal Test State: \(String(describing: test))")
             default:
                 XCTFail("Illegal Test: \(String(describing: test))")
             }

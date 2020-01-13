@@ -128,8 +128,6 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
      These are flags that indicate the status of various tests.
      */
     enum TestStatus {
-        /// This means that the test is not valid for this engine.
-        case unsupported
         /// This means that the test is valid, but neither of its flags are set.
         case unknown
         /// This means that the incomplete flag is set for this test.
@@ -307,7 +305,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
     
     /* ################################################################## */
     /**
-     - returns: Only the tests that are in an unkown state.
+     - returns: Only the tests that are in an unknown state.
      */
     var testsUnkown: [TestCategories] { return testAvailability.compactMap { return .unknown == $0.testStatus ? $0 : nil } }
 }
