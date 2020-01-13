@@ -173,6 +173,56 @@ class RVS_BTDriver_TestPID_0100_0200: XCTestCase {
 class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
     /* ################################################################## */
     /**
+     */
+    func splitUpString(_ inString: String) -> String {
+        var ret: String = ""
+        
+        // This splits the string into pairs, like we get from the device.
+        for index in stride(from: 0, to: inString.count, by: 4) {
+            let startIndex1 = inString.index(inString.startIndex, offsetBy: index)
+            let endIndex1 = inString.index(startIndex1, offsetBy: 2)
+            let startIndex2 = endIndex1
+            let endIndex2 = inString.index(startIndex2, offsetBy: 2)
+            
+            let subString1 = String(inString[startIndex1..<endIndex1])
+            let subString2 = String(inString[startIndex2..<endIndex2])
+            
+            ret += String(format: "%@ %@ ", subString1, subString2)
+        }
+        
+        return ret.trimmingCharacters(in: CharacterSet.whitespaces)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func evaluateTest(_ inMask: UInt32, state inStatus: RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter.TestStatus, count inCount: UInt32, isDiesel inIsDiesel: Bool, service inService: Int) {
+        // We will have 11 available tests, diesel will be off, and the available tests are laid out in the OptionSet rawvalue.
+        let value: UInt32 = (inCount << 24) | (inIsDiesel ? 0x00080000 : 0)  | inMask
+        let valueString = splitUpString(String(format: "%08x", value))
+        let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: valueString, service: inService)
+        
+        let allTests = testTarget.allTests
+        
+        XCTAssertEqual(Int(inCount), allTests.count)
+        XCTAssertEqual(Int(inCount), testTarget.count)
+        
+        var tests: [RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter.TestCategories] = []
+
+        switch inStatus {
+        case .complete:
+            tests = testTarget.testsComplete
+        case .inProgress:
+            tests = testTarget.testsInProgress
+        case .unknown:
+            tests = testTarget.testsUnknown
+        }
+        
+        XCTAssertEqual(1, tests.count)
+    }
+    
+    /* ################################################################## */
+    /**
      Tests to see if every spark test is on.
      */
     func test_AllSparkOn() {
@@ -348,6 +398,48 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
             }
         }
     }
+    
+    /* ################################################################## */
+    /**
+     */
+    func test_EachSparkIndividually() {
+        let availableDTCsMask = [UInt32]([
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.componentsAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.fuelSystemAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.misfireAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.egrSystemAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.catalystAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.oxygenSensorHeaterAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.oxygenSensorAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.acRefrigerantAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.sasAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.evaporativeSystemAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.heatedCatalystAvailable.rawValue
+        ])
+        
+        let inProgressDTCsMask = [UInt32]([
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.componentsIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.fuelSystemIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.misfireIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.egrSystemIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.catalystIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.oxygenSensorHeaterIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.oxygenSensorIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.acRefrigerantIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.sasIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.evaporativeSystemIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.heatedCatalystIncomplete.rawValue
+        ])
+        
+        for mask in availableDTCsMask {
+            evaluateTest(mask, state: .complete, count: UInt32(availableDTCsMask.count), isDiesel: false, service: 1)
+        }
+        
+        for mask in inProgressDTCsMask {
+            evaluateTest(mask, state: .inProgress, count: UInt32(inProgressDTCsMask.count), isDiesel: false, service: 1)
+        }
+    }
+    
 
     /* ################################################################## */
     /**

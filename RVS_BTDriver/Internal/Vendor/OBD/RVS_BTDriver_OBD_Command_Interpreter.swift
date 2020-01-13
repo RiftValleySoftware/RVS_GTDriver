@@ -293,21 +293,27 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
     
     /* ################################################################## */
     /**
+     - returns: All of the tests, as an Array, as opposed to a set.
+     */
+    var allTests: [TestCategories] { return testAvailability.map { $0 } }
+    
+    /* ################################################################## */
+    /**
      - returns: Only the tests that have completed.
      */
-    var testsComplete: [TestCategories] { return testAvailability.compactMap { return .complete == $0.testStatus ? $0 : nil } }
-    
+    var testsComplete: [TestCategories] { return allTests.compactMap { return .complete == $0.testStatus ? $0 : nil } }
+
     /* ################################################################## */
     /**
      - returns: Only the tests that are still under way.
      */
-    var testsInProgress: [TestCategories] { return testAvailability.compactMap { return .inProgress == $0.testStatus ? $0 : nil } }
+    var testsInProgress: [TestCategories] { return allTests.compactMap { return .inProgress == $0.testStatus ? $0 : nil } }
     
     /* ################################################################## */
     /**
      - returns: Only the tests that are in an unknown state.
      */
-    var testsUnknown: [TestCategories] { return testAvailability.compactMap { return .unknown == $0.testStatus ? $0 : nil } }
+    var testsUnknown: [TestCategories] { return allTests.compactMap { return .unknown == $0.testStatus ? $0 : nil } }
 }
 
 /* ###################################################################################################################################### */

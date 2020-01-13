@@ -349,17 +349,17 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: Option
     static let diesel = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:                          RawValue(0x00080000))
     
     /// Components system test available
-    static let componentsAvailable = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:             RawValue(0x00004000))
+    static let componentsAvailable = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:             RawValue(0x00040000))
     /// Components system test still in progress
-    static let componentsIncomplete = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:            RawValue(0x00040000))
+    static let componentsIncomplete = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:            RawValue(0x00400000))
     /// Fuel system test available
-    static let fuelSystemAvailable = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:             RawValue(0x00002000))
+    static let fuelSystemAvailable = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:             RawValue(0x00020000))
     /// Fuel system test still in progress
-    static let fuelSystemIncomplete = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:            RawValue(0x00020000))
+    static let fuelSystemIncomplete = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:            RawValue(0x00200000))
     /// Misfire test available
-    static let misfireAvailable = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:                RawValue(0x00001000))
+    static let misfireAvailable = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:                RawValue(0x00010000))
     /// Misfire test still in progress
-    static let misfireIncomplete = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:               RawValue(0x00010000))
+    static let misfireIncomplete = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:               RawValue(0x00100000))
     /// EGR System test available
     static let egrSystemAvailable = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue:              RawValue(0x00008000))
     /// EGR System test still in progress
