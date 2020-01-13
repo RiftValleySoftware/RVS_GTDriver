@@ -196,7 +196,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
     /* ################################################################## */
     /**
      */
-    func evaluateTest(_ inMask: UInt32, state inStatus: RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter.TestStatus, count inCount: UInt32, isDiesel inIsDiesel: Bool, service inService: Int) {
+    func evaluateTest(_ inMask: UInt32, state inStatus: RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter.TestStatus, count inCount: UInt32, expected inExpected: Int = 1, isDiesel inIsDiesel: Bool = false, service inService: Int = 1) {
         // We will have 11 available tests, diesel will be off, and the available tests are laid out in the OptionSet rawvalue.
         let value: UInt32 = (inCount << 24) | (inIsDiesel ? 0x00080000 : 0)  | inMask
         let valueString = splitUpString(String(format: "%08x", value))
@@ -218,7 +218,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
             tests = testTarget.testsUnknown
         }
         
-        XCTAssertEqual(1, tests.count)
+        XCTAssertEqual(inExpected, tests.count)
     }
     
     /* ################################################################## */
@@ -432,11 +432,15 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
         ])
         
         for mask in availableDTCsMask {
-            evaluateTest(mask, state: .complete, count: UInt32(availableDTCsMask.count), isDiesel: false, service: 1)
+            evaluateTest(mask, state: .complete, count: UInt32(availableDTCsMask.count))
         }
         
         for mask in inProgressDTCsMask {
-            evaluateTest(mask, state: .inProgress, count: UInt32(inProgressDTCsMask.count), isDiesel: false, service: 1)
+            evaluateTest(mask, state: .inProgress, count: UInt32(inProgressDTCsMask.count))
+        }
+        
+        for _ in inProgressDTCsMask {
+            evaluateTest(0, state: .unknown, count: UInt32(inProgressDTCsMask.count), expected: 11)
         }
     }
     
@@ -606,6 +610,47 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
             default:
                 XCTFail("Illegal Test: \(String(describing: test))")
             }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func test_EachDieselIndividually() {
+        let availableDTCsMask = [UInt32]([
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.componentsAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.fuelSystemAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.misfireAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.egrSystemAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.catalystAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.pmFilterMonitoringAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.exhaustSensorAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.boostPressureAvailable.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.noxSCRAvailable.rawValue
+        ])
+        
+        let inProgressDTCsMask = [UInt32]([
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.componentsIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.fuelSystemIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.misfireIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.egrSystemIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.catalystIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.pmFilterMonitoringIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.exhaustSensorIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.boostPressureIncomplete.rawValue,
+            RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask.noxSCRIncomplete.rawValue
+        ])
+        
+        for mask in availableDTCsMask {
+            evaluateTest(mask, state: .complete, count: UInt32(availableDTCsMask.count), isDiesel: true)
+        }
+        
+        for mask in inProgressDTCsMask {
+            evaluateTest(mask, state: .inProgress, count: UInt32(inProgressDTCsMask.count), isDiesel: true)
+        }
+        
+        for _ in inProgressDTCsMask {
+            evaluateTest(0, state: .unknown, count: UInt32(inProgressDTCsMask.count), expected: 9, isDiesel: true)
         }
     }
 }
