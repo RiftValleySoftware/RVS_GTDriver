@@ -157,7 +157,7 @@ extension RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController {
                         #if DEBUG
                             print("Unknown Value Type: \(String(describing: property.value))")
                         #endif
-                        serviceProperties.append(RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple(key: key, value: "UNKNOWN VALUE", read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
+                        serviceProperties.append(RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewController_TableDataTuple(key: key, value: "SLUG-UNKNOWN".localizedVariant, read: property.canRead, write: property.canWrite, indicate: property.canIndicate, notify: property.canNotify))
                     }
                 }
                 

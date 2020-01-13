@@ -80,3 +80,8 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-HEADER-NOTIFY"                                        =       "N";
 "SLUG-HEADER-VALUE"                                         =       "VALUE";
 "SLUG-DEVICE-NAME-FORMAT"                                   =       "Device Name: %@";
+"SLUG-READ"                                                 =       "Read";
+"SLUG-WRITE"                                                =       "Write";
+"SLUG-INDICATE"                                             =       "Indicate";
+"SLUG-NOTIFY"                                               =       "Notify";
+"SLUG-UNKNOWN"                                              =       "UNKNOWN VALUE";

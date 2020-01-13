@@ -94,6 +94,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 "SLUG-COMMANDS"                                             =   "COMMANDS";
 "SLUG-AnyValue"                                             =   "Select A Command";
 "SLUG-CleanedValue"                                         =   "Value Only: ";
+"SLUG-UNKNOWN"                                              =   "UNKNOWN VALUE";
 
 /* ################################################################################################################################## */
 // MARK    =    - General -

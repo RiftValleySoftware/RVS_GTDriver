@@ -1143,7 +1143,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="property-display" focusRingType="none" id="pb2-Bg-YLZ" customClass="RVS_BTDriver_OBD_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView" customModule="RVS_BTDriver_OBD_Mac_Test_Harness" customModuleProvider="target">
+                                                        <tableCellView identifier="property-display" focusRingType="none" id="pb2-Bg-YLZ" customClass="RVS_BTDriver_MacOS_Test_Harness_Device_Detail_ViewControllerTableCellView" customModule="RVS_BTDriver_MacOS_Test_Harness" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="400" height="51"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <subviews>
