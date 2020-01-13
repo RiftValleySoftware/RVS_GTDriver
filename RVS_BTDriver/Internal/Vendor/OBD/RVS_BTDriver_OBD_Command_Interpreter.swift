@@ -307,7 +307,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
     /**
      - returns: Only the tests that are in an unknown state.
      */
-    var testsUnkown: [TestCategories] { return testAvailability.compactMap { return .unknown == $0.testStatus ? $0 : nil } }
+    var testsUnknown: [TestCategories] { return testAvailability.compactMap { return .unknown == $0.testStatus ? $0 : nil } }
 }
 
 /* ###################################################################################################################################### */
