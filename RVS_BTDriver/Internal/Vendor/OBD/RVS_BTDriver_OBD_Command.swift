@@ -425,7 +425,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask: Option
     /// CE/MIL on
     var isMILOn: Bool { return 0 != rawValue & Self.mil.rawValue }
     /// Number of Emissions-related DTCs
-    var count: Int { return Int(rawValue & Self.dtcCount.rawValue >> 24) }
+    var count: Int { return Int((Self.dtcCount.rawValue & rawValue) >> 24) }
     
     // MARK: B
     /// This is on, if the motor is compression (diesel).

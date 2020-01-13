@@ -39,9 +39,6 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "RVS_BTDriver_Test_OBD_ELM327">
-               </Test>
-               <Test
                   Identifier = "RVS_BTDriver_iOS_Tests_TestPropertyClass">
                </Test>
             </SkippedTests>

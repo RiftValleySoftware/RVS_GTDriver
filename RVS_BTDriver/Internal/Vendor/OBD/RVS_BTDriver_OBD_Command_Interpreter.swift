@@ -181,6 +181,37 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
         case boostPressure(TestStatus)
         /// NOx/SCR Monitor
         case noxSCR(TestStatus)
+        
+        /* ################################################################## */
+        /**
+         This is a quick way to see the status of the test.
+         
+         - returns: The status.
+         */
+        var testStatus: TestStatus {
+            var ret: TestStatus
+            
+            switch self {
+            case .components(let status),
+                 .fuelSystem(let status),
+                 .misfire(let status),
+                 .egr(let status),
+                 .catalyst(let status),
+                 .oxygenSensorHeater(let status),
+                 .oxygenSensor(let status),
+                 .acRefrigerant(let status),
+                 .sas(let status),
+                 .evaporativeSystem(let status),
+                 .heatedCatalyst(let status),
+                 .pmFilterMonitoring(let status),
+                 .exhaustSensor(let status),
+                 .boostPressure(let status),
+                 .noxSCR(let status):
+                ret = status
+            }
+            
+            return ret
+        }
     }
     
     /* ################################################################## */
@@ -211,43 +242,74 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
     
     /* ################################################################## */
     /**
-     This is on, if the motor is compression (diesel).
+     - returns: True, if the motor is compression (diesel).
      */
     var isDiesel: Bool { return _value.isDiesel }
     
     /* ################################################################## */
     /**
-     This is on, if the motor is spark.
+     - returns: True, if the motor is spark.
      */
     var isSpark: Bool { return !isDiesel }
 
     /* ################################################################## */
     /**
+     - returns: The number of DTCs available.
+     */
+    var count: Int { return _value.count }
+
+    /* ################################################################## */
+    /**
      This returns a Set of enums, containing the status of various tests. Each test has an associated value, containing its status.
-     If they are not supported (like diesel-specific tests in a standard engine), then .unsupported is flagged.
      */
     var testAvailability: Set<TestCategories> {
-        return [
+        var ret: Set<TestCategories> = [
             // All types of engine (no check for diesel)
             .components(_value.componentsAvailable ? .complete : _value.componentsIncomplete ? .inProgress :.unknown),
             .fuelSystem(_value.fuelSystemAvailable ? .complete : _value.fuelSystemIncomplete ? .inProgress : .unknown),
             .misfire(_value.misfireAvailable ? .complete : _value.misfireIncomplete ? .inProgress : .unknown),
             .egr(_value.egrSystemAvailable ? .complete : _value.egrSystemIncomplete ? .inProgress : .unknown),
-            .catalyst(_value.catalystAvailable ? .complete : _value.catalystIncomplete ? .inProgress : .unknown),
-            // Spark engine
-            .oxygenSensorHeater(_value.oxygenSensorHeaterAvailable ? .complete : _value.oxygenSensorHeaterIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
-            .oxygenSensor(_value.oxygenSensorAvailable ? .complete : _value.oxygenSensorIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
-            .acRefrigerant(_value.acRefrigerantAvailable ? .complete : _value.acRefrigerantIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
-            .sas(_value.sasAvailable ? .complete : _value.sasIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
-            .evaporativeSystem(_value.evaporativeSystemAvailable ? .complete : _value.evaporativeSystemIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
-            .heatedCatalyst(_value.heatedCatalystAvailable ? .complete : _value.heatedCatalystIncomplete ? .inProgress : isSpark ? .unknown : .unsupported),
-            // Compression (diesel) engine
-            .pmFilterMonitoring(_value.pmFilterMonitoringAvailable ? .complete : _value.pmFilterMonitoringIncomplete ? .inProgress : isDiesel ? .unknown : .unsupported),
-            .exhaustSensor(_value.exhaustSensorAvailable ? .complete : _value.exhaustSensorIncomplete ? .inProgress : isDiesel ? .unknown : .unsupported),
-            .boostPressure(_value.boostPressureAvailable ? .complete : _value.boostPressureIncomplete ? .inProgress : isDiesel ? .unknown : .unsupported),
-            .noxSCR(_value.noxSCRAvailable ? .complete : _value.noxSCRIncomplete ? .inProgress : isDiesel ? .unknown : .unsupported)
+            .catalyst(_value.catalystAvailable ? .complete : _value.catalystIncomplete ? .inProgress : .unknown)
         ]
+        
+        if isSpark {
+            ret = ret.union(Set<TestCategories>(arrayLiteral: .oxygenSensorHeater(_value.oxygenSensorHeaterAvailable ? .complete : _value.oxygenSensorHeaterIncomplete ? .inProgress : .unknown),
+                .oxygenSensor(_value.oxygenSensorAvailable ? .complete : _value.oxygenSensorIncomplete ? .inProgress : .unknown),
+                .acRefrigerant(_value.acRefrigerantAvailable ? .complete : _value.acRefrigerantIncomplete ? .inProgress : .unknown),
+                .sas(_value.sasAvailable ? .complete : _value.sasIncomplete ? .inProgress : .unknown),
+                .evaporativeSystem(_value.evaporativeSystemAvailable ? .complete : _value.evaporativeSystemIncomplete ? .inProgress : .unknown),
+                .heatedCatalyst(_value.heatedCatalystAvailable ? .complete : _value.heatedCatalystIncomplete ? .inProgress : .unknown)
+                )
+            )
+        } else {
+            ret = ret.union(Set<TestCategories>(arrayLiteral: .pmFilterMonitoring(_value.pmFilterMonitoringAvailable ? .complete : _value.pmFilterMonitoringIncomplete ? .inProgress : .unknown),
+                .exhaustSensor(_value.exhaustSensorAvailable ? .complete : _value.exhaustSensorIncomplete ? .inProgress : .unknown),
+                .boostPressure(_value.boostPressureAvailable ? .complete : _value.boostPressureIncomplete ? .inProgress : .unknown),
+                .noxSCR(_value.noxSCRAvailable ? .complete : _value.noxSCRIncomplete ? .inProgress : .unknown)
+                )
+            )
+        }
+        
+        return ret
     }
+    
+    /* ################################################################## */
+    /**
+     - returns: Only the tests that have completed.
+     */
+    var testsComplete: [TestCategories] { return testAvailability.compactMap { return .complete == $0.testStatus ? $0 : nil } }
+    
+    /* ################################################################## */
+    /**
+     - returns: Only the tests that are still under way.
+     */
+    var testsInProgress: [TestCategories] { return testAvailability.compactMap { return .inProgress == $0.testStatus ? $0 : nil } }
+    
+    /* ################################################################## */
+    /**
+     - returns: Only the tests that are in an unkown state.
+     */
+    var testsUnkown: [TestCategories] { return testAvailability.compactMap { return .unknown == $0.testStatus ? $0 : nil } }
 }
 
 /* ###################################################################################################################################### */

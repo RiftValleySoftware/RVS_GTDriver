@@ -166,3 +166,67 @@ class RVS_BTDriver_TestPID_0100_0200: XCTestCase {
         checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "00000001", service: 2))
     }
 }
+/* ###################################################################################################################################### */
+// MARK: - The Second Interpreter for Service 01 and 02 -
+/* ###################################################################################################################################### */
+class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
+    /* ################################################################## */
+    /**
+     Tests to see if every spark test is on.
+     */
+    func test_AllSparkOn() {
+        let coveredDTCsMask = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask([
+            .componentsAvailable,
+            .fuelSystemAvailable,
+            .misfireAvailable,
+            .egrSystemAvailable,
+            .catalystAvailable,
+            .oxygenSensorHeaterAvailable,
+            .oxygenSensorAvailable,
+            .acRefrigerantAvailable,
+            .sasAvailable,
+            .evaporativeSystemAvailable,
+            .heatedCatalystAvailable
+        ])
+        
+        let value: UInt32 = 0x0B000000 | coveredDTCsMask.rawValue
+        let valueString = String(format: "%08x", value)
+        var simulation: String = ""
+        for index in stride(from: 0, to: valueString.count, by: 4) {
+            let startIndex1 = valueString.index(valueString.startIndex, offsetBy: index)
+            let endIndex1 = valueString.index(startIndex1, offsetBy: 2)
+            let startIndex2 = endIndex1
+            let endIndex2 = valueString.index(startIndex2, offsetBy: 2)
+            
+            let subString1 = String(valueString[startIndex1..<endIndex1])
+            let subString2 = String(valueString[startIndex2..<endIndex2])
+            
+            simulation += String(format: "%@ %@ ", subString1, subString2)
+        }
+        
+        let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 01)
+        print(String(describing: testTarget))
+        let testCount  = testTarget.count
+        let supportedTests = testTarget.testsComplete
+        XCTAssertEqual(supportedTests.count, testCount)
+        XCTAssertEqual(11, testCount)
+        for test in supportedTests {
+            switch test {
+            case .components(let status),
+                 .fuelSystem(let status),
+                 .misfire(let status),
+                 .egr(let status),
+                 .catalyst(let status),
+                 .oxygenSensorHeater(let status),
+                 .oxygenSensor(let status),
+                 .acRefrigerant(let status),
+                 .sas(let status),
+                 .evaporativeSystem(let status),
+                 .heatedCatalyst(let status):
+                XCTAssertEqual(.complete, status)
+            default:
+                XCTFail("Illegal Test: \(String(describing: test))")
+            }
+        }
+    }
+}
