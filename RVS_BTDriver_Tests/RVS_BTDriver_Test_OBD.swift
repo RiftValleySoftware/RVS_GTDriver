@@ -204,6 +204,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
         
         let allTests = testTarget.allTests
         
+        XCTAssertEqual(inService, testTarget.service)
         XCTAssertEqual(Int(inCount), allTests.count)
         XCTAssertEqual(Int(inCount), testTarget.count)
         
@@ -321,7 +322,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
             simulation += String(format: "%@ %@ ", subString1, subString2)
         }
         
-        let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 01)
+        let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 02)
         let testCount  = testTarget.count
         let supportedTests = testTarget.testsInProgress
         XCTAssertTrue(testTarget.isSpark)
@@ -436,7 +437,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
         }
         
         for mask in inProgressDTCsMask {
-            evaluateTest(mask, state: .inProgress, count: UInt32(inProgressDTCsMask.count))
+            evaluateTest(mask, state: .inProgress, count: UInt32(inProgressDTCsMask.count), service: 2)
         }
         
         for _ in inProgressDTCsMask {
@@ -539,7 +540,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
             simulation += String(format: "%@ %@ ", subString1, subString2)
         }
         
-        let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 01)
+        let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 02)
         let testCount  = testTarget.count
         let supportedTests = testTarget.testsInProgress
         XCTAssertTrue(testTarget.isDiesel)
@@ -646,7 +647,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
         }
         
         for mask in inProgressDTCsMask {
-            evaluateTest(mask, state: .inProgress, count: UInt32(inProgressDTCsMask.count), isDiesel: true)
+            evaluateTest(mask, state: .inProgress, count: UInt32(inProgressDTCsMask.count), isDiesel: true, service: 2)
         }
         
         for _ in inProgressDTCsMask {

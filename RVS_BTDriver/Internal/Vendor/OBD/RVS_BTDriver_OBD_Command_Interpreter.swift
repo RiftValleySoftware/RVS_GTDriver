@@ -231,6 +231,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
     init(contents inContents: String, service inService: Int) {
         if  1 == inService || 2 == inService,   // Must be one of these. No other values allowed.
             let derivedValue = UInt32(inContents.hexOnly, radix: 16) {
+            service = inService
             _value = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue: derivedValue)
             return
         }
