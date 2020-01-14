@@ -82,8 +82,8 @@ class RVS_BTDriver_TestPID_0100_0200: XCTestCase {
             }
         }
         
-        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "FF FF FF FF", service: 1))
-        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "FFFFFFFF", service: 2))
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "FF FF FF FF", service: 2))
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "FFFFFFFF", service: 1))
     }
     
     /* ################################################################## */
@@ -127,7 +127,7 @@ class RVS_BTDriver_TestPID_0100_0200: XCTestCase {
         }
         
         checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "55555555", service: 1))
-        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "5 5 55 55     5    5", service: 2))
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "5 5 55 55     5    5", service: 1))
     }
     
     /* ################################################################## */
@@ -144,7 +144,7 @@ class RVS_BTDriver_TestPID_0100_0200: XCTestCase {
             XCTAssertEqual(match, pidsSupported[0])
         }
         
-        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "8 00 0000 0", service: 1))
+        checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "8 00 0000 0", service: 2))
         checkInterpreter(RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter(contents: "80 00 00 00", service: 2))
     }
     
