@@ -243,20 +243,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
         
         // We will have 11 available tests, diesel will be off, and the available tests are laid out in the OptionSet rawvalue.
         let value: UInt32 = 0x0B000000 | coveredDTCsMask.rawValue
-        let valueString = String(format: "%08x", value)
-        var simulation: String = ""
-        // This splits the string into pairs, like we get from the device.
-        for index in stride(from: 0, to: valueString.count, by: 4) {
-            let startIndex1 = valueString.index(valueString.startIndex, offsetBy: index)
-            let endIndex1 = valueString.index(startIndex1, offsetBy: 2)
-            let startIndex2 = endIndex1
-            let endIndex2 = valueString.index(startIndex2, offsetBy: 2)
-            
-            let subString1 = String(valueString[startIndex1..<endIndex1])
-            let subString2 = String(valueString[startIndex2..<endIndex2])
-            
-            simulation += String(format: "%@ %@ ", subString1, subString2)
-        }
+        let simulation = splitUpString(String(format: "%08x", value))
         
         let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 01)
         let testCount  = testTarget.count
@@ -307,21 +294,8 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
         
         // We will have 11 available tests, diesel will be off, and the available tests are laid out in the OptionSet rawvalue.
         let value: UInt32 = 0x0B000000 | coveredDTCsMask.rawValue
-        let valueString = String(format: "%08x", value)
-        var simulation: String = ""
-        // This splits the string into pairs, like we get from the device.
-        for index in stride(from: 0, to: valueString.count, by: 4) {
-            let startIndex1 = valueString.index(valueString.startIndex, offsetBy: index)
-            let endIndex1 = valueString.index(startIndex1, offsetBy: 2)
-            let startIndex2 = endIndex1
-            let endIndex2 = valueString.index(startIndex2, offsetBy: 2)
-            
-            let subString1 = String(valueString[startIndex1..<endIndex1])
-            let subString2 = String(valueString[startIndex2..<endIndex2])
-            
-            simulation += String(format: "%@ %@ ", subString1, subString2)
-        }
-        
+        let simulation = splitUpString(String(format: "%08x", value))
+
         let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 02)
         let testCount  = testTarget.count
         let supportedTests = testTarget.testsInProgress
@@ -357,21 +331,8 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
     func test_AllSparkUnkown() {
         // We will have 11 available tests, diesel will be off.
         let value: UInt32 = 0x0B000000
-        let valueString = String(format: "%08x", value)
-        var simulation: String = ""
-        // This splits the string into pairs, like we get from the device.
-        for index in stride(from: 0, to: valueString.count, by: 4) {
-            let startIndex1 = valueString.index(valueString.startIndex, offsetBy: index)
-            let endIndex1 = valueString.index(startIndex1, offsetBy: 2)
-            let startIndex2 = endIndex1
-            let endIndex2 = valueString.index(startIndex2, offsetBy: 2)
-            
-            let subString1 = String(valueString[startIndex1..<endIndex1])
-            let subString2 = String(valueString[startIndex2..<endIndex2])
-            
-            simulation += String(format: "%@ %@ ", subString1, subString2)
-        }
-        
+        let simulation = splitUpString(String(format: "%08x", value))
+
         let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 01)
         let testCount  = testTarget.count
         let supportedTests = testTarget.testsUnknown
@@ -465,21 +426,8 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
         
         // We will have 9 available tests, diesel will be on, and the available tests are laid out in the OptionSet rawvalue.
         let value: UInt32 = 0x09000000 | 0x00080000 | coveredDTCsMask.rawValue
-        let valueString = String(format: "%08x", value)
-        var simulation: String = ""
-        // This splits the string into pairs, like we get from the device.
-        for index in stride(from: 0, to: valueString.count, by: 4) {
-            let startIndex1 = valueString.index(valueString.startIndex, offsetBy: index)
-            let endIndex1 = valueString.index(startIndex1, offsetBy: 2)
-            let startIndex2 = endIndex1
-            let endIndex2 = valueString.index(startIndex2, offsetBy: 2)
-            
-            let subString1 = String(valueString[startIndex1..<endIndex1])
-            let subString2 = String(valueString[startIndex2..<endIndex2])
-            
-            simulation += String(format: "%@ %@ ", subString1, subString2)
-        }
-        
+        let simulation = splitUpString(String(format: "%08x", value))
+
         let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 01)
         let testCount  = testTarget.count
         let supportedTests = testTarget.testsComplete
@@ -525,21 +473,8 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
         
         // We will have 9 available tests, diesel will be on, and the available tests are laid out in the OptionSet rawvalue.
         let value: UInt32 = 0x09000000 | 0x00080000 | coveredDTCsMask.rawValue
-        let valueString = String(format: "%08x", value)
-        var simulation: String = ""
-        // This splits the string into pairs, like we get from the device.
-        for index in stride(from: 0, to: valueString.count, by: 4) {
-            let startIndex1 = valueString.index(valueString.startIndex, offsetBy: index)
-            let endIndex1 = valueString.index(startIndex1, offsetBy: 2)
-            let startIndex2 = endIndex1
-            let endIndex2 = valueString.index(startIndex2, offsetBy: 2)
-            
-            let subString1 = String(valueString[startIndex1..<endIndex1])
-            let subString2 = String(valueString[startIndex2..<endIndex2])
-            
-            simulation += String(format: "%@ %@ ", subString1, subString2)
-        }
-        
+        let simulation = splitUpString(String(format: "%08x", value))
+
         let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 02)
         let testCount  = testTarget.count
         let supportedTests = testTarget.testsInProgress
@@ -573,21 +508,8 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
     func test_AllDieselUnknown() {
         // We will have 9 available tests, diesel will be on.
         let value: UInt32 = 0x09000000 | 0x00080000
-        let valueString = String(format: "%08x", value)
-        var simulation: String = ""
-        // This splits the string into pairs, like we get from the device.
-        for index in stride(from: 0, to: valueString.count, by: 4) {
-            let startIndex1 = valueString.index(valueString.startIndex, offsetBy: index)
-            let endIndex1 = valueString.index(startIndex1, offsetBy: 2)
-            let startIndex2 = endIndex1
-            let endIndex2 = valueString.index(startIndex2, offsetBy: 2)
-            
-            let subString1 = String(valueString[startIndex1..<endIndex1])
-            let subString2 = String(valueString[startIndex2..<endIndex2])
-            
-            simulation += String(format: "%@ %@ ", subString1, subString2)
-        }
-        
+        let simulation = splitUpString(String(format: "%08x", value))
+
         let testTarget = RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter(contents: simulation.trimmingCharacters(in: CharacterSet.whitespaces), service: 01)
         let testCount  = testTarget.count
         let supportedTests = testTarget.testsUnknown
