@@ -369,50 +369,50 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
     
     /* ################################################################## */
     /**
-     - returns: The sensor test data for sensor 1. This is temperature, in degrees celsius.
+     - returns: The sensor test data for sensor 1. This is temperature, in degrees celsius. nil, if the sensor data is not available.
      */
-    var sensor01TemperatureInDegreesCelsius: Float {
+    var sensor01TemperatureInDegreesCelsius: Float? {
         if  isSensor01DataAvailable,
             3 < _data.count {
             return (Float(_data[3]) / 10) - 40
         }
-        return 0
+        return nil
     }
 
     /* ################################################################## */
     /**
-     - returns: The sensor test data for sensor 2. This is temperature, in degrees celsius.
+     - returns: The sensor test data for sensor 2. This is temperature, in degrees celsius. nil, if the sensor data is not available.
      */
-    var sensor02TemperatureInDegreesCelsius: Float {
+    var sensor02TemperatureInDegreesCelsius: Float? {
         if  isSensor02DataAvailable,
             2 < _data.count {
             return (Float(_data[2]) / 10) - 40
         }
-        return 0
+        return nil
     }
 
     /* ################################################################## */
     /**
-     - returns: The sensor test data for sensor 3. This is temperature, in degrees celsius.
+     - returns: The sensor test data for sensor 3. This is temperature, in degrees celsius. nil, if the sensor data is not available.
      */
-    var sensor03TemperatureInDegreesCelsius: Float {
+    var sensor03TemperatureInDegreesCelsius: Float? {
         if  isSensor03DataAvailable,
             1 < _data.count {
             return (Float(_data[1]) / 10) - 40
         }
-        return 0
+        return nil
     }
 
     /* ################################################################## */
     /**
-     - returns: The sensor test data for sensor 4. This is temperature, in degrees celsius.
+     - returns: The sensor test data for sensor 4. This is temperature, in degrees celsius. nil, if the sensor data is not available.
      */
-    var sensor04TemperatureInDegreesCelsius: Float {
+    var sensor04TemperatureInDegreesCelsius: Float? {
         if  isSensor04DataAvailable,
             0 < _data.count {
             return (Float(_data[0]) / 10) - 40
         }
-        return 0
+        return nil
     }
     
     /* ################################################################## */
@@ -422,10 +422,10 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
      */
     var temperatures: [Float?] {
         var ret: [Float?] = []
-        ret.append(isSensor01DataAvailable ? sensor01TemperatureInDegreesCelsius : nil)
-        ret.append(isSensor02DataAvailable ? sensor02TemperatureInDegreesCelsius : nil)
-        ret.append(isSensor03DataAvailable ? sensor03TemperatureInDegreesCelsius : nil)
-        ret.append(isSensor04DataAvailable ? sensor04TemperatureInDegreesCelsius : nil)
+        ret.append(sensor01TemperatureInDegreesCelsius)
+        ret.append(sensor02TemperatureInDegreesCelsius)
+        ret.append(sensor03TemperatureInDegreesCelsius)
+        ret.append(sensor04TemperatureInDegreesCelsius)
         
         return ret
     }
