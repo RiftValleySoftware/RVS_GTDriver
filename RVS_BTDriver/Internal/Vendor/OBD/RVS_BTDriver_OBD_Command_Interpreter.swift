@@ -336,66 +336,98 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
     var service: Int = 0
     
     // MARK: ABCDE A = 0xFF0000000000000000, B = 0x00FFFF000000000000, C =  0x000000FFFF00000000, D = 0x0000000000FFFF0000, E = 0x00000000000000FFFF
-    
+
     /// This is the header, and it will be a bitmask, denoting which of the following 16-bit numbers represent a test result.
     private let _header: RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader
-    /// This is an Array of 16-bit numbers, representing test results.
+    /// This is an Array of 16-bit numbers, representing test results in binary form, as UInt32.
+    /// Calculated Temperature is (Float(B|C|D|E) / 10.0) - 40.0
     private let _data: [UInt16]
     
-    /// - returns: True, if Sensor 4 has tests.
-    var isSensor04DataAvailable: Bool { return _header.isSensor04Supported }
-    
-    /// - returns: True, if Sensor 3 has tests.
-    var isSensor03DataAvailable: Bool { return _header.isSensor03Supported }
-    
-    /// - returns: True, if Sensor 2 has tests.
-    var isSensor02DataAvailable: Bool { return _header.isSensor02Supported }
-    
-    /// - returns: True, if Sensor 1 has tests.
+    /* ################################################################## */
+    /**
+     - returns: True, if Sensor 1 has tests.
+     */
     var isSensor01DataAvailable: Bool { return _header.isSensor01Supported }
+    
+    /* ################################################################## */
+    /**
+     - returns: True, if Sensor 2 has tests.
+     */
+    var isSensor02DataAvailable: Bool { return _header.isSensor02Supported }
 
     /* ################################################################## */
     /**
-     - returns: The sensor test data for sensor 4.
+     - returns: True, if Sensor 3 has tests.
      */
-    var sensor04: UInt16 {
-        if isSensor04DataAvailable && 0 < _data.count {
-            return _data[0]
+    var isSensor03DataAvailable: Bool { return _header.isSensor03Supported }
+
+    /* ################################################################## */
+    /**
+     - returns: True, if Sensor 4 has tests.
+     */
+    var isSensor04DataAvailable: Bool { return _header.isSensor04Supported }
+    
+    /* ################################################################## */
+    /**
+     - returns: The sensor test data for sensor 1. This is temperature, in degrees celsius.
+     */
+    var sensor01TemperatureInDegreesCelsius: Float {
+        if  isSensor01DataAvailable,
+            3 < _data.count {
+            return (Float(_data[3]) / 10) - 40
+        }
+        return 0
+    }
+
+    /* ################################################################## */
+    /**
+     - returns: The sensor test data for sensor 2. This is temperature, in degrees celsius.
+     */
+    var sensor02TemperatureInDegreesCelsius: Float {
+        if  isSensor02DataAvailable,
+            2 < _data.count {
+            return (Float(_data[2]) / 10) - 40
+        }
+        return 0
+    }
+
+    /* ################################################################## */
+    /**
+     - returns: The sensor test data for sensor 3. This is temperature, in degrees celsius.
+     */
+    var sensor03TemperatureInDegreesCelsius: Float {
+        if  isSensor03DataAvailable,
+            1 < _data.count {
+            return (Float(_data[1]) / 10) - 40
+        }
+        return 0
+    }
+
+    /* ################################################################## */
+    /**
+     - returns: The sensor test data for sensor 4. This is temperature, in degrees celsius.
+     */
+    var sensor04TemperatureInDegreesCelsius: Float {
+        if  isSensor04DataAvailable,
+            0 < _data.count {
+            return (Float(_data[0]) / 10) - 40
         }
         return 0
     }
     
     /* ################################################################## */
     /**
-     - returns: The sensor test data for sensor 3.
+     - returns: The temperatures, in degrees celsius, of the sensors. nil, if the sensor data is not available.
+                The Array is 0 = Sensor 1, 1 = Sensor 2, 2 = Sensor 3, and 3 = Sensor 4.
      */
-    var sensor03: UInt16 {
-        if isSensor03DataAvailable && 1 < _data.count {
-            return _data[1]
-        }
-        return 0
-    }
-    
-    /* ################################################################## */
-    /**
-     - returns: The sensor test data for sensor 2.
-     */
-    var sensor02: UInt16 {
-        if isSensor02DataAvailable && 2 < _data.count {
-            return _data[2]
-        }
-        return 0
-    }
-    
-    /* ################################################################## */
-    /**
-     - returns: The sensor test data for sensor 1.
-     */
-    var sensor01: UInt16 {
-        if isSensor01DataAvailable && 2 < _data.count {
-            return _data[3]
-        }
-        return 0
+    var temperatures: [Float?] {
+        var ret: [Float?] = []
+        ret.append(isSensor01DataAvailable ? sensor01TemperatureInDegreesCelsius : nil)
+        ret.append(isSensor02DataAvailable ? sensor02TemperatureInDegreesCelsius : nil)
+        ret.append(isSensor03DataAvailable ? sensor03TemperatureInDegreesCelsius : nil)
+        ret.append(isSensor04DataAvailable ? sensor04TemperatureInDegreesCelsius : nil)
+        
+        return ret
     }
 
     /* ################################################################## */
@@ -406,21 +438,24 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
       - parameter service: The service (either 1 or 2), to which this interpreter applies.
       */
      init(contents inContents: String, service inService: Int) {
-        var split = inContents.split(separator: " ")
-        if 2 < split.count {
-            if let head = UInt8(split.removeFirst(), radix: 16) {
-                _header = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader(rawValue: head)
+        if  1 == inService || 2 == inService {   // Must be one of these. No other values allowed.
+            service = inService
+            var split = inContents.split(separator: " ")
+            if 2 < split.count {
+                if let head = UInt8(split.removeFirst(), radix: 16) {
+                    _header = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader(rawValue: head)
 
-                var contents: [UInt16] = []
-                
-                for i in stride(from: 0, to: split.count, by: 2) {
-                    if let value = UInt16(String(split[i] + split[i+1]), radix: 16) {
-                        contents.append(value)
+                    var contents: [UInt16] = []
+                    
+                    for i in stride(from: 0, to: split.count, by: 2) {
+                        if let value = UInt16(String(split[i] + split[i+1]), radix: 16) {
+                            contents.append(value)
+                        }
                     }
+                    
+                    _data  = contents
+                    return
                 }
-                
-                _data  = contents
-                return
             }
         }
         
