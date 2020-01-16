@@ -33,7 +33,7 @@ jazzy   --readme ./RVS_BTDriver_MacOS_Test_Harness/README.md \
         --output docs/macOSTestHarness \
         --build-tool-arguments -scheme,RVS_BTDriver_MacOS_Test_Harness \
         --min_acl private
-cp img/* docs/macOSTestHarness/img
+cp RVS_BTDriver_MacOS_Test_Harness/icon.png docs/macOSTestHarness/icon.png
 
 echo "Creating OBD MacOS Test Harness Docs"
 
@@ -43,7 +43,7 @@ jazzy   --readme ./RVS_BTDriver_OBD_Mac_Test_Harness/README.md \
         --output docs/macOSOBDTestHarness \
         --build-tool-arguments -scheme,RVS_BTDriver_OBD_Mac_Test_Harness \
         --min_acl private
-cp img/* docs/macOSOBDTestHarness/img
+cp RVS_BTDriver_OBD_Mac_Test_Harness/icon.png docs/macOSOBDTestHarness/icon.png
 
 echo "Creating iOS Test Harness Docs"
 
@@ -53,8 +53,7 @@ jazzy   --readme ./RVS_BTDriver_iOS_Test_Harness/README.md \
         --output docs/iOSTestHarness \
         --build-tool-arguments -scheme,RVS_BTDriver_iOS_Test_Harness \
         --min_acl private
-cp img/TestHarnessIcon.png docs/iOSTestHarness/icon.png
-cp img/* docs/iOSTestHarness/img
+cp RVS_BTDriver_iOS_Test_Harness/icon.png docs/iOSTestHarness/icon.png
 
 echo "Creating WatchOS Test Harness Docs"
 
@@ -64,8 +63,7 @@ jazzy   --readme ./RVS_BTDriver_WatchOS_Test_Harness/README.md \
         --output docs/watchOSTestHarness \
         --build-tool-arguments -scheme,RVS_BTDriver_WatchOS_Test_Harness \
         --min_acl private
-cp img/TestHarnessIcon.png docs/watchOSTestHarness/icon.png
-cp img/* docs/watchOSTestHarness/img
+cp RVS_BTDriver_WatchOS_Test_Harness/icon.png docs/watchOSTestHarness/icon.png
 
 echo "Creating tvOS Test Harness Docs"
 
@@ -75,7 +73,6 @@ jazzy   --readme ./RVS_BTDriver_tvOS_Test_Harness/README.md \
         --output docs/tvOSTestHarness \
         --build-tool-arguments -scheme,RVS_BTDriver_tvOS_Test_Harness \
         --min_acl private
-cp img/TestHarnessIcon.png docs/tvOSTestHarness/icon.png
-cp img/* docs/tvOSTestHarness/img
+cp RVS_BTDriver_tvOS_Test_Harness/icon.png docs/tvOSTestHarness/icon.png
 
 cd "${CWD}"
