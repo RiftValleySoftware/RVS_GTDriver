@@ -1,4 +1,4 @@
-![Icon](./icon.png)
+![Icon](icon.png)
 
 RVS_BTDriver (in GitHub as RVS_GTDriver, for Historical Reasons)
 =
