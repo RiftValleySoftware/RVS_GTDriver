@@ -27,7 +27,7 @@ cp img/* docs/internal/img
 
 echo "Creating MacOS Test Harness Docs"
 
-jazzy   --readme ./README-MacOS-Harness.md \
+jazzy   --readme ./RVS_BTDriver_MacOS_Test_Harness/README.md \
         --github_url https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_MacOS_Test_Harness \
         --title RVS_BTDriver\ MacOS\ Test\ Harness\ Project\ Code\ Doumentation \
         --output docs/macOSTestHarness \
@@ -37,7 +37,7 @@ cp img/* docs/macOSTestHarness/img
 
 echo "Creating OBD MacOS Test Harness Docs"
 
-jazzy   --readme ./README-MacOS-OBD-Harness.md \
+jazzy   --readme ./RVS_BTDriver_OBD_Mac_Test_Harness/README.md \
         --github_url https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_OBD_Mac_Test_Harness \
         --title RVS_BTDriver\ MacOS\ OBD\ Test\ Harness\ Project\ Code\ Doumentation \
         --output docs/macOSOBDTestHarness \
@@ -47,7 +47,7 @@ cp img/* docs/macOSOBDTestHarness/img
 
 echo "Creating iOS Test Harness Docs"
 
-jazzy   --readme ./README-iOS-Harness.md \
+jazzy   --readme ./RVS_BTDriver_iOS_Test_Harness/README.md \
         --github_url https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_iOS_Test_Harness \
         --title RVS_BTDriver\ iOS/iPadOS\ Test\ Harness\ Project\ Code\ Doumentation \
         --output docs/iOSTestHarness \
@@ -67,15 +67,15 @@ jazzy   --readme ./README-WatchOS-Harness.md \
 cp img/TestHarnessIcon.png docs/watchOSTestHarness/icon.png
 cp img/* docs/watchOSTestHarness/img
 
-#echo "Creating tvOS Test Harness Docs"
-#
-#jazzy   --readme ./README-API.md \
-#        --github_url https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness \
-#        --title RVS_BTDriver\ tvOS\ Test\ Harness\ Project\ Code\ Doumentation \
-#        --output docs/tvOSTestHarness \
-#        --build-tool-arguments -scheme,RVS_BTDriver_tvOS_Test_Harness \
-#        --min_acl private
-#cp img/TestHarnessIcon.png docs/tvOSTestHarness/icon.png
-#cp img/* docs/tvOSTestHarness/img
+echo "Creating tvOS Test Harness Docs"
+
+jazzy   --readme ./RVS_BTDriver_tvOS_Test_Harness/README.md \
+        --github_url https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_tvOS_Test_Harness \
+        --title RVS_BTDriver\ tvOS\ Test\ Harness\ Project\ Code\ Doumentation \
+        --output docs/tvOSTestHarness \
+        --build-tool-arguments -scheme,RVS_BTDriver_tvOS_Test_Harness \
+        --min_acl private
+cp img/TestHarnessIcon.png docs/tvOSTestHarness/icon.png
+cp img/* docs/tvOSTestHarness/img
 
 cd "${CWD}"

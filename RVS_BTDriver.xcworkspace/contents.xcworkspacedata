@@ -14,16 +14,19 @@
          location = "group:README-API.md">
       </FileRef>
       <FileRef
-         location = "group:README-MacOS-Harness.md">
+         location = "group:RVS_BTDriver_iOS_Test_Harness/README.md">
       </FileRef>
       <FileRef
-         location = "group:README-MacOS-OBD-Harness.md">
+         location = "group:RVS_BTDriver_MacOS_Test_Harness/README.md">
       </FileRef>
       <FileRef
-         location = "group:README-WatchOS-Harness.md">
+         location = "group:RVS_BTDriver_OBD_Mac_Test_Harness/README.md">
       </FileRef>
       <FileRef
-         location = "group:README-iOS-Harness.md">
+         location = "group:RVS_BTDriver_WatchOS_Test_Harness/README.md">
+      </FileRef>
+      <FileRef
+         location = "group:RVS_BTDriver_tvOS_Test_Harness/README.md">
       </FileRef>
       <FileRef
          location = "group:CHANGELOG.md">
