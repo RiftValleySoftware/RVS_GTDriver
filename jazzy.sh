@@ -58,7 +58,7 @@ cp img/* docs/iOSTestHarness/img
 
 echo "Creating WatchOS Test Harness Docs"
 
-jazzy   --readme ./README-WatchOS-Harness.md \
+jazzy   --readme ./RVS_BTDriver_WatchOS_Test_Harness/README.md \
         --github_url https://github.com/RiftValleySoftware/RVS_GTDriver/tree/master/RVS_BTDriver_WatchOS_Test_Harness \
         --title RVS_BTDriver\ WatchOS\ Test\ Harness\ Project\ Code\ Doumentation \
         --output docs/watchOSTestHarness \
