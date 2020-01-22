@@ -171,6 +171,7 @@ class RVS_BTDriver_TestPID_0100_0200: XCTestCase {
 // MARK: - The Second Interpreter for Service 01 and 02 -
 /* ###################################################################################################################################### */
 class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
+    // MARK: Spark Engine Tests
     /* ################################################################## */
     /**
      */
@@ -407,6 +408,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
     }
     
 
+    // MARK: Diesel Engine Tests
     /* ################################################################## */
     /**
      Tests to see if every diesel test is on.
@@ -574,6 +576,71 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
         
         for _ in inProgressDTCsMask {
             evaluateTest(0, state: .unknown, count: UInt32(inProgressDTCsMask.count), expected: 9, isDiesel: true)
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Testing Special OBD PID Interpreters -
+/* ###################################################################################################################################### */
+/**
+ */
+/* ###################################################################################################################################### */
+// MARK: - The First Interpreter for Service 01 and 02 Exhaust Gast Temeprature Sensors -
+/* ###################################################################################################################################### */
+class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
+    /* ################################################################## */
+    /**
+     */
+    func testAllSensors() {
+        for service in [1, 2] {
+            var command = "0F 00 00 00 00 00 00 00 00"
+            var testTarget = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature(contents: command, service: service)
+            XCTAssertTrue(testTarget.isSensor01DataAvailable)
+            XCTAssertTrue(testTarget.isSensor02DataAvailable)
+            XCTAssertTrue(testTarget.isSensor03DataAvailable)
+            XCTAssertTrue(testTarget.isSensor04DataAvailable)
+            
+            XCTAssertEqual(-40.0, testTarget.sensor01TemperatureInDegreesCelsius)
+            XCTAssertEqual(-40.0, testTarget.sensor02TemperatureInDegreesCelsius)
+            XCTAssertEqual(-40.0, testTarget.sensor03TemperatureInDegreesCelsius)
+            XCTAssertEqual(-40.0, testTarget.sensor04TemperatureInDegreesCelsius)
+            
+            command = "0F FF FF FF FF FF FF FF FF"
+            testTarget = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature(contents: command, service: service)
+            XCTAssertTrue(testTarget.isSensor01DataAvailable)
+            XCTAssertTrue(testTarget.isSensor02DataAvailable)
+            XCTAssertTrue(testTarget.isSensor03DataAvailable)
+            XCTAssertTrue(testTarget.isSensor04DataAvailable)
+            
+            XCTAssertEqual(6513.5, testTarget.sensor01TemperatureInDegreesCelsius)
+            XCTAssertEqual(6513.5, testTarget.sensor02TemperatureInDegreesCelsius)
+            XCTAssertEqual(6513.5, testTarget.sensor03TemperatureInDegreesCelsius)
+            XCTAssertEqual(6513.5, testTarget.sensor04TemperatureInDegreesCelsius)
+            
+            command = "0F 00 FF 00 FF 00 FF 00 FF"
+            testTarget = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature(contents: command, service: service)
+            XCTAssertTrue(testTarget.isSensor01DataAvailable)
+            XCTAssertTrue(testTarget.isSensor02DataAvailable)
+            XCTAssertTrue(testTarget.isSensor03DataAvailable)
+            XCTAssertTrue(testTarget.isSensor04DataAvailable)
+            
+            XCTAssertEqual(-14.5, testTarget.sensor01TemperatureInDegreesCelsius)
+            XCTAssertEqual(-14.5, testTarget.sensor02TemperatureInDegreesCelsius)
+            XCTAssertEqual(-14.5, testTarget.sensor03TemperatureInDegreesCelsius)
+            XCTAssertEqual(-14.5, testTarget.sensor04TemperatureInDegreesCelsius)
+            
+            command = "0F 01 90 01 90 01 90 01 90"
+            testTarget = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature(contents: command, service: service)
+            XCTAssertTrue(testTarget.isSensor01DataAvailable)
+            XCTAssertTrue(testTarget.isSensor02DataAvailable)
+            XCTAssertTrue(testTarget.isSensor03DataAvailable)
+            XCTAssertTrue(testTarget.isSensor04DataAvailable)
+            
+            XCTAssertEqual(0, testTarget.sensor01TemperatureInDegreesCelsius)
+            XCTAssertEqual(0, testTarget.sensor02TemperatureInDegreesCelsius)
+            XCTAssertEqual(0, testTarget.sensor03TemperatureInDegreesCelsius)
+            XCTAssertEqual(0, testTarget.sensor04TemperatureInDegreesCelsius)
         }
     }
 }

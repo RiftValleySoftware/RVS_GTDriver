@@ -522,14 +522,14 @@ struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader: Opti
     static let egtsensor01 = RawValue(0x01)
     
     /// - returns: True, if Sensor 4 has tests.
-    var isSensor04Supported: Bool { return 0 != rawValue & Self.egtsensor04 }
+    var isSensor04Supported: Bool { return 0 != (rawValue & Self.egtsensor04) }
     
     /// - returns: True, if Sensor 3 has tests.
-    var isSensor03Supported: Bool { return 0 != rawValue & Self.egtsensor03 }
+    var isSensor03Supported: Bool { return 0 != (rawValue & Self.egtsensor03) }
     
     /// - returns: True, if Sensor 2 has tests.
-    var isSensor02Supported: Bool { return 0 != rawValue & Self.egtsensor02 }
+    var isSensor02Supported: Bool { return 0 != (rawValue & Self.egtsensor02) }
     
     /// - returns: True, if Sensor 1 has tests.
-    var isSensor01Supported: Bool { return 0 != rawValue & Self.egtsensor01 }
+    var isSensor01Supported: Bool { return 0 != (rawValue & Self.egtsensor01) }
 }

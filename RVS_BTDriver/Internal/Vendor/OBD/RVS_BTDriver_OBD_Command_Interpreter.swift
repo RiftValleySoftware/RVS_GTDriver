@@ -321,7 +321,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
 // MARK: - RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature -
 /* ###################################################################################################################################### */
 /**
- This is a special struct that is used to decode the exhaust gas temperature sensor data.
+ This is a special struct that is used to decode the exhaust gas temperature sensor data (PID 0178/0179).
  */
 internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     /* ################################################################## */
@@ -335,7 +335,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
     
     var service: Int = 0
     
-    // MARK: ABCDE A = 0xFF0000000000000000, B = 0x00FFFF000000000000, C =  0x000000FFFF00000000, D = 0x0000000000FFFF0000, E = 0x00000000000000FFFF
+    // MARK: ABCDE A = 0x0F0000000000000000, B = 0x00FFFF000000000000, C =  0x000000FFFF00000000, D = 0x0000000000FFFF0000, E = 0x00000000000000FFFF
 
     /// This is the header, and it will be a bitmask, denoting which of the following 16-bit numbers represent a test result.
     private let _header: RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader
