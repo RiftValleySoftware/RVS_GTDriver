@@ -440,21 +440,42 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
      init(contents inContents: String, service inService: Int) {
         if  1 == inService || 2 == inService {   // Must be one of these. No other values allowed.
             service = inService
-            var split = inContents.split(separator: " ")
-            if 2 < split.count {
-                if let head = UInt8(split.removeFirst(), radix: 16) {
-                    _header = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader(rawValue: head)
-
-                    var contents: [UInt16] = []
-                    
-                    for i in stride(from: 0, to: split.count, by: 2) {
-                        if let value = UInt16(String(split[i] + split[i+1]), radix: 16) {
-                            contents.append(value)
-                        }
+            
+            // What we do here, is mash everything into a contiguous hex string, then split it up by twos for stricter parsing.
+            let compacted = inContents.hexOnly
+            
+            assert(18 == compacted.count, "Must be exactly 9 bytes, as a hex string")
+            
+            if 18 == compacted.count {
+                var stringRange:Range<String.Index> = compacted.startIndex..<compacted.index(compacted.startIndex, offsetBy: 2)
+                var split:[String] = []
+                
+                for i in 0..<9 {
+                    let substr = String(compacted[stringRange])
+                    let nextEndOffset = ((i + 1) * 2) + 2
+                    split.append(substr)
+                    if stringRange.upperBound < compacted.endIndex {
+                        stringRange = stringRange.upperBound..<compacted.index(compacted.startIndex, offsetBy: nextEndOffset)
                     }
-                    
-                    _data  = contents
-                    return
+                }
+                
+                assert(9 == split.count, "Must be exactly 9 elements, as an Array of 2-digit hex strings")
+                
+                if 9 == split.count {
+                    if let head = UInt8(split.removeFirst(), radix: 16) {
+                        _header = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature_EGTHeader(rawValue: head)
+
+                        var contents: [UInt16] = []
+                        
+                        for i in stride(from: 0, to: split.count, by: 2) {
+                            if let value = UInt16(String(split[i] + split[i+1]), radix: 16) {
+                                contents.append(value)
+                            }
+                        }
+                        
+                        _data  = contents
+                        return
+                    }
                 }
             }
         }

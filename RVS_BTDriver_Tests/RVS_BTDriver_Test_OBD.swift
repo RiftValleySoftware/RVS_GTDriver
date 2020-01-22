@@ -589,6 +589,38 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
 // MARK: - The First Interpreter for Service 01 and 02 Exhaust Gast Temeprature Sensors -
 /* ###################################################################################################################################### */
 class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
+    let testFlagMax: UInt16 = 0xFFFF
+    let testFlagMin: UInt16 = 0x0000
+    let tesFlagMinus14: UInt16 = 0x00FF
+    let testFlagZero: UInt16 = 0x0190
+
+    /* ################################################################## */
+    /**
+     */
+    func populateSensors(values inValues: [UInt16?]) -> String {
+        precondition(4 == inValues.count)
+        var ret = ""
+        var val = 0
+        
+        for sensorData in inValues.enumerated() {
+            if nil != sensorData.element {
+                val |= 1 << sensorData.offset
+            }
+        }
+        
+        ret = String(format: "%02X", val)
+        
+        for offset in stride(from: 3, to: -1, by: -1) {
+            if let val = inValues[offset] {
+                ret += String(format: " %04X", val)
+            } else {
+                ret += " 0000"
+            }
+        }
+        
+        return ret
+    }
+    
     /* ################################################################## */
     /**
      */
@@ -606,7 +638,7 @@ class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
             XCTAssertEqual(-40.0, testTarget.sensor03TemperatureInDegreesCelsius)
             XCTAssertEqual(-40.0, testTarget.sensor04TemperatureInDegreesCelsius)
             
-            command = "0F FF FF FF FF FF FF FF FF"
+            command = "0F FFFF FFFF FFFF FFFF"
             testTarget = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature(contents: command, service: service)
             XCTAssertTrue(testTarget.isSensor01DataAvailable)
             XCTAssertTrue(testTarget.isSensor02DataAvailable)
@@ -618,7 +650,7 @@ class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
             XCTAssertEqual(6513.5, testTarget.sensor03TemperatureInDegreesCelsius)
             XCTAssertEqual(6513.5, testTarget.sensor04TemperatureInDegreesCelsius)
             
-            command = "0F 00 FF 00 FF 00 FF 00 FF"
+            command = "0F00FF00FF00FF00FF"
             testTarget = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature(contents: command, service: service)
             XCTAssertTrue(testTarget.isSensor01DataAvailable)
             XCTAssertTrue(testTarget.isSensor02DataAvailable)
@@ -630,7 +662,7 @@ class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
             XCTAssertEqual(-14.5, testTarget.sensor03TemperatureInDegreesCelsius)
             XCTAssertEqual(-14.5, testTarget.sensor04TemperatureInDegreesCelsius)
             
-            command = "0F 01 90 01 90 01 90 01 90"
+            command = "0F 0190 01 90 01 90 0190"
             testTarget = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature(contents: command, service: service)
             XCTAssertTrue(testTarget.isSensor01DataAvailable)
             XCTAssertTrue(testTarget.isSensor02DataAvailable)
@@ -641,6 +673,42 @@ class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
             XCTAssertEqual(0, testTarget.sensor02TemperatureInDegreesCelsius)
             XCTAssertEqual(0, testTarget.sensor03TemperatureInDegreesCelsius)
             XCTAssertEqual(0, testTarget.sensor04TemperatureInDegreesCelsius)
+
+            let allSensors = [testFlagMin, tesFlagMinus14, testFlagZero, testFlagMax]
+            command = populateSensors(values: allSensors)
+            testTarget = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature(contents: command, service: service)
+            XCTAssertEqual(-40.0, testTarget.sensor01TemperatureInDegreesCelsius)
+            XCTAssertEqual(-14.5, testTarget.sensor02TemperatureInDegreesCelsius)
+            XCTAssertEqual(0, testTarget.sensor03TemperatureInDegreesCelsius)
+            XCTAssertEqual(6513.5, testTarget.sensor04TemperatureInDegreesCelsius)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testEachSensorIndependently() {
+        for service in [1, 2] {
+            let allValues = [testFlagMin, tesFlagMinus14, testFlagZero, testFlagMax]
+            for value in allValues.enumerated() {
+                var sensorLoad: [UInt16?] = [nil, nil, nil, nil]
+                sensorLoad[value.offset] = value.element
+                let command = populateSensors(values: sensorLoad)
+                let testTarget = RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature(contents: command, service: service)
+                
+                switch value.offset {
+                case 0:
+                    XCTAssertEqual(-40.0, testTarget.sensor01TemperatureInDegreesCelsius)
+                case 1:
+                    XCTAssertEqual(-14.5, testTarget.sensor02TemperatureInDegreesCelsius)
+                case 2:
+                    XCTAssertEqual(0, testTarget.sensor03TemperatureInDegreesCelsius)
+                case 3:
+                    XCTAssertEqual(6513.5, testTarget.sensor04TemperatureInDegreesCelsius)
+                default:
+                    XCTFail("Index Out of Range")
+                }
+            }
         }
     }
 }
