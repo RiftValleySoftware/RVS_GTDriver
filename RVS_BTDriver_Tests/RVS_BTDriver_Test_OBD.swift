@@ -698,12 +698,28 @@ class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
                 
                 switch value.offset {
                 case 0:
+                    XCTAssertTrue(testTarget.isSensor01DataAvailable)
+                    XCTAssertFalse(testTarget.isSensor02DataAvailable)
+                    XCTAssertFalse(testTarget.isSensor03DataAvailable)
+                    XCTAssertFalse(testTarget.isSensor04DataAvailable)
                     XCTAssertEqual(-40.0, testTarget.sensor01TemperatureInDegreesCelsius)
                 case 1:
+                    XCTAssertFalse(testTarget.isSensor01DataAvailable)
+                    XCTAssertTrue(testTarget.isSensor02DataAvailable)
+                    XCTAssertFalse(testTarget.isSensor03DataAvailable)
+                    XCTAssertFalse(testTarget.isSensor04DataAvailable)
                     XCTAssertEqual(-14.5, testTarget.sensor02TemperatureInDegreesCelsius)
                 case 2:
+                    XCTAssertFalse(testTarget.isSensor01DataAvailable)
+                    XCTAssertFalse(testTarget.isSensor02DataAvailable)
+                    XCTAssertTrue(testTarget.isSensor03DataAvailable)
+                    XCTAssertFalse(testTarget.isSensor04DataAvailable)
                     XCTAssertEqual(0, testTarget.sensor03TemperatureInDegreesCelsius)
                 case 3:
+                    XCTAssertFalse(testTarget.isSensor01DataAvailable)
+                    XCTAssertFalse(testTarget.isSensor02DataAvailable)
+                    XCTAssertFalse(testTarget.isSensor03DataAvailable)
+                    XCTAssertTrue(testTarget.isSensor04DataAvailable)
                     XCTAssertEqual(6513.5, testTarget.sensor04TemperatureInDegreesCelsius)
                 default:
                     XCTFail("Index Out of Range")
