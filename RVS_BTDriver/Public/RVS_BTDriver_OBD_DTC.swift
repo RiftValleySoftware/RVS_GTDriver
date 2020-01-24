@@ -27,10 +27,51 @@ import Foundation
 /**
  This enum defines the base for the OBD diagnostic trouble codes (DTCs).
  */
-public enum RVS_BTDriver_OBD_DTC: UInt16, CaseIterable {
-    /// We are a 16-bit unsigned Int.
-    public typealias RawValue = UInt16
+public struct RVS_BTDriver_OBD_DTC {
+    /* ################################################################## */
+    /**
+     */
+    private let _code: UInt16
     
-    /// 0 is an unkown (error) type.
-    case errorType = 0
+    /* ################################################################## */
+    /**
+     */
+    private static func _convertCodeToString(_ inCode: UInt16) -> String! {
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    private static func _convertStringToCode(_ inCode: String) -> UInt16! {
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    var intValue: UInt16 {
+        return _code
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    var stringValue: String {
+        return Self._convertCodeToString(_code)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    init(code inCode: UInt16) {
+        _code = inCode
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    init(stringData: String) {
+        _code = 0
+    }
 }
