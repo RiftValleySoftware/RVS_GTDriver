@@ -484,3 +484,35 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
         _data = []
     }
 }
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_03 -
+/* ###################################################################################################################################### */
+/**
+ This is a special struct that is used to decode the Service 3 response.
+ */
+internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+    /* ################################################################## */
+    /**
+     This is only for the one PID available for Service 3. The response will be a list of trouble codes.
+     */
+    static var pidCommands: [String] = ["0300"]
+    
+    /* ################################################################## */
+    /**
+     It will be service 3, but we need to declare this for protocol conformance.
+     */
+    var service: Int = 3
+    
+    let codes: [RVS_BTDriver_OBD_DTC]
+    
+    /* ################################################################## */
+    /**
+     - parameters:
+        - contents: The String, containing the OBD response to be parsed.
+        - service: The service (ignored, as we are always 3).
+     */
+    init(contents inContents: String, service _: Int) {
+        codes = []
+    }
+}
