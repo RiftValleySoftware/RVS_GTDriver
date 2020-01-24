@@ -25,10 +25,12 @@ import Foundation
 // MARK: - RVS_BTDriver_OBD_DTC -
 /* ###################################################################################################################################### */
 /**
- This enum defines the base for a single trouble code.
+ This enum defines the base for the OBD diagnostic trouble codes (DTCs).
  */
 public enum RVS_BTDriver_OBD_DTC: UInt16, CaseIterable {
+    /// We are a 16-bit unsigned Int.
     public typealias RawValue = UInt16
     
+    /// 0 is an unkown (error) type.
     case errorType = 0
 }
