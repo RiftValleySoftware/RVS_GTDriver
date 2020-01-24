@@ -734,6 +734,10 @@ class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
 /* ###################################################################################################################################### */
 class RVS_BTDriver_TestPID_0300: XCTestCase {
     func testBasicDTCEncoder() {
+        let testString = "0100 0200 1301"
         
+        let testTarget = RVS_BTDriver_OBD_Command_Service_03(contents: testString, service: 3)
+        
+        print(String(describing: testTarget))
     }
 }

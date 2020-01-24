@@ -26,8 +26,13 @@ import Foundation
 /* ###################################################################################################################################### */
 /**
  This enum defines the base for the OBD diagnostic trouble codes (DTCs).
+ Each instance of this struct is a single DTC.
  */
 public struct RVS_BTDriver_OBD_DTC {
+    /// Mask for the first byte, that
+    let byte1Mask: UInt8    = 0x3F
+    let byte2_3Mask: UInt8  = 0xFF
+
     /* ################################################################## */
     /**he code, itself, is stored as a two-byte integer
      */
@@ -52,7 +57,9 @@ public struct RVS_BTDriver_OBD_DTC {
      - returns: The rendered code, as a UInt16.
      */
     private static func _convertStringToCode(_ inStringData: String) -> UInt16! {
-        return nil
+        let compressedString = inStringData.hexOnly
+        assert(4 == compressedString.count, "There must be exactly 4 hex characters.")
+        return UInt16(compressedString.hex2Int)
     }
     
     /* ################################################################## */
@@ -84,6 +91,6 @@ public struct RVS_BTDriver_OBD_DTC {
      Intiatlize with raw string data.
      */
     init(stringData inStringData: String) {
-        _code = Self._convertStringToCode(inStringData)
+        _code = Self._convertStringToCode(inStringData) ?? 0
     }
 }

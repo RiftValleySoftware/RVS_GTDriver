@@ -254,6 +254,28 @@ public extension StringProtocol {
         
         return ret
     }
+    
+    /* ################################################################## */
+    /**
+     Another fairly brute-force simple parser.
+     This computed property will return an Int, extracted from the String, if the String is a Hex number.
+     It will return nil, if the number cannot be extracted.
+     For example, "20" would return 32, "F100" will return 61696, and "3" will return 3. "G" would return nil, but "George" would return 238 ("EE").
+     */
+    var hex2Int: Int! {
+        let workingString = self.hexOnly.reversed()    // Make sure that we are a "pure" hex string, and we'll reverse it, as we will be crawling through the string as powers of 16
+        var ret: Int! = nil
+        var shift = 0
+        // We crawl through, one character at a time, and use a radix of 16 (hex).
+        for char in workingString {
+            // The character needs to be cast into a String.
+            if let val = Int(String(char), radix: 16) {
+                ret = (ret ?? 0) + (val << shift)
+                shift += 4
+            }
+        }
+        return ret
+    }
 }
 
 /* ###################################################################################################################################### */

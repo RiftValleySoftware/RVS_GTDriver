@@ -517,6 +517,16 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
         - service: The service (ignored, as we are always 3).
      */
     init(contents inContents: String, service _: Int) {
-        codes = []
+        var codeTemp: [RVS_BTDriver_OBD_DTC] = []
+        let compressedString = inContents.hexOnly
+        // We extract a hex string, and chop it into 4.
+        if 0 == (compressedString.count % 4) {
+            for index in stride(from: 0, to: compressedString.count, by: 4) {
+                let codeString = String(compressedString[compressedString.index(compressedString.startIndex, offsetBy: index)..<min(compressedString.index(compressedString.startIndex, offsetBy: index + 4), compressedString.endIndex)])
+                codeTemp.append(RVS_BTDriver_OBD_DTC(stringData: codeString))
+            }
+        }
+        
+        codes = codeTemp
     }
 }
