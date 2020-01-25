@@ -29,9 +29,7 @@ import Foundation
  Each instance of this struct is a single DTC.
  */
 public struct RVS_BTDriver_OBD_DTC {
-    /// Mask for the first byte, that
-    let byte1Mask: UInt8    = 0x3F
-    let byte2_3Mask: UInt8  = 0xFF
+    private static let _codeDesignations = ["P", "C", "B", "U"]
 
     /* ################################################################## */
     /**he code, itself, is stored as a two-byte integer
@@ -46,7 +44,10 @@ public struct RVS_BTDriver_OBD_DTC {
      - returns: A String, in the DTC format (Alphabetic chracater -U, P, C or B, followed by four hex digits). Can be nil, if the code cannot be translated.
      */
     private static func _convertCodeToString(_ inCode: UInt16) -> String! {
-        return nil
+        let codeDesignationIndex = Int(inCode).maskedValue(firstPlace: 14, runLength: 2)
+        let codeHeader = _codeDesignations[codeDesignationIndex]
+        let ret = codeHeader + String(format: "%04X", Int(inCode).maskedValue(firstPlace: 0, runLength: 14))
+        return ret
     }
     
     /* ################################################################## */

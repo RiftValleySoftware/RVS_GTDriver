@@ -490,8 +490,22 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
 /* ###################################################################################################################################### */
 /**
  This is a special struct that is used to decode the Service 3 response.
+ It can be subscripted or iterated as an Array of String.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter, Sequence {
+    /// This pretends to be an Array of String.
+    typealias Element = String
+    /// The iterator is the one used by an Array of String.
+    typealias Iterator = Array<String>.Iterator
+    
+    /* ################################################################## */
+    /**
+     The iterator is quite simple. We just return an Array of String's iterator.
+     */
+    func makeIterator() -> Iterator {
+        return codesAsStrings.makeIterator()
+    }
+
     /* ################################################################## */
     /**
      This is only handler for the one PID available for Service 3. The response will be a list of trouble codes.
@@ -512,6 +526,31 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
     
     /* ################################################################## */
     /**
+     These are the DTC codes returned by the device, but as an Array of String.
+     */
+    var codesAsStrings: [String] {
+        return codes.map { $0.stringValue }
+    }
+
+    /* ################################################################## */
+    /**
+     This is a simple subscript. We don't construct an Array of String, first, because this is a bit more efficient.
+     */
+    subscript(_ inValue: Int) -> String {
+        precondition((0..<codes.count).contains(inValue), "Index Out of Range")
+        return codes[inValue].stringValue
+    }
+    
+    /* ################################################################## */
+    /**
+     The count is simple how many codes we have.
+     */
+    var count: Int {
+        return codes.count
+    }
+    
+    /* ################################################################## */
+    /**
      - parameters:
         - contents: The String, containing the OBD response to be parsed.
         - service: The service (ignored, as we are always 3).
@@ -522,7 +561,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
         // We extract a hex string, and chop it into 4.
         if 0 == (compressedString.count % 4) {
             for index in stride(from: 0, to: compressedString.count, by: 4) {
-                let codeString = String(compressedString[compressedString.index(compressedString.startIndex, offsetBy: index)..<min(compressedString.index(compressedString.startIndex, offsetBy: index + 4), compressedString.endIndex)])
+                let codeString = String(compressedString[compressedString.index(compressedString.startIndex, offsetBy: index)..<Swift.min(compressedString.index(compressedString.startIndex, offsetBy: index + 4), compressedString.endIndex)])
                 codeTemp.append(RVS_BTDriver_OBD_DTC(stringData: codeString))
             }
         }
