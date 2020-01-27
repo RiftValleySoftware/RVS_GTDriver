@@ -131,6 +131,16 @@ public class RVS_BTDriver: NSObject {
     deinit {
         stopScanning()
     }
+    
+    /* ################################################################## */
+    /**
+     This is here to satisfy the sequence protocol. It should not be called.
+     
+     - parameter sequence_contents: Ignored
+     */
+    public required init(sequence_contents inSequence_contents: [RVS_BTDriver_DeviceProtocol]) {
+        preconditionFailure("This Method Cannot Be Used.")
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -397,7 +407,7 @@ extension RVS_BTDriver: RVS_SequenceProtocol {
         get {
             return _device_list
         }
-        
+
         /// We do not allow the list to be modified from outside the driver.
         set {
             _ = newValue    // Just to shut up SwiftLint.

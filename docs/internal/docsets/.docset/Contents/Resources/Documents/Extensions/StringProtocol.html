@@ -237,6 +237,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/StringProtocol.html">StringProtocol</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt.html">UInt</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -318,6 +321,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter/TestCategories.html">– TestCategories</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Command_Service_03.html">RVS_BTDriver_OBD_Command_Service_03</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_DTC.html">RVS_BTDriver_OBD_DTC</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html">RVS_BTDriver_OBD_Device_TransactionStruct</a>
@@ -711,6 +720,36 @@ From here: <a href="https://stackoverflow.com/a/28288340/879365">https://stackov
                         <p>The String, assumed to be hex numbers (two characters, 0-F, separated by non-hex characters, or not separated); converted to an ASCII string (no spaces).
        Nil, if the string failed to yeild a UTF8 value.
        This requires two characters (0-9a-fA-F), side-by-side for each character. They may or may not be separated.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE7hex2IntSiSgvp"></a>
+                    <a name="//apple_ref/swift/Property/hex2Int" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE7hex2IntSiSgvp">hex2Int</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Another fairly brute-force simple parser.
+This computed property will return an Int, extracted from the String, if the String is a Hex number.
+It will return nil, if the number cannot be extracted.
+For example, &ldquo;20&rdquo; would return 32, &ldquo;F100&rdquo; will return 61696, and &ldquo;3&rdquo; will return 3. &ldquo;G&rdquo; would return nil, but &ldquo;George&rdquo; would return 238 (&ldquo;EE&rdquo;).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">hex2Int</span><span class="p">:</span> <span class="kt">Int</span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>

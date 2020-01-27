@@ -1,6 +1,12 @@
 {
   "warnings": [
-
+    {
+      "file": "/Volumes/Development/RiftValley/RVS_GTDriver/RVS_BTDriver/Public/RVS_BTDriver_OBD_DTC.swift",
+      "line": 32,
+      "symbol": "RVS_BTDriver_OBD_DTC._codeDesignations",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Volumes/Development/RiftValley/RVS_GTDriver"
 }

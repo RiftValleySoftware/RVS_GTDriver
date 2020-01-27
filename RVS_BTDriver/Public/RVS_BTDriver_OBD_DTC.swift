@@ -44,9 +44,9 @@ public struct RVS_BTDriver_OBD_DTC {
      - returns: A String, in the DTC format (Alphabetic chracater -U, P, C or B, followed by four hex digits). Can be nil, if the code cannot be translated.
      */
     private static func _convertCodeToString(_ inCode: UInt16) -> String! {
-        let codeDesignationIndex = Int(inCode).maskedValue(firstPlace: 14, runLength: 2)
+        let codeDesignationIndex = Int(UInt(inCode).maskedValue(firstPlace: 14, runLength: 2))
         let codeHeader = _codeDesignations[codeDesignationIndex]
-        let ret = codeHeader + String(format: "%04X", Int(inCode).maskedValue(firstPlace: 0, runLength: 14))
+        let ret = codeHeader + String(format: "%04X", UInt(inCode).maskedValue(firstPlace: 0, runLength: 14))
         return ret
     }
     
