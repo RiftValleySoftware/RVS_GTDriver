@@ -235,10 +235,16 @@
             <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/StringProtocol.html">StringProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/UInt.html">UInt</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt64.html">UInt64</a>
               </li>
             </ul>
           </li>
@@ -374,8 +380,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This method allows us to mask a discrete bit range within the number, and return its value as a basic Int.
-For example, if we have the hex number 0xF30 (3888 decimal, or 111100110000 binary), we can mask parts of it to get masked values, like so:</p>
+                        <p>This method allows us to mask a discrete bit range within the number, and return its value as a basic unsigned Int.</p>
+
+<p>For example, if we have the hex number 0xF30 (3888 decimal, or 111100110000 binary), we can mask parts of it to get masked values, like so:</p>
 <pre class="highlight swift"><code>   <span class="c1">// 111100110000 (Value, in binary)</span>
 
    <span class="c1">// 111111111111 (Mask, in binary)</span>
@@ -411,7 +418,7 @@ The parameters must be positive, but are declared as signed Int, in order to be 
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">maskedValue</span><span class="p">(</span><span class="nv">firstPlace</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">,</span> <span class="nv">runLength</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UInt</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">maskedValue</span><span class="p">(</span><span class="n">firstPlace</span> <span class="nv">inFirstPlace</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">,</span> <span class="n">runLength</span> <span class="nv">inRunLength</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UInt</span></code></pre>
 
                         </div>
                       </div>
@@ -427,7 +434,7 @@ The parameters must be positive, but are declared as signed Int, in order to be 
                               </td>
                               <td>
                                 <div>
-                                  <p>The 1-based (1 is the first bit) starting position for the mask. Must be a positive integer.</p>
+                                  <p>The 1-based (1 is the first bit) starting position for the mask.</p>
                                 </div>
                               </td>
                             </tr>
@@ -439,7 +446,7 @@ The parameters must be positive, but are declared as signed Int, in order to be 
                               </td>
                               <td>
                                 <div>
-                                  <p>The inclusive (includes the starting place) number of bits to mask. Must be a positive integer. If 0, then the return will always be 0.</p>
+                                  <p>The inclusive (includes the starting place) number of bits to mask. If 0, then the return will always be 0.</p>
                                 </div>
                               </td>
                             </tr>
