@@ -406,7 +406,6 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
             evaluateTest(0, state: .unknown, count: UInt32(inProgressDTCsMask.count), expected: 11)
         }
     }
-    
 
     // MARK: Diesel Engine Tests
     /* ################################################################## */
@@ -602,10 +601,8 @@ class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
         var ret = ""
         var val = 0
         
-        for sensorData in inValues.enumerated() {
-            if nil != sensorData.element {
-                val |= 1 << sensorData.offset
-            }
+        for sensorData in inValues.enumerated() where nil != sensorData.element {
+            val |= 1 << sensorData.offset
         }
         
         ret = String(format: "%02X", val)

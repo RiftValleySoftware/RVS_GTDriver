@@ -232,6 +232,30 @@
 		D4524BA9234D40BA00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4524BA7234D40BA00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_NavigationController.swift */; };
 		D453E0B12371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453E0B02371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift */; };
 		D453E0B22371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453E0B02371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift */; };
+		D45FBB8523E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB8623E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB8723E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB8823E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB8923E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB8A23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB8B23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB8C23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB8D23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB8E23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB8F23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB9023E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */; };
+		D45FBB9123E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
+		D45FBB9223E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
+		D45FBB9323E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
+		D45FBB9423E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
+		D45FBB9523E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
+		D45FBB9623E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
+		D45FBB9723E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
+		D45FBB9823E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
+		D45FBB9923E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
+		D45FBB9A23E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
+		D45FBB9B23E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
+		D45FBB9C23E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */; };
 		D474904923C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474904823C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift */; };
 		D474904A23C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474904823C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift */; };
 		D474904B23C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474904823C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift */; };
@@ -265,30 +289,6 @@
 		D4912EC123AD5097007CEA7E /* RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4912EBB23AD5097007CEA7E /* RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.swift */; };
 		D4912EC223AD5097007CEA7E /* RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4912EBB23AD5097007CEA7E /* RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.swift */; };
 		D4912EC523AD5097007CEA7E /* RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4912EBB23AD5097007CEA7E /* RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.swift */; };
-		D49466F523DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D49466F623DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D49466F723DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D49466F823DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D49466F923DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D49466FA23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D49466FB23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D49466FC23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D49466FD23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D49466FE23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D49466FF23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D494670023DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */; };
-		D494670123DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
-		D494670223DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
-		D494670323DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
-		D494670423DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
-		D494670523DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
-		D494670623DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
-		D494670723DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
-		D494670823DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
-		D494670923DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
-		D494670A23DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
-		D494670B23DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
-		D494670C23DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */; };
 		D494670D23DF86E000CA67CA /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F223DF86E000CA67CA /* RVS_String_Extensions.swift */; };
 		D494670E23DF86E000CA67CA /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F223DF86E000CA67CA /* RVS_String_Extensions.swift */; };
 		D494670F23DF86E000CA67CA /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49466F223DF86E000CA67CA /* RVS_String_Extensions.swift */; };
@@ -838,6 +838,8 @@
 		D4524B9E234D3EEB00F3EC79 /* RVS_BTDriver_iOS_Test_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVS_BTDriver_iOS_Test_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4524BA7234D40BA00F3EC79 /* RVS_BTDriver_iOS_Test_Harness_NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_iOS_Test_Harness_NavigationController.swift; sourceTree = "<group>"; };
 		D453E0B02371F1FE00D98A45 /* RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_MacOS_Test_Harness_Settings_ViewController.swift; sourceTree = "<group>"; };
+		D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_FIFOQueue.swift; path = "Carthage/Checkouts/RVS_Generic_Swift_Toolbox/src/Collection Tools/RVS_FIFOQueue.swift"; sourceTree = SOURCE_ROOT; };
+		D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_Int_Extensions.swift; path = Carthage/Checkouts/RVS_Generic_Swift_Toolbox/src/Extensions/RVS_Int_Extensions.swift; sourceTree = SOURCE_ROOT; };
 		D474904823C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_OBD_Command_Interpreter.swift; sourceTree = "<group>"; };
 		D4798FEC23AFFD4C00FDBAB9 /* RVS_BTDriver_OBD_ELM327_AT_Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_OBD_ELM327_AT_Command.swift; sourceTree = "<group>"; };
 		D480365D23995107007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift; sourceTree = "<group>"; };
@@ -851,8 +853,6 @@
 		D492DBEF234FAEFF00CA4C7C /* RVS_BTDriver_State_Machine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_BTDriver_State_Machine.swift; sourceTree = "<group>"; };
 		D49323C02364F8C50071FF58 /* RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist; path = Meta/RVS_BTDriver_tvOS_Test_Harness_Framework_Info.plist; sourceTree = "<group>"; };
 		D49323C12364F8C50071FF58 /* RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist; path = Meta/RVS_BTDriver_tvOS_Test_Harness_Direct_Info.plist; sourceTree = "<group>"; };
-		D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_Int_Extensions.swift; path = Carthage/Checkouts/RVS_Generic_Swift_Toolbox/src/Extensions/RVS_Int_Extensions.swift; sourceTree = SOURCE_ROOT; };
-		D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_FIFOQueue.swift; path = "Carthage/Checkouts/RVS_Generic_Swift_Toolbox/src/Collection Tools/RVS_FIFOQueue.swift"; sourceTree = SOURCE_ROOT; };
 		D49466F223DF86E000CA67CA /* RVS_String_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_String_Extensions.swift; path = Carthage/Checkouts/RVS_Generic_Swift_Toolbox/src/Extensions/RVS_String_Extensions.swift; sourceTree = SOURCE_ROOT; };
 		D49466F323DF86E000CA67CA /* RVS_SequenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_SequenceProtocol.swift; path = "Carthage/Checkouts/RVS_Generic_Swift_Toolbox/src/Collection Tools/RVS_SequenceProtocol.swift"; sourceTree = SOURCE_ROOT; };
 		D49466F423DF86E000CA67CA /* RVS_DebugTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RVS_DebugTools.swift; path = "Carthage/Checkouts/RVS_Generic_Swift_Toolbox/src/Debug Tools/RVS_DebugTools.swift"; sourceTree = SOURCE_ROOT; };
@@ -1280,6 +1280,18 @@
 			path = RVS_BTDriver_tvOS_Tests;
 			sourceTree = "<group>";
 		};
+		D45FBB8223E26EAB003740C5 /* FromCarthage */ = {
+			isa = PBXGroup;
+			children = (
+				D49466F423DF86E000CA67CA /* RVS_DebugTools.swift */,
+				D45FBB8323E26F13003740C5 /* RVS_FIFOQueue.swift */,
+				D45FBB8423E26F13003740C5 /* RVS_Int_Extensions.swift */,
+				D49466F323DF86E000CA67CA /* RVS_SequenceProtocol.swift */,
+				D49466F223DF86E000CA67CA /* RVS_String_Extensions.swift */,
+			);
+			name = FromCarthage;
+			sourceTree = "<group>";
+		};
 		D4749B5C232A842A0073F7BC = {
 			isa = PBXGroup;
 			children = (
@@ -1495,11 +1507,7 @@
 			isa = PBXGroup;
 			children = (
 				D494673123DF872700CA67CA /* RVS_BTDriverCommunicatorTools.swift */,
-				D49466F423DF86E000CA67CA /* RVS_DebugTools.swift */,
-				D49466F123DF86E000CA67CA /* RVS_FIFOQueue.swift */,
-				D49466F023DF86E000CA67CA /* RVS_Int_Extensions.swift */,
-				D49466F323DF86E000CA67CA /* RVS_SequenceProtocol.swift */,
-				D49466F223DF86E000CA67CA /* RVS_String_Extensions.swift */,
+				D45FBB8223E26EAB003740C5 /* FromCarthage */,
 			);
 			path = Toolbox;
 			sourceTree = "<group>";
@@ -2317,6 +2325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D42A35B023C0385B00D104A9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift in Sources */,
+				D45FBB8623E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D4ECE44D23B422BA003CFB10 /* RVS_BTDriver_Vendor_GoTenna.swift in Sources */,
 				D4ECE45623B422BA003CFB10 /* RVS_BTDriver_Base_Interface.swift in Sources */,
 				D4ECE44723B422BA003CFB10 /* RVS_BTDriver_State_Machine.swift in Sources */,
@@ -2329,8 +2338,8 @@
 				D494672623DF86E000CA67CA /* RVS_DebugTools.swift in Sources */,
 				D4ECE44523B422BA003CFB10 /* RVS_BTDriver_OBD_ELM327_AT_Command.swift in Sources */,
 				D42A35C623C0385B00D104A9 /* RVS_BTDriver_PropertyProtocol.swift in Sources */,
-				D494670223DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
 				D4ECE45723B422BA003CFB10 /* RVS_BTDriver_Interface_BLE.swift in Sources */,
+				D45FBB9223E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D450FB4A23CB588000EA0077 /* RVS_BTDriver_Test_OBD.swift in Sources */,
 				D494671A23DF86E000CA67CA /* RVS_SequenceProtocol.swift in Sources */,
 				D42A35D123C0385B00D104A9 /* RVS_BTDriver_ServiceProtocol.swift in Sources */,
@@ -2352,7 +2361,6 @@
 				D410EFC523C5F94700D590BA /* RVS_BTDriver_OBD_Command.swift in Sources */,
 				D4C317F923BCEA8A00D01619 /* RVS_BTDriver_Device_BLE.swift in Sources */,
 				D4ECE44823B422BA003CFB10 /* RVS_BTDriver_Device.swift in Sources */,
-				D49466F623DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D4ECE45223B422BA003CFB10 /* RVS_BTDriver_Vendor_OBD_ELM327_VLINK.swift in Sources */,
 				D42A366E23C03A0C00D104A9 /* RVS_BTDriver_Vendor_OBD_Parser.swift in Sources */,
 				D4ECE44C23B422BA003CFB10 /* RVS_BTDriver_Vendor_GenericBLE.swift in Sources */,
@@ -2382,6 +2390,7 @@
 				D4397F50239922F900A30F6D /* RVS_PersistentPrefs.swift in Sources */,
 				D41B6B78239834DD008F4E7D /* RVS_BTDriver_Device.swift in Sources */,
 				D4912EC523AD5097007CEA7E /* RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.swift in Sources */,
+				D45FBB9923E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D4AFF94D23A028CC009A2677 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift in Sources */,
 				D41B6B7A239834DD008F4E7D /* RVS_BTDriver_Property.swift in Sources */,
 				D42A367523C03A0C00D104A9 /* RVS_BTDriver_Vendor_OBD_Parser.swift in Sources */,
@@ -2390,13 +2399,11 @@
 				D4CE409623B847EF00E2203B /* RVS_BTDriver_OBD_MacOS_Test_Harness_Command_ViewController.swift in Sources */,
 				D41B6B79239834DD008F4E7D /* RVS_BTDriver_Service.swift in Sources */,
 				D41B6B7F239834DD008F4E7D /* RVS_BTDriver_Base_Interface.swift in Sources */,
-				D49466FD23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D41B6B7B239834DD008F4E7D /* RVS_BTDriver_VendorProtocol.swift in Sources */,
 				D41B6B65239834BF008F4E7D /* RVS_BTDriver_OBD_Mac_Test_Harness_AppDelegate.swift in Sources */,
 				D42A35A123C0385B00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift in Sources */,
 				D4F987DD239D6DB50098F4A1 /* RVS_BTDriver_Vendor_GenericBLE.swift in Sources */,
 				D41B6B7D239834DD008F4E7D /* RVS_BTDriver_Vendor_OBD.swift in Sources */,
-				D494670923DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
 				D42A35C223C0385B00D104A9 /* RVS_BTDriver_DeviceProtocol.swift in Sources */,
 				D42A35D823C0385B00D104A9 /* RVS_BTDriver_ServiceProtocol.swift in Sources */,
 				D494672123DF86E000CA67CA /* RVS_SequenceProtocol.swift in Sources */,
@@ -2410,6 +2417,7 @@
 				D480365E23995107007FF2EF /* RVS_BTDriver_OBD_MacOS_Test_Harness_Base_ViewController.swift in Sources */,
 				D4968BBA23A2D23000B57B45 /* RVS_BTDriver_Vendor_OBD_ELM327_VLINK.swift in Sources */,
 				D494671523DF86E000CA67CA /* RVS_String_Extensions.swift in Sources */,
+				D45FBB8D23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D4C7439823B3B7D600C69507 /* RVS_BTDriver_Test_Harness_Prefs.swift in Sources */,
 				D4C700CB23A7DA6400762126 /* RVS_BTDriver_OBD_MacOS_Test_Harness_Device_ViewController.swift in Sources */,
 				D41B6B7E239834DD008F4E7D /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
@@ -2461,12 +2469,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D42A367123C03A0C00D104A9 /* RVS_BTDriver_Vendor_OBD_Parser.swift in Sources */,
-				D494670523DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
 				D494671D23DF86E000CA67CA /* RVS_SequenceProtocol.swift in Sources */,
 				D4ECE4A323B422BF003CFB10 /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
+				D45FBB8923E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D494672923DF86E000CA67CA /* RVS_DebugTools.swift in Sources */,
 				D4C317FC23BCEA8A00D01619 /* RVS_BTDriver_Device_BLE.swift in Sources */,
 				D4C7439323B3B7D600C69507 /* RVS_BTDriver_Test_Harness_Prefs.swift in Sources */,
+				D45FBB9523E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D4ECE4A423B422BF003CFB10 /* RVS_BTDriver_Base_Interface.swift in Sources */,
 				D4ECE4A223B422BF003CFB10 /* RVS_BTDriver_Vendor_OBD_Kiwi.swift in Sources */,
 				D4C3181423BCEB2A00D01619 /* RVS_BTDriver_Service_BLE.swift in Sources */,
@@ -2479,7 +2488,6 @@
 				D4ECE49523B422BF003CFB10 /* RVS_BTDriver_State_Machine.swift in Sources */,
 				D4ECE49623B422BF003CFB10 /* RVS_BTDriver_Device.swift in Sources */,
 				D42A359D23C0385B00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift in Sources */,
-				D49466F923DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D4ECE49923B422BF003CFB10 /* RVS_BTDriver_VendorProtocol.swift in Sources */,
 				D4DD08A42370A2490081C707 /* RVS_PersistentPrefs.swift in Sources */,
 				D494671123DF86E000CA67CA /* RVS_String_Extensions.swift in Sources */,
@@ -2516,7 +2524,6 @@
 				D4ECE46B23B422BC003CFB10 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift in Sources */,
 				D494671B23DF86E000CA67CA /* RVS_SequenceProtocol.swift in Sources */,
 				D474904B23C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift in Sources */,
-				D494670323DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
 				D42A35C723C0385B00D104A9 /* RVS_BTDriver_PropertyProtocol.swift in Sources */,
 				D4ECE47023B422BC003CFB10 /* RVS_BTDriver_Base_Interface.swift in Sources */,
 				D410EFC623C5F94700D590BA /* RVS_BTDriver_OBD_Command.swift in Sources */,
@@ -2531,7 +2538,6 @@
 				D494670F23DF86E000CA67CA /* RVS_String_Extensions.swift in Sources */,
 				D42A359B23C0385B00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift in Sources */,
 				D4ECE46923B422BC003CFB10 /* RVS_BTDriver_Vendor_OBD.swift in Sources */,
-				D49466F723DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D4ECE46023B422BC003CFB10 /* RVS_BTDriver.swift in Sources */,
 				D4ECE46123B422BC003CFB10 /* RVS_BTDriver_State_Machine.swift in Sources */,
 				D4428F1F234E5CE400229A4C /* RVS_BTDriver_iOS_Test_Harness_SettingsViewController.swift in Sources */,
@@ -2540,6 +2546,7 @@
 				D4ECE46F23B422BC003CFB10 /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
 				D42A35BC23C0385B00D104A9 /* RVS_BTDriver_DeviceProtocol.swift in Sources */,
 				D4312A54234E14F100D19AEE /* RVS_BTDriver_iOS_Test_Harness_Base_ViewController.swift in Sources */,
+				D45FBB9323E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D4ED454823DB17AD00C5E2E0 /* RVS_BTDriver_OBD_DTC.swift in Sources */,
 				D42A35B123C0385B00D104A9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift in Sources */,
 				D4DD089F2370A2490081C707 /* RVS_PersistentPrefs.swift in Sources */,
@@ -2549,6 +2556,7 @@
 				D4ECE46A23B422BC003CFB10 /* RVS_BTDriver_Vendor_OBD_ELM327.swift in Sources */,
 				D4ECE46223B422BC003CFB10 /* RVS_BTDriver_Device.swift in Sources */,
 				D4C317FA23BCEA8A00D01619 /* RVS_BTDriver_Device_BLE.swift in Sources */,
+				D45FBB8723E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D4ECE46823B422BC003CFB10 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */,
 				D4ECE46D23B422BC003CFB10 /* RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.swift in Sources */,
 				D42A35D223C0385B00D104A9 /* RVS_BTDriver_ServiceProtocol.swift in Sources */,
@@ -2565,6 +2573,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4212DF123CB6CBC008FD9C9 /* RVS_BTDriver_Service.swift in Sources */,
+				D45FBB8F23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D4212DEF23CB6CBC008FD9C9 /* RVS_BTDriver_State_Machine.swift in Sources */,
 				D4212DF323CB6CBC008FD9C9 /* RVS_BTDriver_VendorProtocol.swift in Sources */,
 				D4212E0323CB6CBC008FD9C9 /* RVS_BTDriver_Interface_BLE.swift in Sources */,
@@ -2577,8 +2586,8 @@
 				D494672F23DF86E000CA67CA /* RVS_DebugTools.swift in Sources */,
 				D4212E0623CB6CBC008FD9C9 /* RVS_BTDriver_Property_BLE.swift in Sources */,
 				D4212DF223CB6CBC008FD9C9 /* RVS_BTDriver_Property.swift in Sources */,
-				D494670B23DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
 				D4212DF823CB6CBC008FD9C9 /* RVS_BTDriver_OBD_Command_Interpreter.swift in Sources */,
+				D45FBB9B23E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D4212DFE23CB6CBC008FD9C9 /* RVS_BTDriver_Vendor_OBD_ELM327_VLINK.swift in Sources */,
 				D494672323DF86E000CA67CA /* RVS_SequenceProtocol.swift in Sources */,
 				D4212DFA23CB6CBC008FD9C9 /* RVS_BTDriver_Vendor_OBD.swift in Sources */,
@@ -2600,7 +2609,6 @@
 				D4212DFF23CB6CBC008FD9C9 /* RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.swift in Sources */,
 				D4212DEB23CB6CBC008FD9C9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift in Sources */,
 				D4212DFD23CB6CBC008FD9C9 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift in Sources */,
-				D49466FF23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D4212E0523CB6CBC008FD9C9 /* RVS_BTDriver_Service_BLE.swift in Sources */,
 				D4212DF723CB6CBC008FD9C9 /* RVS_BTDriver_OBD_Command.swift in Sources */,
 				D4212DFB23CB6CBC008FD9C9 /* RVS_BTDriver_Vendor_OBD_Parser.swift in Sources */,
@@ -2646,10 +2654,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4ECE4D123B422C4003CFB10 /* RVS_BTDriver_Vendor_OBD.swift in Sources */,
+				D45FBB9C23E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D4ECE4D323B422C4003CFB10 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift in Sources */,
 				D494672423DF86E000CA67CA /* RVS_SequenceProtocol.swift in Sources */,
 				D4ECE4CA23B422C4003CFB10 /* RVS_BTDriver_Device.swift in Sources */,
-				D494670C23DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
 				D42A35A323C0385B00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift in Sources */,
 				D4ECE4CD23B422C4003CFB10 /* RVS_BTDriver_VendorProtocol.swift in Sources */,
 				D494673023DF86E000CA67CA /* RVS_DebugTools.swift in Sources */,
@@ -2673,7 +2681,6 @@
 				D4ECE4C923B422C4003CFB10 /* RVS_BTDriver_State_Machine.swift in Sources */,
 				D494673D23DF872700CA67CA /* RVS_BTDriverCommunicatorTools.swift in Sources */,
 				D42A35B923C0385B00D104A9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift in Sources */,
-				D494670023DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D4ECE4C823B422C4003CFB10 /* RVS_BTDriver.swift in Sources */,
 				D4C7439723B3B7D600C69507 /* RVS_BTDriver_Test_Harness_Prefs.swift in Sources */,
 				D4B19BD7235F28A30036EDF5 /* RVS_BTDriver_tvOS_Test_Harness_AppDelegate.swift in Sources */,
@@ -2685,6 +2692,7 @@
 				D42A35DA23C0385B00D104A9 /* RVS_BTDriver_ServiceProtocol.swift in Sources */,
 				D4ECE4D723B422C4003CFB10 /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
 				D4ED455123DB17AD00C5E2E0 /* RVS_BTDriver_OBD_DTC.swift in Sources */,
+				D45FBB9023E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D42A35C423C0385B00D104A9 /* RVS_BTDriver_DeviceProtocol.swift in Sources */,
 				D42A35AE23C0385B00D104A9 /* RVS_BTDriver_Extension.swift in Sources */,
 			);
@@ -2701,7 +2709,6 @@
 				D4DBE17B235E0DD600107353 /* RVS_BTDriver_MacOS_Test_Harness_Main_ViewController.swift in Sources */,
 				D4DBE1CA235E0E3100107353 /* RVS_BTDriver_Device.swift in Sources */,
 				D402EB0023A3E67200DFE5EB /* RVS_BTDriver_Vendor_OBD_Kiwi.swift in Sources */,
-				D49466FC23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D4912EC223AD5097007CEA7E /* RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.swift in Sources */,
 				D4DBE1CC235E0E3100107353 /* RVS_BTDriver_Property.swift in Sources */,
 				D42A367423C03A0C00D104A9 /* RVS_BTDriver_Vendor_OBD_Parser.swift in Sources */,
@@ -2710,6 +2717,7 @@
 				D4879A32238E91C8008977D9 /* RVS_BTDriver_Vendor_OBD.swift in Sources */,
 				D402EAF523A3E07500DFE5EB /* RVS_BTDriver_Vendor_GoTenna.swift in Sources */,
 				D4DBE1CF235E0E3100107353 /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
+				D45FBB9823E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D4F987DB239D6DB50098F4A1 /* RVS_BTDriver_Vendor_GenericBLE.swift in Sources */,
 				D494672C23DF86E000CA67CA /* RVS_DebugTools.swift in Sources */,
 				D4DBE1C9235E0E3100107353 /* RVS_BTDriver.swift in Sources */,
@@ -2728,12 +2736,12 @@
 				D410EFCB23C5F94700D590BA /* RVS_BTDriver_OBD_Command.swift in Sources */,
 				D494671423DF86E000CA67CA /* RVS_String_Extensions.swift in Sources */,
 				D42A35D723C0385B00D104A9 /* RVS_BTDriver_ServiceProtocol.swift in Sources */,
+				D45FBB8C23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D4DBE1C8235E0E3100107353 /* RVS_BTDriver_State_Machine.swift in Sources */,
 				D4DBE179235E0DD600107353 /* RVS_BTDriver_MacOS_Test_Harness_AppDelegate.swift in Sources */,
 				D4C317FF23BCEA8A00D01619 /* RVS_BTDriver_Device_BLE.swift in Sources */,
 				D4C3181723BCEB2A00D01619 /* RVS_BTDriver_Service_BLE.swift in Sources */,
 				D4B5AA6A2371B00C0037884B /* RVS_BTDriver_MacOS_Test_Harness_Base_ViewController.swift in Sources */,
-				D494670823DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
 				D44AC699235E25F9004FD702 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */,
 				D4DBE1D0235E0E3100107353 /* RVS_BTDriver_Base_Interface.swift in Sources */,
 				D44AC693235E23D1004FD702 /* RVS_BTDriver_Interface_BLE.swift in Sources */,
@@ -2757,12 +2765,11 @@
 				D42A35CA23C0385B00D104A9 /* RVS_BTDriver_PropertyProtocol.swift in Sources */,
 				D402EAF423A3E07500DFE5EB /* RVS_BTDriver_Vendor_GoTenna.swift in Sources */,
 				D4879A31238E91C8008977D9 /* RVS_BTDriver_Vendor_OBD.swift in Sources */,
-				D494670623DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
-				D49466FA23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D4DBE1BE235E0E2600107353 /* RVS_BTDriver_Base_Interface.swift in Sources */,
 				D4968BB623A2D23000B57B45 /* RVS_BTDriver_Vendor_OBD_ELM327_VLINK.swift in Sources */,
 				D42A35B423C0385B00D104A9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift in Sources */,
 				D494672A23DF86E000CA67CA /* RVS_DebugTools.swift in Sources */,
+				D45FBB8A23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D42A359E23C0385B00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift in Sources */,
 				D42A35BF23C0385B00D104A9 /* RVS_BTDriver_DeviceProtocol.swift in Sources */,
 				D44AC698235E25F8004FD702 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */,
@@ -2786,6 +2793,7 @@
 				D4AFF94923A028CC009A2677 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift in Sources */,
 				D4DBE1BA235E0E2600107353 /* RVS_BTDriver_Property.swift in Sources */,
 				D4DBE1B8235E0E2600107353 /* RVS_BTDriver_Device.swift in Sources */,
+				D45FBB9623E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D474904E23C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift in Sources */,
 				D410EFC923C5F94700D590BA /* RVS_BTDriver_OBD_Command.swift in Sources */,
 			);
@@ -2802,12 +2810,11 @@
 				D4ECE47B23B422BD003CFB10 /* RVS_BTDriver_State_Machine.swift in Sources */,
 				D4ECE48B23B422BD003CFB10 /* RVS_BTDriver_Interface_BLE.swift in Sources */,
 				D4ECE48323B422BD003CFB10 /* RVS_BTDriver_Vendor_OBD.swift in Sources */,
-				D494670423DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
-				D49466F823DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D42A35C823C0385B00D104A9 /* RVS_BTDriver_PropertyProtocol.swift in Sources */,
 				D4ECE48923B422BD003CFB10 /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
 				D4ECE47F23B422BD003CFB10 /* RVS_BTDriver_VendorProtocol.swift in Sources */,
 				D494672823DF86E000CA67CA /* RVS_DebugTools.swift in Sources */,
+				D45FBB8823E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D4ECE48223B422BD003CFB10 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */,
 				D42A35B223C0385B00D104A9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift in Sources */,
 				D42A359C23C0385B00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift in Sources */,
@@ -2831,6 +2838,7 @@
 				D4ECE48123B422BD003CFB10 /* RVS_BTDriver_Vendor_GoTenna.swift in Sources */,
 				D4ECE47E23B422BD003CFB10 /* RVS_BTDriver_Property.swift in Sources */,
 				D4ECE47923B422BD003CFB10 /* RVS_BTDriver_OBD_ELM327_AT_Command.swift in Sources */,
+				D45FBB9423E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D474904C23C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift in Sources */,
 				D410EFC723C5F94700D590BA /* RVS_BTDriver_OBD_Command.swift in Sources */,
 			);
@@ -2841,6 +2849,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4ECE41423B422A6003CFB10 /* RVS_BTDriver_Vendor_GoTenna.swift in Sources */,
+				D45FBB8B23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D474904F23C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift in Sources */,
 				D4ECE41823B422A6003CFB10 /* RVS_BTDriver_Vendor_OBD_ELM327_VEEPEAK.swift in Sources */,
 				D4ECE41723B422A6003CFB10 /* RVS_BTDriver_Vendor_OBD_ELM327.swift in Sources */,
@@ -2853,8 +2862,8 @@
 				D494672B23DF86E000CA67CA /* RVS_DebugTools.swift in Sources */,
 				D4ECE40F23B422A6003CFB10 /* RVS_BTDriver_Device.swift in Sources */,
 				D42A35CB23C0385B00D104A9 /* RVS_BTDriver_PropertyProtocol.swift in Sources */,
-				D494670723DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
 				D4ECE41623B422A6003CFB10 /* RVS_BTDriver_Vendor_OBD.swift in Sources */,
+				D45FBB9723E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D4ECE41E23B422A6003CFB10 /* RVS_BTDriver_Interface_BLE.swift in Sources */,
 				D494671F23DF86E000CA67CA /* RVS_SequenceProtocol.swift in Sources */,
 				D4ECE41D23B422A6003CFB10 /* RVS_BTDriver_Base_Interface.swift in Sources */,
@@ -2876,7 +2885,6 @@
 				D4ECE40D23B422A6003CFB10 /* RVS_BTDriver.swift in Sources */,
 				D4ECE41C23B422A6003CFB10 /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
 				D4ECE41523B422A6003CFB10 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */,
-				D49466FB23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D4ECE41B23B422A6003CFB10 /* RVS_BTDriver_Vendor_OBD_Kiwi.swift in Sources */,
 				D42A35D623C0385B00D104A9 /* RVS_BTDriver_ServiceProtocol.swift in Sources */,
 				D42A35C023C0385B00D104A9 /* RVS_BTDriver_DeviceProtocol.swift in Sources */,
@@ -2895,12 +2903,11 @@
 				D4ECE4AF23B422C3003CFB10 /* RVS_BTDriver_State_Machine.swift in Sources */,
 				D4ECE4BF23B422C3003CFB10 /* RVS_BTDriver_Interface_BLE.swift in Sources */,
 				D4ECE4B723B422C3003CFB10 /* RVS_BTDriver_Vendor_OBD.swift in Sources */,
-				D494670A23DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
-				D49466FE23DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D42A35CE23C0385B00D104A9 /* RVS_BTDriver_PropertyProtocol.swift in Sources */,
 				D4ECE4BD23B422C3003CFB10 /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
 				D4ECE4B323B422C3003CFB10 /* RVS_BTDriver_VendorProtocol.swift in Sources */,
 				D494672E23DF86E000CA67CA /* RVS_DebugTools.swift in Sources */,
+				D45FBB8E23E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D4ECE4B623B422C3003CFB10 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */,
 				D42A35B823C0385B00D104A9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift in Sources */,
 				D42A35A223C0385B00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift in Sources */,
@@ -2924,6 +2931,7 @@
 				D4ECE4B523B422C3003CFB10 /* RVS_BTDriver_Vendor_GoTenna.swift in Sources */,
 				D4ECE4B223B422C3003CFB10 /* RVS_BTDriver_Property.swift in Sources */,
 				D4ECE4AD23B422C3003CFB10 /* RVS_BTDriver_OBD_ELM327_AT_Command.swift in Sources */,
+				D45FBB9A23E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D474905223C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift in Sources */,
 				D410EFCD23C5F94700D590BA /* RVS_BTDriver_OBD_Command.swift in Sources */,
 			);
@@ -2940,12 +2948,11 @@
 				D4ECE42D23B422B9003CFB10 /* RVS_BTDriver_State_Machine.swift in Sources */,
 				D4ECE43D23B422B9003CFB10 /* RVS_BTDriver_Interface_BLE.swift in Sources */,
 				D4ECE43523B422B9003CFB10 /* RVS_BTDriver_Vendor_OBD.swift in Sources */,
-				D494670123DF86E000CA67CA /* RVS_FIFOQueue.swift in Sources */,
-				D49466F523DF86E000CA67CA /* RVS_Int_Extensions.swift in Sources */,
 				D42A35C523C0385B00D104A9 /* RVS_BTDriver_PropertyProtocol.swift in Sources */,
 				D4ECE43B23B422B9003CFB10 /* RVS_BTDriver_InterfaceProtocol.swift in Sources */,
 				D4ECE43123B422B9003CFB10 /* RVS_BTDriver_VendorProtocol.swift in Sources */,
 				D494672523DF86E000CA67CA /* RVS_DebugTools.swift in Sources */,
+				D45FBB8523E26F13003740C5 /* RVS_FIFOQueue.swift in Sources */,
 				D4ECE43423B422B9003CFB10 /* RVS_BTDriver_Vendor_GoTenna_Mesh.swift in Sources */,
 				D42A35AF23C0385B00D104A9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift in Sources */,
 				D42A359923C0385B00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift in Sources */,
@@ -2969,6 +2976,7 @@
 				D4ECE43323B422B9003CFB10 /* RVS_BTDriver_Vendor_GoTenna.swift in Sources */,
 				D4ECE43023B422B9003CFB10 /* RVS_BTDriver_Property.swift in Sources */,
 				D4ECE42B23B422B9003CFB10 /* RVS_BTDriver_OBD_ELM327_AT_Command.swift in Sources */,
+				D45FBB9123E26F13003740C5 /* RVS_Int_Extensions.swift in Sources */,
 				D474904923C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift in Sources */,
 				D410EFC423C5F94700D590BA /* RVS_BTDriver_OBD_Command.swift in Sources */,
 			);
