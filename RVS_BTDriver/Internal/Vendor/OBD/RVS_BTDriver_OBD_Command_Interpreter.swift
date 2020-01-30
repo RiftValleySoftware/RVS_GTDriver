@@ -21,35 +21,6 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol -
-/* ###################################################################################################################################### */
-/**
- This is the base protocol for command interpreters. It defines an Array of String, which is used to match the interpreter with the PID it is applied to.
- */
-internal protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
-    /* ################################################################## */
-    /**
-     This returns an Array of Strings, reflecting which PIDs will return data to be decoded by this mask set.
-     */
-    static var pidCommands: [String] { get }
-    
-    /* ################################################################## */
-    /**
-     This return an Int, with the service being handled by this interpreter.
-     */
-    var service: Int { get }
-    
-    /* ################################################################## */
-    /**
-     This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).
-     
-     - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
-     - parameter service: The service to which this interpreter applies.
-     */
-    init(contents inContents: String, service inService: Int)
-}
-
-/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask -
 /* ###################################################################################################################################### */
 /**

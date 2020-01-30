@@ -46,6 +46,9 @@
       <FileRef
          location = "group:.jazzy.yaml">
       </FileRef>
+      <FileRef
+         location = "group:/Volumes/Development/RiftValley/RVS_GTDriver/spec/DTC-Samples.txt">
+      </FileRef>
    </Group>
    <FileRef
       location = "group:/Volumes/Development/RiftValley/RVS_GTDriver/RVS_BTDriver.xcodeproj">

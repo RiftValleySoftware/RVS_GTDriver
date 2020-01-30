@@ -23,6 +23,35 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol -
+/* ###################################################################################################################################### */
+/**
+ This is the base protocol for command interpreters. It defines an Array of String, which is used to match the interpreter with the PID it is applied to.
+ */
+public protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+    /* ################################################################## */
+    /**
+     This returns an Array of Strings, reflecting which PIDs will return data to be decoded by this mask set.
+     */
+    static var pidCommands: [String] { get }
+    
+    /* ################################################################## */
+    /**
+     This return an Int, with the service being handled by this interpreter.
+     */
+    var service: Int { get }
+    
+    /* ################################################################## */
+    /**
+     This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).
+     
+     - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
+     - parameter service: The service to which this interpreter applies.
+     */
+    init(contents inContents: String, service inService: Int)
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Device_TransactionStruct Struct -
 /* ###################################################################################################################################### */
 /**
@@ -57,14 +86,33 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
     /* ################################################################## */
     /**
      This is the response, "cleaned," and converted to a String (if possible).
+     
+     Upon being set, we execute the parser.
      */
-    public var parsedData: String!
+    public var parsedData: String! {
+       didSet {
+           parseCommand()
+       }
+    }
 
     /* ################################################################## */
     /**
      Any error that may have occurred.
      */
     public var error: RVS_BTDriver.Errors!
+    
+    /* ################################################################## */
+    /**
+     This is any data that was returned from the OBD adapter.
+     */
+    public var interpreters: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter] = []
+
+    /* ################################################################## */
+    /**
+     */
+    mutating internal func parseCommand() {
+        
+    }
     
     /* ################################################################## */
     /**
@@ -86,8 +134,8 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         rawCommand = inRawCommand
         completeCommand = inCompleteCommand
         responseData = inResponseData
-        parsedData = inResponseDataAsString
         error = inError
+        parsedData = inResponseDataAsString
     }
     
     /* ################################################################## */
