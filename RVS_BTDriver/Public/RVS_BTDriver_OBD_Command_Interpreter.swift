@@ -26,17 +26,17 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 /**
  This is an option set that will decode the response to the 0100 PID.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+public struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     /// This is the interpreted value, assigned to an OptionSet.
     private let _value: UInt32
     /// This will contain the service (either 1 or 2) to which this interpreter applies.
-    var service: Int = 0
+    public var service: Int = 0
     
     /* ################################################################## */
     /**
      This will be used for the first PID of Service 01 and 02.
      */
-    static var pidCommands: [String] {
+    public static var pidCommands: [String] {
         return [RVS_BTDriver_OBD_Command_Service_01_PIDs.returnSupportedPIDs.rawValue,
                 RVS_BTDriver_OBD_Command_Service_02_PIDs.returnSupportedPIDs.rawValue]
     }
@@ -62,7 +62,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter:
         
         return ret
     }
-    
+
     /* ################################################################## */
     /**
      This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).
@@ -70,7 +70,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter:
      - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
      - parameter service: The service (either 1 or 2), to which this interpreter applies.
      */
-    init(contents inContents: String, service inService: Int) {
+    public init(contents inContents: String, service inService: Int) {
         if  1 == inService || 2 == inService,   // Must be one of these. No other values allowed.
             let derivedValue = UInt32(inContents.hexOnly, radix: 16) {
             service = inService
@@ -88,11 +88,11 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter:
 /**
  This is an option set that will decode the response to the 0101/0141 PID.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+public struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     /// This contains the value of the response.
     private let _value: RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask
     /// This will contain the service (either 1 or 2) to which this interpreter applies.
-    var service: Int = 0
+    public var service: Int = 0
 
     /* ################################################################## */
     /**
@@ -187,7 +187,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
     /**
      This will be used by these PIDs of service 01.
      */
-    static var pidCommands: [String] {
+    public static var pidCommands: [String] {
         return [RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatus.rawValue,
                 RVS_BTDriver_OBD_Command_Service_01_PIDs.returnMonitorStatusThisCycle.rawValue]
     }
@@ -199,7 +199,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
      - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
      - parameter service: The service (either 1 or 2), to which this interpreter applies.
      */
-    init(contents inContents: String, service inService: Int) {
+    public init(contents inContents: String, service inService: Int) {
         if  1 == inService || 2 == inService,   // Must be one of these. No other values allowed.
             let derivedValue = UInt32(inContents.hexOnly, radix: 16) {
             service = inService
@@ -294,17 +294,17 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
 /**
  This is a special struct that is used to decode the exhaust gas temperature sensor data (PID 0178/0179).
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+public struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     /* ################################################################## */
     /**
      This will be used by these PIDs of service 01 and 02.
      */
-    static var pidCommands: [String] {
+    public static var pidCommands: [String] {
         return [RVS_BTDriver_OBD_Command_Service_01_PIDs.egt_Bank_01.rawValue,
                 RVS_BTDriver_OBD_Command_Service_01_PIDs.egt_Bank_02.rawValue]
     }
     
-    var service: Int = 0
+    public var service: Int = 0
     
     // MARK: ABCDE A = 0x0F0000000000000000, B = 0x00FFFF000000000000, C =  0x000000FFFF00000000, D = 0x0000000000FFFF0000, E = 0x00000000000000FFFF
 
@@ -408,7 +408,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
       - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
       - parameter service: The service (either 1 or 2), to which this interpreter applies.
       */
-     init(contents inContents: String, service inService: Int) {
+     public init(contents inContents: String, service inService: Int) {
         if  1 == inService || 2 == inService {   // Must be one of these. No other values allowed.
             service = inService
             
@@ -463,17 +463,17 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
     This is a special struct that is used to decode the Service 3 response.
     It can be subscripted or iterated as an Array of String.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter, Sequence {
+public struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter, Sequence {
     /// This pretends to be an Array of String.
-    typealias Element = String
+    public typealias Element = String
     /// The iterator is the one used by an Array of String.
-    typealias Iterator = Array<String>.Iterator
+    public typealias Iterator = Array<String>.Iterator
     
     /* ################################################################## */
     /**
         The iterator is quite simple. We just return an Array of String's iterator.
      */
-    func makeIterator() -> Iterator {
+    public func makeIterator() -> Iterator {
         return codesAsStrings.makeIterator()
     }
 
@@ -481,13 +481,13 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
     /**
         This is only handler for the one PID available for Service 3. The response will be a list of trouble codes.
      */
-    static let pidCommands: [String] = ["0300"]
+    public static let pidCommands: [String] = ["0300"]
     
     /* ################################################################## */
     /**
         The service. It will always be service 3, but we need to declare this for protocol conformance.
      */
-    let service: Int = 3
+    public let service: Int = 3
     
     /* ################################################################## */
     /**
@@ -551,6 +551,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
                 let bodyStringArray = String(inResponseDataAsString[inResponseDataAsString.index(inResponseDataAsString.startIndex, offsetBy: 13)...]).split(separator: "\n")
                 // This removes the line numbers from long responses. It compresses the data (cleaning out non-hex characters) into a single String of hex numbers.
                 let bodyString = bodyStringArray.reduce("") { inCurrent, inString in
+                    // We ignore everything before the first colon.
                     if let colonPos = inString.firstIndex(of: ":") {
                         return inCurrent + inString[inString.index(after: colonPos)...].hexOnly
                     }
@@ -558,7 +559,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
                 }
 
                 // Walk through the compressed hex data, in chunks of 4 (16-bit values).
-                // We just want to make sure the length header didn't lie. We don't go past the end.
+                // The min thing is because we just want to make sure the length header didn't lie. We don't go past the end.
                 for substringStart in stride(from: 0, to: Swift.min(bodyString.count, lengthHeader), by: 4) {
                     let startIndex = bodyString.index(bodyString.startIndex, offsetBy: substringStart)
                     let endIndex = bodyString.index(startIndex, offsetBy: 4)
@@ -583,7 +584,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
         - contents: The String, containing the OBD response to be parsed.
         - service: The service (ignored, as we are always 3).
      */
-    init(contents inContents: String, service _: Int) {
+    public init(contents inContents: String, service _: Int) {
         codes = Self.parseCommand(inContents)
     }
 }
