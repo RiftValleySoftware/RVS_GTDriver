@@ -206,12 +206,12 @@ class RVS_BTDriver_Device_OBD: RVS_BTDriver_Device_BLE, RVS_BTDriver_OBD_DeviceP
                 
                 let parser = RVS_BTDriver_Vendor_OBD_Parser(transaction: currTrans)
 
-                if let cleanedString = parser.transaction?.parsedData {
+                if let cleanedString = parser.transaction?.responseDataAsString {
                     #if DEBUG
                         print("Adding \"\(cleanedString)\" to the transaction.")
                     #endif
                     
-                    currentTransaction.parsedData = cleanedString
+                    currentTransaction.responseDataAsString = cleanedString
                 } else {
                     #if DEBUG
                         print("Unable to produce a cleaned string.")

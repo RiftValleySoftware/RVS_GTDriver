@@ -89,7 +89,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
      
      Upon being set, we execute the parser.
      */
-    public var parsedData: String! {
+    public var responseDataAsString: String! {
        didSet {
            parseCommand()
        }
@@ -111,8 +111,8 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
     /**
      */
     mutating internal func parseCommand() {
-        if nil != parsedData,
-            !parsedData.isEmpty {
+        if nil != responseDataAsString,
+            !responseDataAsString.isEmpty {
             
         }
     }
@@ -138,7 +138,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         completeCommand = inCompleteCommand
         responseData = inResponseData
         error = inError
-        parsedData = inResponseDataAsString
+        responseDataAsString = inResponseDataAsString
     }
     
     /* ################################################################## */
@@ -165,7 +165,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
             ret += "\n\tResponse: \"\(stringResponse)\""
         }
         
-        if  let responseDataAsString = parsedData {
+        if  let responseDataAsString = responseDataAsString {
             ret += "\n\tResponse As A String: \"\(responseDataAsString)\""
         }
         
