@@ -460,8 +460,8 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
 // MARK: - RVS_BTDriver_OBD_Command_Service_03 -
 /* ###################################################################################################################################### */
 /**
- This is a special struct that is used to decode the Service 3 response.
- It can be subscripted or iterated as an Array of String.
+    This is a special struct that is used to decode the Service 3 response.
+    It can be subscripted or iterated as an Array of String.
  */
 internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter, Sequence {
     /// This pretends to be an Array of String.
@@ -471,7 +471,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
     
     /* ################################################################## */
     /**
-     The iterator is quite simple. We just return an Array of String's iterator.
+        The iterator is quite simple. We just return an Array of String's iterator.
      */
     func makeIterator() -> Iterator {
         return codesAsStrings.makeIterator()
@@ -479,25 +479,25 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
 
     /* ################################################################## */
     /**
-     This is only handler for the one PID available for Service 3. The response will be a list of trouble codes.
+        This is only handler for the one PID available for Service 3. The response will be a list of trouble codes.
      */
     static let pidCommands: [String] = ["0300"]
     
     /* ################################################################## */
     /**
-     It will be service 3, but we need to declare this for protocol conformance.
+        The service. It will always be service 3, but we need to declare this for protocol conformance.
      */
     let service: Int = 3
     
     /* ################################################################## */
     /**
-     These are the DTC codes returned by the device.
+        These are the DTC codes returned by the device.
      */
     let codes: [RVS_BTDriver_OBD_DTC]
     
     /* ################################################################## */
     /**
-     These are the DTC codes returned by the device, but as an Array of String.
+        These are the DTC codes returned by the device, but as an Array of String.
      */
     var codesAsStrings: [String] {
         return codes.map { $0.stringValue }
@@ -505,7 +505,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
 
     /* ################################################################## */
     /**
-     This is a simple subscript. We don't construct an Array of String, first, because this is a bit more efficient.
+        This is a simple subscript. We don't construct an Array of String, first, because this is a bit more efficient.
      */
     subscript(_ inValue: Int) -> String {
         precondition((0..<codes.count).contains(inValue), "Index Out of Range")
@@ -514,7 +514,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
     
     /* ################################################################## */
     /**
-     The count is simple how many codes we have.
+        The count is simply how many codes we have.
      */
     var count: Int {
         return codes.count
@@ -522,14 +522,20 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
     
     /* ################################################################## */
     /**
+        This is a static function that we use to parse a response string into an Array of DTC instances (structs).
+        - prameter inResponseDataAsString: The response from the device, as a "raw" String.
+        - returns:An Array of 0 or more RVS_BTDriver_OBD_DTC instances, instantiated from the data.
      */
-    internal static func parseCommand(_ responseDataAsString: String) -> [RVS_BTDriver_OBD_DTC] {
+    internal static func parseCommand(_ inResponseDataAsString: String) -> [RVS_BTDriver_OBD_DTC] {
         var returnCodes = [RVS_BTDriver_OBD_DTC]()
-        if !responseDataAsString.isEmpty {
+        if !inResponseDataAsString.isEmpty {
             // See if we have a regular "shorty" response.
-            if "4" == responseDataAsString.first {
-                let compressedString = responseDataAsString.hexOnly
+            if "4" == inResponseDataAsString.first {
+                // We simply create a "pure" hex string from the data.
+                let compressedString = inResponseDataAsString.hexOnly
+                // Go past the header to start.
                 let bodyString = String(compressedString[compressedString.index(compressedString.startIndex, offsetBy: 4)...])
+                // Walk through the compressed hex data, in chunks of 4 (16-bit values).
                 for substringStart in stride(from: 0, to: bodyString.count, by: 4) {
                     let startIndex = bodyString.index(bodyString.startIndex, offsetBy: substringStart)
                     let endIndex = bodyString.index(startIndex, offsetBy: 4)
@@ -537,28 +543,29 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
                     returnCodes.append(RVS_BTDriver_OBD_DTC(stringData: thisCodeStr))
                 }
             } else {
-                let lengthHeader = String(responseDataAsString[responseDataAsString.startIndex..<responseDataAsString.index(responseDataAsString.startIndex, offsetBy: 3)]).hexOnly
-                let header = String(responseDataAsString[responseDataAsString.index(responseDataAsString.startIndex, offsetBy: 7)..<responseDataAsString.index(responseDataAsString.startIndex, offsetBy: 12)]).hexOnly
-                let bodyStringArray = String(responseDataAsString[responseDataAsString.index(responseDataAsString.startIndex, offsetBy: 13)...]).split(separator: "\n")
+                // Long responses take more work.
+                // This is how many caracters we are supposed to expect. It does not include line numbers or spaces.
+                let lengthHeader = Int(String(inResponseDataAsString[inResponseDataAsString.startIndex..<inResponseDataAsString.index(inResponseDataAsString.startIndex, offsetBy: 3)]).hexOnly, radix: 16) ?? 0
+                // We start by splitting the body into chunks as lines.
+                let bodyStringArray = String(inResponseDataAsString[inResponseDataAsString.index(inResponseDataAsString.startIndex, offsetBy: 13)...]).split(separator: "\n")
+                // This removes the line numbers from long responses. It compresses the data (cleaning out non-hex characters) into a single String of hex numbers.
                 let bodyString = bodyStringArray.reduce("") { inCurrent, inString in
                     if let colonPos = inString.firstIndex(of: ":") {
                         return inCurrent + inString[inString.index(after: colonPos)...].hexOnly
                     }
                     return inCurrent + inString.hexOnly
                 }
-                let dataLen = Int(lengthHeader, radix: 16) ?? 0
-                print("Length Header (Long): \(lengthHeader) (\(dataLen))")
-                print("Header (Long): \(header)")
-                print("Body (Long): \(bodyString)")
-                for substringStart in stride(from: 0, to: bodyString.count, by: 4) {
+
+                // Walk through the compressed hex data, in chunks of 4 (16-bit values).
+                // We just want to make sure the length header didn't lie. We don't go past the end.
+                for substringStart in stride(from: 0, to: Swift.min(bodyString.count, lengthHeader), by: 4) {
                     let startIndex = bodyString.index(bodyString.startIndex, offsetBy: substringStart)
-                    if substringStart < (bodyString.count - 3) {
-                        let endIndex = bodyString.index(startIndex, offsetBy: 4)
-                        let thisCodeStr = String(bodyString[startIndex..<endIndex])
-                        if  let val = Int(thisCodeStr, radix: 16),
-                            0 < val {
-                            returnCodes.append(RVS_BTDriver_OBD_DTC(stringData: thisCodeStr))
-                        }
+                    let endIndex = bodyString.index(startIndex, offsetBy: 4)
+                    let thisCodeStr = String(bodyString[startIndex..<endIndex])
+                    // We don't instantiate 0 DTCs.
+                    if  let val = Int(thisCodeStr, radix: 16),
+                        0 < val {
+                        returnCodes.append(RVS_BTDriver_OBD_DTC(stringData: thisCodeStr))
                     }
                 }
             }
