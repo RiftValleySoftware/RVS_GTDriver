@@ -527,7 +527,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
         - returns:An Array of 0 or more RVS_BTDriver_OBD_DTC instances, instantiated from the data.
      */
     internal static func parseCommand(_ inResponseDataAsString: String) -> [RVS_BTDriver_OBD_DTC] {
-        var returnCodes = [RVS_BTDriver_OBD_DTC]()
+        var returnCodes = [String: RVS_BTDriver_OBD_DTC]()  // Doing this as a Dictionary allows us to avoid duplicates.
         if !inResponseDataAsString.isEmpty {
             // See if we have a regular "shorty" response.
             if "4" == inResponseDataAsString.first {
@@ -540,7 +540,8 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
                     let startIndex = bodyString.index(bodyString.startIndex, offsetBy: substringStart)
                     let endIndex = bodyString.index(startIndex, offsetBy: 4)
                     let thisCodeStr = String(bodyString[startIndex..<endIndex])
-                    returnCodes.append(RVS_BTDriver_OBD_DTC(stringData: thisCodeStr))
+                    let instance = RVS_BTDriver_OBD_DTC(stringData: thisCodeStr)
+                    returnCodes[instance.stringValue] = instance
                 }
             } else {
                 // Long responses take more work.
@@ -565,13 +566,15 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
                     // We don't instantiate 0 DTCs.
                     if  let val = Int(thisCodeStr, radix: 16),
                         0 < val {
-                        returnCodes.append(RVS_BTDriver_OBD_DTC(stringData: thisCodeStr))
+                        let instance = RVS_BTDriver_OBD_DTC(stringData: thisCodeStr)
+                        returnCodes[instance.stringValue] = instance
                     }
                 }
             }
         }
         
-        return returnCodes
+        // I sort the codes, as well. It's pretty easy, as they are just numerically specified, under the hood.
+        return returnCodes.values.sorted() { (inA, inB) -> Bool in return inA.intValue < inB.intValue }
     }
 
     /* ################################################################## */
