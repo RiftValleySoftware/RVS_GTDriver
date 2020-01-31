@@ -83,7 +83,7 @@ internal enum RVS_BTDriver_OBD_Command_Service_04_PIDs: String, CaseIterable {
  These are for test results that include non-CAN oxygen sensor test reults.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_05_PIDs: String, CaseIterable {
-    /// Returns all the monotor IDs available.
+    /// Returns all the monitor IDs available.
     case returnMonitorIDs           = "050100"
     /// Set 01, Bank 01, Sensor 01.
     case set_01_Bank_01_Sensor_01   = "050101"
@@ -158,7 +158,7 @@ internal enum RVS_BTDriver_OBD_Command_Service_05_PIDs: String, CaseIterable {
  These are for test results that include CAN oxygen sensor tests.
  */
 internal enum RVS_BTDriver_OBD_Command_Service_06_PIDs: String, CaseIterable {
-    /// Returns all the monotor IDs available.
+    /// Returns all the monitor IDs available.
     case returnMonitorIDs           = "060100"
     /// Set 01, Bank 01, Sensor 01.
     case set_01_Bank_01_Sensor_01   = "060101"
@@ -234,7 +234,7 @@ internal enum RVS_BTDriver_OBD_Command_Service_06_PIDs: String, CaseIterable {
  */
 internal enum RVS_BTDriver_OBD_Command_Service_07_PIDs: String, CaseIterable {
         /// Placeholder
-    case nop = "06700"
+    case nop = "0700"
 }
 
 /* ###################################################################################################################################### */

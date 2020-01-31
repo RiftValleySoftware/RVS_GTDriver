@@ -111,7 +111,10 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
     /**
      */
     mutating internal func parseCommand() {
-        
+        if nil != parsedData,
+            !parsedData.isEmpty {
+            
+        }
     }
     
     /* ################################################################## */
