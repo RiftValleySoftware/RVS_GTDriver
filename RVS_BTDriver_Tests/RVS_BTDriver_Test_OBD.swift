@@ -744,13 +744,16 @@ class RVS_BTDriver_TestPID_0300: XCTestCase {
             ("00C\n0: 43 05 0C 5A 05 37\n1: 04 94 00 9E 00 10 00", ["P0C5A", "P0537", "P0494", "P009E", "P0010"]),
             ("00E\n0: 43 06 0C 5A 05 37\n1: 04 94 00 9E 00 10 00\n2: 11 00 00 00 00 00 00", ["P0C5A", "P0537", "P0494", "P009E", "P0010", "P0011"])
         ]
-        for testString  in testingStrings {
+        
+        for testString in testingStrings {
             let testTarget = RVS_BTDriver_OBD_Command_Service_03(contents: testString.0, service: 3)
             
+            var index = 0
             for returnedCode in testTarget {
-                print(returnedCode)
+                let expectedCode = testString.1[index]
+                XCTAssertEqual(expectedCode, returnedCode)
+                index += 1
             }
-            print("---")
         }
     }
 }

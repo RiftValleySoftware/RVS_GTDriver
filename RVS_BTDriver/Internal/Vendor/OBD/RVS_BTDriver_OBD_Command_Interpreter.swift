@@ -526,9 +526,9 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
     internal static func parseCommand(_ responseDataAsString: String) -> [RVS_BTDriver_OBD_DTC] {
         var returnCodes = [RVS_BTDriver_OBD_DTC]()
         if !responseDataAsString.isEmpty {
-            let compressedString = responseDataAsString.hexOnly
             // See if we have a regular "shorty" response.
-            if "4" == compressedString.first {
+            if "4" == responseDataAsString.first {
+                let compressedString = responseDataAsString.hexOnly
                 let bodyString = String(compressedString[compressedString.index(compressedString.startIndex, offsetBy: 4)...])
                 for substringStart in stride(from: 0, to: bodyString.count, by: 4) {
                     let startIndex = bodyString.index(bodyString.startIndex, offsetBy: substringStart)
@@ -537,15 +537,29 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
                     returnCodes.append(RVS_BTDriver_OBD_DTC(stringData: thisCodeStr))
                 }
             } else {
-                let lengthHeader = String(compressedString[compressedString.startIndex..<compressedString.index(compressedString.startIndex, offsetBy: 3)])
-                let header = String(compressedString[compressedString.index(compressedString.startIndex, offsetBy: 3)..<compressedString.index(compressedString.startIndex, offsetBy: 7)])
-                let bodyString = String(compressedString[compressedString.index(compressedString.startIndex, offsetBy: 7)...])
+                let lengthHeader = String(responseDataAsString[responseDataAsString.startIndex..<responseDataAsString.index(responseDataAsString.startIndex, offsetBy: 3)]).hexOnly
+                let header = String(responseDataAsString[responseDataAsString.index(responseDataAsString.startIndex, offsetBy: 7)..<responseDataAsString.index(responseDataAsString.startIndex, offsetBy: 12)]).hexOnly
+                let bodyStringArray = String(responseDataAsString[responseDataAsString.index(responseDataAsString.startIndex, offsetBy: 13)...]).split(separator: "\n")
+                let bodyString = bodyStringArray.reduce("") { inCurrent, inString in
+                    if let colonPos = inString.firstIndex(of: ":") {
+                        return inCurrent + inString[inString.index(after: colonPos)...].hexOnly
+                    }
+                    return inCurrent + inString.hexOnly
+                }
                 let dataLen = Int(lengthHeader, radix: 16) ?? 0
-                print("Length Header (Long): \(lengthHeader)")
+                print("Length Header (Long): \(lengthHeader) (\(dataLen))")
                 print("Header (Long): \(header)")
                 print("Body (Long): \(bodyString)")
-                if 0 < dataLen {
-                    
+                for substringStart in stride(from: 0, to: bodyString.count, by: 4) {
+                    let startIndex = bodyString.index(bodyString.startIndex, offsetBy: substringStart)
+                    if substringStart < (bodyString.count - 3) {
+                        let endIndex = bodyString.index(startIndex, offsetBy: 4)
+                        let thisCodeStr = String(bodyString[startIndex..<endIndex])
+                        if  let val = Int(thisCodeStr, radix: 16),
+                            0 < val {
+                            returnCodes.append(RVS_BTDriver_OBD_DTC(stringData: thisCodeStr))
+                        }
+                    }
                 }
             }
         }
