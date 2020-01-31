@@ -544,8 +544,8 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
                 }
             } else {
                 // Long responses take more work.
-                // This is how many caracters we are supposed to expect. It does not include line numbers or spaces.
-                let lengthHeader = Int(String(inResponseDataAsString[inResponseDataAsString.startIndex..<inResponseDataAsString.index(inResponseDataAsString.startIndex, offsetBy: 3)]).hexOnly, radix: 16) ?? 0
+                // This is how many bytes we are supposed to expect. It does not include line numbers or spaces, and we have two characters per byte. We subtract two bytes for the header.
+                let lengthHeader = Swift.max(0, ((Int(String(inResponseDataAsString[inResponseDataAsString.startIndex..<inResponseDataAsString.index(inResponseDataAsString.startIndex, offsetBy: 3)]).hexOnly, radix: 16) ?? 0) * 2) - 2)
                 // We start by splitting the body into chunks as lines.
                 let bodyStringArray = String(inResponseDataAsString[inResponseDataAsString.index(inResponseDataAsString.startIndex, offsetBy: 13)...]).split(separator: "\n")
                 // This removes the line numbers from long responses. It compresses the data (cleaning out non-hex characters) into a single String of hex numbers.
