@@ -522,21 +522,44 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
     
     /* ################################################################## */
     /**
+     */
+    internal static func parseCommand(_ responseDataAsString: String) -> [RVS_BTDriver_OBD_DTC] {
+        var returnCodes = [RVS_BTDriver_OBD_DTC]()
+        if !responseDataAsString.isEmpty {
+            let compressedString = responseDataAsString.hexOnly
+            // See if we have a regular "shorty" response.
+            if "4" == compressedString.first {
+                let bodyString = String(compressedString[compressedString.index(compressedString.startIndex, offsetBy: 4)...])
+                for substringStart in stride(from: 0, to: bodyString.count, by: 4) {
+                    let startIndex = bodyString.index(bodyString.startIndex, offsetBy: substringStart)
+                    let endIndex = bodyString.index(startIndex, offsetBy: 4)
+                    let thisCodeStr = String(bodyString[startIndex..<endIndex])
+                    returnCodes.append(RVS_BTDriver_OBD_DTC(stringData: thisCodeStr))
+                }
+            } else {
+                let lengthHeader = String(compressedString[compressedString.startIndex..<compressedString.index(compressedString.startIndex, offsetBy: 3)])
+                let header = String(compressedString[compressedString.index(compressedString.startIndex, offsetBy: 3)..<compressedString.index(compressedString.startIndex, offsetBy: 7)])
+                let bodyString = String(compressedString[compressedString.index(compressedString.startIndex, offsetBy: 7)...])
+                let dataLen = Int(lengthHeader, radix: 16) ?? 0
+                print("Length Header (Long): \(lengthHeader)")
+                print("Header (Long): \(header)")
+                print("Body (Long): \(bodyString)")
+                if 0 < dataLen {
+                    
+                }
+            }
+        }
+        
+        return returnCodes
+    }
+
+    /* ################################################################## */
+    /**
      - parameters:
         - contents: The String, containing the OBD response to be parsed.
         - service: The service (ignored, as we are always 3).
      */
     init(contents inContents: String, service _: Int) {
-        var codeTemp: [RVS_BTDriver_OBD_DTC] = []
-        let compressedString = inContents.hexOnly
-        // We extract a hex string, and chop it into 4.
-        if 0 == (compressedString.count % 4) {
-            for index in stride(from: 0, to: compressedString.count, by: 4) {
-                let codeString = String(compressedString[compressedString.index(compressedString.startIndex, offsetBy: index)..<Swift.min(compressedString.index(compressedString.startIndex, offsetBy: index + 4), compressedString.endIndex)])
-                codeTemp.append(RVS_BTDriver_OBD_DTC(stringData: codeString))
-            }
-        }
-        
-        codes = codeTemp
+        codes = Self.parseCommand(inContents)
     }
 }

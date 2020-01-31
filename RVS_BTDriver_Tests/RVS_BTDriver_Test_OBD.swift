@@ -585,7 +585,7 @@ class RVS_BTDriver_TestPID_0101_0201: XCTestCase {
 /**
  */
 /* ###################################################################################################################################### */
-// MARK: - The First Interpreter for Service 01 and 02 Exhaust Gast Temeprature Sensors -
+// MARK: - The First Interpreter for Service 01 and 02 Exhaust Gast Temperature Sensors -
 /* ###################################################################################################################################### */
 class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
     let testFlagMax: UInt16 = 0xFFFF
@@ -731,12 +731,26 @@ class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
 /* ###################################################################################################################################### */
 class RVS_BTDriver_TestPID_0300: XCTestCase {
     func testBasicDTCEncoder() {
-        let testString = "0000 4000 8000 C000 0000"
-
-        let testTarget = RVS_BTDriver_OBD_Command_Service_03(contents: testString, service: 3)
-        
-        for returnedCode in testTarget {
-            print(returnedCode)
+        let testingStrings: [String] = [
+            "43 01 01 08",
+            "43 02 01 08 02 32",
+            "008\n0: 43 03 01 08 02 32\n1: 0C 87 00 00 00 00 00",
+            "00C\n0: 43 05 01 08 02 32\n1: 0C 87 00 01 0A 01 00",
+            "00E\n0: 43 06 01 08 02 32\n1: 0C 87 00 01 0A 01 0B\n2: 00 00 00 00 00 00 00",
+            "43 01 0C 5A",
+            "43 02 0C 5A 05 37",
+            "008\n0: 43 03 0C 5A 05 37\n1: 04 94 00 00 00 00 00",
+            "00A\n0: 43 04 0C 5A 05 37\n1: 04 94 00 9E 00 00 00",
+            "00C\n0: 43 05 0C 5A 05 37\n1: 04 94 00 9E 00 10 00",
+            "00E\n0: 43 06 0C 5A 05 37\n1: 04 94 00 9E 00 10 00\n2: 11 00 00 00 00 00 00"
+        ]
+        for testString  in testingStrings {
+            let testTarget = RVS_BTDriver_OBD_Command_Service_03(contents: testString, service: 3)
+            
+            for returnedCode in testTarget {
+                print(returnedCode)
+            }
+            print("---")
         }
     }
 }

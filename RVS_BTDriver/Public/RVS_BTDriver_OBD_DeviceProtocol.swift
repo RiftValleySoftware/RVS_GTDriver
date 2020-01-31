@@ -89,11 +89,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
      
      Upon being set, we execute the parser.
      */
-    public var responseDataAsString: String! {
-       didSet {
-           parseCommand()
-       }
-    }
+    public var responseDataAsString: String!
 
     /* ################################################################## */
     /**
@@ -106,16 +102,6 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
      This is any data that was returned from the OBD adapter.
      */
     public var interpreters: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter] = []
-
-    /* ################################################################## */
-    /**
-     */
-    mutating internal func parseCommand() {
-        if nil != responseDataAsString,
-            !responseDataAsString.isEmpty {
-            
-        }
-    }
     
     /* ################################################################## */
     /**
