@@ -526,7 +526,7 @@ public struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Serv
         - prameter inResponseDataAsString: The response from the device, as a "raw" String.
         - returns:An Array of 0 or more RVS_BTDriver_OBD_DTC instances, instantiated from the data.
      */
-    internal static func parseCommand(_ inResponseDataAsString: String) -> [RVS_BTDriver_OBD_DTC] {
+    public static func parseCommand(_ inResponseDataAsString: String) -> [Any] {
         var returnCodes = [String: RVS_BTDriver_OBD_DTC]()  // Doing this as a Dictionary allows us to avoid duplicates.
         if !inResponseDataAsString.isEmpty {
             // See if we have a regular "shorty" response.
@@ -585,6 +585,6 @@ public struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Serv
         - service: The service (ignored, as we are always 3).
      */
     public init(contents inContents: String, service _: Int) {
-        codes = Self.parseCommand(inContents)
+        codes = Self.parseCommand(inContents) as? [RVS_BTDriver_OBD_DTC] ?? []
     }
 }
