@@ -52,6 +52,74 @@ public protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
 }
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol -
+/* ###################################################################################################################################### */
+/**
+ This is the base protocol for command interpreters. It defines an Array of String, which is used to match the interpreter with the PID it is applied to.
+ 
+ The sequence conformance allows us to act as a sequence of String
+ */
+public protocol RVS_BTDriver_OBD_DTC_Container: Sequence where Element == String {
+    /* ################################################################## */
+    /**
+     These are the DTC codes returned by the device.
+     */
+    var codes: [RVS_BTDriver_OBD_DTC] { get }
+    
+    /* ################################################################## */
+    /**
+     These are the DTC codes returned by the device, but as an Array of String.
+     */
+    var codesAsStrings: [String] { get }
+    
+    /* ################################################################## */
+    /**
+     We have a simple subscript, allowing us to get the codes as if we are an Array.
+     
+     - parameter index: The 0-based index of the item we want.
+     */
+    subscript(_ index: Int) -> String { get }
+    
+    /* ################################################################## */
+    /**
+     The count is simply how many codes we have.
+     */
+    var count: Int { get }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol -
+/* ###################################################################################################################################### */
+/**
+ This is the base protocol for command interpreters. It defines an Array of String, which is used to match the interpreter with the PID it is applied to.
+ */
+extension RVS_BTDriver_OBD_DTC_Container {
+    /* ################################################################## */
+    /**
+        The default implementation is pretty much all we need.
+     */
+    public var codesAsStrings: [String] {
+        return codes.map { $0.stringValue }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    public subscript(_ inIndex: Int) -> String {
+        precondition((0..<codes.count).contains(inIndex), "Index Out of Range")
+        return codes[inIndex].stringValue
+    }
+    
+    /* ################################################################## */
+    /**
+     Default should be all we need to get this.
+     */
+    public var count: Int {
+        return codes.count
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Device_TransactionStruct Struct -
 /* ###################################################################################################################################### */
 /**

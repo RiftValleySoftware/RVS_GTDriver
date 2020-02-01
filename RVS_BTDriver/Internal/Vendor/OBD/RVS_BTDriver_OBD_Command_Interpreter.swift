@@ -494,17 +494,12 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
     This is a special struct that is used to decode the Service 3 response.
     It can be subscripted or iterated as an Array of String.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal, Sequence {
-    /// This pretends to be an Array of String.
-    public typealias Element = String
-    /// The iterator is the one used by an Array of String.
-    public typealias Iterator = Array<String>.Iterator
-    
+internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal, RVS_BTDriver_OBD_DTC_Container {
     /* ################################################################## */
     /**
         The iterator is quite simple. We just return an Array of String's iterator.
      */
-    public func makeIterator() -> Iterator {
+    public func makeIterator() -> Array<String>.Iterator {
         return codesAsStrings.makeIterator()
     }
 
