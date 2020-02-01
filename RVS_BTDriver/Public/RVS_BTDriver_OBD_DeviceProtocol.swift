@@ -49,29 +49,6 @@ public protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
      - parameter service: The service to which this interpreter applies.
      */
     init(contents inContents: String, service inService: Int)
-    
-    /* ################################################################## */
-    /**
-        This is a static function that we use to parse a response string into an Array of DTC instances (structs).
-        - prameter inResponseDataAsString: The response from the device, as a "raw" String.
-        - returns:An Array of 0 or more interpreted instances, instantiated from the data.
-     */
-    static func parseCommand(_ inResponseDataAsString: String) -> [Any]
-}
-
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Default -
-/* ###################################################################################################################################### */
-/**
- */
-extension RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
-    /* ################################################################## */
-    /**
-        The default function returns an empty Array.
-     */
-    public static func parseCommand(_ inResponseDataAsString: String) -> [Any] {
-        return []
-    }
 }
 
 /* ###################################################################################################################################### */
