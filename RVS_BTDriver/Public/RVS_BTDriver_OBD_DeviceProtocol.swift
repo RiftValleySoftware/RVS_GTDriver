@@ -96,6 +96,14 @@ public protocol RVS_BTDriver_OBD_DTC_Container: Sequence where Element == String
 extension RVS_BTDriver_OBD_DTC_Container {
     /* ################################################################## */
     /**
+        The iterator is quite simple. We just return an Array of String's iterator.
+     */
+    public func makeIterator() -> Array<String>.Iterator {
+        return codesAsStrings.makeIterator()
+    }
+
+    /* ################################################################## */
+    /**
         The default implementation is pretty much all we need.
      */
     public var codesAsStrings: [String] {

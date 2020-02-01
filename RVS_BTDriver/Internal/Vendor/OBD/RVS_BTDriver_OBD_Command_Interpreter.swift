@@ -497,14 +497,6 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
 internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal, RVS_BTDriver_OBD_DTC_Container {
     /* ################################################################## */
     /**
-        The iterator is quite simple. We just return an Array of String's iterator.
-     */
-    public func makeIterator() -> Array<String>.Iterator {
-        return codesAsStrings.makeIterator()
-    }
-
-    /* ################################################################## */
-    /**
         This is only handler for the one PID available for Service 3. The response will be a list of trouble codes.
      */
     public static let pidCommands: [String] = ["0300"]
@@ -520,31 +512,6 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
         These are the DTC codes returned by the device.
      */
     let codes: [RVS_BTDriver_OBD_DTC]
-    
-    /* ################################################################## */
-    /**
-        These are the DTC codes returned by the device, but as an Array of String.
-     */
-    var codesAsStrings: [String] {
-        return codes.map { $0.stringValue }
-    }
-
-    /* ################################################################## */
-    /**
-        This is a simple subscript. We don't construct an Array of String, first, because this is a bit more efficient.
-     */
-    subscript(_ inValue: Int) -> String {
-        precondition((0..<codes.count).contains(inValue), "Index Out of Range")
-        return codes[inValue].stringValue
-    }
-    
-    /* ################################################################## */
-    /**
-        The count is simply how many codes we have.
-     */
-    var count: Int {
-        return codes.count
-    }
     
     /* ################################################################## */
     /**
