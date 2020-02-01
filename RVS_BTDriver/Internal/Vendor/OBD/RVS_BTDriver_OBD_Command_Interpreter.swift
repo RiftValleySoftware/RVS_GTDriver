@@ -335,6 +335,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
                 RVS_BTDriver_OBD_Command_Service_01_PIDs.egt_Bank_02.rawValue]
     }
     
+    /// This is the service ID.
     public var service: Int = 0
     
     // MARK: ABCDE A = 0x0F0000000000000000, B = 0x00FFFF000000000000, C =  0x000000FFFF00000000, D = 0x0000000000FFFF0000, E = 0x00000000000000FFFF
@@ -431,7 +432,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
         
         return ret
     }
-
+    
     /* ################################################################## */
     /**
      This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).
