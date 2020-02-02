@@ -21,43 +21,12 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol -
-/* ###################################################################################################################################### */
-/**
- This is the base protocol for command interpreters. It defines an Array of String, which is used to match the interpreter with the PID it is applied to.
- */
-internal protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
-    /* ################################################################## */
-    /**
-        This is a static function that we use to parse a response string into an Array of DTC instances (structs).
-        - prameter inResponseDataAsString: The response from the device, as a "raw" String.
-        - returns:An Array of 0 or more interpreted instances, instantiated from the data.
-     */
-    static func parseCommand(_ inResponseDataAsString: String) -> [Any]
-}
-
-/* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Default -
-/* ###################################################################################################################################### */
-/**
- */
-extension RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal {
-    /* ################################################################## */
-    /**
-        The default function returns an empty Array.
-     */
-    internal static func parseCommand(_ inResponseDataAsString: String) -> [Any] {
-        return []
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask -
 /* ###################################################################################################################################### */
 /**
  This is an option set that will decode the response to the 0100 PID.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal {
+internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     /// This is the interpreted value, assigned to an OptionSet.
     private let _value: UInt32
     /// This will contain the service (either 1 or 2) to which this interpreter applies.
@@ -119,7 +88,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter:
 /**
  This is an option set that will decode the response to the 0101/0141 PID.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal {
+internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     /// This contains the value of the response.
     private let _value: RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask
     /// This will contain the service (either 1 or 2) to which this interpreter applies.
@@ -325,7 +294,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
 /**
  This is a special struct that is used to decode the exhaust gas temperature sensor data (PID 0178/0179).
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal {
+internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     /* ################################################################## */
     /**
      This will be used by these PIDs of service 01 and 02.
@@ -495,7 +464,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
     This is a special struct that is used to decode the Service 3 response.
     It can be subscripted or iterated as an Array of String.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal, RVS_BTDriver_OBD_DTC_Container {
+internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter, RVS_BTDriver_OBD_DTC_Container {
     /* ################################################################## */
     /**
         This is only handler for the one PID available for Service 3. The response will be a list of trouble codes.
