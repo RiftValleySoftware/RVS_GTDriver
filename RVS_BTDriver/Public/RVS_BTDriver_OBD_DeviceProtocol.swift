@@ -50,7 +50,7 @@ public protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
      
      - returns: A new instance of this interpeter class, for use as a factory.
      */
-    func generateInstance(contents inContents: String, service inService: Int) -> RVS_BTDriver_OBD_Command_Service_Command_Interpreter?
+    func createNewInstance(contents inContents: String, service inService: Int) -> RVS_BTDriver_OBD_Command_Service_Command_Interpreter?
 
     /* ################################################################## */
     /**
@@ -87,7 +87,7 @@ extension RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     /**
      Default returns nil. This is temporary. Once we have the factory instances in place, this goes away.
      */
-    func generateInstance(contents inContents: String, service inService: Int) -> RVS_BTDriver_OBD_Command_Service_Command_Interpreter? {
+    func createNewInstance(contents inContents: String, service inService: Int) -> RVS_BTDriver_OBD_Command_Service_Command_Interpreter? {
         return Self(contents: inContents, service: inService)
     }
 }
