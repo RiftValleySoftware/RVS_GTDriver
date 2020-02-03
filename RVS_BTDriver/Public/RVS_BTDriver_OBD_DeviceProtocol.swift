@@ -43,12 +43,53 @@ public protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     
     /* ################################################################## */
     /**
+     This is the "factory" generator.
+     
+     - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
+     - parameter service: The service to which this interpreter applies.
+     
+     - returns: A new instance of this interpeter class, for use as a factory.
+     */
+    func generateInstance(contents inContents: String, service inService: Int) -> RVS_BTDriver_OBD_Command_Service_Command_Interpreter?
+
+    /* ################################################################## */
+    /**
      This will read in the data, and save the header (a UInt8 bitmask), and the data (4 UInt16).
      
      - parameter contents: The contents, as a String of 2-character hex numbers, space-separated.
      - parameter service: The service to which this interpreter applies.
      */
     init(contents inContents: String, service inService: Int)
+    
+    /* ################################################################## */
+    /**
+     If we initialize with no parameters, we are making a "factory instance."
+     */
+    init()
+}
+
+/* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol -
+/* ###################################################################################################################################### */
+/**
+ The default implementation.
+ */
+extension RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+    /* ################################################################## */
+    /**
+     We call the default init with empty parameters.
+     */
+    public init() {
+        self.init(contents: "", service: 0)
+    }
+    
+    /* ################################################################## */
+    /**
+     Default returns nil. This is temporary. Once we have the factory instances in place, this goes away.
+     */
+    func generateInstance(contents inContents: String, service inService: Int) -> RVS_BTDriver_OBD_Command_Service_Command_Interpreter? {
+        return Self(contents: inContents, service: inService)
+    }
 }
 
 /* ###################################################################################################################################### */
