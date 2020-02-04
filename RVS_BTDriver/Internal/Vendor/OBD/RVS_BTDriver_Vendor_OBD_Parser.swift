@@ -29,6 +29,13 @@ import Foundation
  This struct acts as an OBD response parser, accepting a near-complete transaction, parsing the response, then storing the complete transaction.
  */
 internal struct RVS_BTDriver_Vendor_OBD_Parser {
+    static let interpreterClasses: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter.Type] = [
+        RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter.self,
+        RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter.self,
+        RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature.self,
+        RVS_BTDriver_OBD_Command_Service_03.self
+    ]
+    
     /* ################################################################## */
     /**
      Searching placeholder always begins with this
@@ -47,7 +54,10 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
      */
     static internal let atHeader = "AT"
 
-    /// This will hold the transaction we are parsing.
+    /* ################################################################## */
+    /**
+     This will hold the transaction we are parsing.
+     */
     internal let transaction: RVS_BTDriver_OBD_Device_TransactionStruct!
     
     /* ################################################################## */
@@ -102,7 +112,7 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
         
         var stringComponents = inPacketData.split(separator: "\r").compactMap { $0.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"])) }
         
-        if 1 < stringComponents.count {
+        if  1 < stringComponents.count {
             #if DEBUG
                 print("Split Components: \"\(stringComponents)\".")
             #endif
@@ -154,7 +164,16 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
                     print("Cleaned Response: \"\(trimmedResponse2)\".")
                 #endif
 
-                transaction = RVS_BTDriver_OBD_Device_TransactionStruct(device: inTransaction.device, rawCommand: inTransaction.rawCommand, completeCommand: inTransaction.completeCommand, responseData: inTransaction.responseData, responseDataAsString: trimmedResponse2, error: nil)
+                let interpreters: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter] = Self.interpreterClasses.compactMap {
+                    if  let command = inTransaction.rawCommand,
+                        let service = Int(command[...command.index(command.startIndex, offsetBy: 2)], radix: 16) {
+                        return $0.init(contents: trimmedResponse2, service: service)
+                    }
+                    
+                    return nil
+                }
+                
+                transaction = RVS_BTDriver_OBD_Device_TransactionStruct(device: inTransaction.device, rawCommand: inTransaction.rawCommand, completeCommand: inTransaction.completeCommand, responseData: inTransaction.responseData, responseDataAsString: trimmedResponse2, error: nil, interpreters: interpreters)
                 return
             }
         }

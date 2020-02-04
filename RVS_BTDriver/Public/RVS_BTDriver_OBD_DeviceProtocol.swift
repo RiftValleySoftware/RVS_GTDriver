@@ -50,7 +50,7 @@ public protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
      
      - returns: A new instance of this interpeter class, for use as a factory.
      */
-    func createNewInstance(contents inContents: String, service inService: Int) -> RVS_BTDriver_OBD_Command_Service_Command_Interpreter?
+    static func createNewInstance(contents inContents: String, service inService: Int) -> RVS_BTDriver_OBD_Command_Service_Command_Interpreter?
 
     /* ################################################################## */
     /**
@@ -87,7 +87,7 @@ extension RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     /**
      Default returns nil. This is temporary. Once we have the factory instances in place, this goes away.
      */
-    func createNewInstance(contents inContents: String, service inService: Int) -> RVS_BTDriver_OBD_Command_Service_Command_Interpreter? {
+    static func createNewInstance(contents inContents: String, service inService: Int) -> RVS_BTDriver_OBD_Command_Service_Command_Interpreter? {
         return Self(contents: inContents, service: inService)
     }
 }
@@ -187,6 +187,12 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
      This is the raw String value of the command being sent (it may be a format string).
      */
     public let rawCommand: String!
+    
+    /* ################################################################## */
+    /**
+     This is any interpreters, containing parsed data.
+     */
+    public let interpreters: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter]
 
     /* ################################################################## */
     /**
@@ -216,12 +222,6 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
     
     /* ################################################################## */
     /**
-     This is any data that was returned from the OBD adapter.
-     */
-    public var interpreters: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter] = []
-    
-    /* ################################################################## */
-    /**
      Initializer, with most fields optional.
      
      - parameters:
@@ -232,7 +232,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         - responseDataAsString: Optional. If the command can be represented as a String, that is set here.
         - error: Optional. Any error that may have occurred.
      */
-    public init(device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String, completeCommand inCompleteCommand: String, responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil) {
+    public init(device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String, completeCommand inCompleteCommand: String, responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil, interpreters inInterpreters: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter] = []) {
         precondition((nil != inDevice) || RVS_DebugTools.isRunningUnitTests, "The device cannot be nil!")
         precondition(!inRawCommand.isEmpty, "The raw command cannot be empty.")
         precondition(!inCompleteCommand.isEmpty, "The complete command cannot be empty.")
@@ -242,6 +242,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         responseData = inResponseData
         error = inError
         responseDataAsString = inResponseDataAsString
+        interpreters = inInterpreters
     }
     
     /* ################################################################## */
