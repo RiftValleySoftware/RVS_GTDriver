@@ -88,7 +88,7 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
             print("Parsing OBD Response: \"\(inResponseStrings)\".")
         #endif
         
-        let ret = inResponseStrings.joined(separator: "\r")
+        let ret = inResponseStrings.joined(separator: "\n")
         
         #if DEBUG
             print("AS ASCII: \"\(String(describing: ret.hex2UTF8))\".")
@@ -110,7 +110,7 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
             print("Parsing: \"\(inPacketData)\".")
         #endif
         
-        var stringComponents = inPacketData.split(separator: "\r").compactMap { $0.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"])) }
+        var stringComponents = inPacketData.split(separator: "\n").compactMap { $0.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r"])) }
         
         if  1 < stringComponents.count {
             #if DEBUG
@@ -154,7 +154,8 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
      - parameter transaction: The transaction to be parsed.
      */
     internal init(transaction inTransaction: RVS_BTDriver_OBD_Device_TransactionStruct) {
-        if let trimmedResponse = String(data: inTransaction.responseData, encoding: .ascii)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])) {
+        if  let responseData = inTransaction.responseData,
+            let trimmedResponse = String(data: responseData, encoding: .ascii)?.trimmingCharacters(in: CharacterSet([" ", "\t", "\n", "\r", ">", "?"])) {
             #if DEBUG
                 print("Trimming \"\(trimmedResponse)\".")
             #endif
@@ -165,9 +166,22 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
                 #endif
 
                 let interpreters: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter] = Self.interpreterClasses.compactMap {
-                    if  let command = inTransaction.rawCommand,
-                        let service = Int(command[...command.index(command.startIndex, offsetBy: 2)], radix: 16) {
-                        return $0.init(contents: trimmedResponse2, service: service)
+                    if  let command = inTransaction.rawCommand {
+                        let testTrimmed = trimmedResponse2.hexOnly
+                        let commandString = String(command[..<command.index(command.startIndex, offsetBy: 2)])
+                        let pid = String(command[command.index(command.startIndex, offsetBy: 2)..<command.index(command.startIndex, offsetBy: 4)])
+                        if  let service = Int(commandString, radix: 16),
+                            let pidInt = Int(pid, radix: 16) {
+                            var dataString = ""
+                            // Compare this string to the front of the response, to see if we have a "short" response.
+                            let compString = String(format: "4%X%02X", service, pidInt)
+                            if compString == String(testTrimmed[..<testTrimmed.index(testTrimmed.startIndex, offsetBy: 4)]) {
+                                dataString = String(testTrimmed[testTrimmed.index(testTrimmed.startIndex, offsetBy: 4)...])
+                            } else {
+                                dataString = String(trimmedResponse2[trimmedResponse2.index(trimmedResponse2.startIndex, offsetBy: 4)...])
+                            }
+                            return $0.init(contents: dataString, service: service)
+                        }
                     }
                     
                     return nil

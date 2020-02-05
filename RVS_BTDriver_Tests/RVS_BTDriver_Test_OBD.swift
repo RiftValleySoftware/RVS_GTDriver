@@ -762,3 +762,16 @@ class RVS_BTDriver_TestPID_0300: XCTestCase {
         }
     }
 }
+
+/* ###################################################################################################################################### */
+// MARK: - The tests for the Parser -
+/* ###################################################################################################################################### */
+class RVS_BTDriver_TestParser: XCTestCase {
+    func testBasicInit() {
+        let rawResponseDataString = "0100\nSEARCHING...\n41 00 FF FF FF FF\n\n>"
+        let rawResponseData = rawResponseDataString.data(using: .utf8)
+        let transaction = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0100", completeCommand: "0100", responseData: rawResponseData, responseDataAsString: rawResponseDataString)
+        let parser = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction)
+        print(String(describing: parser))
+    }
+}
