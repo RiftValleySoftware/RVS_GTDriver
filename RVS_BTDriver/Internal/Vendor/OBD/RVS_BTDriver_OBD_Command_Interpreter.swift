@@ -171,6 +171,8 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
         /**
          This is a quick way to see the status of the test.
          
+         This answer was provided [here:](https://stackoverflow.com/a/59721652/879365)
+         
          - returns: The status.
          */
         var testStatus: TestStatus {
