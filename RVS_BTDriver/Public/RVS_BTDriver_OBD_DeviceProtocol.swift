@@ -23,7 +23,7 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 import Foundation
 
 /* ###################################################################################################################################### */
-// MARK: - RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol -
+// MARK: - RVS_BTDriver_OBD_Command_Service_Command_Interpreter Protocol -
 /* ###################################################################################################################################### */
 /**
  This is the base protocol for command interpreters. It defines an Array of String, which is used to match the interpreter with the PID it is applied to.

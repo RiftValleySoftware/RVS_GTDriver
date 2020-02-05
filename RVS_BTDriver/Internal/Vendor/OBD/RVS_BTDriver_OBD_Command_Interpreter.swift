@@ -21,12 +21,25 @@ The Great Rift Valley Software Company: https://riftvalleysoftware.com
 */
 
 /* ###################################################################################################################################### */
+// MARK: - RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal Protocol -
+/* ###################################################################################################################################### */
+/**
+ This an internal extension to the public protocol
+ */
+internal protocol RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+    /// This is true, if the instance has valid data.
+    var valid: Bool { get }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsBitMask -
 /* ###################################################################################################################################### */
 /**
  This is an option set that will decode the response to the 0100 PID.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal {
+    /// This is true, if the instance has valid data.
+    var valid: Bool = false
     /// This is the interpreted value, assigned to an OptionSet.
     private let _value: UInt32
     /// This will contain the service (either 1 or 2) to which this interpreter applies.
@@ -75,6 +88,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter:
             let derivedValue = UInt32(inContents.hexOnly, radix: 16) {
             service = inService
             _value = derivedValue
+            valid = true
             return
         }
         
@@ -88,7 +102,9 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter:
 /**
  This is an option set that will decode the response to the 0101/0141 PID.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal {
+    /// This is true, if the instance has valid data.
+    var valid: Bool = false
     /// This contains the value of the response.
     private let _value: RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask
     /// This will contain the service (either 1 or 2) to which this interpreter applies.
@@ -204,6 +220,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
             let derivedValue = UInt32(inContents.hexOnly, radix: 16) {
             service = inService
             _value = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask(rawValue: derivedValue)
+            valid = true
             return
         }
         
@@ -294,7 +311,10 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
 /**
  This is a special struct that is used to decode the exhaust gas temperature sensor data (PID 0178/0179).
  */
-internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
+internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal {
+    /// This is true, if the instance has valid data.
+    var valid: Bool = false
+
     /* ################################################################## */
     /**
      This will be used by these PIDs of service 01 and 02.
@@ -446,6 +466,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
                         }
                         
                         _data  = contents
+                        valid = true
                         return
                     }
                 }
@@ -464,7 +485,10 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature: RVS_B
     This is a special struct that is used to decode the Service 3 response.
     It can be subscripted or iterated as an Array of String.
  */
-internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter, RVS_BTDriver_OBD_DTC_Container {
+internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal, RVS_BTDriver_OBD_DTC_Container {
+    /// This is true, if the instance has valid data.
+    var valid: Bool = false
+
     /* ################################################################## */
     /**
         This is only handler for the one PID available for Service 3. The response will be a list of trouble codes.
@@ -549,5 +573,6 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
      */
     public init(contents inContents: String, service _: Int) {
         codes = Self.parseCommand(inContents) as? [RVS_BTDriver_OBD_DTC] ?? []
+        valid = 0 < codes.count
     }
 }

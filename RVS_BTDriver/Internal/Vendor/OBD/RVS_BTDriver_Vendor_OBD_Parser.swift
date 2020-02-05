@@ -29,7 +29,7 @@ import Foundation
  This struct acts as an OBD response parser, accepting a near-complete transaction, parsing the response, then storing the complete transaction.
  */
 internal struct RVS_BTDriver_Vendor_OBD_Parser {
-    static let interpreterClasses: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter.Type] = [
+    static let interpreterClasses: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal.Type] = [
         RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter.self,
         RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter.self,
         RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature.self,
@@ -172,15 +172,22 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
                         let pid = String(command[command.index(command.startIndex, offsetBy: 2)..<command.index(command.startIndex, offsetBy: 4)])
                         if  let service = Int(commandString, radix: 16),
                             let pidInt = Int(pid, radix: 16) {
-                            var dataString = ""
-                            // Compare this string to the front of the response, to see if we have a "short" response.
-                            let compString = String(format: "4%X%02X", service, pidInt)
-                            if compString == String(testTrimmed[..<testTrimmed.index(testTrimmed.startIndex, offsetBy: 4)]) {
-                                dataString = String(testTrimmed[testTrimmed.index(testTrimmed.startIndex, offsetBy: 4)...])
-                            } else {
-                                dataString = String(trimmedResponse2[trimmedResponse2.index(trimmedResponse2.startIndex, offsetBy: 4)...])
+                            let pidLookupString = String(format: "%02X%02X", service, pidInt)
+                            if $0.pidCommands.contains(pidLookupString) {
+                                var dataString = ""
+                                // Compare this string to the front of the response, to see if we have a "short" response.
+                                let compString = String(format: "4%X%02X", service, pidInt)
+                                if compString == String(testTrimmed[..<testTrimmed.index(testTrimmed.startIndex, offsetBy: 4)]) {
+                                    dataString = String(testTrimmed[testTrimmed.index(testTrimmed.startIndex, offsetBy: 4)...])
+                                } else {
+                                    dataString = String(trimmedResponse2[trimmedResponse2.index(trimmedResponse2.startIndex, offsetBy: 4)...])
+                                }
+                                let ret = $0.init(contents: dataString, service: service)
+                                
+                                if ret.valid {
+                                    return ret
+                                }
                             }
-                            return $0.init(contents: dataString, service: service)
                         }
                     }
                     
