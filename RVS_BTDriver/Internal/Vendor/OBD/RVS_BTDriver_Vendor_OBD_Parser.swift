@@ -35,7 +35,7 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
      What is happening here, is that each interpreter type has a "factory" static funtion that will create (or not create) an instance of the interpreter, based on the input data.
      We can add each type to our Array, so that we can have a dynamic assignment.
      */
-    static let interpreterClasses: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal.Type] = [
+    internal static let interpreterClasses: [RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal.Type] = [
         RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter.self,
         RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter.self,
         RVS_BTDriver_OBD_Command_Service_01_ExhaustGasTemperature.self,
@@ -46,19 +46,19 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
     /**
      Searching placeholder always begins with this
      */
-    static internal let searchingString = "SEARCHING"
+    internal static let searchingString = "SEARCHING"
     
     /* ################################################################## */
     /**
      If the command returns no data, this will be the string.
      */
-    static internal let noDataString = "NO DATA"
+    internal static let noDataString = "NO DATA"
     
     /* ################################################################## */
     /**
      The first two characters in an AT response (echoing the command).
      */
-    static internal let atHeader = "AT"
+    internal static let atHeader = "AT"
 
     /* ################################################################## */
     /**
@@ -70,7 +70,7 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
     /**
      - returns: The Transaction interpreter (if any). May be nil.
      */
-    public var interpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter! {
+    internal var interpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter! {
         return transaction?.interpreter
     }
 
