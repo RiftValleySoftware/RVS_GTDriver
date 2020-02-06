@@ -28,7 +28,7 @@ import Foundation
 /**
  This struct acts as an OBD response parser, accepting a near-complete transaction, parsing the response, then storing the complete transaction.
  */
-internal struct RVS_BTDriver_Vendor_OBD_Parser {
+public struct RVS_BTDriver_Vendor_OBD_Parser {
     /* ################################################################## */
     /**
      This is per [this SO answer](https://stackoverflow.com/a/60043419/879365).
@@ -66,6 +66,14 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
      */
     internal let transaction: RVS_BTDriver_OBD_Device_TransactionStruct!
     
+    /* ################################################################## */
+    /**
+     - returns: The Transaction interpreter (if any). May be nil.
+     */
+    public var interpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter! {
+        return transaction?.interpreter
+    }
+
     /* ################################################################## */
     /**
      This static function will parse a response string from an AT command.

@@ -730,6 +730,9 @@ class RVS_BTDriver_TestPID_0178_0179: XCTestCase {
 // MARK: - The tests for the DTC response -
 /* ###################################################################################################################################### */
 class RVS_BTDriver_TestPID_0300: XCTestCase {
+    /* ################################################################## */
+    /**
+     */
     func testBasicDTCEncoder() {
         // The first String is the actual data that mocks that returned by the device. The second String represents the expected output afte parsing. We treat the instance like an Array of String.
         let testingStrings: [(String, [String])] = [
@@ -767,11 +770,35 @@ class RVS_BTDriver_TestPID_0300: XCTestCase {
 // MARK: - The tests for the Parser -
 /* ###################################################################################################################################### */
 class RVS_BTDriver_TestParser: XCTestCase {
-    func testBasicInit() {
+    /* ################################################################## */
+    /**
+     */
+    func testBasicInit0100() {
         let rawResponseDataString = "0100\nSEARCHING...\n41 00 FF FF FF FF\n\n>"
         let rawResponseData = rawResponseDataString.data(using: .utf8)
         let transaction = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0100", completeCommand: "0100", responseData: rawResponseData, responseDataAsString: rawResponseDataString)
         let parser = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction)
-        print(String(describing: parser))
+        if let interpreter = parser.interpreter as? RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter {
+            for pid in 1..<33 {
+                let pidString = String(format: "01%02X", pid)
+                XCTAssertTrue(interpreter.supportedPIDs.contains(pidString))
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testBasicInit0200() {
+        let rawResponseDataString = "0200\nSEARCHING...\n42 00 FF FF FF FF\n\n>"
+        let rawResponseData = rawResponseDataString.data(using: .utf8)
+        let transaction = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0200", completeCommand: "0200", responseData: rawResponseData, responseDataAsString: rawResponseDataString)
+        let parser = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction)
+        if let interpreter = parser.interpreter as? RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter {
+            for pid in 1..<33 {
+                let pidString = String(format: "02%02X", pid)
+                XCTAssertTrue(interpreter.supportedPIDs.contains(pidString))
+            }
+        }
     }
 }

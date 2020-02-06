@@ -1127,6 +1127,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D43292E523EB90A90042251D /* OBD */ = {
+			isa = PBXGroup;
+			children = (
+				D4ED454523DB17AC00C5E2E0 /* RVS_BTDriver_OBD_DTC.swift */,
+				D42A359323C0385A00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift */,
+				D42A359523C0385B00D104A9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift */,
+			);
+			path = OBD;
+			sourceTree = "<group>";
+		};
 		D443DEE4234D0D7B00F9DE47 /* RVS_BTDriver_iOS_Test_Harness */ = {
 			isa = PBXGroup;
 			children = (
@@ -1154,7 +1164,6 @@
 			children = (
 				D410EFC323C5F94700D590BA /* RVS_BTDriver_OBD_Command.swift */,
 				D4798FEC23AFFD4C00FDBAB9 /* RVS_BTDriver_OBD_ELM327_AT_Command.swift */,
-				D42A366C23C03A0C00D104A9 /* RVS_BTDriver_Vendor_OBD_Parser.swift */,
 				D474904823C793020086C4E1 /* RVS_BTDriver_OBD_Command_Interpreter.swift */,
 			);
 			name = Commands;
@@ -1480,9 +1489,8 @@
 			children = (
 				D42A359423C0385A00D104A9 /* RVS_BTDriver_Extension.swift */,
 				D42A359623C0385B00D104A9 /* RVS_BTDriver_DeviceProtocol.swift */,
-				D4ED454523DB17AC00C5E2E0 /* RVS_BTDriver_OBD_DTC.swift */,
-				D42A359323C0385A00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift */,
-				D42A359523C0385B00D104A9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift */,
+				D43292E523EB90A90042251D /* OBD */,
+				D42A366C23C03A0C00D104A9 /* RVS_BTDriver_Vendor_OBD_Parser.swift */,
 				D42A359823C0385B00D104A9 /* RVS_BTDriver_ServiceProtocol.swift */,
 				D42A359723C0385B00D104A9 /* RVS_BTDriver_PropertyProtocol.swift */,
 			);
