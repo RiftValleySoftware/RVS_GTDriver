@@ -1087,6 +1087,7 @@
 				D4968BB023A2D23000B57B45 /* RVS_BTDriver_Vendor_OBD_ELM327_VLINK.swift */,
 				D4912EBB23AD5097007CEA7E /* RVS_BTDriver_Vendor_OBD_ELM327_ANON_1.swift */,
 				D402EAF923A3E67200DFE5EB /* RVS_BTDriver_Vendor_OBD_Kiwi.swift */,
+				D42A366C23C03A0C00D104A9 /* RVS_BTDriver_Vendor_OBD_Parser.swift */,
 			);
 			path = OBD;
 			sourceTree = "<group>";
@@ -1133,7 +1134,6 @@
 				D4ED454523DB17AC00C5E2E0 /* RVS_BTDriver_OBD_DTC.swift */,
 				D42A359323C0385A00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift */,
 				D42A359523C0385B00D104A9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift */,
-				D42A366C23C03A0C00D104A9 /* RVS_BTDriver_Vendor_OBD_Parser.swift */,
 			);
 			path = OBD;
 			sourceTree = "<group>";

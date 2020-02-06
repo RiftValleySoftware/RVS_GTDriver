@@ -29,12 +29,12 @@ type_body_length:
 - 1001 # error
 
 line_length:
-- 400 # warning
-- 401 # error
+- 499 # warning
+- 500 # error
 
 cyclomatic_complexity:
-- 23 # warning
-- 24 # error
+- 12 # warning
+- 13 # error
 
 excluded:
 - Pods

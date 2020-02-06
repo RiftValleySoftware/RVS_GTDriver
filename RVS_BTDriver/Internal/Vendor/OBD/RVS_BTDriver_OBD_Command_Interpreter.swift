@@ -564,7 +564,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
         }
         
         // I sort the codes, as well. It's pretty easy, as they are just numerically specified, under the hood.
-        return returnCodes.values.sorted() { (inA, inB) -> Bool in return inA.intValue < inB.intValue }
+        return returnCodes.values.sorted { (inA, inB) -> Bool in return inA.intValue < inB.intValue }
     }
 
     /* ################################################################## */

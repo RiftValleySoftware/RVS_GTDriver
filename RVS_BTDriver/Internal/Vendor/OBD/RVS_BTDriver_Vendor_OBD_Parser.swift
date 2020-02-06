@@ -28,7 +28,7 @@ import Foundation
 /**
  This struct acts as an OBD response parser, accepting a near-complete transaction, parsing the response, then storing the complete transaction.
  */
-public struct RVS_BTDriver_Vendor_OBD_Parser {
+internal struct RVS_BTDriver_Vendor_OBD_Parser {
     /* ################################################################## */
     /**
      This is per [this SO answer](https://stackoverflow.com/a/60043419/879365).
