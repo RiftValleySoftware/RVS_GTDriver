@@ -549,7 +549,7 @@ internal struct RVS_BTDriver_OBD_Command_Service_03: RVS_BTDriver_OBD_Command_Se
 
                 // Walk through the compressed hex data, in chunks of 4 (16-bit values).
                 // The min thing is because we just want to make sure the length header didn't lie. We don't go past the end.
-                for substringStart in stride(from: 0, to: Swift.min(bodyString.count, lengthHeader), by: 4) {
+                for substringStart in stride(from: 0, to: Swift.min(bodyString.count - 1, lengthHeader), by: 4) {
                     let startIndex = bodyString.index(bodyString.startIndex, offsetBy: substringStart)
                     let endIndex = bodyString.index(startIndex, offsetBy: 4)
                     let thisCodeStr = String(bodyString[startIndex..<endIndex])

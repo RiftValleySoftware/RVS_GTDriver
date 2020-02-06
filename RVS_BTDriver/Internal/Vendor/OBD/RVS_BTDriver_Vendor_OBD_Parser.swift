@@ -134,23 +134,15 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
             // Get rid of the echoed command. Keep it, for examination.
             let commandEcho = stringComponents.removeFirst()
             
-            // If we have a "SEARCHING...", we get rid of that, too.
-            if stringComponents[0].starts(with: searchingString) {
-                stringComponents.removeFirst()
-            }
-            
             // Get rid of any empty lines.
-            let stringComponents = stringComponents.filter { !$0.isEmpty }
+            // If we have a "SEARCHING...", or "NO DATA" , we get rid of them, too.
+            let stringComponents = stringComponents.filter { !$0.isEmpty && !$0.starts(with: Self.searchingString) && Self.noDataString != $0 }
             
             if 0 < stringComponents.count {
                 // See if we need to treat it as an AT command response.
-                if commandEcho.starts(with: atHeader) {
+                if commandEcho.starts(with: Self.atHeader) {
                     return parseATResponse(stringComponents)
-                } else if Self.noDataString == stringComponents[0] {
-                    #if DEBUG
-                        print("NO DATA")
-                    #endif
-                } else {    // If neither of the above, we
+                } else {    // If not, we treat it as an OBD parse.
                     return parseOBDResponse(stringComponents)
                 }
             }
