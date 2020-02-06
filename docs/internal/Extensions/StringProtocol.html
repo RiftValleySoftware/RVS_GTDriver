@@ -273,6 +273,12 @@
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DTC_Container.html">RVS_BTDriver_OBD_DTC_Container</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DeviceDelegate.html">RVS_BTDriver_OBD_DeviceDelegate</a>
               </li>
               <li class="nav-group-task">
@@ -359,7 +365,8 @@
 
                 </div>
               </div>
-            <p>These are a variety of cool String extensions that add some great extra cheese on the pizza.</p>
+            <p>These are a variety of cool String extensions that add some great extra cheese on the pizza.
+NOTE: These extensions feature some use of <a href="https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/Common%20Crypto.3cc.html">Apple&rsquo;s built-in CommonCrypto utility</a>.</p>
 
           </div>
         </section>
@@ -411,7 +418,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>From here: <a href="https://stackoverflow.com/q/24123518/879365">https://stackoverflow.com/q/24123518/879365</a>, but modified from here: <a href="https://stackoverflow.com/a/55639723/879365">https://stackoverflow.com/a/55639723/879365</a></p>
+                        <p>This calculates an MD5 checksum of the String, and returns it as an uppercase hex String.</p>
+
+<p>Mostly from <a href="https://www.agnosticdev.com/content/how-use-commoncrypto-apis-swift-5">Matt Eaton&rsquo;s blog entry</a>.</p>
+
+<p>It has direct access to Apple&rsquo;s built-in CommonCrypto library as per <a href="https://stackoverflow.com/a/55639723/879365">this SO question</a></p>
+
+<ul>
+<li><p>Here are a couple of sites that you can use to validate the results of this operation:</p>
+
+<ul>
+<li><a href="https://www.md5hashgenerator.com">MD5 Hash Generator</a></li>
+<li><a href="https://www.miraclesalad.com/webtools/md5.php">Miracle Salad MD5 Hash Generator</a></li>
+</ul></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -424,7 +444,105 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>an MD5 hash of the String</p>
+                        <p>an MD5 hash of the String, as an uppercase hex String.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE3md5SSvg11CC_MD5_TYPEL_a"></a>
+                    <a name="//apple_ref/swift/Alias/CC_MD5_TYPE" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE3md5SSvg11CC_MD5_TYPEL_a">CC_MD5_TYPE</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a cast for <a href="https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/CC_MD5.3cc.html#//apple_ref/doc/man/3cc/CC_MD5">the MD5 function</a>. The convention attribute just says that it&rsquo;s a &ldquo;raw&rdquo; C function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">CC_MD5_TYPE</span> <span class="o">=</span> <span class="kd">@convention</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">(</span><span class="kt">UnsafeRawPointer</span><span class="p">,</span> <span class="kt">UInt32</span><span class="p">,</span> <span class="kt">UnsafeMutableRawPointer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UnsafeMutableRawPointer</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE6sha256SSvp"></a>
+                    <a name="//apple_ref/swift/Property/sha256" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE6sha256SSvp">sha256</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This calculates a SHA256 checksum of the String, and returns it as an uppercase hex String.</p>
+
+<p>Mostly from <a href="https://www.agnosticdev.com/content/how-use-commoncrypto-apis-swift-5">Matt Eaton&rsquo;s blog entry</a>.</p>
+
+<p>It has direct access to Apple&rsquo;s built-in CommonCrypto library as per <a href="https://stackoverflow.com/a/55639723/879365">this SO question</a></p>
+
+<ul>
+<li><p>Here are a couple of sites that you can use to validate the results of this operation:</p>
+
+<ul>
+<li><a href="https://emn178.github.io/online-tools/sha256.html">SHA256 Online</a></li>
+<li><a href="https://www.freeformatter.com/sha256-generator.html">FreeFormatter SHA256 Generator</a></li>
+</ul></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">sha256</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>a SHA256 hash of the String, as an uppercase hex String.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sy18RVS_BTDriver_MacOSE6sha256SSvg14CC_SHA256_TYPEL_a"></a>
+                    <a name="//apple_ref/swift/Alias/CC_SHA256_TYPE" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sy18RVS_BTDriver_MacOSE6sha256SSvg14CC_SHA256_TYPEL_a">CC_SHA256_TYPE</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a cast for <a href="https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/CC_SHA.3cc.html#//apple_ref/doc/man/3cc/CC_SHA">the SHA256 function</a>. The convention attribute just says that it&rsquo;s a &ldquo;raw&rdquo; C function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">CC_SHA256_TYPE</span> <span class="o">=</span> <span class="kd">@convention</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">(</span><span class="kt">UnsafeRawPointer</span><span class="p">,</span> <span class="kt">UInt32</span><span class="p">,</span> <span class="kt">UnsafeMutableRawPointer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UnsafeMutableRawPointer</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -454,7 +572,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The String, converted into an Array of hex strings (leading 0s, 1 8-bit character per element).</p>
+                        <p>The String, converted into an Array of uppercase 2-digit hex strings (leading 0s, 1 8-bit character per element). This actually takes the UTF8 value of each character.</p>
                       </div>
                     </section>
                   </div>
@@ -484,7 +602,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The String, converted into an Array of hex strings (leading 0s, 1 16-bit character per element).</p>
+                        <p>The String, converted into an Array of uppercase 4-digit hex strings (leading 0s, 1 16-bit character per element). This actually takes the UTF16 value of each character.</p>
                       </div>
                     </section>
                   </div>
@@ -725,7 +843,7 @@ From here: <a href="https://stackoverflow.com/a/28288340/879365">https://stackov
                         <h4>Return Value</h4>
                         <p>The String, assumed to be hex numbers (two characters, 0-F, separated by non-hex characters, or not separated); converted to an ASCII string (no spaces).
        Nil, if the string failed to yeild a UTF8 value.
-       This requires two characters (0-9a-fA-F), side-by-side for each character. They may or may not be separated.</p>
+       This requires two characters (0-9a-fA-F), side-by-side for each character. They may or may not be separated. Single characters are ignored.</p>
                       </div>
                     </section>
                   </div>

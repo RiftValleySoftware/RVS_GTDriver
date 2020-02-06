@@ -29,6 +29,7 @@ import Foundation
  Each instance of this struct is a single DTC.
  */
 public struct RVS_BTDriver_OBD_DTC {
+    /// These are the letter substitutions for the DTC headers.
     private static let _codeDesignations = ["P", "C", "B", "U"]
 
     /* ################################################################## */

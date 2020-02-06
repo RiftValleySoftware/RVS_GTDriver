@@ -273,6 +273,12 @@
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DTC_Container.html">RVS_BTDriver_OBD_DTC_Container</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DeviceDelegate.html">RVS_BTDriver_OBD_DeviceDelegate</a>
               </li>
               <li class="nav-group-task">
@@ -425,6 +431,33 @@ OBD transactions are atomic and single-threaded. There can only be one going to 
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV11interpreterAA0a1_b1_e17_Command_Service_J12_Interpreter_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/interpreter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV11interpreterAA0a1_b1_e17_Command_Service_J12_Interpreter_pSgvp">interpreter</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is any interpreter, containing parsed data.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">interpreter</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a></span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV15completeCommandSSSgvp"></a>
                     <a name="//apple_ref/swift/Property/completeCommand" class="dashAnchor"></a>
                     <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV15completeCommandSSSgvp">completeCommand</a>
@@ -479,9 +512,9 @@ OBD transactions are atomic and single-threaded. There can only be one going to 
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV10parsedDataSSSgvp"></a>
-                    <a name="//apple_ref/swift/Property/parsedData" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV10parsedDataSSSgvp">parsedData</a>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV20responseDataAsStringSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/responseDataAsString" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV20responseDataAsStringSSSgvp">responseDataAsString</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -491,12 +524,14 @@ OBD transactions are atomic and single-threaded. There can only be one going to 
                       <div class="abstract">
                         <p>This is the response, &ldquo;cleaned,&rdquo; and converted to a String (if possible).</p>
 
+<p>Upon being set, we execute the parser.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">parsedData</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">responseDataAsString</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -533,9 +568,9 @@ OBD transactions are atomic and single-threaded. There can only be one going to 
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV6device10rawCommand08completeK012responseData0mN8AsString5errorAcA0a1_b1_e1_F8Protocol_pSg_S2S10Foundation0N0VSgSSSgAA0a1_B0C6ErrorsOSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(device:rawCommand:completeCommand:responseData:responseDataAsString:error:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV6device10rawCommand08completeK012responseData0mN8AsString5errorAcA0a1_b1_e1_F8Protocol_pSg_S2S10Foundation0N0VSgSSSgAA0a1_B0C6ErrorsOSgtcfc">init(device:rawCommand:completeCommand:responseData:responseDataAsString:error:)</a>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV6device10rawCommand08completeK012responseData0mN8AsString5error11interpreterAcA0a1_b1_e1_F8Protocol_pSg_S2S10Foundation0N0VSgSSSgAA0a1_B0C6ErrorsOSgAA0a1_b1_e1_k9_Service_K12_Interpreter_pSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(device:rawCommand:completeCommand:responseData:responseDataAsString:error:interpreter:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV6device10rawCommand08completeK012responseData0mN8AsString5error11interpreterAcA0a1_b1_e1_F8Protocol_pSg_S2S10Foundation0N0VSgSSSgAA0a1_B0C6ErrorsOSgAA0a1_b1_e1_k9_Service_K12_Interpreter_pSgtcfc">init(device:rawCommand:completeCommand:responseData:responseDataAsString:error:interpreter:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -550,7 +585,7 @@ OBD transactions are atomic and single-threaded. There can only be one going to 
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV6deviceAA0a1_b1_e1_F8Protocol_pSgvp">device</a></span> <span class="nv">inDevice</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_OBD_DeviceProtocol.html">RVS_BTDriver_OBD_DeviceProtocol</a></span><span class="o">!</span><span class="p">,</span> <span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV10rawCommandSSSgvp">rawCommand</a></span> <span class="nv">inRawCommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV15completeCommandSSSgvp">completeCommand</a></span> <span class="nv">inCompleteCommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV12responseData10Foundation0J0VSgvp">responseData</a></span> <span class="nv">inResponseData</span><span class="p">:</span> <span class="kt">Data</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">responseDataAsString</span> <span class="nv">inResponseDataAsString</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV5errorAA0a1_B0C6ErrorsOSgvp">error</a></span> <span class="nv">inError</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_BTDriver.html">RVS_BTDriver</a></span><span class="o">.</span><span class="kt">Errors</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV6deviceAA0a1_b1_e1_F8Protocol_pSgvp">device</a></span> <span class="nv">inDevice</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_OBD_DeviceProtocol.html">RVS_BTDriver_OBD_DeviceProtocol</a></span><span class="o">!</span><span class="p">,</span> <span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV10rawCommandSSSgvp">rawCommand</a></span> <span class="nv">inRawCommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV15completeCommandSSSgvp">completeCommand</a></span> <span class="nv">inCompleteCommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV12responseData10Foundation0J0VSgvp">responseData</a></span> <span class="nv">inResponseData</span><span class="p">:</span> <span class="kt">Data</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV20responseDataAsStringSSSgvp">responseDataAsString</a></span> <span class="nv">inResponseDataAsString</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV5errorAA0a1_B0C6ErrorsOSgvp">error</a></span> <span class="nv">inError</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_BTDriver.html">RVS_BTDriver</a></span><span class="o">.</span><span class="kt">Errors</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html#/s:18RVS_BTDriver_MacOS0a1_B29_OBD_Device_TransactionStructV11interpreterAA0a1_b1_e17_Command_Service_J12_Interpreter_pSgvp">interpreter</a></span> <span class="nv">inInterpreter</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a></span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -615,6 +650,18 @@ OBD transactions are atomic and single-threaded. There can only be one going to 
                               <td>
                                 <div>
                                   <p>Optional. If the command can be represented as a String, that is set here.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>interpreter</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>This is an interpreter that was created to parse and report the data.</p>
                                 </div>
                               </td>
                             </tr>

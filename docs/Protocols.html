@@ -114,6 +114,12 @@
                 <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_DeviceSubscriberProtocol.html">RVS_BTDriver_DeviceSubscriberProtocol</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_OBD_DTC_Container.html">RVS_BTDriver_OBD_DTC_Container</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RVS_BTDriver_OBD_DeviceDelegate.html">RVS_BTDriver_OBD_DeviceDelegate</a>
               </li>
               <li class="nav-group-task">
@@ -193,7 +199,7 @@
                       <div class="abstract">
                         <p>This was taken straight from the objc.io book &ldquo;Advanced Swift.&rdquo; It&rsquo;s so damn useful, that I have it made into a standard tool.</p>
 
-<p>The original design was done by Ole Begemann and Chris Eidhoff. I have modified it slightly; but not much.</p>
+<p>The original design was done by <a href="https://oleb.net">Ole Begemann</a> and <a href="https://chris.eidhof.nl">Chris Eidhof</a>. I have modified it slightly; but not much.</p>
 
 <p>It is fast all git-go.</p>
 
@@ -253,6 +259,212 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_SequenceProtocol</span> <span class="p">:</span> <span class="kt">Sequence</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/RVS_BTDriver_OBD_Command_Service_Command_Interpreter%20Protocol"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_OBD_Command_Service_Command_Interpreter Protocol" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/RVS_BTDriver_OBD_Command_Service_Command_Interpreter%20Protocol"></a>
+                  <h3 class="section-name"><p>RVS_BTDriver_OBD_Command_Service_Command_Interpreter Protocol</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F12_InterpreterP"></a>
+                    <a name="//apple_ref/swift/Protocol/RVS_BTDriver_OBD_Command_Service_Command_Interpreter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_b21_OBD_Command_Service_F12_InterpreterP">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the base protocol for command interpreters. It defines an Array of String, which is used to match the interpreter with the PID it is applied to.</p>
+
+                        <a href="Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask%20Protocol"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask%20Protocol"></a>
+                  <h3 class="section-name"><p>RVS_BTDriver_OBD_Command_Service_SupportedPIDsBitMask Protocol</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B18_OBD_DTC_ContainerP"></a>
+                    <a name="//apple_ref/swift/Protocol/RVS_BTDriver_OBD_DTC_Container" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B18_OBD_DTC_ContainerP">RVS_BTDriver_OBD_DTC_Container</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the base protocol for command interpreters. It defines an Array of String, which is used to match the interpreter with the PID it is applied to.</p>
+
+<p>The sequence conformance allows us to act as a sequence of String</p>
+
+                        <a href="Protocols/RVS_BTDriver_OBD_DTC_Container.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriver_OBD_DTC_Container</span> <span class="p">:</span> <span class="kt">Sequence</span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/RVS_BTDriver_OBD_DeviceDelegate%20Protocol"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_OBD_DeviceDelegate Protocol" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/RVS_BTDriver_OBD_DeviceDelegate%20Protocol"></a>
+                  <h3 class="section-name"><p>RVS_BTDriver_OBD_DeviceDelegate Protocol</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B19_OBD_DeviceDelegateP"></a>
+                    <a name="//apple_ref/swift/Protocol/RVS_BTDriver_OBD_DeviceDelegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B19_OBD_DeviceDelegateP">RVS_BTDriver_OBD_DeviceDelegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This protocol is for delegates for OBD devices.</p>
+
+                        <a href="Protocols/RVS_BTDriver_OBD_DeviceDelegate.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriver_OBD_DeviceDelegate</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/RVS_BTDriver_OBD_DeviceProtocol%20Protocol"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_OBD_DeviceProtocol Protocol" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/RVS_BTDriver_OBD_DeviceProtocol%20Protocol"></a>
+                  <h3 class="section-name"><p>RVS_BTDriver_OBD_DeviceProtocol Protocol</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B19_OBD_DeviceProtocolP"></a>
+                    <a name="//apple_ref/swift/Protocol/RVS_BTDriver_OBD_DeviceProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B19_OBD_DeviceProtocolP">RVS_BTDriver_OBD_DeviceProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="Protocols/RVS_BTDriver_OBD_DeviceProtocol.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriver_OBD_DeviceProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/RVS_BTDriver_OBD_ELM327_DeviceProtocol%20Protocol"></a>
+                <a name="//apple_ref/swift/Section/RVS_BTDriver_OBD_ELM327_DeviceProtocol Protocol" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/RVS_BTDriver_OBD_ELM327_DeviceProtocol%20Protocol"></a>
+                  <h3 class="section-name"><p>RVS_BTDriver_OBD_ELM327_DeviceProtocol Protocol</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B26_OBD_ELM327_DeviceProtocolP"></a>
+                    <a name="//apple_ref/swift/Protocol/RVS_BTDriver_OBD_ELM327_DeviceProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B26_OBD_ELM327_DeviceProtocolP">RVS_BTDriver_OBD_ELM327_DeviceProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a specialization for the common ELM327 chipset.</p>
+
+                        <a href="Protocols/RVS_BTDriver_OBD_ELM327_DeviceProtocol.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriver_OBD_ELM327_DeviceProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RVS_BTDriver_OBD_DeviceProtocol.html">RVS_BTDriver_OBD_DeviceProtocol</a></span></code></pre>
 
                         </div>
                       </div>
@@ -418,128 +630,6 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriverDelegate</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/RVS_BTDriver_OBD_DeviceDelegate%20Protocol"></a>
-                <a name="//apple_ref/swift/Section/RVS_BTDriver_OBD_DeviceDelegate Protocol" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_OBD_DeviceDelegate%20Protocol"></a>
-                  <h3 class="section-name"><p>RVS_BTDriver_OBD_DeviceDelegate Protocol</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B19_OBD_DeviceDelegateP"></a>
-                    <a name="//apple_ref/swift/Protocol/RVS_BTDriver_OBD_DeviceDelegate" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B19_OBD_DeviceDelegateP">RVS_BTDriver_OBD_DeviceDelegate</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This protocol is for delegates for OBD devices.</p>
-
-                        <a href="Protocols/RVS_BTDriver_OBD_DeviceDelegate.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriver_OBD_DeviceDelegate</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/RVS_BTDriver_OBD_DeviceProtocol%20Protocol"></a>
-                <a name="//apple_ref/swift/Section/RVS_BTDriver_OBD_DeviceProtocol Protocol" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_OBD_DeviceProtocol%20Protocol"></a>
-                  <h3 class="section-name"><p>RVS_BTDriver_OBD_DeviceProtocol Protocol</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B19_OBD_DeviceProtocolP"></a>
-                    <a name="//apple_ref/swift/Protocol/RVS_BTDriver_OBD_DeviceProtocol" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B19_OBD_DeviceProtocolP">RVS_BTDriver_OBD_DeviceProtocol</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Protocols/RVS_BTDriver_OBD_DeviceProtocol.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriver_OBD_DeviceProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RVS_BTDriver_DeviceProtocol.html">RVS_BTDriver_DeviceProtocol</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/RVS_BTDriver_OBD_ELM327_DeviceProtocol%20Protocol"></a>
-                <a name="//apple_ref/swift/Section/RVS_BTDriver_OBD_ELM327_DeviceProtocol Protocol" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/RVS_BTDriver_OBD_ELM327_DeviceProtocol%20Protocol"></a>
-                  <h3 class="section-name"><p>RVS_BTDriver_OBD_ELM327_DeviceProtocol Protocol</p>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:18RVS_BTDriver_MacOS0a1_B26_OBD_ELM327_DeviceProtocolP"></a>
-                    <a name="//apple_ref/swift/Protocol/RVS_BTDriver_OBD_ELM327_DeviceProtocol" class="dashAnchor"></a>
-                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B26_OBD_ELM327_DeviceProtocolP">RVS_BTDriver_OBD_ELM327_DeviceProtocol</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This is a specialization for the common ELM327 chipset.</p>
-
-                        <a href="Protocols/RVS_BTDriver_OBD_ELM327_DeviceProtocol.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_BTDriver_OBD_ELM327_DeviceProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RVS_BTDriver_OBD_DeviceProtocol.html">RVS_BTDriver_OBD_DeviceProtocol</a></span></code></pre>
 
                         </div>
                       </div>

@@ -273,6 +273,12 @@
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DTC_Container.html">RVS_BTDriver_OBD_DTC_Container</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_BTDriver_OBD_DeviceDelegate.html">RVS_BTDriver_OBD_DeviceDelegate</a>
               </li>
               <li class="nav-group-task">
@@ -367,6 +373,35 @@
           <div class="section-content">
             <div class="task-group">
               <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B18_Vendor_OBD_ParserV18interpreterClassesSayAA0a1_b1_f17_Command_Service_J21_Interpreter_Internal_pXpGvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/interpreterClasses" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B18_Vendor_OBD_ParserV18interpreterClassesSayAA0a1_b1_f17_Command_Service_J21_Interpreter_Internal_pXpGvpZ">interpreterClasses</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is per <a href="https://stackoverflow.com/a/60043419/879365">this SO answer</a>.
+What is happening here, is that each interpreter type has a &ldquo;factory&rdquo; static funtion that will create (or not create) an instance of the interpreter, based on the input data.
+We can add each type to our Array, so that we can have a dynamic assignment.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">interpreterClasses</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter_Internal</a></span><span class="o">.</span><span class="k">Type</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -471,6 +506,36 @@
                           <pre class="highlight swift"><code><span class="kd">internal</span> <span class="k">let</span> <span class="nv">transaction</span><span class="p">:</span> <span class="kt"><a href="../Structs/RVS_BTDriver_OBD_Device_TransactionStruct.html">RVS_BTDriver_OBD_Device_TransactionStruct</a></span><span class="o">!</span></code></pre>
 
                         </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18RVS_BTDriver_MacOS0a1_B18_Vendor_OBD_ParserV11interpreterAA0a1_b1_f17_Command_Service_I12_Interpreter_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/interpreter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18RVS_BTDriver_MacOS0a1_B18_Vendor_OBD_ParserV11interpreterAA0a1_b1_f17_Command_Service_I12_Interpreter_pSgvp">interpreter</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">interpreter</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_BTDriver_OBD_Command_Service_Command_Interpreter.html">RVS_BTDriver_OBD_Command_Service_Command_Interpreter</a></span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The Transaction interpreter (if any). May be nil.</p>
                       </div>
                     </section>
                   </div>
