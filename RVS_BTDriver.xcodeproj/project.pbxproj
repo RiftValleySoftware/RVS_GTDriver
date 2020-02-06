@@ -1133,6 +1133,7 @@
 				D4ED454523DB17AC00C5E2E0 /* RVS_BTDriver_OBD_DTC.swift */,
 				D42A359323C0385A00D104A9 /* RVS_BTDriver_OBD_DeviceProtocol.swift */,
 				D42A359523C0385B00D104A9 /* RVS_BTDriver_OBD_ELM327_DeviceProtocol.swift */,
+				D42A366C23C03A0C00D104A9 /* RVS_BTDriver_Vendor_OBD_Parser.swift */,
 			);
 			path = OBD;
 			sourceTree = "<group>";
@@ -1490,7 +1491,6 @@
 				D42A359423C0385A00D104A9 /* RVS_BTDriver_Extension.swift */,
 				D42A359623C0385B00D104A9 /* RVS_BTDriver_DeviceProtocol.swift */,
 				D43292E523EB90A90042251D /* OBD */,
-				D42A366C23C03A0C00D104A9 /* RVS_BTDriver_Vendor_OBD_Parser.swift */,
 				D42A359823C0385B00D104A9 /* RVS_BTDriver_ServiceProtocol.swift */,
 				D42A359723C0385B00D104A9 /* RVS_BTDriver_PropertyProtocol.swift */,
 			);
