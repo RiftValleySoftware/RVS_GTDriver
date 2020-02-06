@@ -774,14 +774,44 @@ class RVS_BTDriver_TestParser: XCTestCase {
     /**
      */
     func testBasicInit0100() {
-        let rawResponseDataString = "0100\nSEARCHING...\n41 00 FF FF FF FF\n\n>"
-        let rawResponseData = rawResponseDataString.data(using: .utf8)
-        let transaction = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0100", completeCommand: "0100", responseData: rawResponseData, responseDataAsString: rawResponseDataString)
-        let parser = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction)
-        if let interpreter = parser.interpreter as? RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter {
+        let rawResponseDataString1 = "0100\nSEARCHING...\n41 00 FF FF FF FF\n\n>"
+        let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+        let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0100", completeCommand: "0100", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+        let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
+        if let interpreter = parser1.interpreter as? RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter {
             for pid in 1..<33 {
                 let pidString = String(format: "01%02X", pid)
                 XCTAssertTrue(interpreter.supportedPIDs.contains(pidString))
+            }
+        }
+        
+        let rawResponseDataString2 = "0100\nSEARCHING...\n41 00 AA AA AA AA\n\n>"
+        let rawResponseData2 = rawResponseDataString2.data(using: .utf8)
+        let transaction2 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0100", completeCommand: "0100", responseData: rawResponseData2, responseDataAsString: rawResponseDataString2)
+        let parser2 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction2)
+        if let interpreter = parser2.interpreter as? RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter {
+            for pid in 1..<33 {
+                let pidString = String(format: "01%02X", pid)
+                if 0 == pid % 2 {
+                    XCTAssertFalse(interpreter.supportedPIDs.contains(pidString))
+                } else {
+                    XCTAssertTrue(interpreter.supportedPIDs.contains(pidString))
+                }
+            }
+        }
+        
+        let rawResponseDataString3 = "0100\nSEARCHING...\n41 00 55 55 55 55\n\n>"
+        let rawResponseData3 = rawResponseDataString3.data(using: .utf8)
+        let transaction3 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0100", completeCommand: "0100", responseData: rawResponseData3, responseDataAsString: rawResponseDataString3)
+        let parser3 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction3)
+        if let interpreter = parser3.interpreter as? RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter {
+            for pid in 1..<33 {
+                let pidString = String(format: "01%02X", pid)
+                if 0 == pid % 2 {
+                    XCTAssertTrue(interpreter.supportedPIDs.contains(pidString))
+                } else {
+                    XCTAssertFalse(interpreter.supportedPIDs.contains(pidString))
+                }
             }
         }
     }
@@ -790,14 +820,46 @@ class RVS_BTDriver_TestParser: XCTestCase {
     /**
      */
     func testBasicInit0200() {
-        let rawResponseDataString = "0200\nSEARCHING...\n42 00 FF FF FF FF\n\n>"
-        let rawResponseData = rawResponseDataString.data(using: .utf8)
-        let transaction = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0200", completeCommand: "0200", responseData: rawResponseData, responseDataAsString: rawResponseDataString)
-        let parser = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction)
-        if let interpreter = parser.interpreter as? RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter {
+        let rawResponseDataString1 = "0200\nSEARCHING...\n42 00 FF FF FF FF\n\n>"
+        let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+        let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0200", completeCommand: "0200", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+        let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
+        if let interpreter = parser1.interpreter as? RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter {
             for pid in 1..<33 {
                 let pidString = String(format: "02%02X", pid)
                 XCTAssertTrue(interpreter.supportedPIDs.contains(pidString))
+            }
+        }
+        
+        let rawResponseDataString2 = "0200\nSEARCHING...\n42 00 AA AA AA AA\n\n>"
+        let rawResponseData2 = rawResponseDataString2.data(using: .utf8)
+        let transaction2 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0200", completeCommand: "0200", responseData: rawResponseData2, responseDataAsString: rawResponseDataString2)
+        let parser2 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction2)
+        if let interpreter = parser2.interpreter as? RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter {
+            let supportedPIDs = interpreter.supportedPIDs
+            print(supportedPIDs)
+            for pid in 1..<33 {
+                let pidString = String(format: "02%02X", pid)
+                if 0 == pid % 2 {
+                    XCTAssertFalse(interpreter.supportedPIDs.contains(pidString))
+                } else {
+                    XCTAssertTrue(interpreter.supportedPIDs.contains(pidString))
+                }
+            }
+        }
+        
+        let rawResponseDataString3 = "0200\nSEARCHING...\n42 00 55 55 55 55\n\n>"
+        let rawResponseData3 = rawResponseDataString3.data(using: .utf8)
+        let transaction3 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0200", completeCommand: "0200", responseData: rawResponseData3, responseDataAsString: rawResponseDataString3)
+        let parser3 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction3)
+        if let interpreter = parser3.interpreter as? RVS_BTDriver_OBD_Command_Service_01_02_SupportedPIDsInterpreter {
+            for pid in 1..<33 {
+                let pidString = String(format: "02%02X", pid)
+                if 0 == pid % 2 {
+                    XCTAssertTrue(interpreter.supportedPIDs.contains(pidString))
+                } else {
+                    XCTAssertFalse(interpreter.supportedPIDs.contains(pidString))
+                }
             }
         }
     }
