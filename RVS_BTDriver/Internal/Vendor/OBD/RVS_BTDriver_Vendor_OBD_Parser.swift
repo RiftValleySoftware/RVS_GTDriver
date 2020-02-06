@@ -196,7 +196,7 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
                                 if compString == String(testTrimmed[..<testTrimmed.index(testTrimmed.startIndex, offsetBy: 4)]) {
                                     dataString = String(testTrimmed[testTrimmed.index(testTrimmed.startIndex, offsetBy: 4)...]) // This is easy. We just use the "filtered" hex string.
                                 } else {
-                                    dataString = String(trimmedResponse2[trimmedResponse2.index(trimmedResponse2.startIndex, offsetBy: 4)...])  // Otherwise, we need to cut the command reflection out, and send the rest, unfiltered.
+                                    dataString = trimmedResponse2  // Otherwise, we just send it all in, unfiltered.
                                 }
                                 // Once we have our groomed data, it's time to try establishing an interpreter.
                                 let ret = $0.init(contents: dataString, service: service)

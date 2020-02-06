@@ -863,4 +863,31 @@ class RVS_BTDriver_TestParser: XCTestCase {
             }
         }
     }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testBasicInit0300() {
+        // The first String is the actual data that mocks that returned by the device. The second String represents the expected output afte parsing. We treat the instance like an Array of String.
+        let testingStrings: [(String, [String])] = [
+            ("0300\nSEARCHING...\n43 01 01 08\n\n>", ["P0108"]),
+            ("0300\n43 02 01 08 02 32", ["P0108", "P0232"])
+        ]
+        for testSet in testingStrings {
+            let rawResponseDataString1 = testSet.0
+            let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+            let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0300", completeCommand: "0300", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+            let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
+            if let interpreter = parser1.interpreter as? RVS_BTDriver_OBD_Command_Service_03 {
+                let comp = testSet.1
+                XCTAssertEqual(interpreter.codes.count, interpreter.count)
+                XCTAssertEqual(comp.count, interpreter.count)
+                for index in 0..<comp.count {
+                    let compVal = comp[index]
+                    let code = index < interpreter.count ? interpreter[index] : ""
+                    XCTAssertEqual(compVal, code)
+                }
+            }
+        }
+    }
 }
