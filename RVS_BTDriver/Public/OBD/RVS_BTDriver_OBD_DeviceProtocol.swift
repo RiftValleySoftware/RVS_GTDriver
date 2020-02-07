@@ -240,12 +240,12 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
     public init(_ inClonedFrom: RVS_BTDriver_OBD_Device_TransactionStruct! = nil, device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String, completeCommand inCompleteCommand: String, responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil, interpreter inInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter! = nil) {
         precondition((nil != inDevice) || RVS_DebugTools.isRunningUnitTests || nil != inClonedFrom?.device, "The device cannot be nil!")
         device = inDevice ?? inClonedFrom?.device
-        rawCommand = inRawCommand.isEmpty ? inClonedFrom?.rawCommand ?? "" : inRawCommand
-        completeCommand = inCompleteCommand.isEmpty ? inClonedFrom?.completeCommand ?? "" : inCompleteCommand
+        rawCommand = inRawCommand.isEmpty ? inClonedFrom?.rawCommand : inRawCommand
+        completeCommand = inCompleteCommand.isEmpty ? inClonedFrom?.completeCommand : inCompleteCommand
         responseData = inResponseData ?? inClonedFrom?.responseData
-        error = inError ?? inClonedFrom?.error
         responseDataAsString = inResponseDataAsString ?? inClonedFrom?.responseDataAsString
         interpreter = inInterpreter ?? inClonedFrom?.interpreter
+        error = inError ?? inClonedFrom?.error
     }
     
     /* ################################################################## */
@@ -276,6 +276,10 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
             ret += "\n\tResponse As A String: \"\(responseDataAsString)\""
         }
         
+        if  let interpreter = interpreter {
+            ret += "\n\tInterpreter: \"\(interpreter)\""
+        }
+
         if let error = error {
             ret += "\n\tError: \(String(describing: error))"
         }
