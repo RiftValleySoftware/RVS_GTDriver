@@ -204,7 +204,8 @@ class RVS_BTDriver_Test_OBD_Parser: XCTestCase {
         // We will have 11 available tests, diesel will be off, and the available tests are laid out in the OptionSet rawvalue.
         let value: UInt32 = 0x0B000000 | coveredDTCsMask.rawValue
         let simulation = splitUpString(String(format: "%08x", value))
-        let rawResponseDataString1 = "0101\nSEARCHING...\n41 01 \(simulation)\n\n>"
+        let addSearching = 1 == Int.random(in: 0...1) ? "SEARCHING...\n" : ""
+        let rawResponseDataString1 = "0101\n\(addSearching)41 01 \(simulation)\n\n>"
         let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
         let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
         let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
@@ -258,13 +259,14 @@ class RVS_BTDriver_Test_OBD_Parser: XCTestCase {
         // We will have 11 available tests, diesel will be off, and the available tests are laid out in the OptionSet rawvalue.
         let value: UInt32 = 0x0B000000 | coveredDTCsMask.rawValue
         let simulation = splitUpString(String(format: "%08x", value))
-        let rawResponseDataString1 = "0101\nSEARCHING...\n41 01 \(simulation)\n\n>"
+        let addSearching = 1 == Int.random(in: 0...1) ? "SEARCHING...\n" : ""
+        let rawResponseDataString1 = "0101\n\(addSearching)41 01 \(simulation)\n\n>"
         let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
         let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
         let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
         if let interpreter = parser1.interpreter as? RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter {
             let testCount  = interpreter.count
-            let supportedTests = interpreter.testsComplete
+            let supportedTests = interpreter.testsInProgress
             XCTAssertTrue(interpreter.isSpark)
             XCTAssertEqual(11, testCount)
             XCTAssertEqual(supportedTests.count, testCount)
@@ -283,7 +285,7 @@ class RVS_BTDriver_Test_OBD_Parser: XCTestCase {
                      .sas(let status),
                      .evaporativeSystem(let status),
                      .heatedCatalyst(let status):
-                    XCTAssertEqual(.complete, status, "Illegal Test State: \(String(describing: test))")
+                    XCTAssertEqual(.inProgress, status, "Illegal Test State: \(String(describing: test))")
                 default:
                     XCTFail("Illegal Test: \(String(describing: test))")
                 }
@@ -310,7 +312,8 @@ class RVS_BTDriver_Test_OBD_Parser: XCTestCase {
         // We will have 9 available tests, diesel will be on, and the available tests are laid out in the OptionSet rawvalue.
         let value: UInt32 = 0x09000000 | 0x00080000 | coveredDTCsMask.rawValue
         let simulation = splitUpString(String(format: "%08x", value))
-        let rawResponseDataString1 = "0101\nSEARCHING...\n41 01 \(simulation)\n\n>"
+        let addSearching = 1 == Int.random(in: 0...1) ? "SEARCHING...\n" : ""
+        let rawResponseDataString1 = "0101\n\(addSearching)41 01 \(simulation)\n\n>"
         let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
         let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
         let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
@@ -360,7 +363,8 @@ class RVS_BTDriver_Test_OBD_Parser: XCTestCase {
         // We will have 9 available tests, diesel will be on, and the available tests are laid out in the OptionSet rawvalue.
         let value: UInt32 = 0x09000000 | 0x00080000 | coveredDTCsMask.rawValue
         let simulation = splitUpString(String(format: "%08x", value))
-        let rawResponseDataString1 = "0101\nSEARCHING...\n41 01 \(simulation)\n\n>"
+        let addSearching = 1 == Int.random(in: 0...1) ? "SEARCHING...\n" : ""
+        let rawResponseDataString1 = "0101\n\(addSearching)41 01 \(simulation)\n\n>"
         let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
         let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
         let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
