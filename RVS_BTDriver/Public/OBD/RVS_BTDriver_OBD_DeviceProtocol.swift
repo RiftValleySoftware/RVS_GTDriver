@@ -237,7 +237,8 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         - interpreter: Optional. This is an interpreter that was created to parse and report the data.
         - error: Optional. Any error that may have occurred.
      */
-    public init(_ inClonedFrom: RVS_BTDriver_OBD_Device_TransactionStruct! = nil, device inDevice: RVS_BTDriver_OBD_DeviceProtocol! = nil, rawCommand inRawCommand: String = "", completeCommand inCompleteCommand: String = "", responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil, interpreter inInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter! = nil) {
+    public init(_ inClonedFrom: RVS_BTDriver_OBD_Device_TransactionStruct! = nil, device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String = "", completeCommand inCompleteCommand: String = "", responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil, interpreter inInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter! = nil) {
+        assert((nil != inDevice) || (nil != inClonedFrom?.device) || RVS_DebugTools.isRunningUnitTests, "The device cannot be nil!")
         device = inDevice ?? inClonedFrom?.device
         rawCommand = inRawCommand.isEmpty ? inClonedFrom?.rawCommand : inRawCommand
         completeCommand = inCompleteCommand.isEmpty ? inClonedFrom?.completeCommand : inCompleteCommand
