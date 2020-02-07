@@ -225,20 +225,19 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
     
     /* ################################################################## */
     /**
-     Initializer, with most fields optional.
+     Initializer, with all parameters optional.
      
      - parameters:
-        - inClonedFrom: This is another transaction that we may be "cloning." If there are values specified for any of the properties, those are used to replace the ones in this instance.
-        - device: Required. The device that is running the transaction. It can be nil for testing purposes, but should not be nil, otherwise.
-        - rawCommand: Required. This is the raw String value of the command being sent (it may be a format string).
-        - completeCommand: Required. This is the command, filled out (it may be the same as the rawCommand, but a format will have values substituted).
+        - inClonedFrom: Optional. This is another transaction that we may be "cloning." If there are values specified for any of the properties, those are used to replace the ones in this instance.
+        - device: Optional. The device that is running the transaction. It can be nil for testing purposes, but should not be nil, otherwise.
+        - rawCommand: Optional. This is the raw String value of the command being sent (it may be a format string).
+        - completeCommand: Optional. This is the command, filled out (it may be the same as the rawCommand, but a format will have values substituted).
         - responseData: Optional. This is any data that was returned from the OBD adapter.
         - responseDataAsString: Optional. If the command can be represented as a String, that is set here.
-        - interpreter: This is an interpreter that was created to parse and report the data.
+        - interpreter: Optional. This is an interpreter that was created to parse and report the data.
         - error: Optional. Any error that may have occurred.
      */
-    public init(_ inClonedFrom: RVS_BTDriver_OBD_Device_TransactionStruct! = nil, device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String, completeCommand inCompleteCommand: String, responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil, interpreter inInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter! = nil) {
-        precondition((nil != inDevice) || RVS_DebugTools.isRunningUnitTests || nil != inClonedFrom?.device, "The device cannot be nil!")
+    public init(_ inClonedFrom: RVS_BTDriver_OBD_Device_TransactionStruct! = nil, device inDevice: RVS_BTDriver_OBD_DeviceProtocol! = nil, rawCommand inRawCommand: String = "", completeCommand inCompleteCommand: String = "", responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil, interpreter inInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter! = nil) {
         device = inDevice ?? inClonedFrom?.device
         rawCommand = inRawCommand.isEmpty ? inClonedFrom?.rawCommand : inRawCommand
         completeCommand = inCompleteCommand.isEmpty ? inClonedFrom?.completeCommand : inCompleteCommand
