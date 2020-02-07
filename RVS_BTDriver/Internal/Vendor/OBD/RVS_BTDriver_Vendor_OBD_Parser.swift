@@ -206,7 +206,7 @@ internal struct RVS_BTDriver_Vendor_OBD_Parser {
                 // If we had one or more (there should only be one) interpreter, then we have a valid transaction.
                 if 0 < interpreters.count {
                     assert(1 == interpreters.count, "There Can Be Only One. -Connor MacLeod")
-                    transaction = RVS_BTDriver_OBD_Device_TransactionStruct(device: inTransaction.device, rawCommand: inTransaction.rawCommand, completeCommand: inTransaction.completeCommand, responseData: inTransaction.responseData, responseDataAsString: trimmedResponse2, error: nil, interpreter: interpreters[0])
+                    transaction = RVS_BTDriver_OBD_Device_TransactionStruct(inTransaction, responseDataAsString: trimmedResponse2, interpreter: interpreters[0])
                     return
                 }
             }

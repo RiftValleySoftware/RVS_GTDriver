@@ -29,6 +29,28 @@ class RVS_BTDriver_Test_OBD_Parser: XCTestCase {
     /* ################################################################## */
     /**
      */
+    func splitUpString(_ inString: String) -> String {
+        var ret: String = ""
+        
+        // This splits the string into pairs, like we get from the device.
+        for index in stride(from: 0, to: inString.count, by: 4) {
+            let startIndex1 = inString.index(inString.startIndex, offsetBy: index)
+            let endIndex1 = inString.index(startIndex1, offsetBy: 2)
+            let startIndex2 = endIndex1
+            let endIndex2 = inString.index(startIndex2, offsetBy: 2)
+            
+            let subString1 = String(inString[startIndex1..<endIndex1])
+            let subString2 = String(inString[startIndex2..<endIndex2])
+            
+            ret += String(format: "%@ %@ ", subString1, subString2)
+        }
+        
+        return ret.trimmingCharacters(in: CharacterSet.whitespaces)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
     func testBasicInit0100() {
         let rawResponseDataString1 = "0100\nSEARCHING...\n41 00 FF FF FF FF\n\n>"
         let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
@@ -156,6 +178,214 @@ class RVS_BTDriver_Test_OBD_Parser: XCTestCase {
                     let compVal = comp[index]
                     let code = index < interpreter.count ? interpreter[index] : ""
                     XCTAssertEqual(compVal, code)
+                }
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testBasicInit0101_AllSparkOn() {
+        let coveredDTCsMask = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask([
+            .componentsAvailable,
+            .fuelSystemAvailable,
+            .misfireAvailable,
+            .egrSystemAvailable,
+            .catalystAvailable,
+            .oxygenSensorHeaterAvailable,
+            .oxygenSensorAvailable,
+            .acRefrigerantAvailable,
+            .sasAvailable,
+            .evaporativeSystemAvailable,
+            .heatedCatalystAvailable
+        ])
+        
+        // We will have 11 available tests, diesel will be off, and the available tests are laid out in the OptionSet rawvalue.
+        let value: UInt32 = 0x0B000000 | coveredDTCsMask.rawValue
+        let simulation = splitUpString(String(format: "%08x", value))
+        let rawResponseDataString1 = "0101\nSEARCHING...\n41 01 \(simulation)\n\n>"
+        let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+        let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+        let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
+        if let interpreter = parser1.interpreter as? RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter {
+            let testCount  = interpreter.count
+            let supportedTests = interpreter.testsComplete
+            XCTAssertTrue(interpreter.isSpark)
+            XCTAssertEqual(11, testCount)
+            XCTAssertEqual(supportedTests.count, testCount)
+            XCTAssertEqual(supportedTests.count, interpreter.count)
+            XCTAssertEqual(supportedTests.count, interpreter.testAvailability.count)
+            for test in supportedTests {
+                switch test {
+                case .components(let status),
+                     .fuelSystem(let status),
+                     .misfire(let status),
+                     .egr(let status),
+                     .catalyst(let status),
+                     .oxygenSensorHeater(let status),
+                     .oxygenSensor(let status),
+                     .acRefrigerant(let status),
+                     .sas(let status),
+                     .evaporativeSystem(let status),
+                     .heatedCatalyst(let status):
+                    XCTAssertEqual(.complete, status, "Illegal Test State: \(String(describing: test))")
+                default:
+                    XCTFail("Illegal Test: \(String(describing: test))")
+                }
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testBasicInit0101_AllSparkInProgress() {
+        let coveredDTCsMask = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask([
+            .componentsIncomplete,
+            .fuelSystemIncomplete,
+            .misfireIncomplete,
+            .egrSystemIncomplete,
+            .catalystIncomplete,
+            .oxygenSensorHeaterIncomplete,
+            .oxygenSensorIncomplete,
+            .acRefrigerantIncomplete,
+            .sasIncomplete,
+            .evaporativeSystemIncomplete,
+            .heatedCatalystIncomplete
+        ])
+        
+        // We will have 11 available tests, diesel will be off, and the available tests are laid out in the OptionSet rawvalue.
+        let value: UInt32 = 0x0B000000 | coveredDTCsMask.rawValue
+        let simulation = splitUpString(String(format: "%08x", value))
+        let rawResponseDataString1 = "0101\nSEARCHING...\n41 01 \(simulation)\n\n>"
+        let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+        let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+        let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
+        if let interpreter = parser1.interpreter as? RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter {
+            let testCount  = interpreter.count
+            let supportedTests = interpreter.testsComplete
+            XCTAssertTrue(interpreter.isSpark)
+            XCTAssertEqual(11, testCount)
+            XCTAssertEqual(supportedTests.count, testCount)
+            XCTAssertEqual(supportedTests.count, interpreter.count)
+            XCTAssertEqual(supportedTests.count, interpreter.testAvailability.count)
+            for test in supportedTests {
+                switch test {
+                case .components(let status),
+                     .fuelSystem(let status),
+                     .misfire(let status),
+                     .egr(let status),
+                     .catalyst(let status),
+                     .oxygenSensorHeater(let status),
+                     .oxygenSensor(let status),
+                     .acRefrigerant(let status),
+                     .sas(let status),
+                     .evaporativeSystem(let status),
+                     .heatedCatalyst(let status):
+                    XCTAssertEqual(.complete, status, "Illegal Test State: \(String(describing: test))")
+                default:
+                    XCTFail("Illegal Test: \(String(describing: test))")
+                }
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testBasicInit0101_AllDieselOn() {
+        let coveredDTCsMask = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask([
+            .componentsAvailable,
+            .fuelSystemAvailable,
+            .misfireAvailable,
+            .egrSystemAvailable,
+            .catalystAvailable,
+            .pmFilterMonitoringAvailable,
+            .exhaustSensorAvailable,
+            .boostPressureAvailable,
+            .noxSCRAvailable
+        ])
+        
+        // We will have 9 available tests, diesel will be on, and the available tests are laid out in the OptionSet rawvalue.
+        let value: UInt32 = 0x09000000 | 0x00080000 | coveredDTCsMask.rawValue
+        let simulation = splitUpString(String(format: "%08x", value))
+        let rawResponseDataString1 = "0101\nSEARCHING...\n41 01 \(simulation)\n\n>"
+        let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+        let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+        let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
+        if let interpreter = parser1.interpreter as? RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter {
+            let testCount  = interpreter.count
+            let supportedTests = interpreter.testsComplete
+            XCTAssertTrue(interpreter.isDiesel)
+            XCTAssertEqual(9, testCount)
+            XCTAssertEqual(supportedTests.count, testCount)
+            XCTAssertEqual(supportedTests.count, interpreter.count)
+            XCTAssertEqual(supportedTests.count, interpreter.testAvailability.count)
+            for test in supportedTests {
+                switch test {
+                case .components(let status),
+                     .fuelSystem(let status),
+                     .misfire(let status),
+                     .egr(let status),
+                     .catalyst(let status),
+                     .pmFilterMonitoring(let status),
+                     .exhaustSensor(let status),
+                     .boostPressure(let status),
+                     .noxSCR(let status):
+                    XCTAssertEqual(.complete, status, "Illegal Test State: \(String(describing: test))")
+                default:
+                    XCTFail("Illegal Test: \(String(describing: test))")
+                }
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testBasicInit0101_AllDieselInProgress() {
+        let coveredDTCsMask = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask([
+            .componentsIncomplete,
+            .fuelSystemIncomplete,
+            .misfireIncomplete,
+            .egrSystemIncomplete,
+            .catalystIncomplete,
+            .pmFilterMonitoringIncomplete,
+            .exhaustSensorIncomplete,
+            .boostPressureIncomplete,
+            .noxSCRIncomplete
+        ])
+        
+        // We will have 9 available tests, diesel will be on, and the available tests are laid out in the OptionSet rawvalue.
+        let value: UInt32 = 0x09000000 | 0x00080000 | coveredDTCsMask.rawValue
+        let simulation = splitUpString(String(format: "%08x", value))
+        let rawResponseDataString1 = "0101\nSEARCHING...\n41 01 \(simulation)\n\n>"
+        let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+        let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+        let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
+        if let interpreter = parser1.interpreter as? RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter {
+            let testCount  = interpreter.count
+            let supportedTests = interpreter.testsInProgress
+            XCTAssertTrue(interpreter.isDiesel)
+            XCTAssertEqual(9, testCount)
+            XCTAssertEqual(supportedTests.count, testCount)
+            XCTAssertEqual(supportedTests.count, interpreter.count)
+            XCTAssertEqual(supportedTests.count, interpreter.testAvailability.count)
+            for test in supportedTests {
+                switch test {
+                case .components(let status),
+                     .fuelSystem(let status),
+                     .misfire(let status),
+                     .egr(let status),
+                     .catalyst(let status),
+                     .pmFilterMonitoring(let status),
+                     .exhaustSensor(let status),
+                     .boostPressure(let status),
+                     .noxSCR(let status):
+                    XCTAssertEqual(.inProgress, status, "Illegal Test State: \(String(describing: test))")
+                default:
+                    XCTFail("Illegal Test: \(String(describing: test))")
                 }
             }
         }
