@@ -85,7 +85,10 @@ extension RVS_BTDriver_OBD_Command_Service_Command_Interpreter {
     
     /* ################################################################## */
     /**
-     Default returns nil. This is temporary. Once we have the factory instances in place, this goes away.
+       Factory function for generating instances of this class.
+     - parameters:
+        - contents: The String, containing the response data to be interpreted.
+        - service: The service. 1-9
      */
     static func createNewInstance(contents inContents: String, service inService: Int) -> RVS_BTDriver_OBD_Command_Service_Command_Interpreter? {
         return Self(contents: inContents, service: inService)
@@ -225,6 +228,7 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
      Initializer, with most fields optional.
      
      - parameters:
+        - inClonedFrom: This is another transaction that we may be "cloning." If there are values specified for any of the properties, those are used to replace the ones in this instance.
         - device: Required. The device that is running the transaction. It can be nil for testing purposes, but should not be nil, otherwise.
         - rawCommand: Required. This is the raw String value of the command being sent (it may be a format string).
         - completeCommand: Required. This is the command, filled out (it may be the same as the rawCommand, but a format will have values substituted).
@@ -233,17 +237,15 @@ public struct RVS_BTDriver_OBD_Device_TransactionStruct {
         - interpreter: This is an interpreter that was created to parse and report the data.
         - error: Optional. Any error that may have occurred.
      */
-    public init(device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String, completeCommand inCompleteCommand: String, responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil, interpreter inInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter! = nil) {
-        precondition((nil != inDevice) || RVS_DebugTools.isRunningUnitTests, "The device cannot be nil!")
-        precondition(!inRawCommand.isEmpty, "The raw command cannot be empty.")
-        precondition(!inCompleteCommand.isEmpty, "The complete command cannot be empty.")
-        device = inDevice
-        rawCommand = inRawCommand
-        completeCommand = inCompleteCommand
-        responseData = inResponseData
-        error = inError
-        responseDataAsString = inResponseDataAsString
-        interpreter = inInterpreter
+    public init(_ inClonedFrom: RVS_BTDriver_OBD_Device_TransactionStruct! = nil, device inDevice: RVS_BTDriver_OBD_DeviceProtocol!, rawCommand inRawCommand: String, completeCommand inCompleteCommand: String, responseData inResponseData: Data! = nil, responseDataAsString inResponseDataAsString: String! = nil, error inError: RVS_BTDriver.Errors! = nil, interpreter inInterpreter: RVS_BTDriver_OBD_Command_Service_Command_Interpreter! = nil) {
+        precondition((nil != inDevice) || RVS_DebugTools.isRunningUnitTests || nil != inClonedFrom?.device, "The device cannot be nil!")
+        device = inDevice ?? inClonedFrom?.device
+        rawCommand = inRawCommand.isEmpty ? inClonedFrom?.rawCommand ?? "" : inRawCommand
+        completeCommand = inCompleteCommand.isEmpty ? inClonedFrom?.completeCommand ?? "" : inCompleteCommand
+        responseData = inResponseData ?? inClonedFrom?.responseData
+        error = inError ?? inClonedFrom?.error
+        responseDataAsString = inResponseDataAsString ?? inClonedFrom?.responseDataAsString
+        interpreter = inInterpreter ?? inClonedFrom?.interpreter
     }
     
     /* ################################################################## */
