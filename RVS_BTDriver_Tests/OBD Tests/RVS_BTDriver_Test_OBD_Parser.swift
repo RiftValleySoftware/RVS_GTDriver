@@ -452,4 +452,58 @@ class RVS_BTDriver_Test_OBD_Parser: XCTestCase {
             }
         }
     }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testBasicInit0101_MixedDiesel() {
+        let coveredDTCsMask = RVS_BTDriver_OBD_Command_Service_01_MonitorStatusBitMask([
+            .componentsAvailable,
+            .fuelSystemIncomplete,
+            .misfireAvailable,
+            .egrSystemIncomplete,
+            .catalystAvailable,
+            .pmFilterMonitoringIncomplete,
+            .noxSCRAvailable
+        ])
+        
+        // We will have 9 available tests, diesel will be on, and the available tests are laid out in the OptionSet rawvalue.
+        let value: UInt32 = 0x09000000 | 0x00080000 | coveredDTCsMask.rawValue
+        let simulation = splitUpString(String(format: "%08x", value))
+        let addSearching = 1 == Int.random(in: 0...1) ? "SEARCHING...\n" : ""
+        let rawResponseDataString1 = "0101\n\(addSearching)41 01 \(simulation)\n\n>"
+        let rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+        let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+        let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
+        if let interpreter = parser1.interpreter as? RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter {
+            let testCount  = interpreter.count
+            let supportedTests = interpreter.allTests
+            XCTAssertTrue(interpreter.isDiesel)
+            XCTAssertEqual(9, testCount)
+            XCTAssertEqual(supportedTests.count, testCount)
+            XCTAssertEqual(supportedTests.count, interpreter.count)
+            XCTAssertEqual(supportedTests.count, interpreter.testAvailability.count)
+            for test in supportedTests {
+                switch test {
+                case .components(let status),
+                     .misfire(let status),
+                     .catalyst(let status),
+                     .noxSCR(let status):
+                    XCTAssertEqual(.complete, status, "Illegal Test State: \(String(describing: test))")
+                    
+                case .fuelSystem(let status),
+                     .egr(let status),
+                     .pmFilterMonitoring(let status):
+                    XCTAssertEqual(.inProgress, status, "Illegal Test State: \(String(describing: test))")
+                    
+                case .exhaustSensor(let status),
+                     .boostPressure(let status):
+                    XCTAssertEqual(.unknown, status, "Illegal Test State: \(String(describing: test))")
+                    
+                default:
+                    XCTFail("Illegal Test: \(String(describing: test))")
+                }
+            }
+        }
+    }
 }
