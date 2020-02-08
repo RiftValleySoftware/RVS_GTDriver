@@ -506,4 +506,57 @@ class RVS_BTDriver_Test_OBD_Parser: XCTestCase {
             }
         }
     }
+    
+    /* ################################################################## */
+    /**
+     */
+    func testBasicInit0101_MIL_Diesel_Flags() {
+        var value: UInt32 = 0x80080000
+        var simulation = splitUpString(String(format: "%08x", value))
+        var addSearching = 1 == Int.random(in: 0...1) ? "SEARCHING...\n" : ""
+        var rawResponseDataString1 = "0101\n\(addSearching)41 01 \(simulation)\n\n>"
+        var rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+        let transaction1 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+        let parser1 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction1)
+        if let interpreter1 = parser1.interpreter as? RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter {
+            XCTAssertTrue(interpreter1.isMILOn)
+            XCTAssertTrue(interpreter1.isDiesel)
+        }
+        
+        value = 0x00080000
+        simulation = splitUpString(String(format: "%08x", value))
+        addSearching = 1 == Int.random(in: 0...1) ? "SEARCHING...\n" : ""
+        rawResponseDataString1 = "0101\n\(addSearching)41 01 \(simulation)\n\n>"
+        rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+        let transaction2 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+        let parser2 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction2)
+        if let interpreter2 = parser2.interpreter as? RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter {
+            XCTAssertFalse(interpreter2.isMILOn)
+            XCTAssertTrue(interpreter2.isDiesel)
+        }
+        
+        value = 0x80000000
+        simulation = splitUpString(String(format: "%08x", value))
+        addSearching = 1 == Int.random(in: 0...1) ? "SEARCHING...\n" : ""
+        rawResponseDataString1 = "0101\n\(addSearching)41 01 \(simulation)\n\n>"
+        rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+        let transaction3 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+        let parser3 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction3)
+        if let interpreter3 = parser3.interpreter as? RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter {
+            XCTAssertTrue(interpreter3.isMILOn)
+            XCTAssertFalse(interpreter3.isDiesel)
+        }
+        
+        value = 0x00000000
+        simulation = splitUpString(String(format: "%08x", value))
+        addSearching = 1 == Int.random(in: 0...1) ? "SEARCHING...\n" : ""
+        rawResponseDataString1 = "0101\n\(addSearching)41 01 \(simulation)\n\n>"
+        rawResponseData1 = rawResponseDataString1.data(using: .utf8)
+        let transaction4 = RVS_BTDriver_OBD_Device_TransactionStruct(device: nil, rawCommand: "0101", completeCommand: "0101", responseData: rawResponseData1, responseDataAsString: rawResponseDataString1)
+        let parser4 = RVS_BTDriver_Vendor_OBD_Parser(transaction: transaction4)
+        if let interpreter4 = parser4.interpreter as? RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter {
+            XCTAssertFalse(interpreter4.isMILOn)
+            XCTAssertFalse(interpreter4.isDiesel)
+        }
+    }
 }

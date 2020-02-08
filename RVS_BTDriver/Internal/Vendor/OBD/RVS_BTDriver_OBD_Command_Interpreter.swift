@@ -231,27 +231,33 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
     
     /* ################################################################## */
     /**
+     - returns: True, if MIL should be on.
+     */
+    public var isMILOn: Bool { return _value.isMILOn }
+
+    /* ################################################################## */
+    /**
      - returns: True, if the motor is compression (diesel).
      */
-    var isDiesel: Bool { return _value.isDiesel }
+    public var isDiesel: Bool { return _value.isDiesel }
     
     /* ################################################################## */
     /**
      - returns: True, if the motor is spark.
      */
-    var isSpark: Bool { return !isDiesel }
-
+    public var isSpark: Bool { return !isDiesel }
+    
     /* ################################################################## */
     /**
      - returns: The number of DTCs available.
      */
-    var count: Int { return _value.count }
+    public var count: Int { return _value.count }
 
     /* ################################################################## */
     /**
      This returns a Set of enums, containing the status of various tests. Each test has an associated value, containing its status.
      */
-    var testAvailability: Set<TestCategories> {
+    public var testAvailability: Set<TestCategories> {
         var ret: Set<TestCategories> = [
             // All types of engine (no check for diesel)
             .components(_value.componentsAvailable ? .complete : _value.componentsIncomplete ? .inProgress :.unknown),
@@ -286,25 +292,25 @@ internal struct RVS_BTDriver_OBD_Command_Service_01_MonitorStatus_Interpreter: R
     /**
      - returns: All of the tests, as an Array, as opposed to a set.
      */
-    var allTests: [TestCategories] { return testAvailability.map { $0 } }
+    public var allTests: [TestCategories] { return testAvailability.map { $0 } }
     
     /* ################################################################## */
     /**
      - returns: Only the tests that have completed.
      */
-    var testsComplete: [TestCategories] { return allTests.compactMap { return .complete == $0.testStatus ? $0 : nil } }
+    public var testsComplete: [TestCategories] { return allTests.compactMap { return .complete == $0.testStatus ? $0 : nil } }
 
     /* ################################################################## */
     /**
      - returns: Only the tests that are still under way.
      */
-    var testsInProgress: [TestCategories] { return allTests.compactMap { return .inProgress == $0.testStatus ? $0 : nil } }
+    public var testsInProgress: [TestCategories] { return allTests.compactMap { return .inProgress == $0.testStatus ? $0 : nil } }
     
     /* ################################################################## */
     /**
      - returns: Only the tests that are in an unknown state.
      */
-    var testsUnknown: [TestCategories] { return allTests.compactMap { return .unknown == $0.testStatus ? $0 : nil } }
+    public var testsUnknown: [TestCategories] { return allTests.compactMap { return .unknown == $0.testStatus ? $0 : nil } }
 }
 
 /* ###################################################################################################################################### */
