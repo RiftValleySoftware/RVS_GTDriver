@@ -292,6 +292,8 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
         - withIdentifier: The segue ID for this (we ignore)
         - in: The table instance
         - rowIndex: The vertical position (0-based) of the row that was touched.
+     
+        - returns: The context, if any. Can be nil.
      */
     override func contextForSegue(withIdentifier inSegueIdentifier: String, in inTable: WKInterfaceTable, rowIndex inRowIndex: Int) -> Any? {
         settingsCalled = false
@@ -307,6 +309,8 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Main_InterfaceController {
      
      - parameters:
         - withIdentifier: The segue ID for this (we ignore)
+     
+        - returns: The context, if any. Can be nil.
      */
     override func contextForSegue(withIdentifier inSegueIdentifier: String) -> Any? {
         settingsCalled = false
