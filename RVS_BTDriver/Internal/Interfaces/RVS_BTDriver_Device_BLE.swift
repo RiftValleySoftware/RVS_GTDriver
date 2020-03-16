@@ -282,7 +282,8 @@ class RVS_BTDriver_Device_BLE: RVS_BTDriver_Device {
     */
     internal override func connect() {
         precondition(canConnect, "Device Cannot be Connected!")
-        if .disconnected == peripheral.state { // Must be completely disconnected
+        if  .disconnected == peripheral.state,  // Must be completely disconnected
+            nil != peripheral.name {            // This prevents "false starts." It is possible for some devices to show up before they are ready.
             #if DEBUG
                 print("Connecting the BLE device: \(String(describing: self))")
             #endif

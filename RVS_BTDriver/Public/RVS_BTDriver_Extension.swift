@@ -44,6 +44,9 @@ public enum RVS_BTDriver_VendorTypes: Equatable {
  We require that subscribers be classes, so they will be referenced.
  */
 public protocol RVS_BTDriver_SubscriberProtocol: class {
+    /* ################################################################################################################################## */
+    // MARK: - Required Instance Propeties
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      REQUIRED: The implementation is required to provide this. The implementation should not do anything with it; simply provide a read/write instance property.
@@ -51,11 +54,11 @@ public protocol RVS_BTDriver_SubscriberProtocol: class {
     var _uuid: UUID! { get set }
     
     /* ################################################################################################################################## */
-    // MARK: - Required Instance Propeties
+    // MARK: - Optional Instance Propeties
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is a unique UUID that needs to be assigned to each instance, so we can match subscribers.
+     OPTIONAL: This is a unique UUID that needs to be assigned to each instance, so we can match subscribers.
      */
     var uuid: UUID! { get }
 }
