@@ -231,7 +231,7 @@ class RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController: WKInterfaceC
     /**
      The Delete Button, shown at the bottom of the screen.
      */
-    @IBOutlet weak var deletButton: WKInterfaceButton!
+    @IBOutlet weak var deleteButton: WKInterfaceButton!
 }
 
 /* ###################################################################################################################################### */
@@ -293,7 +293,7 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
             deviceInstance = context.device
             owner = context.owner
             setTitle(deviceInstance?.modelName?.localizedVariant)
-            deletButton.setTitle("SLUG-DELETE".localizedVariant)
+            deleteButton.setTitle("SLUG-DELETE".localizedVariant)
             
             // We need to make sure that the various items we will use to populate the sheet are actually present in the device instance.
             deviceData = []
@@ -342,7 +342,7 @@ extension RVS_BTDriver_WatchOS_Test_Harness_Device_InterfaceController {
     override func willActivate() {
         super.willActivate()
         if iOffedMyself {
-            deletButton.setHidden(true) // We can't delete the deleted.
+            deleteButton.setHidden(true) // We can't delete the deleted.
             populateTable()
         }
     }
