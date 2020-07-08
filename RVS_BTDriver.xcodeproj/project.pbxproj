@@ -1931,7 +1931,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "The Great Rift Valley Software Company";
 				TargetAttributes = {
 					D419701D2382E6E2009480A5 = {
