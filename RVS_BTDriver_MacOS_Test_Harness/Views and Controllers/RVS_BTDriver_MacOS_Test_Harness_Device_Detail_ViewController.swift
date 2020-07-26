@@ -218,9 +218,9 @@ extension RVS_BTDriver_MacOS_Test_Harness_Device_Detail_ViewController: NSTableV
         if tableView(inTableView, isGroupRow: inRow) { // If we are a header...
             let ret = NSTextView()
             ret.string = tableData[inRow].key.localizedVariant
-            ret.backgroundColor = NSColor.black
-            ret.textColor = NSColor.white
-            ret.font = NSFont.boldSystemFont(ofSize: 14)
+            ret.backgroundColor = .black
+            ret.textColor = .white
+            ret.font = .boldSystemFont(ofSize: 14)
             ret.alignment = .center
             return ret
         } else {
